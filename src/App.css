@@ -1,33 +1,586 @@
 .App {
-  text-align: center;
+    color: black;
+    font-family: Kunlasatri;
+    padding-top: 25px;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
+
+.Row {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+h1{font-size: 60px;}
+h2{font-size: 40px;}
+h3{font-size: 32px;}
+h4{font-size: 20px;}
+h5{font-size: 16px;}
+h6{font-size: 14px;}
+
+/* Start Navbar */
+
+.Navbar {
+    overflow: hidden;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 1;
+    background: black;
+    position: fixed;
+}
+
+.NavbarLeft {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    -webkit-position: sticky;
+    position: sticky;
+    width: 150px;
+}
+
+.NavbarRight {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    -webkit-position: sticky;
+    position: sticky;
+    width: 100px;
+}
+
+.NavbarRight:hover {
+    border-bottom: 5px solid #FFB731;
+    text-decoration: none;
+    color: white;
+    padding-bottom: 12px;
+}
+
+.NavbarRight.Active {
+    border-bottom: 5px solid #FFB731;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding-bottom: 12px;
+}
+
+.Navbar ul {
+    list-style: none;
+    text-align: center;
+}
+
+.Navbar li {
+    display: inline-block;
+    
+}
+
+.NavbarText {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100px;
+}
+
+.NavbarText:hover {
+    border-bottom: 5px solid #FFB731;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding-bottom: 12px;
+}
+
+.NavbarText.Active {
+    border-bottom: 5px solid #FFB731;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding-bottom: 12px;
+}
+
+.Navbar img{
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-top: -10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 20px;
+    object-fit: cover;
+}
+
+/* End Navbar */
+
+
+/* Start Haeder */
+.HeaderArea{
+    width: 100%;
+    height: 280px;
+    background-color: #FED07A;
+    z-index: 0;
+}
+
+.HeaderArea img{
+    width: 100%;
+    height: 280px;
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.HeaderAreaCard {
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 20%;
+    text-align: center;
+    float: left;
+    margin-left: 4.16%;
+    margin-top: -45px;
+    background-color: white;
+}
+
+.HeaderAreaCard img{
+    width: 100%;
+    height: 200px;
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-bottom: 10px;
+    object-fit: cover;
+}
+
+.HeaderAreaCard button{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    border: none;
+    color: black;
+    background-color: #FED07A;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    height: 45px;
+}
+
+.HeaderAreaCard button:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
+/* End Haeder */
+
+/* Start Button */
+.BTN_Buy{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    color: white;
+    background-color: black;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.5s;
+}
+
+.BTN_Buy:hover{
+    background-color: #FFB731;
+    color: black;
+}
+
+.BTN_AddCart {
+    font-family: Kunlasatri;
+    font-size: 16px;
+    color: black;
+    background-color: white;
+    border: 1px solid #FFB731;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    transition: 0.5s;
+}
+
+.BTN_AddCart:hover {
+    background-color: #FFB731;
+    color: white;
+}
+
+.BTN_Signin{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    color: black;
+    background-color: #FED07A;
+    border: 1px solid #FED07A;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: 10px;
+    float: right;
+    transition: 0.5s;
+}
+
+.BTN_Signin:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
+.BTN_Signup{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    color: #FFB731;
+    background-color: white;
+    border: 1px solid #FFB731;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: 10px;
+    float: right;
+    transition: 0.5s;
+}
+
+.BTN_Signup:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
+.BTN_PDF{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    display: block;
+    border: none;
+    color: #FFB731;
+    background-color: white;
+    border: 1px solid #FFB731;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.5s;
+}
+
+.BTN_PDF:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
+.BTN_Detail{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    display: block;
+    color: #FFB731;
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid #FFB731;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.5s;
+}
+
+.BTN_Detail:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
+/* End Button */
+
+
+/* Start Input */
+input[type="search"]{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    border: 1px solid black;
+    margin-top: 50px;
+    padding: 15px 15px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+input[type="date"]{
+    font-family: Kunlasatri;
+    font-size: 19px;
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 10px 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+input[type="number"]{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    border: 1px solid black;
+    margin-top: -50px;
+    margin-right: 25px;
+    padding: 10px 10px;
+    width: 40%;
+    border-radius: 5px;
+}
+
+input[type="text"],[type="password"],[type="email"],[type="tel"]{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    border: 1px solid black;
+    margin-top: -50px;
+    padding: 10px 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* End Input */
+
+
+/* Start Product */
+.Card {
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 20%;
+    text-align: center;
+    float: left;
+    margin-left: 4.16%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.Card img{
+    width: 100%;
+    height: 200px;
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-bottom: 10px;
+    object-fit: cover;
+}
+
+.Card button{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    border: none;
+    color: black;
+    background-color: #FED07A;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    height: 45px;
+}
+
+.Card button:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
+/* End Product */
+
+
+/* Start Detail */
+.IMG_Detail{
+    width: 100%;
+    height: 400px;
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-bottom: 10px;
+    object-fit: cover;
+}
+/* End Detail */
+
+
+/* Start Cart */
+.CartCard{
+    border: 1px solid black;
+    width: 100%;
+    height: 200px;
+    float: left;
+    margin-bottom: 10px;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.CartCard:hover{
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
+}
+
+.CartCard img{
+    width: 200px;
+    height: 200px;
+    display: block;
+    object-fit: cover;
+    position: absolute;
+}
+  
+.CartCard button {
+    font-family: Kunlasatri;
+    font-size: 16px;
+    border: none;
+    color: white;
+    background-color: black;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    float: right;
+    transition: 0.5s;
+}
+
+.CartCard button:hover {
+    background: red;
+}
+
+.TotalCart{
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+    background-color: white;
+}
+/* End Cart */
+
+/* Start Buying */
+.BuyingCard{
+    border: 1px solid black;
+    width: 100%;
+    height: 50px;
+    float: left;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.BuyingCard:hover{
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
+}
+
+.BuyingCard button{
+    font-family: Kunlasatri;
+    font-size: 16px;
+    border: none;
+    color: black;
+    background-color: white;
+    border: 1px solid #FFB731;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    transition: 0.5s;
+}
+
+.BuyingCard button:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
+/* End Buying */
+
+/* Start Table */
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    color: black;
+    border-bottom: 1px solid #FFB731;
+    font-size: 18px;
+    padding: 10px 10px;
+}
+
+tr,td{
+    color: black;
+    border-bottom: 1px solid #FFB731;
+    font-size: 16px;
+    padding: 10px 10px;
+    transition: 0.5s;
+}
+
+th,tr:hover{
+    background-color: #f6f6f6;
+}
+
+/* End Table */
+
+/* Start Buying Detial */
+
+.BuyDetailCard{
+    border: 1px solid black;
+    width: 100%;
+    height: 100px;
+    float: left;
+    margin-bottom: 10px;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.BuyDetailCard:hover{
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
+}
+
+
+.BuyDetailCard img{
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: cover;
+    position: absolute;
+}
+
+
+/* End Buying Detail */

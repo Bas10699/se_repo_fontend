@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
+    "pdfmake": "^0.1.58",
+    "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1",
+    "react-time-line": "^0.2.0",
+    "thai-baht-text": "^1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
