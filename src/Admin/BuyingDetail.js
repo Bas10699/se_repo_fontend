@@ -5,7 +5,7 @@ import { user_token, addComma } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import queryString from 'query-string';
 import moment from 'moment'
-import PDF from '../Support/PDF'
+import PDF from '../Support/PdfOrder'
 import { NavLink } from 'react-router-dom'
 
 const events = [

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment'
 import ThaiBaht from 'thai-baht-text'
-import {addComma} from '../Support/Constance'
+import {addComma} from './Constance'
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -21,7 +21,7 @@ pdfMake.fonts = {
   }
 }
 
-class PDF extends Component {
+class PdfOrder extends Component {
 
 
   printPDF() {
@@ -203,4 +203,4 @@ class PDF extends Component {
   }
 
 }
-export default PDF;
+export default PdfOrder;
