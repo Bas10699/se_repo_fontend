@@ -9,7 +9,8 @@ class M_Order extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            get_order: []
+            get_order: [],
+            asdfg:[]
         }
     }
     componentWillMount() {
