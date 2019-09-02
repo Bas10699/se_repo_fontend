@@ -15,6 +15,7 @@ import Signin from './Admin/Signin';
 import Signup from './Admin/Signup';
 import M_Order from './SE-Middle/M_Order';
 import OrderDetail from './Admin/OrderDetail';
+import EditProduct from './Admin/Edit/EditProduct';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route exact path='/User' component={User}/>
       <Route exact path='/M_Order' component={M_Order}/>
       <Route exact path='/M_Order/:orderID' component={OrderDetail}/>
+      <Route exact path='/EditProduct/:productID' component={EditProduct}/>
 
     </Router>
   );
