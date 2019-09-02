@@ -10,6 +10,7 @@ class M_Order extends Component {
         super(props);
         this.state = {
             get_order: [],
+            lkl:[]
         }
     }
     componentWillMount() {
