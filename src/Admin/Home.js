@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
 import { ip, get } from '../Support/Service';
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class Home extends Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class Home extends Component {
                         <div className="HeaderArea">
                             <div className="Row">
                                 <div className="col-6" style={{ backgroundColor: "black" }}>
-                                <img alt="Product"/>
+                                    <img alt="Product" />
                                 </div>
                                 <div className="col-1"></div>
                                 <div className="col-5">
@@ -65,16 +65,21 @@ class Home extends Component {
                     <div className="col-10">
                         {//จะเเสดงเเค่ 4 ตัวสินค้า
                             this.state.product_data.map((element, index) => {
-                                return (
-                                    <div className="HeaderAreaCard">
-                                        <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
-                                        <h4>{element.product_name}</h4>
-                                        <h5>ราคาปลีก บาท</h5>
-                                        <NavLink to={"/Product/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
-                                    </div>
-                                )
+                                for (var i = 0; index < 4; i++) {
+                                    return (
+
+                                        <div className="HeaderAreaCard">
+                                            <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
+                                            <h4>{element.product_name}</h4>
+                                            <h5>ราคาปลีก บาท</h5>
+                                            <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
+                                        </div>
+                                    )
+                                }
+
+
                             })
-                    }
+                        }
                     </div>
                     <div className="col-1"> </div>
                 </div>
