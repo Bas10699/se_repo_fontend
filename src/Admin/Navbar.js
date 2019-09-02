@@ -38,24 +38,6 @@ class Navbar extends Component {
     render_type = (user_type) => {
         let render_user
         switch (user_type) {
-            case "5": // admin
-                render_user =
-                    <div className="App">
-                        <div className="Navbar">
-                            <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
-                            <ul>
-                                <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
-                                <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
-                                <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตระกร้าสินค้า</NavLink></li>
-                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
-                                <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อผู้ประกอบการ</NavLink></li>
-                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
-                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
-                            </ul>
-                        </div>
-                    </div>
-                break;
-
             case "2": // Trader
                 render_user =
                     <div className="App">
@@ -75,7 +57,26 @@ class Navbar extends Component {
                     </div>
                 break;
 
-                case "4": // SE-Middle
+                case "3": // SE-Sub
+                render_user =
+                    <div className="App">
+                        <div className="Navbar">
+                            <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
+                            <ul>
+                                {/* <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
+                                <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
+                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
+                                <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อผู้ประกอบการ</NavLink></li> */}
+
+                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
+                            </ul>
+                        </div>
+                    </div>
+                break;
+
+
+            case "4": // SE-Middle
                 render_user =
                     <div className="App">
                         <div className="Navbar">
@@ -87,6 +88,24 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
                                 <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อผู้ประกอบการ</NavLink></li>
 
+                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
+                            </ul>
+                        </div>
+                    </div>
+                break;
+
+            case "5": // admin
+                render_user =
+                    <div className="App">
+                        <div className="Navbar">
+                            <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
+                            <ul>
+                                <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
+                                <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
+                                <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตระกร้าสินค้า</NavLink></li>
+                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
+                                <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อผู้ประกอบการ</NavLink></li>
                                 <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
                                 <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
                             </ul>

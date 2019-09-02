@@ -115,6 +115,8 @@ class T_Buying extends Component {
                         <h2 style={{ textAlign: "center" }}>ประวัติการซื้อ</h2>
                     </div>
                 </div>
+
+                
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-4">

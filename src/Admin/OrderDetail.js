@@ -1,12 +1,18 @@
 //รายละเอียดคำสั่งซื้อสินค้า SE-M ซื้อของจาก SE-S
 import React, { Component } from 'react';
-import { get, post } from '../Support/Service';
-import { user_token } from '../Support/Constance';
+import { post } from '../Support/Service';
+import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
+import Timeline from 'react-time-line'
 // import PdgOrder from './PdfOrder'
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
+
+const events = [
+
+    { ts: "2562-08-23T13:22:46.587Z", text: 'ออกใบคำสั่งซื้อ' },
+];
 
 class OrderDetail extends Component {
     constructor(props) {
@@ -51,7 +57,14 @@ class OrderDetail extends Component {
         }
     }
 
+    // sum_price = (data_price) => {
+    //     let sum = 0;
+    //     data_price.map((element) => {
+    //         sum += (element.price * element.amount)
+    //     })
+    //     return sum;
 
+    // }
 
     render() {
         return (
@@ -64,52 +77,94 @@ class OrderDetail extends Component {
 
                 <div className="Row">
                     <div className="col-2"></div>
+                    {/* เริ่ม */}
+                    <div className="col-6">
+                        <h4 style={{ textAlign: "right", marginRight: "10px" }}>รหัสใบสั่งซื้อ</h4>
+                        <h4 style={{ textAlign: "right", marginRight: "10px" }}>วันที่ใบสั่งซื้อ</h4>
+                        <h4 style={{ textAlign: "right", marginRight: "10px" }}>ผู้ซื้อ</h4>
+                    </div>
+                    <div className="col-2">
+                        <h4 style={{ textAlign: "left" }}>{this.state.order.order_id}</h4>
+                        <h4 style={{ textAlign: "left" }}>{moment(this.state.order.order_date).utc().add('years', 543).format("DD/MM/YYYY")}</h4>
+                        <h4 style={{ textAlign: "left" }}>{this.state.order.name} {this.state.order.lastname}</h4>
+                    </div>
+                </div>
+
+                <div className="Row">
+                    <div className="col-4"></div>
+                    <div className="col-4">
+                        <Timeline items={events} />
+                    </div>
+                    <div className="col-4"></div>
+                </div>
+
+
+                {/* <PdgOrder data={this.state.order} /> */}
+
+                <div className="Row">
+                    <div className="col-2"></div>
                     <div className="col-8">
-                        <div>id order : {this.state.order.order_id}</div>
-                        <div>ผู้สั่งซื้อ : {this.state.order.name} {this.state.order.lastname}</div>
-                        <div>วันที่สั่งซื้อ : {moment(this.state.order.order_date).utc().format("DD/MM/YYYY, HH:mm")}</div>
-                        {/* <PdgOrder data={this.state.order} /> */}
-                        {/* <HTimeline /> */}
-                        <div className="card">
-                            <div className="container">
-                                <h5>สถานะการสั่งซื้อ : รอยืนยันคำสั่งซื้อ</h5>
-                                <p>รอตรวจสอบสินค้า และส่งใบแจ้งหนี้</p>
-                                <button>ส่งใบแจ้งหนี้</button>
+                        <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อ</h3>
+                        {
+                            this.state.detail.map((element_plant, index) => {
+                                return (
+                                    <div className="BuyDetailCard">
+                                        <div className="Row">
+                                            <div className="col-2">
+                                                <img alt="Product" />
+                                            </div>
+                                            <div className="col-10">
+                                                <h4>{element_plant.plant_name}</h4>
+                                                <div className="Row" style={{ marginTop: "-30px" }}>
+                                                    <div className="col-4">
+                                                        <h4>จำนวนที่สั่ง {addComma(element_plant.amount)} กิโลกรัม</h4>
+                                                    </div>
+                                                    <div className="col-4">
+                                                        <h5>ราคาต่อหน่วย {element_plant.price} บาท</h5>
+                                                    </div>
+                                                    <div className="col-3">
+                                                        <h4 style={{ textAlign: "right" }}>รวม {addComma(element_plant.price * element_plant.amount)} บาท</h4>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+
+
+
+                        <div className="TotalCart">
+                            <div className="Row">
+                                <div className="col-2">
+                                </div>
+                                <div className="col-1"></div>
+                                <div className="col-9">
+
+                                    <div className="Row">
+                                        <div className="col-9">
+                                            <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
+                                        </div>
+                                        <div className="col-3">
+                                            {/* <h4 style={{ color: "red" }}>{addComma(this.sum_price(this.state.cart_product))} บาท</h4> */}
+                                            <h4 style={{ color: "red" ,textAlign: "right" }}>ราคารวม บาท</h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div className="Row">
-                    <div className="col-12">
-                        <h3 style={{ textAlign: "center" }}>รายการ</h3>
+                        <button className="BTN_AddCart" style={{width:"250px", float:"right"}}>ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย</button>
                     </div>
+
                 </div>
-                        <table>
-                            <tr>
-                                <th>ลำดับ</th>
-                                <th>รหัสวิตถุดิบ</th>
-                                <th>ชื่อวัตถุดิบ</th>
-                                <th>จำนวนที่สั่งซื้อ</th>
-                                <th></th>
-                            </tr>
-                            {
-                                this.state.detail.map((element_plant, index) => {
-                                    return (
-                                        <tr>
-                                            <td style={{textAlign:"center"}}>{index + 1}</td>
-                                            <td style={{textAlign:"center"}}>{element_plant.plant_id}</td>
-                                            <td style={{textAlign:"left"}}>{element_plant.plant_name}</td>
-                                            <td style={{textAlign:"center"}}>{element_plant.amount} กิโลกรัม</td>
-                                            <td><button className="BTN_Detail" onClick={() => { this.setState({ num: true, plant: element_plant.plant_name }) }}>รายละเอียดวัตถุดิบ</button></td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </table>
-                    </div>
-                    <div className="col-2"></div>
-                </div>
-                {/* {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} */}
+                <div className="col-2"></div>
+            {/*     </div >
+            {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} 
+            </div > */}
             </div>
+            
         )
     }
 }
