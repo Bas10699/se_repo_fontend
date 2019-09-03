@@ -4,8 +4,10 @@ import { post } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
-import Timeline from 'react-time-line'
-// import PdgOrder from './PdfOrder'
+import Timeline from '../Support/Timeline'
+import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
+import PdgOrder from '../Support/PdfOrder';
+
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
 
@@ -29,15 +31,30 @@ class OrderDetail extends Component {
             tag_default: "https://image.flaticon.com/icons/svg/1161/1161830.svg"
         }
     }
+
+
+
     componentWillMount() {
         this.get_order()
+        this.setState({
+            isMenuOpened: false
+        });
+    }
+
+    handleClick() {
+        // toggles the menu opened state
+        this.setState({ isMenuOpened: !this.state.isMenuOpened });
     }
 
     get_order = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
+        const object = {
+            order_id:params
+        }
+        console.log('obj',object)
         try {
-            await post(params, 'neutarlly/get_order_info', user_token).then((result) => {
+            await post(object, 'neutrally/get_order_info', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
                         order: result.result,
@@ -90,15 +107,15 @@ class OrderDetail extends Component {
                     </div>
                 </div>
 
-                <div className="Row">
+                {/* <div className="Row">
                     <div className="col-4"></div>
                     <div className="col-4">
                         <Timeline items={events} />
                     </div>
                     <div className="col-4"></div>
-                </div>
+                </div> */}
 
-
+                <Timeline data={this.state.order} />
                 {/* <PdgOrder data={this.state.order} /> */}
 
                 <div className="Row">
@@ -115,7 +132,69 @@ class OrderDetail extends Component {
                                             </div>
                                             <div className="col-10">
                                                 <h4>{element_plant.plant_name}</h4>
-                                                <button className="BTN_AddCart" style={{width:"250px", float:"right",marginTop:"-75px"}}>ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย</button>
+
+                                                <OffCanvas isMenuOpened={this.state.isMenuOpened} width={500}>
+                                                    <button onClick={this.handleClick.bind(this)}
+                                                        className="BTN_AddCart"
+                                                        style={{ width: "250px", float: "right", marginTop: "-75px" }}>
+                                                        ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย
+                                                    </button>
+
+                                                    <OffCanvasMenu style={{ marginTop: "50px", background: "white" }}>
+                                                        <button style={{ float: "right" }} onClick={this.handleClick.bind(this)}>
+                                                            X
+                                                        </button>
+                                                        <h4>ชื่อวัตถุดิบ</h4>
+                                                        <h5>จำนวนวัตถุดิบทั้งหมด</h5>
+                                                        <h5 style={{ color: "red" }}>จำนวนที่ต้องซื้อ</h5>
+
+                                                        <table>
+                                                            <tr>
+                                                                <th>ชื่อ SE</th>
+                                                                <th>จำนวนวัตถุดิบที่มีในสต๊อก</th>
+                                                                <th>ค่าขนส่ง</th>
+                                                                <th>ช่วงส่งมอบ</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>SE-1</td>
+                                                                <td>10000</td>
+                                                                <td>20</td>
+                                                                <td>มกราคม</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>SE-2</td>
+                                                                <td>545400</td>
+                                                                <td>200</td>
+                                                                <td>มกราคม</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>SE-3</td>
+                                                                <td>100500</td>
+                                                                <td>888</td>
+                                                                <td>ธันวาคม</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>SE-4</td>
+                                                                <td>10000</td>
+                                                                <td>20</td>
+                                                                <td>มกราคม</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>SE-5</td>
+                                                                <td>10000</td>
+                                                                <td>20</td>
+                                                                <td>มกราคม</td>
+                                                            </tr>
+                                                        </table>
+                                                    </OffCanvasMenu>
+
+                                                </OffCanvas>
+
+
                                                 <div className="Row" style={{ marginTop: "-30px" }}>
                                                     <div className="col-4">
                                                         <h4>จำนวนที่สั่ง {addComma(element_plant.amount)} กิโลกรัม</h4>
@@ -150,7 +229,7 @@ class OrderDetail extends Component {
                                         </div>
                                         <div className="col-3">
                                             {/* <h4 style={{ color: "red" }}>{addComma(this.sum_price(this.state.cart_product))} บาท</h4> */}
-                                            <h4 style={{ color: "red" ,textAlign: "right" }}>ราคารวม บาท</h4>
+                                            <h4 style={{ color: "red", textAlign: "right" }}>ราคารวม บาท</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -160,11 +239,11 @@ class OrderDetail extends Component {
 
                 </div>
                 <div className="col-2"></div>
-            {/*     </div >
+                {/*     </div >
             {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} 
             </div > */}
             </div>
-            
+
         )
     }
 }

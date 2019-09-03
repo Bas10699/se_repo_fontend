@@ -18,7 +18,7 @@ class M_Order extends Component {
 
     get_order = async () => {
         try {
-            await get('neutarlly/get_order_all', user_token).then((result) => {
+            await get('neutrally/get_order_all', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
                         get_order: result.result
@@ -127,7 +127,7 @@ class M_Order extends Component {
                                                 <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{this.render_status(element.order_status)}</h4></div>
                                                 <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{element.trader_id}</h4></div>
                                                 <div className="col-2">
-                                                    <NavLink to={"/M_Order/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}>
+                                                    <NavLink to={"/M_Order/?" + element.order_id} style={{ textDecoration: "none" }}>
                                                         <button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button>
                                                     </NavLink>
                                                 </div>
@@ -147,7 +147,7 @@ class M_Order extends Component {
                                                 <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{this.render_status(element.order_status)}</h4></div>
                                                 <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{element.trader_id}</h4></div>
                                                 <div className="col-2">
-                                                    <NavLink to={"/M_Order/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}>
+                                                    <NavLink to={"/M_Order/?" + element.order_id} style={{ textDecoration: "none" }}>
                                                         <button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button>
                                                     </NavLink>
                                                 </div>

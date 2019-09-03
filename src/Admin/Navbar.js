@@ -57,7 +57,7 @@ class Navbar extends Component {
                     </div>
                 break;
 
-                case "3": // SE-Sub
+            case "3": // SE-Sub
                 render_user =
                     <div className="App">
                         <div className="Navbar">
@@ -114,7 +114,16 @@ class Navbar extends Component {
                 break;
 
             default:
-                render_user = <div> เกิดข้อผิดพลาด </div>
+                render_user =
+                    <div className="App">
+                        <div className="Navbar">
+                            <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
+                            <ul>
+                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                {/* <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink> */}
+                            </ul>
+                        </div>
+                    </div>
                 break;
         }
         return render_user

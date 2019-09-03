@@ -1,19 +1,12 @@
 //รายละเอียดการซื้อสินค้า
 import React, { Component } from 'react';
-import Timeline from 'react-time-line'
+import Timeline from '../Support/Timeline'
 import { user_token, addComma } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import queryString from 'query-string';
 import moment from 'moment'
 import PDF from '../Support/PdfOrder'
-import { NavLink } from 'react-router-dom'
 
-const events = [
-
-    { ts: "2562-09-02T12:22:46.587Z", text: 'ใบเเจ้งหนี้' },
-    { ts: "2562-09-01T12:22:46.587Z", text: 'ยืนยันคำสั่งซื้อ' },
-    { ts: "2562-09-01T13:22:46.587Z", text: 'ออกใบคำสั่งซื้อ' },
-];
 
 class BuyingDetail extends Component {
 
@@ -130,15 +123,15 @@ class BuyingDetail extends Component {
                     <div className="col-2"></div>
                 </div>
 
+                <Timeline />
 
-
-                <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-8">
+                {/* <div className="Row">
+                    <div className="col-4"></div>
+                    <div className="col-4">
                         <Timeline items={events} />
                     </div>
-                    <div className="col-2"></div>
-                </div>
+                    <div className="col-4"></div>
+                </div> */}
 
 
 
