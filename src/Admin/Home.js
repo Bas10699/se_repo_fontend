@@ -60,6 +60,8 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
+
+
                 <div className="Row">
                     <div className="col-1" ></div>
                     <div className="col-10">
@@ -72,7 +74,7 @@ class Home extends Component {
                                             <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
                                             <h4>{element.product_name}</h4>
                                             <h5>ราคาปลีก บาท</h5>
-                                            <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
+                                            <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button>รายละเอียดเพิ่มเติม</button></NavLink>
                                         </div>
                                     )
                                 }
