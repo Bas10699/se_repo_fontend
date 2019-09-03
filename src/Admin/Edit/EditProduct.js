@@ -27,6 +27,7 @@ class EditProduct extends Component {
             pro_status: null,
             pro_id: null,
             pro_image: null,
+            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -197,10 +198,7 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                        {this.state.product_data.image ?
-                            <img alt="Product" className="IMG_Detail" src={ip + 'trader/image/' + this.state.pro_image} />
-                            : <img alt="Product" className="IMG_Detail" src={this.state.pro_image} />
-                        }
+                    {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} />:<img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
 
@@ -288,16 +286,7 @@ class EditProduct extends Component {
 
                         <button className="BTN_Signin"
                             style={{float:"right"}}
-                            onClick={() => this.edit_product(
-                                this.state.pro_name,
-                                this.state.pro_status,
-                                this.state.pro_price,
-                                this.state.pro_amount,
-                                this.state.pro_details,
-                                this.state.pro_id,
-                                this.state.pro_cost,
-                                this.state.pro_image
-                            )}>
+                            onClick={() => this.edit_product()}>
                                 บันทึกการเปลี่ยนแปลง
                         </button>
                         <button className="BTN_Signup" style={{float:"right"}} >ยกเลิก</button>
