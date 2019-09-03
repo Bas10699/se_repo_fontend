@@ -50,15 +50,11 @@ class OrderDetail extends Component {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         const object = {
-            order_id:params
+            order_id:params.aa
         }
         console.log('obj',object)
         try {
-<<<<<<< HEAD
-            await post(params, 'neutrally/get_order_info', user_token).then((result) => {
-=======
             await post(object, 'neutrally/get_order_info', user_token).then((result) => {
->>>>>>> master
                 if (result.success) {
                     this.setState({
                         order: result.result,

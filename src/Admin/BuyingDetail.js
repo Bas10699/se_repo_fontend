@@ -5,13 +5,9 @@ import { user_token, addComma } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import queryString from 'query-string';
 import moment from 'moment'
-<<<<<<< HEAD
 import PdfOrder from '../Support/PdfOrder'
 import PdfInvoice from '../Support/PdfInvoice'
 import { NavLink } from 'react-router-dom'
-=======
-import PDF from '../Support/PdfOrder'
->>>>>>> master
 
 
 class BuyingDetail extends Component {
@@ -128,12 +124,8 @@ class BuyingDetail extends Component {
                     </div>
                     <div className="col-2"></div>
                 </div>
-<<<<<<< HEAD
-                <PdfInvoice data={this.state.order}/>
-=======
 
                 <Timeline />
->>>>>>> master
 
                 {/* <div className="Row">
                     <div className="col-4"></div>
