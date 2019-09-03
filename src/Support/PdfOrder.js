@@ -74,7 +74,7 @@ class PdfOrder extends Component {
                 heights: 90,
                 body: [
                   [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
-                    'วันที่กำหนดส่ง \nจำนวนวันเครดิต \nที่อยู่จัดส่ง \nเลขที่ 2571/1 ซอฟต์เเวร์รีสอร์ท เเขวงหัวหมาก \nเขตบางกะปิ กรุงเทพฯ 10240']
+                    `วันที่กำหนดส่ง ${this.props.data.date_send}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.address_send}`]
                 ]
               }
             },

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Timeline from '../Support/Timeline'
 import { user_token, addComma } from '../Support/Constance';
-import { get, post } from '../Support/Service';
+import { get, post ,ip} from '../Support/Service';
 import queryString from 'query-string';
 import moment from 'moment'
 import PdfOrder from '../Support/PdfOrder'
@@ -148,7 +148,7 @@ class BuyingDetail extends Component {
                                     <div className="BuyDetailCard">
                                         <div className="Row">
                                             <div className="col-2">
-                                                <img alt="Product"/>
+                                                <img src={ip+element_plant.image}alt="Product"/>
                                             </div>
                                             <div className="col-10">
                                                 <h4>{element_plant.plant_name}</h4>

@@ -31,14 +31,10 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            <NavLink to="#0"><li activeClassName="Active" className="Standat">ส่งใบสั่งซ์้อ
-                            <PdgOrder data={this.props.data} /></li></NavLink>
-                            <NavLink to="#1"><li activeClassName="Active" className="Standat">ยืนยันคำสั่งซื้อ
-                            <button className="BTN_PDF">ยืนยันคำสั่งซื้อ</button></li></NavLink>
-                            <NavLink to="#2"><li activeClassName="Active" className="Standat">ใบเเจ้งหนี้
-                            <button className="BTN_PDF">ใบเเจ้งหนี้</button></li></NavLink>
-                            <NavLink to="#3"><li activeClassName="Active" className="Standat">ใบเสร็จ
-                            <button className="BTN_PDF">ใบเสร็จ</button></li></NavLink>
+                            <NavLink to="#0"><li activeClassName="Active" className="Standat">ส่งใบสั่งซ์้อ</li></NavLink>
+                            <NavLink to="#1"><li activeClassName="Active" className="Standat">ยืนยันคำสั่งซื้อ</li></NavLink>
+                            <NavLink to="#2"><li activeClassName="Active" className="Standat">ใบเเจ้งหนี้</li></NavLink>
+                            <NavLink to="#3"><li activeClassName="Active" className="Standat">ใบเสร็จ</li></NavLink>
                         </ul>
                     </div>
                     <div className="col-2"></div>

@@ -122,6 +122,8 @@ class T_Cart extends Component {
     Comfirm = async () => {
         let object = {
             detail: this.state.cart_product,
+            date_send:this.state.date,
+            address_send:this.state.address,
             order_status: "0"
         }
         try {
@@ -224,11 +226,11 @@ class T_Cart extends Component {
                                 <div className="col-10">
                                     <h3 style={{ textAlign: "center" }}>รายละเอียดการจัดส่ง</h3>
                                     <h4>วันที่กำหนดส่ง</h4>
-                                    <input type="date" style={{ marginTop: "-50px", marginLeft: "-2px" }} />
+                                    <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
                                     <h4>ที่อยู่จัดส่ง</h4>
-                                    <textarea rows="4" cols="95" name="address" id="address"
+                                    <textarea rows="4" cols="95" name="address" id="address" onChange={this.handleChange}
                                         form="usrform" />
-                                    <button className="BTN_Signin">ออกใบคำสั่งซื้อ</button>
+                                    <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
                                     <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
 
                                 </div>
