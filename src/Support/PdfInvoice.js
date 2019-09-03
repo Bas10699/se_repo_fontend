@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment'
 import ThaiBaht from 'thai-baht-text'
-import { addComma } from '../../support/Constance'
+import { addComma } from '../Support/Constance'
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;

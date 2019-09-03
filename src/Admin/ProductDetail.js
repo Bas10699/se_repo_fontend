@@ -73,7 +73,8 @@ class ProductDetail extends Component {
             await post(data, 'trader/add_cart_trader', user_token).then((result) => {
                 if (result.success) {
                     // data_cart.push()
-                    alert("เพิ่มลงในตะกร้าแล้ว " + this.state.amount + " ชิ้น");
+                    // alert("เพิ่มลงในตะกร้าแล้ว " + this.state.amount + " ชิ้น");
+                    window.location.href='/T_cart'
 
                     setTimeout(() => {
                         console.log("get_product11", result)
@@ -126,7 +127,7 @@ class ProductDetail extends Component {
                             name="quantity" min="1"
                             id="amount" placeholder="จำนวนที่ต้องการสั่งซื้อ"
                             onChange={this.handleChange} />
-                        <NavLink to="/T_Cart"><button className="BTN_AddCart" onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button></NavLink>
+                        <button className="BTN_AddCart" onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button>
 
 
                     </div>

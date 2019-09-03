@@ -154,7 +154,7 @@ class T_Buying extends Component {
                                                 <div className="col-2"><h4 style={{ marginTop: "15px" }}>{element.order_id}</h4></div>
                                                 <div className="col-2">
                                                     <h4 style={{ marginTop: "15px" }}>
-                                                        {moment(element.order_date).utc().add('years', 543).format("DD/MM/YYYY, HH:mm")}
+                                                        {moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}
                                                     </h4>
                                                 </div>
 
@@ -175,7 +175,7 @@ class T_Buying extends Component {
                                                 <div className="col-1" style={{ textAlign: "right" }}></div>
                                                 <div className="col-2">
                                                     <h4 style={{ marginTop: "15px" }}>
-                                                        {moment(element.order_date).utc().add('years', 543).format("DD/MM/YYYY, HH:mm")}
+                                                        {moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}
                                                     </h4>
                                                 </div>
                                                 <div className="col-2"><h4 style={{ marginTop: "15px" }}>{element.order_id}</h4></div>

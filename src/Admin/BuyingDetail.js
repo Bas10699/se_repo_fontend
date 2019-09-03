@@ -5,7 +5,8 @@ import { user_token, addComma } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import queryString from 'query-string';
 import moment from 'moment'
-import PDF from '../Support/PdfOrder'
+import PdfOrder from '../Support/PdfOrder'
+import PdfInvoice from '../Support/PdfInvoice'
 import { NavLink } from 'react-router-dom'
 
 const events = [
@@ -125,11 +126,11 @@ class BuyingDetail extends Component {
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-8">
-                        <PDF data={this.state.order}/>
+                        <PdfOrder data={this.state.order}/>
                     </div>
                     <div className="col-2"></div>
                 </div>
-
+                <PdfInvoice data={this.state.order}/>
 
 
                 <div className="Row">

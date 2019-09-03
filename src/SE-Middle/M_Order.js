@@ -18,7 +18,7 @@ class M_Order extends Component {
 
     get_order = async () => {
         try {
-            await get('neutarlly/get_order_all', user_token).then((result) => {
+            await get('neutrally/get_order_all', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
                         get_order: result.result

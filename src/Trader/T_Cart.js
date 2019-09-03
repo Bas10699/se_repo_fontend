@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
 import { get, post } from '../Support/Service';
+import Modal from 'react-responsive-modal'
 
 class T_Cart extends Component {
     constructor(props) {
@@ -10,7 +11,8 @@ class T_Cart extends Component {
         this.state = {
             cart_product: [],
             render_cart: null,
-            total_price: []
+            total_price: [],
+            open: false,
         }
     }
     handleChange = (e) => {
@@ -29,6 +31,14 @@ class T_Cart extends Component {
             cart_product: cart_product
         })
     }
+
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
 
     componentWillMount() {
         this.get_product()
@@ -101,6 +111,13 @@ class T_Cart extends Component {
             alert("delete_cart_product_tarde" + error);
         }
     }
+    // connect = () => {
+    //     return (
+    //         <Modal open={this.state.open} onClose={this.onCloseModal} little>
+    //             <h2>Simple centered modal</h2>
+    //         </Modal>
+    //     )
+    // }
 
     Comfirm = async () => {
         let object = {
@@ -199,7 +216,19 @@ class T_Cart extends Component {
                             </div>
                         </div>
                         <button className="BTN_AddCart" style={{ float: "left" }} onClick={() => { this.edit_amount() }}>ยืนยันการแก้ไขจำนวน</button>
-                        <button className="BTN_AddCart" style={{ float: "right" }} onClick={() => { this.Comfirm() }}>ทำการสั่งซื้อ</button>
+                        <button className="BTN_AddCart" style={{ float: "right" }} onClick={() => { this.onOpenModal() }}>สั่งซื้อ</button>
+                        <Modal open={this.state.open} onClose={this.onCloseModal} little>
+                            <h5>วันที่กำหนดส่ง</h5>
+                            <input></input>
+                            <h5>ที่อยู่ในการจัดส่ง</h5>
+                            <input></input>
+                            <h5>ผู้จัดทำ</h5>
+                            <input></input>
+                            <h5>ผู้ตรวจสอบ</h5>
+                            <input></input><br/><br/>
+                            <button onClick={()=>{this.onCloseModal()}}>ยกเลิก</button>
+                            <button>ยืนยันการสั่งซื้อ</button>
+                        </Modal>
                     </div>
                     {/* จบ */}
                     <div className="col-2"></div>
