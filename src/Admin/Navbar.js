@@ -103,8 +103,6 @@ class Navbar extends Component {
                             <ul>
                                 <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
                                 <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
-                                <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตระกร้าสินค้า</NavLink></li>
-                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
                                 <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อผู้ประกอบการ</NavLink></li>
                                 <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
                                 <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
