@@ -18,6 +18,7 @@ class ProductDetail extends Component {
             total_plant: [],
             total_price: [],
             cart_product: [],
+            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         }
     }
 
@@ -113,7 +114,7 @@ class ProductDetail extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-5">
-                        <img className="IMG_Detail" src={ip + 'trader/image/' + this.state.product_data.image} alt={this.state.product_data.product_name} />
+                        {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} />:<img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                     </div>
                     <div className="col-1"></div>
                     <div className="col-5">

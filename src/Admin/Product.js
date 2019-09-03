@@ -10,7 +10,8 @@ class Product extends Component {
         this.state = {
             product_data: [],
             search_order: [],
-            grt_user: null
+            grt_user: null,
+            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
     }
 
@@ -111,7 +112,7 @@ class Product extends Component {
                                         this.state.search_order.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                    <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
+                                                    {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/Product/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
@@ -121,7 +122,7 @@ class Product extends Component {
                                         this.state.product_data.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                    <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
+                                                   {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/Product/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
@@ -168,7 +169,7 @@ class Product extends Component {
                                         this.state.search_order.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                    <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
+                                                   {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
@@ -178,7 +179,7 @@ class Product extends Component {
                                         this.state.product_data.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                    <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
+                                                   {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
