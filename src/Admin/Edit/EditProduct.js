@@ -151,7 +151,7 @@ class EditProduct extends Component {
                     }
                 });
         } catch (error) {
-            alert('update_plant_stock error: '+error);
+            alert('update_plant_stock error:'+error);
         }
         console.log("edit2" + this.state);
     }
@@ -208,7 +208,7 @@ class EditProduct extends Component {
                     <div className="col-1"></div>
                     <div className="col-5">
                         <h3><input type="text"
-                            name="pro_name" id="pro_name"
+                            name="product_name" id="product_name"
                             value={this.state.product_data.product_name}
                             onChange={this.handleInputChange} />
                         </h3>

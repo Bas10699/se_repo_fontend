@@ -115,6 +115,7 @@ class OrderDetail extends Component {
                                             </div>
                                             <div className="col-10">
                                                 <h4>{element_plant.plant_name}</h4>
+                                                <button className="BTN_AddCart" style={{width:"250px", float:"right",marginTop:"-75px"}}>ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย</button>
                                                 <div className="Row" style={{ marginTop: "-30px" }}>
                                                     <div className="col-4">
                                                         <h4>จำนวนที่สั่ง {addComma(element_plant.amount)} กิโลกรัม</h4>
@@ -155,7 +156,6 @@ class OrderDetail extends Component {
                                 </div>
                             </div>
                         </div>
-                        <button className="BTN_AddCart" style={{width:"250px", float:"right"}}>ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย</button>
                     </div>
 
                 </div>
