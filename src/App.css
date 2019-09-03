@@ -1,6 +1,15 @@
+@font-face {
+    font-family: 'kunlasatriregular';
+    src: url('Fonts/kunlasatri-webfont.woff2') format('woff2'),
+         url('Fonts/kunlasatri-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 .App {
     color: black;
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     padding-top: 25px;
 }
 
@@ -35,6 +44,7 @@
     display: flex;
     padding: 0px;
     margin: 0px;
+    font-family: 'kunlasatriregular';
 }
 
 .col-1 {width: 8.33%;}
@@ -102,7 +112,7 @@ h6{font-size: 14px;}
 .NavbarRight.Active {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
-    color: #FFFFFF;
+    color: white;
     padding-bottom: 12px;
 }
 
@@ -126,7 +136,7 @@ h6{font-size: 14px;}
 .NavbarText:hover {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
-    color: #FFFFFF;
+    color: white;
     padding-bottom: 12px;
 }
 
@@ -191,7 +201,7 @@ h6{font-size: 14px;}
 }
 
 .HeaderAreaCard button{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: none;
     color: black;
@@ -211,7 +221,7 @@ h6{font-size: 14px;}
 
 /* Start Button */
 .BTN_Buy{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     color: white;
     background-color: black;
@@ -231,7 +241,7 @@ h6{font-size: 14px;}
 }
 
 .BTN_AddCart {
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     color: black;
     background-color: white;
@@ -249,7 +259,7 @@ h6{font-size: 14px;}
 }
 
 .BTN_Signin{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     color: black;
     background-color: #FED07A;
@@ -270,9 +280,9 @@ h6{font-size: 14px;}
 }
 
 .BTN_Signup{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
-    color: #FFB731;
+    color: black;
     background-color: white;
     border: 1px solid #FFB731;
     text-align: center;
@@ -291,11 +301,11 @@ h6{font-size: 14px;}
 }
 
 .BTN_PDF{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     display: block;
     border: none;
-    color: #FFB731;
+    color: black;
     background-color: white;
     border: 1px solid #FFB731;
     text-align: center;
@@ -314,7 +324,7 @@ h6{font-size: 14px;}
 }
 
 .BTN_Detail{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     display: block;
     color: #FFB731;
@@ -335,12 +345,27 @@ h6{font-size: 14px;}
     color: white;
 }
 
+.X {
+    font-size: 16px;
+    border: none;
+    color: white;
+    background-color: black;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    float: right;
+    transition: 0.5s;
+}
+
+.X:hover {
+    background: red;
+}
 /* End Button */
 
 
 /* Start Input */
 textarea{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: 1px solid black;
     border-radius: 5px;
@@ -348,7 +373,7 @@ textarea{
 
 
 input[type="search"]{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: 1px solid black;
     margin-top: 50px;
@@ -358,7 +383,7 @@ input[type="search"]{
 }
 
 input[type="date"]{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 19px;
     border: 1px solid black;
     margin-top: 50px;
@@ -371,7 +396,7 @@ input[type="date"]{
 }
 
 input[type="number"]{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: 1px solid black;
     margin-top: -50px;
@@ -382,7 +407,7 @@ input[type="number"]{
 }
 
 input[type="text"],[type="password"],[type="email"],[type="tel"]{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: 1px solid black;
     margin-top: -50px;
@@ -418,7 +443,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 }
 
 .Card button{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: none;
     color: black;
@@ -476,7 +501,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 }
   
 .CartCard button {
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: none;
     color: white;
@@ -518,7 +543,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 }
 
 .BuyingCard button{
-    font-family: Kunlasatri;
+    font-family: 'kunlasatriregular';
     font-size: 16px;
     border: none;
     color: black;

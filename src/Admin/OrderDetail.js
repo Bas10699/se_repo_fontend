@@ -6,15 +6,10 @@ import queryString from 'query-string';
 import moment from 'moment'
 import Timeline from '../Support/Timeline'
 import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
-import PdgOrder from '../Support/PdfOrder';
 
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
 
-const events = [
-
-    { ts: "2562-08-23T13:22:46.587Z", text: 'ออกใบคำสั่งซื้อ' },
-];
 
 class OrderDetail extends Component {
     constructor(props) {

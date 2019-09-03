@@ -215,20 +215,28 @@ class T_Cart extends Component {
                                 </div>
                             </div>
                         </div>
-                        <button className="BTN_AddCart" style={{ float: "left" }} onClick={() => { this.edit_amount() }}>ยืนยันการแก้ไขจำนวน</button>
-                        <button className="BTN_AddCart" style={{ float: "right" }} onClick={() => { this.onOpenModal() }}>สั่งซื้อ</button>
-                        <Modal open={this.state.open} onClose={this.onCloseModal} little>
-                            <h5>วันที่กำหนดส่ง</h5>
-                            <input></input>
-                            <h5>ที่อยู่ในการจัดส่ง</h5>
-                            <input></input>
-                            <h5>ผู้จัดทำ</h5>
-                            <input></input>
-                            <h5>ผู้ตรวจสอบ</h5>
-                            <input></input><br/><br/>
-                            <button onClick={()=>{this.onCloseModal()}}>ยกเลิก</button>
-                            <button>ยืนยันการสั่งซื้อ</button>
+                        <button className="BTN_Signin" style={{ float: "left" }} onClick={() => { this.edit_amount() }}>ยืนยันการแก้ไขจำนวน</button>
+                        <button className="BTN_Signup" style={{ float: "right" }} onClick={() => { this.onOpenModal() }}>สั่งซื้อ</button>
+
+                        <Modal open={this.state.open} onClose={this.onCloseModal}>
+                            <div className="Row">
+                                <div className="col-1" />
+                                <div className="col-10">
+                                    <h3 style={{ textAlign: "center" }}>รายละเอียดการจัดส่ง</h3>
+                                    <h4>วันที่กำหนดส่ง</h4>
+                                    <input type="date" style={{ marginTop: "-50px", marginLeft: "-2px" }} />
+                                    <h4>ที่อยู่จัดส่ง</h4>
+                                    <textarea rows="4" cols="95" name="address" id="address"
+                                        form="usrform" />
+                                    <button className="BTN_Signin">ออกใบคำสั่งซื้อ</button>
+                                    <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+
+                                </div>
+                                <div className="col-1" />
+                            </div>
                         </Modal>
+
+                        
                     </div>
                     {/* จบ */}
                     <div className="col-2"></div>
