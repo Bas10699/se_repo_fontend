@@ -63,7 +63,6 @@ class ProductDetail extends Component {
             this.state.data.push({
                 plant_id: element.plant_id,
                 total_plant: this.state.total_plant = element.volume * this.state.amount,
-                // total_price: this.state.total_price = element.price * this.state.total_plant
             })
         })
 
@@ -73,8 +72,6 @@ class ProductDetail extends Component {
         try {
             await post(data, 'trader/add_cart_trader', user_token).then((result) => {
                 if (result.success) {
-                    // data_cart.push()
-                    // alert("เพิ่มลงในตะกร้าแล้ว " + this.state.amount + " ชิ้น");
                     window.location.href='/T_cart'
 
                     setTimeout(() => {

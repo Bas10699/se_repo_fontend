@@ -184,6 +184,8 @@ class T_Cart extends Component {
                                                 <input type="number" name="amount"
                                                     value={element.amount}
                                                     onChange={(event) => { this.handleInputChange(event, index) }} />
+
+                                                    
                                                 <div className="Row">
                                                     <div className="col-10">
                                                         <h5>ราคา</h5>

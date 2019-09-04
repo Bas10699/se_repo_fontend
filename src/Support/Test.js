@@ -46,7 +46,11 @@ class Test extends Component {
                             this.state.data.map((data, index) => {
                                 return (
                                     <div key={index}>
-                                        <input value={data} onChange={(e) => this.handleChange(e, index)} />
+                                        <input type="number" style={{marginTop:"25px"}} value={data} 
+                                        onChange={(e) => this.handleChange(e, index)} 
+                                        
+                                        
+                                        />
                                         <button onClick={() => this.delete(index)}>ลบ</button>
                                     </div>
                                 )
