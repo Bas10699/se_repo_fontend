@@ -27,7 +27,8 @@ class EditProduct extends Component {
             pro_status: null,
             pro_id: null,
             pro_image: null,
-            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
+            addInputBox: null,
+            default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -152,7 +153,7 @@ class EditProduct extends Component {
                     }
                 });
         } catch (error) {
-            alert('update_plant_stock error:'+error);
+            alert('update_plant_stock error:' + error);
         }
         console.log("edit2" + this.state);
     }
@@ -186,7 +187,6 @@ class EditProduct extends Component {
 
     }
 
-
     render() {
         return (
             <div className="App">
@@ -198,41 +198,49 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                    {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} />:<img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                        {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
 
                     </div>
                     <div className="col-1"></div>
                     <div className="col-5">
-                        <h3><input type="text"
+                        <h4>ชื่อสินค้า</h4><input type="text"
                             name="product_name" id="product_name"
                             value={this.state.product_data.product_name}
                             onChange={this.handleInputChange} />
-                        </h3>
-                        <h5>
-                            <textarea rows="4" cols="80" name="product_detail" id="product_detail"
-                                form="usrform" value={this.state.product_data.product_detail} 
+
+                        <h4>รายละเอียดสินค้า</h4>
+                        <textarea rows="4" cols="80" name="product_detail" id="product_detail"
+                            form="usrform" value={this.state.product_data.product_detail}
+                            onChange={this.handleInputChange} />
+
+
+                        <h4>ราคาขายปลีก</h4>
+                        <h4><input type="number" style={{ width: "20%" }}
+                            name="cart_product" id="cart_product" min="1"
+                            value={addComma(this.sum_price(this.state.cart_product))}
+                            onChange={this.handleInputChange} />บาท / กิโลกรัม</h4>
+
+
+                        <h4>ราคาขายส่ง</h4>
+                        <h4><input type="number" style={{ width: "20%" }}
+                            name="cart_product" id="cart_product" min="1"
+                            value={addComma(this.sum_price(this.state.cart_product))}
+                            onChange={this.handleInputChange} /> บาท /
+
+                            <input type="number" style={{ width: "20%" }}
+                                name="cart_product" id="cart_product" min="1"
+                                value={addComma(this.sum_price(this.state.cart_product))}
                                 onChange={this.handleInputChange} />
-                        </h5>
-
-
-                        <h4><input type="number" style={{width:"20%"}}
-                            name="cart_product" id="cart_product" min="1"
-                            value={addComma(this.sum_price(this.state.cart_product))}
-                            onChange={this.handleInputChange} /> บาท / กิโลกรัม</h4>
-                            
-                        <h4><input type="number" style={{width:"20%"}}
-                            name="cart_product" id="cart_product" min="1"
-                            value={addComma(this.sum_price(this.state.cart_product))}
-                            onChange={this.handleInputChange} /> บาท / 
-                            
-                            <input type="number" style={{width:"20%"}}
-                            name="cart_product" id="cart_product" min="1"
-                            value={addComma(this.sum_price(this.state.cart_product))}
-                            onChange={this.handleInputChange} /> กิโลกรัม
+                            หน่วย
+                            <select style={{ width: "20%" }}>
+                                <option value="kg">กิโลกรัม</option>
+                                <option value="tun">ตัน</option>
+                            </select>
                         </h4>
-                        <button className="BTN_AddCart">เพิ่มราคาส่ง</button>
+
+                        <button className="BTN_AddCart" >เพิ่มราคาส่ง</button>
                     </div>
                     <div className="col-1"></div>
 
@@ -285,11 +293,11 @@ class EditProduct extends Component {
                         </table>
 
                         <button className="BTN_Signin"
-                            style={{float:"right"}}
+                            style={{ float: "right" }}
                             onClick={() => this.edit_product()}>
-                                บันทึกการเปลี่ยนแปลง
+                            บันทึกการเปลี่ยนแปลง
                         </button>
-                        <button className="BTN_Signup" style={{float:"right"}} >ยกเลิก</button>
+                        <button className="BTN_Signup" style={{ float: "right" }} >ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>

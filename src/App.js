@@ -16,11 +16,14 @@ import Signup from './Admin/Signup';
 import M_Order from './SE-Middle/M_Order';
 import OrderDetail from './Admin/OrderDetail';
 import EditProduct from './Admin/Edit/EditProduct';
+import Test from './Support/Test';
 
 function App() {
   return (
     <Router exact path="/">
       <Navbar />
+
+      <Route exact path='/Test' component={Test}/>
 
       <Route exact path='/Signin' component={Signin}/>
       <Route exact path='/Signup' component={Signup}/>
