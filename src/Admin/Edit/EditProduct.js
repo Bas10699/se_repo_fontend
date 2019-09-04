@@ -95,61 +95,24 @@ class EditProduct extends Component {
     }
 
 
-
-
-
-    onSubmit(e) {
-        const new_product = {
-            pro_name: this.refs.pro_name.value,
-            pro_amount: this.refs.state.pro_amount.value,
-            pro_cost: this.refs.state.pro_cost.value,
-            pro_details: this.refs.state.pro_details.value,
-            pro_price: this.refs.state.pro_price.value,
-            pro_status: this.refs.state.pro_status.value,
-            pro_id: this.refs.state.pro_id.value,
-            pro_image: this.refs.state.pro_image.value
-        }
-        this.edit_product(new_product);
-        e.preventDefault();
-    }
-
-    updata() {
-        this.setState({
-            pro_name: this.state.get_product.pro_name,
-            pro_amount: this.state.get_product.pro_amount,
-            pro_cost: this.state.get_product.pro_cost,
-            pro_details: this.state.get_product.pro_details,
-            pro_price: this.state.get_product.pro_price,
-            pro_status: this.state.get_product.pro_status,
-            pro_id: this.state.get_product.pro_id,
-            pro_image: this.state.get_product.pro_image
-        });
-    }
-
     edit_product = async () => {
-
+        let url = this.props.location.search
+        let params = queryString.parse(url);
         let object = {
-            pro_name: this.state.pro_name,
-            pro_amount: this.state.pro_amount,
-            pro_cost: this.state.pro_cost,
-            pro_details: this.state.pro_details,
-            pro_price: this.state.pro_price,
-            pro_status: this.state.pro_status,
-            pro_id: this.state.pro_id,
-            pro_image: this.state.pro_image
+            product_id: params.product_id,
+            image: this.state.default_image,
         };
-        console.log("image", this.state.pro_image)
+        console.log('gg', object)
 
         try {
             await post(object, "neutrally/update_plant_stock", user_token)
-                .then(res => {
-                    console.log("edit1" + res);
-
-                    if (res.success) {
+                .then((result) => {
+                    console.log("edit1" + result);
+                    if (result.success) {
                         alert("แก้ไขข้อมูลสินค้าเรียบร้อย");
                         window.location.href = "/Product";
                     } else {
-                        alert("edit_alert : " + res.error_message);
+                        alert("edit_alert : " + result.error_message);
                     }
                 });
         } catch (error) {
