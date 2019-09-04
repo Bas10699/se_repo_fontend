@@ -9,7 +9,8 @@ class Home extends Component {
         super(props)
         this.state = {
             product_data: [],
-            search_order: []
+            search_order: [],
+            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
     }
 
@@ -71,7 +72,7 @@ class Home extends Component {
                                     return (
 
                                         <div className="HeaderAreaCard">
-                                            <img alt="Product" src={ip + 'trader/image/' + this.state.product_data.image} />
+                                            {element.image? <img alt="Product" src={ip + element.image} />:<img alt="Product" src={this.state.default_image} />}
                                             <h4>{element.product_name}</h4>
                                             <h5>ราคาปลีก บาท</h5>
                                             <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button>รายละเอียดเพิ่มเติม</button></NavLink>

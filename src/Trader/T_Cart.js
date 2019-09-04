@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
-import { get, post } from '../Support/Service';
+import { get, post,ip } from '../Support/Service';
 import Modal from 'react-responsive-modal'
 
 class T_Cart extends Component {
@@ -13,6 +13,7 @@ class T_Cart extends Component {
             render_cart: null,
             total_price: [],
             open: false,
+            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
     }
     handleChange = (e) => {
@@ -173,7 +174,7 @@ class T_Cart extends Component {
                                     <div className="CartCard">
                                         <div className="Row">
                                             <div className="col-2">
-                                                {/* <img src={ip + 'trader/image/' + this.state.product_data.image} alt={this.state.product_data.product_name} /> */}
+                                            {element.image? <img alt="Product" src={ip + element.image} />:<img alt="Product" src={this.state.default_image} />}
                                             </div>
                                             <div className="col-1"></div>
                                             <div className="col-9">

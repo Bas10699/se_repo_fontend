@@ -1,6 +1,6 @@
 //รายละเอียดคำสั่งซื้อสินค้า SE-M ซื้อของจาก SE-S
 import React, { Component } from 'react';
-import { post } from '../Support/Service';
+import { post ,ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
@@ -23,7 +23,8 @@ class OrderDetail extends Component {
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
-            tag_default: "https://image.flaticon.com/icons/svg/1161/1161830.svg"
+            tag_default: "https://image.flaticon.com/icons/svg/1161/1161830.svg",
+            default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
     }
 
@@ -69,14 +70,14 @@ class OrderDetail extends Component {
         }
     }
 
-    // sum_price = (data_price) => {
-    //     let sum = 0;
-    //     data_price.map((element) => {
-    //         sum += (element.price * element.amount)
-    //     })
-    //     return sum;
+    sum_price = (data_price) => {
+        let sum = 0;
+        data_price.map((element) => {
+            sum += (element.price * element.amount)
+        })
+        return sum;
 
-    // }
+    }
 
     render() {
         return (
@@ -123,7 +124,7 @@ class OrderDetail extends Component {
                                     <div className="BuyDetailCard">
                                         <div className="Row">
                                             <div className="col-2">
-                                                <img alt="Product" />
+                                            {element_plant.image ? <img alt="Product" src={ip + element_plant.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             </div>
                                             <div className="col-10">
                                                 <h4>{element_plant.plant_name}</h4>
@@ -224,7 +225,7 @@ class OrderDetail extends Component {
                                         </div>
                                         <div className="col-3">
                                             {/* <h4 style={{ color: "red" }}>{addComma(this.sum_price(this.state.cart_product))} บาท</h4> */}
-                                            <h4 style={{ color: "red", textAlign: "right" }}>ราคารวม บาท</h4>
+                                            <h4 style={{ color: "red", textAlign: "right" }}>ราคารวม {addComma(this.sum_price(this.state.detail))} บาท</h4>
                                         </div>
                                     </div>
                                 </div>

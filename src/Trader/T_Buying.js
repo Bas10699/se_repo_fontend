@@ -106,6 +106,15 @@ class T_Buying extends Component {
         }
     }
 
+    sum_price = (data_price) => {
+        let sum = 0;
+        data_price.map((element) => {
+            sum += (element.price * element.amount)
+        })
+        return sum;
+
+    }
+
 
     render() {
         return (
@@ -159,7 +168,7 @@ class T_Buying extends Component {
                                                 </div>
 
                                                 <div className="col-2"><h4 style={{ marginTop: "15px" }}>{this.render_status(element.order_status)}</h4></div>
-                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>ราคา บาท</h4></div>
+                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>ราคา {addComma(this.sum_price(element.detail))} บาท</h4></div>
                                                 <div className="col-2">
                                                     <NavLink to={"/T_Buying/order?order_id=" + element.order_id}><button style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink>
                                                 </div>

@@ -430,6 +430,15 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
     margin-top: 10px;
     background-color: white;
 }
+._Card {
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 67%;
+    float: left;
+    margin-left: 16.5%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: white;
+}
 
 .Card img{
     width: 100%;

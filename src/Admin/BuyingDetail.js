@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Timeline from '../Support/Timeline'
 import { user_token, addComma } from '../Support/Constance';
-import { get, post ,ip} from '../Support/Service';
+import { get, post, ip } from '../Support/Service';
 import queryString from 'query-string';
 import moment from 'moment'
 import PdfOrder from '../Support/PdfOrder'
@@ -19,12 +19,14 @@ class BuyingDetail extends Component {
             detail: [],
             plant: [],
             data: [],
-            data_price:[],
-            cart_product:[],
+            data_price: [],
+            cart_product: [],
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
-            tag_default: "https://image.flaticon.com/icons/svg/1161/1161830.svg"
+            tag_default: "https://image.flaticon.com/icons/svg/1161/1161830.svg",
+            default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
+
         }
     }
 
@@ -117,23 +119,29 @@ class BuyingDetail extends Component {
 
 
 
-                <div className="Row">
+                {/* <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-8">
-                        <PdfOrder data={this.state.order}/>
+                        <PdfOrder data={this.state.order} />
                     </div>
                     <div className="col-2"></div>
-                </div>
+                </div> */}
 
                 <Timeline />
 
-                {/* <div className="Row">
-                    <div className="col-4"></div>
-                    <div className="col-4">
-                        <Timeline items={events} />
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันคำสั่งซื้อ</h4>
+                                <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                            </div>
+                            <div className="col-2">
+                                <PdfOrder data={this.state.order}/>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-4"></div>
-                </div> */}
+                </div>
 
 
 
@@ -148,11 +156,11 @@ class BuyingDetail extends Component {
                                     <div className="BuyDetailCard">
                                         <div className="Row">
                                             <div className="col-2">
-                                                <img src={ip+element_plant.image}alt="Product"/>
+                                                {element_plant.image ? <img alt="Product" src={ip + element_plant.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             </div>
                                             <div className="col-10">
                                                 <h4>{element_plant.plant_name}</h4>
-                                                <div className="Row" style={{marginTop:"-30px"}}>
+                                                <div className="Row" style={{ marginTop: "-30px" }}>
                                                     <div className="col-4">
                                                         <h4>จำนวนที่สั่ง {addComma(element_plant.amount)} กิโลกรัม</h4>
                                                     </div>
@@ -160,7 +168,7 @@ class BuyingDetail extends Component {
                                                         <h5>ราคาต่อหน่วย {element_plant.price} บาท</h5>
                                                     </div>
                                                     <div className="col-3">
-                                                        <h4 style={{textAlign:"right"}}>รวม {addComma(element_plant.price * element_plant.amount)} บาท</h4>
+                                                        <h4 style={{ textAlign: "right" }}>รวม {addComma(element_plant.price * element_plant.amount)} บาท</h4>
                                                     </div>
                                                 </div>
 
@@ -185,7 +193,7 @@ class BuyingDetail extends Component {
                                             <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
                                         </div>
                                         <div className="col-2">
-                                        <h4 style={{ color: "red" }}>{addComma(this.sum_price(this.state.cart_product))} บาท</h4>
+                                            <h4 style={{ color: "red" }}>{addComma(this.sum_price(this.state.detail))} บาท</h4>
                                         </div>
                                     </div>
                                 </div>

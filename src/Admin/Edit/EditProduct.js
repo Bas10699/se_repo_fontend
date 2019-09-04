@@ -179,7 +179,7 @@ class EditProduct extends Component {
             reader.onloadend = () => {
                 console.log("img", reader.result)
                 this.setState({
-                    pro_image: reader.result
+                    default_image: reader.result
                 });
             }
         }

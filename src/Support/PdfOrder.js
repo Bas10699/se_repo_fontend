@@ -74,7 +74,7 @@ class PdfOrder extends Component {
                 heights: 90,
                 body: [
                   [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
-                    `วันที่กำหนดส่ง ${this.props.data.date_send}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.address_send}`]
+                    `วันที่กำหนดส่ง ${this.props.data.date_send}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                 ]
               }
             },
@@ -197,7 +197,7 @@ class PdfOrder extends Component {
   render() {
     return (
       <div>
-        <button className="BTN_PDF" onClick={() => { this.printPDF() }}>ใบสั่งซื้อ</button>
+        <button className="BTN_PDF" onClick={() => { this.printPDF() }}>ดูรายละเอียดใบสั่งซื้อ</button>
       </div>
     )
   }
