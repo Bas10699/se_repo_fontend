@@ -46,9 +46,11 @@ class T_Buying extends Component {
 
         switch (order_status) {
             case 0:
+            case 1:
+            case 2:
                 render_tag = <div style={{ color: "#ffc107" }} > กำลังดำเนินการ </div>
                 break;
-            case 1:
+            case 3:
                 render_tag = <div style={{ color: "#28a745" }} > สำเร็จแล้ว </div>
                 break;
             default:

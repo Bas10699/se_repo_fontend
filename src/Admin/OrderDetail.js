@@ -8,6 +8,7 @@ import Timeline from '../Support/Timeline'
 import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
 import PdfOrder from '../Support/PdfOrder'
 import Modal from 'react-responsive-modal'
+import PdfInvoice from '../Support/PdfInvoice'
 
 
 // import FrequencyPlant from './frequency_plant'
@@ -27,6 +28,12 @@ class OrderDetail extends Component {
             OpenComfrim: false,
             detail_send: null,
             date_send: null,
+<<<<<<< HEAD
+=======
+            BankAccountName: null,
+            BankName: null,
+            BankNo: null,
+>>>>>>> master
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -74,7 +81,7 @@ class OrderDetail extends Component {
                     }, 500)
                 } else {
                     // window.location.href = "/sales_sum";
-                    // alert(result.error_message)
+                    alert(result.error_message)
                     console.log("get_order", result.result)
                 }
             });
@@ -82,6 +89,7 @@ class OrderDetail extends Component {
             alert("get_cart_trader" + error);
         }
     }
+<<<<<<< HEAD
     add_invoice = () => {
         let object = {
             order_id: this.state.order.order_id,
@@ -90,6 +98,35 @@ class OrderDetail extends Component {
             status: 0
         }
         console.log('object', object)
+=======
+    add_invoice = async () => {
+        let detail = {
+            BankName: this.state.BankName,
+            BankNo: this.state.BankNo,
+            BankAccountName: this.state.BankAccountName
+        }
+        let object = {
+            order_id: this.state.order.order_id,
+            date_send: this.state.date_send,
+            detail: JSON.stringify(detail),
+            status: 0
+        }
+        try {
+            await post(object, 'neutrally/add_invoice_neutrally', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                }
+                else {
+                    alert(result.error_message)
+                    console.log("get_order", result.result)
+                }
+            })
+
+        }
+        catch (error) {
+            alert("add_invoice_neutrally" + error);
+        }
+>>>>>>> master
     }
 
     sum_price = (data_price) => {
@@ -116,6 +153,93 @@ class OrderDetail extends Component {
         this.setState({ open: true });
     };
 
+    render_status = (order_status) => {
+        let render_show
+        switch (order_status) {
+            case 0: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้ </h4>
+                                <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                            </div>
+                            <div className="col-2">
+                                <PdfOrder data={this.state.order} />
+                                <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            case 1: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                                <p>&nbsp; </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            case 2: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
+                                <p>&nbsp; </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            case 3: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
+                                <p>&nbsp; </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            default: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+                                <p>&nbsp; </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                break;
+        }
+        return render_show;
+    }
+
     render() {
         return (
             <div className="App">
@@ -140,6 +264,7 @@ class OrderDetail extends Component {
                     </div>
                 </div>
 
+
                 {/* <div className="Row">
                     <div className="col-4"></div>
                     <div className="col-4">
@@ -149,6 +274,7 @@ class OrderDetail extends Component {
                 </div> */}
 
                 <Timeline data={this.state.order} />
+<<<<<<< HEAD
                 {/* <PdgOrder data={this.state.order} /> */}
                 <div className="Row">
                     <div className='_Card'>
@@ -164,6 +290,13 @@ class OrderDetail extends Component {
                         </div>
                     </div>
                 </div>
+=======
+
+                {/* {this.state.order.order_status == 1 ? <PdfInvoice data={this.state.order} /> : null} */}
+                {this.render_status(this.state.order.order_status)}
+
+
+>>>>>>> master
 
                 <div className="Row">
                     <div className="col-2"></div>
@@ -263,11 +396,19 @@ class OrderDetail extends Component {
                             <h4>ชำระเงินภายในวันที่</h4>
                             <input type="date" name="date_send" id="date_send" onChange={this.handleChange} style={{ marginTop: "-50px" }} />
                             <h4 style={{ marginTop: "-30px" }}>ข้อมูลการชำระเงิน</h4>
+<<<<<<< HEAD
                             <p>ชื่อธนาคาร <input></input></p>
 
                             <p>เลขบัญชีธนาคาร <input></input></p>
 
                             <p>ชื่อบัญชีธนาคาร  <input></input></p>
+=======
+                            <p>ชื่อธนาคาร <input name="BankName" id="BankName" onChange={this.handleChange}></input></p>
+
+                            <p>เลขบัญชีธนาคาร <input name="BankNo" id="BankNo" onChange={this.handleChange}></input></p>
+
+                            <p>ชื่อบัญชีธนาคาร  <input name="BankAccountName" id="BankAccountName" onChange={this.handleChange}></input></p>
+>>>>>>> master
 
                             <textarea rows="4" cols="95" name="detail_send" id="detail_send" onChange={this.handleChange}
                                 form="usrform" />
