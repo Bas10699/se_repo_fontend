@@ -1,11 +1,14 @@
 //รายละเอียดคำสั่งซื้อสินค้า SE-M ซื้อของจาก SE-S
 import React, { Component } from 'react';
-import { post ,ip } from '../Support/Service';
+import { post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
 import Timeline from '../Support/Timeline'
 import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
+
+import Modal from 'react-responsive-modal'
+
 
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
@@ -15,6 +18,7 @@ class OrderDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            open: false,
             num: false,
             order: [],
             detail: [],
@@ -46,9 +50,9 @@ class OrderDetail extends Component {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         const object = {
-            order_id:params.aa
+            order_id: params.aa
         }
-        console.log('obj',object)
+        console.log('obj', object)
         try {
             await post(object, 'neutrally/get_order_info', user_token).then((result) => {
                 if (result.success) {
@@ -78,6 +82,14 @@ class OrderDetail extends Component {
         return sum;
 
     }
+
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
 
     render() {
         return (
@@ -124,81 +136,24 @@ class OrderDetail extends Component {
                                     <div className="BuyDetailCard">
                                         <div className="Row">
                                             <div className="col-2">
-                                            {element_plant.image ? <img alt="Product" src={ip + element_plant.image} /> : <img alt="Product" src={this.state.default_image} />}
+                                                {element_plant.image ? <img alt="Product" src={ip + element_plant.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             </div>
                                             <div className="col-10">
                                                 <h4>{element_plant.plant_name}</h4>
-
-                                                <OffCanvas isMenuOpened={this.state.isMenuOpened} width={500}>
-                                                    <button onClick={this.handleClick.bind(this)}
-                                                        className="BTN_AddCart"
-                                                        style={{ width: "250px", float: "right", marginTop: "-75px" }}>
-                                                        ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย
+                                                <button onClick={() => { this.onOpenModal() }}
+                                                    className="BTN_AddCart"
+                                                    style={{ width: "250px", float: "right", marginTop: "-75px" }}>
+                                                    ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย
                                                     </button>
 
-                                                    <OffCanvasMenu style={{ marginTop: "50px", background: "white" }}>
-                                                        <button style={{ float: "right" }} onClick={this.handleClick.bind(this)}>
-                                                            X
-                                                        </button>
-                                                        <h4>ชื่อวัตถุดิบ</h4>
-                                                        <h5>จำนวนวัตถุดิบทั้งหมด</h5>
-                                                        <h5 style={{ color: "red" }}>จำนวนที่ต้องซื้อ</h5>
-
-                                                        <table>
-                                                            <tr>
-                                                                <th>ชื่อ SE</th>
-                                                                <th>จำนวนวัตถุดิบที่มีในสต๊อก</th>
-                                                                <th>ค่าขนส่ง</th>
-                                                                <th>ช่วงส่งมอบ</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>SE-1</td>
-                                                                <td>10000</td>
-                                                                <td>20</td>
-                                                                <td>มกราคม</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>SE-2</td>
-                                                                <td>545400</td>
-                                                                <td>200</td>
-                                                                <td>มกราคม</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>SE-3</td>
-                                                                <td>100500</td>
-                                                                <td>888</td>
-                                                                <td>ธันวาคม</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>SE-4</td>
-                                                                <td>10000</td>
-                                                                <td>20</td>
-                                                                <td>มกราคม</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>SE-5</td>
-                                                                <td>10000</td>
-                                                                <td>20</td>
-                                                                <td>มกราคม</td>
-                                                            </tr>
-                                                        </table>
-                                                    </OffCanvasMenu>
-
-                                                </OffCanvas>
-
-
                                                 <div className="Row" style={{ marginTop: "-30px" }}>
-                                                    <div className="col-4">
+                                                    <div className="col-5">
                                                         <h4>จำนวนที่สั่ง {addComma(element_plant.amount)} กิโลกรัม</h4>
                                                     </div>
-                                                    <div className="col-4">
+                                                    <div className="col-3">
                                                         <h5>ราคาต่อหน่วย {element_plant.price} บาท</h5>
                                                     </div>
-                                                    <div className="col-3">
+                                                    <div className="col-4">
                                                         <h4 style={{ textAlign: "right" }}>รวม {addComma(element_plant.price * element_plant.amount)} บาท</h4>
                                                     </div>
                                                 </div>
@@ -210,7 +165,29 @@ class OrderDetail extends Component {
                             })
                         }
 
+                        <Modal open={this.state.open} onClose={this.onCloseModal}>
+                            <div className="Row">
+                                <div className="col-1" />
+                                <div className="col-10">
+                                    <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ {this.state.detail.plant_name}</h3>
+                                    <h4>จำนวนวัตถุดิบทั้งหมด {this.state.detail.total_plant} กิโลกรัม</h4>
+                                    <h4>จำนวนที่สั่งซื้อ {this.state.detail.amount} กิโลกรัม</h4>
+                                    <table>
+                                        <tr>
+                                            <th>ชื่อ SE</th>
+                                            <th>จำนวนที่มีอยู่ในสต๊อก</th>
+                                            <th>ราคาขนส่ง</th>
+                                            <th>ช่วงส่งมอบ</th>
+                                        </tr>
+                                    </table>
 
+                                    <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
+                                    <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+
+                                </div>
+                                <div className="col-1" />
+                            </div>
+                        </Modal>
 
                         <div className="TotalCart">
                             <div className="Row">

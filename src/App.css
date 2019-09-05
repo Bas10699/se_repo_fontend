@@ -60,12 +60,36 @@
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
-h1{font-size: 60px;}
-h2{font-size: 40px;}
-h3{font-size: 32px;}
-h4{font-size: 20px;}
-h5{font-size: 16px;}
-h6{font-size: 14px;}
+h1{
+    font-size: 60px;
+    font-weight: normal;
+    font-style: normal;
+}
+h2{
+    font-size: 40px;
+    font-weight: normal;
+    font-style: normal;
+}
+h3{
+    font-size: 32px;
+    font-weight: normal;
+    font-style: normal;
+}
+h4{
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+}
+h5{
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+}
+h6{
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* Start Navbar */
 

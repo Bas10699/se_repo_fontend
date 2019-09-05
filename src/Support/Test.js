@@ -1,69 +1,61 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class Test extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            input: "",
+            tasks: []
         };
-
     }
 
-    addprice = () => {
+    addTask = () => {
+        this.state.input &&
+            this.setState(({ tasks, input: value }) => ({
+                tasks: [...tasks, { value, key: new Date().getTime() }],
+                input: ""
+            }));
+        console.log("addTask", this.state.tasks);
+    };
+
+    setValue = ({ target: { value: input } }) => {
         this.setState({
-            data: [...this.state.data, ""]
-        })
-        console.log("add",this.state.data)
-    }
+            input
+        });
+    };
 
-    handleChange = (e, index) => {
-        this.state.data[index] = e.target.value
+    delete = index => {
+        this.state.tasks.splice(index, 1);
+
+        console.log("show data", this.state.data);
         this.setState({
-            data: this.state.data
-        })
-    }
-
-    delete = (index) => {
-        this.state.data.splice(index, 1)
-
-        console.log("show data",this.state.data)
-        this.setState({
-            data:this.state.data
-        })
-    }
-
+            tasks: this.state.tasks
+        });
+    };
 
     render() {
-
-
 
         return (
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
                         Test
-                        {
-                            this.state.data.map((data, index) => {
-                                return (
-                                    <div key={index}>
-                                        <input type="number" style={{marginTop:"25px"}} value={data} 
-                                        onChange={(e) => this.handleChange(e, index)} 
-                                        
-                                        
-                                        />
-                                        <button onClick={() => this.delete(index)}>ลบ</button>
-                                    </div>
-                                )
-                            })
-                        }
-                        <button onClick={(e) => this.addprice(e)}>เพิ่ม</button>
+            <div>
+                            {this.state.tasks.map((task, index) => (
+                                <div key={task.key}>
+                                    {task.value}
+                                    <button onClick={() => this.delete(index)}>ลบ</button>
+                                </div>
+                            ))}
 
+                            <input onChange={this.setValue} value={this.state.input} />
+                            {console.log("value", this.state.input)}
+                            <button onClick={this.addTask}>Add</button>
+                        </div>
                     </div>
                 </div>
-
             </div>
-        )
+        );
     }
-
 }
 export default Test;

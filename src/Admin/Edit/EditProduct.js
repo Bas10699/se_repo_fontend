@@ -20,7 +20,7 @@ class EditProduct extends Component {
             total_price: [],
             cart_product: [],
             addInputBox: null,
-            open_up_image:false,
+            open_up_image: false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -115,12 +115,8 @@ class EditProduct extends Component {
     }
 
     handleInputChange(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
         this.setState({
-            [name]: value
+            [e.target.name.id]: e.target.name.value
         });
     }
 
@@ -137,7 +133,7 @@ class EditProduct extends Component {
                 console.log("img", reader.result)
                 this.setState({
                     default_image: reader.result,
-                    open_up_image:true
+                    open_up_image: true
                 });
             }
         }
@@ -155,17 +151,18 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                        {this.state.open_up_image? <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />:this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                        {this.state.open_up_image ? <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} /> : this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
 
                     </div>
                     <div className="col-1"></div>
                     <div className="col-5">
-                        <h4>ชื่อสินค้า</h4><input type="text"
-                            name="product_name" id="product_name"
+                        <h4>ชื่อสินค้า</h4>
+                        <input type="text"
+                            name="product_data" id="product_name"
                             value={this.state.product_data.product_name}
-                            onChange={this.handleInputChange} />
+                            onChange={(e)=>this.handleInputChange(e)} />
 
                         <h4>รายละเอียดสินค้า</h4>
                         <textarea rows="4" cols="80" name="product_detail" id="product_detail"
