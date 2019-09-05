@@ -10,7 +10,7 @@ class T_Buying extends Component {
         super(props)
         this.state = {
             order: [],
-            data:[],
+            data: [],
             get_user: null,
             get_product: null,
             search_order: [],
@@ -125,7 +125,7 @@ class T_Buying extends Component {
                     </div>
                 </div>
 
-                
+
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-4">
@@ -139,65 +139,43 @@ class T_Buying extends Component {
 
                 <div className="Row">
                     <div className="col-2"></div>
-                    
+
                     <div className="col-8">
-                        <div className="TotalCart">
-                            <div className="Row">
-                                <div className="col-1" style={{ textAlign: "right" }}></div>
-                                <div className="col-2" style={{ textAlign: "center" }}>รหัสใบสั่งซื้อ</div>
-                                <div className="col-2" style={{ textAlign: "center" }}>วันที่</div>
-                                <div className="col-2" style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</div>
-                                <div className="col-2" style={{ textAlign: "center" }}>ยอดการสั่งซื้อ</div>
-                                <div className="col-2" style={{ textAlign: "center" }}>รายละเอียด</div>
-                                <div className="col-1" style={{ textAlign: "left" }}></div>
-                            </div>
-                        </div>
-
-                        {
-                            this.state.search_order ?
-                                this.state.search_order.map((element, index) => {
-                                    return (
-                                        <div className="BuyingCard">
-                                            <div className="Row">
-                                                <div className="col-1"></div>
-                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>{element.order_id}</h4></div>
-                                                <div className="col-2">
-                                                    <h4 style={{ marginTop: "15px" }}>
-                                                        {moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}
-                                                    </h4>
-                                                </div>
-
-                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>{this.render_status(element.order_status)}</h4></div>
-                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>ราคา {addComma(this.sum_price(element.detail))} บาท</h4></div>
-                                                <div className="col-2">
-                                                    <NavLink to={"/T_Buying/order?order_id=" + element.order_id}><button style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                                :
-                                this.state.order.map((element, index) => {
-                                    return (
-                                        <div className="BuyingCard">
-                                            <div className="Row">
-                                                <div className="col-1" style={{ textAlign: "right" }}></div>
-                                                <div className="col-2">
-                                                    <h4 style={{ marginTop: "15px" }}>
-                                                        {moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}
-                                                    </h4>
-                                                </div>
-                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>{element.order_id}</h4></div>
-                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>{this.render_status(element.order_status)}</h4></div>
-                                                <div className="col-2"><h4 style={{ marginTop: "15px" }}>ราคา บาท</h4></div>
-                                                <div className="col-2">
-                                                    <NavLink to={"/T_Buying/order?order_id=" + element.order_id}><button style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                        }
+                        <table style={{textAlign:"center"}}>
+                            <tr>
+                                <th>รหัสใบสั่งซื้อ</th>
+                                <th>วันที่</th>
+                                <th>สถานะการสั่งซื้อ</th>
+                                <th>ยอดการสั่งซื้อ</th>
+                                <th>รายละเอียด</th>
+                            </tr>
+                            {
+                                this.state.search_order ?
+                                    this.state.search_order.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td>{element.order_id}</td>
+                                                <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
+                                                <td>{this.render_status(element.order_status)}</td>
+                                                <td>{addComma(this.sum_price(element.detail))}</td>
+                                                <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
+                                            </tr>
+                                        )
+                                    })
+                                    :
+                                    this.state.order.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td>{element.order_id}</td>
+                                                <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
+                                                <td>{this.render_status(element.order_status)}</td>
+                                                <td>{addComma(this.sum_price(element.detail))}</td>
+                                                <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
+                                            </tr>
+                                        )
+                                    })
+                            }
+                        </table>
                     </div>
                 </div>
 

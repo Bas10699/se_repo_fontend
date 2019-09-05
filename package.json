@@ -5,7 +5,6 @@
   "dependencies": {
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
-    "pdfmake": "^0.1.58",
     "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
