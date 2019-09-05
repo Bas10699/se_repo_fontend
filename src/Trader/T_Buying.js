@@ -10,7 +10,7 @@ class T_Buying extends Component {
         super(props)
         this.state = {
             order: [],
-            data:[],
+            data: [],
             get_user: null,
             get_product: null,
             search_order: [],
@@ -46,9 +46,11 @@ class T_Buying extends Component {
 
         switch (order_status) {
             case 0:
+            case 1:
+            case 2:
                 render_tag = <div style={{ color: "#ffc107" }} > กำลังดำเนินการ </div>
                 break;
-            case 1:
+            case 3:
                 render_tag = <div style={{ color: "#28a745" }} > สำเร็จแล้ว </div>
                 break;
             default:
@@ -125,7 +127,7 @@ class T_Buying extends Component {
                     </div>
                 </div>
 
-                
+
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-4">
@@ -139,7 +141,7 @@ class T_Buying extends Component {
 
                 <div className="Row">
                     <div className="col-2"></div>
-                    
+
                     <div className="col-8">
                         <div className="TotalCart">
                             <div className="Row">

@@ -21,6 +21,7 @@ class BuyingDetail extends Component {
             data: [],
             data_price: [],
             cart_product: [],
+            invoice:[],
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -32,29 +33,92 @@ class BuyingDetail extends Component {
 
 
     render_status = (order_status) => {
-        let render_tag
-
+        let render_show
         switch (order_status) {
-            case 0:
-                render_tag = <div>
-                    <img className="tag" src={this.state.tag0} alt="Status" />
-                    <div className="FontWarning" > กำลังดำเนินการ </div>
+            case 0: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4 >&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการสั่งซื้อ </h4>
+                                <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                            </div>
+                            <div className="col-2">
+                                <PdfOrder data={this.state.order} />
+                                <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 break;
-            case 1:
-                render_tag = <div>
-                    <img className="tag" src={this.state.tag1} alt="Status" />
-                    <div className="FontSuccess"> สำเร็จแล้ว </div>
+
+            case 1: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                                <p>&nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                                <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการชำระเงิน</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 break;
-            default:
-                render_tag = <div>
-                    <img className="tag" src={this.state.tag_default} alt="Status" />
-                    <div className="FontDanger"> เกิดข้อผิดพลาด </div>
+
+            case 2: render_show =
+            
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
+                                <p>&nbsp; </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            case 3: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
+                                <p>&nbsp; </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            default: render_show =
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+                                <p>&nbsp; </p>
+                            </div>
+                            <div className="col-2">
+                                <PdfInvoice data={this.state.order} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 break;
         }
-        return render_tag
+        return render_show;
     }
 
 
@@ -84,6 +148,29 @@ class BuyingDetail extends Component {
         } catch (error) {
             alert("get_cart_trader" + error);
         }
+    }
+    get_invoice = async ()=>{
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        try {
+            await post(params, 'trader/get_invoice_trader', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        invoice: result.result,
+                        
+                    })
+                    setTimeout(() => {
+                        console.log("get_product1", result.result)
+                    }, 500)
+                } else {
+                    window.location.href = "/manage_order";
+                    alert(result.error_message)
+                }
+            });
+        } catch (error) {
+            alert("get_cart_trader" + error);
+        }
+
     }
 
     sum_price = (data_price) => {
@@ -129,19 +216,7 @@ class BuyingDetail extends Component {
 
                 <Timeline />
 
-                <div className="Row">
-                    <div className='_Card'>
-                        <div className="Row">
-                            <div className="col-10">
-                                <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันคำสั่งซื้อ</h4>
-                                <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
-                            </div>
-                            <div className="col-2">
-                                <PdfOrder data={this.state.order}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {this.render_status(this.state.order.order_status)}
 
 
 

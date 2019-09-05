@@ -190,7 +190,7 @@ class Pdf extends Component {
     render() {
         return (
             <div>
-                <button onClick={() => { this.printPDF() }}>ใบแจ้งหนี้</button>
+                <button className="BTN_PDF" onClick={() => { this.printPDF() }}>ใบแจ้งหนี้</button>
             </div>
         )
     }
