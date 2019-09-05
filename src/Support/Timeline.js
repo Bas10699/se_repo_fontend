@@ -31,7 +31,7 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            <NavLink to="#0"><li activeClassName="Active" className="Standat">ส่งใบสั่งซ์้อ</li></NavLink>
+                            <NavLink to="#0">{this.props.status ==1 ? <li className="Standat" >ส่งใบสั่งซ์้อ</li> : <li className="Standat Active" >ส่งใบสั่งซ์้อ</li> }</NavLink>
                             <NavLink to="#1"><li activeClassName="Active" className="Standat">ยืนยันคำสั่งซื้อ</li></NavLink>
                             <NavLink to="#2"><li activeClassName="Active" className="Standat">ใบเเจ้งหนี้</li></NavLink>
                             <NavLink to="#3"><li activeClassName="Active" className="Standat">ใบเสร็จ</li></NavLink>

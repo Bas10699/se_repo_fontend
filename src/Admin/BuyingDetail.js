@@ -8,7 +8,8 @@ import moment from 'moment'
 import PdfOrder from '../Support/PdfOrder'
 import PdfInvoice from '../Support/PdfInvoice'
 import { NavLink } from 'react-router-dom'
-
+import StepTimeline from '../Support/StepTimeline'
+import Modal from 'react-responsive-modal'
 
 class BuyingDetail extends Component {
 
@@ -21,7 +22,9 @@ class BuyingDetail extends Component {
             data: [],
             data_price: [],
             cart_product: [],
-            invoice:[],
+            invoice_detail: [],
+            invoice: [],
+            open:false,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -31,6 +34,14 @@ class BuyingDetail extends Component {
         }
     }
 
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+
+    };
 
     render_status = (order_status) => {
         let render_show
@@ -45,7 +56,6 @@ class BuyingDetail extends Component {
                             </div>
                             <div className="col-2">
                                 <PdfOrder data={this.state.order} />
-                                <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button>
                             </div>
                         </div>
                     </div>
@@ -57,12 +67,13 @@ class BuyingDetail extends Component {
                     <div className='_Card'>
                         <div className="Row">
                             <div className="col-10">
-                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                                <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
+                                <p>&nbsp; กรุณาชำระเงินผ่าน {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</p>
                                 <p>&nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </p>
                             </div>
                             <div className="col-2">
                                 <PdfInvoice data={this.state.order} />
-                                <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการชำระเงิน</button>
+                                <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>ยืนยันการชำระเงิน</button>
                             </div>
                         </div>
                     </div>
@@ -70,7 +81,7 @@ class BuyingDetail extends Component {
                 break;
 
             case 2: render_show =
-            
+
                 <div className="Row">
                     <div className='_Card'>
                         <div className="Row">
@@ -137,8 +148,11 @@ class BuyingDetail extends Component {
                         detail: result.result.detail,
                         plant: result.result.plant,
                     })
+                    if (result.result.order_status > 0) {
+                        this.get_invoice()
+                    }
                     setTimeout(() => {
-                        console.log("get_product1", result.result)
+                        console.log("get_order_info", result.result)
                     }, 500)
                 } else {
                     window.location.href = "/manage_order";
@@ -149,7 +163,7 @@ class BuyingDetail extends Component {
             alert("get_cart_trader" + error);
         }
     }
-    get_invoice = async ()=>{
+    get_invoice = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         try {
@@ -157,10 +171,11 @@ class BuyingDetail extends Component {
                 if (result.success) {
                     this.setState({
                         invoice: result.result,
-                        
+                        invoice_detail: result.result.invoice_detail
+
                     })
                     setTimeout(() => {
-                        console.log("get_product1", result.result)
+                        console.log("get_invoice_trade", result.result)
                     }, 500)
                 } else {
                     window.location.href = "/manage_order";
@@ -168,7 +183,7 @@ class BuyingDetail extends Component {
                 }
             });
         } catch (error) {
-            alert("get_cart_trader" + error);
+            alert("get_invoice_trade" + error);
         }
 
     }
@@ -214,7 +229,8 @@ class BuyingDetail extends Component {
                     <div className="col-2"></div>
                 </div> */}
 
-                <Timeline />
+                <Timeline status={this.state.order.order_status}/>
+                {/* <StepTimeline step={this.state.order.order_status}/> */}
 
                 {this.render_status(this.state.order.order_status)}
 
@@ -278,6 +294,30 @@ class BuyingDetail extends Component {
 
 
                 </div >
+                <Modal open={this.state.open} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-1" />
+                        <div className="col-10">
+                            <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
+                            <h4>ชำระเงินภายในวันที่</h4>
+                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange} style={{ marginTop: "-50px" }} />
+                            <h4 style={{ marginTop: "-30px" }}>ข้อมูลการชำระเงิน</h4>
+                            <p>ชื่อธนาคาร <input name="BankName" id="BankName" onChange={this.handleChange}></input></p>
+
+                            <p>เลขบัญชีธนาคาร <input name="BankNo" id="BankNo" onChange={this.handleChange}></input></p>
+
+                            <p>ชื่อบัญชีธนาคาร  <input name="BankAccountName" id="BankAccountName" onChange={this.handleChange}></input></p>
+
+                            <textarea rows="4" cols="95" name="detail_send" id="detail_send" onChange={this.handleChange}
+                                form="usrform" />
+                            <button className="BTN_Signin" onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
+                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+
+                        </div>
+                        <div className="col-1" />
+                    </div>
+                </Modal>
             </div >
         )
     }
