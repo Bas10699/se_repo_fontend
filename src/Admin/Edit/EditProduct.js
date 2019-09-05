@@ -1,6 +1,6 @@
 //แก้ไขสินค้า
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Prompt } from 'react-router-dom'
 import { user_token, addComma } from '../../Support/Constance';
 import { ip, get, post } from '../../Support/Service';
 import queryString from 'query-string';
@@ -28,7 +28,6 @@ class EditProduct extends Component {
 
     componentWillMount() {
         this.get_product()
-        this.setState(this.props.location.params)
     }
 
     get_product = async () => {
@@ -87,6 +86,9 @@ class EditProduct extends Component {
         return sum;
     }
 
+    refreshPage = () =>{
+        window.location.reload();
+    }
 
     edit_product = async () => {
         let url = this.props.location.search
@@ -102,8 +104,7 @@ class EditProduct extends Component {
                 .then((result) => {
                     console.log("edit1" + result);
                     if (result.success) {
-                        alert("แก้ไขข้อมูลสินค้าเรียบร้อย");
-                        window.location.href = "/Product";
+                        window.location.reload();
                     } else {
                         alert("edit_alert : " + result.error_message);
                     }
@@ -248,13 +249,14 @@ class EditProduct extends Component {
 
                         <button className="BTN_Signin"
                             style={{ float: "right" }}
-                            onClick={() => this.edit_product()}>
+                            onClick={() => {if(window.confirm('บันทึกการเปลี่ยนแปลง?')){this.edit_product()};}}>
                             บันทึกการเปลี่ยนแปลง
                         </button>
-                        <button className="BTN_Signup" style={{ float: "right" }} >ยกเลิก</button>
+                        <button className="BTN_Signup" onClick={()=>this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>
+                <Prompt when={this.state.open_up_image} message="คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้ไหม" />
             </div>
 
         )

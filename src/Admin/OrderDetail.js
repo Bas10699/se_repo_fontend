@@ -6,6 +6,8 @@ import queryString from 'query-string';
 import moment from 'moment'
 import Timeline from '../Support/Timeline'
 import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
+import PdfOrder from '../Support/PdfOrder'
+import Modal from 'react-responsive-modal'
 
 import Modal from 'react-responsive-modal'
 
@@ -24,6 +26,9 @@ class OrderDetail extends Component {
             detail: [],
             plant: null,
             data: [],
+            open: false,
+            detail_send:null,
+            date_send:null,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -39,6 +44,12 @@ class OrderDetail extends Component {
         this.setState({
             isMenuOpened: false
         });
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
     }
 
     handleClick() {
@@ -72,6 +83,15 @@ class OrderDetail extends Component {
         } catch (error) {
             alert("get_cart_trader" + error);
         }
+    }
+    add_invoice = () =>{
+            let object = {
+                order_id: this.state.order.order_id,
+                date_send: this.state.date_send,
+                detail: this.state.detail_send,
+                status: 0
+            }
+            console.log('object',object)
     }
 
     sum_price = (data_price) => {
@@ -125,6 +145,20 @@ class OrderDetail extends Component {
 
                 <Timeline data={this.state.order} />
                 {/* <PdgOrder data={this.state.order} /> */}
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันคำสั่งซื้อ</h4>
+                                <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                            </div>
+                            <div className="col-2">
+                                <PdfOrder data={this.state.order} />
+                                <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>ยืนยันการสั่งซื้อ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="Row">
                     <div className="col-2"></div>
@@ -215,6 +249,32 @@ class OrderDetail extends Component {
                 {/*     </div >
             {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} 
             </div > */}
+
+                <Modal open={this.state.open} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-1" />
+                        <div className="col-10">
+                            <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
+                            <h4>ชำระเงินภายในวันที่</h4>
+                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange} style={{ marginTop: "-50px"}} />
+                            <h4 style={{ marginTop: "-30px"}}>ข้อมูลการชำระเงิน</h4>
+                            <p>ชื่อธนาคาร <input></input></p>
+                            
+                            <p>เลขบัญชีธนาคาร <input></input></p>
+                            
+                            <p>ชื่อบัญชีธนาคาร  <input></input></p>
+                            
+                            <textarea rows="4" cols="95" name="detail_send" id="detail_send" onChange={this.handleChange}
+                                form="usrform" />
+                            <button className="BTN_Signin" onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
+                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+
+                        </div>
+                        <div className="col-1" />
+                    </div>
+                </Modal>
+
             </div>
 
         )

@@ -336,7 +336,7 @@ h6{
     cursor: pointer;
     padding: 10px 10px;
     width: 150px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     transition: 0.5s;
@@ -344,6 +344,29 @@ h6{
 
 .BTN_PDF:hover{
     background-color: #FFB731;
+    color: white;
+}
+
+.BTN_CONFIRM{
+    font-family: 'kunlasatriregular';
+    font-size: 16px;
+    display: block;
+    border: none;
+    color: black;
+    background-color: white;
+    border: 1px solid rgb(97, 197, 39);
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.5s;
+}
+
+.BTN_CONFIRM:hover{
+    background-color: rgb(97, 197, 39);
     color: white;
 }
 
