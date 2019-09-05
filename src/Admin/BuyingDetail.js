@@ -216,22 +216,7 @@ class BuyingDetail extends Component {
 
                 <Timeline />
 
-<<<<<<< HEAD
-                <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-10">
-                        <div className="BuyDetailCard" style={{ height: "160px" }}>
-                            <h4>&nbsp; สถานะการสั่งซื้อ : รอยืนยันคำสั่งซื้อ</h4>
-                            <h5>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
-                            <PdfOrder data={this.state.order} />
-                        </div>
-
-                    </div>
-                    <div className="col-2"></div>
-                </div>
-=======
                 {this.render_status(this.state.order.order_status)}
->>>>>>> master
 
 
 
