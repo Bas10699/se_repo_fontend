@@ -9,8 +9,6 @@ import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
 import PdfOrder from '../Support/PdfOrder'
 import Modal from 'react-responsive-modal'
 
-import Modal from 'react-responsive-modal'
-
 
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
@@ -26,7 +24,7 @@ class OrderDetail extends Component {
             detail: [],
             plant: null,
             data: [],
-            open: false,
+            OpenComfrim: false,
             detail_send:null,
             date_send:null,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
@@ -108,7 +106,14 @@ class OrderDetail extends Component {
     };
 
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, OpenComfrim:false });
+        
+    };
+
+
+
+    onOpenModalComfrim = () => {
+        this.setState({ open: true });
     };
 
     render() {
@@ -154,7 +159,7 @@ class OrderDetail extends Component {
                             </div>
                             <div className="col-2">
                                 <PdfOrder data={this.state.order} />
-                                <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>ยืนยันการสั่งซื้อ</button>
+                                <button className='BTN_CONFIRM' onClick={() => this.setState({OpenComfrim:true})}>ยืนยันการสั่งซื้อ</button>
                             </div>
                         </div>
                     </div>
@@ -250,7 +255,7 @@ class OrderDetail extends Component {
             {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} 
             </div > */}
 
-                <Modal open={this.state.open} onClose={this.onCloseModal}>
+                <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-1" />
                         <div className="col-10">
