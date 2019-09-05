@@ -1,6 +1,6 @@
 //แก้ไขสินค้า
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Prompt } from 'react-router-dom'
 import { user_token, addComma } from '../../Support/Constance';
 import { ip, get, post } from '../../Support/Service';
 import queryString from 'query-string';
@@ -20,7 +20,7 @@ class EditProduct extends Component {
             total_price: [],
             cart_product: [],
             addInputBox: null,
-            open_up_image:false,
+            open_up_image: false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -28,7 +28,6 @@ class EditProduct extends Component {
 
     componentWillMount() {
         this.get_product()
-        this.setState(this.props.location.params)
     }
 
     get_product = async () => {
@@ -87,6 +86,9 @@ class EditProduct extends Component {
         return sum;
     }
 
+    refreshPage = () =>{
+        window.location.reload();
+    }
 
     edit_product = async () => {
         let url = this.props.location.search
@@ -102,8 +104,7 @@ class EditProduct extends Component {
                 .then((result) => {
                     console.log("edit1" + result);
                     if (result.success) {
-                        alert("แก้ไขข้อมูลสินค้าเรียบร้อย");
-                        window.location.href = "/Product";
+                        window.location.reload();
                     } else {
                         alert("edit_alert : " + result.error_message);
                     }
@@ -137,7 +138,7 @@ class EditProduct extends Component {
                 console.log("img", reader.result)
                 this.setState({
                     default_image: reader.result,
-                    open_up_image:true
+                    open_up_image: true
                 });
             }
         }
@@ -155,7 +156,7 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                        {this.state.open_up_image? <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />:this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                        {this.state.open_up_image ? <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} /> : this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
 
@@ -251,13 +252,14 @@ class EditProduct extends Component {
 
                         <button className="BTN_Signin"
                             style={{ float: "right" }}
-                            onClick={() => this.edit_product()}>
+                            onClick={() => {if(window.confirm('บันทึกการเปลี่ยนแปลง?')){this.edit_product()};}}>
                             บันทึกการเปลี่ยนแปลง
                         </button>
-                        <button className="BTN_Signup" style={{ float: "right" }} >ยกเลิก</button>
+                        <button className="BTN_Signup" onClick={()=>this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>
+                <Prompt when={this.state.open_up_image} message="คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้ไหม" />
             </div>
 
         )

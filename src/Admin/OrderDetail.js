@@ -1,11 +1,13 @@
 //รายละเอียดคำสั่งซื้อสินค้า SE-M ซื้อของจาก SE-S
 import React, { Component } from 'react';
-import { post ,ip } from '../Support/Service';
+import { post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
 import Timeline from '../Support/Timeline'
 import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
+import PdfOrder from '../Support/PdfOrder'
+import Modal from 'react-responsive-modal'
 
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
@@ -20,6 +22,7 @@ class OrderDetail extends Component {
             detail: [],
             plant: null,
             data: [],
+            open: false,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -46,9 +49,9 @@ class OrderDetail extends Component {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         const object = {
-            order_id:params.aa
+            order_id: params.aa
         }
-        console.log('obj',object)
+        console.log('obj', object)
         try {
             await post(object, 'neutrally/get_order_info', user_token).then((result) => {
                 if (result.success) {
@@ -78,6 +81,14 @@ class OrderDetail extends Component {
         return sum;
 
     }
+
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
 
     render() {
         return (
@@ -113,6 +124,20 @@ class OrderDetail extends Component {
 
                 <Timeline data={this.state.order} />
                 {/* <PdgOrder data={this.state.order} /> */}
+                <div className="Row">
+                    <div className='_Card'>
+                        <div className="Row">
+                            <div className="col-10">
+                                <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันคำสั่งซื้อ</h4>
+                                <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                            </div>
+                            <div className="col-2">
+                                <PdfOrder data={this.state.order} />
+                                <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>ยืนยันการสั่งซื้อ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="Row">
                     <div className="col-2"></div>
@@ -124,7 +149,7 @@ class OrderDetail extends Component {
                                     <div className="BuyDetailCard">
                                         <div className="Row">
                                             <div className="col-2">
-                                            {element_plant.image ? <img alt="Product" src={ip + element_plant.image} /> : <img alt="Product" src={this.state.default_image} />}
+                                                {element_plant.image ? <img alt="Product" src={ip + element_plant.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             </div>
                                             <div className="col-10">
                                                 <h4>{element_plant.plant_name}</h4>
@@ -238,6 +263,26 @@ class OrderDetail extends Component {
                 {/*     </div >
             {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} 
             </div > */}
+
+                <Modal open={this.state.open} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-1" />
+                        <div className="col-10">
+                            <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
+                            <h4>ชำระเงินภายในวันที่</h4>
+                            <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
+                            <h4>ข้อมูลการชำระเงิน</h4>
+                            <textarea rows="4" cols="95" name="address" id="address" onChange={this.handleChange}
+                                form="usrform" />
+                            <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบแจ้งหนี้</button>
+                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+
+                        </div>
+                        <div className="col-1" />
+                    </div>
+                </Modal>
+
             </div>
 
         )
