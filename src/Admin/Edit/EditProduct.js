@@ -19,15 +19,8 @@ class EditProduct extends Component {
             total_plant: [],
             total_price: [],
             cart_product: [],
-            pro_name: null,
-            pro_amount: null,
-            pro_cost: null,
-            pro_details: null,
-            pro_price: null,
-            pro_status: null,
-            pro_id: null,
-            pro_image: null,
             addInputBox: null,
+            open_up_image:false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -143,7 +136,8 @@ class EditProduct extends Component {
             reader.onloadend = () => {
                 console.log("img", reader.result)
                 this.setState({
-                    default_image: reader.result
+                    default_image: reader.result,
+                    open_up_image:true
                 });
             }
         }
@@ -161,7 +155,7 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                        {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                        {this.state.open_up_image? <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />:this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
 
