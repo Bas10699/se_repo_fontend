@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
-import { get, post,ip } from '../Support/Service';
+import { get, post, ip } from '../Support/Service';
 import Modal from 'react-responsive-modal'
 
 class T_Cart extends Component {
@@ -13,7 +13,7 @@ class T_Cart extends Component {
             render_cart: null,
             total_price: [],
             open: false,
-            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
+            default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
     }
     handleChange = (e) => {
@@ -123,8 +123,8 @@ class T_Cart extends Component {
     Comfirm = async () => {
         let object = {
             detail: this.state.cart_product,
-            date_send:this.state.date,
-            address_send:this.state.address,
+            date_send: this.state.date,
+            address_send: this.state.address,
             order_status: "0"
         }
         try {
@@ -174,7 +174,7 @@ class T_Cart extends Component {
                                     <div className="CartCard">
                                         <div className="Row">
                                             <div className="col-2">
-                                            {element.image? <img alt="Product" src={ip + element.image} />:<img alt="Product" src={this.state.default_image} />}
+                                                {element.image ? <img alt="Product" src={ip + element.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             </div>
                                             <div className="col-1"></div>
                                             <div className="col-9">
@@ -186,13 +186,13 @@ class T_Cart extends Component {
                                                     value={element.amount}
                                                     onChange={(event) => { this.handleInputChange(event, index) }} />
 
-                                                    
+
                                                 <div className="Row">
-                                                    <div className="col-10">
-                                                        <h5>ราคา</h5>
+                                                    <div className="col-9">
+                                                        <h4>ราคา {element.price} บาท / กิโลกรัม</h4>
                                                     </div>
-                                                    <div className="col-2">
-                                                        <h4>{addComma(element.price * element.amount)} บาท</h4>
+                                                    <div className="col-3">
+                                                        <h4>ราคารวม {addComma(element.price * element.amount)} บาท</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,11 +210,12 @@ class T_Cart extends Component {
                                 <div className="col-9">
 
                                     <div className="Row">
-                                        <div className="col-10">
-                                            <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
+                                        <div className="col-7">
+                                            <h4 style={{ textAlign: "right" }}>ยอดคำสั่งซื้อทั้งหมด</h4>
                                         </div>
-                                        <div className="col-2">
-                                            <h4 style={{ color: "red" }}>{addComma(this.sum_price(this.state.cart_product))} บาท</h4>
+                                        <div className="col-1"></div>
+                                        <div className="col-4">
+                                            <h4 style={{ color: "red", textAlign: "center" }}>{addComma(this.sum_price(this.state.cart_product))} บาท</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -241,7 +242,7 @@ class T_Cart extends Component {
                             </div>
                         </Modal>
 
-                        
+
                     </div>
                     {/* จบ */}
                     <div className="col-2"></div>

@@ -336,7 +336,7 @@ h6{
     cursor: pointer;
     padding: 10px 10px;
     width: 150px;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     transition: 0.5s;
@@ -347,34 +347,11 @@ h6{
     color: white;
 }
 
-.BTN_CONFIRM{
-    font-family: 'kunlasatriregular';
-    font-size: 16px;
-    display: block;
-    border: none;
-    color: black;
-    background-color: white;
-    border: 1px solid rgb(97, 197, 39);
-    text-align: center;
-    cursor: pointer;
-    padding: 10px 10px;
-    width: 150px;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    transition: 0.5s;
-}
-
-.BTN_CONFIRM:hover{
-    background-color: rgb(97, 197, 39);
-    color: white;
-}
-
 .BTN_Detail{
     font-family: 'kunlasatriregular';
     font-size: 16px;
     display: block;
-    color: #FFB731;
+    color: black;
     text-decoration: none;
     background-color: transparent;
     border: 1px solid #FFB731;
@@ -487,7 +464,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
     margin-top: 10px;
     background-color: white;
 }
-._Card {
+/* ._Card {
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
     width: 67%;
     float: left;
@@ -495,7 +472,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
     margin-bottom: 20px;
     margin-top: 10px;
     background-color: white;
-}
+} */
 
 .Card img{
     width: 100%;
@@ -544,18 +521,14 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 
 /* Start Cart */
 .CartCard{
-    border: 1px solid black;
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
     width: 100%;
     height: 200px;
     float: left;
     margin-bottom: 10px;
     background-color: white;
     transition: 0.5s;
-}
-
-.CartCard:hover{
-    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid white;
 }
 
 .CartCard img{
@@ -659,7 +632,8 @@ th,tr:hover{
 /* Start Buying Detial */
 
 .BuyDetailCard{
-    border: 1px solid black;
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
     width: 100%;
     height: 100px;
     float: left;
@@ -667,11 +641,11 @@ th,tr:hover{
     background-color: white;
     transition: 0.5s;
 }
-
+/* 
 .BuyDetailCard:hover{
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
     border: 1px solid white;
-}
+} */
 
 
 .BuyDetailCard img{
@@ -745,3 +719,11 @@ th,tr:hover{
     height: 5px;
   }
 /* End Timeline */
+
+.Product{
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: cover;
+    /* position: absolute; */
+}

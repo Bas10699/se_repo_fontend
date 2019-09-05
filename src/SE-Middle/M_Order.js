@@ -104,7 +104,80 @@ class M_Order extends Component {
                     <div className="col-2"></div>
                     {/* เริ่ม */}
                     <div className="col-8">
-                        <div className="TotalCart">
+                        <table style={{textAlign:"center"}}>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>รหัสใบสั่งซื้อ</th>
+                                <th>วันที่สั่งซื้อ</th>
+                                <th>สถานะสั่งซื้อ</th>
+                                <th>ชื่อผู้สั่งซื้อ</th>
+                                <th>รายละเอียด</th>
+                            </tr>
+                            {
+                            this.state.search_order ?
+                                this.state.search_order.map((element, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{element.order_id}</td>
+                                            <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
+                                            <td>{this.render_status(element.order_status)}</td>
+                                            <td>{element.trader_id}</td>
+                                            <td><NavLink to={"/M_Order/gg?aa=" + element.order_id} style={{ textDecoration: "none" }}>
+                                                        <button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button>
+                                                    </NavLink>
+                                            </td>
+                                        </tr>
+                                        // <div className="BuyingCard">
+                                        //     <div className="Row">
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{index + 1}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{element.order_id}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{this.render_status(element.order_status)}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{element.trader_id}</h4></div>
+                                        //         <div className="col-2">
+                                        //             <NavLink to={"/M_Order/gg?aa=" + element.order_id} style={{ textDecoration: "none" }}>
+                                        //                 <button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button>
+                                        //             </NavLink>
+                                        //         </div>
+                                        //     </div>
+                                        // </div>
+
+                                    )
+                                })
+                                :
+                                this.state.get_order.map((element, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{element.order_id}</td>
+                                            <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
+                                            <td>{this.render_status(element.order_status)}</td>
+                                            <td>{element.trader_id}</td>
+                                            <td><NavLink to={"/M_Order/gg?aa=" + element.order_id} style={{ textDecoration: "none" }}>
+                                                        <button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button>
+                                                    </NavLink>
+                                            </td>
+                                        </tr>
+                                        // <div className="BuyingCard">
+                                        //     <div className="Row">
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{index + 1}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{element.order_id}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{this.render_status(element.order_status)}</h4></div>
+                                        //         <div className="col-2"><h4 style={{ textAlign: "center", marginTop: "15px" }}>{element.trader_id}</h4></div>
+                                        //         <div className="col-2">
+                                        //             <NavLink to={"/M_Order/gg?aa=" + element.order_id} style={{ textDecoration: "none" }}>
+                                        //                 <button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button>
+                                        //             </NavLink>
+                                        //         </div>
+                                        //     </div>
+                                        // </div>
+                                    )
+                                })
+                        }
+                        </table>
+                        {/* <div className="TotalCart">
                             <div className="Row">
                                 <div className="col-2" style={{ textAlign: "center" }}>ลำดับ</div>
                                 <div className="col-2" style={{ textAlign: "center" }}>รหัสใบสั่งซื้อ</div>
@@ -155,7 +228,7 @@ class M_Order extends Component {
                                         </div>
                                     )
                                 })
-                        }
+                        } */}
                     </div>
                 </div>
 

@@ -240,35 +240,33 @@ class BuyingDetail extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อ</h3>
+                        <table style={{textAlign:"center"}}>
+                            <tr>
+                                <th>รหัสสินค้า</th>
+                                <th>รูป</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>จำนวนที่สั่งซื้อ (กิโลกรัม)</th>
+                                <th>ราคาต่อหน่วย (บาท)</th>
+                                <th>ราคารวม (บาท)</th>
+                            </tr>
+                            {
+                                this.state.detail.map((element_plant, index) => {
+                                    return (
+                                        <tr>
+                                            <td>PCODE-{element_plant.plant_id}</td>
+                                            <td>{element_plant.image ? <img alt="Product" className="Product"  src={ip + element_plant.image} /> : <img alt="Product" className="Product"  src={this.state.default_image} />}</td>
+                                            <td>{element_plant.plant_name}</td>
+                                            <td>{addComma(element_plant.amount)}</td>
+                                            <td>{element_plant.price}</td>
+                                            <td>{addComma(element_plant.price * element_plant.amount)}</td>
+                                        
+                                        </tr>
+                                               
+                                    )
+                                })
+                            }
+                        </table>
 
-                        {
-                            this.state.detail.map((element_plant, index) => {
-                                return (
-                                    <div className="BuyDetailCard">
-                                        <div className="Row">
-                                            <div className="col-2">
-                                                {element_plant.image ? <img alt="Product" src={ip + element_plant.image} /> : <img alt="Product" src={this.state.default_image} />}
-                                            </div>
-                                            <div className="col-10">
-                                                <h4>{element_plant.plant_name}</h4>
-                                                <div className="Row" style={{ marginTop: "-30px" }}>
-                                                    <div className="col-4">
-                                                        <h4>จำนวนที่สั่ง {addComma(element_plant.amount)} กิโลกรัม</h4>
-                                                    </div>
-                                                    <div className="col-4">
-                                                        <h5>ราคาต่อหน่วย {element_plant.price} บาท</h5>
-                                                    </div>
-                                                    <div className="col-3">
-                                                        <h4 style={{ textAlign: "right" }}>รวม {addComma(element_plant.price * element_plant.amount)} บาท</h4>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
 
 
 
