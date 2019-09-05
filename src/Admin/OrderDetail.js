@@ -23,6 +23,8 @@ class OrderDetail extends Component {
             plant: null,
             data: [],
             open: false,
+            detail_send:null,
+            date_send:null,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -38,6 +40,12 @@ class OrderDetail extends Component {
         this.setState({
             isMenuOpened: false
         });
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
     }
 
     handleClick() {
@@ -71,6 +79,15 @@ class OrderDetail extends Component {
         } catch (error) {
             alert("get_cart_trader" + error);
         }
+    }
+    add_invoice = () =>{
+            let object = {
+                order_id: this.state.order.order_id,
+                date_send: this.state.date_send,
+                detail: this.state.detail_send,
+                status: 0
+            }
+            console.log('object',object)
     }
 
     sum_price = (data_price) => {
@@ -271,11 +288,17 @@ class OrderDetail extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h4>ชำระเงินภายในวันที่</h4>
-                            <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
-                            <h4>ข้อมูลการชำระเงิน</h4>
-                            <textarea rows="4" cols="95" name="address" id="address" onChange={this.handleChange}
+                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange} style={{ marginTop: "-50px"}} />
+                            <h4 style={{ marginTop: "-30px"}}>ข้อมูลการชำระเงิน</h4>
+                            <p>ชื่อธนาคาร <input></input></p>
+                            
+                            <p>เลขบัญชีธนาคาร <input></input></p>
+                            
+                            <p>ชื่อบัญชีธนาคาร  <input></input></p>
+                            
+                            <textarea rows="4" cols="95" name="detail_send" id="detail_send" onChange={this.handleChange}
                                 form="usrform" />
-                            <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบแจ้งหนี้</button>
+                            <button className="BTN_Signin" onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
                             <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
 
                         </div>
