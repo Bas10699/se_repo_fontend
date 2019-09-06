@@ -722,3 +722,36 @@ th,tr:hover{
     object-fit: cover;
     /* position: absolute; */
 }
+/* ห้ามลบ ของกู ปรับแต่งได้ */
+._Card {
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 67%;
+    float: left;
+    margin-left: 16.5%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: white;
+}
+.BTN_CONFIRM{
+    font-family: 'kunlasatriregular';
+    font-size: 16px;
+    display: block;
+    border: none;
+    color: black;
+    background-color: white;
+    border: 1px solid rgb(97, 197, 39);
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.5s;
+}
+
+.BTN_CONFIRM:hover{
+    background-color: rgb(97, 197, 39);
+    color: white;
+}
+/* ห้ามลบ ของกู ปรับแต่งได้  */
