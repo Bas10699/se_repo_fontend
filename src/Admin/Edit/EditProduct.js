@@ -41,18 +41,26 @@ class EditProduct extends Component {
                         product_data: result.result,
                         plant: result.result.plant
                     })
-
+                    this.updateDataInForm()
                     setTimeout(() => {
-                        console.log("get_product1", result.result)
+                        console.log("get_product_information", result.result)
                     }, 500)
+
                 } else {
                     window.location.href = "/Product";
                     alert(result.error_message)
                 }
             });
         } catch (error) {
-            alert("get_product2" + error);
+            alert("get_product_information " + error);
         }
+    }
+
+    updateDataInForm() {
+        this.setState({
+            cost: this.state.product_data.cost,
+            product_name: this.state.product_data.product_name
+        });
     }
 
     filterSearch = (event) => {
@@ -86,7 +94,7 @@ class EditProduct extends Component {
         return sum;
     }
 
-    refreshPage = () =>{
+    refreshPage = () => {
         window.location.reload();
     }
 
@@ -117,9 +125,10 @@ class EditProduct extends Component {
 
     handleInputChange(e) {
         this.setState({
-            [e.target.name.id]: e.target.name.value
+            [e.target.id]: e.target.value
         });
     }
+
 
     uploadpicture = (e) => {
 
@@ -162,8 +171,8 @@ class EditProduct extends Component {
                         <h4>ชื่อสินค้า</h4>
                         <input type="text"
                             name="product_data" id="product_name"
-                            value={this.state.product_data.product_name}
-                            onChange={(e)=>this.handleInputChange(e)} />
+                            value={this.state.product_name}
+                            onChange={(e) => this.handleInputChange(e)} />
 
                         <h4>รายละเอียดสินค้า</h4>
                         <textarea rows="4" cols="80" name="product_detail" id="product_detail"
@@ -171,14 +180,14 @@ class EditProduct extends Component {
                             onChange={this.handleInputChange} />
 
 
-                        <h4>ราคาขายปลีก</h4>
+                        <h4>ราคาทุน (รับซื้อจาก SE ย่อย)</h4>
                         <h4><input type="number" style={{ width: "20%" }}
-                            name="cart_product" id="cart_product" min="1"
-                            value={addComma(this.sum_price(this.state.cart_product))}
-                            onChange={this.handleInputChange} />บาท / กิโลกรัม</h4>
+                            name="cost" id="cost" min="1"
+                            value={this.state.cost}
+                            onChange={this.handleInputChange} /> บาท / กิโลกรัม</h4>
 
 
-                        <h4>ราคาขายส่ง</h4>
+                        <h4>ราคาขาย</h4>
                         <h4><input type="number" style={{ width: "20%" }}
                             name="cart_product" id="cart_product" min="1"
                             value={addComma(this.sum_price(this.state.cart_product))}
@@ -195,7 +204,7 @@ class EditProduct extends Component {
                             </select>
                         </h4>
 
-                        <button className="BTN_AddCart" >เพิ่มราคาส่ง</button>
+                        <button className="BTN_AddCart" >เพิ่มราคาขาย</button>
                     </div>
                     <div className="col-1"></div>
 
@@ -249,10 +258,10 @@ class EditProduct extends Component {
 
                         <button className="BTN_Signin"
                             style={{ float: "right" }}
-                            onClick={() => {if(window.confirm('บันทึกการเปลี่ยนแปลง?')){this.edit_product()};}}>
+                            onClick={() => { if (window.confirm('บันทึกการเปลี่ยนแปลง?')) { this.edit_product() }; }}>
                             บันทึกการเปลี่ยนแปลง
                         </button>
-                        <button className="BTN_Signup" onClick={()=>this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
+                        <button className="BTN_Signup" onClick={() => this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>
