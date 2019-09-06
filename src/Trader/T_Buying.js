@@ -48,13 +48,13 @@ class T_Buying extends Component {
             case 0:
             case 1:
             case 2:
-                render_tag = <div style={{ color: "#ffc107" }} > กำลังดำเนินการ </div>
+                render_tag = <div> กำลังดำเนินการ </div>
                 break;
             case 3:
-                render_tag = <div style={{ color: "#28a745" }} > สำเร็จแล้ว </div>
+                render_tag = <div> สำเร็จแล้ว </div>
                 break;
             default:
-                render_tag = <div style={{ color: "#dc3545" }} > เกิดข้อผิดพลาด </div>
+                render_tag = <div> เกิดข้อผิดพลาด </div>
                 break;
         }
         return render_tag
@@ -159,7 +159,7 @@ class T_Buying extends Component {
                                                 <td>{element.order_id}</td>
                                                 <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_status)}</td>
-                                                <td>{addComma(this.sum_price(element.detail))}</td>
+                                                <td>{addComma(this.sum_price(element.detail))} บาท</td>
                                                 <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>
                                         )
@@ -171,7 +171,7 @@ class T_Buying extends Component {
                                                 <td>{element.order_id}</td>
                                                 <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_status)}</td>
-                                                <td>{addComma(this.sum_price(element.detail))}</td>
+                                                <td>{addComma(this.sum_price(element.detail))} บาท</td>
                                                 <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>
                                         )

@@ -130,14 +130,14 @@ h6{
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: white;
-    padding-bottom: 12px;
+    padding-bottom: 13px;
 }
 
 .NavbarRight.Active {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: white;
-    padding-bottom: 12px;
+    padding-bottom: 13px;
 }
 
 .Navbar ul {
@@ -161,14 +161,14 @@ h6{
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: white;
-    padding-bottom: 12px;
+    padding-bottom: 13px;
 }
 
 .NavbarText.Active {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: #FFFFFF;
-    padding-bottom: 12px;
+    padding-bottom: 13px;
 }
 
 .Navbar img{
@@ -418,7 +418,7 @@ input[type="search"]{
 
 input[type="date"]{
     font-family: 'kunlasatriregular';
-    font-size: 19px;
+    font-size: 17px;
     border: 1px solid black;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -464,15 +464,6 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
     margin-top: 10px;
     background-color: white;
 }
-/* ._Card {
-    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 67%;
-    float: left;
-    margin-left: 16.5%;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    background-color: white;
-} */
 
 .Card img{
     width: 100%;
@@ -641,12 +632,6 @@ th,tr:hover{
     background-color: white;
     transition: 0.5s;
 }
-/* 
-.BuyDetailCard:hover{
-    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid white;
-} */
-
 
 .BuyDetailCard img{
     width: 100px;
