@@ -52,11 +52,12 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            <li activeClassName="Active" className="Standat" >ส่งใบสั่งซ์้อ</li>
-                            <li activeClassName="Active" className="Standat" >ยืนยันคำสั่งซื้อ</li>
-                            <li activeClassName="Active" className="Standat" >ใบเเจ้งหนี้</li>
-                            <li activeClassName="Active" className="Standat" >ใบเสร็จ</li>
+                            {this.props.status ===1? <li className="Status" >ส่งใบสั่งซ์้อ</li>:<li className="Standat" >ส่งใบสั่งซ์้อ</li>}
+                            <li className="Standat" >ยืนยันคำสั่งซื้อ</li>
+                            <li className="Standat" >ใบเเจ้งหนี้</li>
+                            <li className="Standat" >ใบเสร็จ</li>
                         </ul>
+                        {console.log('timline',this.props.status)}
                         
 
                         {/* {this.state.status < 5 ? this.render_Step(this.state.status) : this.setState({ status: 5 })} */}

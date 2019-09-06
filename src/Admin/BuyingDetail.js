@@ -60,12 +60,13 @@ class BuyingDetail extends Component {
             case 1: render_show =
 
                 <div className="Row">
-                    <div className="col-12">
+                    <div className="col-10">
                         <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
                         <h5>&nbsp; กรุณาชำระเงินผ่าน {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
-                        <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")}</h5> {console.log("วันที่ส่ง",this.state.invoice.date)}
+                        <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")}</h5> {console.log("วันที่ส่ง", this.state.invoice.date)}
                         <h5>&nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
-                    
+                    </div>
+                    <div className="col-2">
                         <PdfInvoice data={this.state.order} style={{ float: "right" }} />
                         <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
                     </div>
@@ -301,14 +302,14 @@ class BuyingDetail extends Component {
 
                 </div >
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
-                    <div className="Row" style={{width:"500px"}}>
+                    <div className="Row" style={{ width: "500px" }}>
                         <div className="col-1" />
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h4>โอนเงินไปในบัญชี : {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankAccountName} </h4>
                             <h4>วันที่โอนเงิน <input type="date" />เวลาที่โอนเงิน <input type="time" name="BankNo" id="BankNo" onChange={this.handleChange} /></h4>
-                            
+
                             <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
                             <h4>แนบหลักฐานการโอนเงิน</h4>
                             <div>

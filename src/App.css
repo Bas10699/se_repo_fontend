@@ -670,25 +670,24 @@ th,tr:hover{
     position: relative;
     text-align: center;
     letter-spacing: 2px;
-    background-color: green;
+    background-color: #ccc;
     height: 5px;
     color: black;
   }
 
-  /* .StandatDe {
+  .Status {
     list-style-type: none;
     float: left;
     width: 25%;
     position: relative;
     text-align: center;
     letter-spacing: 2px;
-    background-color: #000;
+    background-color: green;
     height: 5px;
-    margin-top: -100px;
     color: black;
-  } */
+  }
 
-  .Standat:before {
+  .Standat:before,.Status:before {
     content: '';
     width: 10px;
     height: 10px;
@@ -711,13 +710,13 @@ th,tr:hover{
     left: -50%;
     z-index: -1;
   } */
-  .Standat:first-child:after {
+  .Standat:first-child:after,.Status:first-child:after {
     content: none;
   }
-  .Standat.Active {
+  .Standat.Active,.Status.Active {
     color: black;
   }
-  .Standat:before {
+  .Standat:before,.Status:before {
     border-color: #f1c40f;
   }
   .Standat.Active , li:after {
