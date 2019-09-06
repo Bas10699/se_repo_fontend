@@ -82,7 +82,7 @@ class User extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-2"></div>
+                    <div className="col-4"></div>
                     <div className="col-4">
                         <table>
                             <tr>
@@ -107,12 +107,12 @@ class User extends Component {
                             </tr>
                             <tr>
                                 <th>ที่อยู่</th>
-                                <td></td>
+                                <td>{this.state.get_user ? this.state.get_user.address : null}</td>
                             </tr>
                         </table>
                     
                     </div>
-                    <div className="col-2"></div>
+                    <div className="col-4"></div>
                         
                     
                 </div>
