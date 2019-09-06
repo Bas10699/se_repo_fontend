@@ -1,6 +1,5 @@
 //ตระกร้าสินค้า
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
 import { get, post, ip } from '../Support/Service';
 import Modal from 'react-responsive-modal'

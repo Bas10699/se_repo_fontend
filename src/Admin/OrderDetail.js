@@ -98,6 +98,7 @@ class OrderDetail extends Component {
             detail: JSON.stringify(detail),
             status: 0
         }
+        console.log("วันที่ส่ง",this.state.date_send)
         try {
             await post(object, 'neutrally/add_invoice_neutrally', user_token).then((result) => {
                 if (result.success) {
@@ -108,7 +109,7 @@ class OrderDetail extends Component {
                     console.log("get_order", result.result)
                 }
             })
-
+            
         }
         catch (error) {
             alert("add_invoice_neutrally" + error);
@@ -144,7 +145,7 @@ class OrderDetail extends Component {
         switch (order_status) {
             case 0: render_show =
                 <div className="Row">
-                    <div className="Card">
+                    <div className="_Card">
                         <div className="Row">
                             <div className="col-10">
                                 <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้ </h4>
@@ -355,8 +356,8 @@ class OrderDetail extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h4>ชำระเงินภายในวันที่</h4>
-                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange} style={{ marginTop: "-50px" }} />
-                            <h4 style={{ marginTop: "-30px" }}>ข้อมูลการชำระเงิน</h4>
+                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange}/>
+                            <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
                             <p>ชื่อธนาคาร <input name="BankName" id="BankName" onChange={this.handleChange}></input></p>
 
                             <p>เลขบัญชีธนาคาร <input name="BankNo" id="BankNo" onChange={this.handleChange}></input></p>

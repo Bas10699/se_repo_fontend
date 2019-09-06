@@ -95,7 +95,7 @@ class M_Order extends Component {
                         <input type="search" placeholder="ค้นหา" onChange={this.filterID} />
                     </div>
                     <div className="col-4">
-                        <input type="date" placeholder="ค้นหา" onChange={this.filterDate} />
+                        <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} />
                     </div>
                     <div className="col-2"></div>
                 </div>

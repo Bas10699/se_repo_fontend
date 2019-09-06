@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
-import { get, post } from '../Support/Service';
+import { get } from '../Support/Service';
 import moment from 'moment'
 
 class T_Buying extends Component {
@@ -134,7 +134,7 @@ class T_Buying extends Component {
                         <input type="search" placeholder="ค้นหา" onChange={this.filterID} />
                     </div>
                     <div className="col-4">
-                        <input type="date" placeholder="ค้นหา" onChange={this.filterDate} />
+                        <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} />
                     </div>
                     <div className="col-2"></div>
                 </div>

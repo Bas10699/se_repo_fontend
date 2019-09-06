@@ -29,7 +29,7 @@ class BuyingDetail extends Component {
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
             tag_default: "https://image.flaticon.com/icons/svg/1161/1161830.svg",
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
-            image_payment:'https://www.ahvc.com.sg/wp/wp-content/uploads/2016/07/default_image-800x800.png'
+            image_payment: 'https://www.ahvc.com.sg/wp/wp-content/uploads/2016/07/default_image-800x800.png'
         }
     }
 
@@ -60,14 +60,14 @@ class BuyingDetail extends Component {
             case 1: render_show =
 
                 <div className="Row">
-                    <div className="col-10">
+                    <div className="col-12">
                         <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
-                        <p>&nbsp; กรุณาชำระเงินผ่าน {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</p>
-                        <p>&nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </p>
-                    </div>
-                    <div className="col-2">
-                        <PdfInvoice data={this.state.order} />
-                        <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>ยืนยันการชำระเงิน</button>
+                        <h5>&nbsp; กรุณาชำระเงินผ่าน {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
+                        <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")}</h5> {console.log("วันที่ส่ง",this.state.invoice.date)}
+                        <h5>&nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
+                    
+                        <PdfInvoice data={this.state.order} style={{ float: "right" }} />
+                        <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
                     </div>
                 </div>
 
@@ -196,6 +196,10 @@ class BuyingDetail extends Component {
         }
 
     }
+
+    add_invoice = () => {
+        alert("รอการตรวจสอบ")
+    }
     render() {
         return (
             <div className="App">
@@ -229,6 +233,7 @@ class BuyingDetail extends Component {
                 </div> */}
 
                 <Timeline status={this.state.order.order_status} />
+
                 <div className="Row">
                     <div className='_Card'>
                         {this.render_status(this.state.order.order_status)}
@@ -296,20 +301,24 @@ class BuyingDetail extends Component {
 
                 </div >
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
-                    <div className="Row">
+                    <div className="Row" style={{width:"500px"}}>
                         <div className="col-1" />
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
-                            <p>โอนเงินไปในบัญชี : {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankAccountName} </p>
-                            <p>วันที่โอนเงิน <input></input></p>
-                            <p>เวลาที่โอนเงิน <input name="BankNo" id="BankNo" onChange={this.handleChange}></input></p>
-                            <p>แนบหลักฐานการโอนเงิน</p>
-                            <img src={this.state.image_payment}></img>
-                            <input type="file"
-                                onChange={(e) => this.uploadpicture(e)} />
-                            <button className="BTN_Signin" onClick={() => { this.add_invoice() }}>แจ้งการชำระเงิน</button>
-                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                            <h4>โอนเงินไปในบัญชี : {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankAccountName} </h4>
+                            <h4>วันที่โอนเงิน <input type="date" />เวลาที่โอนเงิน <input type="time" name="BankNo" id="BankNo" onChange={this.handleChange} /></h4>
+                            
+                            <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
+                            <h4>แนบหลักฐานการโอนเงิน</h4>
+                            <div>
+                                <input type="file"
+                                    onChange={(e) => this.uploadpicture(e)} />
+                            </div>
+                            <img src={this.state.image_payment}
+                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto" }} alt="หลักฐานการโอน" />
+                            <button className="BTN_Signin" style={{ float: "right" }} onClick={() => { this.add_invoice() }}>ส่งหลักฐานการโอน</button>
+                            <button className="BTN_Signup" style={{ float: "left" }} onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
 
                         </div>
                         <div className="col-1" />
