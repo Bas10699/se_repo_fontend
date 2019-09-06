@@ -1,13 +1,14 @@
 //se-middle สรุปยอดการซื้อ-ขาย
 import React, { Component } from 'react'
 import { user_token } from '../Support/Constance';
-import { get} from '../Support/Service';
+import { get } from '../Support/Service';
 
 class M_Summary extends Component {
     constructor(props) {
         super(props)
         this.state = {
             product_data: [],
+            search_product: []
         }
     }
 
@@ -36,6 +37,17 @@ class M_Summary extends Component {
         }
     }
 
+    filterSearch = (event) => {
+        var updatedList = this.state.product_data;
+        updatedList = updatedList.filter(function (item) {
+            return item.product_name.toLowerCase().search(
+                event.target.value.toLowerCase()) !== -1;
+        });
+        this.setState({
+            search_product: updatedList,
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -46,13 +58,13 @@ class M_Summary extends Component {
                 </div>
                 <div className="Row">
                     <div className="col-12">
-                        <table style={{ textAlign: "center",marginLeft:"5px"}}>
+                        <table style={{ textAlign: "center", marginLeft: "5px" }}>
                             <tr>
                                 <th rowSpan="1">ชื่อวัตถุดิบ</th>
                                 <th colSpan="14" style={{ border: "1px solid #f1c40f" }}>ยอดขาย</th>
                             </tr>
                             <tr>
-                                <th><input style={{width:"50%"}}/></th>
+                                <th><input style={{ width: "100%" }} onChange={this.filterSearch} /></th>
                                 <th style={{ borderLeft: "1px solid #f1c40f" }}>ยอดขายวัน</th>
                                 <th>
                                     <select name="day">
@@ -92,7 +104,7 @@ class M_Summary extends Component {
                                 <th>คิดเป็นเงิน</th>
                                 <th style={{ borderLeft: "1px solid #f1c40f" }}>ยอดขายสัปดาห์</th>
                                 <th>
-                                <select name="day">
+                                    <select name="day">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -191,23 +203,43 @@ class M_Summary extends Component {
                             </tr>
 
                             {
-                                this.state.product_data.map((element, index) => {
-                                    return (
-                                        <tr>
-                                            <td style={{textAlign:"left"}}>{element.product_name}</td>
-                                            <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">1200</td>
-                                            <td>500</td>
-                                            <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">5000</td>
-                                            <td>1500</td>
-                                            <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">10500</td>
-                                            <td>50000</td>
-                                            <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">16700</td>
-                                            <td style={{ borderRight: "1px solid #f1c40f" }}>52000</td>
-                                            <td style={{ borderLeft: "1px solid #f1c40f" }}>16700</td>
-                                            <td style={{ borderRight: "1px solid #f1c40f" }}>52000</td>
-                                        </tr>
-                                    )
-                                })
+                                this.state.search_product ?
+                                    this.state.search_product.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td style={{ textAlign: "left" }}>{element.product_name}</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">1200</td>
+                                                <td>500</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">5000</td>
+                                                <td>1500</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">10500</td>
+                                                <td>50000</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">16700</td>
+                                                <td style={{ borderRight: "1px solid #f1c40f" }}>52000</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }}>16700</td>
+                                                <td style={{ borderRight: "1px solid #f1c40f" }}>52000</td>
+                                            </tr>
+                                        )
+                                    })
+                                    :
+                                    this.state.product_data.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td style={{ textAlign: "left" }}>{element.product_name}</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">1200</td>
+                                                <td>500</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">5000</td>
+                                                <td>1500</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">10500</td>
+                                                <td>50000</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }} colSpan="2">16700</td>
+                                                <td style={{ borderRight: "1px solid #f1c40f" }}>52000</td>
+                                                <td style={{ borderLeft: "1px solid #f1c40f" }}>16700</td>
+                                                <td style={{ borderRight: "1px solid #f1c40f" }}>52000</td>
+                                            </tr>
+                                        )
+                                    })
+                                    
                             }
                             <tr>
                                 <th colSpan="1" style={{ borderRight: "1px solid #f1c40f" }}>รวมยอดเงิน</th>
