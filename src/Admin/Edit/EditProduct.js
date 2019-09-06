@@ -189,7 +189,7 @@ class EditProduct extends Component {
                                 value={addComma(this.sum_price(this.state.cart_product))}
                                 onChange={this.handleInputChange} />
                             หน่วย
-                            <select style={{ width: "20%" }}>
+                            <select style={{ width: "20%" }} name="volum">
                                 <option value="kg">กิโลกรัม</option>
                                 <option value="tun">ตัน</option>
                             </select>

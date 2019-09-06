@@ -75,7 +75,50 @@ class User extends Component {
     render() {
         return (
             <div className="App">
-                User {this.state.get_user ? this.render_type(this.state.get_user.user_type) : null}
+                <div className="Row">
+                    <div className="col-12">
+                        <h2 style={{ textAlign: "center" }}>ข้อมูลผู้ใช้งาน</h2>
+                    </div>
+                </div>
+
+                <div className="Row">
+                    <div className="col-2"></div>
+                    <div className="col-4">
+                        <table>
+                            <tr>
+                                <th>ชื่อ - นามสกุล</th>
+                                <td>{this.state.get_user ? this.state.get_user.name : null} {this.state.get_user ? this.state.get_user.lastname : null}</td>
+                            </tr>
+                            <tr>
+                                <th>ประเภทผู้ใช้งาน</th>
+                                <td>{this.state.get_user ? this.render_type(this.state.get_user.user_type) : null}</td>
+                            </tr>
+                            <tr>
+                                <th>อีเมล์</th>
+                                <td>{this.state.get_user ? this.state.get_user.email : null}</td>
+                            </tr>
+                            <tr>
+                                <th>เบอร์โทรศัพท์</th>
+                                <td>{this.state.get_user ? this.state.get_user.phone : null}</td>
+                            </tr>
+                            <tr>
+                                <th>ชื่อผู้ใช้งาน</th>
+                                <td>{this.state.get_user ? this.state.get_user.username : null}</td>
+                            </tr>
+                            <tr>
+                                <th>ที่อยู่</th>
+                                <td></td>
+                            </tr>
+                        </table>
+                    
+                    </div>
+                    <div className="col-2"></div>
+                        
+                    
+                </div>
+
+
+                
             </div>
         )
     }

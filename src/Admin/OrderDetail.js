@@ -144,7 +144,7 @@ class OrderDetail extends Component {
         switch (order_status) {
             case 0: render_show =
                 <div className="Row">
-                    <div className='_Card'>
+                    <div className="Card">
                         <div className="Row">
                             <div className="col-10">
                                 <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้ </h4>
@@ -161,23 +161,20 @@ class OrderDetail extends Component {
 
             case 1: render_show =
                 <div className="Row">
-                    <div className='_Card'>
-                        <div className="Row">
-                            <div className="col-10">
-                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
-                                <p>&nbsp; </p>
-                            </div>
-                            <div className="col-2">
-                                <PdfInvoice data={this.state.order} />
-                            </div>
+                    <div className="col-2"></div>
+                    <div className="col-8">
+                        <div className="BuyDetailCard">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                            <PdfInvoice data={this.state.order} />
                         </div>
+                        <div className="col-2"></div>
                     </div>
                 </div>
                 break;
 
             case 2: render_show =
                 <div className="Row">
-                    <div className='_Card'>
+                    <div className="Card">
                         <div className="Row">
                             <div className="col-10">
                                 <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
@@ -193,7 +190,7 @@ class OrderDetail extends Component {
 
             case 3: render_show =
                 <div className="Row">
-                    <div className='_Card'>
+                    <div className="Card">
                         <div className="Row">
                             <div className="col-10">
                                 <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
@@ -209,15 +206,13 @@ class OrderDetail extends Component {
 
             default: render_show =
                 <div className="Row">
-                    <div className='_Card'>
-                        <div className="Row">
-                            <div className="col-10">
-                                <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
-                                <p>&nbsp; </p>
-                            </div>
-                            <div className="col-2">
-                                <PdfInvoice data={this.state.order} />
-                            </div>
+                    <div className="col-10">
+                        <div className="Card">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+                            <p>&nbsp; </p>
+                        </div>
+                        <div className="col-2">
+                            <PdfInvoice data={this.state.order} />
                         </div>
                     </div>
                 </div>
@@ -265,7 +260,6 @@ class OrderDetail extends Component {
                 {this.render_status(this.state.order.order_status)}
 
 
-
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-8">
@@ -279,28 +273,28 @@ class OrderDetail extends Component {
                                 <th>ราคารวม (บาท)</th>
                                 <th>ทำการสั่งซื้อ</th>
                             </tr>
-                            
+
                             {
-                            this.state.detail.map((element_plant, index) => {
-                                return (
-                                    <tr>
-                                        <td>{element_plant.image ? <img alt="Product" className="Product" src={ip + element_plant.image} /> : <img alt="Product" className="Product" src={this.state.default_image} />}</td>
-                                        <td>{element_plant.plant_name}</td>
-                                        <td>{addComma(element_plant.amount)} กิโลกรัม</td>
-                                        <td>{element_plant.price} บาท</td>
-                                        <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
-                                        <td><button onClick={() => { this.onOpenModal() }}
-                                                    className="BTN_AddCart"
-                                                    style={{ width: "250px", float: "right"}}>
-                                                    ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย
+                                this.state.detail.map((element_plant, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{element_plant.image ? <img alt="Product" className="Product" src={ip + element_plant.image} /> : <img alt="Product" className="Product" src={this.state.default_image} />}</td>
+                                            <td>{element_plant.plant_name}</td>
+                                            <td>{addComma(element_plant.amount)} กิโลกรัม</td>
+                                            <td>{element_plant.price} บาท</td>
+                                            <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
+                                            <td><button onClick={() => { this.onOpenModal() }}
+                                                className="BTN_AddCart"
+                                                style={{ width: "250px", float: "right" }}>
+                                                ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย
                                                     </button>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                            }
                         </table>
-                        
+
 
 
 

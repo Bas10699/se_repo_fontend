@@ -94,6 +94,7 @@ h6{
 /* Start Navbar */
 
 .Navbar {
+    font-size: 18px;
     overflow: hidden;
     top: 0;
     width: 100%;
@@ -130,14 +131,14 @@ h6{
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: white;
-    padding-bottom: 13px;
+    padding-bottom: 10px;
 }
 
 .NavbarRight.Active {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: white;
-    padding-bottom: 13px;
+    padding-bottom: 10px;
 }
 
 .Navbar ul {
@@ -154,21 +155,21 @@ h6{
     text-decoration: none;
     color: white;
     display: block;
-    width: 100px;
+    width: 120px;
 }
 
 .NavbarText:hover {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: white;
-    padding-bottom: 13px;
+    padding-bottom: 10px;
 }
 
 .NavbarText.Active {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: #FFFFFF;
-    padding-bottom: 13px;
+    padding-bottom: 10px;
 }
 
 .Navbar img{
@@ -395,7 +396,7 @@ textarea{
     border-radius: 5px;
 }
 
-select{
+select[name="volum"]{
     font-family: 'kunlasatriregular';
     font-size: 16px;
     border: 1px solid black;
@@ -405,6 +406,15 @@ select{
     width: 40%;
     border-radius: 5px;
 }
+
+/* select[name="day"],[name="month"],[name="year"]{
+    font-family: 'kunlasatriregular';
+    font-size: 16px;
+    border: 1px solid black;
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 5px;
+} */
 
 input[type="search"]{
     font-family: 'kunlasatriregular';
