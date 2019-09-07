@@ -59,7 +59,7 @@ class PdfOrder extends Component {
                 widths: [50, 100],
                 body: [
                   [{ text: 'เลขที่', style: 'subheader1', alignment: 'center' ,fillColor: '#cccccc'}, this.props.data.order_id],
-                  [{ text: 'วันที่', style: 'subheader1', alignment: 'center' ,fillColor: '#cccccc'}, moment(this.props.data.date).utc().format("DD/MM/YYYY")]
+                  [{ text: 'วันที่', style: 'subheader1', alignment: 'center' ,fillColor: '#cccccc'}, moment(this.props.data.order_date).utc().format("DD/MM/YYYY")]
                 ]
               }
             },
@@ -74,7 +74,7 @@ class PdfOrder extends Component {
                 heights: 90,
                 body: [
                   [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
-                    `วันที่กำหนดส่ง ${this.props.data.date_send}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
+                    `วันที่กำหนดส่ง ${moment(this.props.data.date_send).format('DD/MM/YYYY')}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                 ]
               }
             },

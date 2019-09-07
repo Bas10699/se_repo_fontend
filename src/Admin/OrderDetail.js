@@ -98,7 +98,7 @@ class OrderDetail extends Component {
             detail: JSON.stringify(detail),
             status: 0
         }
-        console.log("วันที่ส่ง",this.state.date_send)
+        console.log("วันที่ส่ง", this.state.date_send)
         try {
             await post(object, 'neutrally/add_invoice_neutrally', user_token).then((result) => {
                 if (result.success) {
@@ -109,7 +109,7 @@ class OrderDetail extends Component {
                     console.log("get_order", result.result)
                 }
             })
-            
+
         }
         catch (error) {
             alert("add_invoice_neutrally" + error);
@@ -145,62 +145,48 @@ class OrderDetail extends Component {
         switch (order_status) {
             case 0: render_show =
                 <div className="Row">
-                    <div className="_Card">
-                        <div className="Row">
-                            <div className="col-10">
-                                <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้ </h4>
-                                <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
-                            </div>
-                            <div className="col-2">
-                                <PdfOrder data={this.state.order} />
-                                <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button>
-                            </div>
-                        </div>
+                    <div className="col-10">
+                        <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้ </h4>
+                        <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                    </div>
+                    <div className="col-2">
+                        <PdfOrder data={this.state.order} />
+                        <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button>
                     </div>
                 </div>
                 break;
 
             case 1: render_show =
                 <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-8">
-                        <div className="BuyDetailCard">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
-                            <PdfInvoice data={this.state.order} />
-                        </div>
-                        <div className="col-2"></div>
+                    <div className="col-10">
+                        <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                    </div>
+                    <div className="col-2">
+                        <PdfInvoice data={this.state.order} />
                     </div>
                 </div>
                 break;
 
             case 2: render_show =
                 <div className="Row">
-                    <div className="Card">
-                        <div className="Row">
-                            <div className="col-10">
-                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
-                                <p>&nbsp; </p>
-                            </div>
-                            <div className="col-2">
-                                <PdfInvoice data={this.state.order} />
-                            </div>
-                        </div>
+                    <div className="col-10">
+                        <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการชำระเงินแล้ว</h4>
+                        <p>&nbsp; รอ se กลางออกใบเสร็จ</p>
+                    </div>
+                    <div className="col-2">
+                        <button className='BTN_CONFIRM' >ออกใบเสร็จ</button>
                     </div>
                 </div>
                 break;
 
             case 3: render_show =
                 <div className="Row">
-                    <div className="Card">
-                        <div className="Row">
-                            <div className="col-10">
-                                <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
-                                <p>&nbsp; </p>
-                            </div>
-                            <div className="col-2">
-                                <PdfInvoice data={this.state.order} />
-                            </div>
-                        </div>
+                    <div className="col-10">
+                        <h4>&nbsp; สถานะการสั่งซื้อ : เรียบร้อย</h4>
+                        <p>&nbsp; </p>
+                    </div>
+                    <div className="col-2">
+                        <button className='BTN_CONFIRM' >ซื้ออีกครั้ง</button>
                     </div>
                 </div>
                 break;
@@ -247,18 +233,13 @@ class OrderDetail extends Component {
                 </div>
 
 
-                {/* <div className="Row">
-                    <div className="col-4"></div>
-                    <div className="col-4">
-                        <Timeline items={events} />
+                <Timeline status={this.state.order.order_status} order={this.state.order} invoice={this.state.invoice} />
+
+                <div className="Row">
+                    <div className='_Card'>
+                        {this.render_status(this.state.order.order_status)}
                     </div>
-                    <div className="col-4"></div>
-                </div> */}
-
-                <Timeline data={this.state.order} />
-
-                {/* {this.state.order.order_status == 1 ? <PdfInvoice data={this.state.order} /> : null} */}
-                {this.render_status(this.state.order.order_status)}
+                </div>
 
 
                 <div className="Row">
@@ -356,7 +337,7 @@ class OrderDetail extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h4>ชำระเงินภายในวันที่</h4>
-                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange}/>
+                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange} />
                             <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
                             <p>ชื่อธนาคาร <input name="BankName" id="BankName" onChange={this.handleChange}></input></p>
 

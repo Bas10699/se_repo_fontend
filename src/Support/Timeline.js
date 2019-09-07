@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { post } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
-import PdgOrder from './PdfOrder';
+import PdfOrder from './PdfOrder';
+import PdfInvoice from './PdfInvoice'
 import { NavLink } from 'react-router-dom'
+import moment from 'moment'
 
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
@@ -52,7 +54,7 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            {this.props.status >= 0 ? <li className="Status" >ส่งใบสั่งซ์้อ</li> : <li className="Standat" >ส่งใบสั่งซ์้อ</li>}
+                            {this.props.status >= 0 ? <li className="Status" >ส่งใบสั่งซ์้อ<br/>{moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li> : <li className="Standat" >ส่งใบสั่งซ์้อ<br/>{moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li>}
                             {this.props.status >= 1 ? <li className="Status" >ยืนยันคำสั่งซื้อแล้ว</li> : <li className="Standat" >ยืนยันคำสั่งซื้อแล้ว</li>}
                             {this.props.status >= 2 ? <li className="Status" >ชำระเงินแล้ว</li> : <li className="Standat" >ชำระเงินแล้ว</li>}
                             {this.props.status >= 3 ? <li className="Status" >สั่งซื้อสำเร็จ</li> : <li className="Standat" >สั่งซื้อสำเร็จ</li>}
@@ -61,10 +63,10 @@ class Timeline extends Component {
                             <div className="col-2"></div>
             
                                 <div className="col-2"  style={{marginLeft: "-125px", marginTop: "-50px" }}>
-                                    {this.props.status >= 1 ? <PdgOrder data={this.props.data} /> : null}
+                                    {this.props.status >= 1 ? <PdfOrder data={this.props.order} /> : null}
                                 </div>
                                 <div className="col-2"  style={{marginLeft: "80px", marginTop: "-50px" }}>
-                                    {this.props.status >= 2 ? <PdgOrder data={this.props.data} /> : null}
+                                    {this.props.status >= 2 ? <PdfInvoice data={this.props.invoice} /> : null}
                                 </div>
                            
                             <div className="col-2"></div>

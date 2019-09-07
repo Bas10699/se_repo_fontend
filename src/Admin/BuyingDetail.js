@@ -88,7 +88,7 @@ class BuyingDetail extends Component {
                         <p>&nbsp; </p>
                     </div>
                     <div className="col-2">
-                        <PdfInvoice data={this.state.order} />
+                        ใส่อะไรดี
                     </div>
                 </div>
                 break;
@@ -258,7 +258,7 @@ class BuyingDetail extends Component {
                     <div className="col-2"></div>
                 </div> */}
 
-                <Timeline status={this.state.order.order_status} data={this.state.order} />
+                <Timeline status={this.state.order.order_status} order={this.state.order} invoice={this.state.invoice}/>
 
                 <div className="Row">
                     <div className='_Card'>

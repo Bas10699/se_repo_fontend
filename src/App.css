@@ -716,17 +716,17 @@ th,tr:hover{
   .Standat.Active,.Status.Active {
     color: black;
   }
-  .Standat:before,.Status:before {
+  .Status:before {
     border-color: #f1c40f;
   }
   .Standat.Active , li:after {
     background-color: #ccc;
     height: 5px;
   }
-  .Standat:hover {
+  /* .Standat:hover {
     background-color: #000;
     height: 5px;
-  }
+  } */
 /* End Timeline */
 
 .Product{
