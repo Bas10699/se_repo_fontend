@@ -23,6 +23,8 @@ class BuyingDetail extends Component {
             cart_product: [],
             invoice_detail: [],
             invoice: [],
+            date_proof: null,
+            time_proof:null,
             open: false,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
@@ -31,6 +33,11 @@ class BuyingDetail extends Component {
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
             image_payment: 'https://www.ahvc.com.sg/wp/wp-content/uploads/2016/07/default_image-800x800.png'
         }
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
     }
 
     onOpenModal = () => {
@@ -63,11 +70,11 @@ class BuyingDetail extends Component {
                     <div className="col-10">
                         <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
                         <h5>&nbsp; กรุณาชำระเงินผ่าน {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
-                        <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")}</h5> {console.log("วันที่ส่ง", this.state.invoice.date)}
-                        <h5>&nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
+                        <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} &nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
+
                     </div>
                     <div className="col-2">
-                        <PdfInvoice data={this.state.order} style={{ float: "right" }} />
+                        <PdfInvoice data={this.state.invoice} style={{ float: "right" }} />
                         <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
                     </div>
                 </div>
@@ -171,6 +178,27 @@ class BuyingDetail extends Component {
 
     }
 
+    add_proof_payment = async () => {
+        let payment = {
+            order_id: this.state.order.order_id,
+            date_proof: this.state.date_proof,
+            time_proof: this.state.time_proof,
+            // image_proof: this.state.image_payment,
+        }
+        try {
+            await post(payment, 'trader/add_proof_of_payment_trader', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                    setTimeout(() => {
+                        console.log('add_proof_of_payment_trader', result.result)
+                    }, 500)
+                }
+            })
+        } catch (error) {
+            alert('add_proof_payment: '+ error)
+        }
+    }
+
     sum_price = (data_price) => {
         let sum = 0;
         data_price.map((element) => {
@@ -198,9 +226,6 @@ class BuyingDetail extends Component {
 
     }
 
-    add_invoice = () => {
-        alert("รอการตรวจสอบ")
-    }
     render() {
         return (
             <div className="App">
@@ -233,7 +258,7 @@ class BuyingDetail extends Component {
                     <div className="col-2"></div>
                 </div> */}
 
-                <Timeline status={this.state.order.order_status} />
+                <Timeline status={this.state.order.order_status} data={this.state.order} />
 
                 <div className="Row">
                     <div className='_Card'>
@@ -308,9 +333,10 @@ class BuyingDetail extends Component {
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h4>โอนเงินไปในบัญชี : {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankAccountName} </h4>
-                            <h4>วันที่โอนเงิน <input type="date" />เวลาที่โอนเงิน <input type="time" name="BankNo" id="BankNo" onChange={this.handleChange} /></h4>
-
                             <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
+
+                            <h4>วันที่โอนเงิน <input type="date" id='date_proof' onChange={this.handleChange}/>เวลาที่โอนเงิน <input type="time" id='time_proof' onChange={this.handleChange} /></h4>
+
                             <h4>แนบหลักฐานการโอนเงิน</h4>
                             <div>
                                 <input type="file"
@@ -318,7 +344,7 @@ class BuyingDetail extends Component {
                             </div>
                             <img src={this.state.image_payment}
                                 style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto" }} alt="หลักฐานการโอน" />
-                            <button className="BTN_Signin" style={{ float: "right" }} onClick={() => { this.add_invoice() }}>ส่งหลักฐานการโอน</button>
+                            <button className="BTN_Signin" style={{ float: "right" }} onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button>
                             <button className="BTN_Signup" style={{ float: "left" }} onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
 
                         </div>
