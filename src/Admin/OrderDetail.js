@@ -236,7 +236,7 @@ class OrderDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.order} /></div>
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
                         <div className="col-6">
                             <button
                                 className='BTN_CONFIRM'
@@ -255,7 +255,7 @@ class OrderDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-6">
-                            <button className="BTN_PDF">ตรวจสอบหลักฐานการโอน</button>
+                            <button className="BTN_PDF" onClick={()=>this.setState({OpenBill:true})}>ตรวจสอบหลักฐานการโอน</button>
                             {/* <PdfInvoice data={this.state.order} /> */}
                         </div>
                         <div className="col-6">
