@@ -24,11 +24,11 @@ class OrderDetail extends Component {
             num: false,
             order: [],
             detail: [],
-            invoice:[],
-            invoice_detail:[],
+            invoice: [],
+            invoice_detail: [],
             plant: null,
             data: [],
-            payment:[],
+            payment: [],
             OpenComfrim: false,
             OpenBill: false,
             detail_send: null,
@@ -255,7 +255,7 @@ class OrderDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-6">
-                            <button className="BTN_PDF" onClick={()=>this.setState({OpenBill:true})}>ตรวจสอบหลักฐานการโอน</button>
+                            <button className="BTN_PDF" onClick={() => this.setState({ OpenBill: true })}>ตรวจสอบหลักฐานการโอน</button>
                             {/* <PdfInvoice data={this.state.order} /> */}
                         </div>
                         <div className="col-6">
@@ -412,9 +412,9 @@ class OrderDetail extends Component {
                     <div className="Row">
                         <div className="col-1" />
                         <div className="col-10">
-                            <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ {this.state.detail.plant_name}</h3>
-                            <h4>จำนวนวัตถุดิบทั้งหมด {this.state.detail.total_plant} กิโลกรัม</h4>
-                            <h4>จำนวนที่สั่งซื้อ {this.state.detail.amount} กิโลกรัม</h4>
+                            <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "ชื่อวัตถุดิบ"</h3>
+                            <h4>จำนวนวัตถุดิบทั้งหมด xxx กิโลกรัม</h4>
+                            <h4>จำนวนที่สั่งซื้อ xxx กิโลกรัม</h4>
                             <table>
                                 <tr>
                                     <th>ชื่อ SE</th>
@@ -422,6 +422,7 @@ class OrderDetail extends Component {
                                     <th>ราคาขนส่ง</th>
                                     <th>ช่วงส่งมอบ</th>
                                 </tr>
+                                
                             </table>
 
                             <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
@@ -461,18 +462,31 @@ class OrderDetail extends Component {
 
                 <Modal open={this.state.OpenBill} onClose={this.onCloseModal}>
                     <div className="Row">
-                        <div className="col-1" />
-                        <div className="col-10">
+                        <div className="col-12" >
                             <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
+                        </div>
+                    </div>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-7" >
+                            <a target="_blank" href={ip + this.state.payment.image_proof}>
+                                <img src={ip + this.state.payment.image_proof}
+                                    style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
+                            </a>
+                        </div>
+                        <div className="col-5">
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
                             <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.order.order_id}</h4>
-                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
-                            <img src={ip+this.state.payment.image_proof}
-                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto" }} alt="หลักฐานการโอน" />
+                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
+                            <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
+                            <button className="BTN_CONFIRM">ปุ่มยืนยัน</button>
+                            <button className="BTN_PDF">หลักฐานการชำระใช้ไม่ได้</button>
+
                         </div>
-                        <div className="col-1" />
                     </div>
                 </Modal>
+
+
 
             </div>
 
