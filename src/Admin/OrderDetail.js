@@ -9,6 +9,7 @@ import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
 import PdfOrder from '../Support/PdfOrder'
 import Modal from 'react-responsive-modal'
 import PdfInvoice from '../Support/PdfInvoice'
+import PdfBill from '../Support/PdfBill'
 
 
 // import FrequencyPlant from './frequency_plant'
@@ -23,9 +24,13 @@ class OrderDetail extends Component {
             num: false,
             order: [],
             detail: [],
+            invoice:[],
+            invoice_detail:[],
             plant: null,
             data: [],
+            payment:[],
             OpenComfrim: false,
+            OpenBill: false,
             detail_send: null,
             date_send: null,
             BankAccountName: null,
@@ -73,6 +78,12 @@ class OrderDetail extends Component {
                         order: result.result,
                         detail: result.result.detail,
                     })
+                    if (result.result.order_status > 0) {
+                        this.get_invoice()
+                    }
+                    if (result.result.order_status > 1) {
+                        this.get_proof_of_payment()
+                    }
                     setTimeout(() => {
                         console.log("get_product1", result.result)
                     }, 500)
@@ -86,6 +97,35 @@ class OrderDetail extends Component {
             alert("get_cart_trader" + error);
         }
     }
+
+    get_invoice = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        const object = {
+            order_id: params.aa
+        }
+        try {
+            await post(object, 'trader/get_invoice_trader', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        invoice: result.result,
+                        invoice_detail: result.result.invoice_detail
+
+                    })
+                    setTimeout(() => {
+                        console.log("get_invoice_trade", result.result)
+                    }, 500)
+                } else {
+                    window.location.href = "/manage_order";
+                    alert(result.error_message)
+                }
+            });
+        } catch (error) {
+            alert("get_invoice_trade" + error);
+        }
+
+    }
+
     add_invoice = async () => {
         let detail = {
             BankName: this.state.BankName,
@@ -109,10 +149,36 @@ class OrderDetail extends Component {
                     console.log("get_order", result.result)
                 }
             })
-
         }
         catch (error) {
             alert("add_invoice_neutrally" + error);
+        }
+    }
+
+    get_proof_of_payment = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        const object = {
+            order_id: params.aa
+        }
+        console.log('obj', object)
+        try {
+            await post(object, 'trader/get_proof_of_payment_trader', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        payment: result.result,
+                    })
+                    setTimeout(() => {
+                        console.log("get_proof_of_payment_trader", result.result)
+                    }, 500)
+                } else {
+                    // window.location.href = "/sales_sum";
+                    alert(result.error_message)
+                    console.log("get_proof_of_payment_trader", result.result)
+                }
+            });
+        } catch (error) {
+            alert("get_proof_of_payment_trader" + error);
         }
     }
 
@@ -130,7 +196,7 @@ class OrderDetail extends Component {
     };
 
     onCloseModal = () => {
-        this.setState({ open: false, OpenComfrim: false });
+        this.setState({ open: false, OpenComfrim: false, OpenBill: false });
 
     };
 
@@ -162,7 +228,7 @@ class OrderDetail extends Component {
                         <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
                     </div>
                     <div className="col-2">
-                        <PdfInvoice data={this.state.order} />
+                        <PdfInvoice data={this.state.invoice} />
                     </div>
                 </div>
                 break;
@@ -174,6 +240,7 @@ class OrderDetail extends Component {
                         <p>&nbsp; รอ se กลางออกใบเสร็จ</p>
                     </div>
                     <div className="col-2">
+                        <button onClick={()=>{this.setState({OpenBill:true})}}>ดูหลักฐานการชำระเงิน</button>
                         <button className='BTN_CONFIRM' >ออกใบเสร็จ</button>
                     </div>
                 </div>
@@ -350,6 +417,21 @@ class OrderDetail extends Component {
                             <button className="BTN_Signin" onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
                             <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
 
+                        </div>
+                        <div className="col-1" />
+                    </div>
+                </Modal>
+
+                <Modal open={this.state.OpenBill} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-1" />
+                        <div className="col-10">
+                            <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.order.order_id}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
+                            <img src={ip+this.state.payment.image_proof}
+                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto" }} alt="หลักฐานการโอน" />
                         </div>
                         <div className="col-1" />
                     </div>
