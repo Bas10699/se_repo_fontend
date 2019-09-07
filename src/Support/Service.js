@@ -4,7 +4,11 @@
 // export const ip = "http://127.0.0.1:3003/api/v1/"
 // export const ip = "http://192.168.1.7:3003/api/v1/" //สนง
 // export const ip = "http://10.94.5.208:3003/api/v1/"
+<<<<<<< HEAD
 export const ip = "http://10.94.12.36:3003/api/v1/"
+=======
+export const ip = "http://10.94.1.129:3003/api/v1/"
+>>>>>>> master
 
 
 export const get = (path,token) => new Promise((resolve,reject) => {

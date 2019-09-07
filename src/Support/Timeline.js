@@ -52,16 +52,20 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            <li activeClassName="Active" className="Standat" >ส่งใบสั่งซ์้อ</li>
-                            <li activeClassName="Active" className="Standat" >ยืนยันคำสั่งซื้อ</li>
-                            <li activeClassName="Active" className="Standat" >ใบเเจ้งหนี้</li>
-                            <li activeClassName="Active" className="Standat" >ใบเสร็จ</li>
+                            {this.props.status >= 0 ? <li className="Status" >ส่งใบสั่งซ์้อ</li> : <li className="Standat" >ส่งใบสั่งซ์้อ</li>}
+                            {this.props.status >= 1 ? <li className="Status" >ยืนยันคำสั่งซื้อแล้ว</li> : <li className="Standat" >ยืนยันคำสั่งซื้อแล้ว</li>}
+                            {this.props.status >= 2 ? <li className="Status" >ชำระเงินแล้ว</li> : <li className="Standat" >ชำระเงินแล้ว</li>}
+                            {this.props.status >= 3 ? <li className="Status" >สั่งซื้อสำเร็จ</li> : <li className="Standat" >สั่งซื้อสำเร็จ</li>}
                         </ul>
-                        
-
-                        {/* {this.state.status < 5 ? this.render_Step(this.state.status) : this.setState({ status: 5 })} */}
-                        {/* 
-                        <button onClick={() => { this.addStep() }}>NEXT STEP</button> */}
+                        <div className="Row">
+                            <div className="col-2"></div>
+            
+                                <div className="col-2"  style={{marginLeft: "-125px", marginTop: "-50px" }}>
+                                    {this.props.status === 1 ? <PdgOrder data={this.props.data} /> : null}
+                                </div>
+                           
+                            <div className="col-2"></div>
+                        </div>
 
                     </div>
                     <div className="col-2"></div>
