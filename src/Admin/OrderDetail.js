@@ -144,65 +144,101 @@ class OrderDetail extends Component {
         let render_show
         switch (order_status) {
             case 0: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4 >&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้ </h4>
-                        <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
+                            <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                        </div>
                     </div>
-                    <div className="col-2">
-                        <PdfOrder data={this.state.order} />
-                        <button className='BTN_CONFIRM' onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button>
+                    <div className="Row">
+                        <div className="col-6"><PdfOrder data={this.state.order} /></div>
+                        <div className="col-6">
+                            <button
+                                className='BTN_CONFIRM'
+                                onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button></div>
                     </div>
                 </div>
                 break;
 
             case 1: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                            {/* <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5> */}
+                        </div>
                     </div>
-                    <div className="col-2">
-                        <PdfInvoice data={this.state.order} />
+                    <div className="Row">
+                        <div className="col-6"><PdfInvoice data={this.state.order} /></div>
+                        <div className="col-6">
+                            <button
+                                className='BTN_CONFIRM'
+                                onClick={() => this.setState({ OpenComfrim: true })}>Activity</button></div>
                     </div>
                 </div>
                 break;
 
             case 2: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการชำระเงินแล้ว</h4>
-                        <p>&nbsp; รอ se กลางออกใบเสร็จ</p>
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการชำระเงินแล้ว</h4>
+                            <h5>&nbsp; รอ SE กลางออกใบเสร็จ</h5>
+                        </div>
                     </div>
-                    <div className="col-2">
-                        <button className='BTN_CONFIRM' >ออกใบเสร็จ</button>
+                    <div className="Row">
+                        <div className="col-6">
+                            <button className="BTN_PDF">ตรวจสอบหลักฐานการโอน</button>
+                            {/* <PdfInvoice data={this.state.order} /> */}
+                        </div>
+                        <div className="col-6">
+                            <button
+                                className='BTN_CONFIRM'
+                                onClick={() => this.setState({ OpenComfrim: true })}>ออกใบเสร็จ</button></div>
                     </div>
                 </div>
+
                 break;
 
             case 3: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : เรียบร้อย</h4>
-                        <p>&nbsp; </p>
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : เรียบร้อย</h4>
+                            <h5>&nbsp; รอ SE กลางออกใบเสร็จ</h5>
+                        </div>
                     </div>
-                    <div className="col-2">
-                        <button className='BTN_CONFIRM' >ซื้ออีกครั้ง</button>
+                    <div className="Row">
+                        <div className="col-6">
+                            {/* <PdfInvoice data={this.state.order} /> */}
+                        </div>
+                        <div className="col-6">
+                            <button
+                                className='BTN_CONFIRM'
+                                onClick={() => this.setState({ OpenComfrim: true })}>ออกใบเสร็จ</button></div>
                     </div>
                 </div>
+
                 break;
 
             default: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <div className="Card">
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
                             <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
-                            <p>&nbsp; </p>
-                        </div>
-                        <div className="col-2">
-                            <PdfInvoice data={this.state.order} />
+                            {/* <h5>&nbsp; รอ SE กลางออกใบเสร็จ</h5> */}
                         </div>
                     </div>
+                    {/* <div className="Row">
+                        <div className="col-6"><PdfInvoice data={this.state.order} /></div>
+                        <div className="col-6">
+                            <button
+                                    className='BTN_CONFIRM'
+                                    onClick={() => this.setState({ OpenComfrim: true })}>ออกใบเสร็จ</button></div>
+                    </div> */}
                 </div>
+
                 break;
         }
         return render_show;
@@ -236,9 +272,9 @@ class OrderDetail extends Component {
                 <Timeline status={this.state.order.order_status} order={this.state.order} invoice={this.state.invoice} />
 
                 <div className="Row">
-                    <div className='_Card'>
-                        {this.render_status(this.state.order.order_status)}
-                    </div>
+                    <div className="col-2"></div>
+                    <div className="col-8">{this.render_status(this.state.order.order_status)}</div>
+                    <div className="col-2"></div>
                 </div>
 
 
@@ -331,7 +367,7 @@ class OrderDetail extends Component {
                 </Modal>
 
                 <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
-                    <div className="Row">
+                    <div className="Row" style={{ width: "500px" }}>
                         <div className="col-1" />
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
@@ -339,17 +375,19 @@ class OrderDetail extends Component {
                             <h4>ชำระเงินภายในวันที่</h4>
                             <input type="date" name="date_send" id="date_send" onChange={this.handleChange} />
                             <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
-                            <p>ชื่อธนาคาร <input name="BankName" id="BankName" onChange={this.handleChange}></input></p>
-
-                            <p>เลขบัญชีธนาคาร <input name="BankNo" id="BankNo" onChange={this.handleChange}></input></p>
-
-                            <p>ชื่อบัญชีธนาคาร  <input name="BankAccountName" id="BankAccountName" onChange={this.handleChange}></input></p>
-
-                            <textarea rows="4" cols="95" name="detail_send" id="detail_send" onChange={this.handleChange}
-                                form="usrform" />
-                            <button className="BTN_Signin" onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
-                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-
+                            <h4>ชื่อธนาคาร <input name="BankName" type="bank" id="BankName" onChange={this.handleChange} /></h4>
+                            <h4>เลขบัญชีธนาคาร <input name="BankNo" type="bank" id="BankNo" onChange={this.handleChange} /></h4>
+                            <h4>ชื่อบัญชีธนาคาร  <input name="BankAccountName" type="bank" id="BankAccountName" onChange={this.handleChange} /></h4>
+                        </div>
+                        <div className="col-1" />
+                    </div>
+                    <div className="Row" style={{ width: "500px" }}>
+                        <div className="col-1" />
+                        <div className="col-5">
+                            <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                        </div>
+                        <div className="col-5">
+                            <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
                         </div>
                         <div className="col-1" />
                     </div>

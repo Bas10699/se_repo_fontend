@@ -106,6 +106,13 @@ class Signup extends Component {
                             placeholder="กรอกบัญชีผู้ใช้" name="username"
                             onChange={this.handleChange}
                         />
+                        <h4>ประเภทผู้ใช้งาน</h4>
+                        <select name="user_type" onChange={this.handleChange}>
+                            <option value="2">ผู้ประกอบการ</option>
+                            <option value="3">SE กลาง</option>
+                            <option value="4">SE ย่อย</option>
+                        </select>
+
                         <h4>รหัสผ่าน</h4>
                         <input type="password" id="password"
                             placeholder="กรอกรหัสผ่าน" name="password"
@@ -129,7 +136,7 @@ class Signup extends Component {
                                 )}>
                                 ลงทะเบียน
                         </button>
-                        <NavLink to={'/Signin'}><button className="BTN_Signup">มีบัญชีผู้ใช้เเล้ว</button></NavLink>
+                            <NavLink to={'/Signin'}><button className="BTN_Signup">มีบัญชีผู้ใช้เเล้ว</button></NavLink>
                         </div>
                     </div>
                     <div className="col-4"></div>

@@ -335,11 +335,12 @@ h6{
     border: 1px solid #FFB731;
     text-align: center;
     cursor: pointer;
+    margin-right: 5px;
+
     padding: 10px 10px;
     width: 150px;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
+
+    float: right;
     transition: 0.5s;
 }
 
@@ -396,7 +397,7 @@ textarea{
     border-radius: 5px;
 }
 
-select[name="volum"]{
+select[name="volum"],[name="user_type"]{
     font-family: 'kunlasatriregular';
     font-size: 16px;
     border: 1px solid black;
@@ -434,6 +435,29 @@ input[name="date"]{
     margin-bottom: 50px;
     margin-right: 10px;
     margin-left: 10px;
+    padding: 10px 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+input[type="bank"]{
+    font-family: 'kunlasatriregular';
+    font-size: 17px;
+    border: 1px solid black;
+    /* margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 10px;
+    margin-left: 10px; */
+    padding: 10px 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+input[name="date_send"],[name="time"]{
+    font-family: 'kunlasatriregular';
+    font-size: 17px;
+    border: 1px solid black;
+    margin-top: -20px;
     padding: 10px 10px;
     width: 100%;
     border-radius: 5px;
@@ -739,9 +763,8 @@ th,tr:hover{
 /* ห้ามลบ ของกู ปรับแต่งได้ */
 ._Card {
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 67%;
+    width: 100%;
     float: left;
-    margin-left: 16.5%;
     margin-bottom: 20px;
     margin-top: 10px;
     background-color: white;
@@ -756,8 +779,8 @@ th,tr:hover{
     cursor: pointer;
     padding: 10px 10px;
     width: 150px;
-    margin-top: 10px;
-    margin-left: 10px;
+    /* margin-top: 10px; */
+    margin-left: 5px;
     float: left;
     transition: 0.5s;
 }
