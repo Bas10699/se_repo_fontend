@@ -24,7 +24,7 @@ class BuyingDetail extends Component {
             invoice_detail: [],
             invoice: [],
             date_proof: null,
-            time_proof:null,
+            time_proof: null,
             open: false,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
@@ -53,67 +53,82 @@ class BuyingDetail extends Component {
         let render_show
         switch (order_status) {
             case 0: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4 >&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการสั่งซื้อ </h4>
-                        <p>&nbsp;  รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</p>
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการสั่งซื้อ</h4>
+                            <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                        </div>
                     </div>
-                    <div className="col-2">
-                        <PdfOrder data={this.state.order} />
+                    <div className="Row">
+                        <div className="col-5"></div>
+                        <div className="col-2"><PdfInvoice data={this.state.order} /></div>
+                        <div className="col-5"></div>
                     </div>
                 </div>
+
                 break;
 
             case 1: render_show =
-
-                <div className="Row">
-                    <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
-                        <h5>&nbsp; กรุณาชำระเงินผ่าน {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
-                        <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} &nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
-
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
+                            <h5>&nbsp; กรุณาชำระเงินผ่าน {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
+                            <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} &nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
+                        </div>
                     </div>
-                    <div className="col-2">
-                        <PdfInvoice data={this.state.invoice} style={{ float: "right" }} />
-                        <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+                    <div className="Row">
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
+                        <div className="col-6">
+                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+                        </div>
                     </div>
                 </div>
-
                 break;
 
             case 2: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : รอ SE กลาง </h4>
-                        <p>&nbsp; </p>
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : รอ SE กลางตรวจสอบการโอนเงิน</h4>
+                            <h5>&nbsp; รอ SE กลาง ตรวจสอบการโอนเงิน หลังจากตรวจสอบเรียบร้อยจะส่งใบเสร็จกลับมา</h5>
+                        </div>
                     </div>
-                    <div className="col-2">
-                        ใส่อะไรดี
-                    </div>
+                    {/* <div className="Row">
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
+                        <div className="col-6">
+                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+                        </div>
+                    </div> */}
                 </div>
+
                 break;
 
             case 3: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
-                        <p>&nbsp; </p>
-                    </div>
-                    <div className="col-2">
-                        <PdfInvoice data={this.state.order} />
-                    </div>
-                </div>
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : เรียบร้อย</h4>
 
+                        </div>
+                    </div>
+                    {/* <div className="Row">
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
+                        <div className="col-6">
+                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+                        </div>
+                    </div> */}
+                </div>
                 break;
 
             default: render_show =
-                <div className="Row">
-                    <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
-                        <p>&nbsp; </p>
-                    </div>
-                    <div className="col-2">
-                        <PdfInvoice data={this.state.order} />
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+
+                        </div>
                     </div>
                 </div>
 
@@ -195,7 +210,7 @@ class BuyingDetail extends Component {
                 }
             })
         } catch (error) {
-            alert('add_proof_payment: '+ error)
+            alert('add_proof_payment: ' + error)
         }
     }
 
@@ -258,12 +273,12 @@ class BuyingDetail extends Component {
                     <div className="col-2"></div>
                 </div> */}
 
-                <Timeline status={this.state.order.order_status} order={this.state.order} invoice={this.state.invoice}/>
+                <Timeline status={this.state.order.order_status} order={this.state.order} invoice={this.state.invoice} />
 
                 <div className="Row">
-                    <div className='_Card'>
-                        {this.render_status(this.state.order.order_status)}
-                    </div>
+                    <div className="col-2"></div>
+                    <div className="col-8">{this.render_status(this.state.order.order_status)}</div>
+                    <div className="col-2"></div>
                 </div>
 
 
@@ -326,6 +341,7 @@ class BuyingDetail extends Component {
 
 
                 </div >
+
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "500px" }}>
                         <div className="col-1" />
@@ -335,20 +351,25 @@ class BuyingDetail extends Component {
                             <h4>โอนเงินไปในบัญชี : {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankAccountName} </h4>
                             <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
 
-                            <h4>วันที่โอนเงิน <input type="date" id='date_proof' onChange={this.handleChange}/>เวลาที่โอนเงิน <input type="time" id='time_proof' onChange={this.handleChange} /></h4>
-
+                            <h4>เวลาที่โอนเงินวันที่โอนเงิน</h4>
+                            <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} />
+                            <h4>เวลาที่โอนเงิน</h4>
+                            <input type="time" name="time" id='time_proof' onChange={this.handleChange} />
                             <h4>แนบหลักฐานการโอนเงิน</h4>
                             <div>
                                 <input type="file"
                                     onChange={(e) => this.uploadpicture(e)} />
                             </div>
                             <img src={this.state.image_payment}
-                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto" }} alt="หลักฐานการโอน" />
-                            <button className="BTN_Signin" style={{ float: "right" }} onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button>
-                            <button className="BTN_Signup" style={{ float: "left" }} onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-
+                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginBottom:"20px" }} alt="หลักฐานการโอน" />
+                            
                         </div>
                         <div className="col-1" />
+                        
+                    </div>
+                    <div className="Row">
+                        <div className="col-6"><button className="BTN_PDF"  onClick={() => { this.onCloseModal() }}>ยกเลิก</button></div>
+                        <div className="col-6"><button className='BTN_CONFIRM' onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
                     </div>
                 </Modal>
             </div >
