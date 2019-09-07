@@ -61,7 +61,10 @@ class Timeline extends Component {
                             <div className="col-2"></div>
             
                                 <div className="col-2"  style={{marginLeft: "-125px", marginTop: "-50px" }}>
-                                    {this.props.status === 1 ? <PdgOrder data={this.props.data} /> : null}
+                                    {this.props.status >= 1 ? <PdgOrder data={this.props.data} /> : null}
+                                </div>
+                                <div className="col-2"  style={{marginLeft: "80px", marginTop: "-50px" }}>
+                                    {this.props.status >= 2 ? <PdgOrder data={this.props.data} /> : null}
                                 </div>
                            
                             <div className="col-2"></div>

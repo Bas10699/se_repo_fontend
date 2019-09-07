@@ -84,7 +84,7 @@ class BuyingDetail extends Component {
             case 2: render_show =
                 <div className="Row">
                     <div className="col-10">
-                        <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการยืนยันการชำระเงิน</h4>
+                        <h4>&nbsp; สถานะการสั่งซื้อ : รอ SE กลาง </h4>
                         <p>&nbsp; </p>
                     </div>
                     <div className="col-2">
@@ -183,7 +183,7 @@ class BuyingDetail extends Component {
             order_id: this.state.order.order_id,
             date_proof: this.state.date_proof,
             time_proof: this.state.time_proof,
-            // image_proof: this.state.image_payment,
+            image_proof: this.state.image_payment,
         }
         try {
             await post(payment, 'trader/add_proof_of_payment_trader', user_token).then((result) => {
