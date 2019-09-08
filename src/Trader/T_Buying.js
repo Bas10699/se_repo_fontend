@@ -4,6 +4,10 @@ import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
 import { get } from '../Support/Service';
 import moment from 'moment'
+import one from '../Image/one.png'
+import two from '../Image/two.png'
+import three from '../Image/three.png'
+import four from '../Image/four.png'
 
 class T_Buying extends Component {
     constructor(props) {
@@ -45,15 +49,35 @@ class T_Buying extends Component {
         let render_tag
 
         switch (order_status) {
-            case 0: render_tag = <div> กำลังดำเนินการ </div>
+            case 0: render_tag = <div>
+                <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+            </div>
                 break;
-            case 1: render_tag = <div> กำลังดำเนินการ </div>
+            case 1: render_tag = <div>
+                <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+            </div>
                 break;
             case 2:
-                render_tag = <div> กำลังดำเนินการ </div>
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                </div>
                 break;
             case 3:
-                render_tag = <div> สำเร็จแล้ว </div>
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
                 break;
             default:
                 render_tag = <div> เกิดข้อผิดพลาด </div>

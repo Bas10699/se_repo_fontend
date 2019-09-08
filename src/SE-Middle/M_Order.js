@@ -4,6 +4,10 @@ import { get, post, ip } from '../Support/Service';
 import { user_token } from '../Support/Constance';
 import moment from 'moment'
 import { NavLink } from 'react-router-dom';
+import one from '../Image/one.png'
+import two from '../Image/two.png'
+import three from '../Image/three.png'
+import four from '../Image/four.png'
 
 class M_Order extends Component {
     constructor(props) {
@@ -43,22 +47,34 @@ class M_Order extends Component {
         switch (order_status) {
             case 0:
                 render_tag = <div>
-                    <div className="FontWarning" > กำลังดำเนินการ </div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
                 </div>
                 break;
             case 1:
                 render_tag = <div>
-                    <div className="FontWarning" > กำลังดำเนินการ </div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
                 </div>
                 break;
             case 2:
                 render_tag = <div>
-                    <div className="FontWarning" > กำลังดำเนินการ </div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
                 </div>
                 break;
             case 3:
                 render_tag = <div>
-                    <div className="FontSuccess"> สำเร็จแล้ว </div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
                 </div>
                 break;
             default:
