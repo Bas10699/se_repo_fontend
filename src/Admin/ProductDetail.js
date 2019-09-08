@@ -183,7 +183,7 @@ class ProductDetail extends Component {
                                 <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
                             </div>
                             <div className="col-2">
-                                <h4 style={{ color: "red" }}>{addComma(this.sum_price(this.state.cart_product))} บาท</h4>
+                                <h4 style={{ color: "red" }}>{addComma(this.state.total_price)} บาท</h4>
                             </div>
                         </div>
                     </div>

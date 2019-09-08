@@ -45,8 +45,10 @@ class T_Buying extends Component {
         let render_tag
 
         switch (order_status) {
-            case 0:
-            case 1:
+            case 0: render_tag = <div> กำลังดำเนินการ </div>
+                break;
+            case 1: render_tag = <div> กำลังดำเนินการ </div>
+                break;
             case 2:
                 render_tag = <div> กำลังดำเนินการ </div>
                 break;
@@ -143,7 +145,7 @@ class T_Buying extends Component {
                     <div className="col-2"></div>
 
                     <div className="col-8">
-                        <table style={{textAlign:"center"}}>
+                        <table style={{ textAlign: "center" }}>
                             <tr>
                                 <th>รหัสใบสั่งซื้อ</th>
                                 <th>วันที่</th>
@@ -160,7 +162,7 @@ class T_Buying extends Component {
                                                 <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_status)}</td>
                                                 <td>{addComma(this.sum_price(element.detail))} บาท</td>
-                                                <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
+                                                <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>
                                         )
                                     })
@@ -172,7 +174,7 @@ class T_Buying extends Component {
                                                 <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_status)}</td>
                                                 <td>{addComma(this.sum_price(element.detail))} บาท</td>
-                                                <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail"  style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
+                                                <td><NavLink to={"/T_Buying/order?order_id=" + element.order_id} style={{ textDecoration: "none" }}><button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>
                                         )
                                     })

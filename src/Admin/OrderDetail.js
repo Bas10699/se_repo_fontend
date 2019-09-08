@@ -236,11 +236,13 @@ class OrderDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
-                        <div className="col-6">
+                        <div className="col-5"></div>
+                        <div className="col-2"><PdfInvoice data={this.state.invoice} /></div>
+                        <div className="col-5"></div>
+                        {/* <div className="col-6">
                             <button
                                 className='BTN_CONFIRM'
-                                onClick={() => this.setState({ OpenComfrim: true })}>Activity</button></div>
+                                onClick={() => this.setState({ OpenComfrim: true })}>Activity</button></div> */}
                     </div>
                 </div>
                 break;
@@ -320,16 +322,16 @@ class OrderDetail extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-2"></div>
+                    <div className="col-7"></div>
                     {/* เริ่ม */}
-                    <div className="col-6">
-                        <h4 style={{ textAlign: "right", marginRight: "10px" }}>รหัสใบสั่งซื้อ</h4>
-                        <h4 style={{ textAlign: "right", marginRight: "10px" }}>วันที่ใบสั่งซื้อ</h4>
-                        <h4 style={{ textAlign: "right", marginRight: "10px" }}>ผู้ซื้อ</h4>
+                    <div className="col-1">
+                        <h4 style={{ textAlign: "left", marginRight: "10px" }}>รหัสใบสั่งซื้อ</h4>
+                        <h4 style={{ textAlign: "left", marginRight: "10px" }}>วันที่ใบสั่งซื้อ</h4>
+                        <h4 style={{ textAlign: "left", marginRight: "10px" }}>ผู้ซื้อ</h4>
                     </div>
                     <div className="col-2">
                         <h4 style={{ textAlign: "left" }}>{this.state.order.order_id}</h4>
-                        <h4 style={{ textAlign: "left" }}>{moment(this.state.order.order_date).utc().format("DD/MM/YYYY")}</h4>
+                        <h4 style={{ textAlign: "left" }}>{moment(this.state.order.order_date).utc().add('years', 543).format("DD/MM/YYYY")}</h4>
                         <h4 style={{ textAlign: "left" }}>{this.state.order.name} {this.state.order.lastname}</h4>
                     </div>
                 </div>
@@ -474,13 +476,15 @@ class OrderDetail extends Component {
                             </a>
                         </div>
                         <div className="col-5">
+                            
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
-                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.order.order_id}</h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : IN{this.state.order.order_id}</h4>
                             <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
                             <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
                             <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
-                            <button className="BTN_CONFIRM">ปุ่มยืนยัน</button>
-                            <button className="BTN_PDF">หลักฐานการชำระใช้ไม่ได้</button>
+                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4>
+                            <button className="BTN_CONFIRM">ยืนยัน</button>
+                            <button className="BTN_PDF">ไม่พบ</button>
 
                         </div>
                     </div>

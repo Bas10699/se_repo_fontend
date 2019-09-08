@@ -62,7 +62,7 @@ class BuyingDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-5"></div>
-                        <div className="col-2"><PdfInvoice data={this.state.order} /></div>
+                        <div className="col-2"><PdfOrder data={this.state.order} /></div>
                         <div className="col-5"></div>
                     </div>
                 </div>

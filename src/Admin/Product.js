@@ -153,7 +153,7 @@ class Product extends Component {
                                 <input type="search" placeholder="ค้นหา" onChange={this.filterSearch} />
                             </div>
                             <div className="col-6">
-                                <button className="BTN_Signin" style={{marginTop:"55px", marginRight:"35px"}}>เพิ่มสินค้า</button>
+                                <NavLink to={"/AddProduct"}><button className="BTN_Signin" style={{marginTop:"55px", marginRight:"35px"}}>เพิ่มสินค้า</button></NavLink>
                                 <button className="BTN_Signup" style={{marginTop:"55px"}}>ลบสินค้า</button>
                             </div>
                             {/* <div className="col-1"></div> */}

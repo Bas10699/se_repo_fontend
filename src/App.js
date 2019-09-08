@@ -18,6 +18,7 @@ import OrderDetail from './Admin/OrderDetail';
 import EditProduct from './Admin/Edit/EditProduct';
 import Test from './Support/Test';
 import M_Summary from './SE-Middle/M_Summary';
+import AddProduct from './Admin/AddProduct';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
       <Route exact path='/M_Order/:orderID' component={OrderDetail}/>
       <Route exact path='/EditProduct/:productID' component={EditProduct}/>
       <Route exact path='/M_Summary' component={M_Summary}/>
+      <Route exact path='/AddProduct' component={AddProduct}/>
 
     </Router>
   );

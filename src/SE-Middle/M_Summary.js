@@ -22,6 +22,7 @@ class M_Summary extends Component {
                 if (result.success) {
                     this.setState({
                         product_data: result.result,
+                        search_product: result.result
                     })
 
                     setTimeout(() => {
@@ -239,7 +240,7 @@ class M_Summary extends Component {
                                             </tr>
                                         )
                                     })
-                                    
+
                             }
                             <tr>
                                 <th colSpan="1" style={{ borderRight: "1px solid #f1c40f" }}>รวมยอดเงิน</th>
