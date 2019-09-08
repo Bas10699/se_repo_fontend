@@ -74,7 +74,7 @@ class T_Buying extends Component {
             case 3:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
@@ -142,11 +142,33 @@ class T_Buying extends Component {
         return sum;
 
     }
+    SortId = () => {
+        const bands = this.state.order
+
+        function compare(a, b) {
+            const order_idA = a.order_id.toUpperCase();
+            const order_idB = b.order_id.toUpperCase();
+
+            let comparison = 0;
+            if (order_idA < order_idB) {
+                comparison = 1;
+            } else if (order_idA > order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+
+        console.log(bands.sort(compare));
+        let sort_order = bands.sort(compare)
+        this.setState({ order: sort_order })
+
+    }
 
 
     render() {
         return (
             <div className="App">
+
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>ประวัติการซื้อ</h2>
@@ -206,8 +228,10 @@ class T_Buying extends Component {
                         </table>
                     </div>
                 </div>
+                <button onClick={() => this.SortId()}>เรียง ID มากไปน้อย</button>
 
                 <div className="col-2"></div>
+
             </div>
         )
     }

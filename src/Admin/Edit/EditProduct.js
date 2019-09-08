@@ -59,7 +59,10 @@ class EditProduct extends Component {
     updateDataInForm() {
         this.setState({
             cost: this.state.product_data.cost,
-            product_name: this.state.product_data.product_name
+            product_name: this.state.product_data.product_name,
+            product_detail: this.state.product_data.product_detail,
+            price: this.state.plant[0].price
+            
         });
     }
 
@@ -175,7 +178,7 @@ class EditProduct extends Component {
 
                         <h4>รายละเอียดสินค้า</h4>
                         <textarea rows="4" cols="80" name="product_detail" id="product_detail"
-                            form="usrform" value={this.state.product_data.product_detail}
+                            form="usrform" value={this.state.product_detail}
                             onChange={this.handleInputChange} />
 
 
@@ -188,13 +191,13 @@ class EditProduct extends Component {
 
                         <h4>ราคาขาย</h4>
                         <h4><input type="number" style={{ width: "20%" }}
-                            name="cart_product" id="cart_product" min="1"
-                            value={addComma(this.sum_price(this.state.cart_product))}
+                            name="price" id="price" min="1"
+                            value={this.state.price}
                             onChange={this.handleInputChange} /> บาท /
 
                             <input type="number" style={{ width: "20%" }}
                                 name="cart_product" id="cart_product" min="1"
-                                value={addComma(this.sum_price(this.state.cart_product))}
+                                value={'1'}
                                 onChange={this.handleInputChange} />
                             หน่วย
                             <select style={{ width: "20%" }} name="volum">

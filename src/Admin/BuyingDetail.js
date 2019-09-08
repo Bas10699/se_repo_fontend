@@ -244,6 +244,7 @@ class BuyingDetail extends Component {
     render() {
         return (
             <div className="App">
+
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>รายละเอียดใบซื้อสินค้า {this.state.order.order_id}</h2>
@@ -361,14 +362,14 @@ class BuyingDetail extends Component {
                                     onChange={(e) => this.uploadpicture(e)} />
                             </div>
                             <img src={this.state.image_payment}
-                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginBottom:"20px" }} alt="หลักฐานการโอน" />
-                            
+                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginBottom: "20px" }} alt="หลักฐานการโอน" />
+
                         </div>
                         <div className="col-1" />
-                        
+
                     </div>
                     <div className="Row">
-                        <div className="col-6"><button className="BTN_PDF"  onClick={() => { this.onCloseModal() }}>ยกเลิก</button></div>
+                        <div className="col-6"><button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button></div>
                         <div className="col-6"><button className='BTN_CONFIRM' onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
                     </div>
                 </Modal>
