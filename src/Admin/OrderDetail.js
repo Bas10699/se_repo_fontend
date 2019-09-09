@@ -85,7 +85,7 @@ class OrderDetail extends Component {
                         this.get_proof_of_payment()
                     }
                     setTimeout(() => {
-                        console.log("get_product1", result.result)
+                        console.log("get_order", result.result)
                     }, 500)
                 } else {
                     // window.location.href = "/sales_sum";
@@ -94,7 +94,7 @@ class OrderDetail extends Component {
                 }
             });
         } catch (error) {
-            alert("get_cart_trader" + error);
+            alert("get_order" + error);
         }
     }
 
@@ -179,6 +179,31 @@ class OrderDetail extends Component {
             });
         } catch (error) {
             alert("get_proof_of_payment_trader" + error);
+        }
+    }
+    confirm_payment = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        const object = {
+            order_id: params.aa,
+            status: 3
+        }
+        try {
+            await post(object, 'neutrally/update_status_order_trader', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                    setTimeout(() => {
+                        console.log("confirm_payment", result.result)
+                    }, 500)
+                } else {
+                    // window.location.href = "/";
+                    alert(result.error_message)
+                    console.log("confirm_payment_err", result.result)
+                }
+            })
+        }
+        catch (error) {
+            alert("confirm_payment" + error);
         }
     }
 
@@ -274,17 +299,7 @@ class OrderDetail extends Component {
                     <div className="Row">
                         <div className="col-12">
                             <h4>&nbsp; สถานะการสั่งซื้อ : เรียบร้อย</h4>
-                            <h5>&nbsp; รอ SE กลางออกใบเสร็จ</h5>
                         </div>
-                    </div>
-                    <div className="Row">
-                        <div className="col-6">
-                            {/* <PdfInvoice data={this.state.order} /> */}
-                        </div>
-                        <div className="col-6">
-                            <button
-                                className='BTN_CONFIRM'
-                                onClick={() => this.setState({ OpenComfrim: true })}>ออกใบเสร็จ</button></div>
                     </div>
                 </div>
 
@@ -424,7 +439,7 @@ class OrderDetail extends Component {
                                     <th>ราคาขนส่ง</th>
                                     <th>ช่วงส่งมอบ</th>
                                 </tr>
-                                
+
                             </table>
 
                             <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
@@ -476,14 +491,14 @@ class OrderDetail extends Component {
                             </a>
                         </div>
                         <div className="col-5">
-                            
+
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
                             <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : IN{this.state.order.order_id}</h4>
                             <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
                             <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
                             <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
                             <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4>
-                            <button className="BTN_CONFIRM">ยืนยัน</button>
+                            <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ยืนยัน</button>
                             <button className="BTN_PDF">ไม่พบ</button>
 
                         </div>
