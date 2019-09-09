@@ -193,7 +193,9 @@ class Bill extends Component {
     render() {
         return (
 
-            <div>{this.printPDF()}</div>
+            <div>
+            <button className="BTN_PDF" onClick={() => { this.printPDF() }} >ดูรายละเอียดใบเสร็จ</button>
+            </div>
 
         )
     }

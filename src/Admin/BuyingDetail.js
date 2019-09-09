@@ -168,6 +168,7 @@ class BuyingDetail extends Component {
             alert("get_cart_trader" + error);
         }
     }
+    
     get_invoice = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
