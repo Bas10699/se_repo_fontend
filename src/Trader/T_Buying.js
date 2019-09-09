@@ -8,6 +8,7 @@ import one from '../Image/one.png'
 import two from '../Image/two.png'
 import three from '../Image/three.png'
 import four from '../Image/four.png'
+import arrow from '../Image/arrow.png'
 
 class T_Buying extends Component {
     constructor(props) {
@@ -142,6 +143,100 @@ class T_Buying extends Component {
         return sum;
 
     }
+    Sortdate = () => {
+        const order = this.state.order
+
+        function compare(a, b) {
+            const order_idA = a.order_date
+            const order_idB = b.order_date
+
+            let comparison = 0;
+            if (order_idA < order_idB) {
+                comparison = 1;
+            } else if (order_idA > order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+
+        console.log(order.sort(compare));
+        let sort_order = order.sort(compare)
+        this.setState({ order: sort_order })
+
+    }
+    SortStatus = (e) => {
+        const order = this.state.order
+
+        if (e === 'Max') {
+            function compare(a, b) {
+                const order_idA = a.order_status
+                const order_idB = b.order_status
+
+                let comparison = 0;
+                if (order_idA < order_idB) {
+                    comparison = 1;
+                } else if (order_idA > order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+        if (e === 'Min') {
+            function compare(a, b) {
+                const order_idA = a.order_status
+                const order_idB = b.order_status
+
+                let comparison = 0;
+                if (order_idA > order_idB) {
+                    comparison = 1;
+                } else if (order_idA < order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+    }
+    SortDate = (e) => {
+        const order = this.state.order
+        if (e === 'Max') {
+            function compare(a, b) {
+                const order_idA = a.order_date
+                const order_idB = b.order_date
+
+                let comparison = 0;
+                if (order_idA < order_idB) {
+                    comparison = 1;
+                } else if (order_idA > order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+        if (e === 'Min') {
+            function compare(a, b) {
+                const order_idA = a.order_date
+                const order_idB = b.order_date
+
+                let comparison = 0;
+                if (order_idA > order_idB) {
+                    comparison = 1;
+                } else if (order_idA < order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+
+    }
+
     SortId = () => {
         const bands = this.state.order
 
@@ -163,7 +258,6 @@ class T_Buying extends Component {
         this.setState({ order: sort_order })
 
     }
-
 
     render() {
         return (
@@ -195,8 +289,23 @@ class T_Buying extends Component {
                         <table style={{ textAlign: "center" }}>
                             <tr>
                                 <th>รหัสใบสั่งซื้อ</th>
-                                <th>วันที่</th>
-                                <th>สถานะการสั่งซื้อ</th>
+                                <th><button className="BTN_Filter" onClick={() => this.SortDate('Min')}>
+                                        เก่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                    วันที่
+                                    <button className="BTN_Filter" onClick={() => this.SortDate('Max')}>
+                                        ล่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                </th>
+                                <th>
+                                <button className="BTN_Filter" onClick={() => this.SortStatus('Min')}>
+                                        น้อย <img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                    สถานะการสั่งซื้อ
+                                    <button className="BTN_Filter" onClick={() => this.SortStatus('Max')}>
+                                        มาก <img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                </th>
                                 <th>ยอดการสั่งซื้อ</th>
                                 <th>รายละเอียด</th>
                             </tr>

@@ -244,6 +244,25 @@ h6{
 /* End Haeder */
 
 /* Start Button */
+.BTN_Filter{
+    padding: 10px 10px 0px 10px;
+    width: 50px;
+    font-family: 'kunlasatriregular';
+    background-color: transparent;
+    border: 1px solid #FFB731;
+    border-radius: 10px;
+    transition: 0.5s;
+    font-size: 16px;
+    color: black;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.BTN_Filter:hover{
+    background-color: #FFB731;
+    color: white;
+}
+
 .BTN_Buy{
     font-family: 'kunlasatriregular';
     font-size: 16px;
