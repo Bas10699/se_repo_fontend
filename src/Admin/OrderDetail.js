@@ -331,7 +331,7 @@ class OrderDetail extends Component {
                     </div>
                     <div className="col-2">
                         <h4 style={{ textAlign: "left" }}>{this.state.order.order_id}</h4>
-                        <h4 style={{ textAlign: "left" }}>{moment(this.state.order.order_date).utc().add('years', 543).format("DD/MM/YYYY")}</h4>
+                        <h4 style={{ textAlign: "left" }}>{moment(this.state.order.order_date).utc().format("DD/MM/YYYY")}</h4>
                         <h4 style={{ textAlign: "left" }}>{this.state.order.name} {this.state.order.lastname}</h4>
                     </div>
                 </div>
