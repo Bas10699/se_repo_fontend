@@ -23,9 +23,11 @@ class BuyingDetail extends Component {
             cart_product: [],
             invoice_detail: [],
             invoice: [],
+            payment: [],
             date_proof: null,
             time_proof: null,
             open: false,
+            OpenProofPaymet: false,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -45,7 +47,7 @@ class BuyingDetail extends Component {
     };
 
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, OpenProofPaymet: false });
 
     };
 
@@ -95,12 +97,11 @@ class BuyingDetail extends Component {
                             <h5>&nbsp; รอ SE กลาง ตรวจสอบการโอนเงิน หลังจากตรวจสอบเรียบร้อยจะส่งใบเสร็จกลับมา</h5>
                         </div>
                     </div>
-                    {/* <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
-                        <div className="col-6">
-                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
-                        </div>
-                    </div> */}
+                    <div className="Row">
+                        <div className="col-5"></div>
+                        <div className="col-2"><button onClick={() => this.setState({ OpenProofPaymet: true })}>ดูหลักฐานการโอนเงิน</button></div>
+                        <div className="col-5"></div>
+                    </div>
                 </div>
 
                 break;
@@ -155,6 +156,9 @@ class BuyingDetail extends Component {
                     })
                     if (result.result.order_status > 0) {
                         this.get_invoice()
+                    }
+                    if (result.result.order_status > 1) {
+                        this.get_proof_of_payment()
                     }
                     setTimeout(() => {
                         console.log("get_order_info", result.result)
@@ -212,6 +216,28 @@ class BuyingDetail extends Component {
             })
         } catch (error) {
             alert('add_proof_payment: ' + error)
+        }
+    }
+    get_proof_of_payment = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        try {
+            await post(params, 'trader/get_proof_of_payment_trader', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        payment: result.result,
+                    })
+                    setTimeout(() => {
+                        console.log("get_proof_of_payment_trader", result.result)
+                    }, 500)
+                } else {
+                    // window.location.href = "/sales_sum";
+                    alert(result.error_message)
+                    console.log("get_proof_of_payment_trader", result.result)
+                }
+            });
+        } catch (error) {
+            alert("get_proof_of_payment_trader" + error);
         }
     }
 
@@ -372,6 +398,32 @@ class BuyingDetail extends Component {
                     <div className="Row">
                         <div className="col-6"><button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button></div>
                         <div className="col-6"><button className='BTN_CONFIRM' onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
+                    </div>
+                </Modal>
+
+                <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-12" >
+                            <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
+                        </div>
+                    </div>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-7" >
+                            <a target="_blank" href={ip + this.state.payment.image_proof}>
+                                <img src={ip + this.state.payment.image_proof}
+                                    style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
+                            </a>
+                        </div>
+                        <div className="col-5">
+
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.invoice.order_id}</h4>
+                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
+                            <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
+                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4>
+
+                        </div>
                     </div>
                 </Modal>
             </div >

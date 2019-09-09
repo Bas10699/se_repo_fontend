@@ -493,7 +493,7 @@ class OrderDetail extends Component {
                         <div className="col-5">
 
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
-                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : IN{this.state.order.order_id}</h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.invoice.invoice_id}</h4>
                             <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
                             <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
                             <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
