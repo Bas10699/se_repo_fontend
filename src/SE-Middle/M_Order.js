@@ -108,6 +108,29 @@ class M_Order extends Component {
         });
     }
 
+    SortId = () => {
+        const bands = this.state.order
+
+        function compare(a, b) {
+            const order_idA = a.order_id.toUpperCase();
+            const order_idB = b.order_id.toUpperCase();
+
+            let comparison = 0;
+            if (order_idA < order_idB) {
+                comparison = 1;
+            } else if (order_idA > order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+
+        console.log(bands.sort(compare));
+        let sort_order = bands.sort(compare)
+        this.setState({ order: sort_order })
+
+    }
+
+
     render() {
         return (
             <div className="App">
@@ -124,6 +147,7 @@ class M_Order extends Component {
                     </div>
                     <div className="col-4">
                         <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} />
+                        <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button>
                     </div>
                     <div className="col-2"></div>
                 </div>
