@@ -99,7 +99,7 @@ class BuyingDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-5"></div>
-                        <div className="col-2"><button onClick={() => this.setState({ OpenProofPaymet: true })}>ดูหลักฐานการโอนเงิน</button></div>
+                        <div className="col-2"><button onClick={() => this.setState({ OpenProofPaymet: true })} className="BTN_PDF">ดูหลักฐานการโอนเงิน</button></div>
                         <div className="col-5"></div>
                     </div>
                 </div>
