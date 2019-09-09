@@ -20,7 +20,7 @@ class EditProduct extends Component {
             total_price: [],
             cart_product: [],
             addInputBox: null,
-            open_up_image: false,
+            open_up: false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -61,9 +61,13 @@ class EditProduct extends Component {
             cost: this.state.product_data.cost,
             product_name: this.state.product_data.product_name,
             product_detail: this.state.product_data.product_detail,
-            price: this.state.plant[0].price
-            
+            price: this.state.plant[0].price,
         });
+        if (this.state.product_data.image) {
+            this.setState({
+                default_image: ip + this.state.product_data.image
+            })
+        }
     }
 
     filterSearch = (event) => {
@@ -102,33 +106,39 @@ class EditProduct extends Component {
     }
 
     edit_product = async () => {
-        let url = this.props.location.search
-        let params = queryString.parse(url);
-        let object = {
-            product_id: params.product_id,
-            image: this.state.default_image,
-        };
-        console.log('gg', object)
+        if (this.state.open_up) {
+            let url = this.props.location.search
+            let params = queryString.parse(url);
+            let object = {
+                product_id: params.product_id,
+                image: this.state.default_image,
+            };
+            console.log('gg', object)
 
-        try {
-            await post(object, "neutrally/update_plant_stock", user_token)
-                .then((result) => {
-                    console.log("edit1" + result);
-                    if (result.success) {
-                        window.location.reload();
-                    } else {
-                        alert("edit_alert : " + result.error_message);
-                    }
-                });
-        } catch (error) {
-            alert('update_plant_stock error:' + error);
+            try {
+                await post(object, "neutrally/update_plant_stock", user_token)
+                    .then((result) => {
+                        console.log("edit1" + result);
+                        if (result.success) {
+                            window.location.reload();
+                        } else {
+                            alert("edit_alert : " + result.error_message);
+                        }
+                    });
+            } catch (error) {
+                alert('update_plant_stock error:' + error);
+            }
+            console.log("edit2" + this.state);
         }
-        console.log("edit2" + this.state);
+        else{
+            window.location.reload()
+        }
     }
 
     handleInputChange(e) {
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.id]: e.target.value,
+            open_up: true
         });
     }
 
@@ -146,7 +156,7 @@ class EditProduct extends Component {
                 console.log("img", reader.result)
                 this.setState({
                     default_image: reader.result,
-                    open_up_image: true
+                    open_up: true
                 });
             }
         }
@@ -164,7 +174,7 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                        {this.state.open_up_image ? <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} /> : this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                        <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
                     </div>
@@ -260,14 +270,14 @@ class EditProduct extends Component {
 
                         <button className="BTN_Signin"
                             style={{ float: "right" }}
-                            onClick={() => { if (window.confirm('บันทึกการเปลี่ยนแปลง?')) { this.edit_product() }; }}>
+                            onClick={() => { this.edit_product() }}>
                             บันทึกการเปลี่ยนแปลง
                         </button>
                         <button className="BTN_Signup" onClick={() => this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>
-                <Prompt when={this.state.open_up_image} message="คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้ไหม" />
+                <Prompt when={this.state.open_up} message="คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้ไหม" />
             </div>
 
         )
