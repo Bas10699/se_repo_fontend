@@ -29,6 +29,7 @@ class M_Order extends Component {
                         order: result.result,
                         search_order: result.result
                     })
+                    this.Sortdate()
                     setTimeout(() => {
                         console.log("get_order", result.result)
                     }, 500)
@@ -73,8 +74,8 @@ class M_Order extends Component {
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
-                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             default:
@@ -107,6 +108,99 @@ class M_Order extends Component {
             search_order: updatedList,
         });
     }
+    Sortdate = () => {
+        const order = this.state.order
+
+        function compare(a, b) {
+            const order_idA = a.order_date
+            const order_idB = b.order_date
+
+            let comparison = 0;
+            if (order_idA < order_idB) {
+                comparison = 1;
+            } else if (order_idA > order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+
+        console.log(order.sort(compare));
+        let sort_order = order.sort(compare)
+        this.setState({ order: sort_order })
+
+    }
+    SortStatus = (e) => {
+        const order = this.state.order
+
+        if (e === 'Max') {
+            function compare(a, b) {
+                const order_idA = a.order_status
+                const order_idB = b.order_status
+
+                let comparison = 0;
+                if (order_idA < order_idB) {
+                    comparison = 1;
+                } else if (order_idA > order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+        if (e === 'Min') {
+            function compare(a, b) {
+                const order_idA = a.order_status
+                const order_idB = b.order_status
+
+                let comparison = 0;
+                if (order_idA > order_idB) {
+                    comparison = 1;
+                } else if (order_idA < order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+    }
+    SortDate = (e) => {
+        const order = this.state.order
+        if (e === 'Max') {
+            function compare(a, b) {
+                const order_idA = a.order_date
+                const order_idB = b.order_date
+
+                let comparison = 0;
+                if (order_idA < order_idB) {
+                    comparison = 1;
+                } else if (order_idA > order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+        if (e === 'Min') {
+            function compare(a, b) {
+                const order_idA = a.order_date
+                const order_idB = b.order_date
+
+                let comparison = 0;
+                if (order_idA > order_idB) {
+                    comparison = 1;
+                } else if (order_idA < order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({ order: sort_order })
+        }
+
+    }
 
     render() {
         return (
@@ -128,6 +222,7 @@ class M_Order extends Component {
                     <div className="col-2"></div>
                 </div>
 
+
                 <div className="Row">
                     <div className="col-2"></div>
                     {/* เริ่ม */}
@@ -136,8 +231,8 @@ class M_Order extends Component {
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>รหัสใบสั่งซื้อ</th>
-                                <th>วันที่สั่งซื้อ</th>
-                                <th>สถานะสั่งซื้อ</th>
+                                <th><button onClick={() => this.SortDate('Max')}>^</button>วันที่สั่งซื้อ<button onClick={() => this.SortStatus('Min')}>v</button></th>
+                                <th><button onClick={() => this.SortStatus('Max')}>^</button>สถานะสั่งซื้อ<button onClick={() => this.SortStatus('Min')}>v</button></th>
                                 <th>ชื่อผู้สั่งซื้อ</th>
                                 <th>รายละเอียด</th>
                             </tr>
@@ -150,7 +245,7 @@ class M_Order extends Component {
                                                 <td>{element.order_id}</td>
                                                 <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_status)}</td>
-                                                <td>{element.trader_id}</td>
+                                                <td>{element.name} {element.lastname}</td>
                                                 <td><NavLink to={"/M_Order/gg?aa=" + element.order_id} style={{ textDecoration: "none" }}>
                                                     <button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button>
                                                 </NavLink>

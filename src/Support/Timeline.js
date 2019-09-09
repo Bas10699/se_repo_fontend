@@ -54,8 +54,8 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            {this.props.status >= 0 ? <li className="Status" >ส่งใบสั่งซ์้อ<br/>{moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li> : <li className="Standat" >ส่งใบสั่งซื้อ</li>}
-                            {this.props.status >= 1 ? <li className="Status" >ยืนยันคำสั่งซื้อแล้ว<br/>{moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li> : <li className="Standat">ยืนยันคำสั่งซื้อแล้ว</li>}
+                            {this.props.status >= 0 ? <li className="Status" >ส่งใบสั่งซ์้อ<br/>{moment(this.props.order.order_date).utc().format('DD/MM/YYYY HH:mm')}</li> : <li className="Standat" >ส่งใบสั่งซื้อ</li>}
+                            {this.props.status >= 1 ? <li className="Status" >ยืนยันคำสั่งซื้อแล้ว<br/>{moment(this.props.invoice.date).utc().format('DD/MM/YYYY HH:mm')}</li> : <li className="Standat">ยืนยันคำสั่งซื้อแล้ว</li>}
                             {this.props.status >= 2 ? <li className="Status" >ชำระเงินแล้ว</li> : <li className="Standat" >ชำระเงินแล้ว</li>}
                             {this.props.status >= 3 ? <li className="Status" >สั่งซื้อสำเร็จ</li> : <li className="Standat" >สั่งซื้อสำเร็จ</li>}
                         </ul>
