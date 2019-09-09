@@ -50,8 +50,12 @@ class AddProduct extends Component {
                         <button className="BTN_AddCart" >เพิ่มราคาขาย</button></div>
                     <div className="col-1"></div>
                 </div>
-
-
+                <div className="Row">
+                    <div className="col-12">
+                        <h3 style={{textAlign:"center"}}>วัตถุดิบที่ต้องใช้ในการผลิต</h3>
+                        ช่องกรอกวัตถุดิบที่ต้องใช้ -ชื่อวัตถุดิบ -จำนวนที่ต้องใช้ในการผลิต
+                    </div>
+                </div>
             </div>
         )
     }
