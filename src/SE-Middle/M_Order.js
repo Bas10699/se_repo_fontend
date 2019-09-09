@@ -255,13 +255,8 @@ class M_Order extends Component {
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>รหัสใบสั่งซื้อ</th>
-<<<<<<< HEAD
                                 <th><button onClick={() => this.SortDate('Min')}>A->Z</button>วันที่สั่งซื้อ<button onClick={() => this.SortDate('Max')}>Z->A</button></th>
                                 <th><button onClick={() => this.SortStatus('Min')}>น้อย</button>สถานะสั่งซื้อ<button onClick={() => this.SortStatus('Max')}>มาก</button></th>
-=======
-                                <th><button onClick={() => this.SortDate('Max')}>^</button>วันที่สั่งซื้อ<button onClick={() => this.SortDate('Min')}>v</button></th>
-                                <th><button onClick={() => this.SortStatus('Max')}>^</button>สถานะสั่งซื้อ<button onClick={() => this.SortStatus('Min')}>v</button></th>
->>>>>>> master
                                 <th>ชื่อผู้สั่งซื้อ</th>
                                 <th>รายละเอียด</th>
                             </tr>
