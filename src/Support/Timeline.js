@@ -11,6 +11,7 @@ import one from '../Image/one.png'
 import two from '../Image/two.png'
 import three from '../Image/three.png'
 import four from '../Image/four.png'
+import Modal from 'react-responsive-modal'
 
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
@@ -25,12 +26,18 @@ class Timeline extends Component {
             plant: null,
             data: [],
             status: 1,
+            OpenProofPaymet:false,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
             tag_default: "https://image.flaticon.com/icons/svg/1161/1161830.svg"
         }
     }
+
+    onCloseModal = () => {
+        this.setState({ OpenProofPaymet: false });
+
+    };
 
 
     render_Step = (status) => {
@@ -49,6 +56,14 @@ class Timeline extends Component {
                 break;
         }
         return render_Show
+    }
+    sum_price = (data_price) => {
+        let sum = 0;
+        data_price.map((element) => {
+            sum += (element.price * element.amount)
+        })
+        return sum;
+
     }
 
     render() {
@@ -113,7 +128,7 @@ class Timeline extends Component {
                                 {this.props.status >= 1 ? <PdfInvoice data={this.props.invoice} /> : null}
                             </div>
                             <div className="col-2" style={{ marginLeft: "75px", marginTop: "-20px" }}>
-                                {this.props.status >= 3 ? <button className="BTN_PDF" >หลักฐานการโอน</button> : null}
+                                {this.props.status >= 3 ? <button className="BTN_PDF" onClick={()=>this.setState({OpenProofPaymet:true})} >หลักฐานการโอน</button> : null}
                             </div>
                             <div className="col-2" style={{ marginLeft: "75px", marginTop: "-20px" }}>
                                 {this.props.status >= 3 ? "ปุ่มดูใบเสร็จ" : null}
@@ -127,6 +142,31 @@ class Timeline extends Component {
                     <img src={ip + this.state.payment.image_proof}
                         style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
                 </a> */}
+                <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-12" >
+                            <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
+                        </div>
+                    </div>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-7" >
+                            <a target="_blank" href={ip + this.props.payment.image_proof}>
+                                <img src={ip + this.props.payment.image_proof}
+                                    style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
+                            </a>
+                        </div>
+                        <div className="col-5">
+
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.props.order.order_id} </h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.props.invoice.invoice_id}</h4>
+                            <h4>วันที่กำหนดชำระเงิน : {moment(this.props.invoice.date_send).format('DD/MM/YYYY')}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.props.payment.date_proof).format('DD/MM/YYYY')} </h4>
+                            <h4>เวลาที่ชำระเงิน : {this.props.payment.time_proof}</h4>
+                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.props.detail))} บาท</h4>
+
+                        </div>
+                    </div>
+                </Modal>
             </div>
         )
     }
