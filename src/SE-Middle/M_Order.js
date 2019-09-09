@@ -8,6 +8,7 @@ import one from '../Image/one.png'
 import two from '../Image/two.png'
 import three from '../Image/three.png'
 import four from '../Image/four.png'
+import arrow from '../Image/arrow.png'
 
 class M_Order extends Component {
     constructor(props) {
@@ -255,11 +256,29 @@ class M_Order extends Component {
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>รหัสใบสั่งซื้อ</th>
-                                <th><button onClick={() => this.SortDate('Min')}>A->Z</button>วันที่สั่งซื้อ<button onClick={() => this.SortDate('Max')}>Z->A</button></th>
-                                <th><button onClick={() => this.SortStatus('Min')}>น้อย</button>สถานะสั่งซื้อ<button onClick={() => this.SortStatus('Max')}>มาก</button></th>
+                                <th>
+                                    <button className="BTN_Filter" onClick={() => this.SortDate('Min')}>
+                                        เก่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                    วันที่สั่งซื้อ
+                                    <button className="BTN_Filter" onClick={() => this.SortDate('Max')}>
+                                        ล่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                </th>
+
+                                <th>
+                                    <button className="BTN_Filter" onClick={() => this.SortStatus('Min')}>
+                                        น้อย <img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                    สถานะสั่งซื้อ
+                                    <button className="BTN_Filter" onClick={() => this.SortStatus('Max')}>
+                                        มาก <img src={arrow} alt="arrow" style={{ width: "15px" }} />
+                                    </button>
+                                </th>
                                 <th>ชื่อผู้สั่งซื้อ</th>
                                 <th>รายละเอียด</th>
                             </tr>
+
                             {
                                 this.state.search_order ?
                                     this.state.search_order.map((element, index) => {
