@@ -336,7 +336,6 @@ class T_Buying extends Component {
                                     วันที่
                                     {this.state.click ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Min')} />
-
                                         :
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Max')} />
                                     }
@@ -344,13 +343,13 @@ class T_Buying extends Component {
 
                                 </th>
                                 <th>
-                                    {/* <button className="BTN_Filter" onClick={() => this.SortStatus('Min')}>
-                                        น้อย <img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button> */}
+                                    
                                     สถานะการสั่งซื้อ
-                                    {/* <button className="BTN_Filter" onClick={() => this.SortStatus('Max')}>
-                                        มาก <img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button> */}
+                                    {this.state.click ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Min')} />
+                                        :
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Max')} />
+                                    }
                                 </th>
                                 <th>ยอดการสั่งซื้อ</th>
                                 <th>รายละเอียด</th>
