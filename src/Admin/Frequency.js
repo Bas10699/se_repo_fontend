@@ -7,7 +7,8 @@ class Frequency extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            frequency:[]
+            frequency: [],
+            se: []
 
         }
     }
@@ -31,7 +32,8 @@ class Frequency extends Component {
             await post(object, 'neutrally/get_chart_frequency_all', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        frequency: result.result
+                        frequency: result.result,
+                        se: result.result
                     })
                     setTimeout(() => {
                         console.log('get_freq', result.result)
@@ -62,7 +64,7 @@ class Frequency extends Component {
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "{this.props.plant_name}"</h3>
                             <h4>จำนวนวัตถุดิบทั้งหมด xxx กิโลกรัม</h4>
-                            <h4>จำนวนที่สั่งซื้อ xxx กิโลกรัม</h4>
+                            <h4>จำนวนที่สั่งซื้อ {addComma(this.props.amount)} กิโลกรัม</h4>
                             <table>
                                 <tr>
                                     <th>ชื่อ SE</th>
@@ -70,6 +72,24 @@ class Frequency extends Component {
                                     <th>ราคาขนส่ง</th>
                                     <th>ช่วงส่งมอบ</th>
                                 </tr>
+                                {
+                                    this.state.frequency.map((element, index) => {
+                                        return (
+                                            <div>
+                                                {
+                                                    element.se.map((element_se, index_se) => {
+                                                        return (
+                                                            <tr>
+                                                                <td>{element_se.name}</td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+
+                                            </div>
+                                        )
+                                    })
+                                }
 
                             </table>
 

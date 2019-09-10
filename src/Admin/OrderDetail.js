@@ -385,7 +385,7 @@ class OrderDetail extends Component {
                                             <td>{addComma(element_plant.amount)} กิโลกรัม</td>
                                             <td>{element_plant.price} บาท</td>
                                             <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
-                                            <td><Frequency plant_name={element_plant.plant_name} /></td>
+                                            <td><Frequency plant_name={element_plant.plant_name} amount={element_plant.amount} /></td>
                                         </tr>
                                     )
                                 })
