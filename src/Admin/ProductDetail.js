@@ -109,6 +109,9 @@ class ProductDetail extends Component {
     render() {
         return (
             <div className="App">
+                {/* <div className="Row">
+                    <div className="col-12" style={{padding:"220"}}></div>
+                </div> */}
                 <div className="Row">
                     <div className="col-5">
                         {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} />:<img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}

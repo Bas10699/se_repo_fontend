@@ -9,6 +9,7 @@ class Home extends Component {
         super(props)
         this.state = {
             product_data: [],
+            product_random:[],
             search_order: [],
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
@@ -40,12 +41,13 @@ class Home extends Component {
         }
     }
 
+
     render() {
 
         let product_data = []
         let len =  Math.floor((Math.random() * (  this.state.product_data.length-1 ) ) + 1) 
-
         product_data = this.state.product_data[len]
+
         return (
             <div className="App">
                 <div className="Row">
@@ -74,11 +76,9 @@ class Home extends Component {
                     <div className="col-1" ></div>
                     <div className="col-10">
                         {//จะเเสดงเเค่ 4 ตัวสินค้า
-                        
                             this.state.product_data.map((element, index) => {
                                 for (var i = 0; index < 4; i++) {
                                     return (
-
                                         <div className="HeaderAreaCard">
                                             {element.image ? <img alt="Product" src={ip + element.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             <h4>{element.product_name}</h4>
@@ -87,8 +87,6 @@ class Home extends Component {
                                         </div>
                                     )
                                 }
-
-
                             })
                         }
                     </div>

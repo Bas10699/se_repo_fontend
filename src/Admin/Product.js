@@ -77,7 +77,7 @@ class Product extends Component {
             case "2": // Trader
                 render_product =
                     <div className="App">
-                        <div className="Row">
+                        {/* <div className="Row">
                             <div className="col-12">
                                 <div className="HeaderArea">
                                     <div className="Row">
@@ -93,7 +93,7 @@ class Product extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="Row">
                             <div className="col-8"></div>
                             <div className="col-3">
