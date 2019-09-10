@@ -126,7 +126,7 @@ class EditProduct extends Component {
                 details:this.state.details,
                 cost:this.state.cost,
                 volume_sold:this.state.volume_sold,
-                price:JSON.stringify(this.state.price)
+                price:JSON.stringify(this.state.price_p)
 
 
             };
@@ -152,13 +152,13 @@ class EditProduct extends Component {
         }
     }
     add_price = () => {
-        let PriceSell = this.state.price
+        let PriceSell = this.state.price_p
         PriceSell.push({
             price: 0,
             volume: 0,
         })
         this.setState({
-            price:PriceSell
+            price_p:PriceSell
         })
     }
 
