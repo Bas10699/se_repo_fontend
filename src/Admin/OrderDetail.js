@@ -352,7 +352,7 @@ class OrderDetail extends Component {
                 </div>
 
 
-                <Timeline status={this.state.order.order_status} order={this.state.order} invoice={this.state.invoice} />
+                <Timeline status={this.state.order.order_status} order={this.state.order} detail={this.state.detail} invoice={this.state.invoice} payment={this.state.payment} />
 
                 <div className="Row">
                     <div className="col-2"></div>

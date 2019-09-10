@@ -50,7 +50,6 @@ class Home extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-
                         {product_data ?
                             <div className="HeaderArea">
                                 <div className="Row">
