@@ -10,6 +10,7 @@ import PdfOrder from '../Support/PdfOrder'
 import Modal from 'react-responsive-modal'
 import PdfInvoice from '../Support/PdfInvoice'
 import PdfBill from '../Support/PdfBill'
+import Frequency_ from './frequency_'
 
 
 // import FrequencyPlant from './frequency_plant'
@@ -384,12 +385,7 @@ class OrderDetail extends Component {
                                             <td>{addComma(element_plant.amount)} กิโลกรัม</td>
                                             <td>{element_plant.price} บาท</td>
                                             <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
-                                            <td><button onClick={() => { this.onOpenModal() }}
-                                                className="BTN_AddCart"
-                                                style={{ width: "250px", float: "right" }}>
-                                                ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย
-                                                    </button>
-                                            </td>
+                                            <td><Frequency_ plant_name={element_plant.plant_name} /></td>
                                         </tr>
                                     )
                                 })
@@ -425,30 +421,6 @@ class OrderDetail extends Component {
             {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} 
             </div > */}
 
-                <Modal open={this.state.open} onClose={this.onCloseModal}>
-                    <div className="Row">
-                        <div className="col-1" />
-                        <div className="col-10">
-                            <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "ชื่อวัตถุดิบ"</h3>
-                            <h4>จำนวนวัตถุดิบทั้งหมด xxx กิโลกรัม</h4>
-                            <h4>จำนวนที่สั่งซื้อ xxx กิโลกรัม</h4>
-                            <table>
-                                <tr>
-                                    <th>ชื่อ SE</th>
-                                    <th>จำนวนที่มีอยู่ในสต๊อก</th>
-                                    <th>ราคาขนส่ง</th>
-                                    <th>ช่วงส่งมอบ</th>
-                                </tr>
-
-                            </table>
-
-                            <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
-                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-
-                        </div>
-                        <div className="col-1" />
-                    </div>
-                </Modal>
 
                 <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "500px" }}>

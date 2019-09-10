@@ -110,7 +110,7 @@ class ProductDetail extends Component {
     render_Step = (status) => {
         let render_Show
         switch (status) {
-            case 0: render_Show = <div style={{ color: "red" ,fontSize:'24px'}}>สินค้าหมด</div>
+            case 0: render_Show = <div style={{ color: "red" ,fontSize:'32px'}}>สินค้าหมด</div>
 
             default:
                 break;
