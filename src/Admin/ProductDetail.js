@@ -14,6 +14,7 @@ class ProductDetail extends Component {
             plant_id: [],
             amount: 1,
             data: [],
+            price:[],
             data_cart: [],
             total_plant: [],
             total_price: [],
@@ -41,6 +42,7 @@ class ProductDetail extends Component {
                 if (result.success) {
                     this.setState({
                         product_data: result.result,
+                        price:result.result.price,
                         plant: result.result.plant
                     })
 
@@ -105,6 +107,16 @@ class ProductDetail extends Component {
 
         return sum;
     }
+    render_Step = (status) => {
+        let render_Show
+        switch (status) {
+            case 0: render_Show = <div style={{ color: "red" ,fontSize:'24px'}}>สินค้าหมด</div>
+
+            default:
+                break;
+        }
+        return render_Show
+    }
 
     render() {
         return (
@@ -122,13 +134,18 @@ class ProductDetail extends Component {
                         <h5>{this.state.product_data.product_status}</h5>
 
 
-                        <h4>ราคาขายปลีก</h4>
-                        <h4>ราคาขายส่ง</h4>
+                        {/* <h4>ราคาขายปลีก</h4> */}
+                        {this.state.price.map((element)=>{
+                            return(<h4>ราคาขาย {element.price} บาท/กิโลกรัม</h4>)
+                        })}
+                        {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
                         <input type="number"
                             name="quantity" min="1"
                             id="amount" placeholder="จำนวนที่ต้องการสั่งซื้อ"
                             onChange={this.handleChange} />
                         <button className="BTN_AddCart" onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button>
+
+                        {this.render_Step(this.state.product_data.amount_stock)}
 
 
                     </div>
@@ -159,7 +176,7 @@ class ProductDetail extends Component {
                                             <td style={{ textAlign: "center" }}>{index_plant + 1}</td>
                                             <td style={{ textAlign: "center" }}>PCODE-{element_plant.plant_id}</td>
                                             <td>{element_plant.plant_name}</td>
-                                            <td style={{ textAlign: "center" }}>{addComma(element_plant.price)} บาท</td>
+                                            <td style={{ textAlign: "center" }}>{addComma(element_plant.price[0].price)} บาท</td>
                                             <td style={{ textAlign: "center" }}>{addComma(this.sum_data(element_plant.data))} กิโลกรัม</td>
                                             <td style={{ textAlign: "center" }}>
                                                 {addComma(this.state.total_plant = element_plant.volume * this.state.amount)} กิโลกรัม
@@ -174,7 +191,7 @@ class ProductDetail extends Component {
                                                  </div>}
                                             </td>
                                             <td style={{ textAlign: "right" }}>
-                                                {addComma(this.state.total_price = element_plant.price * this.state.total_plant)} บาท
+                                                {addComma(this.state.total_price = element_plant.price[0].price * this.state.total_plant)} บาท
                                             </td>
                                         </tr>
                                     )
