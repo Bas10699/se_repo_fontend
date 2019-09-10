@@ -10,7 +10,7 @@ import PdfOrder from '../Support/PdfOrder'
 import Modal from 'react-responsive-modal'
 import PdfInvoice from '../Support/PdfInvoice'
 import PdfBill from '../Support/PdfBill'
-import Frequency_ from './frequency_'
+import Frequency from './Frequency'
 
 
 // import FrequencyPlant from './frequency_plant'
@@ -385,7 +385,7 @@ class OrderDetail extends Component {
                                             <td>{addComma(element_plant.amount)} กิโลกรัม</td>
                                             <td>{element_plant.price} บาท</td>
                                             <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
-                                            <td><Frequency_ plant_name={element_plant.plant_name} /></td>
+                                            <td><Frequency plant_name={element_plant.plant_name} /></td>
                                         </tr>
                                     )
                                 })
