@@ -18,6 +18,7 @@ import sixdis from '../Image/sixdis.png'
 import az from '../Image/az.png'
 import za from '../Image/za.png'
 
+
 class T_Buying extends Component {
     constructor(props) {
         super(props)
@@ -25,6 +26,7 @@ class T_Buying extends Component {
             order: [],
             data: [],
             click: false,
+            clicks: false,
             get_user: null,
             get_product: null,
             search_order: [],
@@ -198,7 +200,8 @@ class T_Buying extends Component {
 
         console.log(order.sort(compare));
         let sort_order = order.sort(compare)
-        this.setState({ order: sort_order })
+        this.setState({ order: sort_order,
+        click:true })
 
     }
     SortStatus = (e) => {
@@ -218,7 +221,8 @@ class T_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({ order: sort_order,
+                clicks: true })
         }
         if (e === 'Min') {
             function compare(a, b) {
@@ -234,7 +238,8 @@ class T_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({ order: sort_order,
+                clicks: false })
         }
     }
     SortDate = (e) => {
@@ -339,13 +344,10 @@ class T_Buying extends Component {
                                         :
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Max')} />
                                     }
-
-
                                 </th>
                                 <th>
-                                    
                                     สถานะการสั่งซื้อ
-                                    {this.state.click ?
+                                    {this.state.clicks ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Min')} />
                                         :
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Max')} />
