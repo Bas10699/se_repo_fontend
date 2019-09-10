@@ -99,7 +99,7 @@ class T_Cart extends Component {
             await post(object, 'trader/delete_cart_product_tarder', user_token).then((result) => {
                 if (result.success) {
                     alert(result.message)
-                    window.location.href = "/T_Crat";
+                    window.location.href = "/T_Cart";
                 }
                 else {
                     window.location.href = "/Product";
