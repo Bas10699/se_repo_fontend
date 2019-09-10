@@ -1,38 +1,46 @@
 import React, { Component } from 'react';
+import moment from 'moment'
+import ThaiBaht from 'thai-baht-text'
+import { addComma } from '../Support/Constance'
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 pdfMake.fonts = {
     THSarabunNew: {
         normal: 'THSarabunNew.ttf',
         bold: 'THSarabunNew Bold.ttf',
-        italics: 'THSarabunNew',
+        italics: 'THSarabunNew Italic.ttf',
         bolditalics: 'THSarabunNew BoldItalic.ttf'
     },
     Roboto: {
         normal: 'Roboto-Regular.ttf',
         bold: 'Roboto-Medium.ttf',
-        italics: 'Roboto-Italic (1).ttf',
+        italics: 'Roboto-Italic.ttf',
         bolditalics: 'Roboto-MediumItalic.ttf'
     }
 }
 
-class Bill extends Component {
+class Pdf extends Component {
 
-    printPDF = () => {
-        var Bill = {
+
+    printPDF() {
+        var total_price = 0
+        var tax = 0
+        var Purchase_orders = {
             content: [
                 {
                     text: 'ชื่อบริษัท',
+                    bold: true,
                     style: 'header',
                     alignment: 'center'
                 },
                 {
-                    text: '287 หมู่ 5 ตำบลสันทรายน้อย อำเภอสันทรายน้อย จังหวัดเชียงใหม่ 50210',
+                    text: '2571/1 ถ.รามคำเเหง เเขวงหัวหมาก เขตบางกะปิ กรุงเทพฯ 10240',
                     alignment: 'center'
                 },
                 {
-                    text: 'โทร. 02-402-8068,081-359-7689 เลขประจำตัวผู้เสียภาษี 0505557001854',
+                    text: 'โทร. 0-2739-5900 โทรสาร 0-2739-5910 เลขประจำตัวผู้เสียภาษี 3125523223',
                     alignment: 'center'
                 },
                 {
@@ -42,6 +50,7 @@ class Bill extends Component {
                         },
                         {
                             text: 'ใบเสร็จ',
+                            bold: true,
                             style: 'subheader',
                             alignment: 'center'
                         },
@@ -49,120 +58,99 @@ class Bill extends Component {
                             table: {
                                 widths: [50, 100],
                                 body: [
-                                    [{text: 'เลขที่', style: 'subheader1', alignment: 'center'}, 'BN610605-002'],
-                                    [{text: 'วันที่', style: 'subheader1', alignment: 'center'}, '05/06/2561']
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [300],
-                                body: [
-                                    ['ผู้ติดต่อ \tอนุสรา เเสนมา \nชื่อบริษัท   บริษัท โชคอนัน จำกัด \nสาขา \t   สำนักงานใหญ่ \t\t\tเลขประจำตัวผู้เสียภาษี 3110801586225 \nที่อยู่ \t23/8 หมู่ที่ 6 ตำบล เอกราช']
+                                    [{ text: 'เลขที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, this.props.data.invoice_id],
+                                    [{ text: 'วันที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, moment(this.props.data.date).utc().format("DD/MM/YYYY")]
                                 ]
                             }
                         },
-                        {
-                            table: {
-                                widths: [192.5],
-                                heights: 62.5,
-                                body: [
-                                    ['วันที่นัดชำระ \t\t\t05/06/2561 \nเงื่อนไขการชำระเงิน']
-                                ]
-                            }
-                        }
                     ]
                 },
                 {
                     columns: [
                         {
+                            style: 'tableExample',
                             table: {
-                                widths: [25, 40, 134.5, 40, 40, 60, 40, 60],
+                                widths: [280, 212.5],
+                                heights: 90,
                                 body: [
-                                    [{text: 'ลำดับที่', style: 'subheader1', alignment: 'center'}, {text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center'}, {text: 'รายการ', style: 'subheader1', alignment: 'center'}, {text: 'จำนวน', style: 'subheader1', alignment: 'center'}, {text: 'หน่วย', style: 'subheader1', alignment: 'center'}, {text: 'ราคา/หน่วย', style: 'subheader1', alignment: 'center'}, {text: 'ส่วนลด', style: 'subheader1', alignment: 'center'}, {text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center'}]
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [25, 40, 134.5, 40, 40, 60, 40, 60],
-                                heights: 300,
-                                body: [
-                                    ['1 \n2',
-                                    'IC-0013 \nDM-003',
-                                    'ปริ๊นเตอร์ SAMSUNG รุ่น S1001 \nน้ำบริสุทธิ์',
-                                    '3.00 \n1.00',
-                                    'เครื่อง \nลิตร',
-                                    '4,500.00 \n3,500.00',
-                                    ' \n ',
-                                    '13,500.00 \n3,500.00']
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [502.5],
-                                heights: 50,
-                                body: [
-                                    [{text: 'หมายเหตุ', style: 'subheader1'}]
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [324.5, 80, 80],
-                                body: [
-                                    [{text: 'สองหมื่นเจ็ดพันแปดร้อยยี่สิบบ้าทถ้วน', alignment: 'center'}, {text: 'จำนวนเงินทั้งสิ้น', style: 'subheader1', alignment: 'center'}, '27,820.00']
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [159],
-                                heights: 80,
-                                body: [
-                                    ['ในนาม \n\nสำนักงานใหญ่ \n_________________________ \nผู้มีอำนาจลงนาม']
+                                    [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
+                                     `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_id}\nอ้างอิงใบแจ้งหนี้เลขที่ ${this.props.data.invoice_id}\nกำหนดวันชำระเงิน ${this.props.data.date_send} \nวันที่ชำระเงิน ${this.props.payment.date_proof}\nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                                 ]
                             }
                         },
+                    ]
+                },
+                {
+                    columns: [
                         {
                             table: {
-                                widths: [159],
-                                heights: 80,
+                                style: 'tableExample',
+                                widths: [20.5, 40, 178, 40, 40, 65, 65],
+                                heights: ['*', 280],
                                 body: [
-                                    ['\nจัดเตรียมโดย ____________________ \n\nตรวจสอบโดย ____________________']
+                                    [{ text: 'ลำดับ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                                    { text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                                    { text: 'รายการ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                                    { text: 'ราคา/หน่วย', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                                    { text: 'จำนวน', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                                    { text: 'หน่วยนับ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                                    { text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' }],
+                                    [{
+                                        table: {
+                                            widths: [20.5, 42, 176, 40, 40, 65, 65],
+                                            body: [
+                                                ...this.props.data.detail.map((element, index) => {
+                                                    total_price += element.price * element.amount
+                                                    return [{ text: index + 1, alignment: 'center' },
+                                                    { text: element.plant_id, alignment: 'center' },
+                                                    element.plant_name,
+                                                    { text: addComma(element.price), alignment: 'center' },
+                                                    { text: addComma(element.amount), alignment: 'center' },
+                                                    { text: 'กิโลกรัม', alignment: 'center' },
+                                                    { text: addComma(element.price * element.amount), alignment: 'center' }]
+                                                })
+                                            ]
+                                        },
+                                        layout: 'noBorders'
+                                    }, '', '', '', '', '', ''],
+                                ]
+
+                            }
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            table: {
+                                widths: [320, 80, 84.5],
+                                body: [
+                                    [{ text: 'หมายเหตุ', rowSpan: 4, border: [true, false, true, true], },
+                                    { border: [true, false, true, true], text: 'รวมเงิน', },
+                                    { border: [true, false, true, true], text: addComma(total_price), alignment: 'right' }],
+                                    ['', { text: 'ส่วนลด' }, ' '],
+                                    ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: addComma(total_price), alignment: 'right' }],
+                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(tax = Math.ceil(total_price * 0.07)), alignment: 'right' }],
+                                    [{ text: ThaiBaht(total_price + tax), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(total_price + tax), alignment: 'right' }]
+                                ],
+                            }
+                        },
+
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            style: 'tableExample',
+                            table: {
+                                widths: [250, 110.5, 124],
+                                heights: [15, 89],
+                                body: [
+                                    [{ text: 'เงื่อนไขอื่นๆ', style: 'subheader1', }, { text: 'ผู้จัดทำ \n\n_______________ \n\nผู้ตรวจสอบ \n\n_______________', rowSpan: 2 }, { text: '\n\n\n\n\n_________________________ \nผู้มีอำนาจลงนาม', rowSpan: 2 },],
+                                    [`1. กรุณาโอนเงินเข้าบัญชี "${this.props.data.invoice_detail.BankAccountName}" และนำหลักฐานการโอนเงิน แจ้งยืนยันการชำระเงิน\n\t\t - ธนาคาร${this.props.data.invoice_detail.BankName}  เลขที่ ${this.props.data.invoice_detail.BankNo}\n\t\t `]
                                 ]
                             }
                         },
-                        {
-                            table: {
-                                widths: [159],
-                                heights: 80,
-                                body: [
-                                    ['ชำระโดย \nเงินสด \tเช็ค \nธนาคาร \nเลขที่__________ \t\tวันที่__________ \nผู้รับเงิน']
-                                ]
-                            }
-                        }
                     ]
                 }
             ],
@@ -179,24 +167,33 @@ class Bill extends Component {
                 subheader1: {
                     fontSize: 12,
                     bold: true
+                },
+                tableExample: {
+                    margin: [0, 5, 0, 5]
+                },
+                tableHeader: {
+                    bold: true,
+                    fontSize: 13,
+                    color: 'black'
                 }
             },
             defaultStyle: {
-                font: 'THSarabunNew'
+                font: 'THSarabunNew',
+                // fontSize: 13,
             }
         }
 
-        pdfMake.createPdf(Bill).open()
+        pdfMake.createPdf(Purchase_orders).open()
+
 
     }
-
     render() {
         return (
-
             <div>
-            <button className="BTN_PDF" onClick={() => { this.printPDF() }} >ดูรายละเอียดใบเสร็จ</button>
+                <button className="BTN_PDF" onClick={() => { this.printPDF() }} >ดูรายละเอียดใบเสร็จ</button>
             </div>
-
         )
     }
-} export default Bill;
+
+}
+export default Pdf
