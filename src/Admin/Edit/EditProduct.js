@@ -218,7 +218,7 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                        <img className="IMG_Detail" src={this.state.default_image} />
+                        <img className="IMG_Detail" src={this.state.default_image} alt="product"/>
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
                     </div>
