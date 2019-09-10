@@ -13,6 +13,7 @@ class EditProduct extends Component {
             search_order: [],
             plant: [],
             plant_id: [],
+            price_p: [],
             amount: 1,
             data: [],
             data_cart: [],
@@ -21,6 +22,7 @@ class EditProduct extends Component {
             cart_product: [],
             addInputBox: null,
             open_up: false,
+            edit_image:false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -60,8 +62,10 @@ class EditProduct extends Component {
         this.setState({
             cost: this.state.product_data.cost,
             product_name: this.state.product_data.product_name,
-            product_detail: this.state.product_data.product_detail,
-            price: this.state.plant[0].price,
+            details: this.state.product_data.details,
+            price_p: this.state.product_data.price,
+            amount_stock: this.state.product_data.amount_stock,
+            volume_sold: this.state.product_data.volume_sold
         });
         if (this.state.product_data.image) {
             this.setState({
@@ -106,12 +110,25 @@ class EditProduct extends Component {
     }
 
     edit_product = async () => {
+        if(this.state.edit_image){
+            var image = this.state.default_image
+        }
+        else{
+            var image = 0
+        }
         if (this.state.open_up) {
             let url = this.props.location.search
             let params = queryString.parse(url);
             let object = {
                 product_id: params.product_id,
-                image: this.state.default_image,
+                image: image,
+                product_name:this.state.product_name,
+                details:this.state.details,
+                cost:this.state.cost,
+                volume_sold:this.state.volume_sold,
+                price:JSON.stringify(this.state.price)
+
+
             };
             console.log('gg', object)
 
@@ -130,9 +147,19 @@ class EditProduct extends Component {
             }
             console.log("edit2" + this.state);
         }
-        else{
+        else {
             window.location.reload()
         }
+    }
+    add_price = () => {
+        let PriceSell = this.state.price
+        PriceSell.push({
+            price: 0,
+            volume: 0,
+        })
+        this.setState({
+            price:PriceSell
+        })
     }
 
     handleInputChange(e) {
@@ -141,6 +168,22 @@ class EditProduct extends Component {
             open_up: true
         });
     }
+    handleChange_price = (event) => {
+
+        let price = this.state.price_p
+        
+        if([event.target.id]=='price'){
+            price[event.target.name].price = parseInt(event.target.value)
+        }
+        if([event.target.id]=='volume'){
+            price[event.target.name].volume = parseInt(event.target.value)
+        }
+         
+        this.setState({
+          price_p: price,
+    
+        })
+      }
 
 
     uploadpicture = (e) => {
@@ -156,7 +199,8 @@ class EditProduct extends Component {
                 console.log("img", reader.result)
                 this.setState({
                     default_image: reader.result,
-                    open_up: true
+                    open_up:true,
+                    edit_image: true
                 });
             }
         }
@@ -188,7 +232,7 @@ class EditProduct extends Component {
 
                         <h4>รายละเอียดสินค้า</h4>
                         <textarea rows="4" cols="80" name="product_detail" id="product_detail"
-                            form="usrform" value={this.state.product_detail}
+                            form="usrform" value={this.state.details}
                             onChange={this.handleInputChange} />
 
 
@@ -197,26 +241,34 @@ class EditProduct extends Component {
                             name="cost" id="cost" min="1"
                             value={this.state.cost}
                             onChange={this.handleInputChange} /> บาท / กิโลกรัม</h4>
+                        <h4>จำนวนที่มีอยู่ในคลัง</h4>
+                        <h4><input type="number" style={{ width: "20%" }}
+                            name="amount_stock" id="amount_stock" min="0"
+                            value={this.state.amount_stock}
+                            onChange={this.handleInputChange} /> กิโลกรัม</h4>
+                        <p>ขายไปแล้ว {this.state.volume_sold} กิโลกรัม</p>
 
 
                         <h4>ราคาขาย</h4>
-                        <h4><input type="number" style={{ width: "20%" }}
-                            name="price" id="price" min="1"
-                            value={this.state.price}
-                            onChange={this.handleInputChange} /> บาท /
+                        {this.state.price_p.map((element,index) => {
+                            return (<h4><input type="number" style={{ width: "20%" }}
+                                name={index} id="price" min="1"
+                                value={element.price}
+                                onChange={this.handleChange_price} /> บาท /
 
                             <input type="number" style={{ width: "20%" }}
-                                name="cart_product" id="cart_product" min="1"
-                                value={'1'}
-                                onChange={this.handleInputChange} />
-                            หน่วย
+                                    name={index} id="volume" min="1"
+                                    value={element.volume}
+                                    onChange={this.handleChange_price} />
+                                หน่วย
                             <select style={{ width: "20%" }} name="volum">
-                                <option value="kg">กิโลกรัม</option>
-                                <option value="tun">ตัน</option>
-                            </select>
-                        </h4>
+                                    <option value="kg">กิโลกรัม</option>
+                                    <option value="tun">ตัน</option>
+                                </select>
+                            </h4>)
+                        })}
 
-                        <button className="BTN_AddCart" >เพิ่มราคาขาย</button>
+                        <button className="BTN_AddCart" onClick={() => this.add_price()}>เพิ่มราคาขาย</button>
                     </div>
                     <div className="col-1"></div>
 
@@ -245,7 +297,7 @@ class EditProduct extends Component {
                                             <td style={{ textAlign: "center" }}>{index_plant + 1}</td>
                                             <td style={{ textAlign: "center" }}>PCODE-{element_plant.plant_id}</td>
                                             <td>{element_plant.plant_name}</td>
-                                            <td style={{ textAlign: "center" }}>{addComma(element_plant.price)} บาท</td>
+                                            <td style={{ textAlign: "center" }}>{addComma(element_plant.price[0].price)} บาท</td>
                                             <td style={{ textAlign: "center" }}>{addComma(this.sum_data(element_plant.data))} กิโลกรัม</td>
                                             <td style={{ textAlign: "center" }}>
                                                 {addComma(this.state.total_plant = element_plant.volume * this.state.amount)} กิโลกรัม
