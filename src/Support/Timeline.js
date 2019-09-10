@@ -131,7 +131,7 @@ class Timeline extends Component {
                                 {this.props.status >= 3 ? <button className="BTN_PDF" onClick={()=>this.setState({OpenProofPaymet:true})} >หลักฐานการโอน</button> : null}
                             </div>
                             <div className="col-2" style={{ marginLeft: "8.5%", marginTop: "-20px" }}>
-                                {this.props.status >= 3 ? <button className="BTN_PDF">ปุ่มดูใบเสร็จ</button> : null}
+                                {this.props.status >= 3 ? <PdfBill data={this.props.invoice} payment={this.props.payment}/> : null}
                             </div>
                         </div>
 
