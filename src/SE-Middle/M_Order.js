@@ -15,7 +15,8 @@ import five from '../Image/five.png'
 import fivedis from '../Image/fivedis.png'
 import six from '../Image/six.png'
 import sixdis from '../Image/sixdis.png'
-import arrow from '../Image/arrow.png'
+import az from '../Image/az.png'
+import za from '../Image/za.png'
 
 class M_Order extends Component {
     constructor(props) {
@@ -23,6 +24,8 @@ class M_Order extends Component {
         this.state = {
             order: [],
             search_order: [],
+            click: false,
+            clicks: false,
         }
     }
     componentWillMount() {
@@ -182,7 +185,7 @@ class M_Order extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({ order: sort_order,clicks: true })
         }
         if (e === 'Min') {
             function compare(a, b) {
@@ -198,7 +201,7 @@ class M_Order extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({ order: sort_order,clicks: false })
         }
     }
     SortDate = (e) => {
@@ -217,7 +220,7 @@ class M_Order extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({ order: sort_order,click: true })
         }
         if (e === 'Min') {
             function compare(a, b) {
@@ -233,7 +236,7 @@ class M_Order extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({ order: sort_order,click: false })
         }
 
     }
@@ -292,23 +295,23 @@ class M_Order extends Component {
                                 <th>ลำดับ</th>
                                 <th>รหัสใบสั่งซื้อ</th>
                                 <th>
-                                    <button className="BTN_Filter" onClick={() => this.SortDate('Min')}>
-                                        เก่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                    
                                     วันที่สั่งซื้อ
-                                    <button className="BTN_Filter" onClick={() => this.SortDate('Max')}>
-                                        ล่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                    {this.state.click ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Min')} />
+                                        :
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Max')} />
+                                    }
                                 </th>
 
                                 <th>
-                                    <button className="BTN_Filter" onClick={() => this.SortStatus('Min')}>
-                                        น้อย <img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                   
                                     สถานะสั่งซื้อ
-                                    <button className="BTN_Filter" onClick={() => this.SortStatus('Max')}>
-                                        มาก <img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                    {this.state.clicks ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Min')} />
+                                        :
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Max')} />
+                                    }
                                 </th>
                                 <th>ชื่อผู้สั่งซื้อ</th>
                                 <th>รายละเอียด</th>
