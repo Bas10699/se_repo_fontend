@@ -82,8 +82,8 @@ class User extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-4"></div>
-                    <div className="col-4">
+                    <div className="col-3"></div>
+                    <div className="col-6">
                         <table>
                             <tr>
                                 <th>ชื่อ - นามสกุล</th>
@@ -112,7 +112,7 @@ class User extends Component {
                         </table>
                     
                     </div>
-                    <div className="col-4"></div>
+                    <div className="col-3"></div>
                         
                     
                 </div>

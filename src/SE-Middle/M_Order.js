@@ -6,8 +6,15 @@ import moment from 'moment'
 import { NavLink } from 'react-router-dom';
 import one from '../Image/one.png'
 import two from '../Image/two.png'
+import twodis from '../Image/twodis.png'
 import three from '../Image/three.png'
+import threedis from '../Image/threedis.png'
 import four from '../Image/four.png'
+import fourdis from '../Image/fourdis.png'
+import five from '../Image/five.png'
+import fivedis from '../Image/fivedis.png'
+import six from '../Image/six.png'
+import sixdis from '../Image/sixdis.png'
 import arrow from '../Image/arrow.png'
 
 class M_Order extends Component {
@@ -50,17 +57,21 @@ class M_Order extends Component {
             case 0:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
-                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
-                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                    <img src={twodis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             case 1:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
-                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             case 2:
@@ -68,7 +79,9 @@ class M_Order extends Component {
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             case 3:
@@ -77,6 +90,28 @@ class M_Order extends Component {
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+                case 4:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+                case 5:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={six} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             default:

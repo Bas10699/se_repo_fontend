@@ -6,9 +6,17 @@ import { get } from '../Support/Service';
 import moment from 'moment'
 import one from '../Image/one.png'
 import two from '../Image/two.png'
+import twodis from '../Image/twodis.png'
 import three from '../Image/three.png'
+import threedis from '../Image/threedis.png'
 import four from '../Image/four.png'
-import arrow from '../Image/arrow.png'
+import fourdis from '../Image/fourdis.png'
+import five from '../Image/five.png'
+import fivedis from '../Image/fivedis.png'
+import six from '../Image/six.png'
+import sixdis from '../Image/sixdis.png'
+import az from '../Image/az.png'
+import za from '../Image/za.png'
 
 class T_Buying extends Component {
     constructor(props) {
@@ -16,6 +24,7 @@ class T_Buying extends Component {
         this.state = {
             order: [],
             data: [],
+            click: false,
             get_user: null,
             get_product: null,
             search_order: [],
@@ -52,16 +61,20 @@ class T_Buying extends Component {
         switch (order_status) {
             case 0: render_tag = <div>
                 <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
-                <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
-                <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                <img src={twodis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
             </div>
                 break;
             case 1: render_tag = <div>
                 <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
-                <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
             </div>
                 break;
             case 2:
@@ -69,7 +82,9 @@ class T_Buying extends Component {
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px", filter: "grayscale(100%)" }} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             case 3:
@@ -78,6 +93,28 @@ class T_Buying extends Component {
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+            case 4:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+            case 5:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={six} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             default:
@@ -216,7 +253,10 @@ class T_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({
+                order: sort_order,
+                click: true
+            })
         }
         if (e === 'Min') {
             function compare(a, b) {
@@ -232,7 +272,10 @@ class T_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order })
+            this.setState({
+                order: sort_order,
+                click: false
+            })
         }
 
     }
@@ -289,22 +332,25 @@ class T_Buying extends Component {
                         <table style={{ textAlign: "center" }}>
                             <tr>
                                 <th>รหัสใบสั่งซื้อ</th>
-                                <th><button className="BTN_Filter" onClick={() => this.SortDate('Min')}>
-                                        เก่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                <th>
                                     วันที่
-                                    <button className="BTN_Filter" onClick={() => this.SortDate('Max')}>
-                                        ล่าสุด<img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                    {this.state.click ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Min')} />
+
+                                        :
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Max')} />
+                                    }
+
+
                                 </th>
                                 <th>
-                                <button className="BTN_Filter" onClick={() => this.SortStatus('Min')}>
+                                    {/* <button className="BTN_Filter" onClick={() => this.SortStatus('Min')}>
                                         น้อย <img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                    </button> */}
                                     สถานะการสั่งซื้อ
-                                    <button className="BTN_Filter" onClick={() => this.SortStatus('Max')}>
+                                    {/* <button className="BTN_Filter" onClick={() => this.SortStatus('Max')}>
                                         มาก <img src={arrow} alt="arrow" style={{ width: "15px" }} />
-                                    </button>
+                                    </button> */}
                                 </th>
                                 <th>ยอดการสั่งซื้อ</th>
                                 <th>รายละเอียด</th>
@@ -338,7 +384,7 @@ class T_Buying extends Component {
                         </table>
                     </div>
                 </div>
-                
+
 
                 <div className="col-2"></div>
 
