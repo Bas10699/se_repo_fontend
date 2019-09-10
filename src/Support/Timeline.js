@@ -77,43 +77,43 @@ class Timeline extends Component {
                             {this.props.status >= 0 ?
                                 <li className="Status" >
                                     <img src={one} alt="one"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", zIndex: "1000" }} />
+                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", zIndex: "1000" }} />
                                     <br />ส่งใบสั่งซ์้อ<br />
                                     {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li>
                                 : <li className="Standat" >
                                     <img src={one} alt="one"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", filter: "grayscale(100%)" }} />
+                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", filter: "grayscale(100%)" }} />
                                     <br />ส่งใบสั่งซื้อ</li>}
 
                             {this.props.status >= 1 ?
                                 <li className="Status" >
                                     <img src={two} alt="two"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", zIndex: "1000" }} />
+                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", zIndex: "1000" }} />
                                     <br />ยืนยันคำสั่งซื้อแล้ว<br />
                                     {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li>
                                 : <li className="Standat">
                                     <img src={two} alt="two"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", filter: "grayscale(100%)" }} />
+                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", filter: "grayscale(100%)" }} />
                                     <br />ยืนยันคำสั่งซื้อแล้ว</li>}
 
                             {this.props.status >= 2 ? <li className="Status" >
                                 <img src={three} alt="three"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", zIndex: "1000" }} />
+                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", zIndex: "1000" }} />
                                 <br />ชำระเงินแล้ว<br />
                                 {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li>
                                 : <li className="Standat" >
                                     <img src={three} alt="three"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", filter: "grayscale(100%)" }} />
+                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", filter: "grayscale(100%)" }} />
                                     <br />ชำระเงินแล้ว</li>}
 
                             {this.props.status >= 3 ? <li className="Status" >
                                 <img src={four} alt="four"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", zIndex: "1000" }} />
+                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", zIndex: "1000" }} />
                                 <br />สั่งซื้อสำเร็จ<br />
                                 {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}</li>
                                 : <li className="Standat" >
                                     <img src={four} alt="four"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-199px", filter: "grayscale(100%)" }} />
+                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "-100%", filter: "grayscale(100%)" }} />
                                     <br />สั่งซื้อสำเร็จ</li>}
                         </ul>
 
@@ -121,17 +121,17 @@ class Timeline extends Component {
 
                         <div className="Row">
                             <div className="col-2"></div>
-                            <div className="col-2" style={{ marginLeft: "-110px", marginTop: "-20px" }}>
+                            <div className="col-2" style={{ marginLeft: "-13%", marginTop: "-20px" }}>
                                 {this.props.status >= 0 ? <PdfOrder data={this.props.order} /> : null}
                             </div>
-                            <div className="col-2" style={{ marginLeft: "75px", marginTop: "-20px" }}>
+                            <div className="col-2" style={{ marginLeft: "8.2%", marginTop: "-20px" }}>
                                 {this.props.status >= 1 ? <PdfInvoice data={this.props.invoice} /> : null}
                             </div>
-                            <div className="col-2" style={{ marginLeft: "75px", marginTop: "-20px" }}>
+                            <div className="col-2" style={{ marginLeft: "8.5%", marginTop: "-20px" }}>
                                 {this.props.status >= 3 ? <button className="BTN_PDF" onClick={()=>this.setState({OpenProofPaymet:true})} >หลักฐานการโอน</button> : null}
                             </div>
-                            <div className="col-2" style={{ marginLeft: "75px", marginTop: "-20px" }}>
-                                {this.props.status >= 3 ? "ปุ่มดูใบเสร็จ" : null}
+                            <div className="col-2" style={{ marginLeft: "8.5%", marginTop: "-20px" }}>
+                                {this.props.status >= 3 ? <button className="BTN_PDF">ปุ่มดูใบเสร็จ</button> : null}
                             </div>
                         </div>
 
