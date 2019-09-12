@@ -796,6 +796,65 @@ th,tr:hover{
     object-fit: cover;
     /* position: absolute; */
 }
+
+/* แทปหน้าสั่งซื้อวัตถุดิบจาด SE ย่อย */
+
+.accordion {
+    font-family: 'kunlasatriregular';
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    font-size: 18px; 
+  }
+  .accordion .accordion-item:first-child .title {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .accordion .accordion-item:last-child .title {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .accordion .accordion-item .title {
+    background-color: #f6f6f6;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-family: 'kunlasatriregular';
+    font-size: 18px; 
+  }
+  .accordion .accordion-item .title:after {
+    content: "\2794";
+    font-size: 10px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+  }
+  .accordion .accordion-item .panel {
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+  }
+  .accordion .accordion-item.active .title {
+    background-color: #eeeeee;
+  }
+  .accordion .accordion-item.active .title:after {
+    content: "\2576";
+    font-size: 17px;
+    /* Unicode character for "minus" sign (-) */
+  }
+  .accordion .accordion-item.active .panel {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+  }
+  
+/* แทปหน้าสั่งซื้อวัตถุดิบจาด SE ย่อย */
+
+
+
 /* ห้ามลบ ของกู ปรับแต่งได้ */
 ._Card {
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
@@ -826,3 +885,4 @@ th,tr:hover{
     color: white;
 }
 /* ห้ามลบ ของกู ปรับแต่งได้  */
+
