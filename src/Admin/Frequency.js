@@ -8,7 +8,8 @@ class Frequency extends Component {
         super(props)
         this.state = {
             frequency: [],
-            se: []
+            se: [],
+            data: []
 
         }
     }
@@ -50,6 +51,17 @@ class Frequency extends Component {
 
     }
 
+    sum_data = (data) => {
+        let sum = 0;
+
+        for (var i = 0; i < data.length; i++) {
+            let data_sum = data[i];
+            sum += data_sum;
+            sum.toLocaleString()
+        }
+        return sum;
+    }
+
     render() {
         return (
             <div>
@@ -57,7 +69,9 @@ class Frequency extends Component {
                     className="BTN_AddCart"
                     style={{ width: "250px", float: "right" }}>
                     ทำการสั่งซื้อวัตถุดิบจาก SE ย่อย
-                                                    </button>
+                </button>
+
+                
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-1" />
@@ -65,33 +79,43 @@ class Frequency extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "{this.props.plant_name}"</h3>
                             <h4>จำนวนวัตถุดิบทั้งหมด xxx กิโลกรัม</h4>
                             <h4>จำนวนที่สั่งซื้อ {addComma(this.props.amount)} กิโลกรัม</h4>
-                            <table>
-                                <tr>
-                                    <th>ชื่อ SE</th>
-                                    <th>จำนวนที่มีอยู่ในสต๊อก</th>
-                                    <th>ราคาขนส่ง</th>
-                                    <th>ช่วงส่งมอบ</th>
-                                </tr>
-                                {
-                                    this.state.frequency.map((element, index) => {
-                                        return (
-                                            <div>
-                                                {
-                                                    element.se.map((element_se, index_se) => {
-                                                        return (
-                                                            <tr>
-                                                                <td>{element_se.name}</td>
-                                                            </tr>
-                                                        )
-                                                    })
-                                                }
+                            {
+                                this.state.frequency.map((element, index) => {
+                                    return (
+                                        <table>
+                                            <tr>
+                                                <th>ชื่อ SE</th>
+                                                <th>จำนวนที่มีอยู่ในสต๊อก</th>
+                                                <th>ราคาขนส่ง</th>
+                                                <th>ช่วงส่งมอบ</th>
+                                            </tr>
+                                            {
+                                                element.se.map((element_se, index) => {
+                                                    return (
+                                                        <tr>
+                                                            <td>{element_se.name}</td>
+                                                            <td>{element_se.rang.map((element_rang, index) => {
+                                                                return (
+                                                                    <div> สั่งครั้งที่ {index + 1} :
+                                                                    {addComma(this.sum_data(element_rang.data))}
+                                                                    </div>
+                                                                )
+                                                            })
+                                                            }</td>
+                                                            <td>x</td>
+                                                            <td>x</td>
+                                                        </tr>
 
-                                            </div>
-                                        )
-                                    })
-                                }
+                                                    )
+                                                })
+                                            }
 
-                            </table>
+
+                                        </table>
+                                    )
+                                })
+                            }
+
 
                             <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
                             <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>

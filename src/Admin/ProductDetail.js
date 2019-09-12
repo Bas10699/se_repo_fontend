@@ -14,12 +14,12 @@ class ProductDetail extends Component {
             plant_id: [],
             amount: 1,
             data: [],
-            price:[],
+            price: [],
             data_cart: [],
             total_plant: [],
             total_price: [],
             cart_product: [],
-            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
+            default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         }
     }
 
@@ -42,7 +42,7 @@ class ProductDetail extends Component {
                 if (result.success) {
                     this.setState({
                         product_data: result.result,
-                        price:result.result.price,
+                        price: result.result.price,
                         plant: result.result.plant
                     })
 
@@ -74,7 +74,7 @@ class ProductDetail extends Component {
         try {
             await post(data, 'trader/add_cart_trader', user_token).then((result) => {
                 if (result.success) {
-                    window.location.href='/T_cart'
+                    window.location.href = '/T_cart'
 
                     setTimeout(() => {
                         console.log("get_product11", result)
@@ -107,11 +107,12 @@ class ProductDetail extends Component {
 
         return sum;
     }
+
     render_Step = (status) => {
         let render_Show
         switch (status) {
-            case 0: render_Show = <div style={{ color: "red" ,fontSize:'32px'}}>สินค้าหมด</div>
-
+            case 0: render_Show = <div style={{ color: "red", fontSize: '32px' }}>สินค้าหมด</div>
+                break;
             default:
                 break;
         }
@@ -126,7 +127,7 @@ class ProductDetail extends Component {
                 </div> */}
                 <div className="Row">
                     <div className="col-5">
-                        {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} />:<img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                        {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                     </div>
                     <div className="col-1"></div>
                     <div className="col-5">
@@ -135,8 +136,8 @@ class ProductDetail extends Component {
 
 
                         {/* <h4>ราคาขายปลีก</h4> */}
-                        {this.state.price.map((element)=>{
-                            return(<h4>ราคาขาย {element.price} บาท/กิโลกรัม</h4>)
+                        {this.state.price.map((element) => {
+                            return (<h4>ราคาขาย {element.price} บาท/กิโลกรัม</h4>)
                         })}
                         {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
                         <input type="number"
