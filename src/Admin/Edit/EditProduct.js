@@ -207,7 +207,7 @@ class EditProduct extends Component {
 
     }
 
-    delete_index = (index) =>{
+    delete_index = (index) => {
         alert("ลบ ราคา")
     }
 
@@ -258,9 +258,9 @@ class EditProduct extends Component {
                             return (
                                 <h4>
                                     <input type="number" style={{ width: "20%" }}
-                                    name={index} id="price" min="1"
-                                    value={element.price}
-                                    onChange={this.handleChange_price} /> บาท /
+                                        name={index} id="price" min="1"
+                                        value={element.price}
+                                        onChange={this.handleChange_price} /> บาท /
 
                             <input type="number" style={{ width: "20%" }}
                                         name={index} id="volume" min="1"
@@ -271,9 +271,11 @@ class EditProduct extends Component {
                                         <option value="kg">กิโลกรัม</option>
                                         <option value="tun">ตัน</option>
                                     </select>
-                                    <button onClick={()=>{this.delete_index(index)}}>ลบ</button>
-                                </h4>)
-                        })}
+                                    <button className="X" onClick={() => { this.delete_index(index) }}>ลบ</button>
+                                </h4>
+                            )
+                        })
+                        }
 
                         <button className="BTN_AddCart" onClick={() => this.add_price()}>เพิ่มราคาขาย</button>
                     </div>
