@@ -160,7 +160,9 @@ class ProductDetail extends Component {
 
 
                         {/* <h4>ราคาขายปลีก</h4> */}
-                        <h4>ราคาขาย {this.volume_check(this.state.price)} บาท/กิโลกรัม</h4>
+                        {this.state.price.map((element,index) => {
+                            return (<h4>{element.volume} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h4>)
+                        })}
                         {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
                         <input type="number"
                             name="quantity" min="1"
