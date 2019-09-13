@@ -84,7 +84,7 @@ class Frequency extends Component {
 
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row">
-                        <div className="col-12" style={{ width: "500px" }}>
+                        <div className="col-12" style={{ width: "1000px" }}>
                             <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "{this.props.plant_name}"</h3>
                             <h4>จำนวนวัตถุดิบทั้งหมด
                             xx
@@ -110,7 +110,6 @@ class Frequency extends Component {
                                                                 <tr>
                                                                     {month.map((element_month) => {
                                                                         return (
-
                                                                             <th>{element_month}</th>
                                                                         )
                                                                     })}

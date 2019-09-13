@@ -131,28 +131,17 @@ class Timeline extends Component {
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
                                     <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>สินค้าทำการจัดส่ง</div></li>}
 
-                            {this.props.status >= 4 ? <li className="Status" >
+                            {this.props.status >= 4 ? <li className="Statusles" >
                                 <img src={five} alt="five"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ตรวจสอบ<br />
-                                    {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}<br/>
-                                    <button className="BTN_PDF">ตรวจสอบ</button>
-                                    </div></li>
-                                : <li className="Standat" >
-                                    <img src={fivedis} alt="fivedis"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ตรวจสอบ</div></li>}
-
-                            {this.props.status >= 5 ? <li className="Statusles" >
-                                <img src={six} alt="six"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "55%", width: "200px" }}>สั่งซื้อสินค้าสำเร็จ<br />
+                                <br /><div style={{ textAlign: "center", marginLeft: "55%", width: "200px" }}>ตรวจสอบสินค้า<br />
                                     {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}<br/>
+                                    {/* <button className="BTN_PDF">ตรวจสอบ</button> */}
                                     </div></li>
                                 : <li className="Standatles" >
-                                    <img src={sixdis} alt="sixdis"
+                                    <img src={fivedis} alt="fivedis"
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "95%", width: "100px" }}>สั่งซื้อสินค้าสำเร็จ</div></li>}
+                                    <br /><div style={{ textAlign: "center", marginLeft: "95%", width: "100px" }}>ตรวจสอบสินค้า</div></li>}
                         </ul>
 
                     </div>

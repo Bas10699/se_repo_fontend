@@ -182,6 +182,7 @@ class OrderDetail extends Component {
             alert("get_proof_of_payment_trader" + error);
         }
     }
+
     confirm_payment = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
@@ -239,13 +240,12 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : รอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
+                            <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการรอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
                             <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-6"><PdfOrder data={this.state.order} /></div>
-                        <div className="col-6">
+                        <div className="col-6"><PdfOrder data={this.state.order} />
                             <button
                                 className='BTN_CONFIRM'
                                 onClick={() => this.setState({ OpenComfrim: true })}>ยืนยันการสั่งซื้อ</button></div>
@@ -262,9 +262,7 @@ class OrderDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-5"></div>
-                        <div className="col-2"><PdfInvoice data={this.state.invoice} /></div>
-                        <div className="col-5"></div>
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
                         {/* <div className="col-6">
                             <button
                                 className='BTN_CONFIRM'
@@ -284,12 +282,7 @@ class OrderDetail extends Component {
                     <div className="Row">
                         <div className="col-6">
                             <button className="BTN_PDF" onClick={() => this.setState({ OpenBill: true })}>ตรวจสอบหลักฐานการโอน</button>
-                            {/* <PdfInvoice data={this.state.order} /> */}
-                        </div>
-                        <div className="col-6">
-                            <button
-                                className='BTN_CONFIRM'
-                                onClick={() => this.setState({ OpenComfrim: true })}>ออกใบเสร็จ</button></div>
+                            {/* <PdfInvoice data={this.state.order} /> */}</div>
                     </div>
                 </div>
 
@@ -299,11 +292,20 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : เรียบร้อย</h4>
+                            <h4>&nbsp; สถานะการสั่งซื้อ : จัดส่งสินค้าเรียบร้อย รอผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้า</h4>
                         </div>
                     </div>
                 </div>
+                break;
 
+                case 4: render_show =
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้าเรียบร้อย</h4>
+                        </div>
+                    </div>
+                </div>
                 break;
 
             default: render_show =
@@ -424,8 +426,7 @@ class OrderDetail extends Component {
 
                 <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "500px" }}>
-                        <div className="col-1" />
-                        <div className="col-10">
+                        <div className="col-11">
                             <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h4>ชำระเงินภายในวันที่</h4>
@@ -438,14 +439,10 @@ class OrderDetail extends Component {
                         <div className="col-1" />
                     </div>
                     <div className="Row" style={{ width: "500px" }}>
-                        <div className="col-1" />
-                        <div className="col-5">
+                        <div className="col-12">
                             <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-                        </div>
-                        <div className="col-5">
                             <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
                         </div>
-                        <div className="col-1" />
                     </div>
                 </Modal>
 
@@ -470,7 +467,7 @@ class OrderDetail extends Component {
                             <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
                             <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
                             <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4>
-                            <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ยืนยัน</button>
+                            <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
                             <button className="BTN_PDF">ไม่พบ</button>
 
                         </div>
