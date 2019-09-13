@@ -181,7 +181,7 @@ class EditProduct extends Component {
          
         this.setState({
           price_p: price,
-    
+          open_up: true
         })
       }
 

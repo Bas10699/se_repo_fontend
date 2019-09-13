@@ -150,12 +150,25 @@ class T_Cart extends Component {
     }
     volume_check = (data_price, index) => {
         let cart_product = this.state.cart_product
+        let dataSortVolume = data_price.sort(compare)
         let price = 0
-        data_price.map((element) => {
+        dataSortVolume.map((element) => {
             if (cart_product[index].amount >= element.volume) {
                 price = element.price
             }
         })
+        function compare(a, b) {
+            const order_idA = a.volume
+            const order_idB = b.volume
+
+            let comparison = 0;
+            if (order_idA > order_idB) {
+                comparison = 1;
+            } else if (order_idA < order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
 
         return price
     }

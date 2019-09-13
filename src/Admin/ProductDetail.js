@@ -99,6 +99,30 @@ class ProductDetail extends Component {
         return sum;
     }
 
+    volume_check = (data_price, index) => {
+        let dataSortVolume = data_price.sort(compare)
+        let price = 0
+        dataSortVolume.map((element) => {
+            if (this.state.amount >= element.volume) {
+                price = element.price
+            }
+        })
+        function compare(a, b) {
+            const order_idA = a.volume
+            const order_idB = b.volume
+
+            let comparison = 0;
+            if (order_idA > order_idB) {
+                comparison = 1;
+            } else if (order_idA < order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+
+        return price
+    }
+
     sum_price = (data) => {
         let sum = 0;
         data.map((element) => {
@@ -136,9 +160,7 @@ class ProductDetail extends Component {
 
 
                         {/* <h4>ราคาขายปลีก</h4> */}
-                        {this.state.price.map((element) => {
-                            return (<h4>ราคาขาย {element.price} บาท/กิโลกรัม</h4>)
-                        })}
+                        <h4>ราคาขาย {this.volume_check(this.state.price)} บาท/กิโลกรัม</h4>
                         {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
                         <input type="number"
                             name="quantity" min="1"
