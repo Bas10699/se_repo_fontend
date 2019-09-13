@@ -155,6 +155,7 @@ class Navbar extends Component {
             <div className="App">
                 <div className="Navbar">
                     {this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}
+                    
                 </div>
             </div >
         )
