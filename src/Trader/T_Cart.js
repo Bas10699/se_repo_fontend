@@ -143,11 +143,21 @@ class T_Cart extends Component {
         }
 
     }
+    volume_check = (data_price, index) => {
+        let cart_product = this.state.cart_product
+        let price = 0
+        data_price.map((element) => {
+            if (cart_product[index].amount >= element.volume) {
+                price = element.price
+            }
+        })
+        return price
+    }
 
     sum_price = (data) => {
         let sum = 0;
-        data.map((element) => {
-            sum += (element.price * element.amount)
+        data.map((element,index) => {
+            sum += (this.volume_check(element.price, index) * element.amount)
         })
 
         return sum;
@@ -155,6 +165,7 @@ class T_Cart extends Component {
 
 
     render() {
+
         const cart_product = (
             <div className="App">
                 <div className="Row">
@@ -188,10 +199,10 @@ class T_Cart extends Component {
 
                                                 <div className="Row">
                                                     <div className="col-9">
-                                                        <h4>ราคา {element.price} บาท / กิโลกรัม</h4>
+                                                        <h4>ราคา {this.volume_check(element.price, index)} บาท / กิโลกรัม</h4>
                                                     </div>
                                                     <div className="col-3">
-                                                        <h4>ราคารวม {addComma(element.price * element.amount)} บาท</h4>
+                                                        <h4>ราคารวม {addComma(this.volume_check(element.price, index) * element.amount)} บาท</h4>
                                                     </div>
                                                 </div>
                                             </div>
