@@ -160,6 +160,7 @@ class T_Buying extends Component {
                         search_order: result.result,
                         render_history: 1
                     })
+                    this.Sortdate()
 
                     setTimeout(() => {
                         console.log("get_product1", result.result)

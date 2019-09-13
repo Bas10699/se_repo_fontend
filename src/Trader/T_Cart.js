@@ -120,8 +120,13 @@ class T_Cart extends Component {
     // }
 
     Comfirm = async () => {
+        let detail = this.state.cart_product
+        detail.map((element,index)=>{
+            element.price = this.volume_check(element.price,index)
+        })
+
         let object = {
-            detail: this.state.cart_product,
+            detail: detail,
             date_send: this.state.date,
             address_send: this.state.address,
             order_status: "0"
@@ -151,6 +156,7 @@ class T_Cart extends Component {
                 price = element.price
             }
         })
+
         return price
     }
 
