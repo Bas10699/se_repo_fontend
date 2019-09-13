@@ -69,6 +69,10 @@ class Frequency extends Component {
 
 
     render() {
+        let month = [
+            'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ค.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'
+        ]
+
         return (
             <div>
                 <button onClick={() => { this.onOpenModal() }}
@@ -83,29 +87,7 @@ class Frequency extends Component {
                         <div className="col-12" style={{ width: "500px" }}>
                             <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "{this.props.plant_name}"</h3>
                             <h4>จำนวนวัตถุดิบทั้งหมด
-                            {
-                                    this.state.frequency.map((element, index) => {
-                                        return (
-                                            <div>
-                                                {
-                                                    element.se.map((element_se, index_se) => {
-                                                        return (
-                                                            <div>
-                                                                {element_se.rang.map((element_rang, index_rang) => {
-                                                                    return (
-                                                                        <div>{this.sum_data(element_rang.data)}
-                                                                        </div>
-                                                                    )
-                                                                })
-                                                                }
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        )
-                                    })
-                                }
+                            xx
                                 กิโลกรัม</h4>
                             <h4>จำนวนที่สั่งซื้อ {addComma(this.props.amount)} กิโลกรัม</h4>
                         </div>
@@ -120,14 +102,28 @@ class Frequency extends Component {
                                                 element.se.map((element_se, index_se) => {
                                                     return (
                                                         <AccordionItem title={element_se.name + " " + "(จำนวนเปอร์เซ็นที่ส่งมา xx%)"}>
-                                                            <table>
+                                                            <table style={{textAlign:"center"}}>
                                                                 <tr>
-                                                                    <th>จำนวน</th>
+                                                                    <th rowSpan="2">จำนวนครั้งที่ส่ง</th>
+                                                                    <th colSpan="12">เดือน</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    {month.map((element_month) => {
+                                                                        return (
+
+                                                                            <th>{element_month}</th>
+                                                                        )
+                                                                    })}
                                                                 </tr>
                                                                 {element_se.rang.map((element_rang, index_rang) => {
                                                                     return (
                                                                         <tr>
-                                                                            <td>{this.sum_data(element_rang.data)}</td>
+                                                                            <td>{index_rang+1}</td>
+                                                                            {element_rang.data.map((element_data) => {
+                                                                                return (
+                                                                                    <td>{addComma(element_data)}</td>
+                                                                                )
+                                                                            })}
                                                                         </tr>
                                                                     )
                                                                 })
