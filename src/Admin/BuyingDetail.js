@@ -51,6 +51,32 @@ class BuyingDetail extends Component {
 
     };
 
+    confirm = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        const object = {
+            order_id: params.order_id,
+            status: 4
+        }
+        try {
+            await post(object, 'neutrally/update_status_order_trader', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                    setTimeout(() => {
+                        console.log("confirm_payment", result.result)
+                    }, 500)
+                } else {
+                    // window.location.href = "/";
+                    alert(result.error_message)
+                    console.log("confirm_payment_err", result.result)
+                }
+            })
+        }
+        catch (error) {
+            alert("confirm_payment" + error);
+        }
+    }
+
     render_status = (order_status) => {
         let render_show
         switch (order_status) {
@@ -63,9 +89,7 @@ class BuyingDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-5"></div>
-                        <div className="col-2"><PdfOrder data={this.state.order} /></div>
-                        <div className="col-5"></div>
+                        <div className="col-6"><PdfOrder data={this.state.order} /></div>
                     </div>
                 </div>
 
@@ -81,8 +105,7 @@ class BuyingDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
-                        <div className="col-6">
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} />
                             <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
                         </div>
                     </div>
@@ -98,15 +121,46 @@ class BuyingDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-5"></div>
-                        <div className="col-2"><button onClick={() => this.setState({ OpenProofPaymet: true })} className="BTN_PDF">ดูหลักฐานการโอนเงิน</button></div>
-                        <div className="col-5"></div>
+                        <div className="col-6">
+                            <button onClick={() => this.setState({ OpenProofPaymet: true })}
+                                className="BTN_PDF">ดูหลักฐานการโอนเงิน</button>
+                        </div>
                     </div>
                 </div>
 
                 break;
 
             case 3: render_show =
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>&nbsp; สถานะการสั่งซื้อ : สินค้าได้ทำการจัดสั่งเเล้ว ผู้ประกอบการกรุณาตรวจสอบสินค้าและใบเสร็จ</h4>
+                        </div>
+                    </div>
+                    <div className="Row">
+                        <div className="col-6">
+                            <button className='BTN_CONFIRM' onClick={() => this.confirm()}>ยืนยันได้รับสินค้า</button>
+                        </div>
+                    </div>
+                </div>
+                break;
+
+            // case 4: render_show =
+            //     <div className='_Card'>
+            //         <div className="Row">
+            //             <div className="col-12">
+            //                 <h4>&nbsp; สถานะการสั่งซื้อ : ตรวจสอบสินค้า</h4>
+            //             </div>
+            //         </div>
+            //         <div className="Row">
+            //             <div className="col-6">
+            //                 <button className='BTN_CONFIRM'>ยืนยันได้รับสินค้า</button>
+            //             </div>
+            //         </div>
+            //     </div>
+            //     break;
+
+            case 4: render_show =
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
@@ -122,6 +176,7 @@ class BuyingDetail extends Component {
                     </div> */}
                 </div>
                 break;
+
 
             default: render_show =
                 <div className='_Card'>
@@ -172,7 +227,7 @@ class BuyingDetail extends Component {
             alert("get_cart_trader" + error);
         }
     }
-    
+
     get_invoice = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
@@ -396,8 +451,8 @@ class BuyingDetail extends Component {
 
                     </div>
                     <div className="Row">
-                        <div className="col-6"><button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button></div>
-                        <div className="col-6"><button className='BTN_CONFIRM' onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
+                        <div className="col-12"><button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                        <button className='BTN_CONFIRM'  onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
                     </div>
                 </Modal>
 

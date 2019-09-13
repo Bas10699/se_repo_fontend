@@ -22,7 +22,7 @@ class EditProduct extends Component {
             cart_product: [],
             addInputBox: null,
             open_up: false,
-            edit_image:false,
+            edit_image: false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -110,10 +110,10 @@ class EditProduct extends Component {
     }
 
     edit_product = async () => {
-        if(this.state.edit_image){
+        if (this.state.edit_image) {
             var image = this.state.default_image
         }
-        else{
+        else {
             var image = 0
         }
         if (this.state.open_up) {
@@ -122,11 +122,11 @@ class EditProduct extends Component {
             let object = {
                 product_id: params.product_id,
                 image: image,
-                product_name:this.state.product_name,
-                details:this.state.details,
-                cost:this.state.cost,
-                volume_sold:this.state.volume_sold,
-                price:JSON.stringify(this.state.price_p)
+                product_name: this.state.product_name,
+                details: this.state.details,
+                cost: this.state.cost,
+                volume_sold: this.state.volume_sold,
+                price: JSON.stringify(this.state.price_p)
 
 
             };
@@ -158,7 +158,7 @@ class EditProduct extends Component {
             volume: 0,
         })
         this.setState({
-            price_p:PriceSell
+            price_p: PriceSell
         })
     }
 
@@ -171,19 +171,19 @@ class EditProduct extends Component {
     handleChange_price = (event) => {
 
         let price = this.state.price_p
-        
-        if([event.target.id]=='price'){
+
+        if ([event.target.id] == 'price') {
             price[event.target.name].price = parseInt(event.target.value)
         }
-        if([event.target.id]=='volume'){
+        if ([event.target.id] == 'volume') {
             price[event.target.name].volume = parseInt(event.target.value)
         }
-         
+
         this.setState({
-          price_p: price,
-          open_up: true
+            price_p: price,
+            open_up: true
         })
-      }
+    }
 
 
     uploadpicture = (e) => {
@@ -199,12 +199,16 @@ class EditProduct extends Component {
                 console.log("img", reader.result)
                 this.setState({
                     default_image: reader.result,
-                    open_up:true,
+                    open_up: true,
                     edit_image: true
                 });
             }
         }
 
+    }
+
+    delete_index = (index) => {
+        alert("ลบ ราคา")
     }
 
     render() {
@@ -218,7 +222,7 @@ class EditProduct extends Component {
 
                 <div className="Row">
                     <div className="col-5">
-                        <img className="IMG_Detail" src={this.state.default_image} alt="product"/>
+                        <img className="IMG_Detail" src={this.state.default_image} alt="product" />
                         <input type="file"
                             onChange={(e) => this.uploadpicture(e)} />
                     </div>
@@ -250,23 +254,28 @@ class EditProduct extends Component {
 
 
                         <h4>ราคาขาย</h4>
-                        {this.state.price_p.map((element,index) => {
-                            return (<h4><input type="number" style={{ width: "20%" }}
-                                name={index} id="price" min="1"
-                                value={element.price}
-                                onChange={this.handleChange_price} /> บาท /
+                        {this.state.price_p.map((element, index) => {
+                            return (
+                                <h4>
+                                    <input type="number" style={{ width: "20%" }}
+                                        name={index} id="price" min="1"
+                                        value={element.price}
+                                        onChange={this.handleChange_price} /> บาท /
 
                             <input type="number" style={{ width: "20%" }}
-                                    name={index} id="volume" min="1"
-                                    value={element.volume}
-                                    onChange={this.handleChange_price} />
-                                หน่วย
+                                        name={index} id="volume" min="1"
+                                        value={element.volume}
+                                        onChange={this.handleChange_price} />
+                                    หน่วย
                             <select style={{ width: "20%" }} name="volum">
-                                    <option value="kg">กิโลกรัม</option>
-                                    <option value="tun">ตัน</option>
-                                </select>
-                            </h4>)
-                        })}
+                                        <option value="kg">กิโลกรัม</option>
+                                        <option value="tun">ตัน</option>
+                                    </select>
+                                    <button className="X" onClick={() => { this.delete_index(index) }}>ลบ</button>
+                                </h4>
+                            )
+                        })
+                        }
 
                         <button className="BTN_AddCart" onClick={() => this.add_price()}>เพิ่มราคาขาย</button>
                     </div>

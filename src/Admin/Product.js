@@ -11,7 +11,7 @@ class Product extends Component {
             product_data: [],
             search_order: [],
             grt_user: null,
-            default_image:'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
+            default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
     }
 
@@ -71,29 +71,16 @@ class Product extends Component {
         });
     }
 
+    delete = () => {
+        alert("ลบสินค้า")
+    }
+
     render_type = (user_type) => {
         let render_product
         switch (user_type) {
             case "2": // Trader
                 render_product =
                     <div className="App">
-                        {/* <div className="Row">
-                            <div className="col-12">
-                                <div className="HeaderArea">
-                                    <div className="Row">
-                                        <div className="col-6" style={{ backgroundColor: "black" }}>
-                                            <img />
-                                        </div>
-                                        <div className="col-1"></div>
-                                        <div className="col-5">
-                                            <h2>ชื่อสินค้า</h2>
-                                            <h4>ราคาขายปลีก</h4>
-                                            <button className="BTN_Buy">ซื้อสินค้า</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                         <div className="Row">
                             <div className="col-8"></div>
                             <div className="col-3">
@@ -112,7 +99,7 @@ class Product extends Component {
                                         this.state.search_order.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                    {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
+                                                    {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/Product/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
@@ -122,7 +109,7 @@ class Product extends Component {
                                         this.state.product_data.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                   {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
+                                                    {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/Product/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
@@ -136,7 +123,7 @@ class Product extends Component {
                     </div>
                 break;
 
-            default: // ผู้ใช้อื่นๆ
+                default: // ผู้ใช้อื่นๆ
                 render_product =
                     <div className="App">
 
@@ -153,8 +140,8 @@ class Product extends Component {
                                 <input type="search" placeholder="ค้นหา" onChange={this.filterSearch} />
                             </div>
                             <div className="col-6">
-                                <NavLink to={"/AddProduct"}><button className="BTN_Signin" style={{marginTop:"55px", marginRight:"35px"}}>เพิ่มสินค้า</button></NavLink>
-                                <button className="BTN_Signup" style={{marginTop:"55px"}}>ลบสินค้า</button>
+                                <NavLink to={"/AddProduct"}><button className="BTN_Signin" style={{ marginTop: "55px", marginRight: "35px" }}>เพิ่มสินค้า</button></NavLink>
+                                
                             </div>
                             {/* <div className="col-1"></div> */}
                         </div>
@@ -169,7 +156,8 @@ class Product extends Component {
                                         this.state.search_order.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                   {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
+                                                    <div className='X' onClick={()=>{this.delete()}}>ลบ</div>
+                                                    {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
@@ -179,7 +167,7 @@ class Product extends Component {
                                         this.state.product_data.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                   {element.image === ''? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip+element.image} />}
+                                                    {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>

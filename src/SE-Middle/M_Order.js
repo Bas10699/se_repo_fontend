@@ -64,7 +64,6 @@ class M_Order extends Component {
                     <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
                     <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             case 1:
@@ -74,7 +73,6 @@ class M_Order extends Component {
                     <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
                     <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
                     <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             case 2:
@@ -84,7 +82,6 @@ class M_Order extends Component {
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
                     <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
             case 3:
@@ -94,7 +91,6 @@ class M_Order extends Component {
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
                 case 4:
@@ -104,19 +100,9 @@ class M_Order extends Component {
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={sixdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 </div>
                 break;
-                case 5:
-                render_tag = <div>
-                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={six} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                </div>
-                break;
+                
             default:
                 render_tag = <div>
                     <div className="FontDanger"> เกิดข้อผิดพลาด </div>
@@ -147,6 +133,7 @@ class M_Order extends Component {
             search_order: updatedList,
         });
     }
+    
     Sortdate = () => {
         const order = this.state.order
 
