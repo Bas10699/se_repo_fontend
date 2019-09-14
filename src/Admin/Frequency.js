@@ -12,6 +12,8 @@ class Frequency extends Component {
             se: [],
             data: [],
             month: [],
+            volume: 0,
+            select_month: [],
         }
     }
     componentWillMount() {
@@ -67,64 +69,70 @@ class Frequency extends Component {
 
     sum_data_in_month = (dd, index) => {
         let sum_se = []
-            let Jan = 0;
-            let Feb = 0;
-            let Mar = 0;
-            let Apr = 0;
-            let May = 0;
-            let Jun = 0;
-            let Jul = 0;
-            let Aug = 0;
-            let Sep = 0;
-            let Oct = 0;
-            let Nov = 0;
-            let Dec = 0;
-            dd.rang.map((ele_rang) => {
-                ele_rang.data.map((ele_rang_data, index) => {
-                    if (index === 0) {
-                        Jan += ele_rang_data
-                    }
-                    else if (index === 1) {
-                        Feb += ele_rang_data
-                    }
-                    else if (index === 2) {
-                        Mar += ele_rang_data
-                    }
-                    else if (index === 3) {
-                        Apr += ele_rang_data
-                    }
-                    else if (index === 4) {
-                        May += ele_rang_data
-                    }
-                    else if (index === 5) {
-                        Jun += ele_rang_data
-                    }
-                    else if (index === 6) {
-                        Jul += ele_rang_data
-                    }
-                    else if (index === 7) {
-                        Aug += ele_rang_data
-                    }
-                    else if (index === 8) {
-                        Sep += ele_rang_data
-                    }
-                    else if (index === 9) {
-                        Oct += ele_rang_data
-                    }
-                    else if (index === 10) {
-                        Nov += ele_rang_data
-                    }
-                    else if (index === 11) {
-                        Dec += ele_rang_data
-                    }
-                    else { }
+        let Jan = 0;
+        let Feb = 0;
+        let Mar = 0;
+        let Apr = 0;
+        let May = 0;
+        let Jun = 0;
+        let Jul = 0;
+        let Aug = 0;
+        let Sep = 0;
+        let Oct = 0;
+        let Nov = 0;
+        let Dec = 0;
+        dd.rang.map((ele_rang) => {
+            ele_rang.data.map((ele_rang_data, index) => {
+                if (index === 0) {
+                    Jan += ele_rang_data
+                }
+                else if (index === 1) {
+                    Feb += ele_rang_data
+                }
+                else if (index === 2) {
+                    Mar += ele_rang_data
+                }
+                else if (index === 3) {
+                    Apr += ele_rang_data
+                }
+                else if (index === 4) {
+                    May += ele_rang_data
+                }
+                else if (index === 5) {
+                    Jun += ele_rang_data
+                }
+                else if (index === 6) {
+                    Jul += ele_rang_data
+                }
+                else if (index === 7) {
+                    Aug += ele_rang_data
+                }
+                else if (index === 8) {
+                    Sep += ele_rang_data
+                }
+                else if (index === 9) {
+                    Oct += ele_rang_data
+                }
+                else if (index === 10) {
+                    Nov += ele_rang_data
+                }
+                else if (index === 11) {
+                    Dec += ele_rang_data
+                }
+                else { }
 
-                })
             })
-            sum_se = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+        })
+        sum_se = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
 
 
         return sum_se
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
     }
 
 
@@ -150,7 +158,8 @@ class Frequency extends Component {
                             xx
                                 กิโลกรัม</h4>
                             <h4>จำนวนที่สั่งซื้อ {addComma(this.props.amount)} กิโลกรัม</h4>
-                            <h3>จาก SE name : จำนวนที่สั่งซื้อจาก SE นี้</h3>
+                            <h4>ต้องสั่งซื้ออีก {addComma(this.props.amount - this.state.volume > 0 ? this.props.amount - this.state.volume : "ซื้อวัตถุดิบครบเเล้ว")} กิโลกรัม</h4>
+                            <h5>จาก SE name : จำนวนที่สั่งซื้อจาก SE นี้ </h5>
                         </div>
                     </div>
                     <div className="Row">
@@ -163,7 +172,19 @@ class Frequency extends Component {
                                                 element.se.map((element_se, index_se) => {
                                                     return (
                                                         <AccordionItem title={element_se.name + " " + "(จำนวนเปอร์เซ็นที่ส่งมา xx%)"}>
-                                                            สั่งซื้อจำนวน : <input />
+                                                            <h4>สั่งซื้อจำนวน : <input style={{ width: "20%" }} type="number" name="volume" id="volume"
+                                                                onChange={(e) => { this.handleChange(e) }} min="0"
+                                                                max={this.props.amount} />
+                                                            </h4>
+                                                            <h4>เลือกเดือนที่จะสั่งซื้อ :
+                                                                <select id="select_month">
+                                                                    {month.map((element_select, index_select) => {
+                                                                        return (
+                                                                            <option value={index_select}>{element_select}</option>
+                                                                        )
+                                                                    })}
+                                                                </select>
+                                                            </h4>
                                                             <table style={{ textAlign: "center" }}>
                                                                 <tr>
                                                                     <th rowSpan="2">จำนวนครั้งที่ส่ง</th>
@@ -197,15 +218,12 @@ class Frequency extends Component {
                                                                         console.log(ele_sum)
                                                                     })} */}
                                                                     {this.sum_data_in_month(element_se, index_se).map((ele_sum) => {
-                                                                        return(
-                                                                            <th>{ele_sum}</th>
+                                                                        return (
+                                                                            <th>{addComma(ele_sum)}</th>
                                                                         )
                                                                     })}
 
                                                                 </tr>
-
-
-
                                                             </table>
                                                         </AccordionItem>
                                                     )
