@@ -11,7 +11,7 @@ class Frequency extends Component {
             frequency: [],
             se: [],
             data: [],
-            month: []
+            month: [],
         }
     }
     componentWillMount() {
@@ -134,24 +134,26 @@ class Frequency extends Component {
 
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row">
-                        <div className="col-12" style={{ width: "1000px" }}>
+                        <div className="col-12">
                             <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "{this.props.plant_name}"</h3>
                             <h4>จำนวนวัตถุดิบทั้งหมด
                             xx
                                 กิโลกรัม</h4>
                             <h4>จำนวนที่สั่งซื้อ {addComma(this.props.amount)} กิโลกรัม</h4>
+                            <h3>จาก SE name : จำนวนที่สั่งซื้อจาก SE นี้</h3>
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-12">
+                        <div className="col-12" style={{ width: "1000px" }}>
                             {
                                 this.state.frequency.map((element, index) => {
                                     return (
-                                        <Accordion atomic={true}>
+                                        <Accordion allowMultipleExpanded={true}>
                                             {
                                                 element.se.map((element_se, index_se) => {
                                                     return (
                                                         <AccordionItem title={element_se.name + " " + "(จำนวนเปอร์เซ็นที่ส่งมา xx%)"}>
+                                                            สั่งซื้อจำนวน : <input />
                                                             <table style={{ textAlign: "center" }}>
                                                                 <tr>
                                                                     <th rowSpan="2">จำนวนครั้งที่ส่ง</th>
