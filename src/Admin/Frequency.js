@@ -3,7 +3,6 @@ import { post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import Modal from 'react-responsive-modal'
 import { Accordion, AccordionItem } from 'react-light-accordion';
-import Chart from '../Support/Chart'
 
 class Frequency extends Component {
     constructor(props) {
@@ -54,7 +53,7 @@ class Frequency extends Component {
 
     }
 
-    sum_data = (data) => {
+    sum_data = (data, index) => {
         let sum = 0;
 
         for (var i = 0; i < data.length; i++) {
@@ -65,8 +64,58 @@ class Frequency extends Component {
         return sum;
     }
 
+    sum_data_in_month = (data, index) => {
+        let Jan = 0;
+        let Feb = 0;
+        let Mar = 0;
+        let Apr = 0;
+        let May = 0;
+        let Jun = 0;
+        let Jul = 0;
+        let Aug = 0;
+        let Sep = 0;
+        let Oct = 0;
+        let Nov = 0;
+        let Dec = 0;
+        if (index === 0) {
+            Jan += data[0]
+        }
+        if (index === 1) {
+            Feb += data[1]
+        }
+        if (index === 2) {
+            Mar += data[2]
+        }
+        if (index === 3) {
+            Apr += data[3]
+        }
+        if (index === 4) {
+            May += data[4]
+        }
+        if (index === 5) {
+            Jun += data[5]
+        }
+        if (index === 6) {
+            Jul += data[6]
+        }
+        if (index === 7) {
+            Aug += data[7]
+        }
+        if (index === 8) {
+            Sep += data[8]
+        }
+        if (index === 9) {
+            Oct += data[9]
+        }
+        if (index === 10) {
+            Nov += data[10]
+        }
+        if (index === 11) {
+            Dec += data[11]
+        }
+        return Jan
 
-
+    }
 
 
     render() {
@@ -111,7 +160,7 @@ class Frequency extends Component {
                                                                 <tr>
                                                                     {month.map((element_month) => {
                                                                         return (
-                                                                            <th>{element_month}</th>
+                                                                            <th>{element_month} </th>
                                                                         )
                                                                     })}
                                                                 </tr>
@@ -125,14 +174,27 @@ class Frequency extends Component {
                                                                                 )
                                                                             })}
                                                                         </tr>
+
                                                                     )
                                                                 })
                                                                 }
+                                                                {element_se.rang.map((element_rang, index_rang) => {
+                                                                    return (
+                                                                        <tr>
+                                                                            <th>รวมทั้งหมด</th>
+
+                                                                            {element_rang.data.map((element_data, index_r_data) => {
+                                                                                return (
+                                                                                    <td>{this.sum_data_in_month(element_data, index_r_data)}</td>
+                                                                                )
+                                                                            })}
+                                                                        </tr>
+
+                                                                    )
+                                                                })
+                                                                }
+
                                                             </table>
-                                                            <Chart
-                                                                data={element_se.rang}
-                                                                name={element_se.name}
-                                                            />
                                                         </AccordionItem>
                                                     )
                                                 })
@@ -141,13 +203,15 @@ class Frequency extends Component {
                                     )
                                 })
                             }
-
-
-                            <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
-                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-
                         </div>
                     </div>
+                    <div className="Row">
+                        <div className="col-12">
+                            <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
+                            <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                        </div>
+                    </div>
+
                 </Modal>
             </div>
         )
