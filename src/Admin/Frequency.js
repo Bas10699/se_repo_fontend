@@ -3,6 +3,7 @@ import { post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import Modal from 'react-responsive-modal'
 import { Accordion, AccordionItem } from 'react-light-accordion';
+import Chart from '../Support/Chart'
 
 class Frequency extends Component {
     constructor(props) {
@@ -102,7 +103,7 @@ class Frequency extends Component {
                                                 element.se.map((element_se, index_se) => {
                                                     return (
                                                         <AccordionItem title={element_se.name + " " + "(จำนวนเปอร์เซ็นที่ส่งมา xx%)"}>
-                                                            <table style={{textAlign:"center"}}>
+                                                            <table style={{ textAlign: "center" }}>
                                                                 <tr>
                                                                     <th rowSpan="2">จำนวนครั้งที่ส่ง</th>
                                                                     <th colSpan="12">เดือน</th>
@@ -117,7 +118,7 @@ class Frequency extends Component {
                                                                 {element_se.rang.map((element_rang, index_rang) => {
                                                                     return (
                                                                         <tr>
-                                                                            <td>{index_rang+1}</td>
+                                                                            <td>{index_rang + 1}</td>
                                                                             {element_rang.data.map((element_data) => {
                                                                                 return (
                                                                                     <td>{addComma(element_data)}</td>
@@ -128,6 +129,10 @@ class Frequency extends Component {
                                                                 })
                                                                 }
                                                             </table>
+                                                            <Chart
+                                                                data={element_se.rang}
+                                                                name={element_se.name}
+                                                            />
                                                         </AccordionItem>
                                                     )
                                                 })
