@@ -38,6 +38,7 @@ class Frequency extends Component {
                         frequency: result.result,
                         se: result.result
                     })
+                    // this.sum_data_in_month()
                     setTimeout(() => {
                         console.log('get_freq', result.result)
                     })
@@ -64,57 +65,66 @@ class Frequency extends Component {
         return sum;
     }
 
-    sum_data_in_month = (data, index) => {
-        let Jan = 0;
-        let Feb = 0;
-        let Mar = 0;
-        let Apr = 0;
-        let May = 0;
-        let Jun = 0;
-        let Jul = 0;
-        let Aug = 0;
-        let Sep = 0;
-        let Oct = 0;
-        let Nov = 0;
-        let Dec = 0;
-        if (index === 0) {
-            Jan += data[0]
-        }
-        if (index === 1) {
-            Feb += data[1]
-        }
-        if (index === 2) {
-            Mar += data[2]
-        }
-        if (index === 3) {
-            Apr += data[3]
-        }
-        if (index === 4) {
-            May += data[4]
-        }
-        if (index === 5) {
-            Jun += data[5]
-        }
-        if (index === 6) {
-            Jul += data[6]
-        }
-        if (index === 7) {
-            Aug += data[7]
-        }
-        if (index === 8) {
-            Sep += data[8]
-        }
-        if (index === 9) {
-            Oct += data[9]
-        }
-        if (index === 10) {
-            Nov += data[10]
-        }
-        if (index === 11) {
-            Dec += data[11]
-        }
-        return Jan
+    sum_data_in_month = (dd, index) => {
+        let sum_se = []
+            let Jan = 0;
+            let Feb = 0;
+            let Mar = 0;
+            let Apr = 0;
+            let May = 0;
+            let Jun = 0;
+            let Jul = 0;
+            let Aug = 0;
+            let Sep = 0;
+            let Oct = 0;
+            let Nov = 0;
+            let Dec = 0;
+            dd.rang.map((ele_rang) => {
+                ele_rang.data.map((ele_rang_data, index) => {
+                    if (index === 0) {
+                        Jan += ele_rang_data
+                    }
+                    else if (index === 1) {
+                        Feb += ele_rang_data
+                    }
+                    else if (index === 2) {
+                        Mar += ele_rang_data
+                    }
+                    else if (index === 3) {
+                        Apr += ele_rang_data
+                    }
+                    else if (index === 4) {
+                        May += ele_rang_data
+                    }
+                    else if (index === 5) {
+                        Jun += ele_rang_data
+                    }
+                    else if (index === 6) {
+                        Jul += ele_rang_data
+                    }
+                    else if (index === 7) {
+                        Aug += ele_rang_data
+                    }
+                    else if (index === 8) {
+                        Sep += ele_rang_data
+                    }
+                    else if (index === 9) {
+                        Oct += ele_rang_data
+                    }
+                    else if (index === 10) {
+                        Nov += ele_rang_data
+                    }
+                    else if (index === 11) {
+                        Dec += ele_rang_data
+                    }
+                    else { }
 
+                })
+            })
+            sum_se = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+
+
+        return sum_se
     }
 
 
@@ -180,21 +190,21 @@ class Frequency extends Component {
                                                                     )
                                                                 })
                                                                 }
-                                                                {element_se.rang.map((element_rang, index_rang) => {
-                                                                    return (
-                                                                        <tr>
-                                                                            <th>รวมทั้งหมด</th>
 
-                                                                            {element_rang.data.map((element_data, index_r_data) => {
-                                                                                return (
-                                                                                    <td>{this.sum_data_in_month(element_data, index_r_data)}</td>
-                                                                                )
-                                                                            })}
-                                                                        </tr>
+                                                                <tr>
+                                                                    <th>รวมทั้งหมด</th>
+                                                                    {/* {this.state.data.sum.map((ele_sum)=>{
+                                                                        console.log(ele_sum)
+                                                                    })} */}
+                                                                    {this.sum_data_in_month(element_se, index_se).map((ele_sum) => {
+                                                                        return(
+                                                                            <th>{ele_sum}</th>
+                                                                        )
+                                                                    })}
 
-                                                                    )
-                                                                })
-                                                                }
+                                                                </tr>
+
+
 
                                                             </table>
                                                         </AccordionItem>
