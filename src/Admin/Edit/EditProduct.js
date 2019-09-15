@@ -1,6 +1,6 @@
 //แก้ไขสินค้า
 import React, { Component } from 'react';
-import { NavLink, Prompt } from 'react-router-dom'
+import { NavLink, Prompt, Redirect } from 'react-router-dom'
 import { user_token, addComma } from '../../Support/Constance';
 import { ip, get, post } from '../../Support/Service';
 import queryString from 'query-string';
@@ -29,7 +29,13 @@ class EditProduct extends Component {
     }
 
     componentWillMount() {
-        this.get_product()
+        if (!user_token) {
+            this.props.history.push('/')
+        } else {
+            this.get_product()
+        }
+
+
     }
 
     get_product = async () => {

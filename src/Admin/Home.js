@@ -62,7 +62,7 @@ class Home extends Component {
                                     <div className="col-5">
                                         <h2>{product_data.product_name}</h2>
                                         <h4>ราคาขายปลีก</h4>
-                                        <NavLink to={"/EditProduct/product?product_id=" + product_data.product_id}><button className="BTN_Buy">ซื้อสินค้า</button></NavLink>
+                                        <NavLink to={"/Product/product?product_id=" + product_data.product_id}><button className="BTN_Buy">ซื้อสินค้า</button></NavLink>
                                     </div>
 
                                 </div>
@@ -83,7 +83,7 @@ class Home extends Component {
                                             {element.image ? <img alt="Product" src={ip + element.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             <h4>{element.product_name}</h4>
                                             <h5>ราคาปลีก บาท</h5>
-                                            <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button>รายละเอียดเพิ่มเติม</button></NavLink>
+                                            <NavLink to={"/Product/product?product_id=" + element.product_id}><button>รายละเอียดเพิ่มเติม</button></NavLink>
                                         </div>
                                     )
                                 }

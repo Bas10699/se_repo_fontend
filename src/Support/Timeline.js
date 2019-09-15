@@ -86,7 +86,7 @@ class Timeline extends Component {
                                     <img src={one} alt="one"
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
                                     <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ<br />
-                                        {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}
+                                        {moment(this.props.order.order_date).utc().format('DD/MM/YYYY HH:mm')}
                                         <PdfOrder data={this.props.order} />
                                     </div></li>
                                 : <li className="Standat" >
@@ -99,7 +99,7 @@ class Timeline extends Component {
                                     <img src={two} alt="two"
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
                                     <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ยืนยันคำสั่งซื้อแล้ว<br />
-                                        {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}
+                                        {moment(this.props.invoice.date).utc().format('DD/MM/YYYY HH:mm')}
                                         <PdfInvoice data={this.props.invoice} />
                                     </div></li>
                                 : <li className="Standat">
@@ -111,7 +111,7 @@ class Timeline extends Component {
                                 <img src={three} alt="three"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
                                 <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ชำระเงินแล้ว<br />
-                                    {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}<br />
+                                    {moment(this.props.order.date_of_payment).utc().format('DD/MM/YYYY HH:mm')}<br />
                                     <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
                                     </div></li>
                                 : <li className="Standat" >
@@ -123,8 +123,8 @@ class Timeline extends Component {
                                 <img src={four} alt="four"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
                                 <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>สินค้าทำการจัดส่ง<br />
-                                    {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}<br/>
-                                    <PdfBill data={this.props.bill}/>
+                                    {moment(this.props.order.check_payment_date).utc().format('DD/MM/YYYY HH:mm')}<br/>
+                                    <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment}/>
                                     </div></li>
                                 : <li className="Standat" >
                                     <img src={fourdis} alt="four"
@@ -135,7 +135,7 @@ class Timeline extends Component {
                                 <img src={five} alt="five"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", zIndex: "1000" }} />
                                 <br /><div style={{ textAlign: "center", marginLeft: "55%", width: "200px" }}>ตรวจสอบสินค้า<br />
-                                    {moment(this.props.order.order_date).format('DD/MM/YYYY HH:mm')}<br/>
+                                    {moment(this.props.order.date_end).utc().format('DD/MM/YYYY HH:mm')}<br/>
                                     {/* <button className="BTN_PDF">ตรวจสอบ</button> */}
                                     </div></li>
                                 : <li className="Standatles" >

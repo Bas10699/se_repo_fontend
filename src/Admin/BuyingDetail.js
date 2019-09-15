@@ -56,10 +56,10 @@ class BuyingDetail extends Component {
         let params = queryString.parse(url);
         const object = {
             order_id: params.order_id,
-            status: 4
+            order_status: 4
         }
         try {
-            await post(object, 'neutrally/update_status_order_trader', user_token).then((result) => {
+            await post(object, 'trader/update_status_order_trader', user_token).then((result) => {
                 if (result.success) {
                     window.location.reload()
                     setTimeout(() => {
@@ -219,7 +219,7 @@ class BuyingDetail extends Component {
                         console.log("get_order_info", result.result)
                     }, 500)
                 } else {
-                    window.location.href = "/manage_order";
+                    window.location.href = "/T_Buying";
                     alert(result.error_message)
                 }
             });

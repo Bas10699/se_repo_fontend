@@ -132,7 +132,8 @@ class Navbar extends Component {
     logOut = (e) => {
         e.preventDefault()
         localStorage.removeItem('user_token')
-        this.props.history.push('/')
+        window.location.href='/'
+        // this.props.history.push('/')
     }
 
 

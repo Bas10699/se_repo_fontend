@@ -7,7 +7,6 @@
     "apexcharts": "^3.8.6",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
-    "pdfmake": "^0.1.57",
     "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
