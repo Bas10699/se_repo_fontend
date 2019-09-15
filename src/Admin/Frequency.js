@@ -3,6 +3,7 @@ import { post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import Modal from 'react-responsive-modal'
 import { Accordion, AccordionItem } from 'react-light-accordion';
+import { NavLink } from 'react-router-dom'
 
 class Frequency extends Component {
     constructor(props) {
@@ -14,10 +15,14 @@ class Frequency extends Component {
             month: [],
             volume: 0,
             select_month: [],
+            status:null,
         }
     }
     componentWillMount() {
         this.get_freq()
+        this.setState({
+            status:this.props.status
+        })
     }
 
     onCloseModal = () => {
@@ -135,6 +140,13 @@ class Frequency extends Component {
         })
     }
 
+    Comfirm = () =>{
+        this.setState({
+            status:1,
+            open: false
+        })
+        alert("ทำการสั่งซื้อเรียบร้อย")
+    }
 
     render() {
         let month = [
@@ -143,20 +155,25 @@ class Frequency extends Component {
 
         return (
             <div>
-                <button onClick={() => { this.onOpenModal() }}
+                {this.state.status <= 5 ? 
+                <NavLink to={"/Product/product?product_id=" + this.props.product_id}>
+                <button 
+                
+                // onClick={() => { this.onOpenModal() }}
                     className="BTN_AddCart"
                     style={{ width: "250px", float: "right" }}>
                     ทำการสั่งซื้อวัตถุดิบ
-                </button>
+                </button> </NavLink> 
+                : "ทำการสั่งซื้อเเล้ว"}
+                {console.log("status", this.state.status)}
+                
 
 
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-12">
                             <h3 style={{ textAlign: "center" }}>รายละเอียดวัตถุดิบ "{this.props.plant_name}"</h3>
-                            <h4>จำนวนวัตถุดิบทั้งหมด
-                            xx
-                                กิโลกรัม</h4>
+                            <h4>จำนวนวัตถุดิบทั้งหมด xx กิโลกรัม</h4>
                             <h4>จำนวนที่สั่งซื้อ {addComma(this.props.amount)} กิโลกรัม</h4>
                             <h4>ต้องสั่งซื้ออีก {addComma(this.props.amount - this.state.volume > 0 ? this.props.amount - this.state.volume : "ซื้อวัตถุดิบครบเเล้ว")} กิโลกรัม</h4>
                             <h5>จาก SE name : จำนวนที่สั่งซื้อจาก SE นี้ </h5>

@@ -16,8 +16,6 @@ import four from '../Image/four.png'
 import fourdis from '../Image/fourdis.png'
 import five from '../Image/five.png'
 import fivedis from '../Image/fivedis.png'
-import six from '../Image/six.png'
-import sixdis from '../Image/sixdis.png'
 import Modal from 'react-responsive-modal'
 
 // import FrequencyPlant from './frequency_plant'

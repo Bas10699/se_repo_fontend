@@ -242,6 +242,7 @@ class OrderDetail extends Component {
                         <div className="col-12">
                             <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการรอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
                             <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                            <h3>&nbsp; ต้องทำการสั่งซื้อวะตถุดิบก่อน เเล้วจึงกดยืนยันการสั่งซื้อ</h3>
                         </div>
                     </div>
                     <div className="Row">
@@ -298,7 +299,7 @@ class OrderDetail extends Component {
                 </div>
                 break;
 
-                case 4: render_show =
+            case 4: render_show =
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
@@ -387,7 +388,11 @@ class OrderDetail extends Component {
                                             <td>{addComma(element_plant.amount)} กิโลกรัม</td>
                                             <td>{element_plant.price} บาท</td>
                                             <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
-                                            <td><Frequency plant_name={element_plant.plant_name} amount={element_plant.amount} /></td>
+                                            <td><Frequency
+                                                product_id={"P%20" + element_plant.plant_id}
+                                                plant_name={element_plant.plant_name}
+                                                amount={element_plant.amount}
+                                                status={this.state.order.order_status} /></td>
                                         </tr>
                                     )
                                 })
@@ -432,6 +437,8 @@ class OrderDetail extends Component {
                             <h4>ชำระเงินภายในวันที่</h4>
                             <input type="date" name="date_send" id="date_send" onChange={this.handleChange} />
                             <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
+                            เเสดงรายชื่อธนาคารทั้งหมด
+
                             <h4>ชื่อธนาคาร <input name="BankName" type="bank" id="BankName" onChange={this.handleChange} /></h4>
                             <h4>เลขบัญชีธนาคาร <input name="BankNo" type="bank" id="BankNo" onChange={this.handleChange} /></h4>
                             <h4>ชื่อบัญชีธนาคาร  <input name="BankAccountName" type="bank" id="BankAccountName" onChange={this.handleChange} /></h4>

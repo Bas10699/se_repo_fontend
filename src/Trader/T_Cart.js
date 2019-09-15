@@ -9,6 +9,7 @@ class T_Cart extends Component {
         super(props)
         this.state = {
             cart_product: [],
+            get_user:null,
             render_cart: null,
             total_price: [],
             open: false,
@@ -42,6 +43,25 @@ class T_Cart extends Component {
 
     componentWillMount() {
         this.get_product()
+        this.get_user()
+    }
+
+    get_user = async () => {
+        try {
+            await get('show/show_user', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        get_user: result.result
+                    })
+                    setTimeout(() => {
+                        console.log("get user : ", result.result)
+                    }, 500)
+                } else {
+                }
+            });
+        } catch (error) {
+            alert("get user error : " + error);
+        }
     }
 
     get_product = async () => {
@@ -261,6 +281,8 @@ class T_Cart extends Component {
                                     <h4>วันที่กำหนดส่ง</h4>
                                     <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
                                     <h4>ที่อยู่จัดส่ง</h4>
+                                        <input type="radio" name="address_new"/>ที่อยู่เดิม
+                                        <input type="radio" name="address_new"/>ที่อยู่ใหม่
                                     <textarea rows="4" cols="95" name="address" id="address" onChange={this.handleChange}
                                         form="usrform" />
                                     <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>

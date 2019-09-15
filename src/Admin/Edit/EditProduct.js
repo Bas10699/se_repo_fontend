@@ -214,6 +214,7 @@ class EditProduct extends Component {
     }
 
     delete_index = (index) => {
+        
         alert("ลบ ราคา")
     }
 
@@ -277,7 +278,7 @@ class EditProduct extends Component {
                                         <option value="kg">กิโลกรัม</option>
                                         <option value="tun">ตัน</option>
                                     </select>
-                                    <button className="X" onClick={() => { this.delete_index(index) }}>ลบ</button>
+                                    <button onClick={() => { this.delete_index(index) }}>ลบ</button>
                                 </h4>
                             )
                         })
