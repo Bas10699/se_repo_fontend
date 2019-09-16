@@ -19,6 +19,7 @@ import EditProduct from './Admin/Edit/EditProduct';
 import Test from './Support/Test';
 import M_Summary from './SE-Middle/M_Summary';
 import AddProduct from './Admin/AddProduct';
+import EditUser from './Admin/Edit/EditUser';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Route exact path='/T_Buying' component={T_Buying}/>
       <Route exact path='/T_Buying/:orderID' component={BuyingDetail}/>
       <Route exact path='/User' component={User}/>
+      <Route exact path='/EditUser' component={EditUser}/>
       <Route exact path='/M_Order' component={M_Order}/>
       <Route exact path='/M_Order/:orderID' component={OrderDetail}/>
       <Route exact path='/EditProduct/:productID' component={EditProduct}/>

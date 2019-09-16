@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
 import { get } from '../Support/Service';
+import { NavLink } from 'react-router-dom'
 
 class User extends Component {
     constructor(props) {
@@ -109,16 +110,24 @@ class User extends Component {
                                 <th>ที่อยู่</th>
                                 <td>{this.state.get_user ? this.state.get_user.address : null}</td>
                             </tr>
+
                         </table>
-                    
+                        บัญชีธนาคาร
+                        <div style={{width:"100%", boder:"1px solid #d9d9d9"}}>
+                            <h3>ชื่อธนาคาร</h3>
+                            <h4>ชื่อบัญชีธนาคาร</h4>
+                            <h4>เลขที่บัญชี</h4>
+                        </div>
+
+                        <NavLink to={"/EditUser"}><button className="BTN_Signin">แก้ไขข้อมูล</button></NavLink>
                     </div>
                     <div className="col-3"></div>
-                        
-                    
+
+
                 </div>
 
 
-                
+
             </div>
         )
     }
