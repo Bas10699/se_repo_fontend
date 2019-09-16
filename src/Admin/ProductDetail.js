@@ -143,6 +143,23 @@ class ProductDetail extends Component {
         return price
     }
 
+    sort_price = (data_price)=>{
+        let dataSortVolume = data_price.sort(compare)
+        function compare(a, b) {
+            const order_idA = a.volume
+            const order_idB = b.volume
+
+            let comparison = 0;
+            if (order_idA > order_idB) {
+                comparison = 1;
+            } else if (order_idA < order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+        return dataSortVolume
+    }
+
     sum_price = (data) => {
         let sum = 0;
         data.map((element) => {
@@ -182,7 +199,7 @@ class ProductDetail extends Component {
 
 
                         {/* <h4>ราคาขายปลีก</h4> */}
-                        {this.state.price.map((element, index) => {
+                        {this.sort_price(this.state.price).map((element, index) => {
                             return (<h4>{element.volume} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h4>)
                         })}
                         {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
@@ -223,7 +240,7 @@ class ProductDetail extends Component {
                                             <td style={{ textAlign: "center" }}>{index_plant + 1}</td>
                                             <td style={{ textAlign: "center" }}>PCODE-{element_plant.plant_id}</td>
                                             <td>{element_plant.plant_name}</td>
-                                            <td style={{ textAlign: "center" }}>{addComma(element_plant.price[0].price)} บาท</td>
+                                            <td style={{ textAlign: "center" }}>{addComma(this.volume_check(element_plant.price))} บาท</td>
                                             <td style={{ textAlign: "center" }}>{addComma(this.sum_data(element_plant.data))} กิโลกรัม</td>
                                             <td style={{ textAlign: "center" }}>
                                                 {addComma(this.state.total_plant = element_plant.volume * this.state.amount)} กิโลกรัม
@@ -238,7 +255,7 @@ class ProductDetail extends Component {
                                                  </div>}
                                             </td>
                                             <td style={{ textAlign: "right" }}>
-                                                {addComma(this.state.total_price = element_plant.price[0].price * this.state.total_plant)} บาท
+                                                {addComma(this.state.total_price = this.volume_check(element_plant.price) * this.state.total_plant)} บาท
                                             </td>
                                         </tr>
                                     )
