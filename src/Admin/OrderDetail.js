@@ -241,9 +241,9 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการรอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
-                            <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
-                            <h3>&nbsp; ต้องทำการสั่งซื้อวะตถุดิบก่อน เเล้วจึงกดยืนยันการสั่งซื้อ</h3>
+                            <h4>สถานะการสั่งซื้อ : ผู้ประกอบการรอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
+                            <h5>รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                            <h3>ต้องทำการสั่งซื้อวัตถุดิบก่อน เเล้วจึงกดยืนยันการสั่งซื้อ</h3>
                         </div>
                     </div>
                     <div className="Row">
@@ -259,8 +259,8 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
-                            {/* <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5> */}
+                            <h4>สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                            {/* <h5>รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5> */}
                         </div>
                     </div>
                     <div className="Row">
@@ -277,8 +277,8 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการชำระเงินแล้ว</h4>
-                            <h5>&nbsp; รอ SE กลางออกใบเสร็จ</h5>
+                            <h4>สถานะการสั่งซื้อ : ผู้ประกอบการชำระเงินแล้ว</h4>
+                            <h5>รอ SE กลางออกใบเสร็จ</h5>
                         </div>
                     </div>
                     <div className="Row">
@@ -294,7 +294,7 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : จัดส่งสินค้าเรียบร้อย รอผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้า</h4>
+                            <h4>สถานะการสั่งซื้อ : จัดส่งสินค้าเรียบร้อย รอผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้า</h4>
                         </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : ผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้าเรียบร้อย</h4>
+                            <h4>สถานะการสั่งซื้อ : ผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้าเรียบร้อย</h4>
                         </div>
                     </div>
                 </div>
@@ -314,8 +314,8 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
-                            {/* <h5>&nbsp; รอ SE กลางออกใบเสร็จ</h5> */}
+                            <h4>สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+                            {/* <h5>รอ SE กลางออกใบเสร็จ</h5> */}
                         </div>
                     </div>
                     {/* <div className="Row">

@@ -84,8 +84,8 @@ class BuyingDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการสั่งซื้อ</h4>
-                            <h5>&nbsp; รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                            <h4>สถานะการสั่งซื้อ : รอการยืนยันการสั่งซื้อ</h4>
+                            <h5>รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
                         </div>
                     </div>
                     <div className="Row">
@@ -99,10 +99,10 @@ class BuyingDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
-                            <h5>&nbsp; กรุณาชำระเงินผ่าน : 
+                            <h4>สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
+                            <h5>กรุณาชำระเงินผ่าน : 
                             โชว์รายชื่อธนาคาร {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
-                            <h5>&nbsp; ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} &nbsp; เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
+                            <h5>ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
                         </div>
                     </div>
                     <div className="Row">
@@ -117,8 +117,8 @@ class BuyingDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : รอ SE กลางตรวจสอบการโอนเงิน</h4>
-                            <h5>&nbsp; รอ SE กลาง ตรวจสอบการโอนเงิน หลังจากตรวจสอบเรียบร้อยจะส่งใบเสร็จกลับมา</h5>
+                            <h4>สถานะการสั่งซื้อ : รอ SE กลางตรวจสอบการโอนเงิน</h4>
+                            <h5>รอ SE กลาง ตรวจสอบการโอนเงิน หลังจากตรวจสอบเรียบร้อยจะส่งใบเสร็จกลับมา</h5>
                         </div>
                     </div>
                     <div className="Row">
@@ -135,7 +135,7 @@ class BuyingDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : สินค้าได้ทำการจัดสั่งเเล้ว ผู้ประกอบการกรุณาตรวจสอบสินค้าและใบเสร็จ</h4>
+                            <h4>สถานะการสั่งซื้อ : สินค้าได้ทำการจัดสั่งเเล้ว ผู้ประกอบการกรุณาตรวจสอบสินค้าและใบเสร็จ</h4>
                         </div>
                     </div>
                     <div className="Row">
@@ -150,7 +150,7 @@ class BuyingDetail extends Component {
             //     <div className='_Card'>
             //         <div className="Row">
             //             <div className="col-12">
-            //                 <h4>&nbsp; สถานะการสั่งซื้อ : ตรวจสอบสินค้า</h4>
+            //                 <h4>สถานะการสั่งซื้อ : ตรวจสอบสินค้า</h4>
             //             </div>
             //         </div>
             //         <div className="Row">
@@ -165,7 +165,7 @@ class BuyingDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : เรียบร้อย</h4>
+                            <h4>สถานะการสั่งซื้อ : เรียบร้อย</h4>
 
                         </div>
                     </div>
@@ -183,7 +183,7 @@ class BuyingDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>&nbsp; สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+                            <h4>สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
 
                         </div>
                     </div>

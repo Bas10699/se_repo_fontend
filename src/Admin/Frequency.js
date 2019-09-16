@@ -155,9 +155,6 @@ class Frequency extends Component {
 
         return (
             <div>
-                
-
-
 
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row">

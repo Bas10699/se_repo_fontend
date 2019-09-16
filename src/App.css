@@ -496,6 +496,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
     padding: 10px 10px;
     width: 100%;
     border-radius: 5px;
+    margin-top: -10px;
 }
 
 /* End Input */
