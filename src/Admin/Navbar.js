@@ -142,7 +142,7 @@ class Navbar extends Component {
         const loginRegLink = (
             <div className="App">
                 <div className="Navbar">
-                    <NavLink exact to="/" className="NavbarLeft">SE Home Shop</NavLink>
+                    <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
                     <ul>
                         <NavLink to="/signin" activeClassName="Active" className="NavbarRight">เข้าสู่ระบบ</NavLink>
                         <NavLink to="/signup" activeClassName="Active" className="NavbarRight">ลงทะเบียน</NavLink>

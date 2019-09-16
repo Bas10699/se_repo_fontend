@@ -15,13 +15,13 @@ class Frequency extends Component {
             month: [],
             volume: 0,
             select_month: [],
-            status:null,
+            status: null,
         }
     }
     componentWillMount() {
         this.get_freq()
         this.setState({
-            status:this.props.status
+            status: this.props.status
         })
     }
 
@@ -140,9 +140,9 @@ class Frequency extends Component {
         })
     }
 
-    Comfirm = () =>{
+    Comfirm = () => {
         this.setState({
-            status:1,
+            status: 1,
             open: false
         })
         alert("ทำการสั่งซื้อเรียบร้อย")
@@ -155,18 +155,8 @@ class Frequency extends Component {
 
         return (
             <div>
-                {this.state.status <= 5 ? 
-                <NavLink to={"/Product/product?product_id=" + this.props.product_id}>
-                <button 
                 
-                // onClick={() => { this.onOpenModal() }}
-                    className="BTN_AddCart"
-                    style={{ width: "250px", float: "right" }}>
-                    ทำการสั่งซื้อวัตถุดิบ
-                </button> </NavLink> 
-                : "ทำการสั่งซื้อเเล้ว"}
-                {console.log("status", this.state.status)}
-                
+
 
 
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
