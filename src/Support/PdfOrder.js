@@ -3,7 +3,7 @@ import moment from 'moment'
 import ThaiBaht from 'thai-baht-text'
 import {addComma} from './Constance'
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 pdfMake.fonts = {

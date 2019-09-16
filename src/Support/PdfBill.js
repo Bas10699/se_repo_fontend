@@ -58,8 +58,8 @@ class Pdf extends Component {
                             table: {
                                 widths: [50, 100],
                                 body: [
-                                    [{ text: 'เลขที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, this.props.data.invoice_id],
-                                    [{ text: 'วันที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, moment(this.props.data.date).utc().format("DD/MM/YYYY")]
+                                    [{ text: 'เลขที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, this.props.invoice.invoice_id],
+                                    [{ text: 'วันที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, moment(this.props.invoice.date).utc().format("DD/MM/YYYY")]
                                 ]
                             }
                         },
@@ -74,7 +74,7 @@ class Pdf extends Component {
                                 heights: 90,
                                 body: [
                                     [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
-                                     `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_id}\nอ้างอิงใบแจ้งหนี้เลขที่ ${this.props.data.invoice_id}\nกำหนดวันชำระเงิน ${this.props.data.date_send} \nวันที่ชำระเงิน ${this.props.payment.date_proof}\nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
+                                     `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_id}\nอ้างอิงใบแจ้งหนี้เลขที่ ${this.props.invoice.invoice_id}\nกำหนดวันชำระเงิน ${this.props.data.date_send} \nวันที่ชำระเงิน ${this.props.payment.date_proof}\nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                                 ]
                             }
                         },
@@ -147,7 +147,7 @@ class Pdf extends Component {
                                 heights: [15, 89],
                                 body: [
                                     [{ text: 'เงื่อนไขอื่นๆ', style: 'subheader1', }, { text: 'ผู้จัดทำ \n\n_______________ \n\nผู้ตรวจสอบ \n\n_______________', rowSpan: 2 }, { text: '\n\n\n\n\n_________________________ \nผู้มีอำนาจลงนาม', rowSpan: 2 },],
-                                    [`1. กรุณาโอนเงินเข้าบัญชี "${this.props.data.invoice_detail.BankAccountName}" และนำหลักฐานการโอนเงิน แจ้งยืนยันการชำระเงิน\n\t\t - ธนาคาร${this.props.data.invoice_detail.BankName}  เลขที่ ${this.props.data.invoice_detail.BankNo}\n\t\t `]
+                                    [`1. กรุณาโอนเงินเข้าบัญชี "${this.props.invoice.invoice_detail.BankAccountName}" และนำหลักฐานการโอนเงิน แจ้งยืนยันการชำระเงิน\n\t\t - ธนาคาร${this.props.invoice.invoice_detail.BankName}  เลขที่ ${this.props.invoice.invoice_detail.BankNo}\n\t\t `]
                                 ]
                             }
                         },

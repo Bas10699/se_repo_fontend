@@ -90,9 +90,9 @@ class OrderDetail extends Component {
                         console.log("get_order", result.result)
                     }, 500)
                 } else {
-                    // window.location.href = "/sales_sum";
+                    window.location.href = "/M_Order";
                     alert(result.error_message)
-                    console.log("get_order", result.result)
+                    // console.log("get_order", result.result)
                 }
             });
         } catch (error) {
