@@ -392,15 +392,9 @@ class OrderDetail extends Component {
                                             {console.log("test", this.state.detail)}
                                             <td>{
                                                 this.state.order.order_status <= 5 ?
-                                                    <NavLink to={"/Product/product?product_id=P%20" + element_plant.plant_id}>
+                                                    <NavLink to={"/M_Product"}>
                                                         <button
-                                                            // onClick={() => { this.onOpenModal() }}
                                                             className="BTN_AddCart"
-                                                            order_id={this.state.order.order_id}
-                                                            plant_name={element_plant.plant_name}
-                                                            amount={element_plant.amount}
-                                                            status={this.state.order.order_status}
-                                                            detail={this.state.detail}
                                                             style={{ width: "250px", float: "right" }}>
                                                             ทำการสั่งซื้อวัตถุดิบ
                                                         </button>

@@ -78,6 +78,28 @@ class EditUser extends Component {
         this.get_user()
     }
 
+    render_type = (user_type) => {
+        let render_user
+        switch (user_type) {
+            case "2":
+                render_user = <div > ผู้ประกอบการ </div>
+                break;
+            case "3":
+                render_user = <div > SE ย่อย </div>
+                break;
+            case "4":
+                render_user = <div > SE กลาง  </div>
+                break;
+            case "5":
+                render_user = <div > Admin </div>
+                break;
+
+            default:
+                render_user = <div className="FontDanger"> เกิดข้อผิดพลาด </div>
+                break;
+        }
+        return render_user
+    }
 
 
     render() {
@@ -89,64 +111,40 @@ class EditUser extends Component {
                     </div>
                 </div>
                 <div className="Row">
-                    <div className="col-4"></div>
+                    <div className="col-1"></div>
                     <div className="col-4">
-                        <table>
-                            <tr>
-                                <th>ชื่อ</th>
-                                < input style={{ marginTop: "0px" }}
-                                    type="text" id="name"
-                                    placeholder={this.state.get_user ? this.state.get_user.name : null}
-                                    onChange={this.handleChange}
-                                />
-                            </tr>
-                            <tr>
-                                <th>นามสกุล</th>
-                                < input style={{ marginTop: "0px" }} type="text" id="lastname"
-                                    placeholder={this.state.get_user ? this.state.get_user.lastname : null} 
-                                    onChange={this.handleChange}
-                                />
-                            </tr>
-                            <tr>
-                                <th>ประเภทผู้ใช้งาน</th>
-                                < input style={{ marginTop: "0px" }} type="text" id="render_type"
-                                    placeholder={this.state.get_user ? this.render_type(this.state.get_user.user_type) : null} 
-                                    onChange={this.handleChange}
-                                />
-                            </tr>
-                            <tr>
-                                <th>อีเมล์</th>
-                                < input style={{ marginTop: "0px" }} type="text" id="email"
-                                    placeholder={this.state.get_user ? this.state.get_user.email : null} onChange={this.handleChange}
-                                />
-                            </tr>
-                            <tr>
-                                <th>เบอร์โทรศัพท์</th>
-                                < input style={{ marginTop: "0px" }} type="text" id="phone"
-                                    placeholder={this.state.get_user ? this.state.get_user.phone : null} onChange={this.handleChange}
-                                />
-                            </tr>
-                            <tr>
-                                <th>ชื่อผู้ใช้งาน</th>
-                                < input style={{ marginTop: "0px" }} type="text" id="username"
-                                    placeholder={this.state.get_user ? this.state.get_user.username : null} onChange={this.handleChange}
-                                />
-                            </tr>
-                            <tr>
-                                <th>ที่อยู่</th>
-                                < input style={{ marginTop: "0px" }} type="text" id="address"
-                                    placeholder={this.state.get_user ? this.state.get_user.address : null} onChange={this.handleChange}
-                                />
-                            </tr>
-                            <p>
-                                <NavLink to={"User"}>
-                                    <button>ยกเลิก</button>
-                                </NavLink>
-                            </p>
-                            <p>
-                                <button onClick={() => this.Show_Alert_Data()}>บันทึกข้อมูลผู้ใช้งาน</button>
-                            </p>
-                        </table>
+
+                        <h4>ชื่อ</h4>
+                        < input style={{ marginTop: "0px" }}
+                            type="text" id="name"
+                            placeholder={this.state.get_user ? this.state.get_user.name : null}
+                            onChange={this.handleChange}
+                        />
+                        <h4>นามสกุล</h4>
+                        < input style={{ marginTop: "0px" }} type="text" id="lastname"
+                            placeholder={this.state.get_user ? this.state.get_user.lastname : null}
+                            onChange={this.handleChange}
+                        />
+                        <h4>ประเภทผู้ใช้งาน</h4>
+                        <h4>{this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}</h4>
+                        <h4>อีเมล์</h4>
+                        < input style={{ marginTop: "0px" }} type="text" id="email"
+                            placeholder={this.state.get_user ? this.state.get_user.email : null} onChange={this.handleChange}
+                        />
+                        <h4>เบอร์โทรศัพท์</h4>
+                        < input style={{ marginTop: "0px" }} type="text" id="phone"
+                            placeholder={this.state.get_user ? this.state.get_user.phone : null} onChange={this.handleChange}
+                        />
+                        <h4>ชื่อผู้ใช้งาน</h4>
+                        < input style={{ marginTop: "0px" }} type="text" id="username"
+                            placeholder={this.state.get_user ? this.state.get_user.username : null} onChange={this.handleChange}
+                        />
+                        <h4>ที่อยู่</h4>
+                        < input style={{ marginTop: "0px" }} type="text" id="address"
+                            placeholder={this.state.get_user ? this.state.get_user.address : null} onChange={this.handleChange}
+                        />
+                        <button className="BTN_Signin" onClick={() => this.Show_Alert_Data()}>บันทึกข้อมูลผู้ใช้งาน</button>
+                        <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink>
                     </div>
                     <div className="col-4"></div>
                 </div>
@@ -154,4 +152,5 @@ class EditUser extends Component {
             </div>
         )
     }
-} export default EditUser;
+} 
+export default EditUser;

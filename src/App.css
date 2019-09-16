@@ -874,6 +874,7 @@ th,tr:hover{
     margin-bottom: 20px;
     margin-top: 10px;
     background-color: white;
+    padding: 10px 10px;
 }
 .BTN_CONFIRM{
     font-family: 'kunlasatriregular';

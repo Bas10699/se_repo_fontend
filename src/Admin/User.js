@@ -113,10 +113,10 @@ class User extends Component {
 
                         </table>
                         บัญชีธนาคาร
-                        <div style={{width:"100%", boder:"1px solid #d9d9d9"}}>
-                            <h3>ชื่อธนาคาร</h3>
-                            <h4>ชื่อบัญชีธนาคาร</h4>
-                            <h4>เลขที่บัญชี</h4>
+                        <div className="_Card">
+                            สัญลักษณ์ธนาคาร
+                            <h3 style={{margin:"0px"}}>ชื่อธนาคาร</h3>
+                            <h4 style={{margin:"0px"}}>ชื่อบัญชีธนาคาร เลขที่บัญชี</h4>
                         </div>
 
                         <NavLink to={"/EditUser"}><button className="BTN_Signin">แก้ไขข้อมูล</button></NavLink>
