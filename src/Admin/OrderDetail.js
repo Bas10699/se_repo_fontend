@@ -11,6 +11,7 @@ import Modal from 'react-responsive-modal'
 import PdfInvoice from '../Support/PdfInvoice'
 import PdfBill from '../Support/PdfBill'
 import Frequency from './Frequency'
+import { NavLink } from 'react-router-dom'
 
 
 // import FrequencyPlant from './frequency_plant'
@@ -388,11 +389,25 @@ class OrderDetail extends Component {
                                             <td>{addComma(element_plant.amount)} กิโลกรัม</td>
                                             <td>{element_plant.price} บาท</td>
                                             <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
-                                            <td><Frequency
-                                                product_id={"P%20" + element_plant.plant_id}
-                                                plant_name={element_plant.plant_name}
-                                                amount={element_plant.amount}
-                                                status={this.state.order.order_status} /></td>
+                                            {console.log("test", this.state.detail)}
+                                            <td>{
+                                                this.state.order.order_status <= 5 ?
+                                                    <NavLink to={"/Product/product?product_id=P%20" + element_plant.plant_id}>
+                                                        <button
+                                                            // onClick={() => { this.onOpenModal() }}
+                                                            className="BTN_AddCart"
+                                                            order_id={this.state.order.order_id}
+                                                            plant_name={element_plant.plant_name}
+                                                            amount={element_plant.amount}
+                                                            status={this.state.order.order_status}
+                                                            detail={this.state.detail}
+                                                            style={{ width: "250px", float: "right" }}>
+                                                            ทำการสั่งซื้อวัตถุดิบ
+                                                        </button>
+                                                    </NavLink>
+                                                    : "ทำการสั่งซื้อเเล้ว"}
+
+                                            </td>
                                         </tr>
                                     )
                                 })
