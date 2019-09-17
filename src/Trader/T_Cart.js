@@ -159,6 +159,7 @@ class T_Cart extends Component {
                 }
                 else {
                     alert(result.error_message)
+                    window.location.reload()
                 }
             })
 

@@ -137,67 +137,7 @@ class ProductDetail extends Component {
         return sum;
     }
 
-    sum_data_in_month = (dd, index) => {
-        let sum_se = []
-        let Jan = 0;
-        let Feb = 0;
-        let Mar = 0;
-        let Apr = 0;
-        let May = 0;
-        let Jun = 0;
-        let Jul = 0;
-        let Aug = 0;
-        let Sep = 0;
-        let Oct = 0;
-        let Nov = 0;
-        let Dec = 0;
-        dd.rang.map((ele_rang) => {
-            ele_rang.data.map((ele_rang_data, index) => {
-                if (index === 0) {
-                    Jan += ele_rang_data
-                }
-                else if (index === 1) {
-                    Feb += ele_rang_data
-                }
-                else if (index === 2) {
-                    Mar += ele_rang_data
-                }
-                else if (index === 3) {
-                    Apr += ele_rang_data
-                }
-                else if (index === 4) {
-                    May += ele_rang_data
-                }
-                else if (index === 5) {
-                    Jun += ele_rang_data
-                }
-                else if (index === 6) {
-                    Jul += ele_rang_data
-                }
-                else if (index === 7) {
-                    Aug += ele_rang_data
-                }
-                else if (index === 8) {
-                    Sep += ele_rang_data
-                }
-                else if (index === 9) {
-                    Oct += ele_rang_data
-                }
-                else if (index === 10) {
-                    Nov += ele_rang_data
-                }
-                else if (index === 11) {
-                    Dec += ele_rang_data
-                }
-                else { }
-
-            })
-        })
-        sum_se = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
-
-
-        return sum_se
-    }
+    
 
 
     volume_check = (data_price, index) => {
