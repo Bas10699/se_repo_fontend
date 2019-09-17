@@ -278,7 +278,7 @@ class EditProduct extends Component {
                                         <option value="kg">กิโลกรัม</option>
                                         <option value="tun">ตัน</option>
                                     </select>
-                                    <button onClick={() => { this.delete_index(index) }}>ลบ</button>
+                                    <button onClick={() => { this.delete_index(index) }} style={{background: "red" , border:"none" ,color:"white", borderRadius:"50%",padding: "2px 6px"}}>x</button>
                                 </h4>
                             )
                         })
@@ -293,7 +293,7 @@ class EditProduct extends Component {
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-10">
-                        <h3 style={{ textAlign: "center" }}>รายการวัตถุดิบ</h3>
+                        {/* <h3 style={{ textAlign: "center" }}>รายการวัตถุดิบ</h3>
 
                         <table>
                             <tr>
@@ -334,14 +334,14 @@ class EditProduct extends Component {
                                     )
                                 })
                             }
-                        </table>
+                        </table> */}
 
-                        <button className="BTN_Signin"
-                            style={{ float: "right" }}
+                        <button className="BTN_Signin" 
+                            style={{ float: "right",marginBottom:"30px" }}
                             onClick={() => { this.edit_product() }}>
                             บันทึกการเปลี่ยนแปลง
                         </button>
-                        <button className="BTN_Signup" onClick={() => this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
+                        <button style={{marginBottom:"30px"}} className="BTN_Signup" onClick={() => this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>

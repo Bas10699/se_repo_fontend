@@ -123,7 +123,7 @@ class Signup extends Component {
                             onClick={this.show_password}
                         />แสดงรหัสผ่าน
                         <div>
-                            <button className="BTN_Signin"
+                            <button className="BTN_Signin" style={{marginBottom:"30px"}}
                                 onClick={() => this.add_user(
                                     this.state.username,
                                     this.state.password,
@@ -136,7 +136,7 @@ class Signup extends Component {
                                 )}>
                                 ลงทะเบียน
                         </button>
-                            <NavLink to={'/Signin'}><button className="BTN_Signup">มีบัญชีผู้ใช้เเล้ว</button></NavLink>
+                            <NavLink to={'/Signin'}><button style={{marginBottom:"30px"}} className="BTN_Signup">มีบัญชีผู้ใช้เเล้ว</button></NavLink>
                         </div>
                     </div>
                     <div className="col-4"></div>
