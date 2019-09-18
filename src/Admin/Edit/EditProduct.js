@@ -167,6 +167,14 @@ class EditProduct extends Component {
             price_p: PriceSell
         })
     }
+    delete_price = (index) => {
+        let PriceSell = this.state.price_p
+        PriceSell.splice(index, 1)
+        this.setState({
+            price_p: PriceSell,
+            open_up: true
+        })
+    }
 
     handleInputChange(e) {
         this.setState({
@@ -213,10 +221,7 @@ class EditProduct extends Component {
 
     }
 
-    delete_index = (index) => {
-        
-        alert("ลบ ราคา")
-    }
+
 
     render() {
         return (
@@ -278,7 +283,7 @@ class EditProduct extends Component {
                                         <option value="kg">กิโลกรัม</option>
                                         <option value="tun">ตัน</option>
                                     </select>
-                                    <button onClick={() => { this.delete_index(index) }} style={{background: "red" , border:"none" ,color:"white", borderRadius:"50%",padding: "2px 6px"}}>x</button>
+                                    <button onClick={() => { this.delete_price(index) }} style={{ background: "red", border: "none", color: "white", borderRadius: "50%", padding: "2px 6px" }}>x</button>
                                 </h4>
                             )
                         })
@@ -336,12 +341,12 @@ class EditProduct extends Component {
                             }
                         </table> */}
 
-                        <button className="BTN_Signin" 
-                            style={{ float: "right",marginBottom:"30px" }}
+                        <button className="BTN_Signin"
+                            style={{ float: "right", marginBottom: "30px" }}
                             onClick={() => { this.edit_product() }}>
                             บันทึกการเปลี่ยนแปลง
                         </button>
-                        <button style={{marginBottom:"30px"}} className="BTN_Signup" onClick={() => this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
+                        <button style={{ marginBottom: "30px" }} className="BTN_Signup" onClick={() => this.refreshPage()} style={{ float: "right" }} >ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>

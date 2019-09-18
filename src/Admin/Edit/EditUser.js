@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { user_token } from '../../Support/Constance';
 import { ip, get, post } from '../../Support/Service';
 import { NavLink } from 'react-router-dom';
+import { async } from 'q';
 
 class EditUser extends Component {
     constructor(props) {
@@ -15,18 +16,13 @@ class EditUser extends Component {
             username: '',
             address: '',
             user_style: 1,
-            get_user: null,
+            get_user: '',
             isInEdit: false,
             password: true,
-            new_password: true,
-            new_password_again: true,
             password1: null,
             new_password1: null,
             new_password_again1: null
         };
-        this.Password_Show = this.Password_Show.bind(this);
-        this.New_Password_Show = this.New_Password_Show.bind(this);
-        this.New_Password_Again_Show = this.New_Password_Again_Show.bind(this);
 
     }
 
@@ -57,37 +53,70 @@ class EditUser extends Component {
         this.setState({ password: !this.state.password });
     }
 
-    New_Password_Show = () => {
-        this.setState({ new_password: !this.state.new_password });
-    }
-
-    New_Password_Again_Show = () => {
-        this.setState({ new_password_again: !this.state.new_password_again });
-    }
-
     Check_Password = () => {
         if (this.state.new_password1 === null) {
-            alert("กรอกรหัสผ่านใหม่");
+            alert("กรุณากรอกรหัสผ่านใหม่");
         } else if (this.state.new_password_again1 === null) {
-            alert("กรอกรหัสผ่านยืนยัน");
+            alert("กรุณากรอกรหัสผ่านยืนยัน");
         } else if (this.state.new_password1 !== this.state.new_password_again1) {
             alert("รหัสผ่านไม่ตรงกัน");
-            return false;
+
         } else {
-            alert("รหัสผ่านตรงกัน");
-            window.location.href = "/User";
-            return true;
+            this.change_password(this.state.new_password1)
+        }
+    }
+    change_password = async (new_password) => {
+        let object = {
+            password: this.state.password1,
+            newpassword: new_password
+        }
+        console.log(object)
+        try {
+            await post(object, 'user/user_update_password', user_token).then((result) => {
+                if (result.success) {
+                    alert(result.message)
+                    window.location.reload()
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+
+        } catch (error) {
+            alert('change_password: ' + error)
         }
     }
 
-    Show_Alert_Data = () => {
-        alert(this.state.name + '\n' + this.state.lastname + '\n' + this.state.render_type + '\n' + this.state.email + '\n' + this.state.phone + '\n' + this.state.username + '\n' + this.state.address)
-        // alert('ถูกต้อง')
+    update_data_user = async() => {
+        let object = {
+            name : this.state.get_user.name,
+            lastname:this.state.get_user.lastname,
+            email:this.state.get_user.email,
+            phone:this.state.get_user.phone,
+            username:this.state.get_user.username,
+            address:this.state.get_user.address
+        }
+        try{
+            await post(object,'user/user_update_data',user_token).then((result)=>{
+                if(result.success){
+                    alert(result.message)
+                    window.location.reload()
+                }
+                else{
+                    alert(result.error_message)
+                }
+            })
+        }catch(error){
+            alert('update_data_user'+error)
+        }
+            
     }
 
     handleChange = (e) => {
+        let users = this.state.get_user
+        users[e.target.id] = e.target.value
         this.setState({
-            [e.target.id]: e.target.value
+            get_user: users
         })
     }
 
@@ -154,13 +183,13 @@ class EditUser extends Component {
                         <h4>ชื่อ</h4>
                         < input
                             type="text" id="name"
-                            placeholder={this.state.get_user ? this.state.get_user.name : null}
+                            value={this.state.get_user.name}
                             onChange={this.handleChange}
                         />
                         <h4>นามสกุล</h4>
                         < input
                             type="text" id="lastname"
-                            placeholder={this.state.get_user ? this.state.get_user.lastname : null}
+                            value={this.state.get_user.lastname}
                             onChange={this.handleChange}
                         />
                         <h4>ประเภทผู้ใช้งาน</h4>
@@ -168,28 +197,28 @@ class EditUser extends Component {
                         <h4>อีเมล์</h4>
                         < input
                             type="text" id="email"
-                            placeholder={this.state.get_user ? this.state.get_user.email : null}
+                            value={this.state.get_user.email}
                             onChange={this.handleChange}
                         />
                         <h4>เบอร์โทรศัพท์</h4>
                         < input
                             type="text" id="phone"
-                            placeholder={this.state.get_user ? this.state.get_user.phone : null}
+                            value={this.state.get_user.phone}
                             onChange={this.handleChange}
                         />
                         <h4>ชื่อผู้ใช้งาน</h4>
                         < input
                             type="text" id="username"
-                            placeholder={this.state.get_user ? this.state.get_user.username : null}
+                            value={this.state.get_user.username}
                             onChange={this.handleChange}
                         />
                         <h4>ที่อยู่</h4>
                         < input
                             type="text" id="address"
-                            placeholder={this.state.get_user ? this.state.get_user.address : null}
+                            value={this.state.get_user.address}
                             onChange={this.handleChange}
                         />
-                        <button className="BTN_Signin" onClick={() => this.Show_Alert_Data()}>บันทึกข้อมูลผู้ใช้งาน</button>
+                        <button className="BTN_Signin" onClick={() => this.update_data_user()}>บันทึกข้อมูลผู้ใช้งาน</button>
                         <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink>
                     </div>
                     <div className="col-1"></div>
@@ -200,7 +229,7 @@ class EditUser extends Component {
                         <h3 style={{ textAlign: "center" }}>รหัสผ่าน</h3>
 
                         <h4>กรอกรหัสผ่านเก่า</h4>
-                        <input type="password"
+                        <input type={this.state.password ? "password" : "text"}
                             id="password1"
                             onChange={this.handleChange}
                         />
