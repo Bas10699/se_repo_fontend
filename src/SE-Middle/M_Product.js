@@ -19,8 +19,9 @@ class ProductDetail extends Component {
             plant_id: [],
             amount: 1,
             data: [],
-            order:[],
-            sum_vol:'',
+            order: [],
+            sum_vol: '',
+            quantity: '',
             price: [],
             data_cart: [],
             total_plant: [],
@@ -66,7 +67,7 @@ class ProductDetail extends Component {
         const object = {
             order_id: params.order_id
         }
-        console.log('obj', object)
+        // console.log('obj', object)
         try {
             await post(object, 'neutrally/get_order_info', user_token).then((result) => {
                 if (result.success) {
@@ -118,7 +119,7 @@ class ProductDetail extends Component {
                 if (result.success) {
                     this.setState({
                         frequency: result.result,
-                        sum_vol:result.result[0].sum,
+                        sum_vol: result.result[0].sum,
                         se: result.result
                     })
                     // this.sum_data_in_month()
@@ -153,7 +154,9 @@ class ProductDetail extends Component {
                         plant: result.result.plant,
                     })
                     this.get_freq(result.result.product_name)
+
                     setTimeout(() => {
+                        this.order_quantity()
                         console.log("get_product1", result.result)
                     }, 500)
                 } else {
@@ -298,15 +301,26 @@ class ProductDetail extends Component {
         volume.map((element) => {
             sum += element
         })
-        sum = (sum/this.state.frequency[0].sum)*100
-        return sum.toFixed(2) 
+        sum = (sum / this.state.frequency[0].sum) * 100
+        return sum.toFixed(2)
     }
-    sum_volume = (volume) =>{
+    sum_volume = (volume) => {
         let sum = 0
         volume.map((element) => {
             sum += element
         })
         return sum
+    }
+    order_quantity = () => {
+        let re = 0
+        this.state.detail.map((element) => {
+            if (element.plant_id === this.state.product_data.product_id) {
+                re = element.amount
+            }
+        })
+        this.setState({
+            quantity: re
+        })
     }
 
     sort_price = (data_price) => {
@@ -367,7 +381,7 @@ class ProductDetail extends Component {
                             <h3>{this.state.product_data.product_name}</h3>
                             <h5>{this.state.product_data.product_status}</h5>
                             <h4>จำนวนที่มีอยู่ {this.state.sum_vol} กิโลกรัม</h4>
-                            <h4>จำนวนที่ต้องสั่งซื้อ {this.props.amount} กิโลกรัม</h4>
+                            <h4>จำนวนที่ต้องสั่งซื้อ {this.state.quantity} กิโลกรัม</h4>
 
                             {
                                 this.state.frequency.map((element, index) => {
@@ -376,7 +390,21 @@ class ProductDetail extends Component {
                                             {
                                                 element.se.map((element_se, index_se) => {
                                                     return (
-                                                        <AccordionItem title={element_se.name + " : " +this.sum_volume(this.sum_data_in_month(element_se))+' กิโลกรัม    คิดเป็น '+this.percent_volume(this.sum_data_in_month(element_se)) +' %'}>
+                                                        <AccordionItem title={
+                                                            <div className="Row">
+                                                                <div className="col-7" style={{ textAlign: 'left' }}>{element_se.name + " : " + this.sum_volume(this.sum_data_in_month(element_se)) + ' กิโลกรัม'}
+                                                                </div>
+                                                                <div className="col-3">
+                                                                    <progress className="progress" value={this.percent_volume(this.sum_data_in_month(element_se))} max="100" />
+                                                                    <div style={{marginTop:"-39px",marginLeft:"5px",color:"white"}}>{this.percent_volume(this.sum_data_in_month(element_se))}%</div>
+                                                                    {/* <div class="progress">
+                                                                        <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" width={this.percent_volume(this.sum_data_in_month(element_se))}>
+                                                                            {this.percent_volume(this.sum_data_in_month(element_se))}
+                                                                        </div>
+                                                                    </div> */}
+                                                                </div>
+                                                            </div>}>
 
                                                             <table style={{ textAlign: "center" }}>
                                                                 <tr>

@@ -11,6 +11,7 @@ class T_Cart extends Component {
             cart_product: [],
             get_user:null,
             render_cart: null,
+            address:null,
             total_price: [],
             open: false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
@@ -30,6 +31,14 @@ class T_Cart extends Component {
         cart_product[index].amount = value
         this.setState({
             cart_product: cart_product
+        })
+    }
+    address_change = (event) => {
+
+        let address = this.state.get_user.address
+
+        this.setState({
+            address: address
         })
     }
 
@@ -282,9 +291,9 @@ class T_Cart extends Component {
                                     <h4>วันที่กำหนดส่ง</h4>
                                     <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
                                     <h4>ที่อยู่จัดส่ง</h4>
-                                        <input type="radio" name="address_new"/>ที่อยู่เดิม
+                                        <input type="radio" name="address_new" onChange={this.address_change}/>ที่อยู่เดิม
                                         <input type="radio" name="address_new"/>ที่อยู่ใหม่
-                                    <textarea rows="4" cols="95" name="address" id="address" onChange={this.handleChange}
+                                    <textarea rows="4" cols="95" name="address" id="address" value={this.state.address} onChange={this.handleChange}
                                         form="usrform" />
                                     <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
                                     <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
