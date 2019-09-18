@@ -453,7 +453,7 @@ class ProductDetail extends Component {
                                                                     onChange={this.handleChange} /></div>
                                                             <div>
                                                                 <h4 style={{ marginTop: "10px" }}>+ ราคาขนส่ง</h4>
-                                                                <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม xxx บาท</h4>
+                                                                <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม 0 บาท</h4>
                                                             </div>
                                                         </div>
                                                     )

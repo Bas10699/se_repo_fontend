@@ -21,6 +21,7 @@ import M_Summary from './SE-Middle/M_Summary';
 import AddProduct from './Admin/AddProduct';
 import EditUser from './Admin/Edit/EditUser';
 import M_Product from './SE-Middle/M_Product';
+import UserAll from './Admin/UserAll';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
       <Navbar />
 
       <Route exact path='/Test' component={Test}/>
-
+      <Route exact path='/UserAll' component={UserAll}/>
       <Route exact path='/Signin' component={Signin}/>
       <Route exact path='/Signup' component={Signup}/>
       <Route exact path='/' component={Home}/>
