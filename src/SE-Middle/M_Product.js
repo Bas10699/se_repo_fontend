@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 
 import Modal from 'react-responsive-modal'
-import { user_token, } from '../Support/Constance';
+import { user_token, addComma } from '../Support/Constance';
 import { ip, get, post } from '../Support/Service';
 import queryString from 'query-string';
 
 import { Accordion, AccordionItem } from 'react-light-accordion';
+import { async } from 'q';
 
 class ProductDetail extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class ProductDetail extends Component {
             plant: [],
             plant_id: [],
             amount: 1,
+            se: [],
             data: [],
             order: [],
             sum_vol: '',
@@ -40,6 +42,13 @@ class ProductDetail extends Component {
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+    }
+    handleChange_se = (e) => {
+        let se = this.state.se
+        se[e.target.id].amount = e.target.value
+        this.setState({
+           se : se
         })
     }
 
@@ -123,6 +132,7 @@ class ProductDetail extends Component {
                         se: result.result
                     })
                     // this.sum_data_in_month()
+                    this.se()
                     setTimeout(() => {
                         console.log('get_freq', result.result)
                     })
@@ -137,7 +147,6 @@ class ProductDetail extends Component {
         }
 
     }
-
 
     get_product = async () => {
         let url = this.props.location.search;
@@ -166,6 +175,31 @@ class ProductDetail extends Component {
             });
         } catch (error) {
             alert("get_product2" + error);
+        }
+    }
+
+    add_order_se = async () =>{
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        let obj = {
+            order_se :this.state.se,
+            order_trader_id:params.order_id,
+            detail_order_trader:this.state.detail,
+            plant_name:this.state.product_data.product_name
+        }
+        try{
+           await post(obj,'neutrally/add_order_se',user_token).then((result)=>{
+            if(result.success){
+                alert('สั่งซื้อสำเร็จ')
+                window.location.href='M_Order/gg?aa='+params.order_id
+            }
+            else{
+                alert(result.error_message)
+            }
+        }) 
+        }
+        catch (error){
+            alert('add_order_se: '+error)
         }
     }
 
@@ -209,7 +243,25 @@ class ProductDetail extends Component {
         return sum;
     }
 
+    se = () => {
+        let se = []
+        this.state.se.map((ele) => {
+            ele.se.map((ele_se) => {
+                se.push({
+                    plant: ele.plant,
+                    name: ele_se.name,
+                    amount: 0
+                })
+            })
+        })
+        this.setState({
+            se: se
+        })
+        console.log(this.state.se)
+    }
+
     sum_data_in_month = (dd) => {
+
         let sum_se = []
         let Jan = 0;
         let Feb = 0;
@@ -225,6 +277,7 @@ class ProductDetail extends Component {
         let Dec = 0;
         dd.rang.map((ele_rang) => {
             ele_rang.data.map((ele_rang_data, index) => {
+
                 if (index === 0) {
                     Jan += ele_rang_data
                 }
@@ -266,7 +319,6 @@ class ProductDetail extends Component {
             })
         })
         sum_se = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
-
 
         return sum_se
     }
@@ -343,11 +395,13 @@ class ProductDetail extends Component {
     sum_price = (data) => {
         let sum = 0;
         data.map((element) => {
-            sum += (element.price * element.amount)
+            sum += (this.state.product_data.cost * element.amount)
         })
 
         return sum;
     }
+
+    
 
     render_Step = (status) => {
         let render_Show
@@ -381,7 +435,7 @@ class ProductDetail extends Component {
                             <h3>{this.state.product_data.product_name}</h3>
                             <h5>{this.state.product_data.product_status}</h5>
                             <h4>จำนวนที่มีอยู่ {this.state.sum_vol} กิโลกรัม</h4>
-                            <h4>จำนวนที่ต้องสั่งซื้อ {this.state.quantity} กิโลกรัม</h4>
+                            <h4>จำนวนที่ต้องสั่งซื้อ {this.state.quantity} กิโลกรัม  ราคา {this.state.product_data.cost} บาท/กิโลกรัม</h4>
 
                             {
                                 this.state.frequency.map((element, index) => {
@@ -396,7 +450,7 @@ class ProductDetail extends Component {
                                                                 </div>
                                                                 <div className="col-3">
                                                                     <progress className="progress" value={this.percent_volume(this.sum_data_in_month(element_se))} max="100" />
-                                                                    <div style={{marginTop:"-39px",marginLeft:"5px",color:"white"}}>{this.percent_volume(this.sum_data_in_month(element_se))}%</div>
+                                                                    <div style={{ marginTop: "-39px", marginLeft: "5px", color: "white" }}>{this.percent_volume(this.sum_data_in_month(element_se))}%</div>
                                                                     {/* <div class="progress">
                                                                         <div class="progress-bar progress-bar-striped active" role="progressbar"
                                                                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" width={this.percent_volume(this.sum_data_in_month(element_se))}>
@@ -465,35 +519,31 @@ class ProductDetail extends Component {
                             paddingLeft: "15px",
                         }}>
                             <h3>รายการสั่งซื้อวัตถุดิบ</h3>
-                            {
-                                this.state.frequency.map((element, index) => {
-                                    return (
-                                        <div>
-                                            {
-                                                element.se.map((element_se, index_se) => {
-                                                    return (
-                                                        <div>
-                                                            <input type="checkbox" />{element_se.name}
-                                                            <div>
-                                                                <input type="number" style={{ marginTop: "0px" }}
-                                                                    name="quantity" min="1"
-                                                                    id="amount" placeholder="จำนวนที่ต้องการสั่งซื้อ"
-                                                                    onChange={this.handleChange} /></div>
-                                                            <div>
-                                                                <h4 style={{ marginTop: "10px" }}>+ ราคาขนส่ง</h4>
-                                                                <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม 0 บาท</h4>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                            <h3>รวมทั้งหมด</h3>
 
-                                            <button className="BTN_AddCart" onClick={() => { this.onOpenModal() }}>ยืนยันการสั่งซื้อ</button>
-                                        </div>
-                                    )
-                                })
-                            }
+                            <div>
+                                {
+                                    this.state.se.map((element_se, index_se) => {
+                                        return (
+                                            <div>
+                                                <input type="checkbox" />{element_se.name}
+                                                <div>
+                                                    <input type="number" style={{ marginTop: "0px" }}
+                                                        name="quantity" min="1"
+                                                        id={index_se} placeholder="จำนวนที่ต้องการสั่งซื้อ"
+                                                        value={element_se.amount}
+                                                        onChange={this.handleChange_se} /></div>
+                                                <div>
+                                                    <h4 style={{ marginTop: "10px" }}>+ ราคาขนส่ง</h4>
+                                                    <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม {this.state.product_data.cost*element_se.amount} บาท</h4>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                <h3>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h3>
+
+                                <button className="BTN_AddCart" onClick={() => { this.onOpenModal() }}>ยืนยันการสั่งซื้อ</button>
+                            </div>
 
                         </div>
 
@@ -503,10 +553,14 @@ class ProductDetail extends Component {
                     <Modal open={this.state.open} onClose={this.onCloseModal}>
                         <div className="Row">
                             <div className="col-12">
-                                <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อวัตถุดิบ "ชื่อวัตถุดิบ"</h3>
-                                รายชื่อ SE ที่สั่ง จำนวนที่สั่งซื้อ + ราคาขนส่ง รวมทั้งหมด
-                               ราคารวมทั้งหมด
-                             <button className="BTN_Signin">ออกใบคำสั่งซื้อ</button>
+                                <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อวัตถุดิบ "{this.state.product_data.product_name}"</h3>
+                                {this.state.se.map((element)=>{
+                                    return(
+                                        <div>{element.name} จำนวน {element.amount} กิโลกรัม ราคา {this.state.product_data.cost*element.amount} บาท</div>
+                                    )
+                                })}
+                               รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท
+                             <button className="BTN_Signin" onClick={()=>this.add_order_se()}>ออกใบคำสั่งซื้อ</button>
                                 <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
                             </div>
                         </div>
@@ -516,7 +570,7 @@ class ProductDetail extends Component {
                 break;
 
             default: render_page = <div className="App">
-                <h1>เกิดข้อผิดพลาด</h1>
+                <h1>กำลังโหลด...</h1>
             </div>
                 break;
         }
