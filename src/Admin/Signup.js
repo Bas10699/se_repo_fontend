@@ -16,7 +16,7 @@ class Signup extends Component {
             lastname: null,
             phone: null,
             address: null,
-            user_type: 1
+            user_type: null
         };
     }
 
@@ -107,10 +107,10 @@ class Signup extends Component {
                             onChange={this.handleChange}
                         />
                         <h4>ประเภทผู้ใช้งาน</h4>
-                        <select name="user_type" onChange={this.handleChange}>
-                            <option value="2">ผู้ประกอบการ</option>
-                            <option value="3">SE กลาง</option>
-                            <option value="4">SE ย่อย</option>
+                        <select id="user_type" name="user_type" onChange={this.handleChange}>
+                            <option value='2'>ผู้ประกอบการ</option>
+                            <option value='4'>SE กลาง</option>
+                            <option value='3'>SE ย่อย</option>
                         </select>
 
                         <h4>รหัสผ่าน</h4>
