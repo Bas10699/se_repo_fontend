@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import { NavLink } from 'react-router-dom'
-import { async } from 'q';
 
 class UserAll extends Component {
     constructor(props) {
@@ -23,6 +22,8 @@ class UserAll extends Component {
             get_user: [],
             isInEdit: false,
             user_image: null,
+            cencel: "https://image.flaticon.com/icons/svg/148/148766.svg",
+            edit: "https://image.flaticon.com/icons/svg/148/148926.svg",
             default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg"
         };
     }
@@ -78,7 +79,7 @@ class UserAll extends Component {
                 if (result.success) {
                     window.location.reload()
                 }
-                else{
+                else {
                     alert(result.error_message)
                 }
             })
@@ -106,6 +107,7 @@ class UserAll extends Component {
                     <div className="col-8">
                         <table style={{ textAlign: "center", border: "1px solid #f4f4f4" }}>
                             <tr style={{ border: "1px solid #f4f4f4" }}>
+                                <th></th>
                                 <th style={{ borderLeft: "1px solid #f4f4f4" }}>ลำดับ</th>
                                 <th style={{ borderLeft: "1px solid #f4f4f4" }}>ID</th>
                                 <th style={{ borderLeft: "1px solid #f4f4f4" }}>ชื่อ</th>
@@ -117,14 +119,22 @@ class UserAll extends Component {
                             {this.state.get_user.map((element, index) => {
                                 return (
                                     <tr style={{ borderLeft: "1px solid #f4f4f4" }}>
+                                        <td>
+                                            <button style={{ backgroundColor: "transparent", border: "none" }} onClick={() => { if (window.confirm('ยืนยันการลบบัญชีผู้ใช้')) { this.delete_user(element.user_id) } }}>
+                                                <img src={this.state.cencel} alt="cancel" style={{ width: "20px", marginTop: "50%" }} />
+                                            </button>
+                                        </td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{index + 1}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{element.user_id}</td>
                                         <td style={{ textAlign: "left", width: "15%", borderLeft: "1px solid #f4f4f4" }}>{element.name}</td>
                                         <td style={{ textAlign: "left", width: "10%", borderLeft: "1px solid #f4f4f4" }}>{element.lastname}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{this.render_type(element.user_type)}</td>
                                         <td style={{ textAlign: "left", width: "30%", borderLeft: "1px solid #f4f4f4" }}>{element.address}</td>
-                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}><NavLink to={'/user/userID?user_id='+element.user_id}>ดูเพิ่มเติม</NavLink></td>
-                                        <button onClick={() => { if (window.confirm('ยืนยันการลบบัญชีผู้ใช้')) { this.delete_user(element.user_id) } }}>ลบบัญชีผู้ใช้</button>
+                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>
+                                            <NavLink to={'/user/userID?user_id=' + element.user_id}><img alt="edit" src={this.state.edit} style={{ width: "20px" }}/></NavLink>
+
+                                            
+                                        </td>
                                     </tr>
                                 )
                             })}
