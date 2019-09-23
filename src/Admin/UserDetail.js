@@ -32,16 +32,16 @@ class UserDetail extends Component {
         let render_user
         switch (user_type) {
             case "2":
-                render_user = <div > ผู้ประกอบการ </div>
+                render_user = 'ผู้ประกอบการ'
                 break;
             case "3":
-                render_user = <div > SE ย่อย </div>
+                render_user = 'SE ย่อย'
                 break;
             case "4":
-                render_user = <div > SE กลาง  </div>
+                render_user = 'SE กลาง'
                 break;
             case "5":
-                render_user = <div > Admin </div>
+                render_user = 'Admin' 
                 break;
 
             default:
@@ -49,6 +49,14 @@ class UserDetail extends Component {
                 break;
         }
         return render_user
+    }
+
+    handleChange = (e) => {
+        let users = this.state.get_user
+        users[e.target.id] = e.target.value
+        this.setState({
+            get_user: users
+        })
     }
 
     onOpenModal = () => {
@@ -166,9 +174,8 @@ class UserDetail extends Component {
                                     onChange={this.handleChange}
                                 />
                                 <h4>ประเภทผู้ใช้งาน</h4>
-                                <h4>{this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}</h4>
                                 <select id="user_type" name="user_type" onChange={this.handleChange}>
-                                    <option>--เลือกประเภท--</option>
+                                    <option>{this.render_type(this.state.get_user.user_type)}</option>
                                     <option value='2'>ผู้ประกอบการ</option>
                                     <option value='4'>SE กลาง</option>
                                     <option value='3'>SE ย่อย</option>
