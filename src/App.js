@@ -22,7 +22,7 @@ import AddProduct from './Admin/AddProduct';
 import EditUser from './Admin/Edit/EditUser';
 import M_Product from './SE-Middle/M_Product';
 import UserAll from './Admin/UserAll';
-import BB from './SE-Middle/BB'
+import M_Buying from './SE-Middle/M_Buying';
 
 function App() {
   return (
@@ -47,7 +47,7 @@ function App() {
       <Route exact path='/EditProduct/:productID' component={EditProduct}/>
       <Route exact path='/M_Summary' component={M_Summary}/>
       <Route exact path='/AddProduct' component={AddProduct}/>
-      <Route exact path='/M_BB' component={BB}/>
+      <Route exact path='/M_Buying' component={M_Buying}/>
 
     </Router>
   );

@@ -341,7 +341,7 @@ class T_Buying extends Component {
                                     }
                                 </th>
                                 <th>จำนวนการสั่งซื้อ</th>
-                                <th>ชื่อผู้สั่งซื้อ</th>
+                                <th>สั่งซื้อกับ</th>
                                 <th>รายละเอียด</th>
                             </tr>
                             {
