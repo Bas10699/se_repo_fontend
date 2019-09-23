@@ -48,7 +48,7 @@ class ProductDetail extends Component {
         let se = this.state.se
         se[e.target.id].amount = e.target.value
         this.setState({
-           se : se
+            se: se
         })
     }
 
@@ -178,28 +178,28 @@ class ProductDetail extends Component {
         }
     }
 
-    add_order_se = async () =>{
+    add_order_se = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         let obj = {
-            order_se :this.state.se,
-            order_trader_id:params.order_id,
-            detail_order_trader:this.state.detail,
-            plant_name:this.state.product_data.product_name
+            order_se: this.state.se,
+            order_trader_id: params.order_id,
+            detail_order_trader: this.state.detail,
+            plant_name: this.state.product_data.product_name
         }
-        try{
-           await post(obj,'neutrally/add_order_se',user_token).then((result)=>{
-            if(result.success){
-                alert('สั่งซื้อสำเร็จ')
-                window.location.href='M_Order/gg?aa='+params.order_id
-            }
-            else{
-                alert(result.error_message)
-            }
-        }) 
+        try {
+            await post(obj, 'neutrally/add_order_se', user_token).then((result) => {
+                if (result.success) {
+                    alert('สั่งซื้อสำเร็จ')
+                    window.location.href = 'M_Order/gg?aa=' + params.order_id
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
         }
-        catch (error){
-            alert('add_order_se: '+error)
+        catch (error) {
+            alert('add_order_se: ' + error)
         }
     }
 
@@ -401,7 +401,7 @@ class ProductDetail extends Component {
         return sum;
     }
 
-    
+
 
     render_Step = (status) => {
         let render_Show
@@ -418,7 +418,8 @@ class ProductDetail extends Component {
         let render_page
         switch (user_type) {
 
-            case "4": render_page =
+            case "4":
+            case "5": render_page =
 
                 <div className="App">
 
@@ -534,7 +535,7 @@ class ProductDetail extends Component {
                                                         onChange={this.handleChange_se} /></div>
                                                 <div>
                                                     <h4 style={{ marginTop: "10px" }}>+ ราคาขนส่ง</h4>
-                                                    <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม {this.state.product_data.cost*element_se.amount} บาท</h4>
+                                                    <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม {this.state.product_data.cost * element_se.amount} บาท</h4>
                                                 </div>
                                             </div>
                                         )
@@ -554,13 +555,13 @@ class ProductDetail extends Component {
                         <div className="Row">
                             <div className="col-12">
                                 <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อวัตถุดิบ "{this.state.product_data.product_name}"</h3>
-                                {this.state.se.map((element)=>{
-                                    return(
-                                        <div>{element.name} จำนวน {element.amount} กิโลกรัม ราคา {this.state.product_data.cost*element.amount} บาท</div>
+                                {this.state.se.map((element) => {
+                                    return (
+                                        <div>{element.name} จำนวน {element.amount} กิโลกรัม ราคา {this.state.product_data.cost * element.amount} บาท</div>
                                     )
                                 })}
-                               รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท
-                             <button className="BTN_Signin" onClick={()=>this.add_order_se()}>ออกใบคำสั่งซื้อ</button>
+                                รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท
+                             <button className="BTN_Signin" onClick={() => this.add_order_se()}>ออกใบคำสั่งซื้อ</button>
                                 <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
                             </div>
                         </div>
