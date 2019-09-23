@@ -108,6 +108,7 @@ class Signup extends Component {
                         />
                         <h4>ประเภทผู้ใช้งาน</h4>
                         <select id="user_type" name="user_type" onChange={this.handleChange}>
+                            <option>--เลือกประเภท--</option>
                             <option value='2'>ผู้ประกอบการ</option>
                             <option value='4'>SE กลาง</option>
                             <option value='3'>SE ย่อย</option>
@@ -123,7 +124,7 @@ class Signup extends Component {
                             onClick={this.show_password}
                         />แสดงรหัสผ่าน
                         <div>
-                            <button className="BTN_Signin" style={{marginBottom:"30px"}}
+                            <button className="BTN_Signin" style={{ marginBottom: "30px" }}
                                 onClick={() => this.add_user(
                                     this.state.username,
                                     this.state.password,
@@ -136,7 +137,7 @@ class Signup extends Component {
                                 )}>
                                 ลงทะเบียน
                         </button>
-                            <NavLink to={'/Signin'}><button style={{marginBottom:"30px"}} className="BTN_Signup">มีบัญชีผู้ใช้เเล้ว</button></NavLink>
+                            <NavLink to={'/Signin'}><button style={{ marginBottom: "30px" }} className="BTN_Signup">มีบัญชีผู้ใช้เเล้ว</button></NavLink>
                         </div>
                     </div>
                     <div className="col-4"></div>

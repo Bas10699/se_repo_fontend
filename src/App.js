@@ -23,6 +23,7 @@ import EditUser from './Admin/Edit/EditUser';
 import M_Product from './SE-Middle/M_Product';
 import UserAll from './Admin/UserAll';
 import M_Buying from './SE-Middle/M_Buying';
+import UserDetail from './Admin/UserDetail'
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
       <Route exact path='/M_Summary' component={M_Summary}/>
       <Route exact path='/AddProduct' component={AddProduct}/>
       <Route exact path='/M_Buying' component={M_Buying}/>
+      <Route exact path='/user/:UserID' component={UserDetail}/>
 
     </Router>
   );

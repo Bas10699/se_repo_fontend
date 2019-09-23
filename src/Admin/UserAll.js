@@ -123,7 +123,7 @@ class UserAll extends Component {
                                         <td style={{ textAlign: "left", width: "10%", borderLeft: "1px solid #f4f4f4" }}>{element.lastname}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{this.render_type(element.user_type)}</td>
                                         <td style={{ textAlign: "left", width: "30%", borderLeft: "1px solid #f4f4f4" }}>{element.address}</td>
-                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>ดูเพิ่มเติม</td>
+                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}><NavLink to={'/user/userID?user_id='+element.user_id}>ดูเพิ่มเติม</NavLink></td>
                                         <button onClick={() => { if (window.confirm('ยืนยันการลบบัญชีผู้ใช้')) { this.delete_user(element.user_id) } }}>ลบบัญชีผู้ใช้</button>
                                     </tr>
                                 )
