@@ -98,7 +98,7 @@ class Timeline extends Component {
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
                                     <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ยืนยันคำสั่งซื้อแล้ว<br />
                                         {moment(this.props.invoice.date).utc().format('DD/MM/YYYY HH:mm')}
-                                        <PdfInvoice data={this.props.invoice} />
+                                        <PdfInvoice data={this.props.invoice} order={this.props.order}  />
                                     </div></li>
                                 : <li className="Standat">
                                     <img src={twodis} alt="two"

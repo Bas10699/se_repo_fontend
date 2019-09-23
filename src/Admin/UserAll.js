@@ -5,8 +5,9 @@
 //4 = se-sub
 import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
-import { get } from '../Support/Service';
+import { get, post } from '../Support/Service';
 import { NavLink } from 'react-router-dom'
+import { async } from 'q';
 
 class UserAll extends Component {
     constructor(props) {
@@ -68,6 +69,25 @@ class UserAll extends Component {
         }
     }
 
+    delete_user = async (id) => {
+        let obj = {
+            user_id: id
+        }
+        try {
+            await post(obj, 'user/delete_user', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                }
+                else{
+                    alert(result.error_message)
+                }
+            })
+
+        } catch{
+
+        }
+    }
+
     componentWillMount() {
         this.get_user()
     }
@@ -84,26 +104,27 @@ class UserAll extends Component {
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-8">
-                        <table style={{textAlign:"center",border:"1px solid #f4f4f4"}}>
-                            <tr style={{border:"1px solid #f4f4f4"}}>
-                                <th style={{borderLeft:"1px solid #f4f4f4"}}>ลำดับ</th>
-                                <th style={{borderLeft:"1px solid #f4f4f4"}}>ID</th>
-                                <th style={{borderLeft:"1px solid #f4f4f4"}}>ชื่อ</th>
-                                <th style={{borderLeft:"1px solid #f4f4f4"}}>นามสกุล</th>
-                                <th style={{borderLeft:"1px solid #f4f4f4"}}>ประเภทผู้ใช้งาน</th>
-                                <th style={{borderLeft:"1px solid #f4f4f4"}}>ที่อยู่</th>
-                                <th style={{borderLeft:"1px solid #f4f4f4"}}></th>
+                        <table style={{ textAlign: "center", border: "1px solid #f4f4f4" }}>
+                            <tr style={{ border: "1px solid #f4f4f4" }}>
+                                <th style={{ borderLeft: "1px solid #f4f4f4" }}>ลำดับ</th>
+                                <th style={{ borderLeft: "1px solid #f4f4f4" }}>ID</th>
+                                <th style={{ borderLeft: "1px solid #f4f4f4" }}>ชื่อ</th>
+                                <th style={{ borderLeft: "1px solid #f4f4f4" }}>นามสกุล</th>
+                                <th style={{ borderLeft: "1px solid #f4f4f4" }}>ประเภทผู้ใช้งาน</th>
+                                <th style={{ borderLeft: "1px solid #f4f4f4" }}>ที่อยู่</th>
+                                <th style={{ borderLeft: "1px solid #f4f4f4" }}></th>
                             </tr>
                             {this.state.get_user.map((element, index) => {
                                 return (
-                                    <tr style={{borderLeft:"1px solid #f4f4f4"}}>
-                                        <td style={{borderLeft:"1px solid #f4f4f4"}}>{index + 1}</td>
-                                        <td style={{borderLeft:"1px solid #f4f4f4"}}>{element.user_id}</td>
-                                        <td style={{textAlign:"left",width:"15%",borderLeft:"1px solid #f4f4f4"}}>{element.name}</td>
-                                        <td style={{textAlign:"left",width:"10%",borderLeft:"1px solid #f4f4f4"}}>{element.lastname}</td>
-                                        <td style={{borderLeft:"1px solid #f4f4f4"}}>{this.render_type(element.user_type)}</td>
-                                        <td style={{textAlign:"left",width:"30%",borderLeft:"1px solid #f4f4f4"}}>{element.address}</td>
-                                        <td style={{borderLeft:"1px solid #f4f4f4"}}>ดูเพิ่มเติม</td>
+                                    <tr style={{ borderLeft: "1px solid #f4f4f4" }}>
+                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>{index + 1}</td>
+                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>{element.user_id}</td>
+                                        <td style={{ textAlign: "left", width: "15%", borderLeft: "1px solid #f4f4f4" }}>{element.name}</td>
+                                        <td style={{ textAlign: "left", width: "10%", borderLeft: "1px solid #f4f4f4" }}>{element.lastname}</td>
+                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>{this.render_type(element.user_type)}</td>
+                                        <td style={{ textAlign: "left", width: "30%", borderLeft: "1px solid #f4f4f4" }}>{element.address}</td>
+                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>ดูเพิ่มเติม</td>
+                                        <button onClick={() => { if (window.confirm('ยืนยันการลบบัญชีผู้ใช้')) { this.delete_user(element.user_id) } }}>ลบบัญชีผู้ใช้</button>
                                     </tr>
                                 )
                             })}

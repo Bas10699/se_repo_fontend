@@ -125,7 +125,7 @@ class Pdf extends Component {
                             table: {
                                 widths: [320, 80, 84.5],
                                 body: [
-                                    [{ text: 'หมายเหตุ', rowSpan: 4, border: [true, false, true, true], },
+                                    [{ text: '*หมายเหตุ \n ชำระเงินแล้ว', rowSpan: 4, border: [true, false, true, true], },
                                     { border: [true, false, true, true], text: 'รวมเงิน', },
                                     { border: [true, false, true, true], text: addComma(total_price), alignment: 'right' }],
                                     ['', { text: 'ส่วนลด' }, ' '],

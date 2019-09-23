@@ -106,7 +106,7 @@ class BuyingDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.invoice} />
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} order={this.state.order} />
                             <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
                         </div>
                     </div>
