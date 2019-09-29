@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
-import { element } from 'prop-types'
 
 class S_Order extends Component {
     constructor(props) {
@@ -28,7 +27,7 @@ class S_Order extends Component {
                 }
             })
         } catch (error) {
-            console.error();
+            alert('get_order_se: '+error)
 
         }
     }
