@@ -289,7 +289,9 @@ class T_Cart extends Component {
                                 <div className="col-10">
                                     <h3 style={{ textAlign: "center" }}>รายละเอียดการจัดส่ง</h3>
                                     <h4>วันที่กำหนดส่ง</h4>
+                                    <h5 style={{color:"red"}} >** เลือกวันกำหนดส่ง กรณีสินค้าหมด หรือสั่งซื้อล่วงหน้า **</h5>
                                     <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
+                                   
                                     <h4>ที่อยู่จัดส่ง</h4>
                                         <input type="radio" name="address_new" onChange={this.address_change}/>ที่อยู่เดิม
                                         <input type="radio" name="address_new"/>ที่อยู่ใหม่

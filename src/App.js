@@ -24,10 +24,13 @@ import M_Product from './SE-Middle/M_Product';
 import UserAll from './Admin/UserAll';
 import M_Buying from './SE-Middle/M_Buying';
 import UserDetail from './Admin/UserDetail'
+import S_Order from './SE-Sub/S_Order'
+import SocketIo from './socket.io/socketIo'
 
 function App() {
   return (
     <Router exact path="/">
+      {/* <Route exact path='/Socket' component={SocketIo}/> */}
       <Navbar />
 
       <Route exact path='/Test' component={Test}/>
@@ -50,6 +53,9 @@ function App() {
       <Route exact path='/AddProduct' component={AddProduct}/>
       <Route exact path='/M_Buying' component={M_Buying}/>
       <Route exact path='/user/:UserID' component={UserDetail}/>
+      <Route exact path='/S_Order' component={S_Order}/>
+
+      
 
     </Router>
   );
