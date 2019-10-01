@@ -12,9 +12,12 @@ class S_skill_farmer extends Component {
         }
     }
 
+
+
     componentWillMount() {
         this.get_skill_farmer()
     }
+
     get_skill_farmer = async () => {
         try {
             await get('neo_firm/get_farmer_se', user_token).then((result) => {
@@ -81,11 +84,26 @@ class S_skill_farmer extends Component {
 
     render() {
         return (
-            <div>
-                <br></br>
-                <br></br>
+            <div className="App">
+                <div className="Row">
+                    <div className="col-12">
+                        <h2 style={{ textAlign: "center" }}>รายชื่อเกษตรกรในเครือข่าย</h2>
+                    </div>
+                </div>
+
+                <div className="Row" style={{marginTop:"-50px"}}>
+                <div className='col-3'></div>
+                    <div className="col-8" >
+                        <input type="search" placeholder="ค้นหา" 
+                        // onChange={this.filterID} 
+                        />
+                    </div>
+                    <div className='col-1'></div>
+                </div>
+
+
                 <div className='Row'>
-                    <div className='col-2'></div>
+                    <div className='col-1'></div>
                     <div className='col-2'>
                         {/* พืชที่ปลูก
                 {this.plants_se(this.state.farmer).map((ele, index) => {
@@ -106,19 +124,44 @@ class S_skill_farmer extends Component {
                     </div>
                     <div className='col-8'>
                         <b>รายชื่อเกษตรที่ปลูกพืช</b>
-                        {this.sort_plant(this.state.farmer).map((element, index) => {
-                            return (
-                                <div>
-                                    <br></br>
-                                    {index + 1} .
-                            <div>ชื่อ {element.title_name}{element.first_name}  {element.last_name}</div>
-                                    <div>พืชที่ปลูก <b>{element.plant}</b> ปลูกได้ {element.year_value} {element.year_value_unit}</div>
-                                    <div>ส่งมอบ {element.deliver_value} กิโลกรัม</div>
-                                    <div>ผลผลิตต่อไร่ {element.product_value} กิโลกรัม</div>
-                                </div>
-                            )
-                        })}
+                        <table>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>ชื่อ</th>
+                                <th>พืชที่ปลูก
+                                    <select>
+                                        <option value="0">--แสดงพืชทั้งหมด--</option>
+                                        {this.plants_se(this.sort_plant(this.state.farmer)).map((ele_plant, index) => {
+                                            return (
+
+                                                <option value={index + 1}>{ele_plant}</option>
+
+                                            )
+                                        })}
+                                    </select> </th>
+                                <th colSpan="2">ปลูกได้</th>
+                                <th colSpan="2">ส่งมอบ</th>
+                                <th colSpan="2">ผลผลิตต่อไร่</th>
+                            </tr>
+                            {this.sort_plant(this.state.farmer).map((element, index) => {
+                                return (
+                                    <tr>
+                                        <td>{index + 1} .</td>
+                                        <td>{element.title_name}{element.first_name}  {element.last_name}</td>
+                                        <td><b>{element.plant}</b></td>
+                                        <td style={{ textAlign: "right" }}>{element.year_value} </td>
+                                        <td>{element.year_value_unit}</td>
+                                        <td style={{ textAlign: "center" }}>{element.deliver_value}</td>
+                                        <td>กิโลกรัม</td>
+                                        <td style={{ textAlign: "center" }}>{element.product_value}</td>
+                                        <td>กิโลกรัม</td>
+                                    </tr>
+                                )
+                            })}
+                        </table>
+
                     </div>
+                    <div className='col-1'></div>
                 </div>
 
             </div>

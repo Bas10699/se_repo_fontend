@@ -27,25 +27,66 @@ class S_Order extends Component {
                 }
             })
         } catch (error) {
-            alert('get_order_se: '+error)
+            alert('get_order_se: ' + error)
 
         }
     }
     render() {
         return (
-            <div>
-                <br></br><br></br>
-                {this.state.order_se.map((element, index) => {
-                    return (
-                        <div style={{textAlign:'center'}}>
-                            <div>{index+1}</div>
-                            <div>{element.order_se_id}</div>
-                            <div>{element.plant_name}</div>
-                            <div>{element.amount}</div>
-                            <br></br>
-                        </div>
-                    )
-                })}
+            <div className="App">
+                <div className="Row">
+                    <div className="col-12">
+                        <h2 style={{ textAlign: "center" }}>คำสั่งซื้อจาก Neo_firm</h2>
+                    </div>
+                </div>
+
+
+                <div className="Row">
+                    <div className="col-2"></div>
+                    <div className="col-4">
+                        <input type="search" placeholder="ค้นหา" 
+                        // onChange={this.filterID} 
+                        />
+                    </div>
+                    <div className="col-4">
+                        <input type="date" name="date" placeholder="ค้นหา" 
+                        // onChange={this.filterDate} 
+                        />
+                        {/* <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button> */}
+                    </div>
+                    <div className="col-2"></div>
+                </div>
+
+
+
+                <div className="Row">
+                    <div className="col-2"></div>
+                    <div className="col-8">
+                        <table style={{ textAlign: "center" }}>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>รหัสใบสั่งซื้อ</th>
+                                <th>ชื่อพืช</th>
+                                <th>วันที่</th>
+                                <th>จำนวน</th>
+                            </tr>
+                            {this.state.order_se.map((element, index) => {
+                            return (
+                                <tr>
+                                    <td>{index + 1}</td>
+                                    <td>{element.order_se_id}</td>
+                                    <td>{element.plant_name}</td>
+                                    <td></td>
+                                    <td>{element.amount}</td>
+                                </tr>
+                            )
+                        })}
+                        </table>
+                        
+                    </div>
+                    <div className="col-2"></div>
+                </div>
+
             </div>
 
         )

@@ -281,8 +281,7 @@ class M_Order extends Component {
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>รหัสใบสั่งซื้อ</th>
-                                <th>
-                                    
+                                <th>                                    
                                     วันที่สั่งซื้อ
                                     {this.state.click ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Min')} />
