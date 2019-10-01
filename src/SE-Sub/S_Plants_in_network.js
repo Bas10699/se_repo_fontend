@@ -35,7 +35,7 @@ class S_Plants_in_network extends Component{
     }
     render(){
         return(
-            <div>
+            <div className="App">
                 {this.state.plants.map((element)=>{
                     return(
                         <div>{element.name}</div>

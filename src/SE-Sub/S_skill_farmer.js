@@ -12,12 +12,9 @@ class S_skill_farmer extends Component {
         }
     }
 
-
-
     componentWillMount() {
         this.get_skill_farmer()
     }
-
     get_skill_farmer = async () => {
         try {
             await get('neo_firm/get_farmer_se', user_token).then((result) => {
