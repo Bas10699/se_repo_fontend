@@ -5,7 +5,6 @@ import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
 import Timeline from '../Support/Timeline'
-import { OffCanvas, OffCanvasMenu } from 'react-offcanvas';
 import PdfOrder from '../Support/PdfOrder'
 import Modal from 'react-responsive-modal'
 import PdfInvoice from '../Support/PdfInvoice'
@@ -470,7 +469,7 @@ class OrderDetail extends Component {
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-7" >
-                            <a target="_blank" href={ip + this.state.payment.image_proof}>
+                            <a href={ip + this.state.payment.image_proof}>
                                 <img src={ip + this.state.payment.image_proof}
                                     style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
                             </a>

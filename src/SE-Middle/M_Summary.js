@@ -58,9 +58,19 @@ class M_Summary extends Component {
                     </div>
                 </div>
                 <div className="Row">
-                    <div className="col-12">
-                        sdfghjkl
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                        <div className="Row">
+                            <div className="col-6" style={{backgroundColor:"#ccc"}}>
+                                กราฟเเท่ง ยอดขายรายเดือน
+                            </div>
+                            <div className="col-1"></div>
+                            <div className="col-6" style={{backgroundColor:"#ccc"}}>
+                                กราฟพายยอดขาย se ย่อย
+                            </div>
+                        </div>
                     </div>
+                    <div className="col-1"></div>
                 </div>
             </div>
         )

@@ -98,7 +98,7 @@ class Timeline extends Component {
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
                                     <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ยืนยันคำสั่งซื้อแล้ว<br />
                                         {moment(this.props.invoice.date).utc().format('DD/MM/YYYY HH:mm')}
-                                        <PdfInvoice data={this.props.invoice} order={this.props.order}  />
+                                        <PdfInvoice data={this.props.invoice} order={this.props.order} />
                                     </div></li>
                                 : <li className="Standat">
                                     <img src={twodis} alt="two"
@@ -111,7 +111,7 @@ class Timeline extends Component {
                                 <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ชำระเงินแล้ว<br />
                                     {moment(this.props.order.date_of_payment).utc().format('DD/MM/YYYY HH:mm')}<br />
                                     <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
-                                    </div></li>
+                                </div></li>
                                 : <li className="Standat" >
                                     <img src={threedis} alt="three"
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
@@ -121,9 +121,9 @@ class Timeline extends Component {
                                 <img src={four} alt="four"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
                                 <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>สินค้าทำการจัดส่ง<br />
-                                    {moment(this.props.order.check_payment_date).utc().format('DD/MM/YYYY HH:mm')}<br/>
-                                    <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment}/>
-                                    </div></li>
+                                    {moment(this.props.order.check_payment_date).utc().format('DD/MM/YYYY HH:mm')}<br />
+                                    <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
+                                </div></li>
                                 : <li className="Standat" >
                                     <img src={fourdis} alt="four"
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
@@ -133,9 +133,9 @@ class Timeline extends Component {
                                 <img src={five} alt="five"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", zIndex: "1000" }} />
                                 <br /><div style={{ textAlign: "center", marginLeft: "55%", width: "200px" }}>ตรวจสอบสินค้า<br />
-                                    {moment(this.props.order.date_end).utc().format('DD/MM/YYYY HH:mm')}<br/>
+                                    {moment(this.props.order.date_end).utc().format('DD/MM/YYYY HH:mm')}<br />
                                     {/* <button className="BTN_PDF">ตรวจสอบ</button> */}
-                                    </div></li>
+                                </div></li>
                                 : <li className="Standatles" >
                                     <img src={fivedis} alt="fivedis"
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", filter: "grayscale(100%)", backgroundColor: "white" }} />
@@ -144,7 +144,7 @@ class Timeline extends Component {
 
                     </div>
                 </div>
-               
+
                 <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-12" >
