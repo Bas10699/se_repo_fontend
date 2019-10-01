@@ -136,9 +136,9 @@ class S_skill_farmer extends Component {
                                             )
                                         })}
                                     </select> </th>
-                                <th colSpan="2">ปลูกได้</th>
-                                <th colSpan="2">ส่งมอบ</th>
-                                <th colSpan="2">ผลผลิตต่อไร่</th>
+                                <th colSpan="2" style={{borderLeft:"1px solid #ccc"}}>ปลูกได้</th>
+                                <th colSpan="2"  style={{borderLeft:"1px solid #ccc"}}>ส่งมอบ</th>
+                                <th colSpan="2"  style={{borderLeft:"1px solid #ccc"}}>ผลผลิตต่อไร่</th>
                             </tr>
                             {this.sort_plant(this.state.farmer).map((element, index) => {
                                 return (
@@ -146,11 +146,11 @@ class S_skill_farmer extends Component {
                                         <td>{index + 1} .</td>
                                         <td>{element.title_name}{element.first_name}  {element.last_name}</td>
                                         <td><b>{element.plant}</b></td>
-                                        <td style={{ textAlign: "right" }}>{element.year_value} </td>
+                                        <td style={{ textAlign: "right",borderLeft:"1px solid #ccc" }}>{element.year_value} </td>
                                         <td>{element.year_value_unit}</td>
-                                        <td style={{ textAlign: "center" }}>{element.deliver_value}</td>
+                                        <td style={{ textAlign: "center",borderLeft:"1px solid #ccc" }}>{element.deliver_value}</td>
                                         <td>กิโลกรัม</td>
-                                        <td style={{ textAlign: "center" }}>{element.product_value}</td>
+                                        <td style={{ textAlign: "center",borderLeft:"1px solid #ccc" }}>{element.product_value}</td>
                                         <td>กิโลกรัม</td>
                                     </tr>
                                 )

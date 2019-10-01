@@ -1,15 +1,18 @@
+
 @font-face {
-    font-family: 'kunlasatriregular';
-    src: url('Fonts/kunlasatri-webfont.woff2') format('woff2'),
-         url('Fonts/kunlasatri-webfont.woff') format('woff');
+    font-family: 'fc_lamoonregular';
+    src: url('Fonts/fc_lamoon_regular_ver_1.00-webfont.woff2') format('woff2'),
+         url('Fonts/fc_lamoon_regular_ver_1.00-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+
 }
 
 .App {
     color: black;
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     padding-top: 25px;
+    font-size: 18px;
 }
 
 .App-logo {
@@ -43,7 +46,8 @@
     display: flex;
     padding: 0px;
     margin: 0px;
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
+    font-size: 18px;
 }
 
 .col-1 {width: 8.33%;}
@@ -75,17 +79,17 @@ h3{
     font-style: normal;
 }
 h4{
-    font-size: 20px;
+    font-size: 24px;
     font-weight: normal;
     font-style: normal;
 }
 h5{
-    font-size: 16px;
+    font-size: 20px;
     font-weight: normal;
     font-style: normal;
 }
 h6{
-    font-size: 14px;
+    font-size: 18px;
     font-weight: normal;
     font-style: normal;
 }
@@ -225,7 +229,7 @@ h6{
 }
 
 .HeaderAreaCard button{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: none;
     color: black;
@@ -247,7 +251,7 @@ h6{
 .BTN_Filter{
     padding: 10px 10px 0px 10px;
     width: 50px;
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     background-color: transparent;
     border: 1px solid #FFB731;
     border-radius: 10px;
@@ -264,7 +268,7 @@ h6{
 }
 
 .BTN_Buy{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     color: white;
     background-color: black;
@@ -284,7 +288,7 @@ h6{
 }
 
 .BTN_AddCart {
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     color: black;
     background-color: white;
@@ -302,7 +306,7 @@ h6{
 }
 
 .BTN_Signin{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     color: black;
     background-color: #FED07A;
@@ -323,7 +327,7 @@ h6{
 }
 
 .BTN_Signup{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     color: black;
     background-color: white;
@@ -344,7 +348,7 @@ h6{
 }
 
 .BTN_PDF{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: none;
     color: black;
@@ -363,7 +367,7 @@ h6{
 }
 
 .BTN_Detail{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     display: block;
     color: black;
@@ -404,14 +408,14 @@ h6{
 
 /* Start Input */
 textarea{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;
     border-radius: 5px;
 }
 
 select[name="volum"],[name="user_type"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;
     margin-top: -50px;
@@ -422,7 +426,7 @@ select[name="volum"],[name="user_type"]{
 }
 
 /* select[name="day"],[name="month"],[name="year"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;
     width: 100%;
@@ -431,7 +435,7 @@ select[name="volum"],[name="user_type"]{
 } */
 
 input[type="search"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;
     margin-top: 50px;
@@ -441,7 +445,7 @@ input[type="search"]{
 }
 
 input[name="date"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 17px;
     border: 1px solid black;
     margin-top: 50px;
@@ -454,7 +458,7 @@ input[name="date"]{
 }
 
 input[type="bank"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 17px;
     border: 1px solid black;
     /* margin-top: 50px;
@@ -467,7 +471,7 @@ input[type="bank"]{
 }
 
 input[name="date_send"],[name="time"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 17px;
     border: 1px solid black;
     margin-top: -20px;
@@ -478,7 +482,7 @@ input[name="date_send"],[name="time"]{
 }
 
 input[type="number"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;
     margin-top: -50px;
@@ -489,7 +493,7 @@ input[type="number"]{
 }
 
 input[type="text"],[type="password"],[type="email"],[type="tel"]{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;
     margin-top: -50px;
@@ -527,7 +531,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 }
 
 .Card button{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: none;
     color: black;
@@ -592,7 +596,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 }
   
 .CartCard button {
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: none;
     color: white;
@@ -634,7 +638,7 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 }
 
 .BuyingCard button{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: none;
     color: black;
@@ -658,19 +662,20 @@ input[type="text"],[type="password"],[type="email"],[type="tel"]{
 table{
     width: 100%;
     border-collapse: collapse;
+    font-size: 20px;
 }
 
 th {
     color: black;
     border-bottom: 1px solid #FFB731;
-    font-size: 18px;
+    font-size: 20px;
     padding: 10px 10px;
 }
 
 tr,td{
     color: black;
     border-bottom: 1px solid #FFB731;
-    font-size: 16px;
+    font-size: 18px;
     padding: 10px 10px;
     transition: 0.5s;
 }
@@ -813,7 +818,7 @@ th,tr:hover{
 /* แทปหน้าสั่งซื้อวัตถุดิบจาด SE ย่อย */
 
 .accordion {
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     border-radius: 5px;
     border: 1px solid #d9d9d9;
     font-size: 18px; 
@@ -836,7 +841,7 @@ th,tr:hover{
     border: none;
     outline: none;
     transition: 0.4s;
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 18px; 
   }
   .accordion .accordion-item .title:after {
@@ -923,7 +928,7 @@ th,tr:hover{
     padding: 10px 10px;
 }
 .BTN_CONFIRM{
-    font-family: 'kunlasatriregular';
+    font-family: 'fc_lamoonregular';
     font-size: 16px;
     color: black;
     background-color: transparent;
