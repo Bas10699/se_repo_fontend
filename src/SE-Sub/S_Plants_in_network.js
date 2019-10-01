@@ -2,12 +2,12 @@
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
-import { async } from 'q'
 
 class S_Plants_in_network extends Component{
     constructor(props){
         super(props)
         this.state={
+            plants:[]
 
         }
     }
@@ -18,6 +18,9 @@ class S_Plants_in_network extends Component{
         try{
             await get('neo_firm/get_plant_in_network',user_token).then((result)=>{
                 if(result.success){
+                    this.setState({
+                        plants:result.result[0].plant
+                    })
                     console.log(result.result[0])
                 }
                 else{
@@ -33,7 +36,11 @@ class S_Plants_in_network extends Component{
     render(){
         return(
             <div>
-
+                {this.state.plants.map((element)=>{
+                    return(
+                        <div>{element.name}</div>
+                    )
+                })}
             </div>
         )
     }
