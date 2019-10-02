@@ -136,7 +136,7 @@ class S_skill_farmer extends Component {
                                             )
                                         })}
                                     </select> </th>
-                                <th colSpan="2" style={{borderLeft:"1px solid #ccc"}}>ปลูกได้</th>
+                                <th colSpan="2" style={{borderLeft:"1px solid #ccc"}}>จํานวนผลผลิตที่ขายต่อปี</th>
                                 <th colSpan="2"  style={{borderLeft:"1px solid #ccc"}}>ส่งมอบ</th>
                                 <th colSpan="2"  style={{borderLeft:"1px solid #ccc"}}>ผลผลิตต่อไร่</th>
                             </tr>
