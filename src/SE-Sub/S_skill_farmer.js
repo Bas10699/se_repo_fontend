@@ -24,7 +24,8 @@ class S_skill_farmer extends Component {
             await get('neo_firm/get_farmer_se', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        farmer: result.result
+                        farmer: result.result,
+                        plants: result.result
                     })
 
                 }
@@ -38,9 +39,20 @@ class S_skill_farmer extends Component {
         }
     }
 
+    filterPlant = (event) => {
+        var updatedList = this.state.order;
+        updatedList = updatedList.filter(function (item) {
+            return item.order_id.toLowerCase().search(
+                event.target.value.toLowerCase()) !== -1;
+        });
+        this.setState({
+            search_order: updatedList,
+        });
+    }
+
     plants_se = (data) => {
         let disnict_plant = []
-
+        let disnict_plant_sum = []
         data.map((el, i) => {
             let index = disnict_plant.findIndex((find) => find === el.plant)
             if (index < 0) {
@@ -49,14 +61,35 @@ class S_skill_farmer extends Component {
                 }
             }
         })
-        return disnict_plant
+        disnict_plant.map((ele_plant) => {
+            let value = 0
+            data.map((ele_data) => {
+                if (ele_data.plant === ele_plant) {
+                    value += ele_data.deliver_value * 1
+                }
+            })
+            disnict_plant_sum.push({
+                plant: ele_plant,
+                deliver_value: value
+            })
+        })
+
+
+
+        return this.sort_plant(disnict_plant_sum)
     }
 
     sort_plant = (data) => {
         const order = data
+        // console.log(data)
+        // order.map((element)=>{
+        //     if(element.year_value_unit == 'ตัน'){
+        //         element.year_value = element.year_value*1000
+        //     }
+        // })
         function compare(a, b) {
-            const order_idA = parseInt(a.deliver_value)
-            const order_idB = parseInt(b.deliver_value)
+            const order_idA = parseInt(a.year_value)
+            const order_idB = parseInt(b.year_value)
 
             let comparison = 0;
             if (order_idA < order_idB) {
@@ -145,7 +178,7 @@ class S_skill_farmer extends Component {
                                         {this.plants_se(this.sort_plant(this.state.farmer)).map((ele_plant, index) => {
                                             return (
 
-                                                <option value={index + 1}>{ele_plant}</option>
+                                                <option value={ele_plant.plant}  >{ele_plant.plant}</option>
 
                                             )
                                         })}
@@ -168,6 +201,8 @@ class S_skill_farmer extends Component {
                                         <td>กิโลกรัม</td>
                                         <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
                                         <td>กิโลกรัม</td>
+                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
+                                        <td>ไร่</td>
                                     </tr>
                                 )
                             // }
