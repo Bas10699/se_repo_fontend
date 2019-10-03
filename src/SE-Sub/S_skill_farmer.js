@@ -2,18 +2,22 @@
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
+import {NavLink} from 'react-router-dom'
 
 class S_skill_farmer extends Component {
     constructor(props) {
         super(props)
         this.state = {
             farmer: [],
-            plants: []
+            plants: [],
+            get_user:null,
+            default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg",
         }
     }
 
     componentWillMount() {
         this.get_skill_farmer()
+        this.get_user()
     }
     get_skill_farmer = async () => {
         try {
@@ -79,54 +83,64 @@ class S_skill_farmer extends Component {
         return sort_order
     }
 
+    get_user = async () => {
+        try {
+            await get('show/show_user', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        get_user: result.result
+                    })
+                    setTimeout(() => {
+                        console.log("get_user", result.result)
+                    }, 500)
+                } else {
+                    window.location.href = "/";
+                    //alert("user1"+result.error_message);
+                }
+            });
+        } catch (error) {
+            alert("get_user2" + error);
+        }
+    }
+
+
     render() {
         return (
             <div className="App">
                 <div className="Row">
-                    <div className="col-12">
+                    <div className="col-2"></div>
+                    <div className="col-10">
                         <h2 style={{ textAlign: "center" }}>รายชื่อเกษตรกรในเครือข่าย</h2>
                     </div>
                 </div>
 
-                <div className="Row" style={{marginTop:"-50px"}}>
-                <div className='col-3'></div>
-                    <div className="col-8" >
-                        <input type="search" placeholder="ค้นหา" 
-                        // onChange={this.filterID} 
-                        />
-                    </div>
-                    <div className='col-1'></div>
-                </div>
-
 
                 <div className='Row'>
-                    <div className='col-1'></div>
-                    <div className='col-2'>
-                        {/* พืชที่ปลูก
-                {this.plants_se(this.state.farmer).map((ele, index) => {
-                            return (
-                                <div>
-                                    {index + 1}. {ele}
-                                </div>
-                            )
-                        })} */}
-                        <b>พืชที่เกษตรในเครือข่ายปลูกได้ดี</b>
-                        {this.plants_se(this.sort_plant(this.state.farmer)).map((ele_plant, index) => {
-                            return (
-                                <div>
-                                    <b>{index + 1}. {ele_plant}</b>
-                                </div>
-                            )
-                        })}
+                    <div className='col-2' style={{marginTop:"-130px"}}>
+                        
+                        <ol>
+                            <div style={{textAlign:"center",margin:"0px"}}>
+                                {/* <img src={this.state.default_user_image} alt="se_photo" style={{width:"150px",marginTop:"10px",borderRadius:"50%"}}/> */}
+                                <h5 style={{padding:"10px 5px 10px 10px",margin:"0px"}}>{this.state.get_user ? this.state.get_user.name : null}</h5>
+                            </div>
+                            <hr style={{boxShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.2)",border: "1px solid #ccc",width:"80%"}}/>
+                            {this.plants_se(this.sort_plant(this.state.farmer)).map((ele_plant, index) => {
+                                return (
+                                    <li><button >{ele_plant}</button></li>
+                                )
+                            })}
+                        </ol>
                     </div>
-                    <div className='col-8'>
-                        <b>รายชื่อเกษตรที่ปลูกพืช</b>
+
+                    <div className='col-1'></div>
+                    <div className='col-8' style={{ marginTop: "-50px" }}>
+                        <input type="search" placeholder="ค้นหา" />
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ชื่อ</th>
                                 <th>พืชที่ปลูก
-                                    <select>
+                                    {/* <select>
                                         <option value="0">--แสดงพืชทั้งหมด--</option>
                                         {this.plants_se(this.sort_plant(this.state.farmer)).map((ele_plant, index) => {
                                             return (
@@ -135,25 +149,28 @@ class S_skill_farmer extends Component {
 
                                             )
                                         })}
-                                    </select> </th>
-                                <th colSpan="2" style={{borderLeft:"1px solid #ccc"}}>ปลูกได้</th>
-                                <th colSpan="2"  style={{borderLeft:"1px solid #ccc"}}>ส่งมอบ</th>
-                                <th colSpan="2"  style={{borderLeft:"1px solid #ccc"}}>ผลผลิตต่อไร่</th>
+                                    </select>  */}
+                                    </th>
+                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ปลูกได้</th>
+                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ส่งมอบ</th>
+                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่</th>
                             </tr>
                             {this.sort_plant(this.state.farmer).map((element, index) => {
+                                //  for (var i = 0; index < 20; i++) {
                                 return (
                                     <tr>
                                         <td>{index + 1} .</td>
                                         <td>{element.title_name}{element.first_name}  {element.last_name}</td>
                                         <td><b>{element.plant}</b></td>
-                                        <td style={{ textAlign: "right",borderLeft:"1px solid #ccc" }}>{element.year_value} </td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
                                         <td>{element.year_value_unit}</td>
-                                        <td style={{ textAlign: "center",borderLeft:"1px solid #ccc" }}>{element.deliver_value}</td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.deliver_value}</td>
                                         <td>กิโลกรัม</td>
-                                        <td style={{ textAlign: "center",borderLeft:"1px solid #ccc" }}>{element.product_value}</td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
                                         <td>กิโลกรัม</td>
                                     </tr>
                                 )
+                            // }
                             })}
                         </table>
 
