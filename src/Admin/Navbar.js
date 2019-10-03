@@ -59,7 +59,7 @@ class Navbar extends Component {
 
             case "3": // SE-Sub
                 render_user =
-                    <div className="App">
+                    <div >
                         <div className="Navbar">
                             <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
@@ -69,6 +69,16 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">รายการขายสินค้า</NavLink></li>
                                 <li><NavLink exact to="/S_Plants_in_network" activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
                                 <li><NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">เกษตรกร</NavLink></li>
+                                {/* <div class="dropdown">
+                                    <button class="dropbtn">Dropdown
+                                    <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a href="#">Link 1</a>
+                                        <a href="#">Link 2</a>
+                                        <a href="#">Link 3</a>
+                                    </div>
+                                </div> */}
 
                                 <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
                                 <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
@@ -137,7 +147,7 @@ class Navbar extends Component {
     logOut = (e) => {
         e.preventDefault()
         localStorage.removeItem('user_token')
-        window.location.href='/'
+        window.location.href = '/'
         // this.props.history.push('/')
     }
 
@@ -161,7 +171,7 @@ class Navbar extends Component {
             <div className="App">
                 <div className="Navbar">
                     {this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}
-                    
+
                 </div>
             </div >
         )
