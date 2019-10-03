@@ -88,8 +88,8 @@ class S_skill_farmer extends Component {
         //     }
         // })
         function compare(a, b) {
-            const order_idA = parseInt(a.year_value)
-            const order_idB = parseInt(b.year_value)
+            const order_idA = a.year_value*1
+            const order_idB = b.year_value*1
 
             let comparison = 0;
             if (order_idA < order_idB) {
@@ -194,13 +194,13 @@ class S_skill_farmer extends Component {
                                         <td>{index + 1} .</td>
                                         <td>{element.title_name}{element.first_name}  {element.last_name}</td>
                                         <td><b>{element.plant}</b></td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value*1} </td>
                                         <td>{element.year_value_unit}</td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.deliver_value}</td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.deliver_value*1}</td>
                                         <td>กิโลกรัม</td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value*1}</td>
                                         <td>กิโลกรัม</td>
-                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
+                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea*1}</td>
                                         <td>ไร่</td>
                                     </tr>
                                 )
