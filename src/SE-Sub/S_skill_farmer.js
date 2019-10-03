@@ -103,7 +103,6 @@ class S_skill_farmer extends Component {
         }
     }
 
-
     render() {
         return (
             <div className="App">
@@ -126,7 +125,7 @@ class S_skill_farmer extends Component {
                             <hr style={{boxShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.2)",border: "1px solid #ccc",width:"80%"}}/>
                             {this.plants_se(this.sort_plant(this.state.farmer)).map((ele_plant, index) => {
                                 return (
-                                    <li><button >{ele_plant}</button></li>
+                                    <li><NavLink to="#" style={{color:"black",textDecoration: "none"}}>{ele_plant}</NavLink></li>
                                 )
                             })}
                         </ol>
