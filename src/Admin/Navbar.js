@@ -50,8 +50,15 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
 
 
-                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
-                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
+                                <div className="NavbarRight">
+                                    <div className="dropdown">
+                                        <NavLink exact to="/User" className="dropbtn" >{this.state.get_user.username}</NavLink>
+                                        <div className="dropdown-content">
+                                            <NavLink to={"/EditUser" } activeClassName="Active" className="NavbarRight">แก้ไขข้อมูล</NavLink>
+                                            <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                        </div>
+                                    </div>
+                                </div>
                             </ul>
                         </div>
                     </div>
@@ -69,26 +76,18 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">รายการขายสินค้า</NavLink></li>
                                 <li><NavLink exact to="/S_Plants_in_network" activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
                                 <li><NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">เกษตรกร</NavLink></li>
-                                {/* <div className="dropdown NavbarText" ctiveClassName="Active">
-                                    <button className="dropbtn">Dropdown
-                                    <i className="fa fa-caret-down"></i>
-                                    </button>
-                                    <div className="dropdown-content">
-                                        <a href="#">Link 1</a>
-                                        <a href="#">Link 2</a>
-                                        <a href="#">Link 3</a>
-                                    </div>
-                                </div> */}
 
-                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
-                                <div activeClassName="Active" className="NavbarRight">
-                                    
+
+                                
+                                <div className="NavbarRight">
+                                    <div className="dropdown">
                                         <NavLink exact to="/User" className="dropbtn" >{this.state.get_user.username}</NavLink>
-                                    
-                                    
+                                        <div className="dropdown-content">
+                                            <NavLink to={"/EditUser" } activeClassName="Active" className="NavbarRight">แก้ไขข้อมูล</NavLink>
+                                            <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                
                             </ul>
                         </div>
                     </div>
@@ -109,8 +108,15 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/M_Summary" activeClassName="Active" className="NavbarText">สรุปยอดซื้อ-ขาย</NavLink></li>
                                 {/* <li><NavLink exact to="/M_BB" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
 
-                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
-                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
+                                <div className="NavbarRight">
+                                    <div className="dropdown">
+                                        <NavLink exact to="/User" className="dropbtn" >{this.state.get_user.username}</NavLink>
+                                        <div className="dropdown-content">
+                                            <NavLink to={"/EditUser" } activeClassName="Active" className="NavbarRight">แก้ไขข้อมูล</NavLink>
+                                            <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                        </div>
+                                    </div>
+                                </div>
                             </ul>
                         </div>
                     </div>
@@ -128,8 +134,16 @@ class Navbar extends Component {
                                 <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">ข้อมูลวัตถุดิบ</NavLink></li>
                                 <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">วางแผนการเพาะปลูก</NavLink></li>
                                 <li><NavLink exact to="/UserAll" activeClassName="Active" className="NavbarText">ผู้ใช้งาน</NavLink></li>
-                                <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
-                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
+                                
+                                <div className="NavbarRight">
+                                    <div className="dropdown">
+                                        <NavLink exact to="/User" className="dropbtn" >{this.state.get_user.username}</NavLink>
+                                        <div className="dropdown-content">
+                                            <NavLink to={"/EditUser" } activeClassName="Active" className="NavbarRight">แก้ไขข้อมูล</NavLink>
+                                            <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                        </div>
+                                    </div>
+                                </div>
                             </ul>
                         </div>
                     </div>

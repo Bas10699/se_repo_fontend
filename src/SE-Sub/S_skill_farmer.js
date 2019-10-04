@@ -64,7 +64,7 @@ class S_skill_farmer extends Component {
             let value = 0
             data.map((ele_data) => {
                 if (ele_data.plant === ele_plant) {
-                    value += ele_data.year_value 
+                    value += ele_data.year_value
                 }
             })
             disnict_plant_sum.push({
@@ -81,8 +81,8 @@ class S_skill_farmer extends Component {
     sort_plant = (data) => {
         const order = data
         function compare(a, b) {
-            const order_idA = a.year_value 
-            const order_idB = b.year_value 
+            const order_idA = a.year_value
+            const order_idB = b.year_value
 
             let comparison = 0;
             if (order_idA < order_idB) {
@@ -149,6 +149,10 @@ class S_skill_farmer extends Component {
                                 <h5 style={{ padding: "10px 5px 10px 10px", margin: "0px" }}>{this.state.get_user ? this.state.get_user.name : null}</h5>
                             </div>
                             <hr style={{ boxShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.2)", border: "1px solid #ccc", width: "80%" }} />
+                            <NavLink
+                                style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
+                                <li style={{ textAlign: "center" }} activeClassName="Active">--แสดงทั้งหมด--</li>
+                            </NavLink>
                             {this.plants_se(this.state.plants).map((ele_plant, index) => {
                                 return (
                                     <NavLink onClick={() => this.filterPlant(ele_plant.plant)}
@@ -180,11 +184,11 @@ class S_skill_farmer extends Component {
                                         <td>{index + 1} .</td>
                                         <td>{element.title_name}{element.first_name}  {element.last_name}</td>
                                         <td><b>{element.plant}</b></td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value } </td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
                                         <td>กิโลกรม</td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value }</td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
                                         <td>กิโลกรัม</td>
-                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea }</td>
+                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
                                         <td>ไร่</td>
                                     </tr>
                                 )

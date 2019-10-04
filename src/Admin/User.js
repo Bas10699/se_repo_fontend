@@ -119,7 +119,7 @@ class User extends Component {
                             <h4 style={{margin:"0px"}}>ชื่อบัญชีธนาคาร เลขที่บัญชี</h4>
                         </div>:null : null}
 
-                        <NavLink to={"/EditUser"}><button className="BTN_Signin">แก้ไขข้อมูล</button></NavLink>
+                        {/* <NavLink to={"/EditUser"}><button className="BTN_Signin">แก้ไขข้อมูล</button></NavLink> */}
                     </div>
                     <div className="col-3"></div>
 

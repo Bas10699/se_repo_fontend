@@ -1,10 +1,23 @@
 //แก้ไข User
 import React, { Component } from 'react';
-import { user_token } from '../../Support/Constance';
+import { user_token, addComma } from '../../Support/Constance';
 import { ip, get, post } from '../../Support/Service';
 import { NavLink } from 'react-router-dom';
-import { async } from 'q';
+import Modal from 'react-responsive-modal'
 
+const invoice = [
+    {
+        bankNo: "123-4-56789-0",
+        bankName: "นายบัญชี ธนาคาร",
+        bankAccount: "ธนาคารกรุงไทย"
+    },
+    {
+        bankNo: "012-3-45678-9",
+        bankName: "นายบัญชี ธนาคาร",
+        bankAccount: "ธนาคารไทยพาณิชย์"
+    }
+
+]
 class EditUser extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +34,9 @@ class EditUser extends Component {
             password: true,
             password1: null,
             new_password1: null,
-            new_password_again1: null
+            new_password_again1: null,
+            open: false,
+
         };
 
     }
@@ -87,29 +102,29 @@ class EditUser extends Component {
         }
     }
 
-    update_data_user = async() => {
+    update_data_user = async () => {
         let object = {
-            name : this.state.get_user.name,
-            lastname:this.state.get_user.lastname,
-            email:this.state.get_user.email,
-            phone:this.state.get_user.phone,
-            username:this.state.get_user.username,
-            address:this.state.get_user.address
+            name: this.state.get_user.name,
+            lastname: this.state.get_user.lastname,
+            email: this.state.get_user.email,
+            phone: this.state.get_user.phone,
+            username: this.state.get_user.username,
+            address: this.state.get_user.address
         }
-        try{
-            await post(object,'user/user_update_data',user_token).then((result)=>{
-                if(result.success){
+        try {
+            await post(object, 'user/user_update_data', user_token).then((result) => {
+                if (result.success) {
                     alert(result.message)
                     window.location.reload()
                 }
-                else{
+                else {
                     alert(result.error_message)
                 }
             })
-        }catch(error){
-            alert('update_data_user'+error)
+        } catch (error) {
+            alert('update_data_user' + error)
         }
-            
+
     }
 
     handleChange = (e) => {
@@ -167,6 +182,17 @@ class EditUser extends Component {
         return render_user
     }
 
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+    onCloseModal = () => {
+        this.setState({ open: false });
+
+    };
+
+    add_invoice = () => {
+        alert("เพิ่มบัญชีธนาคารเรียบร้อย")
+    }
 
     render() {
         return (
@@ -250,6 +276,39 @@ class EditUser extends Component {
                         />
                         <button onClick={() => this.Check_Password()} className="BTN_Signin">ยืนยัน</button>
                         <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink>
+
+
+                        <h3 style={{ textAlign: "center", marginTop: "80px" }}>บัญชีธนาคาร</h3>
+
+                        <button className='BTN_CONFIRM' style={{float:"right"}} onClick={() => this.onOpenModal()}>เพิ่มบัญชีธนาคาร</button>
+                        <hr style={{marginTop:"80px"}}/>
+                        {invoice.map((element_in, index) => {
+                            return (
+                                <div className="Card" style={{width:"45%"}}>
+                                    <h4>{element_in.bankName}</h4>
+                                    <h5>{element_in.bankAccount}</h5>                                    
+                                    <h5>{element_in.bankNo}</h5>
+                                    <button>แก้ไข</button>
+                                </div>
+
+                            )
+                        })}
+
+                        <Modal open={this.state.open} onClose={this.onCloseModal}>
+
+                            <div className="Row" style={{ width: "500px" }}>
+                                <div className="col-10">
+                                    <h2 style={{ textAlign: "center" }}>เพิ่มบัญชีธนาคาร</h2>
+                                    <h5>ชื่อธนาคาร</h5> <input type="text" placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" />
+                                    <h5>เลขที่บัญชี</h5> <input type="text" pattern="[0-9]{1,}" placeholder="123-4-56789-0" />
+                                    <h5>ชื่อบัญชี</h5> <input type="text" placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" />
+
+                                    <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                                    <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>เพิ่มบัญชี</button></div>
+                            </div>
+                        </Modal>
+
+
 
                     </div>
                     <div className="col-1"></div>
