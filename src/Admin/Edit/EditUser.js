@@ -159,34 +159,15 @@ class EditUser extends Component {
         this.get_user()
     }
 
-    render_type = (user_type) => {
-        let render_user
-        switch (user_type) {
-            case "2":
-                render_user = <div > ผู้ประกอบการ </div>
-                break;
-            case "3":
-                render_user = <div > SE ย่อย </div>
-                break;
-            case "4":
-                render_user = <div > SE กลาง  </div>
-                break;
-            case "5":
-                render_user = <div > Admin </div>
-                break;
-
-            default:
-                render_user = <div className="FontDanger"> เกิดข้อผิดพลาด </div>
-                break;
-        }
-        return render_user
-    }
 
     onOpenModal = () => {
         this.setState({ open: true });
     };
+    openEdit = () => {
+        this.setState({ open: true });
+    }
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, openEdit: false });
 
     };
 
@@ -218,8 +199,7 @@ class EditUser extends Component {
                             value={this.state.get_user.lastname}
                             onChange={this.handleChange}
                         />
-                        <h4>ประเภทผู้ใช้งาน</h4>
-                        <h4>{this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}</h4>
+                        <h4>ประเภทผู้ใช้งาน : {this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}</h4>
                         <h4>อีเมล์</h4>
                         < input
                             type="text" id="email"
@@ -277,34 +257,52 @@ class EditUser extends Component {
                         <button onClick={() => this.Check_Password()} className="BTN_Signin">ยืนยัน</button>
                         <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink>
 
+                        <hr style={{ marginTop: "80px" }} />
+                        <h3 style={{ textAlign: "center", marginTop: "50px" }}>บัญชีธนาคาร</h3>
 
-                        <h3 style={{ textAlign: "center", marginTop: "80px" }}>บัญชีธนาคาร</h3>
+                        <button className='BTN_CONFIRM' style={{ float: "right", marginTop: "-20px", width:"100%"}} onClick={() => this.onOpenModal()}>เพิ่มบัญชีธนาคาร</button>
 
-                        <button className='BTN_CONFIRM' style={{float:"right"}} onClick={() => this.onOpenModal()}>เพิ่มบัญชีธนาคาร</button>
-                        <hr style={{marginTop:"80px"}}/>
                         {invoice.map((element_in, index) => {
                             return (
-                                <div className="Card" style={{width:"45%"}}>
-                                    <h4>{element_in.bankName}</h4>
-                                    <h5>{element_in.bankAccount}</h5>                                    
-                                    <h5>{element_in.bankNo}</h5>
-                                    <button>แก้ไข</button>
+                                <div className="Card" style={{ width: "45%", marginTop: "10px" }}>
+                                    <h4 >{element_in.bankName}</h4>
+                                    <h5 style={{ marginTop: "-20px" }}>{element_in.bankAccount}</h5>
+                                    <h5 style={{ marginTop: "-20px" }}>{element_in.bankNo}</h5>
+                                    <button onClick={() => this.setState({ openEdit: true })}>แก้ไข</button>
                                 </div>
 
                             )
                         })}
 
                         <Modal open={this.state.open} onClose={this.onCloseModal}>
-
+                            <div className="Row">
+                                <div className="col-12"><h2 style={{ textAlign: "center" }}>เพิ่มบัญชีธนาคาร</h2></div>
+                            </div>
                             <div className="Row" style={{ width: "500px" }}>
+
                                 <div className="col-10">
-                                    <h2 style={{ textAlign: "center" }}>เพิ่มบัญชีธนาคาร</h2>
+
                                     <h5>ชื่อธนาคาร</h5> <input type="text" placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" />
                                     <h5>เลขที่บัญชี</h5> <input type="text" pattern="[0-9]{1,}" placeholder="123-4-56789-0" />
                                     <h5>ชื่อบัญชี</h5> <input type="text" placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" />
 
                                     <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
                                     <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>เพิ่มบัญชี</button></div>
+                            </div>
+                        </Modal>
+
+                        <Modal open={this.state.openEdit} onClose={this.onCloseModal}>
+                            <div className="Row">
+                                <div className="col-12"><h2 style={{ textAlign: "center" }}>แก้ไขบัญชีธนาคาร</h2></div>
+                            </div>
+                            <div className="Row" style={{ width: "500px" }}>
+                                <div className="col-10">
+                                    <h5>ชื่อธนาคาร</h5> <input type="text" placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" />
+                                    <h5>เลขที่บัญชี</h5> <input type="text" pattern="[0-9]{1,}" placeholder="123-4-56789-0" />
+                                    <h5>ชื่อบัญชี</h5> <input type="text" placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" />
+
+                                    <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                                    <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ยืนยัน</button></div>
                             </div>
                         </Modal>
 
