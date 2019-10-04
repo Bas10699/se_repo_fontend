@@ -101,7 +101,7 @@ class BuyingDetail extends Component {
                         <div className="col-12">
                             <h4>สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
                             <h5>กรุณาชำระเงินผ่าน : 
-                            โชว์รายชื่อธนาคาร {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
+                            รายชื่อธนาคาร {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
                             <h5>ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
                         </div>
                     </div>
