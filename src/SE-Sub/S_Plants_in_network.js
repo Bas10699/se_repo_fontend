@@ -10,8 +10,9 @@ class S_Plants_in_network extends Component {
         super(props)
         this.state = {
             plants: [],
-            se_name: null
-
+            se_name: null,
+            index_plant: 0,
+            data_month:[]
         }
     }
     componentWillMount() {
@@ -23,7 +24,8 @@ class S_Plants_in_network extends Component {
                 if (result.success) {
                     this.setState({
                         se_name: result.result[0].se_name,
-                        plants: result.result[0].plant
+                        plants: result.result[0].plant,
+                        data_month: result.result[0].plant[0].data
                     })
                     console.log(result.result[0])
                 }
@@ -37,25 +39,38 @@ class S_Plants_in_network extends Component {
 
         }
     }
+
+    show_chart = (index) => {
+        let plant = this.state.plants
+        this.setState({
+            index_plant: index,
+            data_month: plant[index].data
+        })
+    }
+
     render() {
+        let plant = this.state.plants
+        let index = this.state.index_plant
+        console.log('555', plant[index])
         var options = {
 
             title: {
-                text: 'Chart.update'
-            },
-
-            subtitle: {
-                text: 'Plain'
+                text: plant[index]? plant[index].name : null
             },
 
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+            },
+
+            yAxis: {
+                // type: 'logarithmic',
+                // minorTickInterval: 10
             },
 
             series: [{
                 type: 'column',
                 colorByPoint: true,
-                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                data: plant[index] ? plant[index].data : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 showInLegend: false
             }]
 
@@ -71,15 +86,24 @@ class S_Plants_in_network extends Component {
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-2">
-                        {this.state.plants.map((element) => {
+                        ผลผลิตที่ส่งมอบได้
+                        {this.state.plants.map((element, index) => {
                             return (
-                                <div>{element.name}</div>
+                                <div style={{cursor:'pointer'}} onClick={() => this.show_chart(index)}> {index+1}. {element.name}</div>
                             )
                         })}
                     </div>
-                    <div className='col-8'>
+                    <div className='col-6'>
                         <HighchartsReact highcharts={Highcharts} options={options} />
-                        </div>
+                    </div>
+                    <div className="col-1"></div>
+                    <div className="col-1">
+                        {this.state.data_month.map((element, index) => {
+                            return (
+                                <div style={{cursor:'pointer'}}>{index+1}. {element} </div>
+                            )
+                        })}
+                    </div>
                     <div className="col-1"></div>
                 </div>
 
