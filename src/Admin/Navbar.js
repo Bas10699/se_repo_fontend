@@ -69,19 +69,26 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">รายการขายสินค้า</NavLink></li>
                                 <li><NavLink exact to="/S_Plants_in_network" activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
                                 <li><NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">เกษตรกร</NavLink></li>
-                                {/* <div class="dropdown">
-                                    <button class="dropbtn">Dropdown
-                                    <i class="fa fa-caret-down"></i>
+                                {/* <div className="dropdown NavbarText" ctiveClassName="Active">
+                                    <button className="dropbtn">Dropdown
+                                    <i className="fa fa-caret-down"></i>
                                     </button>
-                                    <div class="dropdown-content">
-                                    <NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">เกษตรกร</NavLink>
-                                    <NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink>
+                                    <div className="dropdown-content">
+                                        <a href="#">Link 1</a>
+                                        <a href="#">Link 2</a>
                                         <a href="#">Link 3</a>
                                     </div>
                                 </div> */}
 
                                 <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
-                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink>
+                                <div activeClassName="Active" className="NavbarRight">
+                                    
+                                        <NavLink exact to="/User" className="dropbtn" >{this.state.get_user.username}</NavLink>
+                                    
+                                    
+                                </div>
+                                
+                                
                             </ul>
                         </div>
                     </div>

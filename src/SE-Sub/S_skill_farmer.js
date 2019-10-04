@@ -69,7 +69,7 @@ class S_skill_farmer extends Component {
             })
             disnict_plant_sum.push({
                 plant: ele_plant,
-                year_value : value
+                year_value: value
             })
         })
 
@@ -151,7 +151,11 @@ class S_skill_farmer extends Component {
                             <hr style={{ boxShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.2)", border: "1px solid #ccc", width: "80%" }} />
                             {this.plants_se(this.state.plants).map((ele_plant, index) => {
                                 return (
-                                    <li><NavLink onClick={() => this.filterPlant(ele_plant.plant)} style={{ color: "black", textDecoration: "none" }}>{ele_plant.plant}</NavLink></li>
+                                    <NavLink onClick={() => this.filterPlant(ele_plant.plant)}
+                                        style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
+                                        <li style={{ textAlign: "center" }} activeClassName="Active">{ele_plant.plant}</li>
+                                    </NavLink>
+
                                 )
                             })}
                         </ol>
