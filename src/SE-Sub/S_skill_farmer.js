@@ -64,7 +64,7 @@ class S_skill_farmer extends Component {
             let value = 0
             data.map((ele_data) => {
                 if (ele_data.plant === ele_plant) {
-                    value += ele_data.year_value * 1
+                    value += ele_data.year_value 
                 }
             })
             disnict_plant_sum.push({
@@ -81,8 +81,8 @@ class S_skill_farmer extends Component {
     sort_plant = (data) => {
         const order = data
         function compare(a, b) {
-            const order_idA = a.year_value * 1
-            const order_idB = b.year_value * 1
+            const order_idA = a.year_value 
+            const order_idB = b.year_value 
 
             let comparison = 0;
             if (order_idA < order_idB) {
@@ -176,11 +176,11 @@ class S_skill_farmer extends Component {
                                         <td>{index + 1} .</td>
                                         <td>{element.title_name}{element.first_name}  {element.last_name}</td>
                                         <td><b>{element.plant}</b></td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value * 1} </td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value } </td>
                                         <td>กิโลกรม</td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value * 1}</td>
+                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value }</td>
                                         <td>กิโลกรัม</td>
-                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea * 1}</td>
+                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea }</td>
                                         <td>ไร่</td>
                                     </tr>
                                 )

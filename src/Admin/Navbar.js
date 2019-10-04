@@ -74,8 +74,8 @@ class Navbar extends Component {
                                     <i class="fa fa-caret-down"></i>
                                     </button>
                                     <div class="dropdown-content">
-                                        <a href="#">Link 1</a>
-                                        <a href="#">Link 2</a>
+                                    <NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">เกษตรกร</NavLink>
+                                    <NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink>
                                         <a href="#">Link 3</a>
                                     </div>
                                 </div> */}
