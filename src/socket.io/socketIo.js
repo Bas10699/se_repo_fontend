@@ -10,7 +10,7 @@ class SocketIo extends Component {
             input: '',
             num: '',
             message: [],
-            endpoint: '127.0.0.1:3003'// เชื่อมต่อไปยัง url ของ realtime server
+            endpoint: ip+'ss/ss'// เชื่อมต่อไปยัง url ของ realtime server
         }
     }
 
@@ -51,7 +51,7 @@ class SocketIo extends Component {
     render() {
         const { input, message } = this.state
         return (
-            <div>
+            <div className='App' style={{paddingTop:'100px'}}>
                 <div style={style}>
                     {this.state.num}
                     <input value={input} onChange={this.changeInput} />
