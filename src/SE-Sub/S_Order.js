@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
+import {NavLink} from 'react-router-dom'
+import moment from 'moment'
 
 class S_Order extends Component {
     constructor(props) {
@@ -74,9 +76,9 @@ class S_Order extends Component {
                             return (
                                 <tr>
                                     <td>{index + 1}</td>
-                                    <td>{element.order_se_id}</td>
+                                    <td><NavLink to={'S_Order/Order?orderId='+element.order_se_id}>{element.order_se_id}</NavLink></td>
                                     <td>{element.plant_name}</td>
-                                    <td></td>
+                                    <td>{moment(element.order_se_date).utc().format('DD/MM/YYYY')}</td>
                                     <td>{element.amount}</td>
                                 </tr>
                             )
