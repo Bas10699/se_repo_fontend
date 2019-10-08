@@ -24,9 +24,9 @@ class Navbar extends Component {
                     this.setState({
                         get_user: result.result
                     })
-                    setTimeout(() => {
-                        console.log("get user : ", result.result)
-                    }, 500)
+                    // setTimeout(() => {
+                    //     console.log("get user : ", result.result)
+                    // }, 500)
                 } else {
                 }
             });

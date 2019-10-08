@@ -27,6 +27,7 @@ import UserDetail from './Admin/UserDetail'
 import S_Order from './SE-Sub/S_Order'
 import S_Plants_in_network from './SE-Sub/S_Plants_in_network'
 import S_skill_farmer from './SE-Sub/S_skill_farmer'
+import S_OrderDetail from './SE-Sub/S_OrderDetail'
 import SocketIo from './socket.io/socketIo'
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
       <Route exact path='/S_Order' component={S_Order}/>
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>
       <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
+      <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
       
 
     </Router>
