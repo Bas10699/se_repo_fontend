@@ -13,8 +13,6 @@ import four from '../Image/four.png'
 import fourdis from '../Image/fourdis.png'
 import five from '../Image/five.png'
 import fivedis from '../Image/fivedis.png'
-import six from '../Image/six.png'
-import sixdis from '../Image/sixdis.png'
 import az from '../Image/az.png'
 import za from '../Image/za.png'
 
@@ -191,6 +189,7 @@ class M_Order extends Component {
             this.setState({ order: sort_order,clicks: false })
         }
     }
+    
     SortDate = (e) => {
         const order = this.state.order
         if (e === 'Max') {

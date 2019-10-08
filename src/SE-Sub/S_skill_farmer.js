@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
+import za from '../Image/za.png'
+import az from '../Image/az.png'
 
 class S_skill_farmer extends Component {
     constructor(props) {
@@ -10,6 +12,8 @@ class S_skill_farmer extends Component {
         this.state = {
             farmer: [],
             plants: [],
+            search_order: [],
+            click: false,
             get_user: null,
             default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg",
         }
@@ -25,7 +29,8 @@ class S_skill_farmer extends Component {
                 if (result.success) {
                     this.setState({
                         farmer: result.result,
-                        plants: result.result
+                        plants: result.result,
+                        search_order:result.result
                     })
 
                 }
@@ -173,27 +178,51 @@ class S_skill_farmer extends Component {
                                 <th>ลำดับ</th>
                                 <th>ชื่อ</th>
                                 <th>พืชที่ปลูก </th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี</th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่</th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก</th>
+                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี
+                                {this.state.click ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value('Min')} />
+                                        :
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value('Max')} />
+                                    }
+                                </th>
+                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่
+                                {this.state.click ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value('Min')} />
+                                        :
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value('Max')} />
+                                    }
+                                </th>
+                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
+                                {this.state.click ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea('Min')} />
+                                        :
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea('Max')} />
+                                    }
+                                </th>
                             </tr>
-                            {this.sort_plant(this.state.farmer).map((element, index) => {
-                                //  for (var i = 0; index < 20; i++) {
-                                return (
-                                    <tr>
-                                        <td>{index + 1} .</td>
-                                        <td>{element.title_name}{element.first_name}  {element.last_name}</td>
-                                        <td><b>{element.plant}</b></td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
-                                        <td>กิโลกรม</td>
-                                        <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
-                                        <td>กิโลกรัม</td>
-                                        <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
-                                        <td>ไร่</td>
-                                    </tr>
-                                )
-                                // }
-                            })}
+                            {
+                                this.state.search_order ?
+                                    this.sort_plant(this.state.farmer).map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td style={{textAlign:"center"}}>{index + 1} .</td>
+                                                <td>{element.title_name}{element.first_name}  {element.last_name}</td>
+                                                <td style={{textAlign:"center"}}><b>{element.plant}</b></td>
+                                                <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
+                                                <td>กิโลกรัม</td>
+                                                <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
+                                                <td>กิโลกรัม</td>
+                                                <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
+                                                <td>ไร่</td>
+                                            </tr>
+                                        )
+                                        // }
+                                    })
+                                    :
+                                    null
+
+                            }
+
                         </table>
 
                     </div>

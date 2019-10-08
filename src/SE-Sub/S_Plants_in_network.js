@@ -130,8 +130,8 @@ class S_Plants_in_network extends Component {
                 }
             },
             tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><br/><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0;font-size:10px">{point.key}: </td>' +
+                headerFormat: '<span style="font-size:14px">{point.key}</span><br/><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0;font-size:10px">จำนวน : </td>' +
                     '<td style="padding:0"><b>{point.y} กิโลกรัม </b></td></tr>',
                 footerFormat: '</table>',
             },
@@ -166,8 +166,8 @@ class S_Plants_in_network extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-1"></div>
-                    <div className="col-2">
+                    {/* <div className="col-1"></div> */}
+                    <div className="col-1" style={{marginLeft:"10px"}}>
                         ผลผลิตที่ส่งมอบได้
                         {this.state.plants.map((element, index) => {
                             return (
@@ -175,13 +175,14 @@ class S_Plants_in_network extends Component {
                             )
                         })}
                     </div>
-                    <div className='col-6'>
+                    {/* <div className="col-1"></div> */}
+                    <div className='col-9'>
                         <HighchartsReact highcharts={Highcharts} options={options} />
 
 
                     </div>
-                    <div className="col-1"></div>
-                    <div className="col-2">
+                    {/* <div className="col-1"></div> */}
+                    <div className="col-2"  style={{marginLeft:"10px"}}>
                         <div style={{ textAlign: "center" }}>
                             {this.state.plants[this.state.index_plant] ?
                                 this.state.plants[this.state.index_plant].name
@@ -224,39 +225,21 @@ class S_Plants_in_network extends Component {
                                     </tr>
                                     {this.state.month_detail.map((ele_detail, index) => {
                                         return (
-                                            <tr style={{ textAlign: "center", width: "100%" }}>
+                                            <tr style={{ textAlign: "center" }}>
+                                                <td>{index + 1}</td>
+                                                <td style={{ textAlign: "left" }}>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
+                                                <td><b>{ele_detail.plant}</b></td>
+                                                <td>{ele_detail.end_plant}</td>
                                                 {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                    <td style={{ color: "#f4f4f4" }}>{index + 1}</td>
-                                                    :
-                                                    <td>{index + 1}</td>
-                                                }
-                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                    <td style={{ textAlign: "left", color: "#f4f4f4" }}>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
-                                                    :
-                                                    <td style={{ textAlign: "left" }}>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
-                                                }
-                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                    <td style={{ color: "#f4f4f4" }}><b>{ele_detail.plant}</b></td>
-                                                    :
-                                                    <td><b>{ele_detail.plant}</b></td>
-                                                }
-                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                    <td style={{ color: "#f4f4f4" }}>{ele_detail.end_plant}</td>
-                                                    :
-                                                    <td>{ele_detail.end_plant}</td>
-                                                }
-                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                    <td style={{ color: "#f4f4f4" }}><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
+                                                    <td style={{ color: "red" }}><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
                                                     :
                                                     <td><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
                                                 }
-                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                    <td style={{ color: "#f4f4f4" }}>{addComma(ele_detail.deliver_frequency_number)}</td>
-                                                    :
+                                                
                                                     <td>{addComma(ele_detail.deliver_frequency_number)}</td>
-                                                }
+                                                
                                                 {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                    <td style={{ color: "#f4f4f4" }}>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
+                                                    <td style={{ color: "red" }}>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
                                                     :
                                                     <td>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
                                                 }
