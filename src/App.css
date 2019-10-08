@@ -140,6 +140,7 @@ h6{
     font-family: inherit;
     text-decoration: none;
     font-size: 18px;
+    width: 100px;
 
 }
 
@@ -209,7 +210,7 @@ h6{
     padding-bottom: 10px;
 } */
 
-.NavbarRight.Active {
+.NavbarRight.Active,.dropbtn.Active {
     border-bottom: 5px solid #FFB731;
     text-decoration: none;
     color: white;
