@@ -31,6 +31,9 @@ class UserAll extends Component {
     render_type = (user_type) => {
         let render_user
         switch (user_type) {
+            case "1":
+                render_user = <div > นักวิจัย </div>
+                break;
             case "2":
                 render_user = <div > ผู้ประกอบการ </div>
                 break;

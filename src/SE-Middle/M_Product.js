@@ -418,7 +418,6 @@ class ProductDetail extends Component {
         let render_page
         switch (user_type) {
 
-            case "4":
             case "5": render_page =
 
                 <div className="App">

@@ -78,6 +78,7 @@ class Product extends Component {
     render_type = (user_type) => {
         let render_product
         switch (user_type) {
+            
             case "2": // Trader
                 render_product =
                     <div className="App">

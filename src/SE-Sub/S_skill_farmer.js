@@ -135,7 +135,7 @@ class S_skill_farmer extends Component {
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-10">
-                        <h2 style={{ textAlign: "center" }}>รายชื่อเกษตรกรในเครือข่าย</h2>
+                        <h2 style={{ textAlign: "center" }}>ประสิทธิภาพการปลูกพืชของเกษตรกร</h2>
                     </div>
                 </div>
 
