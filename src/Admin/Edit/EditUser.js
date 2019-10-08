@@ -44,6 +44,9 @@ class EditUser extends Component {
     render_type = (user_type) => {
         let render_user
         switch (user_type) {
+            case "1":
+                render_user = 'นักวิจัย'
+                break;
             case "2":
                 render_user = 'ผู้ประกอบการ'
                 break;

@@ -38,6 +38,31 @@ class Navbar extends Component {
     render_type = (user_type) => {
         let render_user
         switch (user_type) {
+            case "1":
+                render_user = 
+                <div className="App">
+                        <div className="Navbar">
+                            <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
+                            <ul>
+                                <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
+                                {/* <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
+                                <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตระกร้าสินค้า</NavLink></li>
+                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
+
+
+                                <div className="NavbarRight" activeClassName="Active">
+                                    <div className="dropdown" activeClassName="Active">
+                                        <NavLink exact to="/User" className="dropbtn" activeClassName="Active">{this.state.get_user.username}</NavLink>
+                                        <div className="dropdown-content">
+                                            <NavLink to={"/EditUser" } activeClassName="Active" className="NavbarRight">แก้ไขข้อมูล</NavLink>
+                                            <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                break;
             case "2": // Trader
                 render_user =
                     <div className="App">

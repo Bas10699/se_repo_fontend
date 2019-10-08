@@ -1,7 +1,7 @@
 //พืชที่มีอยู่ในเครือข่ายตัวเองที่ส่งมอบได้
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
-import { user_token } from '../Support/Constance'
+import { user_token, addComma } from '../Support/Constance'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
@@ -50,7 +50,7 @@ class S_Plants_in_network extends Component {
         })
     }
 
-    show_detail_month = (plant,index) => {
+    show_detail_month = (plant, index) => {
         let plants = this.state.plants
         console.log('index', plants[plant])
         this.setState({
@@ -58,14 +58,51 @@ class S_Plants_in_network extends Component {
         })
     }
 
+    rander_month = (index) => {
+        let return_month
+        switch (index) {
+            case 1: return_month = <b>ม.ค.</b>
+                break;
+            case 2: return_month = <b>ก.พ.</b>
+                break;
+            case 3: return_month = <b>มี.ค.</b>
+                break;
+            case 4: return_month = <b>เม.ย.</b>
+                break;
+            case 5: return_month = <b>พ.ค.</b>
+                break;
+            case 6: return_month = <b>มิ.ย.</b>
+                break;
+            case 7: return_month = <b>ก.ค.</b>
+                break;
+            case 8: return_month = <b>ส.ค.</b>
+                break;
+            case 9: return_month = <b>ก.ย.</b>
+                break;
+            case 10: return_month = <b>ต.ค.</b>
+                break;
+            case 11: return_month = <b>พ.ย.</b>
+                break;
+            case 12: return_month = <b>ธ.ค.</b>
+                break;
+            default:
+                break;
+        }
+        return return_month
+    }
+
     render() {
         let plant = this.state.plants
         let index = this.state.index_plant
-        console.log('555', plant[index])
+        console.log('chart plant', plant[index])
         var options = {
 
             title: {
-                text: plant[index] ? plant[index].name : null
+                text: plant[index] ? plant[index].name : null,
+                style: {
+                    fontSize: '24px',
+                    fontFamily: 'fc_lamoonregular'
+                }
             },
 
             xAxis: {
@@ -75,14 +112,49 @@ class S_Plants_in_network extends Component {
             yAxis: {
                 // type: 'logarithmic',
                 // minorTickInterval: 10
+                title: {
+                    text: '<span style="font-size:15px;">จำนวน (กิโลกรัม)</span>',
+                    style: {
+                        fontSize: '20px',
+                        fontFamily: 'fc_lamoonregular'
+                    }
+                }
             },
-
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y}'
+                    }
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><br/><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0;font-size:10px">{point.key}: </td>' +
+                    '<td style="padding:0"><b>{point.y} กิโลกรัม </b></td></tr>',
+                footerFormat: '</table>',
+            },
             series: [{
                 type: 'column',
                 colorByPoint: true,
                 data: plant[index] ? plant[index].data : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                showInLegend: false
-            }]
+                showInLegend: false,
+                labels: {
+                    enabled: true,
+                    rotation: 0,
+                    color: '{series.color}',
+                    align: 'center',
+                    format: '{point.y}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                        fontSize: '20px',
+                        fontFamily: 'fc_lamoonregular'
+
+                    }
+                }
+            }],
+
 
         }
         return (
@@ -105,45 +177,101 @@ class S_Plants_in_network extends Component {
                     </div>
                     <div className='col-6'>
                         <HighchartsReact highcharts={Highcharts} options={options} />
-                        <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
-                        <table>
-                            <tr>
-                                <th>ลำดับ</th>
-                                <th>ชื่อ</th>
-                                <th>พืชที่ปลูก </th>
-                                <th>เดือนที่ส่งมอบ</th>
-                                <th>จํานวนผลผลิตที่ส่งมอบต่อครั้ง</th>
-                                <th>จำนวนครั้ง</th>
-                            </tr>
-                            {this.state.month_detail.map((ele_detail, index) => {
+
+
+                    </div>
+                    <div className="col-1"></div>
+                    <div className="col-2">
+                        <div style={{ textAlign: "center" }}>
+                            {this.state.plants[this.state.index_plant] ?
+                                this.state.plants[this.state.index_plant].name
+                                :
+                                null
+                            }
+                        </div>
+                        <table className="s_plant">
+
+
+
+                            {this.state.data_month.map((element, index) => {
                                 return (
-                                    <tr>
-                                        <td>{index + 1}</td>
-                                        <td>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
-                                        <td><b>{ele_detail.plant}</b></td>
-                                        <td>{ele_detail.end_plant}</td>
-                                        <td><b>{ele_detail.deliver_value*1}</b></td>
-                                        <td>{ele_detail.deliver_frequency_number}</td>
+                                    <tr style={{ cursor: 'pointer' }} onClick={() => this.show_detail_month(this.state.index_plant, index)}>
+                                        <th>{this.rander_month(index + 1)}</th>
+                                        <td style={{ textAlign: "right" }}>{addComma(element)}</td>
+                                        <td style={{ textAlign: "center" }}>กิโลกรัม</td>
                                     </tr>
                                 )
-                            })
-                            }
-
+                            })}
                         </table>
 
                     </div>
-                    <div className="col-1"></div>
-                    <div className="col-1">
-                        {this.state.plants[this.state.index_plant] ? this.state.plants[this.state.index_plant].name : null}
-                        {this.state.data_month.map((element, index) => {
-                            return (
-                                <div style={{ cursor: 'pointer' }} onClick={() => this.show_detail_month(this.state.index_plant, index)}>{index + 1}. {element} </div>
-                            )
-                        })}
-                    </div>
-                    <div className="col-1"></div>
                 </div>
+                <div className="Row">
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                        {this.state.data_month ?
+                            <div>
+                                <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
+                                <table>
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>ชื่อ</th>
+                                        <th>พืชที่ปลูก </th>
+                                        <th>เดือนที่ส่งมอบ</th>
+                                        <th>จํานวนผลผลิตที่ส่งมอบต่อครั้ง</th>
+                                        <th>จำนวนครั้งส่งมอบ</th>
+                                        <th>รวม</th>
+                                    </tr>
+                                    {this.state.month_detail.map((ele_detail, index) => {
+                                        return (
+                                            <tr style={{ textAlign: "center", width: "100%" }}>
+                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
+                                                    <td style={{ color: "#f4f4f4" }}>{index + 1}</td>
+                                                    :
+                                                    <td>{index + 1}</td>
+                                                }
+                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
+                                                    <td style={{ textAlign: "left", color: "#f4f4f4" }}>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
+                                                    :
+                                                    <td style={{ textAlign: "left" }}>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
+                                                }
+                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
+                                                    <td style={{ color: "#f4f4f4" }}><b>{ele_detail.plant}</b></td>
+                                                    :
+                                                    <td><b>{ele_detail.plant}</b></td>
+                                                }
+                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
+                                                    <td style={{ color: "#f4f4f4" }}>{ele_detail.end_plant}</td>
+                                                    :
+                                                    <td>{ele_detail.end_plant}</td>
+                                                }
+                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
+                                                    <td style={{ color: "#f4f4f4" }}><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
+                                                    :
+                                                    <td><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
+                                                }
+                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
+                                                    <td style={{ color: "#f4f4f4" }}>{addComma(ele_detail.deliver_frequency_number)}</td>
+                                                    :
+                                                    <td>{addComma(ele_detail.deliver_frequency_number)}</td>
+                                                }
+                                                {addComma(ele_detail.deliver_value * 1) == 0 ?
+                                                    <td style={{ color: "#f4f4f4" }}>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
+                                                    :
+                                                    <td>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
+                                                }
 
+                                            </tr>
+                                        )
+                                    })
+                                    }
+
+                                </table>
+                            </div>
+                            : null}
+
+                    </div>
+                </div>
             </div>
         )
     }

@@ -79,7 +79,7 @@ class S_Order extends Component {
                                     <td><NavLink to={'S_Order/Order?orderId='+element.order_se_id}>{element.order_se_id}</NavLink></td>
                                     <td>{element.plant_name}</td>
                                     <td>{moment(element.order_se_date).utc().format('DD/MM/YYYY')}</td>
-                                    <td>{element.amount}</td>
+                                    <td>{element.amount} กิโลกรัม</td>
                                 </tr>
                             )
                         })}

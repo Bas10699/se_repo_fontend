@@ -29,6 +29,9 @@ class User extends Component {
     render_type = (user_type) => {
         let render_user
         switch (user_type) {
+            case "1":
+                render_user = <div > นักวิจัย </div>
+                break;
             case "2":
                 render_user = <div > ผู้ประกอบการ </div>
                 break;
@@ -112,12 +115,12 @@ class User extends Component {
                             </tr>
 
                         </table>
-                        {this.state.get_user ?  this.state.get_user.user_type === '4' ?
-                        <div className="_Card">
-                            สัญลักษณ์ธนาคาร
-                            <h3 style={{margin:"0px"}}>ชื่อธนาคาร</h3>
-                            <h4 style={{margin:"0px"}}>ชื่อบัญชีธนาคาร เลขที่บัญชี</h4>
-                        </div>:null : null}
+                        {this.state.get_user ? this.state.get_user.user_type === '4' ?
+                            <div className="_Card">
+                                สัญลักษณ์ธนาคาร
+                            <h3 style={{ margin: "0px" }}>ชื่อธนาคาร</h3>
+                                <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เลขที่บัญชี</h4>
+                            </div> : null : null}
 
                         {/* <NavLink to={"/EditUser"}><button className="BTN_Signin">แก้ไขข้อมูล</button></NavLink> */}
                     </div>
