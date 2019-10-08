@@ -4,6 +4,7 @@ import { get, post, ip } from '../Support/Service'
 import { user_token, addComma } from '../Support/Constance'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import top from '../Image/top.png'
 
 class S_Plants_in_network extends Component {
     constructor(props) {
@@ -159,6 +160,7 @@ class S_Plants_in_network extends Component {
         }
         return (
             <div className="App">
+                
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ของ {this.state.se_name}</h2>
@@ -167,7 +169,7 @@ class S_Plants_in_network extends Component {
 
                 <div className="Row">
                     {/* <div className="col-1"></div> */}
-                    <div className="col-1" style={{marginLeft:"10px"}}>
+                    <div className="col-1" style={{ marginLeft: "10px" }}>
                         ผลผลิตที่ส่งมอบได้
                         {this.state.plants.map((element, index) => {
                             return (
@@ -182,7 +184,7 @@ class S_Plants_in_network extends Component {
 
                     </div>
                     {/* <div className="col-1"></div> */}
-                    <div className="col-2"  style={{marginLeft:"10px"}}>
+                    <div className="col-2" style={{ marginLeft: "10px" }}>
                         <div style={{ textAlign: "center" }}>
                             {this.state.plants[this.state.index_plant] ?
                                 this.state.plants[this.state.index_plant].name
@@ -191,9 +193,6 @@ class S_Plants_in_network extends Component {
                             }
                         </div>
                         <table className="s_plant">
-
-
-
                             {this.state.data_month.map((element, index) => {
                                 return (
                                     <tr style={{ cursor: 'pointer' }} onClick={() => this.show_detail_month(this.state.index_plant, index)}>
@@ -202,17 +201,20 @@ class S_Plants_in_network extends Component {
                                         <td style={{ textAlign: "center" }}>กิโลกรัม</td>
                                     </tr>
                                 )
-                            })}
+                            })}<div  id="Top"/>
                         </table>
 
                     </div>
+                </div>
+                <div>
+                    <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
                 </div>
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-10">
                         {this.state.data_month ?
                             <div>
-                                <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
+
                                 <table>
                                     <tr>
                                         <th>ลำดับ</th>
@@ -235,9 +237,9 @@ class S_Plants_in_network extends Component {
                                                     :
                                                     <td><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
                                                 }
-                                                
-                                                    <td>{addComma(ele_detail.deliver_frequency_number)}</td>
-                                                
+
+                                                <td>{addComma(ele_detail.deliver_frequency_number)}</td>
+
                                                 {addComma(ele_detail.deliver_value * 1) == 0 ?
                                                     <td style={{ color: "red" }}>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
                                                     :
@@ -255,6 +257,7 @@ class S_Plants_in_network extends Component {
 
                     </div>
                 </div>
+                <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
             </div>
         )
     }

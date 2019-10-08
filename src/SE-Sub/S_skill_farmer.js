@@ -5,6 +5,7 @@ import { user_token } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
 import za from '../Image/za.png'
 import az from '../Image/az.png'
+import top from '../Image/top.png'
 
 class S_skill_farmer extends Component {
     constructor(props) {
@@ -136,7 +137,7 @@ class S_skill_farmer extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div className="App" id="#Top">
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-10">
@@ -167,7 +168,9 @@ class S_skill_farmer extends Component {
 
                                 )
                             })}
+                            
                         </ol>
+                        <a href="#Top" style={{textDecoration: "none",}}><img alt="top" src={top} className="top"/></a>
                     </div>
 
                     <div className='col-1'></div>
@@ -176,7 +179,7 @@ class S_skill_farmer extends Component {
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
-                                <th>ชื่อ</th>
+                                <th>ชื่อ - นามสกุล</th>
                                 <th>พืชที่ปลูก </th>
                                 <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี
                                 {this.state.click ?
