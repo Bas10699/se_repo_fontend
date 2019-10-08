@@ -1,6 +1,7 @@
 //รายละเอียดการซื้อสินค้า
 import React, { Component } from 'react';
 import queryString from 'query-string';
+import Timeline from '../Support/Timeline'
 
 class S_OrderDetail extends Component {
 
@@ -20,10 +21,13 @@ class S_OrderDetail extends Component {
         })
     }
 
+
+
     render() {
         return (
             <div className="App" style={{textAlign:'center'}}>
                 <h3>ใบสั่งซื้อเลขที่ {this.state.id}</h3>
+                
             </div >
         )
     }
