@@ -1097,3 +1097,31 @@ ol {
 .s_plant tr:hover{
     background-color: #f4f4f4;
 }
+
+.top{
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+    width: 50px;
+    z-index: 1000;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    filter: grayscale(100%);
+    transition: 0.5s;
+}
+
+.top a{
+    z-index: 1000;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    filter: grayscale(100%);
+}
+
+.top:hover{
+    filter: grayscale(0%);
+}
