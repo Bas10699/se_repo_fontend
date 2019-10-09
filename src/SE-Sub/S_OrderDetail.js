@@ -43,13 +43,32 @@ class S_OrderDetail extends Component {
         }
     }
 
+    render_Step = (status) => {
+        let render_Show
+        switch (status) {
+            case 0: render_Show = 'คำสั่งซื้อ'
+                break;
+            case 1: render_Show = 'ยืนยันคำสั่งซื้อ'
+                break;
+            case 2: render_Show = 'ชำระเงินเเล้ว'
+                break;
+            case 3: render_Show = 'สินค้าทำการจัดส่ง'
+                break;
+            case 4: render_Show = 'ตรวจสอบสินค้า'
+                break;
+
+            default:
+                break;
+        }
+        return render_Show
+    }
 
 
     render() {
         return (
             <div className="App" style={{ textAlign: 'center' }}>
                 <h3>ใบสั่งซื้อเลขที่ {this.state.order.order_se_id}</h3>
-                <div>{this.state.order.plant_name} จำนวน {this.state.order.amount} กิโลกรัม สถานะ {this.state.order.order_se_status}</div>
+                <div>{this.state.order.plant_name} จำนวน {this.state.order.amount} กิโลกรัม สถานะ {this.render_Step(this.state.order.order_se_status)}</div>
                 <Timeline status={this.state.order.order_se_status} />
             </div >
         )
