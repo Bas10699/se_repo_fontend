@@ -312,7 +312,7 @@ class S_skill_farmer extends Component {
                     </div>
 
                     <div className='col-1'></div>
-                    <div className='col-8' style={{ marginTop: "-50px" }}>
+                    <div  style={{ marginTop: "-50px" }}>
                         <input type="search" placeholder="ค้นหา" />
                         <h4>เลือกข้อมูลที่ต้องการเปรียบเทียบ</h4>
                         <button className={this.state.showHide1 ? "selectShowb":"selectShow"} onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>จํานวนผลผลิตที่ขายต่อปี</button>
@@ -339,6 +339,9 @@ class S_skill_farmer extends Component {
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value()} />
                                     }
                                 </th> : null}
+                                <th>จำนวนการส่งมอบต่อครั้ง</th>
+                                <th>เดือนที่ส่งมอบ</th>
+                                <th>จำนวนครั้งส่งมอบ</th>
                                 {this.state.showHide3 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
                                 {this.state.click3 ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea()} />
@@ -361,6 +364,9 @@ class S_skill_farmer extends Component {
                                                 {this.state.showHide2 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
                                                     : null}
                                                 {this.state.showHide2 ? <td>กิโลกรัม</td> : null}
+                                                <td style={{textAlign:'center'}}>{element.deliver_value} กิโลกรัม</td>
+                                                <td>{element.end_plant}</td>
+                                                <td>{element.deliver_frequency_number}</td>
                                                 {this.state.showHide3 ? <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
                                                     : null}
                                                 {this.state.showHide3 ? <td>ไร่</td> : null}
@@ -376,7 +382,7 @@ class S_skill_farmer extends Component {
                         </table>
 
                     </div>
-                    <div className='col-1'></div>
+                    {/* <div className='col-1'></div> */}
                 </div>
 
             </div>
