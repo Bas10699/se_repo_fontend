@@ -17,6 +17,9 @@ class S_skill_farmer extends Component {
             click1: false,
             click2: false,
             click3: false,
+            showHide1: true,
+            showHide2: true,
+            showHide3: true,
             get_user: null,
             default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg",
         }
@@ -302,40 +305,44 @@ class S_skill_farmer extends Component {
 
                                 )
                             })}
-                            
+
                         </ol>
-                        <a href="#Top" style={{textDecoration: "none",}}><img alt="top" src={top} className="top"/></a>
+                        <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
                     </div>
 
                     <div className='col-1'></div>
                     <div className='col-8' style={{ marginTop: "-50px" }}>
                         <input type="search" placeholder="ค้นหา" />
+                        <button onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>gg1</button>
+                        <button onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>gg2</button>
+                        <button onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>gg3</button>
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>พืชที่ปลูก </th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี
+
+                                {this.state.showHide1 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี
                                 {this.state.click1 ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value()} />
                                         :
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value()} />
                                     }
-                                </th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่
+                                </th> : null}
+                                {this.state.showHide2 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่
                                 {this.state.click2 ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value()} />
                                         :
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value()} />
                                     }
-                                </th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
+                                </th> : null}
+                                {this.state.showHide3 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
                                 {this.state.click3 ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea()} />
                                         :
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea()} />
                                     }
-                                </th>
+                                </th> : null}
                             </tr>
                             {
                                 this.state.search_order ?
@@ -345,12 +352,15 @@ class S_skill_farmer extends Component {
                                                 <td style={{ textAlign: "center" }}>{index + 1} .</td>
                                                 <td>{element.title_name}{element.first_name}  {element.last_name}</td>
                                                 <td style={{ textAlign: "center" }}><b>{element.plant}</b></td>
-                                                <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
-                                                <td>กิโลกรัม</td>
-                                                <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
-                                                <td>กิโลกรัม</td>
-                                                <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
-                                                <td>ไร่</td>
+                                                {this.state.showHide1 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
+                                                    : null}
+                                                {this.state.showHide1 ? <td>กิโลกรัม</td> : null}
+                                                {this.state.showHide2 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
+                                                    : null}
+                                                {this.state.showHide2 ? <td>กิโลกรัม</td> : null}
+                                                {this.state.showHide3 ? <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
+                                                    : null}
+                                                {this.state.showHide3 ? <td>ไร่</td> : null}
                                             </tr>
                                         )
                                         // }
