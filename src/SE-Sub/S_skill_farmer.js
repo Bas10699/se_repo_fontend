@@ -17,6 +17,7 @@ class S_skill_farmer extends Component {
             click1: false,
             click2: false,
             click3: false,
+            click: true,
             showHide1: true,
             showHide2: true,
             showHide3: true,
@@ -313,9 +314,11 @@ class S_skill_farmer extends Component {
                     <div className='col-1'></div>
                     <div className='col-8' style={{ marginTop: "-50px" }}>
                         <input type="search" placeholder="ค้นหา" />
-                        <button onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>gg1</button>
-                        <button onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>gg2</button>
-                        <button onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>gg3</button>
+                        <h4>เลือกข้อมูลที่ต้องการเปรียบเทียบ</h4>
+                        <button className={this.state.showHide1 ? "selectShowb":"selectShow"} onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>จํานวนผลผลิตที่ขายต่อปี</button>
+                        <button className={this.state.showHide2 ? "selectShowb":"selectShow"} onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>ผลผลิตต่อไร่</button>
+                        <button className={this.state.showHide3 ? "selectShowb":"selectShow"} onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>พื้นที่ปลูก</button>
+                        {console.log(this.state.showHide1)}
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
