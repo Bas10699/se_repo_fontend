@@ -791,29 +791,68 @@ th,tr:hover{
     margin-bottom: 100px;
     padding: 0px;
     text-align: left;
-    /* counter-increment: step 0; */
-    
+  }
+
+.Progressbar img{
+    width: "25px";
+    margin-top: "-10px";
+    margin-left: "100%";
+    z-index: "1000";
+  }
+
+  li.Standat1 {
+    list-style-type: none;
+    float: left;
+    width: 22.2%;
+    margin-left: -25%;
+    position: relative;
+    height: 5px;
+    color: black;
+    z-index: -1;
+  }
+
+  .Standat1 img{    
+    width: "25px";
+    margin-top: "-10px";
+    margin-left: "100%";
+    z-index: "1000";
   }
 
   .Standat {
     list-style-type: none;
     float: left;
-    width: 25%;
-    
+    width: 22.2%;
+    margin-left: 2.8%;
     position: relative;
     background-color: #ccc;
     height: 5px;
     color: black;
+    z-index: -1;
+    filter: grayscale(100%);
   }
 
-  .Status {
+  .Standat img{
+    width: "25px";
+    margin-top: "-10px";
+    margin-left: "100%";
+    z-index: "1000";
+  }
+  li.Status {
     list-style-type: none;
     float: left;
-    width: 25%;
+    width: 22.2%;
     position: relative;
     background-color: green;
     height: 5px;
-    color: black;    
+    color: black;
+    z-index: -1;
+    margin-left: 2.8%;
+  }
+  li.Status img{
+    width: "25px";
+    margin-top: "-10px";
+    margin-left: "100%";
+    z-index: "1000";
   }
 
   .Standatles {
@@ -998,7 +1037,7 @@ th,tr:hover{
     margin-bottom: 20px;
     margin-top: 10px;
     background-color: white;
-    padding: 10px 10px;
+    padding: 10px 0px 10px 10px;
 }
 .BTN_CONFIRM{
     font-family: 'fc_lamoonregular';
@@ -1136,6 +1175,7 @@ ol {
     font-size: 18px;
     background-color: #FFB731;
     border: 1px solid #FFB731;
+    color: white;
     border-radius: 10px;
     transition: 0.5s;
 }
@@ -1153,5 +1193,6 @@ ol {
     padding: 10px 16px;
     margin-bottom: 10px;
     cursor: pointer;
+    color: black;
     transition: 0.5s;
   }

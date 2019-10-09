@@ -301,7 +301,7 @@ class S_skill_farmer extends Component {
                                 return (
                                     <NavLink onClick={() => this.filterPlant(ele_plant.plant)}
                                         style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
-                                        <li style={{ textAlign: "center" }} activeClassName="Active">{ele_plant.plant}</li>
+                                        <li style={{ textAlign: "left" ,marginLeft:"20px",paddingLeft:"20px" }} activeClassName="Active">{ele_plant.plant}</li>
                                     </NavLink>
 
                                 )
