@@ -235,30 +235,32 @@ class EditUser extends Component {
 
 
                     <div className="col-4">
-                        <h3 style={{ textAlign: "center" }}>รหัสผ่าน</h3>
+                        <div className="">
+                            <h3 style={{ textAlign: "center" }}>รหัสผ่าน</h3>
 
-                        <h4>กรอกรหัสผ่านเก่า</h4>
-                        <input type={this.state.password ? "password" : "text"}
-                            id="password1"
-                            onChange={this.handleChange}
-                        />
-                        <input type="checkbox" id="show_password"
-                            name="show_password"
-                            onClick={this.Password_Show}
-                        />แสดงรหัสผ่าน
-                        <h4>กรอกรหัสผ่านใหม่</h4>
-                        <input type="password"
-                            id="new_password1"
-                            onChange={this.handleChange}
-                        />
+                            <h4>กรอกรหัสผ่านเก่า</h4>
+                            <input type={this.state.password ? "password" : "text"}
+                                id="password1"
+                                onChange={this.handleChange}
+                            />
+                            <input type="checkbox" id="show_password"
+                                name="show_password"
+                                onClick={this.Password_Show}
+                            />แสดงรหัสผ่าน
+                                <h4>กรอกรหัสผ่านใหม่</h4>
+                            <input type="password"
+                                id="new_password1"
+                                onChange={this.handleChange}
+                            />
 
-                        <h4>ยืนยันรหัสผ่านใหม่</h4>
-                        <input type="password"
-                            id="new_password_again1"
-                            onChange={this.handleChange}
-                        />
-                        <button onClick={() => this.Check_Password()} className="BTN_Signin">ยืนยัน</button>
-                        <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink>
+                            <h4>ยืนยันรหัสผ่านใหม่</h4>
+                            <input type="password"
+                                id="new_password_again1"
+                                onChange={this.handleChange}
+                            />
+                            <button onClick={() => this.Check_Password()} className="BTN_Signin">ยืนยัน</button>
+                            <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink> 
+                        </div>
 
                         <hr style={{ marginTop: "80px" }} />
                         <h3 style={{ textAlign: "center", marginTop: "50px" }}>บัญชีธนาคาร</h3>

@@ -14,7 +14,12 @@ class S_skill_farmer extends Component {
             farmer: [],
             plants: [],
             search_order: [],
-            click: false,
+            click1: false,
+            click2: false,
+            click3: false,
+            showHide1: true,
+            showHide2: true,
+            showHide3: true,
             get_user: null,
             default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg",
         }
@@ -29,9 +34,9 @@ class S_skill_farmer extends Component {
             await get('neo_firm/get_farmer_se', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        farmer: result.result,
+                        farmer: this.sort_plant(result.result),
                         plants: result.result,
-                        search_order:result.result
+                        search_order: result.result
                     })
 
                 }
@@ -100,6 +105,9 @@ class S_skill_farmer extends Component {
         }
         let sort_order = order.sort(compare)
 
+        // this.setState({
+        //     farmer:sort_order
+        // })
 
         // let disnict_plant = []
 
@@ -114,6 +122,135 @@ class S_skill_farmer extends Component {
         // console.log('data', disnict_plant)
         return sort_order
     }
+
+    year_value = () => {
+        const order = this.state.farmer
+        if (this.state.click1 === true) {
+            function compare(a, b) {
+                const order_idA = a.year_value
+                const order_idB = b.year_value
+
+                let comparison = 0;
+                if (order_idA < order_idB) {
+                    comparison = 1;
+                } else if (order_idA > order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({
+                farmer: sort_order,
+                click1: false
+            })
+        }
+        else {
+            function compare(a, b) {
+                const order_idA = a.year_value
+                const order_idB = b.year_value
+
+                let comparison = 0;
+                if (order_idA > order_idB) {
+                    comparison = 1;
+                } else if (order_idA < order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({
+                farmer: sort_order,
+                click1: true
+            })
+        }
+
+    }
+    product_value = () => {
+        const order = this.state.farmer
+        if (this.state.click2 === true) {
+            function compare(a, b) {
+                const order_idA = a.product_value
+                const order_idB = b.product_value
+
+                let comparison = 0;
+                if (order_idA < order_idB) {
+                    comparison = 1;
+                } else if (order_idA > order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({
+                farmer: sort_order,
+                click2: false
+            })
+        }
+        else {
+            function compare(a, b) {
+                const order_idA = a.product_value
+                const order_idB = b.product_value
+
+                let comparison = 0;
+                if (order_idA > order_idB) {
+                    comparison = 1;
+                } else if (order_idA < order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({
+                farmer: sort_order,
+                click2: true
+            })
+        }
+
+    }
+
+    growingArea = () => {
+        const order = this.state.farmer
+        if (this.state.click3 === true) {
+            function compare(a, b) {
+                const order_idA = a.growingArea
+                const order_idB = b.growingArea
+
+                let comparison = 0;
+                if (order_idA < order_idB) {
+                    comparison = 1;
+                } else if (order_idA > order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({
+                farmer: sort_order,
+                click3: false
+            })
+        }
+        else {
+            function compare(a, b) {
+                const order_idA = a.growingArea
+                const order_idB = b.growingArea
+
+                let comparison = 0;
+                if (order_idA > order_idB) {
+                    comparison = 1;
+                } else if (order_idA < order_idB) {
+                    comparison = -1;
+                }
+                return comparison;
+            }
+            let sort_order = order.sort(compare)
+            this.setState({
+                farmer: sort_order,
+                click3: true
+            })
+        }
+
+    }
+
 
     get_user = async () => {
         try {
@@ -168,55 +305,62 @@ class S_skill_farmer extends Component {
 
                                 )
                             })}
-                            
+
                         </ol>
-                        <a href="#Top" style={{textDecoration: "none",}}><img alt="top" src={top} className="top"/></a>
+                        <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
                     </div>
 
                     <div className='col-1'></div>
                     <div className='col-8' style={{ marginTop: "-50px" }}>
                         <input type="search" placeholder="ค้นหา" />
+                        <button onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>gg1</button>
+                        <button onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>gg2</button>
+                        <button onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>gg3</button>
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>พืชที่ปลูก </th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี
-                                {this.state.click ?
-                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value('Min')} />
+
+                                {this.state.showHide1 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี
+                                {this.state.click1 ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value()} />
                                         :
-                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value('Max')} />
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value()} />
                                     }
-                                </th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่
-                                {this.state.click ?
-                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value('Min')} />
+                                </th> : null}
+                                {this.state.showHide2 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่
+                                {this.state.click2 ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value()} />
                                         :
-                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value('Max')} />
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value()} />
                                     }
-                                </th>
-                                <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
-                                {this.state.click ?
-                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea('Min')} />
+                                </th> : null}
+                                {this.state.showHide3 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
+                                {this.state.click3 ?
+                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea()} />
                                         :
-                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea('Max')} />
+                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea()} />
                                     }
-                                </th>
+                                </th> : null}
                             </tr>
                             {
                                 this.state.search_order ?
-                                    this.sort_plant(this.state.farmer).map((element, index) => {
+                                    this.state.farmer.map((element, index) => {
                                         return (
                                             <tr>
-                                                <td style={{textAlign:"center"}}>{index + 1} .</td>
+                                                <td style={{ textAlign: "center" }}>{index + 1} .</td>
                                                 <td>{element.title_name}{element.first_name}  {element.last_name}</td>
-                                                <td style={{textAlign:"center"}}><b>{element.plant}</b></td>
-                                                <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
-                                                <td>กิโลกรัม</td>
-                                                <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
-                                                <td>กิโลกรัม</td>
-                                                <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
-                                                <td>ไร่</td>
+                                                <td style={{ textAlign: "center" }}><b>{element.plant}</b></td>
+                                                {this.state.showHide1 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
+                                                    : null}
+                                                {this.state.showHide1 ? <td>กิโลกรัม</td> : null}
+                                                {this.state.showHide2 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
+                                                    : null}
+                                                {this.state.showHide2 ? <td>กิโลกรัม</td> : null}
+                                                {this.state.showHide3 ? <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
+                                                    : null}
+                                                {this.state.showHide3 ? <td>ไร่</td> : null}
                                             </tr>
                                         )
                                         // }

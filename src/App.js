@@ -29,6 +29,10 @@ import S_Plants_in_network from './SE-Sub/S_Plants_in_network'
 import S_skill_farmer from './SE-Sub/S_skill_farmer'
 import S_OrderDetail from './SE-Sub/S_OrderDetail'
 import SocketIo from './socket.io/socketIo'
+import Researcher from './Researcher/Researcher';
+import Request from './Researcher/Request';
+import Results from './Researcher/Results';
+import Material from './Researcher/Material';
 
 function App() {
   return (
@@ -61,6 +65,10 @@ function App() {
       <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
       
+      <Route exact path='/Researcher' component={Researcher}/>
+      <Route exact path='/Request' component={Request}/>
+      <Route exact path='/Results' component={Results}/>
+      <Route exact path='/Material' component={Material}/>
 
     </Router>
   );
