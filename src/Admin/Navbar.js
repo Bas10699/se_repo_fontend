@@ -45,9 +45,9 @@ class Navbar extends Component {
                             <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
                                 <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
-                                <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">ความต้องการ</NavLink></li>
+                                {/* <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">ความต้องการ</NavLink></li>
                                 <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">สร้างสูตร</NavLink></li>
-                                <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">ผลผลิต</NavLink></li>
+                                <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">ผลผลิต</NavLink></li> */}
 
 
                                 <div className="NavbarRight" activeClassName="Active">
