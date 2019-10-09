@@ -79,20 +79,33 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            {this.props.status >= 0 ?
-                                <li className="Status" >
-                                    <img src={one} alt="one"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ<br />
-                                        {moment(this.props.order.order_date).utc().format('DD/MM/YYYY HH:mm')}
-                                        <PdfOrder data={this.props.order} />
-                                    </div></li>
-                                : <li className="Standat" >
-                                    <img src={one} alt="one"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ</div></li>}
+                            {
+                                this.props.status >= 0 ?
+                                    <li className="Standat" >
+                                        <img src={one} alt="one"
+                                            style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
+                                        <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ<br />
+                                            {moment(this.props.order.order_date).utc().format('DD/MM/YYYY HH:mm')}
+                                            <PdfOrder data={this.props.order} />
+                                        </div>
+                                    </li>
+                                    
+                                    :
+                                    <li className="Standat" >
+                                        <img src={one} alt="one"
+                                            style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
+                                        <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ</div>
+                                    </li>
+                            }
+
+
+
+
+
+
 
                             {this.props.status >= 1 ?
+
                                 <li className="Status" >
                                     <img src={two} alt="two"
                                         style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
