@@ -68,8 +68,9 @@ class S_OrderDetail extends Component {
         return (
             <div className="App" style={{ textAlign: 'center' }}>
                 <h3>ใบสั่งซื้อเลขที่ {this.state.order.order_se_id}</h3>
-                <div>{this.state.order.plant_name} จำนวน {this.state.order.amount} กิโลกรัม สถานะ {this.render_Step(this.state.order.order_se_status)}</div>
-                <Timeline status={this.state.order.order_se_status} />
+                
+                <Timeline status={this.state.order.order_se_status} /><div>
+                {this.state.order.plant_name} จำนวน {this.state.order.amount} กิโลกรัม สถานะ {this.render_Step(this.state.order.order_se_status)}</div>
             </div >
         )
     }
