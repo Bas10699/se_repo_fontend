@@ -68,13 +68,13 @@ class Timeline extends Component {
                                 <div style={{ marginLeft: "105%", width: "100%" }}>
                                     ส่งใบสั่งซื้อ
                                     </div>
-                                {this.props.status >= 0 ?
+                                {/* {this.props.status >= 0 ?
                                     <div style={{ marginLeft: "88%", width: "150%" }}>
                                         <PdfOrder data={this.props.order} />
                                     </div>
                                     :
                                     null
-                                }
+                                } */}
                             </li>
 
 
@@ -84,13 +84,13 @@ class Timeline extends Component {
                                 <div style={{ marginLeft: "86%", width: "100%" }}>
                                     ยืนยันคำสั่งซื้อแล้ว
                                     </div>
-                                {this.props.status >= 1 ?
+                                {/* {this.props.status >= 1 ?
                                     <div style={{ marginLeft: "75%", width: "160%" }}>
                                         <PdfInvoice data={this.props.invoice} order={this.props.order} />
                                     </div>
                                     :
                                     null
-                                }
+                                } */}
                             </li>
 
                             <li className={this.props.status >= 2 ? "Status" : "Standat"}>
@@ -99,13 +99,13 @@ class Timeline extends Component {
                                 <div style={{ marginLeft: "90%", width: "100%" }} >
                                     ชำระเงินแล้ว
                                     </div>
-                                {this.props.status >= 2 ?
+                                {/* {this.props.status >= 2 ?
                                     <div style={{ marginLeft: "75%", width: "160%" }}>
                                         <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
                                     </div>
                                     :
                                     null
-                                }
+                                } */}
 
                             </li>
                             <li className={this.props.status >= 3 ? "Status" : "Standat"}>
@@ -114,13 +114,13 @@ class Timeline extends Component {
                                 <div style={{ marginLeft: "86%", width: "100%" }} >
                                     สินค้าทำการจัดส่ง
                                     </div>
-                                {this.props.status >= 2 ?
+                                {/* {this.props.status >= 2 ?
                                     <div style={{ marginLeft: "75%", width: "160%" }}>
                                         <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
                                     </div>
                                     :
                                     null
-                                }
+                                } */}
 
                             </li>
 
@@ -135,6 +135,35 @@ class Timeline extends Component {
                         </ul>
 
 
+
+                        {this.props.status >= 0 ?
+                            <div style={{ marginLeft: "-7%", width: "40%", marginTop: "-40px" }}>
+                                <PdfOrder data={this.props.order} />
+                            </div>
+                            :
+                            null
+                        }
+                        {this.props.status >= 1 ?
+                            <div style={{ marginLeft: "18.5%", width: "40%", marginTop: "-40px" }}>
+                                <PdfInvoice data={this.props.invoice} order={this.props.order} />
+                            </div>
+                            :
+                            null
+                        }
+                        {this.props.status >= 2 ?
+                            <div style={{ marginLeft: "43.5%", width: "40%", marginTop: "-40px" }}>
+                                <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
+                            </div>
+                            :
+                            null
+                        }
+                        {this.props.status >= 3 ?
+                            <div style={{ marginLeft: "68.5%", width: "40%", marginTop: "-40px" }}>
+                                <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
+                            </div>
+                            :
+                            null
+                        }
                         {/*                         
                         <ul className="Progressbar">
                             {
