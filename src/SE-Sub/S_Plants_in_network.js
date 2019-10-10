@@ -111,7 +111,7 @@ class S_Plants_in_network extends Component {
             },
 
             yAxis: {
-                // type: 'logarithmic',
+                type: 'logarithmic',
                 // minorTickInterval: 10
                 title: {
                     text: '<span style="font-size:15px;">จำนวน (กิโลกรัม)</span>',
