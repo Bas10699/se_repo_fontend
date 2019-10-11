@@ -30,12 +30,17 @@ class EditUser extends Component {
             address: '',
             user_style: 1,
             get_user: '',
+            bank_information: '',
             isInEdit: false,
             password: true,
             password1: null,
             new_password1: null,
             new_password_again1: null,
             open: false,
+            bankAccount: null,
+            bankName: null,
+            bankNo: null,
+            index:0
 
         };
 
@@ -112,7 +117,8 @@ class EditUser extends Component {
             email: this.state.get_user.email,
             phone: this.state.get_user.phone,
             username: this.state.get_user.username,
-            address: this.state.get_user.address
+            address: this.state.get_user.address,
+            bank_information: JSON.stringify(this.state.bank_information)
         }
         try {
             await post(object, 'user/user_update_data', user_token).then((result) => {
@@ -130,6 +136,12 @@ class EditUser extends Component {
 
     }
 
+    handleChange_bank = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
     handleChange = (e) => {
         let users = this.state.get_user
         users[e.target.id] = e.target.value
@@ -140,10 +152,11 @@ class EditUser extends Component {
 
     get_user = async () => {
         try {
-            await get('show/show_user', user_token).then((result) => {
+            await get('user/get_user', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_user: result.result
+                        get_user: result.result,
+                        bank_information: result.result.bank_information
                     })
                     setTimeout(() => {
                         console.log("get_user", result.result)
@@ -175,7 +188,17 @@ class EditUser extends Component {
     };
 
     add_invoice = () => {
-        alert("เพิ่มบัญชีธนาคารเรียบร้อย")
+        let bank = []
+        bank.push({
+            bankAccount: this.state.bankAccount,
+            bankName: this.state.bankName,
+            bankNo: this.state.bankNo
+        })
+        this.setState({
+            bank_information: bank
+        })
+        this.onCloseModal()
+
     }
 
     render() {
@@ -259,25 +282,27 @@ class EditUser extends Component {
                                 onChange={this.handleChange}
                             />
                             <button onClick={() => this.Check_Password()} className="BTN_Signin">ยืนยัน</button>
-                            <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink> 
+                            <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink>
                         </div>
 
                         <hr style={{ marginTop: "80px" }} />
                         <h3 style={{ textAlign: "center", marginTop: "50px" }}>บัญชีธนาคาร</h3>
 
-                        <button className='BTN_CONFIRM' style={{ float: "right", marginTop: "-20px", width:"100%"}} onClick={() => this.onOpenModal()}>เพิ่มบัญชีธนาคาร</button>
+                        <button className='BTN_CONFIRM' style={{ float: "right", marginTop: "-20px", width: "100%" }} onClick={() => this.onOpenModal()}>เพิ่มบัญชีธนาคาร</button>
+                        {this.state.bank_information ?
+                            this.state.bank_information.map((element_in, index) => {
+                                return (
+                                    <div className="Card" style={{ width: "45%", marginTop: "10px" }}>
+                                        <h4 >{element_in.bankName}</h4>
+                                        <h5 style={{ marginTop: "-20px" }}>{element_in.bankAccount}</h5>
+                                        <h5 style={{ marginTop: "-20px" }}>{element_in.bankNo}</h5>
+                                        <button onClick={() => this.setState({ openEdit: true })}>แก้ไข</button>
+                                    </div>
 
-                        {invoice.map((element_in, index) => {
-                            return (
-                                <div className="Card" style={{ width: "45%", marginTop: "10px" }}>
-                                    <h4 >{element_in.bankName}</h4>
-                                    <h5 style={{ marginTop: "-20px" }}>{element_in.bankAccount}</h5>
-                                    <h5 style={{ marginTop: "-20px" }}>{element_in.bankNo}</h5>
-                                    <button onClick={() => this.setState({ openEdit: true })}>แก้ไข</button>
-                                </div>
+                                )
+                            })
+                            : null}
 
-                            )
-                        })}
 
                         <Modal open={this.state.open} onClose={this.onCloseModal}>
                             <div className="Row">
@@ -287,9 +312,9 @@ class EditUser extends Component {
 
                                 <div className="col-10">
 
-                                    <h5>ชื่อธนาคาร</h5> <input type="text" placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" />
-                                    <h5>เลขที่บัญชี</h5> <input type="text" pattern="[0-9]{1,}" placeholder="123-4-56789-0" />
-                                    <h5>ชื่อบัญชี</h5> <input type="text" placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" />
+                                    <h5>ชื่อธนาคาร</h5> <input type="text" id='bankName' placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์"  onChange={this.handleChange_bank} />
+                                    <h5>เลขที่บัญชี</h5> <input type="text" id='bankNo' pattern="[0-9]{1,}" placeholder="123-4-56789-0" onChange={this.handleChange_bank} />
+                                    <h5>ชื่อบัญชี</h5> <input type="text" id='bankAccount' placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" onChange={this.handleChange_bank} />
 
                                     <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
                                     <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>เพิ่มบัญชี</button></div>
@@ -302,9 +327,9 @@ class EditUser extends Component {
                             </div>
                             <div className="Row" style={{ width: "500px" }}>
                                 <div className="col-10">
-                                    <h5>ชื่อธนาคาร</h5> <input type="text" placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" />
-                                    <h5>เลขที่บัญชี</h5> <input type="text" pattern="[0-9]{1,}" placeholder="123-4-56789-0" />
-                                    <h5>ชื่อบัญชี</h5> <input type="text" placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" />
+                                    <h5>ชื่อธนาคาร</h5> <input type="text" id='bankName' placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" onChange={this.handleChange_bank} />
+                                    <h5>เลขที่บัญชี</h5> <input type="text" id='bankNo' pattern="[0-9]{1,}" placeholder="123-4-56789-0" onChange={this.handleChange_bank} />
+                                    <h5>ชื่อบัญชี</h5> <input type="text" id='bankAccount' placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" onChange={this.handleChange_bank} />
 
                                     <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
                                     <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ยืนยัน</button></div>
