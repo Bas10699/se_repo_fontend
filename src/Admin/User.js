@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
 import { get } from '../Support/Service';
 import { NavLink } from 'react-router-dom'
+import { element } from 'prop-types';
 
 class User extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class User extends Component {
             phone: '',
             address: '',
             user_type: 1,
+            bank_information: '',
             get_user: null,
             isInEdit: false,
             user_image: null,
@@ -54,10 +56,11 @@ class User extends Component {
 
     get_user = async () => {
         try {
-            await get('show/show_user', user_token).then((result) => {
+            await get('user/get_user', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_user: result.result
+                        get_user: result.result,
+                        bank_information: result.result.bank_information
                     })
                     setTimeout(() => {
                         console.log("get_user", result.result)
@@ -116,11 +119,17 @@ class User extends Component {
 
                         </table>
                         {this.state.get_user ? this.state.get_user.user_type === '4' ?
-                            <div className="_Card">
-                                สัญลักษณ์ธนาคาร
-                            <h3 style={{ margin: "0px" }}>ชื่อธนาคาร</h3>
-                                <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เลขที่บัญชี</h4>
-                            </div> : null : null}
+                            this.state.bank_information.map((element) => {
+                                return (
+                                    <div className="_Card">
+                                        สัญลักษณ์ธนาคาร
+                            <h3 style={{ margin: "0px" }}>{element.bankName}</h3>
+                                        <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h4>
+                                    </div>
+                                )
+                            })
+                            : null
+                            : null}
 
                         {/* <NavLink to={"/EditUser"}><button className="BTN_Signin">แก้ไขข้อมูล</button></NavLink> */}
                     </div>

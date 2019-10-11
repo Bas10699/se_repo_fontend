@@ -40,6 +40,9 @@ class EditUser extends Component {
             bankAccount: null,
             bankName: null,
             bankNo: null,
+            edit_bankAccount: null,
+            edit_bankName: null,
+            edit_bankNo: null,
             index:0
 
         };
@@ -188,7 +191,7 @@ class EditUser extends Component {
     };
 
     add_invoice = () => {
-        let bank = []
+        let bank = this.state.bank_information
         bank.push({
             bankAccount: this.state.bankAccount,
             bankName: this.state.bankName,
@@ -199,6 +202,28 @@ class EditUser extends Component {
         })
         this.onCloseModal()
 
+    }
+
+    open_edit_invoice = (index) =>{
+        let bank = this.state.bank_information
+        
+        this.setState({ 
+            openEdit: true,
+            index:index,
+            edit_bankAccount: bank[index].bankAccount,
+            edit_bankName: bank[index].bankName,
+            edit_bankNo: bank[index].bankNo
+         })
+    }
+
+    edit_invoice = () =>{
+        let index = this.state.index
+        this.state.bank_information[index] = {
+            bankAccount: this.state.edit_bankAccount,
+            bankName: this.state.edit_bankName,
+            bankNo: this.state.edit_bankNo
+        }
+        this.onCloseModal()
     }
 
     render() {
@@ -296,7 +321,7 @@ class EditUser extends Component {
                                         <h4 >{element_in.bankName}</h4>
                                         <h5 style={{ marginTop: "-20px" }}>{element_in.bankAccount}</h5>
                                         <h5 style={{ marginTop: "-20px" }}>{element_in.bankNo}</h5>
-                                        <button onClick={() => this.setState({ openEdit: true })}>แก้ไข</button>
+                                        <button onClick={() => this.open_edit_invoice(index)}>แก้ไข</button>
                                     </div>
 
                                 )
@@ -327,12 +352,12 @@ class EditUser extends Component {
                             </div>
                             <div className="Row" style={{ width: "500px" }}>
                                 <div className="col-10">
-                                    <h5>ชื่อธนาคาร</h5> <input type="text" id='bankName' placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" onChange={this.handleChange_bank} />
-                                    <h5>เลขที่บัญชี</h5> <input type="text" id='bankNo' pattern="[0-9]{1,}" placeholder="123-4-56789-0" onChange={this.handleChange_bank} />
-                                    <h5>ชื่อบัญชี</h5> <input type="text" id='bankAccount' placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" onChange={this.handleChange_bank} />
+                                    <h5>ชื่อธนาคาร</h5> <input type="text" id='edit_bankName' value={this.state.edit_bankName} placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" onChange={this.handleChange_bank} />
+                                    <h5>เลขที่บัญชี</h5> <input type="text" id='edit_bankNo' value={this.state.edit_bankNo} pattern="[0-9]{1,}" placeholder="123-4-56789-0" onChange={this.handleChange_bank} />
+                                    <h5>ชื่อบัญชี</h5> <input type="text" id='edit_bankAccount' value={this.state.edit_bankAccount} placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" onChange={this.handleChange_bank} />
 
                                     <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-                                    <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ยืนยัน</button></div>
+                                    <button className='BTN_CONFIRM' onClick={() => { this.edit_invoice() }}>ยืนยัน</button></div>
                             </div>
                         </Modal>
 
