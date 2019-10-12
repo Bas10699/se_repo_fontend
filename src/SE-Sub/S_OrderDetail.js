@@ -10,12 +10,16 @@ class S_OrderDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            order: ''
+            order: '',
+            farmer: [],
+            plants: [],
+            search_order: [],
         }
     }
 
     componentWillMount() {
         this.get_order()
+        this.get_skill_farmer()
     }
 
     get_order = async () => {
@@ -41,6 +45,45 @@ class S_OrderDetail extends Component {
         catch (error) {
             alert('get_order: ' + error)
         }
+    }
+
+    get_skill_farmer = async () => {
+        try {
+            await get('neo_firm/get_farmer_se', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        farmer: this.sort_plant(result.result),
+                        plants: result.result,
+                        search_order: result.result
+                    })
+
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('get_skill_farmer: ' + error)
+        }
+    }
+
+    sort_plant = (data) => {
+        const order = data
+        function compare(a, b) {
+            const order_idA = a.year_value
+            const order_idB = b.year_value
+
+            let comparison = 0;
+            if (order_idA < order_idB) {
+                comparison = 1;
+            } else if (order_idA > order_idB) {
+                comparison = -1;
+            }
+            return comparison;
+        }
+        let sort_order = order.sort(compare)
+        return sort_order
     }
 
     render_Step = (status) => {
@@ -81,7 +124,7 @@ class S_OrderDetail extends Component {
                     </div>
                 </div>
 
-                <div className="Row" style={{marginTop:"30px"}}>
+                <div className="Row" style={{ marginTop: "30px" }}>
                     <div className="col-1"></div>
                     <div className="col-2">
                         <div className="Card" style={{ width: "100%" }}>
@@ -89,14 +132,38 @@ class S_OrderDetail extends Component {
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
                             <button>ออกใบเเจ้งหนี้</button>
                         </div>
-                        <div>คลิ๊กเลือกรายชื่อเกษตรกรที่จะสั่งของ</div>
+                        <div>
+                            ทำการคลิ๊กเลือกเกษตรกรที่ต้องการซื้อผลผลิต
+                        </div>
 
                     </div>
                     <div className="col-1"></div>
 
-                    <div className="col-4">
-                            <div>เเสดงรายชื่อเกษตรกรที่มียอดถึงจำนวนนั้นๆ</div>
-                        </div>
+                    <div className="col-7">
+                        <h4>เกษตรกรที่พร้อมส่งมอบ</h4>
+                        <table>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>ชื่อ - นามสกุล</th>
+                                <th>พืชที่ปลูก</th>
+                                <th>จำนวนผลผลิตต่อปี</th>
+                                <th>เดือนที่ส่งมอบ</th>
+                            </tr>
+                            {
+                                this.state.farmer.map((element, index) => {
+                                    return (
+                                        <tr>
+                                            
+                                            <td style={{ textAlign: "center" }}>{index + 1} .</td>
+                                            <td>{element.title_name}{element.first_name}  {element.last_name}</td>
+                                        </tr>
+
+                                    )
+                                })
+                            }
+                        </table>
+
+                    </div>
                     <div className="col-1"></div>
                 </div>
 
