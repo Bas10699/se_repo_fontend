@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Checkbox extends Component {
     state = {
         isChecked: false,
+        farmer:[]
     }
 
     toggleCheckboxChange = () => {
@@ -36,31 +37,50 @@ class Checkbox extends Component {
 
         this.props.return_func(check_array)
     }
+    
+    // componentWillMount(){
+    //     this.filterPlant()
+    // }
 
-
+    // filterPlant = () => {
+    //     var updatedList = this.props.option;
+    //     updatedList = updatedList.filter(function (item) {
+    //         return item.plant.search(this.props.plant_name) !== -1;
+    //     });
+    //     this.setState({
+    //         farmer: updatedList,
+    //     });
+    //     console.log("updated",updatedList)
+    //     console.log("option",this.props.option)
+    //     console.log("plant_name",this.props.plant_name)
+    //     return updatedList;
+    // }
 
     render() {
 
+
         return (
             <div>
+            {this.props.plant_name}
                 <table>
                     <tr>
-                        <th>ลำดับ</th>
+                        <th>ลำดับ </th>
                         <th>ชื่อ - นามสกุล</th>
                         <th>จำนวนผลผลิตต่อปี</th>
                         <th>เดือนที่ส่งมอบ</th>
                     </tr>
                     {
-                        this.props.option.map((option_element, index) => {
+                       this.props.option.map((option_element, index) => {
                             return (
-                                    <tr>
-                                        <td><input type="checkbox" value={option_element.first_name+" "+option_element.last_name}
-                                            onClick={(event) => { this.onCheck(event) }} /> {index+1} .
+                                <tr>
+                                    <td><input type="checkbox" value={option_element.first_name + " " + option_element.last_name + " " + option_element.year_value}
+                                        onClick={(event) => { this.onCheck(event) }} /> {index + 1} .
                                         </td>
-                                        <td>{option_element.title_name} {option_element.first_name} {option_element.last_name}</td>
-                                        <td style={{ textAlign: "center" }}><b>{option_element.plant}</b></td>
-                                        <td>{option_element.year_value}</td>
-                                    </tr>
+                                    <td>{option_element.title_name} {option_element.first_name} {option_element.last_name}</td>
+                                    
+                                    <td>{option_element.year_value}</td>
+                                    <td>{option_element.end_plant}</td>
+                                </tr>
                             )
                         })
                     }

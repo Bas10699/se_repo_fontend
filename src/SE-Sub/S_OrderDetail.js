@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { get, post, ip } from '../Support/Service'
-import { user_token,addComma } from '../Support/Constance'
+import { user_token, addComma } from '../Support/Constance'
 import Timeline from './Timeline'
 import Checkbox from '../Support/Checkbox'
 import moment from 'moment'
@@ -116,6 +116,15 @@ class S_OrderDetail extends Component {
         return render_Show
     }
 
+    filterPlant = (data) => {
+        var updatedList = this.state.plants;
+        updatedList = updatedList.filter(function (item) {
+            return item.plant.search(data) !== -1;
+        });
+        this.setState({
+            farmer: updatedList,
+        });
+    }
 
     render() {
         return (
@@ -144,7 +153,7 @@ class S_OrderDetail extends Component {
                             <button onClick={() => this.setState({ OpenProofPaymet: true })}>ออกใบเเจ้งหนี้</button>
                         </div>
 
-                       
+
                     </div>
                     <div className="col-1"></div>
 
@@ -152,7 +161,8 @@ class S_OrderDetail extends Component {
 
                         <h4>เกษตรกรที่พร้อมส่งมอบ</h4>
 
-                        <Checkbox option={this.state.farmer} check_array={this.state.check_array}
+                        <Checkbox option={this.state.farmer} plant_name={this.state.order.plant_name}
+                            check_array={this.state.check_array}
                             return_func={(event) => {
                                 this.setState({
                                     check_array: event
@@ -172,10 +182,11 @@ class S_OrderDetail extends Component {
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-7" >
-                           {JSON.stringify(this.state.check_array)} 
+                            {this.state.check_array}
+
                         </div>
                         <div className="col-5">
-                        
+
 
                         </div>
                     </div>
