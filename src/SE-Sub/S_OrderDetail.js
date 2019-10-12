@@ -2,8 +2,11 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { get, post, ip } from '../Support/Service'
-import { user_token } from '../Support/Constance'
+import { user_token,addComma } from '../Support/Constance'
 import Timeline from './Timeline'
+import Checkbox from '../Support/Checkbox'
+import moment from 'moment'
+import Modal from 'react-responsive-modal'
 
 class S_OrderDetail extends Component {
 
@@ -14,6 +17,8 @@ class S_OrderDetail extends Component {
             farmer: [],
             plants: [],
             search_order: [],
+            check_array: [],
+            OpenProofPaymet: false,
         }
     }
 
@@ -21,6 +26,11 @@ class S_OrderDetail extends Component {
         this.get_order()
         this.get_skill_farmer()
     }
+
+    onCloseModal = () => {
+        this.setState({ OpenProofPaymet: false });
+
+    };
 
     get_order = async () => {
         let url = this.props.location.search;
@@ -130,44 +140,46 @@ class S_OrderDetail extends Component {
                         <div className="Card" style={{ width: "100%" }}>
                             <h4>{this.state.order.plant_name} </h4>
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
-                            <button>ออกใบเเจ้งหนี้</button>
-                        </div>
-                        <div>
-                            ทำการคลิ๊กเลือกเกษตรกรที่ต้องการซื้อผลผลิต
+                            <h5>วันที่ต้องการ</h5>
+                            <button onClick={() => this.setState({ OpenProofPaymet: true })}>ออกใบเเจ้งหนี้</button>
                         </div>
 
+                       
                     </div>
                     <div className="col-1"></div>
 
                     <div className="col-7">
-                        <h4>เกษตรกรที่พร้อมส่งมอบ</h4>
-                        <table>
-                            <tr>
-                                <th>ลำดับ</th>
-                                <th>ชื่อ - นามสกุล</th>
-                                <th>พืชที่ปลูก</th>
-                                <th>จำนวนผลผลิตต่อปี</th>
-                                <th>เดือนที่ส่งมอบ</th>
-                            </tr>
-                            {
-                                this.state.farmer.map((element, index) => {
-                                    return (
-                                        <tr>
-                                            
-                                            <td style={{ textAlign: "center" }}>{index + 1} .</td>
-                                            <td>{element.title_name}{element.first_name}  {element.last_name}</td>
-                                        </tr>
 
-                                    )
+                        <h4>เกษตรกรที่พร้อมส่งมอบ</h4>
+
+                        <Checkbox option={this.state.farmer} check_array={this.state.check_array}
+                            return_func={(event) => {
+                                this.setState({
+                                    check_array: event
                                 })
-                            }
-                        </table>
+                            }} />
+
 
                     </div>
                     <div className="col-1"></div>
                 </div>
 
+                <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-12" >
+                            <h3 style={{ textAlign: "center" }}>แบบฟอร์ม</h3>
+                        </div>
+                    </div>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-7" >
+                           {JSON.stringify(this.state.check_array)} 
+                        </div>
+                        <div className="col-5">
+                        
 
+                        </div>
+                    </div>
+                </Modal>
 
 
 
