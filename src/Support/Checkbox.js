@@ -68,6 +68,7 @@ class Checkbox extends Component {
                         <th>ชื่อ - นามสกุล</th>
                         <th>จำนวนผลผลิตต่อปี</th>
                         <th>เดือนที่ส่งมอบ</th>
+                        <th>จำนวนที่สั่ง</th>
                     </tr>
                     {
                        this.props.option.map((option_element, index) => {
@@ -80,6 +81,7 @@ class Checkbox extends Component {
                                     
                                     <td>{option_element.year_value}</td>
                                     <td>{option_element.end_plant}</td>
+                                    <td>สั่งเท่าไร</td>
                                 </tr>
                             )
                         })

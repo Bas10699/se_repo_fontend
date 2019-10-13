@@ -149,7 +149,7 @@ class S_OrderDetail extends Component {
                         <div className="Card" style={{ width: "100%" }}>
                             <h4>{this.state.order.plant_name} </h4>
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
-                            <h5>วันที่ต้องการ</h5>
+                            <h5>เดือนที่ต้องการ</h5>
                             <button onClick={() => this.setState({ OpenProofPaymet: true })}>ออกใบเเจ้งหนี้</button>
                         </div>
 
@@ -177,7 +177,7 @@ class S_OrderDetail extends Component {
                 <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-12" >
-                            <h3 style={{ textAlign: "center" }}>แบบฟอร์ม</h3>
+                            <h3 style={{ textAlign: "center" }}>แผนการสั่งซื้อ</h3>
                         </div>
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
@@ -186,7 +186,7 @@ class S_OrderDetail extends Component {
 
                         </div>
                         <div className="col-5">
-
+                            <button >ออกใบสำคัญรับเงิน</button>
 
                         </div>
                     </div>
