@@ -120,14 +120,14 @@ class S_OrderDetail extends Component {
 
     filterPlant = (data) => {
         var updatedList = this.state.plants;
-        console.log(updatedList)
+        // console.log(updatedList)
         updatedList = updatedList.filter(function (item) {
             return item.plant.search(data) !== -1;
         });
         this.setState({
             farmer: updatedList,
         });
-        console.log('up',updatedList)
+        // console.log('up',updatedList)
     }
 
     render() {
