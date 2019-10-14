@@ -46,8 +46,8 @@ class S_OrderDetail extends Component {
                         order: result.result
                     })
                     console.log(result.result)
-                    setTimeout(()=>{this.filterPlant(result.result.plant_name)},500)
-                    
+                    setTimeout(() => { this.filterPlant(result.result.plant_name) }, 500)
+
                 }
                 else {
                     alert(result.error_message)
@@ -163,7 +163,7 @@ class S_OrderDetail extends Component {
 
                     <div className="col-7">
 
-                        <h4>เกษตรกรที่พร้อมส่งมอบ</h4>
+                        <h4 style={{ margin: "0px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
 
                         <Checkbox option={this.state.farmer}
                             check_array={this.state.check_array}
@@ -186,11 +186,17 @@ class S_OrderDetail extends Component {
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-7" >
-                            {this.state.check_array}
+                            <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร</h5>
+                            
+                            {this.state.check_array+"\n"}
+                            {console.log(this.state.check_array)}
+                            <h5>รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h5>
+                            <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
 
                         </div>
                         <div className="col-5">
-                            <button >ออกใบสำคัญรับเงิน</button>
+                            {/* ออก PDF */}
+                            <button className="BTN_Signin">ออกใบสำคัญรับเงิน</button>
 
                         </div>
                     </div>

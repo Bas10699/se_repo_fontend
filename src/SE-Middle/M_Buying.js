@@ -341,7 +341,7 @@ class M_Buying extends Component {
                                     }
                                 </th>
                                 <th>จำนวนการสั่งซื้อ</th>
-                                <th>สั่งซื้อกับ</th>
+                                <th style={{width:"120px"}}>สั่งซื้อกับ</th>
                                 <th>รายละเอียด</th>
                             </tr>
                             {

@@ -9,6 +9,24 @@ import { get } from '../Support/Service';
 import { NavLink } from 'react-router-dom'
 import { element } from 'prop-types';
 
+const order = [
+    {
+        name_order: "ยาสมุนไพรลดความอ้วน",
+        status: "0",
+        detial_order: "สมุนไพรที่ช่วยขับเหงื่อ มีฤทธิ์ร้อน กระตุ้นให้หิวน้ำ"
+    },
+    {
+        name_order: "อาหารคลีน",
+        status: "0",
+        detial_order: "เน้นผัก รสชาติอร่อย ไม่มีน้ำตาลเเต่มีความหวาน ชงดื่มได้"
+    },
+    {
+        name_order: "นมเพิ่มความสูง",
+        status: "1",
+        detial_order: "วัตถุดิบที่เพิ่มเเคลเซียมเยอะๆ กินง่าย ชงดื่มได้ทั้งร้อนเเละเย็น"
+    }
+]
+
 class User extends Component {
     constructor(props) {
         super(props);
@@ -79,6 +97,25 @@ class User extends Component {
         this.get_user()
     }
 
+    status_show = (status) => {
+        let return_status
+        switch (status) {
+            case "1":
+                return_status = <div>ฉบับร่าง</div>
+                break;
+
+            case "0":
+                return_status = <div>ส่งเเล้ว</div>
+                break;
+
+            default:
+                return_status = <div>เกิดข้อผิดพลาด</div>
+                break;
+        }
+        return return_status;
+    }
+
+
     render() {
         return (
             <div className="App">
@@ -131,7 +168,33 @@ class User extends Component {
                             : null
                             : null}
 
-                        {/* <NavLink to={"/EditUser"}><button className="BTN_Signin">แก้ไขข้อมูล</button></NavLink> */}
+
+                        {this.state.get_user ? this.state.get_user.user_type === '2' ?
+                        <div> 
+                            <h4 style={{marginBottom:"0px"}}>ความต้องการที่บันทึกไว้</h4>
+                            <table>                                
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ชื่อผลิตภัณฑ์</th>
+                                    <th>สถานะ</th>
+                                    <th>แก้ไข/ลบ</th>
+                                </tr>
+                                {order.map((element, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{element.name_order}</td>
+                                            <td>{this.status_show(element.status)}</td>
+                                            <td>แก้ไข/ลบ</td>
+                                        </tr>
+                                    )
+                                })}
+                            </table>
+                            </div>
+                           
+                            : null
+                            : null}
+
                     </div>
                     <div className="col-3"></div>
 
