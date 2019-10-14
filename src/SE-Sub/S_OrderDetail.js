@@ -46,6 +46,8 @@ class S_OrderDetail extends Component {
                         order: result.result
                     })
                     console.log(result.result)
+                    setTimeout(()=>{this.filterPlant(result.result.plant_name)},500)
+                    
                 }
                 else {
                     alert(result.error_message)
@@ -118,12 +120,14 @@ class S_OrderDetail extends Component {
 
     filterPlant = (data) => {
         var updatedList = this.state.plants;
+        console.log(updatedList)
         updatedList = updatedList.filter(function (item) {
             return item.plant.search(data) !== -1;
         });
         this.setState({
             farmer: updatedList,
         });
+        console.log('up',updatedList)
     }
 
     render() {
@@ -161,7 +165,7 @@ class S_OrderDetail extends Component {
 
                         <h4>เกษตรกรที่พร้อมส่งมอบ</h4>
 
-                        <Checkbox option={this.state.farmer} plant_name={this.state.order.plant_name}
+                        <Checkbox option={this.state.farmer}
                             check_array={this.state.check_array}
                             return_func={(event) => {
                                 this.setState({

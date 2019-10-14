@@ -38,30 +38,12 @@ class Checkbox extends Component {
         this.props.return_func(check_array)
     }
     
-    // componentWillMount(){
-    //     this.filterPlant()
-    // }
-
-    // filterPlant = () => {
-    //     var updatedList = this.props.option;
-    //     updatedList = updatedList.filter(function (item) {
-    //         return item.plant.search(this.props.plant_name) !== -1;
-    //     });
-    //     this.setState({
-    //         farmer: updatedList,
-    //     });
-    //     console.log("updated",updatedList)
-    //     console.log("option",this.props.option)
-    //     console.log("plant_name",this.props.plant_name)
-    //     return updatedList;
-    // }
 
     render() {
 
 
         return (
             <div>
-            {this.props.plant_name}
                 <table>
                     <tr>
                         <th>ลำดับ </th>
