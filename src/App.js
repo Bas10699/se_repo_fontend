@@ -28,16 +28,18 @@ import S_Order from './SE-Sub/S_Order'
 import S_Plants_in_network from './SE-Sub/S_Plants_in_network'
 import S_skill_farmer from './SE-Sub/S_skill_farmer'
 import S_OrderDetail from './SE-Sub/S_OrderDetail'
-import SocketIo from './socket.io/socketIo'
 import Researcher from './Researcher/Researcher';
 import Request from './Researcher/Request';
 import Results from './Researcher/Results';
 import Material from './Researcher/Material';
+import SocketIo from './socket.io/socketIo'
 
 function App() {
   return (
     <Router exact path="/">
-      {/* <Route exact path='/Socket' component={SocketIo}/> */}
+
+      <Route exact path='/Socket' component={SocketIo}/>
+      
       <Navbar />
 
       <Route exact path='/Test' component={Test}/>
