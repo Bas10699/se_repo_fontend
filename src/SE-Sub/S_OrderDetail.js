@@ -196,7 +196,7 @@ class S_OrderDetail extends Component {
                         </div>
                         <div className="col-5">
                             {/* ออก PDF */}
-                            <button className="BTN_Signin">ออกใบสำคัญรับเงิน</button>
+                            <button className="BTN_Signin" >ออกใบสำคัญรับเงิน</button>
 
                         </div>
                     </div>
