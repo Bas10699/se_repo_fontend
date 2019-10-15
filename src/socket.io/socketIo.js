@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import socketIOClient from 'socket.io-client'
 import {ip} from '../Support/Service'
+import moment from 'moment'
 
 class socketIO extends Component {
   constructor() {
@@ -51,7 +52,7 @@ class socketIO extends Component {
         {
           message.map((data, i) =>
             <div key={i} style={style} >
-              {data.add} : {data.mes}
+              {data.add} : <b>{data.mes}</b> เวลา: {moment(data.time).format('HH:mm')}
             </div>
           )
         }
