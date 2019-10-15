@@ -33,22 +33,14 @@ import Request from './Researcher/Request';
 import Results from './Researcher/Results';
 import Material from './Researcher/Material';
 import T_Order from './Trader/T_Order';
-<<<<<<< HEAD
 import M_BuyingDetail from './SE-Middle/M_BuyingDetail';
-=======
 import SocketIo from './socket.io/socketIo'
->>>>>>> master
 
 function App() {
   return (
     <Router exact path="/">
-<<<<<<< HEAD
-      <Route exact path='/Socket' component={SocketIo}/>
-=======
-
       <Route exact path='/Socket' component={SocketIo}/>
       
->>>>>>> master
       <Navbar />
 
       <Route exact path='/Test' component={Test}/>
