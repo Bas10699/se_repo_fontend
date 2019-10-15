@@ -32,6 +32,7 @@ import Researcher from './Researcher/Researcher';
 import Request from './Researcher/Request';
 import Results from './Researcher/Results';
 import Material from './Researcher/Material';
+import T_Order from './Trader/T_Order';
 import SocketIo from './socket.io/socketIo'
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
       <Route exact path='/Signup' component={Signup}/>
       <Route exact path='/' component={Home}/>
       <Route exact path='/T_Cart' component={T_Cart}/>
+      <Route exact path='/T_Order' component={T_Order}/>
       <Route exact path='/Product' component={Product}/>
       <Route exact path='/Product/:productID' component={ProductDetail}/>
       <Route exact path='/T_Buying' component={T_Buying}/>

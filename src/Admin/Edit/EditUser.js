@@ -5,19 +5,7 @@ import { ip, get, post } from '../../Support/Service';
 import { NavLink } from 'react-router-dom';
 import Modal from 'react-responsive-modal'
 
-const invoice = [
-    {
-        bankNo: "123-4-56789-0",
-        bankName: "นายบัญชี ธนาคาร",
-        bankAccount: "ธนาคารกรุงไทย"
-    },
-    {
-        bankNo: "012-3-45678-9",
-        bankName: "นายบัญชี ธนาคาร",
-        bankAccount: "ธนาคารไทยพาณิชย์"
-    }
 
-]
 class EditUser extends Component {
     constructor(props) {
         super(props);
