@@ -1196,3 +1196,23 @@ ol {
     color: black;
     transition: 0.5s;
   }
+
+  .BTN_Cencle{
+    font-family: 'fc_lamoonregular';
+    font-size: 16px;
+    color: red;
+    background-color: transparent;
+    border: 1px solid red;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 150px;
+    margin-top: 0px;
+    margin-left: 10px;
+    transition: 0.5s;
+}
+
+.BTN_Cencle:hover{
+    background-color: red;
+    color: white;
+}
