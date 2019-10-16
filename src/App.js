@@ -35,6 +35,9 @@ import Product_Info from './Researcher/Product_Info';
 import Check_Details from './Researcher/Check_Details';
 import Product_History from './Researcher/Product_History';
 import Material from './Researcher/Material';
+import T_Order from './Trader/T_Order';
+import M_BuyingDetail from './SE-Middle/M_BuyingDetail';
+import SocketIo from './socket.io/socketIo'
 
 import Development from './Researcher/Development';
 import Information from './Researcher/Information';
@@ -42,7 +45,8 @@ import Information from './Researcher/Information';
 function App() {
   return (
     <Router exact path="/">
-      {/* <Route exact path='/Socket' component={SocketIo}/> */}
+      <Route exact path='/Socket' component={SocketIo}/>
+      
       <Navbar />
 
       <Route exact path='/Test' component={Test}/>
@@ -51,6 +55,7 @@ function App() {
       <Route exact path='/Signup' component={Signup}/>
       <Route exact path='/' component={Home}/>
       <Route exact path='/T_Cart' component={T_Cart}/>
+      <Route exact path='/T_Order' component={T_Order}/>
       <Route exact path='/Product' component={Product}/>
       <Route exact path='/Product/:productID' component={ProductDetail}/>
       <Route exact path='/T_Buying' component={T_Buying}/>
@@ -64,6 +69,7 @@ function App() {
       <Route exact path='/M_Summary' component={M_Summary}/>
       <Route exact path='/AddProduct' component={AddProduct}/>
       <Route exact path='/M_Buying' component={M_Buying}/>
+      <Route exact path='/M_Buying/:orderID' component={M_BuyingDetail}/>
       <Route exact path='/user/:UserID' component={UserDetail}/>
       <Route exact path='/S_Order' component={S_Order}/>
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>

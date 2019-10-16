@@ -79,72 +79,107 @@ class Timeline extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <ul className="Progressbar">
-                            {this.props.status >= 0 ?
-                                <li className="Status" >
-                                    <img src={one} alt="one"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ<br />
-                                        {/* {moment(this.props.order.order_date).utc().format('DD/MM/YYYY HH:mm')} */}
-                                        <PdfOrder data={this.props.order} />
-                                    </div></li>
-                                : <li className="Standat" >
-                                    <img src={one} alt="one"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ</div></li>}
+                            <li className={this.props.status >= 0 ? "Standat1" : "Standat1"}>
+                                <img src={one} alt="one"
+                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "112%" }} />
+                                <div style={{ marginLeft: "105%", width: "100%" }}>
+                                    ส่งใบสั่งซื้อ
+                                    </div>
+                                {/* {this.props.status >= 0 ? 
+                                    <div style={{ marginLeft: "88%", width: "150%" }}><PdfOrder data={this.props.order} /></div>
+                                    :
+                                    null 
+                                 } */}
+                            </li>
 
-                            {this.props.status >= 1 ?
-                                <li className="Status" >
-                                    <img src={two} alt="two"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ยืนยันคำสั่งซื้อแล้ว<br />
-                                        {moment(this.props.invoice.date).utc().format('DD/MM/YYYY HH:mm')}
+
+                            <li className={this.props.status >= 1 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 1 ? two : twodis} alt="two"
+                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
+                                <div style={{ marginLeft: "86%", width: "100%" }} >
+                                    ยืนยันคำสั่งซื้อแล้ว
+                                    </div>
+                                {/* {this.props.status >= 1 ?
+                                    <div style={{ marginLeft: "75%", width: "160%" }}>
                                         <PdfInvoice data={this.props.invoice} order={this.props.order} />
-                                    </div></li>
-                                : <li className="Standat">
-                                    <img src={twodis} alt="two"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ยืนยันคำสั่งซื้อแล้ว</div></li>}
+                                    </div>
+                                    :
+                                    null
+                                } */}
+                            </li>
 
-                            {this.props.status >= 2 ? <li className="Status" >
-                                <img src={three} alt="three"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ชำระเงินแล้ว<br />
-                                    {moment(this.props.order.date_of_payment).utc().format('DD/MM/YYYY HH:mm')}<br />
-                                    <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
-                                </div></li>
-                                : <li className="Standat" >
-                                    <img src={threedis} alt="three"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ชำระเงินแล้ว</div></li>}
+                            <li className={this.props.status >= 2 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 2 ? three : threedis} alt="three"
+                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
+                                <div style={{ marginLeft: "90%", width: "100%" }} >
+                                    ชำระเงินแล้ว
+                                    </div>
+                                {/* {this.props.status >= 2 ?
+                                    <div style={{ marginLeft: "75%", width: "160%" }}>
+                                        <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
+                                    </div>
+                                    :
+                                    null
+                                } */}
 
-                            {this.props.status >= 3 ? <li className="Status" >
-                                <img src={four} alt="four"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>สินค้าทำการจัดส่ง<br />
-                                    {moment(this.props.order.check_payment_date).utc().format('DD/MM/YYYY HH:mm')}<br />
-                                    <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
-                                </div></li>
-                                : <li className="Standat" >
-                                    <img src={fourdis} alt="four"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>สินค้าทำการจัดส่ง</div></li>}
+                            </li>
+                            <li className={this.props.status >= 3 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 3 ? four : fourdis} alt="four"
+                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
+                                <div style={{ marginLeft: "86%", width: "100%" }} >
+                                    สินค้าทำการจัดส่ง
+                                    </div>
+                                {/* {this.props.status >= 2 ?
+                                    <div style={{ marginLeft: "75%", width: "160%" }}>
+                                        <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
+                                    </div>
+                                    :
+                                    null
+                                } */}
 
-                            {this.props.status >= 4 ? <li className="Statusles" >
-                                <img src={five} alt="five"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "55%", width: "200px" }}>ตรวจสอบสินค้า<br />
-                                    {moment(this.props.order.date_end).utc().format('DD/MM/YYYY HH:mm')}<br />
-                                    {/* <button className="BTN_PDF">ตรวจสอบ</button> */}
-                                </div></li>
-                                : <li className="Standatles" >
-                                    <img src={fivedis} alt="fivedis"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "95%", width: "100px" }}>ตรวจสอบสินค้า</div></li>}
+                            </li>
+
+                            <li className={this.props.status >= 4 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 4 ? five : fivedis} alt="five"
+                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
+                                <div style={{ marginLeft: "86%", width: "100%" }} >
+                                    ตรวจสอบสินค้า
+                                    </div>
+                            </li>
+
                         </ul>
 
                     </div>
                 </div>
 
+                {this.props.status >= 0 ?
+                    <div style={{ marginLeft: "2.5%", width: "30%", marginTop: "-40px" }}>
+                        <PdfOrder data={this.props.order} />
+                    </div>
+                    :
+                    null
+                }
+                {this.props.status >= 1 ?
+                    <div style={{ marginLeft: "19.5%", width: "30%", marginTop: "-40px" }}>
+                        <PdfInvoice data={this.props.invoice} order={this.props.order} />
+                    </div>
+                    :
+                    null
+                }
+                {this.props.status >= 2 ?
+                    <div style={{ marginLeft: "36%", width: "30%", marginTop: "-40px" }}>
+                        <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
+                    </div>
+                    :
+                    null
+                }
+                {this.props.status >= 3 ?
+                    <div style={{ marginLeft: "53%", width: "30%", marginTop: "-40px" }}>
+                        <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
+                    </div>
+                    :
+                    null
+                }
                 {/* <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-12" >

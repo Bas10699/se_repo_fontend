@@ -418,160 +418,152 @@ class ProductDetail extends Component {
         let render_page
         switch (user_type) {
 
-            case "5": render_page =
+            case "4":
+            case "5":
+                render_page =
 
-                <div className="App">
+                    <div className="App">
 
-                    <div className="Row">
-                        <div className="col-12">
-                            <h2 style={{ textAlign: "center" }}>คำสั่งซื้อวัตถุดิบของหมายเลขคำสั่งซื้อ {this.state.order.order_id}</h2></div>
-                    </div>
-                    <div className="Row">
-                        <div className="col-2" style={{ marginRight: "2%" }}>
-                            {this.state.product_data.image ? <img className="IMG_Detail_SEM" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                        <div className="Row">
+                            <div className="col-12">
+                                <h2 style={{ textAlign: "center" }}>คำสั่งซื้อวัตถุดิบของหมายเลขคำสั่งซื้อ {this.state.order.order_id}</h2></div>
                         </div>
-                        {console.log("product_data : ", this.state.product_data)}
-                        <div className="col-6">
-                            <h3>{this.state.product_data.product_name}</h3>
-                            <h5>{this.state.product_data.product_status}</h5>
-                            <h4>จำนวนที่มีอยู่ {this.state.sum_vol} กิโลกรัม</h4>
-                            <h4>จำนวนที่ต้องสั่งซื้อ {this.state.quantity} กิโลกรัม  ราคา {this.state.product_data.cost} บาท/กิโลกรัม</h4>
+                        <div className="Row">
+                            <div className="col-2" style={{ marginRight: "2%" }}>
+                                {this.state.product_data.image ? <img className="IMG_Detail_SEM" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                            </div>
+                            {console.log("product_data : ", this.state.product_data)}
+                            <div className="col-6">
+                                <h3>{this.state.product_data.product_name}</h3>
+                                <h5>{this.state.product_data.product_status}</h5>
+                                <h4>จำนวนที่มีอยู่ {this.state.sum_vol} กิโลกรัม</h4>
+                                <h4>จำนวนที่ต้องสั่งซื้อ {this.state.quantity} กิโลกรัม  ราคา {this.state.product_data.cost} บาท/กิโลกรัม</h4>
 
-                            {
-                                this.state.frequency.map((element, index) => {
-                                    return (
-                                        <Accordion allowMultipleExpanded={true}>
-                                            {
-                                                element.se.map((element_se, index_se) => {
-                                                    return (
-                                                        <AccordionItem title={
-                                                            <div className="Row">
-                                                                <div className="col-7" style={{ textAlign: 'left' }}>{element_se.name + " : " + this.sum_volume(this.sum_data_in_month(element_se)) + ' กิโลกรัม'}
-                                                                </div>
-                                                                <div className="col-3">
-                                                                    <progress className="progress" value={this.percent_volume(this.sum_data_in_month(element_se))} max="100" />
-                                                                    <div style={{ marginTop: "-39px", marginLeft: "5px", color: "white" }}>{this.percent_volume(this.sum_data_in_month(element_se))}%</div>
-                                                                    {/* <div class="progress">
-                                                                        <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" width={this.percent_volume(this.sum_data_in_month(element_se))}>
-                                                                            {this.percent_volume(this.sum_data_in_month(element_se))}
-                                                                        </div>
-                                                                    </div> */}
-                                                                </div>
-                                                            </div>}>
-
-                                                            <table style={{ textAlign: "center" }}>
-                                                                <tr>
-                                                                    <th rowSpan="2">จำนวนครั้งที่ส่ง</th>
-                                                                    <th colSpan="12">เดือน</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    {this.state.month.map((element_month) => {
-                                                                        return (
-                                                                            <th>{element_month} </th>
-                                                                        )
-                                                                    })}
-                                                                </tr>
-                                                                {element_se.rang.map((element_rang, index_rang) => {
-                                                                    return (
-                                                                        <tr>
-                                                                            <td>{index_rang + 1}</td>
-                                                                            {element_rang.data.map((element_data) => {
-                                                                                return (
-                                                                                    <td>{(element_data)}</td>
-                                                                                )
-                                                                            })}
-                                                                        </tr>
-
-                                                                    )
-                                                                })
-                                                                }
-
-                                                                <tr>
-                                                                    <th>รวมทั้งหมด</th>
-                                                                    {this.sum_data_in_month(element_se, index_se).map((ele_sum) => {
-                                                                        return (
-                                                                            <th>{(ele_sum)}</th>
-                                                                        )
-                                                                    })}
-
-                                                                </tr>
-                                                            </table>
-                                                        </AccordionItem>
-                                                    )
-                                                })
-                                            }
-                                        </Accordion>
-                                    )
-                                })
-                            }
-                            {/* <input type="number"
-                              name="quantity" min="1"
-                              id="amount" placeholder="จำนวนที่ต้องการสั่งซื้อ"
-                              onChange={this.handleChange} />
-                          <button className="BTN_AddCart" onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button> */}
-
-
-                        </div>
-                        <div className="col-4" style={{
-                            borderLeft: "2px solid black",
-                            paddingRight: "15px",
-                            paddingLeft: "15px",
-                        }}>
-                            <h3>รายการสั่งซื้อวัตถุดิบ</h3>
-
-                            <div>
                                 {
-                                    this.state.se.map((element_se, index_se) => {
+                                    this.state.frequency.map((element, index) => {
                                         return (
-                                            <div>
-                                                <input type="checkbox" />{element_se.name}
-                                                <div>
-                                                    <input type="number" style={{ marginTop: "0px" }}
-                                                        name="quantity" min="1"
-                                                        id={index_se} placeholder="จำนวนที่ต้องการสั่งซื้อ"
-                                                        value={element_se.amount}
-                                                        onChange={this.handleChange_se} /></div>
-                                                <div>
-                                                    <h4 style={{ marginTop: "10px" }}>+ ราคาขนส่ง</h4>
-                                                    <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม {this.state.product_data.cost * element_se.amount} บาท</h4>
-                                                </div>
-                                            </div>
+                                            <Accordion allowMultipleExpanded={true}>
+                                                {
+                                                    element.se.map((element_se, index_se) => {
+                                                        return (
+                                                            <AccordionItem title={
+                                                                <div className="Row">
+                                                                    <div className="col-7" style={{ textAlign: 'left' }}>{element_se.name + " : " + this.sum_volume(this.sum_data_in_month(element_se)) + ' กิโลกรัม'}
+                                                                    </div>
+                                                                    <div className="col-3">
+                                                                        <progress className="progress" value={this.percent_volume(this.sum_data_in_month(element_se))} max="100" />
+                                                                        <div style={{ marginTop: "-39px", marginLeft: "5px", color: "white" }}>{this.percent_volume(this.sum_data_in_month(element_se))}%</div>
+
+                                                                    </div>
+                                                                </div>}>
+
+                                                                <table style={{ textAlign: "center" }}>
+                                                                    <tr>
+                                                                        <th rowSpan="2">จำนวนครั้งที่ส่ง</th>
+                                                                        <th colSpan="12">เดือน</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        {this.state.month.map((element_month) => {
+                                                                            return (
+                                                                                <th>{element_month} </th>
+                                                                            )
+                                                                        })}
+                                                                    </tr>
+                                                                    {element_se.rang.map((element_rang, index_rang) => {
+                                                                        return (
+                                                                            <tr>
+                                                                                <td>{index_rang + 1}</td>
+                                                                                {element_rang.data.map((element_data) => {
+                                                                                    return (
+                                                                                        <td>{(element_data)}</td>
+                                                                                    )
+                                                                                })}
+                                                                            </tr>
+
+                                                                        )
+                                                                    })
+                                                                    }
+
+                                                                    <tr>
+                                                                        <th>รวมทั้งหมด</th>
+                                                                        {this.sum_data_in_month(element_se, index_se).map((ele_sum) => {
+                                                                            return (
+                                                                                <th>{(ele_sum)}</th>
+                                                                            )
+                                                                        })}
+
+                                                                    </tr>
+                                                                </table>
+                                                            </AccordionItem>
+                                                        )
+                                                    })
+                                                }
+                                            </Accordion>
                                         )
                                     })
                                 }
-                                <h3>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h3>
 
-                                <button className="BTN_AddCart" onClick={() => { this.onOpenModal() }}>ยืนยันการสั่งซื้อ</button>
+                            </div>
+                            <div className="col-5" style={{
+                                borderLeft: "2px solid black",
+                                paddingRight: "15px",
+                                paddingLeft: "15px",
+                            }}>
+                                <h3>รายการสั่งซื้อวัตถุดิบ</h3>
+
+                                <div>
+                                    {
+                                        this.state.se.map((element_se, index_se) => {
+                                            return (
+                                                <div>
+                                                    <input type="checkbox" />{element_se.name}
+                                                    <div>
+                                                        <input type="number" style={{ marginTop: "0px" }}
+                                                            name="quantity" min="1"
+                                                            id={index_se} placeholder="จำนวนที่ต้องการสั่งซื้อ"
+                                                            value={element_se.amount}
+                                                            onChange={this.handleChange_se} />
+                                                        + ราคาขนส่ง</div>
+                                                    <div>
+
+                                                        <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม {this.state.product_data.cost * element_se.amount} บาท</h4>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                    <h3>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h3>
+
+                                    <button className="BTN_AddCart" onClick={() => { this.onOpenModal() }}>ยืนยันการสั่งซื้อ</button>
+                                </div>
+
                             </div>
 
                         </div>
+                        <Modal open={this.state.open} onClose={this.onCloseModal}>
+                            <div className="Row">
+                                <div className="col-12">
+                                    <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อวัตถุดิบ "{this.state.product_data.product_name}"</h3>
 
+                                    {this.state.se.map((element) => {
+                                        return (
+                                            <div>
+                                                <h5>{element.name} จำนวน {element.amount} กิโลกรัม </h5>
+                                                ราคา {this.state.product_data.cost * element.amount} บาท
+                                        </div>
+                                        )
+                                    })}
+                                    <h4 style={{ color: "red" }}>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h4>
+                                    <button className="BTN_Signin" onClick={() => this.add_order_se()}>ออกใบคำสั่งซื้อ</button>
+                                    <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                                </div>
+                            </div>
 
-                        <div className="col-1"></div>
+                        </Modal>
                     </div>
-                    <Modal open={this.state.open} onClose={this.onCloseModal}>
-                        <div className="Row">
-                            <div className="col-12">
-                                <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อวัตถุดิบ "{this.state.product_data.product_name}"</h3>
-                                {this.state.se.map((element) => {
-                                    return (
-                                        <div>{element.name} จำนวน {element.amount} กิโลกรัม ราคา {this.state.product_data.cost * element.amount} บาท</div>
-                                    )
-                                })}
-                                รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท
-                             <button className="BTN_Signin" onClick={() => this.add_order_se()}>ออกใบคำสั่งซื้อ</button>
-                                <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-                            </div>
-                        </div>
-
-                    </Modal>
-                </div>
                 break;
 
-            default: render_page = <div className="App">
-                <h1>กำลังโหลด...</h1>
-            </div>
+            default:
                 break;
         }
         return render_page

@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 import za from '../Image/za.png'
 import az from '../Image/az.png'
 import top from '../Image/top.png'
+import arrow from '../Image/up-arrow.png'
 
 class S_skill_farmer extends Component {
     constructor(props) {
@@ -17,12 +18,30 @@ class S_skill_farmer extends Component {
             click1: false,
             click2: false,
             click3: false,
+            click4: false,
+            click5: false,
+            click6: false,
+            click: true,
             showHide1: true,
             showHide2: true,
             showHide3: true,
+            showHide4: true,
+            showHide5: true,
+            showHide6: true,
             get_user: null,
             default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg",
         }
+    }
+
+    filterName = (event) => {
+        var updatedList = this.state.plants;
+        updatedList = updatedList.filter(function (item) {
+            return item.first_name.toLowerCase().search(
+                event.target.value.toLowerCase()) !== -1;
+        });
+        this.setState({
+            farmer: updatedList,
+        });
     }
 
     componentWillMount() {
@@ -210,7 +229,7 @@ class S_skill_farmer extends Component {
 
     growingArea = () => {
         const order = this.state.farmer
-        if (this.state.click3 === true) {
+        if (this.state.click6 === true) {
             function compare(a, b) {
                 const order_idA = a.growingArea
                 const order_idB = b.growingArea
@@ -226,7 +245,7 @@ class S_skill_farmer extends Component {
             let sort_order = order.sort(compare)
             this.setState({
                 farmer: sort_order,
-                click3: false
+                click6: false
             })
         }
         else {
@@ -245,7 +264,7 @@ class S_skill_farmer extends Component {
             let sort_order = order.sort(compare)
             this.setState({
                 farmer: sort_order,
-                click3: true
+                click6: true
             })
         }
 
@@ -284,7 +303,7 @@ class S_skill_farmer extends Component {
 
 
                 <div className='Row'>
-                    <div className='col-2' style={{ marginTop: "-130px" }}>
+                    <div className='col-1' style={{ marginTop: "-130px" }}>
 
                         <ol>
                             <div style={{ textAlign: "center", margin: "0px" }}>
@@ -294,13 +313,13 @@ class S_skill_farmer extends Component {
                             <hr style={{ boxShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.2)", border: "1px solid #ccc", width: "80%" }} />
                             <NavLink
                                 style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
-                                <li style={{ textAlign: "center" }} activeClassName="Active">--แสดงทั้งหมด--</li>
+                                <li style={{ textAlign: "left", marginLeft: "5px", paddingLeft: "5px" }} activeClassName="Active">--แสดงทั้งหมด--</li>
                             </NavLink>
                             {this.plants_se(this.state.plants).map((ele_plant, index) => {
                                 return (
                                     <NavLink onClick={() => this.filterPlant(ele_plant.plant)}
                                         style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
-                                        <li style={{ textAlign: "center" }} activeClassName="Active">{ele_plant.plant}</li>
+                                        <li style={{ textAlign: "left", marginLeft: "10px", paddingLeft: "10px" }} activeClassName="Active">{ele_plant.plant}</li>
                                     </NavLink>
 
                                 )
@@ -310,37 +329,63 @@ class S_skill_farmer extends Component {
                         <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
                     </div>
 
-                    <div className='col-1'></div>
-                    <div className='col-8' style={{ marginTop: "-50px" }}>
-                        <input type="search" placeholder="ค้นหา" />
-                        <button onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>gg1</button>
-                        <button onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>gg2</button>
-                        <button onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>gg3</button>
+                    {/* <div className='col-1'></div> */}
+                    <div className='col-11' style={{ marginTop: "-50px", marginLeft: "20px", marginRight: "10px" }} >
+                        <input type="search" placeholder="ค้นหา" onChange={this.filterName} />
+                        <h4>เลือกข้อมูลที่ต้องการเปรียบเทียบ</h4>
+                        <button className={this.state.showHide1 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>จํานวนผลผลิตที่ขายต่อปี</button>
+                        <button className={this.state.showHide2 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>ผลผลิตต่อไร่</button>
+                        <button className={this.state.showHide3 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>จำนวนการส่งมอบต่อครั้ง</button>
+                        <button className={this.state.showHide4 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide4 === true) { this.setState({ showHide4: false }) } else { this.setState({ showHide4: true }) } }}>เดือนที่ส่งมอบ</button>
+                        <button className={this.state.showHide5 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide5 === true) { this.setState({ showHide5: false }) } else { this.setState({ showHide5: true }) } }}>จำนวนการส่งมอบต่อครั้ง</button>
+                        <button className={this.state.showHide6 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide6 === true) { this.setState({ showHide6: false }) } else { this.setState({ showHide6: true }) } }}>พื้นที่ปลูก</button>
+                        {/* {console.log(this.state.showHide1)} */}
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>พืชที่ปลูก </th>
 
-                                {this.state.showHide1 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขายต่อปี
+                                {this.state.showHide1 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขาย/ปี
                                 {this.state.click1 ?
-                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer" }} onClick={() => this.year_value()} />
                                         :
-                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.year_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer" }} onClick={() => this.year_value()} />
                                     }
                                 </th> : null}
-                                {this.state.showHide2 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิตต่อไร่
+                                {this.state.showHide2 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิต/ไร่
                                 {this.state.click2 ?
-                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer" }} onClick={() => this.product_value()} />
                                         :
-                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer" }} onClick={() => this.product_value()} />
                                     }
                                 </th> : null}
-                                {this.state.showHide3 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
+                                {this.state.showHide3 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จำนวนการส่งมอบ/ครั้ง
                                 {this.state.click3 ?
-                                        <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer" }} onClick={() => this.product_value()} />
                                         :
-                                        <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.growingArea()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer" }} onClick={() => this.product_value()} />
+                                    }
+                                </th> : null}
+                                {this.state.showHide4 ? <th style={{ borderLeft: "1px solid #ccc" }}>เดือนที่ส่งมอบ
+                                {this.state.click4 ?
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer" }} onClick={() => this.product_value()} />
+                                        :
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer" }} onClick={() => this.product_value()} />
+                                    }
+                                </th> : null}
+                                {this.state.showHide5 ? <th style={{ borderLeft: "1px solid #ccc" }}>จำนวนครั้งส่งมอบ
+                                {this.state.click5 ?
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer" }} onClick={() => this.product_value()} />
+                                        :
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer" }} onClick={() => this.product_value()} />
+                                    }
+                                </th> : null}
+                                {this.state.showHide6 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
+                                {this.state.click6 ?
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer" }} onClick={() => this.growingArea()} />
+                                        :
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer" }} onClick={() => this.growingArea()} />
                                     }
                                 </th> : null}
                             </tr>
@@ -355,12 +400,22 @@ class S_skill_farmer extends Component {
                                                 {this.state.showHide1 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
                                                     : null}
                                                 {this.state.showHide1 ? <td>กิโลกรัม</td> : null}
+
                                                 {this.state.showHide2 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.product_value}</td>
                                                     : null}
                                                 {this.state.showHide2 ? <td>กิโลกรัม</td> : null}
-                                                {this.state.showHide3 ? <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
+
+                                                {this.state.showHide3 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.deliver_value}</td>
                                                     : null}
-                                                {this.state.showHide3 ? <td>ไร่</td> : null}
+                                                {this.state.showHide3 ? <td>กิโลกรัม</td> : null}
+
+                                                {this.state.showHide4 ? <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.end_plant}</td>
+                                                    : null}
+                                                {this.state.showHide5 ? <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.deliver_frequency_number}</td>
+                                                    : null}
+                                                {this.state.showHide6 ? <td style={{ textAlign: "center", borderLeft: "1px solid #ccc" }}>{element.growingArea}</td>
+                                                    : null}
+                                                {this.state.showHide6 ? <td>ไร่</td> : null}
                                             </tr>
                                         )
                                         // }
@@ -373,7 +428,7 @@ class S_skill_farmer extends Component {
                         </table>
 
                     </div>
-                    <div className='col-1'></div>
+                    {/* <div className='col-1'></div> */}
                 </div>
 
             </div>

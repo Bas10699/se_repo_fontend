@@ -327,7 +327,6 @@ class BuyingDetail extends Component {
     render() {
         return (
             <div className="App">
-
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>รายละเอียดใบซื้อสินค้า {this.state.order.order_id}</h2>
@@ -346,8 +345,6 @@ class BuyingDetail extends Component {
                         <h4 style={{ textAlign: "right" }}>{moment(this.state.order.order_date).utc().add('years', 543).format("DD/MM/YYYY")}</h4>
                     </div>
                 </div>
-
-
 
                 {/* <div className="Row">
                     <div className="col-2"></div>
