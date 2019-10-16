@@ -10,7 +10,15 @@ class Material extends Component {
                         <h3 style={{ textAlign: "center" }}>ข้อมูลวัตถุดิบ</h3>
                     </div>
                 </div>
-                
+
+                <div className="Row">
+                    <div className="col-2"></div>
+                    <div className="col-8">
+                        <h3 style={{ textAlign: "center" }}>กราฟข้อมูลวัตถุดิบ(เหมือนหน้าวัตถุดิบที่ส่งมอบของ SE ย่อย)</h3>
+                    </div>
+                    <div className="col-2"></div>
+                </div>
+
             </div>
         )
     }

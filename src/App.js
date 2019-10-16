@@ -23,16 +23,21 @@ import EditUser from './Admin/Edit/EditUser';
 import M_Product from './SE-Middle/M_Product';
 import UserAll from './Admin/UserAll';
 import M_Buying from './SE-Middle/M_Buying';
-import UserDetail from './Admin/UserDetail'
-import S_Order from './SE-Sub/S_Order'
-import S_Plants_in_network from './SE-Sub/S_Plants_in_network'
-import S_skill_farmer from './SE-Sub/S_skill_farmer'
-import S_OrderDetail from './SE-Sub/S_OrderDetail'
-import SocketIo from './socket.io/socketIo'
-import Researcher from './Researcher/Researcher';
-import Request from './Researcher/Request';
-import Results from './Researcher/Results';
+import UserDetail from './Admin/UserDetail';
+import S_Order from './SE-Sub/S_Order';
+import S_Plants_in_network from './SE-Sub/S_Plants_in_network';
+import S_skill_farmer from './SE-Sub/S_skill_farmer';
+import S_OrderDetail from './SE-Sub/S_OrderDetail';
+import SocketIo from './socket.io/socketIo';
+
+import Confirm_Product from './Researcher/Confirm_Product';
+import Product_Info from './Researcher/Product_Info';
+import Check_Details from './Researcher/Check_Details';
+import Product_History from './Researcher/Product_History';
 import Material from './Researcher/Material';
+
+import Development from './Researcher/Development';
+import Information from './Researcher/Information';
 
 function App() {
   return (
@@ -64,11 +69,15 @@ function App() {
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>
       <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
-      
-      <Route exact path='/Researcher' component={Researcher}/>
-      <Route exact path='/Request' component={Request}/>
-      <Route exact path='/Results' component={Results}/>
+
+      <Route exact path='/Confirm_Product' component={Confirm_Product}/>
+      <Route exact path='/Product_Info' component={Product_Info}/>
+      <Route exact path='/Check_Details' component={Check_Details}/>
+      <Route exact path='/Product_History' component={Product_History}/>
       <Route exact path='/Material' component={Material}/>
+
+      <Route exact path='/Development' component={Development}/>
+      <Route exact path='/Information' component={Information}/>
 
     </Router>
   );

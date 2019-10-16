@@ -45,6 +45,13 @@ class Navbar extends Component {
                             <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
                                 <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
+                                <li><NavLink exact to="/confirm_Product" activeClassName="Active" className="NavbarText">ยืนยันการพัฒนาผลิตภัณฑ์</NavLink></li>
+                                <li><NavLink exact to="/Product_Info" activeClassName="Active" className="NavbarText">ข้อมูลผลิตภัณฑ์</NavLink></li>
+                                <li><NavLink exact to="/Check_Details" activeClassName="Active" className="NavbarText">ตรวจสอบรายละเอียด</NavLink></li>
+                                <li><NavLink exact to="/Product_History" activeClassName="Active" className="NavbarText">ประวัติการพัฒนาผลิตภัณฑ์</NavLink></li>
+                                <li><NavLink exact to="/Material" activeClassName="Active" className="NavbarText">ข้อมูลวัตถุดิบ</NavLink></li>
+                                {/* <li><NavLink exact to="/Product_history" activeClassName="Active" className="NavbarText">ประวัติผลิตภัณฑ์</NavLink></li>
+                                <li><NavLink exact to="/Material" activeClassName="Active" className="NavbarText">วัตถุดิบ</NavLink></li> */}
                                 {/* <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
                                 <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตระกร้าสินค้า</NavLink></li>
                                 <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
