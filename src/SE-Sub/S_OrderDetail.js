@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 import { get, post, ip } from '../Support/Service'
 import { user_token, addComma } from '../Support/Constance'
-import Timeline from './Timeline'
+import Timeline from './TimelineNeo'
 import Checkbox from '../Support/Checkbox'
 import moment from 'moment'
 import Modal from 'react-responsive-modal'
