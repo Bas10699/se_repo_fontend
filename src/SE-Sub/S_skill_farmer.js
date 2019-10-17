@@ -7,11 +7,15 @@ import za from '../Image/za.png'
 import az from '../Image/az.png'
 import top from '../Image/top.png'
 import arrow from '../Image/up-arrow.png'
+import Pagination from "react-pagination-library";
+import "react-pagination-library/build/css/index.css"; //for css
 
 class S_skill_farmer extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            currentPage: 1,
+            todosPerPage: 10,
             farmer: [],
             plants: [],
             search_order: [],
@@ -291,7 +295,38 @@ class S_skill_farmer extends Component {
         }
     }
 
+    changeCurrentPage = numPage => {
+        this.setState({ currentPage: numPage });
+        //fetch a data
+        //or update a query to get data
+    };
+
     render() {
+        const { farmer, currentPage, todosPerPage } = this.state;
+        const todos = farmer
+        // Logic for displaying todos
+        const indexOfLastTodo = currentPage * todosPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+        const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
+
+        // const renderTodos = currentTodos.map((todo, index) => {
+        //     return <li>{todo}</li>;
+        // });
+
+        // Logic for displaying page numbers
+        // const pageNumbers = [];
+        // for (let i = 1; i <= Math.ceil(todos.length / todosPerPage); i++) {
+        //     pageNumbers.push(i);
+        // }
+
+        // const renderPageNumbers = pageNumbers.map(number => {
+        //     return (
+        //         <div onClick={() => this.handleClick(number)}>
+        //             {number}
+        //             &nbsp;
+        //         </div>
+        //     );
+        // });
         return (
             <div className="App" id="#Top">
                 <div className="Row">
@@ -317,7 +352,7 @@ class S_skill_farmer extends Component {
                             </NavLink>
                             {this.plants_se(this.state.plants).map((ele_plant, index) => {
                                 return (
-                                    <NavLink onClick={() => this.filterPlant(ele_plant.plant)}
+                                    <NavLink onClick={() => this.filterPlant(ele_plant.plant, this.setState({ currentPage: 1 }))}
                                         style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
                                         <li style={{ textAlign: "left", marginLeft: "10px", paddingLeft: "10px" }} activeClassName="Active">{ele_plant.plant}</li>
                                     </NavLink>
@@ -391,7 +426,7 @@ class S_skill_farmer extends Component {
                             </tr>
                             {
                                 this.state.search_order ?
-                                    this.state.farmer.map((element, index) => {
+                                    currentTodos.map((element, index) => {
                                         return (
                                             <tr>
                                                 <td style={{ textAlign: "center" }}>{index + 1} .</td>
@@ -420,18 +455,27 @@ class S_skill_farmer extends Component {
                                         )
                                         // }
                                     })
+
                                     :
                                     null
 
                             }
 
                         </table>
-
+                        <div className="Row">
+                            <div className="col-4"></div>
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={Math.ceil(todos.length / todosPerPage)}
+                                changeCurrentPage={this.changeCurrentPage}
+                                theme="bottom-border"
+                            />
+                            
+                        </div>
                     </div>
-                    {/* <div className='col-1'></div> */}
                 </div>
 
-            </div>
+            </div >
         )
     }
 }
