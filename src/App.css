@@ -1168,11 +1168,11 @@ ol {
     font-family: 'fc_lamoonregular';
     width:30%;
     outline: none;
-    padding: 10px 16px;
+    padding: 6px 6px;
     margin-right: 1.5%;
     margin-left: 1.5%;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 24px;
     background-color: #FFB731;
     border: 1px solid #FFB731;
     color: white;
@@ -1186,14 +1186,14 @@ ol {
     width:30%;
     background-color: white;
     border: 1px solid #FFB731;
-    font-size: 18px;
+    font-size: 24px;
     outline: none;
     margin-right: 1.5%;
     margin-left: 1.5%;
-    padding: 10px 16px;
+    padding: 6px 6px;
     margin-bottom: 10px;
     cursor: pointer;
-    color: black;
+    color: #FFB731;
     transition: 0.5s;
   }
 
