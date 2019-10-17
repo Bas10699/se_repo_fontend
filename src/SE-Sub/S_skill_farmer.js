@@ -468,7 +468,7 @@ class S_skill_farmer extends Component {
                                 currentPage={currentPage}
                                 totalPages={Math.ceil(todos.length / todosPerPage)}
                                 changeCurrentPage={this.changeCurrentPage}
-                                theme="bottom-border"
+                                theme="square-i"
                             />
                             
                         </div>

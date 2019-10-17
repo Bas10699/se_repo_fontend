@@ -5,11 +5,15 @@ import { user_token, addComma } from '../Support/Constance'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import top from '../Image/top.png'
+import Pagination from "react-pagination-library";
+import "react-pagination-library/build/css/index.css"; //for css
 
 class S_Plants_in_network extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            currentPage: 1,
+            todosPerPage: 10,
             plants: [],
             se_name: null,
             index_plant: 0,
@@ -92,7 +96,20 @@ class S_Plants_in_network extends Component {
         return return_month
     }
 
+    changeCurrentPage = numPage => {
+        this.setState({ currentPage: numPage });
+        //fetch a data
+        //or update a query to get data
+    };
+
     render() {
+
+        const { month_detail, currentPage, todosPerPage } = this.state;
+        // Logic for displaying todos
+        const indexOfLastTodo = currentPage * todosPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+        const currentTodos = month_detail.slice(indexOfFirstTodo, indexOfLastTodo);
+
         let plant = this.state.plants
         let index = this.state.index_plant
         console.log('chart plant', plant[index])
@@ -160,7 +177,7 @@ class S_Plants_in_network extends Component {
         }
         return (
             <div className="App">
-                
+
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ของ {this.state.se_name}</h2>
@@ -201,7 +218,7 @@ class S_Plants_in_network extends Component {
                                         <td style={{ textAlign: "center" }}>กิโลกรัม</td>
                                     </tr>
                                 )
-                            })}<div  id="Top"/>
+                            })}<div id="Top" />
                         </table>
 
                     </div>
@@ -225,7 +242,7 @@ class S_Plants_in_network extends Component {
                                         <th>จำนวนครั้งส่งมอบ</th>
                                         <th>รวม</th>
                                     </tr>
-                                    {this.state.month_detail.map((ele_detail, index) => {
+                                    {currentTodos.map((ele_detail, index) => {
                                         return (
                                             <tr style={{ textAlign: "center" }}>
                                                 <td>{index + 1}</td>
@@ -254,7 +271,16 @@ class S_Plants_in_network extends Component {
                                 </table>
                             </div>
                             : null}
+                        <div className="Row">
+                            <div className="col-4"></div>
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={Math.ceil(month_detail.length / todosPerPage)}
+                                changeCurrentPage={this.changeCurrentPage}
+                                theme="square-i"
+                            />
 
+                        </div>
                     </div>
                 </div>
                 <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
