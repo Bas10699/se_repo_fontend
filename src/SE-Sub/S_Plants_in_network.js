@@ -180,7 +180,7 @@ class S_Plants_in_network extends Component {
 
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ของ {this.state.se_name}</h2>
+                        <h2 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ในเครือ {this.state.se_name}</h2>
                     </div>
                 </div>
 

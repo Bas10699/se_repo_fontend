@@ -38,7 +38,7 @@ class S_Order extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>คำสั่งซื้อจาก Neo_firm</h2>
+                        <h2 style={{ textAlign: "center" }}>คำสั่งซื้อจาก Neo_trust</h2>
                     </div>
                 </div>
 
