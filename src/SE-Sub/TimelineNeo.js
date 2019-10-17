@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
-import PdfOrder from '../Support/PdfOrder';
+import PdfOrder from '../SE-Middle/pdfOrderNeo';
 import PdfInvoice from '../Support/PdfInvoice'
 import PdfBill from '../Support/PdfBill'
 import { NavLink } from 'react-router-dom'

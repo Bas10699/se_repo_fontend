@@ -146,7 +146,7 @@ class S_Plants_in_network extends Component {
                     rotation: 0,
                     color: '{series.color}',
                     align: 'center',
-                    format: '{point.y}', // one decimal
+                    format: '(point.y)}', // one decimal
                     y: 10, // 10 pixels down from the top
                     style: {
                         fontSize: '20px',
