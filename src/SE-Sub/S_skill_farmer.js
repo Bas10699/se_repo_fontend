@@ -302,8 +302,15 @@ class S_skill_farmer extends Component {
     };
 
     render() {
+        let todos = []
         const { farmer, currentPage, todosPerPage } = this.state;
-        const todos = farmer
+        farmer.map((element,index)=>{
+            todos.push({
+                num:index+1,
+                ...element
+            })
+        })
+        
         // Logic for displaying todos
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
@@ -430,7 +437,7 @@ class S_skill_farmer extends Component {
                                     currentTodos.map((element, index) => {
                                         return (
                                             <tr>
-                                                <td style={{ textAlign: "center" }}>{index + 1} .</td>
+                                                <td style={{ textAlign: "center" }}>{element.num} .</td>
                                                 <td>{element.title_name}{element.first_name}  {element.last_name}</td>
                                                 <td style={{ textAlign: "center" }}><b>{element.plant}</b></td>
                                                 {this.state.showHide1 ? <td style={{ textAlign: "right", borderLeft: "1px solid #ccc" }}>{element.year_value} </td>
@@ -463,13 +470,13 @@ class S_skill_farmer extends Component {
                             }
 
                         </table>
-                        <div className="Row">
-                            <div className="col-4"></div>
+                        <div style={{textAlign:'center'}}>
+                            
                             <Pagination
                                 currentPage={currentPage}
                                 totalPages={Math.ceil(todos.length / todosPerPage)}
                                 changeCurrentPage={this.changeCurrentPage}
-                                theme="square-i"
+                                theme="square-fill"
                             />
                             
                         </div>
