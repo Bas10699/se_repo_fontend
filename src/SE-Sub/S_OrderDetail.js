@@ -7,6 +7,7 @@ import Timeline from './TimelineNeo'
 import Checkbox from '../Support/Checkbox'
 import moment from 'moment'
 import Modal from 'react-responsive-modal'
+import { element } from 'prop-types';
 
 class S_OrderDetail extends Component {
 
@@ -14,6 +15,7 @@ class S_OrderDetail extends Component {
         super(props)
         this.state = {
             order: '',
+            selectFarmer:[],
             farmer: [],
             plants: [],
             search_order: [],
@@ -98,6 +100,28 @@ class S_OrderDetail extends Component {
         return sort_order
     }
 
+    openModel = () =>{
+        let farmer = this.state.farmer
+        let selectFarmer = []
+        
+        this.state.check_array.map((element)=>{
+            
+            selectFarmer.push({
+                title_name: farmer[element.check].title_name,
+                first_name: farmer[element.check].first_name,
+                last_name: farmer[element.check].last_name,
+                plant: farmer[element.check].plant,
+                amount: element.amount
+            })
+        
+        })
+        console.log(selectFarmer)
+        this.setState({ 
+            OpenProofPaymet: true,
+            selectFarmer:selectFarmer
+        })
+    }
+
     render_Step = (status) => {
         let render_Show
         switch (status) {
@@ -154,7 +178,7 @@ class S_OrderDetail extends Component {
                             <h4>{this.state.order.plant_name} </h4>
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
                             <h5>เดือนที่ต้องการ</h5>
-                            <button onClick={() => this.setState({ OpenProofPaymet: true })}>ออกใบเเจ้งหนี้</button>
+                            <button onClick={() => this.openModel()}>ออกใบเเจ้งหนี้</button>
                         </div>
 
 
@@ -165,9 +189,11 @@ class S_OrderDetail extends Component {
 
                         <h4 style={{ margin: "0px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
 
-                        <Checkbox option={this.state.farmer}
+                        <Checkbox 
+                            option={this.state.farmer}
                             check_array={this.state.check_array}
                             return_func={(event) => {
+                                console.log('event',event)
                                 this.setState({
                                     check_array: event
                                 })
@@ -188,8 +214,15 @@ class S_OrderDetail extends Component {
                         <div className="col-7" >
                             <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร</h5>
                             
-                            {this.state.check_array+"\n"}
-                            {console.log(this.state.check_array)}
+                            {/* {this.state.check_array+"\n"}
+                            
+                            {console.log(this.state.check_array)} */}
+                            {this.state.selectFarmer.map((element,index)=>{
+                                return <div>
+                                    {index+1}. {element.title_name} {element.first_name} {element.last_name}
+                                    จำนวน {element.amount} กิโลกรัม
+                                </div>
+                            })}
                             <h5>รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h5>
                             <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
 

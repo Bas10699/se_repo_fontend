@@ -7,8 +7,7 @@ import za from '../Image/za.png'
 import az from '../Image/az.png'
 import top from '../Image/top.png'
 import arrow from '../Image/up-arrow.png'
-import Pagination from "react-pagination-library";
-import "react-pagination-library/build/css/index.css"; //for css
+import Pagination from "../Support/Pagination";
 
 class S_skill_farmer extends Component {
     constructor(props) {
