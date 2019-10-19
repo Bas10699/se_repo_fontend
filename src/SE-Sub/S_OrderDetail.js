@@ -214,21 +214,21 @@ class S_OrderDetail extends Component {
                         <div className="col-7" >
                             <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร</h5>
                             
-                            {/* {this.state.check_array+"\n"}
-                            
-                            {console.log(this.state.check_array)} */}
                             {this.state.selectFarmer.map((element,index)=>{
                                 return <div>
                                     {index+1}. {element.title_name} {element.first_name} {element.last_name}
                                     จำนวน {element.amount} กิโลกรัม
                                 </div>
                             })}
+
+
                             <h5>รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h5>
                             <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
 
                         </div>
                         <div className="col-5">
-                            {/* ออก PDF */}
+                            กำหนดวันชำระเงิน
+                            <input type="date"/>
                             <button className="BTN_Signin" >ออกใบสำคัญรับเงิน</button>
 
                         </div>

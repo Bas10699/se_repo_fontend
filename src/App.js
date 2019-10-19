@@ -35,6 +35,7 @@ import Material from './Researcher/Material';
 import T_Order from './Trader/T_Order';
 import M_BuyingDetail from './SE-Middle/M_BuyingDetail';
 import SocketIo from './socket.io/socketIo'
+import M_Plan from './SE-Middle/M_Plan';
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>
       <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
+      <Route exact path='M_Plan' component={M_Plan}/>
       
       <Route exact path='/Researcher' component={Researcher}/>
       <Route exact path='/Request' component={Request}/>
