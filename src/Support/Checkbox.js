@@ -7,10 +7,10 @@ class Checkbox extends Component {
         todosPerPage: 10,
         isChecked: false,
         click: false,
-        amount:0,
+        amount: 0,
         farmer: [],
-        result:[],
-        aa:[]
+        result: [],
+        checkInput: []
     }
 
     toggleCheckboxChange = () => {
@@ -25,22 +25,48 @@ class Checkbox extends Component {
         handleCheckboxChange(label);
     }
 
-    handleChange = (e) =>{
+    handleChange = (e) => {
         console.log(e.target.name)
-        let aa = this.state.aa
         let result = this.state.result
         console.log(result)
-        result.map((element,index)=>{
-            if(element.check === e.target.name){
+        result.map((element, index) => {
+            if (element.check === e.target.name) {
                 result[index].amount = parseInt(e.target.value)
             }
         })
         console.log(result)
         // this.setState({
-            
+
         //     amount:e.target.value
         // })
         this.props.return_func(result)
+    }
+
+    check_input = (number) => {
+        let checkInput = this.state.checkInput
+        // console.log('index', number)
+        if (checkInput.length === 0) {
+            checkInput.push({
+                number
+            })
+        }
+        else {
+            let index = checkInput.findIndex((array_event) => {
+                return array_event.number === number
+            })
+            if (index !== -1) {
+                checkInput.splice(index, 1)
+            }
+            else {
+                checkInput.push({
+                    number,
+                })
+            }
+        }
+        this.setState({
+            checkInput: checkInput
+        })
+
     }
 
     onCheck = (event) => {
@@ -59,8 +85,8 @@ class Checkbox extends Component {
         }
         else {
             check_array.push({
-                [event.target.id]:event.target.value,
-                amount:0
+                [event.target.id]: event.target.value,
+                amount: 0
             })
             this.setState({
                 result: check_array
@@ -82,7 +108,7 @@ class Checkbox extends Component {
 
     render() {
         let todos = []
-        const { currentPage, todosPerPage } = this.state;
+        const { currentPage, todosPerPage, checkInput } = this.state;
         this.props.option.map((element, index) => {
             todos.push({
                 num: index + 1,
@@ -107,10 +133,12 @@ class Checkbox extends Component {
                     </tr>
                     {
                         currentTodos.map((option_element, index) => {
+                            let chInput = 0
                             return (
                                 <tr>
                                     <td><input type="checkbox" value={index} id='check'
                                         amount={true}
+                                        onChange={() => this.check_input(index)}
                                         onClick={(event) => { this.onCheck(event) }} /> {index + 1} .
                                         </td>
                                     <td>{option_element.title_name} {option_element.first_name} {option_element.last_name}</td>
@@ -118,8 +146,17 @@ class Checkbox extends Component {
                                     <td>{option_element.year_value}</td>
                                     <td>{option_element.end_plant}</td>
                                     <td>
-                                        <input id='amount' name={index} onChange={this.handleChange} />
-                                         กิโลกรัม
+                                        {checkInput.map((ele_check) => {
+                                            if (ele_check.number == index) {
+                                                chInput = 1
+                                            }
+
+                                        }),
+                                            chInput ? <input id='amount' name={index} onChange={this.handleChange} /> :
+                                                <input id='amount' name={index} value='' onChange={this.handleChange} disabled />
+                                        }
+
+                                        &nbsp;กิโลกรัม
                                     </td>
                                 </tr>
                             )
