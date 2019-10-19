@@ -30,7 +30,7 @@ import S_skill_farmer from './SE-Sub/S_skill_farmer'
 import S_OrderDetail from './SE-Sub/S_OrderDetail'
 // import Researcher from './Researcher/Researcher';
 // import Request from './Researcher/Request';
-import Results from './Researcher/Results';
+// import Results from './Researcher/Results';
 // import Material from './Researcher/Material';
 import T_Order from './Trader/T_Order';
 import M_BuyingDetail from './SE-Middle/M_BuyingDetail';
@@ -60,8 +60,8 @@ function App() {
       <Route exact path='/Signin' component={Signin}/>
       <Route exact path='/Signup' component={Signup}/>
       <Route exact path='/' component={Home}/>
-      {/* <Route exact path='/T_Cart' component={T_Cart}/> */}
-      {/* <Route exact path='/T_Order' component={T_Order}/> */}
+      <Route exact path='/T_Cart' component={T_Cart}/>
+      <Route exact path='/T_Order' component={T_Order}/>
       <Route exact path='/Product' component={Product}/>
       <Route exact path='/Product/:productID' component={ProductDetail}/>
       <Route exact path='/T_Buying' component={T_Buying}/>
@@ -85,7 +85,7 @@ function App() {
       
       {/* <Route exact path='/Researcher' component={Researcher}/> */}
       {/* <Route exact path='/Request' component={Request}/> */}
-      <Route exact path='/Results' component={Results}/>
+      {/* <Route exact path='/Results' component={Results}/> */}
       {/* <Route exact path='/Material' component={Material}/> */}
 
       <Route exact path='/Planting_Planning' component={Planting_Planning}/>
