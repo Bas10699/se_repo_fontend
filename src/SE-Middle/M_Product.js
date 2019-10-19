@@ -532,29 +532,7 @@ class ProductDetail extends Component {
                                                 check_array: event
                                             })
                                         }} />
-                                    {/* {
-                                        this.state.se.map((element_se, index_se) => {
-                                            return (
-                                                <div>
-
-                                                   
-
-                                                    <div>
-                                                        <input type="number" style={{ marginTop: "0px" }}
-                                                            name="quantity" min="1"
-                                                            id={index_se} placeholder="จำนวนที่ต้องการสั่งซื้อ"
-                                                            value={element_se.amount}
-                                                            onChange={this.handleChange_se} />
-                                                        + ราคาขนส่ง
-                                                        </div>
-                                                    <div>
-
-                                                        <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม {this.state.product_data.cost * element_se.amount} บาท</h4>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    } */}
+                                    
                                     <hr />
                                     <h3 style={{ margin: "0" }}>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h3>
 
