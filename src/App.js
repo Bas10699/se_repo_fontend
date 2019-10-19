@@ -91,11 +91,12 @@ function App() {
       <Route exact path='/Planting_Planning' component={Planting_Planning}/>
       <Route exact path='/Product_Information' component={Product_Information}/>
       <Route exact path='/Product_Research' component={Product_Research}/>
+      <Route exact path='/Product_Research/:id' component={Product_Research}/>
 
-      <Route exact path='/Confirm_Product' component={Confirm_Product}/>
+      {/* <Route exact path='/Confirm_Product' component={Confirm_Product}/>
       <Route exact path='/Product_Info' component={Product_Info}/>
       <Route exact path='/Check_Details' component={Check_Details}/>
-      <Route exact path='/Product_History' component={Product_History}/>
+      <Route exact path='/Product_History' component={Product_History}/> */}
 
       <Route exact path='/Order_plan' component={Order_plan}/>
       <Route exact path='/Quotation' component={Quotation}/>

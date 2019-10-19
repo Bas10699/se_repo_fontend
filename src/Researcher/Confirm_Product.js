@@ -76,7 +76,7 @@ class Confirm_Product extends Component {
         return (
             <div className="App">
 
-                <NavLink to={"/Confirm_Product"}>
+                {/* <NavLink to={"/Confirm_Product"}>
                     <button>ยืนยันการพัฒนาผลิตภัณฑ์</button>
                 </NavLink>
                 <NavLink to={"/Product_Info"}>
@@ -87,7 +87,7 @@ class Confirm_Product extends Component {
                 </NavLink>
                 <NavLink to={"/Product_History"}>
                     <button>ประวัติการพัฒนาผลิตภัณฑ์</button>
-                </NavLink>
+                </NavLink> */}
 
                 <div className="Row">
                     <div className="col-12">
