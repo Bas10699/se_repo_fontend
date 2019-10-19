@@ -1172,7 +1172,7 @@ ol {
     margin-right: 1.5%;
     margin-left: 1.5%;
     margin-bottom: 10px;
-    font-size: 24px;
+    font-size: 20px;
     background-color: #FFB731;
     border: 1px solid #FFB731;
     color: white;
@@ -1186,12 +1186,13 @@ ol {
     width:30%;
     background-color: white;
     border: 1px solid #FFB731;
-    font-size: 24px;
+    font-size: 20px;
     outline: none;
     margin-right: 1.5%;
     margin-left: 1.5%;
     padding: 6px 6px;
     margin-bottom: 10px;
+    border-radius: 10px;
     cursor: pointer;
     color: #FFB731;
     transition: 0.5s;
