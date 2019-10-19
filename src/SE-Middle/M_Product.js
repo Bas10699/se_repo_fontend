@@ -6,6 +6,7 @@ import Modal from 'react-responsive-modal'
 import { user_token, addComma } from '../Support/Constance';
 import { ip, get, post } from '../Support/Service';
 import queryString from 'query-string';
+import Checkbox from './Checkbox_M'
 
 import { Accordion, AccordionItem } from 'react-light-accordion';
 import { async } from 'q';
@@ -31,6 +32,7 @@ class ProductDetail extends Component {
             cart_product: [],
             frequency: [],
             status: null,
+            check_array: [],
             month: [
                 'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ค.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'
             ],
@@ -431,13 +433,18 @@ class ProductDetail extends Component {
                         <div className="Row">
                             <div className="col-2" style={{ marginRight: "2%" }}>
                                 {this.state.product_data.image ? <img className="IMG_Detail_SEM" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                                <h3 style={{ margin: "0px", textAlign: "center" }}>{this.state.product_data.product_name}</h3>
+
+                                <div style={{ padding: "10px" }}>
+                                    <h5 style={{ margin: "0px" }}>{this.state.product_data.product_status}</h5>
+                                    <h5 style={{ margin: "0px" }}>จำนวนที่มีอยู่ {addComma(this.state.sum_vol)} กิโลกรัม</h5>
+                                    <h5 style={{ margin: "0px" }}>จำนวนที่ต้องสั่งซื้อ {addComma(this.state.quantity)} กิโลกรัม</h5>
+                                    ราคา {this.state.product_data.cost} บาท/กิโลกรัม
+                                </div>
                             </div>
                             {console.log("product_data : ", this.state.product_data)}
-                            <div className="col-6">
-                                <h3>{this.state.product_data.product_name}</h3>
-                                <h5>{this.state.product_data.product_status}</h5>
-                                <h4>จำนวนที่มีอยู่ {this.state.sum_vol} กิโลกรัม</h4>
-                                <h4>จำนวนที่ต้องสั่งซื้อ {this.state.quantity} กิโลกรัม  ราคา {this.state.product_data.cost} บาท/กิโลกรัม</h4>
+                            <div style={{ width: "53%" }}>
+                                <h3 style={{ margin: "0" }}>Neo-firm ที่ส่งมอบวัตถุดิบ</h3>
 
                                 {
                                     this.state.frequency.map((element, index) => {
@@ -504,26 +511,43 @@ class ProductDetail extends Component {
                                 }
 
                             </div>
-                            <div className="col-5" style={{
-                                borderLeft: "2px solid black",
+                            <div style={{ width: "3%" }} />
+                            <div className="col-2" style={{
+                                position: "fixed",
+                                right: "10px",
+                                height: "450px",
+                                width: "23%",
                                 paddingRight: "15px",
                                 paddingLeft: "15px",
+                                borderRadius: "10px",
+                                backgroundColor: "#FED07A"
                             }}>
-                                <h3>รายการสั่งซื้อวัตถุดิบ</h3>
+                                <h3 style={{ margin: "10px" }}>รายการสั่งซื้อวัตถุดิบ</h3>
 
                                 <div>
-                                    {
+                                    <Checkbox option={this.state.se}
+                                        cost={this.state.product_data.cost}
+                                        check_array={this.state.check_array}
+                                        return_func={(event) => {
+                                            this.setState({
+                                                check_array: event
+                                            })
+                                        }} />
+                                    {/* {
                                         this.state.se.map((element_se, index_se) => {
                                             return (
                                                 <div>
-                                                    <input type="checkbox" />{element_se.name}
+
+                                                   
+
                                                     <div>
                                                         <input type="number" style={{ marginTop: "0px" }}
                                                             name="quantity" min="1"
                                                             id={index_se} placeholder="จำนวนที่ต้องการสั่งซื้อ"
                                                             value={element_se.amount}
                                                             onChange={this.handleChange_se} />
-                                                        + ราคาขนส่ง</div>
+                                                        + ราคาขนส่ง
+                                                        </div>
                                                     <div>
 
                                                         <h4 style={{ textAlign: "right", marginTop: "-10px" }}> ราคารวม {this.state.product_data.cost * element_se.amount} บาท</h4>
@@ -531,28 +555,38 @@ class ProductDetail extends Component {
                                                 </div>
                                             )
                                         })
-                                    }
-                                    <h3>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h3>
+                                    } */}
+                                    <hr />
+                                    <h3 style={{ margin: "0" }}>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h3>
 
-                                    <button className="BTN_AddCart" onClick={() => { this.onOpenModal() }}>ยืนยันการสั่งซื้อ</button>
+                                    <button className="BTN_AddCart" onClick={() => { this.onOpenModal() }}
+                                        style={{ marginBottom: "10px" }}>ยืนยันการสั่งซื้อ</button>
                                 </div>
 
                             </div>
 
                         </div>
                         <Modal open={this.state.open} onClose={this.onCloseModal}>
-                            <div className="Row">
+                            <div className="Row" style={{ width: "500px" }}>
                                 <div className="col-12">
                                     <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อวัตถุดิบ "{this.state.product_data.product_name}"</h3>
-
-                                    {this.state.se.map((element) => {
+                                    {this.state.check_array + "\n"}
+                                    {/* {this.state.se.map((element) => {
                                         return (
-                                            <div>
-                                                <h5>{element.name} จำนวน {element.amount} กิโลกรัม </h5>
-                                                ราคา {this.state.product_data.cost * element.amount} บาท
-                                        </div>
+                                            <div className="Row">
+                                                <div className="col-6">
+                                                    {element.name}
+                                                </div>
+                                                <div className="col-3">
+                                                    <h5 style={{ margin: "0" }}> จำนวน {element.amount} กิโลกรัม</h5>
+                                                </div>
+                                                <div className="col-3">
+                                                    <h5 style={{ margin: "0" }}>ราคา {this.state.product_data.cost * element.amount} บาท</h5>
+                                                </div>
+                                            </div>
                                         )
-                                    })}
+                                    })} */}
+
                                     <h4 style={{ color: "red" }}>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h4>
                                     <button className="BTN_Signin" onClick={() => this.add_order_se()}>ออกใบคำสั่งซื้อ</button>
                                     <button className="BTN_Signup" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>

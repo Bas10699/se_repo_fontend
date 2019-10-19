@@ -220,7 +220,7 @@ class ProductDetail extends Component {
 
                         {/* <h4>ราคาขายปลีก</h4> */}
                         {this.sort_price(this.state.price).map((element, index) => {
-                            return (<h4>{addComma(element.volume)} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h4>)
+                            return (<h5>{addComma(element.volume)} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h5>)
                         })}
                         {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
                         <input type="number"
