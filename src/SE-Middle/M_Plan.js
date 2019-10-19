@@ -21,7 +21,7 @@ class M_Plan extends Component {
             todosPerPage: 10,
             plants: [],
             se_name: null,
-            get_se:[],
+            get_se: [],
             index_plant: 0,
             data_month: [],
             month_detail: []
@@ -35,7 +35,7 @@ class M_Plan extends Component {
             await get('neutrally/get_plant_all_se', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_se:result.result,
+                        get_se: result.result,
                         se_name: result.result[0].se_name,
                         plants: result.result[0].plant,
                         data_month: result.result[0].plant[0].data
@@ -54,7 +54,7 @@ class M_Plan extends Component {
         }
     }
 
-    select_se = (index) =>{
+    select_se = (index) => {
         let result = this.state.get_se
         this.setState({
             se_name: result[index].se_name,
@@ -197,10 +197,15 @@ class M_Plan extends Component {
 
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ในเครือ {this.state.se_name}</h2>
-                        {this.state.get_se.map((ele_get_se,index)=>{
-                            return <div onClick={()=>this.select_se(index)}>{ele_get_se.se_name}</div>
+                    <h2 style={{marginBottom:"0",marginTop:"10px",marginLeft:"50px" }}>เลือก Neo-firm</h2>
+                        {this.state.get_se.map((ele_get_se, index) => {
+                            return (
+                                    <button onClick={() => this.select_se(index)} style={{ width: "20%",margin:"0" }} className="selectShowb">
+                                        {ele_get_se.se_name}
+                                    </button>
+                            )
                         })}
+                        <h3 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ในเครือ {this.state.se_name}</h3>
                     </div>
                 </div>
 
