@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 
 import { user_token } from '../Support/Constance';
-import { get } from '../Support/Service';
+import { get,ip } from '../Support/Service';
 import bell from '../Image/bell.png'
+
+import socketIOClient from 'socket.io-client'
 
 class Navbar extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class Navbar extends Component {
         this.state = {
             get_user: null,
             news: false,
+            
         };
     }
 
@@ -19,12 +22,24 @@ class Navbar extends Component {
         this.get_user()
     }
 
+    componentDidMount() {
+        this.response()
+    }
+    response = () => {
+        const socket = socketIOClient(ip)
+        socket.on('new-noti', (messageNew) => {
+            console.log(messageNew)
+          this.setState({ news: true })
+        })
+      }
+
     get_user = async () => {
         try {
             await get('show/show_user', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_user: result.result
+                        get_user: result.result,
+                        news: result.result.noti
                     })
                     // setTimeout(() => {
                     //     console.log("get user : ", result.result)
@@ -138,9 +153,8 @@ class Navbar extends Component {
                                 {/* <li><NavLink exact to="/M_BB" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
 
 
-                                <NavLink to="#">
-                                    <img src={bell} alt="bell" style={{width:"30px",height:"30px",marginLeft:"10px",filter:" grayscale(20%)"}}
-                                    onClick={() => (this.setState(({ news }) => ({ news: !news })))} />
+                                <NavLink to="/signup"><img src={bell} alt="bell"
+                                    onClick={() => this.setState({news:false})} />
                                     <span className={this.state.news ? "badge" : null} />
                                 </NavLink>
                                 <div className="NavbarRight" activeClassName="Active">

@@ -1,17 +1,18 @@
 //ตระกร้าสินค้า
 import React, { Component } from 'react';
-import { user_token, addComma } from '../Support/Constance';
+import { user_token, addComma,user_token_decoded } from '../Support/Constance';
 import { get, post, ip } from '../Support/Service';
 import Modal from 'react-responsive-modal'
+import socketIOClient from 'socket.io-client'
 
 class T_Cart extends Component {
     constructor(props) {
         super(props)
         this.state = {
             cart_product: [],
-            get_user:null,
+            get_user: null,
             render_cart: null,
-            address:null,
+            address: null,
             total_price: [],
             open: false,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
@@ -150,8 +151,8 @@ class T_Cart extends Component {
 
     Comfirm = async () => {
         let detail = this.state.cart_product
-        detail.map((element,index)=>{
-            element.price = this.volume_check(element.price,index)
+        detail.map((element, index) => {
+            element.price = this.volume_check(element.price, index)
         })
 
         let object = {
@@ -160,24 +161,35 @@ class T_Cart extends Component {
             address_send: this.state.address,
             order_status: "0"
         }
-        try {
-            await post(object, 'trader/add_order', user_token).then((result) => {
-                if (result.success) {
-                    alert("ระบบดำเนินการส่งใบสั่งซื้อเรียบร้อย")
-                    window.location.href = "/T_Buying";
-                }
-                else {
-                    alert(result.error_message)
-                    window.location.reload()
-                }
-            })
+        const socket = socketIOClient(ip)
+        socket.emit('send-noti', object)
+        // try {
+        //     await post(object, 'trader/add_order', user_token).then((result) => {
+        //         if (result.success) {
 
-        }
-        catch (error) {
-            alert("get_cart_trader" + error);
-        }
+        //             alert("ระบบดำเนินการส่งใบสั่งซื้อเรียบร้อย")
+        //             window.location.href = "/T_Buying";
+        //         }
+        //         else {
+        //             alert(result.error_message)
+        //             window.location.reload()
+        //         }
+        //     })
+
+        // }
+        // catch (error) {
+        //     alert("get_cart_trader" + error);
+        // }
 
     }
+
+    // send_noti = () => {
+    //     // const { endpoint, input } = this.state
+    //     const socket = socketIOClient(ip)
+    //     socket.emit('send-noti', 'Hello')
+    //     // this.setState({ input: '' })
+    //   }
+
     volume_check = (data_price, index) => {
         let cart_product = this.state.cart_product
         let dataSortVolume = data_price.sort(compare)
@@ -205,7 +217,7 @@ class T_Cart extends Component {
 
     sum_price = (data) => {
         let sum = 0;
-        data.map((element,index) => {
+        data.map((element, index) => {
             sum += (this.volume_check(element.price, index) * element.amount)
         })
 
@@ -289,12 +301,12 @@ class T_Cart extends Component {
                                 <div className="col-10">
                                     <h3 style={{ textAlign: "center" }}>รายละเอียดการจัดส่ง</h3>
                                     <h4>วันที่กำหนดส่ง</h4>
-                                    <h5 style={{color:"red"}} >** เลือกวันกำหนดส่ง กรณีสินค้าหมด หรือสั่งซื้อล่วงหน้า **</h5>
+                                    <h5 style={{ color: "red" }} >** เลือกวันกำหนดส่ง กรณีสินค้าหมด หรือสั่งซื้อล่วงหน้า **</h5>
                                     <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
-                                   
+
                                     <h4>ที่อยู่จัดส่ง</h4>
-                                        <input type="radio" name="address_new" onChange={this.address_change}/>ที่อยู่เดิม
-                                        <input type="radio" name="address_new"/>ที่อยู่ใหม่
+                                    <input type="radio" name="address_new" onChange={this.address_change} />ที่อยู่เดิม
+                                        <input type="radio" name="address_new" />ที่อยู่ใหม่
                                     <textarea rows="4" cols="95" name="address" id="address" value={this.state.address} onChange={this.handleChange}
                                         form="usrform" />
                                     <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>

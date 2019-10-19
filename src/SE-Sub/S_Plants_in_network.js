@@ -7,6 +7,12 @@ import HighchartsReact from 'highcharts-react-official'
 import top from '../Image/top.png'
 import Pagination from "../Support/Pagination";
 
+Highcharts.setOptions({
+    lang: {
+        thousandsSep: ','
+    }
+});
+
 class S_Plants_in_network extends Component {
     constructor(props) {
         super(props)
@@ -142,7 +148,7 @@ class S_Plants_in_network extends Component {
                     borderWidth: 0,
                     dataLabels: {
                         enabled: true,
-                        format: '{point.y}'
+                        // format: '{point.y}'
                     }
                 }
             },
