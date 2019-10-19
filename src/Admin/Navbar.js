@@ -45,11 +45,11 @@ class Navbar extends Component {
                             <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
                                 <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
-                                <li><NavLink exact to="/confirm_Product" activeClassName="Active" className="NavbarText">ยืนยันการพัฒนาผลิตภัณฑ์</NavLink></li>
-                                <li><NavLink exact to="/Product_Info" activeClassName="Active" className="NavbarText">ข้อมูลผลิตภัณฑ์</NavLink></li>
-                                <li><NavLink exact to="/Check_Details" activeClassName="Active" className="NavbarText">ตรวจสอบรายละเอียด</NavLink></li>
-                                <li><NavLink exact to="/Product_History" activeClassName="Active" className="NavbarText">ประวัติการพัฒนาผลิตภัณฑ์</NavLink></li>
-                                <li><NavLink exact to="/Material" activeClassName="Active" className="NavbarText">ข้อมูลวัตถุดิบ</NavLink></li>
+                                <li><NavLink exact to="/Planting_Planning" activeClassName="Active" className="NavbarText">การวางแผนเพาะปลูก</NavLink></li>
+                                <li><NavLink exact to="/Product_Information" activeClassName="Active" className="NavbarText">ข้อมูลผลผลิต</NavLink></li>
+                                <li><NavLink exact to="/Product_Research" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
+                                {/* <li><NavLink exact to="/Product_History" activeClassName="Active" className="NavbarText">ประวัติการพัฒนาผลิตภัณฑ์</NavLink></li>
+                                <li><NavLink exact to="/Material" activeClassName="Active" className="NavbarText">ข้อมูลวัตถุดิบ</NavLink></li> */}
                                 {/* <li><NavLink exact to="/Product_history" activeClassName="Active" className="NavbarText">ประวัติผลิตภัณฑ์</NavLink></li>
                                 <li><NavLink exact to="/Material" activeClassName="Active" className="NavbarText">วัตถุดิบ</NavLink></li> */}
                                 {/* <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
