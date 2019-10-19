@@ -11,23 +11,6 @@ import { element } from 'prop-types';
 import Modal from 'react-responsive-modal'
 
 
-const order = [
-    {
-        name_order: "ยาสมุนไพรลดความอ้วน",
-        status: "0",
-        detial_order: "สมุนไพรที่ช่วยขับเหงื่อ มีฤทธิ์ร้อน กระตุ้นให้หิวน้ำ"
-    },
-    {
-        name_order: "อาหารคลีน",
-        status: "0",
-        detial_order: "เน้นผัก รสชาติอร่อย ไม่มีน้ำตาลเเต่มีความหวาน ชงดื่มได้"
-    },
-    {
-        name_order: "นมเพิ่มความสูง",
-        status: "1",
-        detial_order: "วัตถุดิบที่เพิ่มเเคลเซียมเยอะๆ กินง่าย ชงดื่มได้ทั้งร้อนเเละเย็น"
-    }
-]
 
 class User extends Component {
     constructor(props) {
@@ -101,6 +84,10 @@ class User extends Component {
                         get_user: result.result,
                         bank_information: result.result.bank_information
                     })
+
+                    if (result.result.user_type === "2") {
+                        this.get_demand_tarder()
+                    }
                     setTimeout(() => {
                         console.log("get_user", result.result)
                     }, 500)
@@ -113,6 +100,27 @@ class User extends Component {
             alert("get_user2" + error);
         }
     }
+
+    get_demand_tarder = async () => {
+        try {
+            await get('trader/get_send_demand', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        order: result.result
+                    })
+                    console.log('get_demand_tarder', result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('get_demand_tarder' + error)
+        }
+    }
+
+
 
     componentWillMount() {
         this.get_user()
@@ -216,15 +224,15 @@ class User extends Component {
                                         <th colSpan="2">สถานะ</th>
 
                                     </tr>
-                                    {order.map((element, index) => {
+                                    {this.state.order.map((element, index) => {
                                         return (
                                             <tr>
                                                 <td>{index + 1}</td>
-                                                <td>{element.name_order}</td>
-                                                <td style={{ textAlign: "center" }}>{this.status_show(element.status)}</td>
-                                                <td><button style={{ backgroundColor: "transparent", border: "none",float:"right" }}
+                                                <td>{element.product_name}</td>
+                                                <td style={{ textAlign: "center" }}>{this.status_show(element.product_status)}</td>
+                                                <td><button style={{ backgroundColor: "transparent", border: "none", float: "right" }}
                                                     onClick={() => { this.open(index) }} >
-                                                    <img src={this.state.edit} alt="edit" style={{ width: "20px", marginTop: "50%",cursor:"pointer" }} />
+                                                    <img src={this.state.edit} alt="edit" style={{ width: "20px", marginTop: "50%", cursor: "pointer" }} />
                                                 </button></td>
                                             </tr>
                                         )

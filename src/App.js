@@ -23,11 +23,19 @@ import EditUser from './Admin/Edit/EditUser';
 import M_Product from './SE-Middle/M_Product';
 import UserAll from './Admin/UserAll';
 import M_Buying from './SE-Middle/M_Buying';
-import UserDetail from './Admin/UserDetail';
-import S_Order from './SE-Sub/S_Order';
-import S_Plants_in_network from './SE-Sub/S_Plants_in_network';
-import S_skill_farmer from './SE-Sub/S_skill_farmer';
-import S_OrderDetail from './SE-Sub/S_OrderDetail';
+import UserDetail from './Admin/UserDetail'
+import S_Order from './SE-Sub/S_Order'
+import S_Plants_in_network from './SE-Sub/S_Plants_in_network'
+import S_skill_farmer from './SE-Sub/S_skill_farmer'
+import S_OrderDetail from './SE-Sub/S_OrderDetail'
+import Researcher from './Researcher/Researcher';
+import Request from './Researcher/Request';
+import Results from './Researcher/Results';
+import Material from './Researcher/Material';
+import T_Order from './Trader/T_Order';
+import M_BuyingDetail from './SE-Middle/M_BuyingDetail';
+import SocketIo from './socket.io/socketIo'
+import M_Plan from './SE-Middle/M_Plan';
 
 import Planting_Planning from './Researcher/Planting_Planning';
 import Product_Information from './Researcher/Product_Information';
@@ -73,6 +81,12 @@ function App() {
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>
       <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
+      <Route exact path='/M_Plan' component={M_Plan}/>
+      
+      <Route exact path='/Researcher' component={Researcher}/>
+      <Route exact path='/Request' component={Request}/>
+      <Route exact path='/Results' component={Results}/>
+      <Route exact path='/Material' component={Material}/>
 
       <Route exact path='/Planting_Planning' component={Planting_Planning}/>
       <Route exact path='/Product_Information' component={Product_Information}/>

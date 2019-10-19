@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import queryString from 'query-string';
-import Timeline from '../SE-Sub/Timeline';
+import Timeline from '../SE-Sub/TimelineNeo';
 import Modal from 'react-responsive-modal'
 import moment from 'moment'
 
@@ -19,7 +19,7 @@ class M_BuyingDetail extends Component {
             data: [],
             click: false,
             clicks: false,
-            get_user: '',
+            get_order: '',
             get_product: '',
             search_order: [],
             render_history: null,
@@ -28,17 +28,17 @@ class M_BuyingDetail extends Component {
     }
     componentWillMount() {
         this.get_order()
-        this.get_user()
+        // this.get_user()
     }
 
-    get_user = async () => {
+    get_order = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         try {
             await post(params, 'neutrally/get_order_se', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_user: result.result
+                        get_order: result.result
                     })
                     setTimeout(() => {
                         console.log("neutrally/get_order_se", result.result)
@@ -53,29 +53,29 @@ class M_BuyingDetail extends Component {
         }
     }
 
-    get_order = async () => {
-        try {
-            await get('neutrally/get_order_se_all', user_token).then((result) => {
-                if (result.success) {
-                    this.setState({
-                        order: result.result,
-                        search_order: result.result,
-                        render_history: 1
-                    })
+    // get_order = async () => {
+    //     try {
+    //         await get('neutrally/get_order_se_all', user_token).then((result) => {
+    //             if (result.success) {
+    //                 this.setState({
+    //                     order: result.result,
+    //                     search_order: result.result,
+    //                     render_history: 1
+    //                 })
 
 
-                    setTimeout(() => {
-                        console.log("get_product1", result.result)
-                    }, 500)
-                } else {
-                    window.location.href = "/product_information";
-                    alert(result.error_message)
-                }
-            });
-        } catch (error) {
-            alert("get_cart_trader" + error);
-        }
-    }
+    //                 setTimeout(() => {
+    //                     console.log("get_product1", result.result)
+    //                 }, 500)
+    //             } else {
+    //                 window.location.href = "/product_information";
+    //                 alert(result.error_message)
+    //             }
+    //         });
+    //     } catch (error) {
+    //         alert("get_cart_trader" + error);
+    //     }
+    // }
 
     render_status = (order_status) => {
         let render_show
@@ -85,7 +85,7 @@ class M_BuyingDetail extends Component {
                     <div className="Row">
                         <div className="col-12">
                             <h4>สถานะการสั่งซื้อ : รอการยืนยันการสั่งซื้อ</h4>
-                            <h5>รอ {this.state.get_user.se_name} ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                            <h5>รอ {this.state.get_order.se_name} ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
                         </div>
                     </div>
                     <div className="Row">
@@ -118,8 +118,8 @@ class M_BuyingDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : รอ {this.state.get_user.se_name} ตรวจสอบการโอนเงิน</h4>
-                            <h5>รอ {this.state.get_user.se_name} ตรวจสอบการโอนเงิน หลังจากตรวจสอบเรียบร้อยจะส่งใบเสร็จกลับมา</h5>
+                            <h4>สถานะการสั่งซื้อ : รอ {this.state.get_order.se_name} ตรวจสอบการโอนเงิน</h4>
+                            <h5>รอ {this.state.get_order.se_name} ตรวจสอบการโอนเงิน หลังจากตรวจสอบเรียบร้อยจะส่งใบเสร็จกลับมา</h5>
                         </div>
                     </div>
                     <div className="Row">
@@ -200,7 +200,7 @@ class M_BuyingDetail extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>รายละเอียดคำสั่งซื้อกับ {this.state.get_user.se_name}</h2>
+                        <h2 style={{ textAlign: "center" }}>รายละเอียดคำสั่งซื้อกับ {this.state.get_order.se_name}</h2>
                     </div>
                 </div>
 
@@ -213,7 +213,7 @@ class M_BuyingDetail extends Component {
 
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
-                        <Timeline status={this.state.get_user.order_se_status} />
+                        <Timeline status={this.state.get_order.order_se_status} data={this.state.get_order} />
                     </div>
                 </div>
 
