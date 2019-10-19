@@ -1,14 +1,13 @@
 //ความสามารถของเกษตร
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
-import { user_token } from '../Support/Constance'
+import { user_token,sortData } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
 import za from '../Image/za.png'
 import az from '../Image/az.png'
 import top from '../Image/top.png'
 import arrow from '../Image/up-arrow.png'
-import Pagination from "react-pagination-library";
-import "react-pagination-library/build/css/index.css"; //for css
+import Pagination from "../Support/Pagination";
 
 class S_skill_farmer extends Component {
     constructor(props) {
@@ -274,6 +273,57 @@ class S_skill_farmer extends Component {
 
     }
 
+    deliver_value = () =>{
+        if(this.state.click3 === true){
+            let data = sortData(this.state.farmer,'deliver_value',true)
+            this.setState({
+                farmer: data,
+                click3: false
+            })
+        }
+        else{
+            let data = sortData(this.state.farmer,'deliver_value',false)
+            this.setState({
+                farmer: data,
+                click3: true
+            })
+        }
+    }
+
+    end_plant = () =>{
+        if(this.state.click4 === true){
+            let data = sortData(this.state.farmer,'end_plant',true)
+            this.setState({
+                farmer: data,
+                click4: false
+            })
+        }
+        else{
+            let data = sortData(this.state.farmer,'end_plant',false)
+            this.setState({
+                farmer: data,
+                click4: true
+            })
+        }
+    }
+
+    deliver_frequency_number = () =>{
+        if(this.state.click5 === true){
+            let data = sortData(this.state.farmer,'deliver_frequency_number',true)
+            this.setState({
+                farmer: data,
+                click5: false
+            })
+        }
+        else{
+            let data = sortData(this.state.farmer,'deliver_frequency_number',false)
+            this.setState({
+                farmer: data,
+                click5: true
+            })
+        }
+    }
+
 
     get_user = async () => {
         try {
@@ -353,7 +403,7 @@ class S_skill_farmer extends Component {
                                 <h5 style={{ padding: "10px 5px 10px 10px", margin: "0px" }}>{this.state.get_user ? this.state.get_user.name : null}</h5>
                             </div>
                             <hr style={{ boxShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.2)", border: "1px solid #ccc", width: "80%" }} />
-                            <NavLink
+                            <NavLink onClick={()=>this.setState({farmer:this.state.plants})}
                                 style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
                                 <li style={{ textAlign: "left", marginLeft: "5px", paddingLeft: "5px" }} activeClassName="Active">--แสดงทั้งหมด--</li>
                             </NavLink>
@@ -405,23 +455,23 @@ class S_skill_farmer extends Component {
                                 </th> : null}
                                 {this.state.showHide3 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จำนวนการส่งมอบ/ครั้ง
                                 {this.state.click3 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_value()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_value()} />
                                     }
                                 </th> : null}
                                 {this.state.showHide4 ? <th style={{ borderLeft: "1px solid #ccc" }}>เดือนที่ส่งมอบ
                                 {this.state.click4 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.end_plant()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.end_plant()} />
                                     }
                                 </th> : null}
                                 {this.state.showHide5 ? <th style={{ borderLeft: "1px solid #ccc" }}>จำนวนครั้งส่งมอบ
                                 {this.state.click5 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_frequency_number()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_frequency_number()} />
                                     }
                                 </th> : null}
                                 {this.state.showHide6 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก

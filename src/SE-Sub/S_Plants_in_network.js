@@ -5,8 +5,7 @@ import { user_token, addComma } from '../Support/Constance'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import top from '../Image/top.png'
-import Pagination from "react-pagination-library";
-import "react-pagination-library/build/css/index.css"; //for css
+import Pagination from "../Support/Pagination";
 
 class S_Plants_in_network extends Component {
     constructor(props) {
