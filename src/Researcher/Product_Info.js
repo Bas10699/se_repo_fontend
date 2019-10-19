@@ -8,26 +8,32 @@ const order = [
         nutrients: 'โปรตีน',
         number: '10 กล่อง',
         status: "0",
-        detial_order: "สมุนไพรที่ช่วยขับเหงื่อ มีฤทธิ์ร้อน กระตุ้นให้หิวน้ำ"
+        detial_order: "สมุนไพรที่ช่วยขับเหงื่อ มีฤทธิ์ร้อน กระตุ้นให้หิวน้ำ",
+        timeStrat: "15/8/2562",
+        timeEnd: "30/12/2562"
     },
     {
         name_order: "อาหารคลีน",
         nutrients: 'คาร์โบไฮเดรต',
         number: '20 ชิ้น',
         status: "0",
-        detial_order: "เน้นผัก รสชาติอร่อย ไม่มีน้ำตาลเเต่มีความหวาน ชงดื่มได้"
+        detial_order: "เน้นผัก รสชาติอร่อย ไม่มีน้ำตาลเเต่มีความหวาน ชงดื่มได้",
+        timeStrat: "15/8/2562",
+        timeEnd: "30/12/2562"
     },
     {
         name_order: "นมเพิ่มความสูง",
         nutrients: 'วิตามิน',
         number: '20 กล่อง',
         status: "1",
-        detial_order: "วัตถุดิบที่เพิ่มเเคลเซียมเยอะๆ กินง่าย ชงดื่มได้ทั้งร้อนเเละเย็น"
+        detial_order: "วัตถุดิบที่เพิ่มเเคลเซียมเยอะๆ กินง่าย ชงดื่มได้ทั้งร้อนเเละเย็น",
+        timeStrat: "15/8/2562",
+        timeEnd: "30/12/2562"
     }
 ]
 
 class Confirm_Product extends Component {
-    render () {
+    render() {
         return (
             <div className="App">
 
@@ -68,7 +74,8 @@ class Confirm_Product extends Component {
                                             <td>{element.name_order}</td>
                                             <td>{element.nutrients}</td>
                                             <td>{element.number}</td>
-                                            <td>ระยะเวลาการพัฒนา</td>
+                                            <td><div style={{ color: "green" }}> วันที่เริ่มต้น : {element.timeStrat}</div>
+                                                <div style={{ color: "red" }}>วันที่สิ้นสุด : {element.timeEnd}</div></td>
                                             <td>
                                                 <NavLink>
                                                     <button>
