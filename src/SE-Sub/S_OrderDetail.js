@@ -15,7 +15,7 @@ class S_OrderDetail extends Component {
         super(props)
         this.state = {
             order: '',
-            selectFarmer:[],
+            selectFarmer: [],
             farmer: [],
             plants: [],
             search_order: [],
@@ -100,12 +100,12 @@ class S_OrderDetail extends Component {
         return sort_order
     }
 
-    openModel = () =>{
+    openModel = () => {
         let farmer = this.state.farmer
         let selectFarmer = []
-        
-        this.state.check_array.map((element)=>{
-            
+
+        this.state.check_array.map((element) => {
+
             selectFarmer.push({
                 title_name: farmer[element.check].title_name,
                 first_name: farmer[element.check].first_name,
@@ -113,12 +113,12 @@ class S_OrderDetail extends Component {
                 plant: farmer[element.check].plant,
                 amount: element.amount
             })
-        
+
         })
         console.log(selectFarmer)
-        this.setState({ 
+        this.setState({
             OpenProofPaymet: true,
-            selectFarmer:selectFarmer
+            selectFarmer: selectFarmer
         })
     }
 
@@ -154,6 +154,13 @@ class S_OrderDetail extends Component {
         // console.log('up',updatedList)
     }
 
+    ChStatus = () => {
+        this.setState({
+            OpenProofPaymet: false,
+            order: 1
+        })
+    }
+
     render() {
         return (
             <div className="App">
@@ -186,20 +193,33 @@ class S_OrderDetail extends Component {
                     <div className="col-1"></div>
 
                     <div className="col-7">
-
-                        <h4 style={{ margin: "0px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
-
-                        <Checkbox 
-                            option={this.state.farmer}
-                            check_array={this.state.check_array}
-                            return_func={(event) => {
-                                console.log('event',event)
-                                this.setState({
-                                    check_array: event
-                                })
-                            }} />
-
-
+                        {this.state.order.order_se_status >= 0 ?
+                            <div>
+                                <h4 style={{ margin: "0px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
+                                <Checkbox
+                                    option={this.state.farmer}
+                                    check_array={this.state.check_array}
+                                    return_func={(event) => {
+                                        console.log('event', event)
+                                        this.setState({
+                                            check_array: event
+                                        })
+                                    }} />
+                            </div>
+                            :
+                            <div>
+                                <h4 style={{ margin: "0px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
+                                {this.state.selectFarmer.map((element, index) => {
+                                    return (
+                                        <div>
+                                            {index + 1}. {element.title_name} {element.first_name} {element.last_name}
+                                            จำนวน {element.amount} กิโลกรัม
+                                            <button>PDF</button>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        }
                     </div>
                     <div className="col-1"></div>
                 </div>
@@ -213,10 +233,10 @@ class S_OrderDetail extends Component {
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-7" >
                             <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร</h5>
-                            
-                            {this.state.selectFarmer.map((element,index)=>{
+
+                            {this.state.selectFarmer.map((element, index) => {
                                 return <div>
-                                    {index+1}. {element.title_name} {element.first_name} {element.last_name}
+                                    {index + 1}. {element.title_name} {element.first_name} {element.last_name}
                                     จำนวน {element.amount} กิโลกรัม
                                 </div>
                             })}
@@ -228,8 +248,8 @@ class S_OrderDetail extends Component {
                         </div>
                         <div className="col-5">
                             กำหนดวันชำระเงิน
-                            <input type="date"/>
-                            <button className="BTN_Signin" >ออกใบสำคัญรับเงิน</button>
+                            <input type="date" />
+                            <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบสำคัญรับเงิน</button>
 
                         </div>
                     </div>

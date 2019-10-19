@@ -70,7 +70,7 @@ function App() {
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>
       <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
-      <Route exact path='M_Plan' component={M_Plan}/>
+      <Route exact path='/M_Plan' component={M_Plan}/>
       
       <Route exact path='/Researcher' component={Researcher}/>
       <Route exact path='/Request' component={Request}/>
