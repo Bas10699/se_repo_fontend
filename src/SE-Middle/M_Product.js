@@ -432,9 +432,8 @@ class ProductDetail extends Component {
                         </div>
                         <div className="Row">
                             <div className="col-2" style={{ marginRight: "2%" }}>
-                                {this.state.product_data.image ? <img className="IMG_Detail_SEM" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                                {this.state.product_data.image ? <img className="IMG_Detail_SEM" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail_SEM" src={this.state.default_image} alt={this.state.product_data.product_name} />}
                                 <h3 style={{ margin: "0px", textAlign: "center" }}>{this.state.product_data.product_name}</h3>
-
                                 <div style={{ padding: "10px" }}>
                                     <h5 style={{ margin: "0px" }}>{this.state.product_data.product_status}</h5>
                                     <h5 style={{ margin: "0px" }}>จำนวนที่มีอยู่ {addComma(this.state.sum_vol)} กิโลกรัม</h5>

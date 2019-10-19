@@ -138,7 +138,8 @@ class Navbar extends Component {
                                 {/* <li><NavLink exact to="/M_BB" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
 
 
-                                <NavLink to="/signup"><img src={bell} alt="bell"
+                                <NavLink to="#">
+                                    <img src={bell} alt="bell" style={{width:"30px",height:"30px",marginLeft:"10px",filter:" grayscale(20%)"}}
                                     onClick={() => (this.setState(({ news }) => ({ news: !news })))} />
                                     <span className={this.state.news ? "badge" : null} />
                                 </NavLink>

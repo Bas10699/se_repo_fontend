@@ -81,8 +81,8 @@ class Home extends Component {
                                     return (
                                         <div className="HeaderAreaCard">
                                             {element.image ? <img alt="Product" src={ip + element.image} /> : <img alt="Product" src={this.state.default_image} />}
-                                            <h4>{element.product_name}</h4>
-                                            <h5>ราคาปลีก บาท</h5>
+                                            <h4 style={{marginTop:"0"}}>{element.product_name}</h4>
+                                            <h5 style={{margin:"0"}}>ราคาปลีก บาท</h5>
                                             <NavLink to={"/Product/product?product_id=" + element.product_id}><button>รายละเอียดเพิ่มเติม</button></NavLink>
                                         </div>
                                     )
