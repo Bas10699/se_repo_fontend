@@ -137,7 +137,7 @@ class Checkbox extends Component {
                             return (
                                 <tr>
                                     <td><input type="checkbox" value={index} id='check'
-                                        amount={true}
+                                        // amount={true}
                                         onChange={() => this.check_input(index)}
                                         onClick={(event) => { this.onCheck(event) }} /> {index + 1} .
                                         </td>
