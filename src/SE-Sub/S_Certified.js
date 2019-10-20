@@ -118,7 +118,7 @@ class S_Certified extends Component {
             title: {
                 text: 'กราฟแสดงจำนวนเกษตรกรที่ห่างจากการใช้สารเคมี',
                 style: {
-                    fontSize: '20px',
+                    fontSize: '24px',
                     fontFamily: 'fc_lamoonregular'
                 }
             },
@@ -154,11 +154,8 @@ class S_Certified extends Component {
                     </div>
                 </div>
                 <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-4">
-                        <HighchartsReact highcharts={Highcharts} options={options} />
-                    </div>
-                    <div className="col-4">
+                    <div className="col-5">
+                        <HighchartsReact highcharts={Highcharts} options={options} /> 
                         <h4 style={{ cursor: 'pointer' }} onClick={() => this.setState({ get_farmer: this.state.get_origin })}>เกษตรทั้งหมด จำนวน 1347 คน</h4>
                         <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(0)}>ไม่ได้ใช้สารเคมีน้อยกว่า 1 ปี จำนวน 140 คน</h4>
                         <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(1)}>ไม่ได้ใช้สารเคมี 1 ปี จำนวน 338 คน</h4>
@@ -167,10 +164,6 @@ class S_Certified extends Component {
                         <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h4>
                         <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
                     </div>
-                    <div className="col-2"></div>
-                </div>
-
-                <div className='Row'>
                     <div className="col-1"></div>
                     <div className="col-3">
 

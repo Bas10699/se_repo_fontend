@@ -441,7 +441,7 @@ class S_skill_farmer extends Component {
 
                                 {this.state.showHide1 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขาย/ปี
                                 {this.state.click1 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px", marginLeft:"5px" }} onClick={() => this.year_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.year_value()} />
                                         :
                                         <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.year_value()} />
                                     }
