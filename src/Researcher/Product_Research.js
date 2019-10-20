@@ -21,6 +21,8 @@ class Product_Research extends Component {
                 break;
             case "/Product_Research/Product_History": render_page = <Product_History />
                 break;
+            default:
+                break;
         }
         return (
             <div className="App">
