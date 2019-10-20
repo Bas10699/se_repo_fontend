@@ -1,46 +1,41 @@
 import React, { Component } from 'react';
-import {get,post,ip} from '../Support/Service'
+import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance';
 import { element } from 'prop-types';
-class M_Demand extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            get_demand:[]
+import { NavLink } from 'react-router-dom';
+import M_R_Order from './M_Research/M_R_Order';
+import M_R_Trace from './M_Research/M_R_Trace';
+
+class M_Demand extends Component {
+
+    render() {
+        let url = this.props.location.pathname;
+        console.log(this.props)
+
+        let render_page
+        switch (url) {
+            case "/M_Demand": render_page = <M_R_Order />
+                break;
+            case "/M_Demand/M_R_Trace": render_page = <M_R_Trace />
+                break;
+            default:
+                break;
         }
-    }
-    componentWillMount(){
-        this.get_demand()
-    }
-    get_demand = async () =>{
-        try{
-            await get('researcher/get_demand_trader_all',user_token).then((result)=>{
-                if(result.success){
-                    this.setState({
-                        get_demand:result.result
-                    })
-                    console.log(result.result)
-                }
-                else{
-                    alert(result.error_message)
-                }
-            })
-        }
-        catch(error){
-            alert('get_demand'+error)
-        }
-    }
-    render(){
-        return(
+        return (
             <div className='App'>
-                <h1>ที่เหลือดูใน console</h1>
-                {this.state.get_demand.map((element)=>{
-                    return(
-                        <div>{element.product_name}</div>
-                    )
-                })}
+                 <div className="tab">
+                    <NavLink to={"/M_Demand"}>
+                        <button>เรียกดูคำสั่งแปรรูปผลิตภัณฑ์</button>
+                    </NavLink>
+                    <NavLink to={"/M_Demand/M_R_Trace"}>
+                        <button>ติดตามผลการแปรรูป</button>
+                    </NavLink>
+                </div>
+                {render_page}
 
             </div>
+
+
         )
     }
 }

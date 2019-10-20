@@ -51,6 +51,9 @@ import Product_History from './Researcher/Product_History';
 import Order_plan from './Support/pdfmake/Order_plan';
 import Quotation from './Support/pdfmake/Quotation';
 
+import M_R_Order from './SE-Middle/M_Research/M_R_Order';
+import M_R_Trace from './SE-Middle/M_Research/M_R_Trace';
+
 function App() {
   return (
     <Router exact path="/">
@@ -77,7 +80,8 @@ function App() {
       <Route exact path='/M_Summary' component={M_Summary}/>
       <Route exact path='/AddProduct' component={AddProduct}/>
       <Route exact path='/M_Buying' component={M_Buying}/>
-      <Route exact path='/M_Demand' component={M_Demand}/>
+      <Route exact path='/M_Demand/' component={M_Demand}/>
+      <Route exact path='/M_Demand/:id' component={M_Demand}/>
       {/* <Route exact path='/M_Buying/:orderID' component={M_BuyingDetail}/> */}
       <Route exact path='/user/:UserID' component={UserDetail}/>
       <Route exact path='/S_Order' component={S_Order}/>
@@ -105,6 +109,7 @@ function App() {
 
       <Route exact path='/Order_plan' component={Order_plan}/>
       <Route exact path='/Quotation' component={Quotation}/>
+
 
     </Router>
   );
