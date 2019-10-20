@@ -28,6 +28,7 @@ import S_Order from './SE-Sub/S_Order'
 import S_Plants_in_network from './SE-Sub/S_Plants_in_network'
 import S_skill_farmer from './SE-Sub/S_skill_farmer'
 import S_OrderDetail from './SE-Sub/S_OrderDetail'
+import S_Certified from './SE-Sub/S_Certified'
 // import Researcher from './Researcher/Researcher';
 // import Request from './Researcher/Request';
 // import Results from './Researcher/Results';
@@ -83,6 +84,8 @@ function App() {
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>
       <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
+      <Route exact path='/S_Certified' component={S_Certified}/>
+
       <Route exact path='/M_Plan' component={M_Plan}/>
       
       {/* <Route exact path='/Researcher' component={Researcher}/> */}

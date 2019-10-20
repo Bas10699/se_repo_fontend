@@ -131,7 +131,7 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/S_Plants_in_network" activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
                                 <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">รายการขายสินค้า</NavLink></li>
                                 <li><NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">ข้อมูลเกษตรกร</NavLink></li>
-
+                                <li><NavLink exact to="/S_Certified" activeClassName="Active" className="NavbarText">มาตรฐาน</NavLink></li>
 
 
                                 <div className="NavbarRight" activeClassName="Active">
