@@ -133,10 +133,29 @@ class S_Certified extends Component {
                 }
             },
             xAxis: {
-                categories: ['น้อยกว่า 1 ปี', '1 ปี', '2 ปี', '3 ปี', 'มากกว่า 3 ปี']
+                categories: ['น้อยกว่า 1 ปี', '1 ปี', '2 ปี', '3 ปี', 'มากกว่า 3 ปี'],
+                title: {
+                    text: '<span style="font-size:15px;">ระยะเวลา</span>',
+                    style: {
+                        fontSize: '20px',
+                        fontFamily: 'fc_lamoonregular'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'logarithmic',
+                // minorTickInterval: 10
+                title: {
+                    text: '<span style="font-size:15px;">จำนวน (คน)</span>',
+                    style: {
+                        fontSize: '20px',
+                        fontFamily: 'fc_lamoonregular'
+                    }
+                }
             },
             series: [{
                 name: 'Jane',
+                colorByPoint: true,
                 data: [
                     { name: 'น้อยกว่า 1 ปี', y: 28 },
                     { name: '1 ปี', y: 338 },
@@ -155,26 +174,30 @@ class S_Certified extends Component {
                 </div>
                 <div className="Row">
                     <div className="col-5">
-                        <HighchartsReact highcharts={Highcharts} options={options} /> 
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.setState({ get_farmer: this.state.get_origin })}>เกษตรทั้งหมด จำนวน 1347 คน</h4>
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(0)}>ไม่ได้ใช้สารเคมีน้อยกว่า 1 ปี จำนวน 140 คน</h4>
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(1)}>ไม่ได้ใช้สารเคมี 1 ปี จำนวน 338 คน</h4>
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(2)}>ไม่ได้ใช้สารเคมี 2 ปี จำนวน 299 คน</h4>
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(3)}>ไม่ได้ใช้สารเคมี 3 ปี จำนวน 400 คน</h4>
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h4>
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                        <HighchartsReact highcharts={Highcharts} options={options} />
                     </div>
                     <div className="col-1"></div>
-                    <div className="col-3">
+                    <div className="col-6">
+                        <h3 style={{ textAlign: "center", margin: "0" }}>เลือกการเเสดงรายชื่อเกษตรกร</h3>
+                        <h5 style={{ textAlign: "center", margin: "0" }}>จำนวนปีที่ห่างจากการใช้สารเคมี :
+                        <select name="user_type">
+                                <option value="0" onClick={() => this.filter_chemical_date(0)}>น้อยกว่า 1 ปี</option>
+                                <option value="1" onClick={() => this.filter_chemical_date(1)}>1 ปี</option>
+                                <option value="2" onClick={() => this.filter_chemical_date(2)}>2 ปี</option>
+                                <option value="3" onClick={() => this.filter_chemical_date(3)}>3 ปี</option>
+                                <option value="4" onClick={() => this.filter_chemical_date(4)}>มากกว่า 3 ปี</option>
+                            </select>
+                        </h5>
+                        {/* <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.setState({ get_farmer: this.state.get_origin })}>เกษตรทั้งหมด จำนวน 1347 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(0)}>ไม่ได้ใช้สารเคมีน้อยกว่า 1 ปี จำนวน 140 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(1)}>ไม่ได้ใช้สารเคมี 1 ปี จำนวน 338 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(2)}>ไม่ได้ใช้สารเคมี 2 ปี จำนวน 299 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(3)}>ไม่ได้ใช้สารเคมี 3 ปี จำนวน 400 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h6> */}
 
-                    </div>
 
-                </div>
-
-                <div className="Row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                        <h4 style={{ textAlign: "center" }}>รายชื่อเกษตร</h4>
+                        <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "center" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                        {/* <h4 style={{ textAlign: "center" }}>รายชื่อเกษตร </h4> */}
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
@@ -213,7 +236,9 @@ class S_Certified extends Component {
                             />
                         </div>
                     </div>
+
                 </div>
+
 
             </div>
 
