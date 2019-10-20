@@ -117,7 +117,7 @@ class M_R_Order extends Component {
                                             check_array: event
                                         })
                                     }} />
-                                    กำหนดวันที่ต้องการ <input />
+                                    กำหนดวันที่ต้องการ <input type="date"/>
                                     <button onClick={()=>this.onCloseModal()}>ยืนยัน</button>
                         </div>
                         <div className="col-1" />
