@@ -5,12 +5,14 @@ import { get, post, ip } from '../Support/Service';
 import moment from 'moment'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import arrow from '../Image/up-arrow.png'
 
 class S_Certified extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            get_farmer: []
+            get_farmer: [],
+            click:false,
         }
     }
 
@@ -75,7 +77,11 @@ class S_Certified extends Component {
                             element
                         )
                     }
+                    break;
+                default:
+                    break;
             }
+
 
         })
 
@@ -92,10 +98,14 @@ class S_Certified extends Component {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'column'
             },
             title: {
-                text: 'ไม่ได้ใช้สารเคมี'
+                text: 'กราฟแสดงจำนวนเกษตรกรที่ห่างจากการใช้สารเคมี',
+                style: {
+                    fontSize: '20px',
+                    fontFamily: 'fc_lamoonregular'
+                }
             },
             plotOptions: {
                 pie: {
@@ -106,6 +116,9 @@ class S_Certified extends Component {
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                     }
                 }
+            },
+            xAxis: {
+                categories: ['1 ปี', '2 ปี', '3 ปี', 'มากกว่า 3 ปี']
             },
             series: [{
                 name: 'Jane',
@@ -119,59 +132,62 @@ class S_Certified extends Component {
         };
         return (
             <div className='App'>
+                <div className="Row">
+                    <div className="col-12">
+                        <h2 style={{ textAlign: "center" }}>มาตรฐานของเกษตรกร</h2>
+                    </div>
+                </div>
+                <div className="Row">
+                    <div className="col-2"></div>
+                    <div className="col-4">
+                        <HighchartsReact highcharts={Highcharts} options={options} />
+                    </div>
+                    <div className="col-4">
+                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.setState({ get_farmer: this.state.get_origin })}>เกษตรทั้งหมด จำนวน 1347 คน</h4>
+                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(1)}>ไม่ได้ใช้สารเคมี 1 ปี จำนวน 338 คน</h4>
+                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(2)}>ไม่ได้ใช้สารเคมี 2 ปี จำนวน 299 คน</h4>
+                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(3)}>ไม่ได้ใช้สารเคมี 3 ปี จำนวน 400 คน</h4>
+                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h4>
+                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                    </div>
+                    <div className="col-2"></div>
+                </div>
+
                 <div className='Row'>
                     <div className="col-1"></div>
                     <div className="col-3">
-                        <h4 style={{cursor:'pointer'}} onClick={() => this.setState({get_farmer:this.state.get_origin})}>เกษตรทั้งหมด จำนวน 1347 คน</h4>
-                        <h4 style={{cursor:'pointer'}} onClick={() => this.filter_chemical_date(1)}>ไม่ได้ใช้สารเคมี 1 ปี จำนวน 338 คน</h4>
-                        <h4 style={{cursor:'pointer'}} onClick={() => this.filter_chemical_date(2)}>ไม่ได้ใช้สารเคมี 2 ปี จำนวน 299 คน</h4>
-                        <h4 style={{cursor:'pointer'}} onClick={() => this.filter_chemical_date(3)}>ไม่ได้ใช้สารเคมี 3 ปี จำนวน 400 คน</h4>
-                        <h4 style={{cursor:'pointer'}} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h4>
-                        <h4 style={{cursor:'pointer'}} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+
                     </div>
-                    <HighchartsReact highcharts={Highcharts} options={options} />
+
                 </div>
 
                 <div className="Row">
                     <div className="col-1"></div>
-                    <div className="col-2"></div>
-                    <div className="col-8">
-                        <h4>รายชื่อเกษตร</h4>
+                    <div className="col-10">
+                        <h4 style={{textAlign:"center"}}>รายชื่อเกษตร</h4>
                         <table>
                             <tr>
-                                <th>
-                                    ลำดับ
-                            </th>
-                                <th>
-                                    ชื่อ-สกุล
-                        </th>
-                                <th>
-                                    ครั้งสุดท้ายที่ใช้สารเคมี
-                            </th>
-                                <th>
-                                    พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน
-                        </th>
+                                <th>ลำดับ</th>
+                                <th>ชื่อ-สกุล</th>
+                                <th>ครั้งสุดท้ายที่ใช้สารเคมี
+                                    {this.click ?
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} />
+                                        :
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} />
+                                    }
+                                </th>
+                                <th>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน</th>
                             </tr>
-
-
 
                             {this.state.get_farmer.map((element, index) => {
                                 let diff = moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true)
                                 console.log(diff)
                                 return (
                                     <tr>
-                                        <td>
-                                            {index + 1}
-                                        </td>
-                                        <td>
-                                            {element.last_name} {element.first_name} {element.last_name}
-                                        </td>
-                                        <td>
-                                            {element.chemical_date} (คิดเป็น {parseInt(diff)} ปี)
-                                </td>
-                                        <td>
-                                            {element.area_storage}
-                                        </td>
+                                        <td>{index + 1}</td>
+                                        <td>{element.title} {element.first_name} {element.last_name}</td>
+                                        <td>{element.chemical_date} (คิดเป็น {parseInt(diff)} ปี)</td>
+                                        <td>{element.area_storage}</td>
                                     </tr>
 
 
