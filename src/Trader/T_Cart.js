@@ -1,6 +1,6 @@
 //ตระกร้าสินค้า
 import React, { Component } from 'react';
-import { user_token, addComma,user_token_decoded } from '../Support/Constance';
+import { user_token, addComma, user_token_decoded } from '../Support/Constance';
 import { get, post, ip } from '../Support/Service';
 import Modal from 'react-responsive-modal'
 import socketIOClient from 'socket.io-client'
@@ -161,25 +161,27 @@ class T_Cart extends Component {
             address_send: this.state.address,
             order_status: "0"
         }
-        const socket = socketIOClient(ip)
-        socket.emit('send-noti', object)
-        // try {
-        //     await post(object, 'trader/add_order', user_token).then((result) => {
-        //         if (result.success) {
 
-        //             alert("ระบบดำเนินการส่งใบสั่งซื้อเรียบร้อย")
-        //             window.location.href = "/T_Buying";
-        //         }
-        //         else {
-        //             alert(result.error_message)
-        //             window.location.reload()
-        //         }
-        //     })
+        try {
+            await post(object, 'trader/add_order', user_token).then((result) => {
+                if (result.success) {
+                    
+                    const socket = socketIOClient(ip)
+                    socket.emit('send-noti', result.result)
 
-        // }
-        // catch (error) {
-        //     alert("get_cart_trader" + error);
-        // }
+                    alert("ระบบดำเนินการส่งใบสั่งซื้อเรียบร้อย")
+                    window.location.href = "/T_Buying";
+                }
+                else {
+                    alert(result.error_message)
+                    window.location.reload()
+                }
+            })
+
+        }
+        catch (error) {
+            alert("get_cart_trader" + error);
+        }
 
     }
 

@@ -11,6 +11,7 @@ import PdfInvoice from '../Support/PdfInvoice'
 import PdfBill from '../Support/PdfBill'
 import Frequency from './Frequency'
 import { NavLink } from 'react-router-dom'
+import socketIOClient from 'socket.io-client'
 
 
 // import FrequencyPlant from './frequency_plant'
@@ -140,9 +141,12 @@ class OrderDetail extends Component {
             status: 0
         }
         console.log("วันที่ส่ง", this.state.date_send)
+
         try {
             await post(object, 'neutrally/add_invoice_neutrally', user_token).then((result) => {
                 if (result.success) {
+                    const socket = socketIOClient(ip)
+                    socket.emit('send-noti-se', this.state.order.order_id)
                     window.location.reload()
                 }
                 else {

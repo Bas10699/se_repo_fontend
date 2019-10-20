@@ -9,6 +9,7 @@ class Product_Research extends Component {
 
     render() {
         let url = this.props.location.pathname;
+        console.log(this.props)
 
         let render_page
         switch (url) {

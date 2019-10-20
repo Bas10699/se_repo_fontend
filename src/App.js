@@ -36,6 +36,7 @@ import T_Order from './Trader/T_Order';
 import M_BuyingDetail from './SE-Middle/M_BuyingDetail';
 import SocketIo from './socket.io/socketIo'
 import M_Plan from './SE-Middle/M_Plan';
+import M_Demand from './SE-Middle/M_Demand'
 
 import Planting_Planning from './Researcher/Planting_Planning';
 import Product_Information from './Researcher/Product_Information';
@@ -75,6 +76,7 @@ function App() {
       <Route exact path='/M_Summary' component={M_Summary}/>
       <Route exact path='/AddProduct' component={AddProduct}/>
       <Route exact path='/M_Buying' component={M_Buying}/>
+      <Route exact path='/M_Demand' component={M_Demand}/>
       {/* <Route exact path='/M_Buying/:orderID' component={M_BuyingDetail}/> */}
       <Route exact path='/user/:UserID' component={UserDetail}/>
       <Route exact path='/S_Order' component={S_Order}/>

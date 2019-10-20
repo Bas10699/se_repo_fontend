@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 
 import { user_token } from '../Support/Constance';
-import { get,ip } from '../Support/Service';
+import { get, ip } from '../Support/Service';
 import bell from '../Image/bell.png'
 
 import socketIOClient from 'socket.io-client'
+
+import NotificationMiddle from '../Support/notificationMiddle'
+import NotificationTrader from '../Support/notificationTrader'
 
 class Navbar extends Component {
     constructor(props) {
@@ -14,7 +17,7 @@ class Navbar extends Component {
         this.state = {
             get_user: null,
             news: false,
-            
+
         };
     }
 
@@ -29,9 +32,9 @@ class Navbar extends Component {
         const socket = socketIOClient(ip)
         socket.on('new-noti', (messageNew) => {
             console.log(messageNew)
-          this.setState({ news: true })
+            this.setState({ news: true })
         })
-      }
+    }
 
     get_user = async () => {
         try {
@@ -111,6 +114,7 @@ class Navbar extends Component {
                                 </div>
                             </ul>
                         </div>
+                        <NotificationTrader/>
                     </div>
                 break;
 
@@ -140,7 +144,9 @@ class Navbar extends Component {
                                     </div>
                                 </div>
                             </ul>
+
                         </div>
+
                     </div>
                 break;
 
@@ -153,7 +159,7 @@ class Navbar extends Component {
                             <ul>
                                 <li><NavLink exact to="/M_Plan" activeClassName="Active" className="NavbarText">Neo-firm</NavLink></li>
                                 <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
-                                <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
+                                <li><NavLink exact to="/M_Demand" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
                                 {/* <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตระกร้าสินค้า</NavLink></li> */}
                                 <li><NavLink exact to="/M_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
                                 <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อผู้ประกอบการ</NavLink></li>
@@ -161,10 +167,10 @@ class Navbar extends Component {
                                 {/* <li><NavLink exact to="/M_BB" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
 
 
-                                <NavLink to="/signup"><img src={bell} alt="bell"
-                                    onClick={() => this.setState({news:false})} />
+                                {/* <NavLink to="/signup"><img src={bell} alt="bell"
+                                    onClick={() => this.setState({ news: false })} />
                                     <span className={this.state.news ? "badge" : null} />
-                                </NavLink>
+                                </NavLink> */}
                                 <div className="NavbarRight" activeClassName="Active">
                                     <div className="dropdown" activeClassName="Active">
                                         <NavLink exact to="/User" className="dropbtn" activeClassName="Active">{this.state.get_user.username}</NavLink>
@@ -177,6 +183,7 @@ class Navbar extends Component {
 
                             </ul>
                         </div>
+                        <NotificationMiddle />
                     </div>
                 break;
 
