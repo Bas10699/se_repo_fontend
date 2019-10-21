@@ -160,7 +160,7 @@ class S_OrderDetail extends Component {
         // console.log('up',updatedList)
     }
 
-    ChStatus = () => {
+    ChStatus = async () => {
         let order = this.state.order
         order.order_se_status = 1
         this.setState({
