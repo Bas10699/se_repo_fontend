@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token,sortData } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
-import za from '../Image/za.png'
-import az from '../Image/az.png'
 import top from '../Image/top.png'
 import arrow from '../Image/up-arrow.png'
 import Pagination from "../Support/Pagination";
