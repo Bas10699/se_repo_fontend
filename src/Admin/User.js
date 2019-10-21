@@ -41,7 +41,7 @@ class User extends Component {
             ],
             order_1: '',
             user_type: 1,
-            bank_information: '',
+            bank_information: [],
             get_user: null,
             isInEdit: false,
             user_image: null,
@@ -201,15 +201,17 @@ class User extends Component {
 
                         </table>
                         {this.state.get_user ? this.state.get_user.user_type === '4' || this.state.get_user.user_type === '3' ?
-                            this.state.bank_information.map((element) => {
-                                return (
-                                    <div className="_Card">
-                                        สัญลักษณ์ธนาคาร
+                            this.state.bank_information ?
+                                this.state.bank_information.map((element) => {
+                                    return (
+                                        <div className="_Card">
+                                            สัญลักษณ์ธนาคาร
                             <h3 style={{ margin: "0px" }}>{element.bankName}</h3>
-                                        <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h4>
-                                    </div>
-                                )
-                            })
+                                            <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h4>
+                                        </div>
+                                    )
+                                })
+                                : null
                             : null
                             : null}
 
