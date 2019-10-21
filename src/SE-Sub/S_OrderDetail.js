@@ -22,14 +22,14 @@ class S_OrderDetail extends Component {
             check_array: [],
             OpenProofPaymet: false,
             openIN: false,
-            get_user: ''
+ 
         }
     }
 
     componentWillMount() {
         this.get_order()
         this.get_skill_farmer()
-        // this.get_user()
+
     }
 
     onCloseModal = () => {
@@ -37,27 +37,7 @@ class S_OrderDetail extends Component {
 
     };
 
-    // get_user = async () => {
-    //     let url = this.props.location.search;
-    //     let params = queryString.parse(url);
-    //     try {
-    //         await post(params, 'user/show_user', user_token).then((result) => {
-    //             if (result.success) {
-    //                 this.setState({
-    //                     get_user: result.result
-    //                 })
-    //                 setTimeout(() => {
-    //                     console.log("get_user", result.result)
-    //                 }, 500)
-    //             } else {
-    //                 window.location.href = "/";
-    //                 //alert("user1"+result.error_message);
-    //             }
-    //         });
-    //     } catch (error) {
-    //         alert("get_user2" + error);
-    //     }
-    // }
+   
 
     get_order = async () => {
         let url = this.props.location.search;
@@ -257,14 +237,14 @@ class S_OrderDetail extends Component {
                                         )
                                     })
                                     : <button>เพิ่มบัญชีธนาคาร</button>
-                                    } */}
-                                {/* <div className="_Card">
+                                    }  */}
+                              <div className="_Card">
                                     สัญลักษณ์ธนาคาร
                             <h3 style={{ margin: "0px" }}>ธนาคารกรุงไทย</h3>
                                     <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เกษตรกรอินทรีย์อีสาน เลขที่บัญชี 123-4-56789-0</h4>
                                 </div>
                                 <button onClick={() => this.setState({ openIN: true })}>ออกใบเเจ้งหนี้</button>
-                                <button>เพิ่มบัญชีธนาคาร</button> */}
+                                <button>เพิ่มบัญชีธนาคาร</button>
                                 
 
                             </div>
