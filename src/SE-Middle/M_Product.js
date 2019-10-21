@@ -33,6 +33,7 @@ class ProductDetail extends Component {
             frequency: [],
             status: null,
             check_array: [],
+            checkInput: [],
             month: [
                 'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ค.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'
             ],
@@ -403,6 +404,71 @@ class ProductDetail extends Component {
         return sum;
     }
 
+    toggleCheckboxChange = () => {
+        const { handleCheckboxChange, label } = this.props;
+
+        this.setState(({ isChecked }) => (
+            {
+                isChecked: !isChecked,
+            }
+        ));
+
+        handleCheckboxChange(label);
+    }
+
+    onCheck = (event) => {
+        console.log("Check", event.target.value)
+
+
+        let check_array = this.state.check_array
+        let index = check_array.findIndex((array_event) => {
+            return array_event === event.target.value
+
+        })
+        console.log("index", index)
+
+        if (index !== -1) {
+            check_array.splice(index, 1)
+        }
+        else {
+            check_array.push(event.target.value)
+        }
+
+        // this.props.return_func(check_array)
+        this.setState(({ click }) => (
+            {
+                click: !click
+            }
+        ));
+    }
+
+    check_input = (number) => {
+        let checkInput = this.state.checkInput
+        // console.log('index', number)
+        if (checkInput.length === 0) {
+            checkInput.push({
+                number
+            })
+        }
+        else {
+            let index = checkInput.findIndex((array_event) => {
+                return array_event.number === number
+            })
+            if (index !== -1) {
+                checkInput.splice(index, 1)
+            }
+            else {
+                checkInput.push({
+                    number,
+                })
+            }
+        }
+        this.setState({
+            checkInput: checkInput
+        })
+
+    }
+
 
 
     render_Step = (status) => {
@@ -524,7 +590,7 @@ class ProductDetail extends Component {
                                 <h3 style={{ margin: "10px" }}>รายการสั่งซื้อวัตถุดิบ</h3>
 
                                 <div>
-                                    <Checkbox option={this.state.se}
+                                    {/* <Checkbox option={this.state.se}
                                         cost={this.state.product_data.cost}
                                         check_array={this.state.check_array}
                                         return_func={(event) => {
@@ -533,7 +599,46 @@ class ProductDetail extends Component {
                                             })
                                         }} />
                                     
-                                    <hr />
+                                    <hr /> */}
+
+                                    {
+                                        this.state.se.map((option_element, index) => {
+                                            let chInput = 0
+                                            return (
+                                                <div>
+                                                    <input type="checkbox" value={option_element.name}
+                                                        // amount={option_element.year_value}
+                                                        onChange={() => this.check_input(index)}
+                                                        onClick={(event) => { this.onCheck(event) }} />
+                                                    {option_element.name}
+                                                    {this.state.checkInput.map((ele_check) => {
+                                                        console.log('555', ele_check)
+                                                        if (ele_check.number == index) {
+                                                            chInput = 1
+                                                        }
+
+                                                    }),
+                                                        chInput ?
+                                                            <input type="number" style={{ marginTop: "0px" }}
+                                                                name="quantity" min="1"
+                                                                id={index} placeholder="จำนวนที่ต้องการสั่งซื้อ"
+                                                                value={option_element.amount}
+                                                                onChange={this.handleChange_se} /> :
+                                                            <input type="number" style={{ marginTop: "0px" }}
+                                                                name="quantity" min="1"
+                                                                id={index} placeholder="จำนวนที่ต้องการสั่งซื้อ"
+                                                                value={option_element.amount}
+                                                                onChange={this.handleChange_se} disabled />
+                                                    }
+                                                    {/* + ราคาขนส่ง */}
+
+                                                    <h5 style={{ marginTop: "0", marginBottom: "5px", textAlign: "right" }}>ราคารวม {option_element.amount * this.state.product_data.cost} บาท</h5>
+                                                </div>
+                                            )
+                                        })
+                                    }
+
+
                                     <h3 style={{ margin: "0" }}>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h3>
 
                                     <button className="BTN_AddCart" onClick={() => { this.onOpenModal() }}
@@ -547,8 +652,8 @@ class ProductDetail extends Component {
                             <div className="Row" style={{ width: "500px" }}>
                                 <div className="col-12">
                                     <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อวัตถุดิบ "{this.state.product_data.product_name}"</h3>
-                                    {this.state.check_array + "\n"}
-                                    {/* {this.state.se.map((element) => {
+                                    {/* {this.state.check_array + "\n"} */}
+                                    {this.state.se.map((element) => {
                                         return (
                                             <div className="Row">
                                                 <div className="col-6">
@@ -562,7 +667,7 @@ class ProductDetail extends Component {
                                                 </div>
                                             </div>
                                         )
-                                    })} */}
+                                    })}
 
                                     <h4 style={{ color: "red" }}>รวมทั้งหมด {addComma(this.sum_price(this.state.se))} บาท</h4>
                                     <button className="BTN_Signin" onClick={() => this.add_order_se()}>ออกใบคำสั่งซื้อ</button>
