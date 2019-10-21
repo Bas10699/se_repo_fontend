@@ -24,11 +24,16 @@ class Order_plan extends Component {
             content: [
                 {
                     text: 'ชื่อบริษัท',
+                    bold: true,
                     style: 'header',
                     alignment: 'center'
                 },
                 {
-                    text: 'ที่อยู่',
+                    text: '2571/1 ถ.รามคำเเหง เเขวงหัวหมาก เขตบางกะปิ กรุงเทพฯ 10240',
+                    alignment: 'center'
+                },
+                {
+                    text: 'โทร. 0-2739-5900 โทรสาร 0-2739-5910 เลขประจำตัวผู้เสียภาษี 3125523223',
                     alignment: 'center'
                 },
                 {
@@ -37,143 +42,110 @@ class Order_plan extends Component {
                             text: ''
                         },
                         {
-                            text: 'แผนการสั่งซื้อ',
+                            text: 'ใบสั่งซื้อ',
+                            bold: true,
                             style: 'subheader',
                             alignment: 'center'
                         },
                         {
                             table: {
-                                widths: [30, 120],
-                                body: [
-                                    [{ text: 'เลขที่', style: 'subheader1', alignment: 'center' }, '11111-11111'],
-                                    [{ text: 'วันที่', style: 'subheader1', alignment: 'center' }, '19/10/2562']
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
                                 widths: [50, 100],
                                 body: [
-                                    [{ text: 'ชื่อผู้รับ', style: 'subheader1', alignment: 'center' }, ''],
-                                    [{ text: 'ที่อยู่', style: 'subheader1', alignment: 'center' }, ''],
-                                    [{ text: 'เบอร์โทร', style: 'subheader1', alignment: 'center' }, '']
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [20, 50, 150, 30, 30, 50, 50],
-                                body: [
-                                    [{ text: 'ลำดับ', style: 'subheader1', alignment: 'center' },
-                                    { text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center' },
-                                    { text: 'รายการ', style: 'subheader1', alignment: 'center' },
-                                    { text: 'ราคา/หน่วย', style: 'subheader1', alignment: 'center' },
-                                    { text: 'จำนวน', style: 'subheader1', alignment: 'center' },
-                                    { text: 'หน่ยย', style: 'subheader1', alignment: 'center' },
-                                    { text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center' }]
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [20, 50, 150, 30, 30, 50, 50],
-                                heights: 300,
-                                body: [
-                                    ['1 \n2',
-                                        '1234 \nCar-10',
-                                        'ข้าว \nขนส่ง',
-                                        '10 \n1',
-                                        '50 \n50',
-                                        'กิโลกรัม \nกิโลกรัม',
-                                        '500 \n50']
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [300],
-                                heights: [100],
-                                body: [
-                                    [{ text: 'หมายเหตุ', style: 'subheader1' }]
+                                    [{ text: 'เลขที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, 'PO20102562-25'],
+                                    [{ text: 'วันที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, '20/10/2562']
                                 ]
                             }
                         },
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            style: 'tableExample',
+                            table: {
+                                widths: [503],
+                                heights: 50,
+                                body: [
+                                    [`ผู้ติดต่อ \t\tนายลำใย เผ่าสูง  \nที่อยู่ \t\t   74 หมู่ 7 ตำบลสันทรายงาม อำเภอเทิง จังหวัดเชียงราย 57160 \nโทร \t\t\t086-4000208 `,
+                                    ]
+                                ]
+                            }
+                        },
+                    ]
+                },
+                {
+                    columns: [
                         {
                             table: {
-                                widths: [50, 150],
+                                widths: [20.5, 40, 178, 40, 40, 65, 65],
+                                heights: ['*', 280],
                                 body: [
-                                    [{ text: 'รวมเงิน', style: 'subheader1' }, ''],
-                                    [{ text: 'ส่วนลด', style: 'subheader1' }, ''],
-                                    [{ text: 'มูลค่าหลังหักส่วนลด', style: 'subheader1' }, ''],
-                                    [{ text: 'ภาษีมูลค่าเพิ่ม', style: 'subheader1' }, '']
+                                    [{ text: 'ลำดับ', style: 'subheader1', alignment: 'center',bold: true, fillColor: '#cccccc' },
+                                    { text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center',bold: true, fillColor: '#cccccc' },
+                                    { text: 'รายการ', style: 'subheader1', alignment: 'center',bold: true, fillColor: '#cccccc' },
+                                    { text: 'ราคา/หน่วย', style: 'subheader1', alignment: 'center',bold: true, fillColor: '#cccccc' },
+                                    { text: 'จำนวน', style: 'subheader1', alignment: 'center',bold: true, fillColor: '#cccccc' },
+                                    { text: 'หน่วย', style: 'subheader1', alignment: 'center',bold: true, fillColor: '#cccccc' },
+                                    { text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center',bold: true, fillColor: '#cccccc' }],
+                                    [{
+                                        table: {
+                                            widths: [20.5, 40, 178, 40, 40, 65, 65],
+                                            body: [
+                                                [{ text: '1', alignment: 'center' },
+                                                { text: '15', alignment: 'center' },
+                                                    'ข้าว กข.6',
+                                                { text: '15', alignment: 'center' },
+                                                { text: '200', alignment: 'center' },
+                                                { text: 'กิโลกรัม', alignment: 'center' },
+                                                { text: '3000', alignment: 'center' }]
+
+                                            ]
+                                        },
+                                        layout: 'noBorders'
+                                    }, '', '', '', '', '', ''],
                                 ]
                             }
                         }
                     ]
                 },
+                {
+                    columns: [
+                        {
+                            table: {
+                                widths: [305.5,114, 65],
+                                body: [
+                                    [{ text: 'หมายเหตุ', rowSpan: 4, border: [true, false, true, true], },
+                                    { border: [true, false, true, true], text: 'รวมเงิน', },
+                                    { border: [true, false, true, true], text: '3000', alignment: 'right' }],
+                                    ['', { text: 'ส่วนลด'}, { text: '-', alignment: 'right' }],
+                                    ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: '2800', alignment: 'right' }],
+                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: '2996', alignment: 'right' }],
+                                    [{ text: 'หนึ่งพันสองร้อยสามสิบสามบาทถ้วน', alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: '1233', alignment: 'right' }]
+                                ],
+                            }
+                        },
+
+                    ]
+                },
+                
                 {
                     columns: [
                         {
                             table: {
                                 widths: [250],
+                                heights: [15, 89],
                                 body: [
-                                    [{ text: '(จำนวนเงินภาษาไทย)', style: 'subheader1', alignment: 'center' }]
+                                    [{ text: 'เงื่อนไขอื่นๆ', style: 'subheader1', border: [true, false, true, true], }],
+                                    ['\n(1) โปรดระบุเลขที่ใบสั่งซื้อข้างต้น ในใบส่งของทุกฉบับ \n(2) การวางบิลเเละการรับเช็ค เป็นไปตามกำหนดเวลาที่บริษัทกำหนดไว้ \n(3) ในการวางบิลเพื่อเรียกเก็บ ให้เเนบสำเนาใบสั่งซื้อกำกับมาด้วย']
                                 ]
                             }
                         },
                         {
                             table: {
-                                widths: [100, 150],
+                                widths: [110, 124],
+                                heights: 50,
                                 body: [
-                                    [{ text: 'จำนวนเงินทั้งสิ้น', style: 'subheader1' }, '']
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            table: {
-                                widths: [250],
-                                heights: [100],
-                                body: [
-                                    [{ text: 'เงื่อนไข', style: 'subheader1', alignment: 'center' }],
-                                    ['']
-                                ]
-                            }
-                        },
-                        {
-                            table: {
-                                widths: [100],
-                                heights: [100],
-                                body: [
-                                    []
-                                ]
-                            }
-                        },
-                        {
-                            table: {
-                                widths: [100],
-                                heights: [100],
-                                body: [
-                                    []
+                                    [{ text: '\n\n\n\n\n_________________________ \nผู้รับเงิน', border: [false, false, true, true], }, { text: '\n\n\n\n\n_________________________ \nผู้มอบเงิน', border: [true, false, true, true], }]
                                 ]
                             }
                         }
@@ -193,6 +165,14 @@ class Order_plan extends Component {
                 subheader1: {
                     fontSize: 12,
                     bold: true
+                },
+                tableExample: {
+                    margin: [0, 5, 0, 5]
+                },
+                tableHeader: {
+                    bold: true,
+                    fontSize: 13,
+                    color: 'black'
                 }
             },
             defaultStyle: {
