@@ -42,7 +42,7 @@ class Order_plan extends Component {
                             text: ''
                         },
                         {
-                            text: 'ใบสั่งซื้อ',
+                            text: 'ใบสำคัญรับเงิน',
                             bold: true,
                             style: 'subheader',
                             alignment: 'center'
