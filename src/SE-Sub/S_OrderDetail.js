@@ -21,18 +21,43 @@ class S_OrderDetail extends Component {
             search_order: [],
             check_array: [],
             OpenProofPaymet: false,
+            openIN: false,
+            get_user: ''
         }
     }
 
     componentWillMount() {
         this.get_order()
         this.get_skill_farmer()
+        this.get_user()
     }
 
     onCloseModal = () => {
-        this.setState({ OpenProofPaymet: false });
+        this.setState({ OpenProofPaymet: false, openIN: false });
 
     };
+
+    get_user = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        try {
+            await post(params, 'user/show_user', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        get_user: result.result
+                    })
+                    setTimeout(() => {
+                        console.log("get_user", result.result)
+                    }, 500)
+                } else {
+                    window.location.href = "/";
+                    //alert("user1"+result.error_message);
+                }
+            });
+        } catch (error) {
+            alert("get_user2" + error);
+        }
+    }
 
     get_order = async () => {
         let url = this.props.location.search;
@@ -157,7 +182,8 @@ class S_OrderDetail extends Component {
     ChStatus = () => {
         this.setState({
             OpenProofPaymet: false,
-            order: 1
+            openIN: false,
+            order: this.state.order.order_se_status
         })
     }
 
@@ -184,8 +210,8 @@ class S_OrderDetail extends Component {
                         <div className="Card" style={{ width: "100%" }}>
                             <h4>{this.state.order.plant_name} </h4>
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
-                            <h5>เดือนที่ต้องการ</h5>
-                            <button onClick={() => this.openModel()}>ออกใบเเจ้งหนี้</button>
+                            <h5>ราคา</h5>
+                            <button onClick={() => this.openModel()}>ออกใบสำคัญรับเงิน</button>
                         </div>
 
 
@@ -218,6 +244,29 @@ class S_OrderDetail extends Component {
                                         </div>
                                     )
                                 })}
+
+                                บัญชีธนาคาร
+                                {/* {this.state.get_user ? 
+                                    this.state.bank_information.map((element) => {
+                                        return (
+                                            <div className="_Card">
+                                                สัญลักษณ์ธนาคาร
+                            <h3 style={{ margin: "0px" }}>{element.bankName}</h3>
+                                                <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h4>
+                                            </div>
+                                        )
+                                    })
+                                    : <button>เพิ่มบัญชีธนาคาร</button>
+                                    } */}
+                                <div className="_Card">
+                                    สัญลักษณ์ธนาคาร
+                            <h3 style={{ margin: "0px" }}>ธนาคารกรุงไทย</h3>
+                                    <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เกษตรกรอินทรีย์อีสาน เลขที่บัญชี 123-4-56789-0</h4>
+                                </div>
+                                <button onClick={() => this.setState({ openIN: true })}>ออกใบเเจ้งหนี้</button>
+                                <button>เพิ่มบัญชีธนาคาร</button>
+                                
+
                             </div>
                         }
                     </div>
@@ -231,7 +280,7 @@ class S_OrderDetail extends Component {
                         </div>
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
-                        <div className="col-7" >
+                        <div className="col-12" >
                             <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร</h5>
 
                             {this.state.selectFarmer.map((element, index) => {
@@ -245,16 +294,41 @@ class S_OrderDetail extends Component {
                             <h5>รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h5>
                             <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
 
-                        </div>
-                        <div className="col-5">
-                            กำหนดวันชำระเงิน
-                            <input type="date" />
                             <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบสำคัญรับเงิน</button>
 
                         </div>
                     </div>
                 </Modal>
 
+
+                {/* ใบเเจ้งหนี้ */}
+                <Modal open={this.state.openIN} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-12" >
+                            <h3 style={{ textAlign: "center" }}>ออกใบเเจ้งหนี้</h3>
+                        </div>
+                    </div>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-12" >
+                            <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_se_id}</h2>
+                            <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร</h5>
+
+                            {this.state.selectFarmer.map((element, index) => {
+                                return <div>
+                                    {index + 1}. {element.title_name} {element.first_name} {element.last_name}
+                                    จำนวน {element.amount} กิโลกรัม
+                                </div>
+                            })}
+
+                            กำหนดวันชำระเงิน : <input type="date" />
+                            <h5>รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h5>
+                            <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
+
+                            <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบเเจ้งหนี้</button>
+
+                        </div>
+                    </div>
+                </Modal>
 
 
 

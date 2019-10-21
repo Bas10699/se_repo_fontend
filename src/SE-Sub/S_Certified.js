@@ -175,10 +175,11 @@ class S_Certified extends Component {
                 <div className="Row">
                     <div className="col-5">
                         <HighchartsReact highcharts={Highcharts} options={options} />
+                        <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "center" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
                     </div>
                     <div className="col-1"></div>
                     <div className="col-6">
-                        <h3 style={{ textAlign: "center", margin: "0" }}>เลือกการเเสดงรายชื่อเกษตรกร</h3>
+                        {/* <h3 style={{ textAlign: "center", margin: "0" }}>เลือกการเเสดงรายชื่อเกษตรกร</h3> */}
                         <h5 style={{ textAlign: "center", margin: "0" }}>จำนวนปีที่ห่างจากการใช้สารเคมี :
                         <select name="user_type">
                                 <option value="0" onClick={() => this.filter_chemical_date(0)}>น้อยกว่า 1 ปี</option>
@@ -196,7 +197,7 @@ class S_Certified extends Component {
                         <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h6> */}
 
 
-                        <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "center" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                       
                         {/* <h4 style={{ textAlign: "center" }}>รายชื่อเกษตร </h4> */}
                         <table>
                             <tr>
