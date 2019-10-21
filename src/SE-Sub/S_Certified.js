@@ -1,6 +1,6 @@
 //ตระกร้าสินค้า
 import React, { Component } from 'react';
-import { user_token, addComma, user_token_decoded } from '../Support/Constance';
+import { user_token, addComma, user_token_decoded,sortData } from '../Support/Constance';
 import { get, post, ip } from '../Support/Service';
 import moment from 'moment'
 import Highcharts from 'highcharts'
@@ -16,6 +16,8 @@ class S_Certified extends Component {
             todosPerPage: 10,
             get_farmer: [],
             click: false,
+            sumEach: [],
+            sum_area_storage: []
         }
     }
 
@@ -31,6 +33,7 @@ class S_Certified extends Component {
                         get_farmer: result.result,
                         get_origin: result.result
                     })
+                    this.sum()
                     console.log('get_fa', result.result)
                 }
                 else {
@@ -55,45 +58,100 @@ class S_Certified extends Component {
         this.setState({
             get_farmer: area_storage
         })
+
     }
 
-    filter_chemical_date = (num) => {
+    sum = () => {
+        let farmer = this.state.get_origin
+        let num0 = 0, num1 = 0, num2 = 0, num3 = 0, num4 = 0
+        let area_storage = []
+        farmer.map((element) => {
+            let chemical = parseInt(moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true))
+            if (chemical === 0) {
+                num0 += 1
+            }
+            else if (chemical === 1) {
+                num1 += 1
+            }
+            else if (chemical === 2) {
+                num2 += 1
+            }
+            else if (chemical === 3) {
+                num3 += 1
+            }
+            else {
+                num4 += 1
+            }
+            if (element.area_storage !== "null") {
+                area_storage.push(element)
+            }
+        })
+        this.setState({
+            sumEach: [
+                { name: 'น้อยกว่า 1 ปี', y: num0 },
+                { name: '1 ปี', y: num1 },
+                { name: '2 ปี', y: num2 },
+                { name: '3 ปี', y: num3 },
+                { name: 'มากกว่า 3 ปี', y: num4 }
+            ],
+            sum_area_storage: area_storage
+        })
+    }
+
+    sort_date = () => {
+        console.log(sortData(this.state.get_farmer,'chemical_date',false))
+        this.setState(({ click }) => ({ click: !click }))
+    }
+
+    filter_chemical_date = (e) => {
+        let num = e.target.value
+        console.log(num)
         let data = this.state.get_origin
         let chemical_date = []
-        data.map((element) => {
+        if (num === "all") {
+            this.setState({
+                get_farmer: this.state.get_origin,
+                currentPage: 1,
+            })
+        }
+        else {
+            data.map((element) => {
 
-            let chemical = parseInt(moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true))
+                let chemical = parseInt(moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true))
 
-            switch (num) {
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                    if (num === chemical) {
-                        chemical_date.push(
-                            element
-                        )
-                    }
-                    break;
-                case 4:
-                    if (chemical >= 4) {
-                        chemical_date.push(
-                            element
-                        )
-                    }
-                    break;
-                default:
-                    break;
-            }
+                switch (num) {
+                    case "0":
+                    case "1":
+                    case "2":
+                    case "3":
+                        if (num == chemical) {
+                            chemical_date.push(
+                                element
+                            )
+                        }
+                        break;
+                    case "4":
+                        if (chemical >= 4) {
+                            chemical_date.push(
+                                element
+                            )
+                        }
+                        break;
+                    default:
+                        break;
+                }
 
 
-        })
+            })
 
-        this.setState({
-            get_farmer: chemical_date,
-        });
+            this.setState({
+                get_farmer: chemical_date,
+                currentPage: 1,
+            });
+        }
 
     }
+
     changeCurrentPage = numPage => {
         this.setState({ currentPage: numPage });
         //fetch a data
@@ -101,11 +159,18 @@ class S_Certified extends Component {
     };
 
     render() {
+        let todos = []
         const { get_farmer, currentPage, todosPerPage } = this.state;
+        get_farmer.map((element, index) => {
+            todos.push({
+                num: index + 1,
+                ...element
+            })
+        })
         // Logic for displaying todos
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-        const currentTodos = get_farmer.slice(indexOfFirstTodo, indexOfLastTodo);
+        const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
 
         const options = {
             chart: {
@@ -143,7 +208,7 @@ class S_Certified extends Component {
                 }
             },
             yAxis: {
-                type: 'logarithmic',
+                // type: 'logarithmic',
                 // minorTickInterval: 10
                 title: {
                     text: '<span style="font-size:15px;">จำนวน (คน)</span>',
@@ -154,17 +219,19 @@ class S_Certified extends Component {
                 }
             },
             series: [{
-                name: 'Jane',
+                name: '',
                 colorByPoint: true,
-                data: [
-                    { name: 'น้อยกว่า 1 ปี', y: 28 },
-                    { name: '1 ปี', y: 338 },
-                    { name: '2 ปี', y: 299 },
-                    { name: '3 ปี', y: 400 },
-                    { name: 'มากกว่า 3 ปี', y: 287 }
-                ]
+                data: this.state.sumEach
+
             }]
         };
+
+        var linkStyle;
+        if (this.state.hover) {
+            linkStyle = { color: '#ed1212', cursor: 'pointer' }
+        } else {
+            linkStyle = { color: '#000' }
+        }
         return (
             <div className='App'>
                 <div className="Row">
@@ -180,12 +247,13 @@ class S_Certified extends Component {
                     <div className="col-6">
                         <h3 style={{ textAlign: "center", margin: "0" }}>เลือกการเเสดงรายชื่อเกษตรกร</h3>
                         <h5 style={{ textAlign: "center", margin: "0" }}>จำนวนปีที่ห่างจากการใช้สารเคมี :
-                        <select name="user_type">
-                                <option value="0" onClick={() => this.filter_chemical_date(0)}>น้อยกว่า 1 ปี</option>
-                                <option value="1" onClick={() => this.filter_chemical_date(1)}>1 ปี</option>
-                                <option value="2" onClick={() => this.filter_chemical_date(2)}>2 ปี</option>
-                                <option value="3" onClick={() => this.filter_chemical_date(3)}>3 ปี</option>
-                                <option value="4" onClick={() => this.filter_chemical_date(4)}>มากกว่า 3 ปี</option>
+                        <select name="user_type" onChange={this.filter_chemical_date}>
+                                <option value="all">ทั้งหมด</option>
+                                <option value="0" >น้อยกว่า 1 ปี</option>
+                                <option value="1" >1 ปี</option>
+                                <option value="2" >2 ปี</option>
+                                <option value="3" >3 ปี</option>
+                                <option value="4" >มากกว่า 3 ปี</option>
                             </select>
                         </h5>
                         {/* <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.setState({ get_farmer: this.state.get_origin })}>เกษตรทั้งหมด จำนวน 1347 คน</h6>
@@ -196,7 +264,7 @@ class S_Certified extends Component {
                         <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h6> */}
 
 
-                        <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "center" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน {this.state.sum_area_storage.length} คน</h4>
                         {/* <h4 style={{ textAlign: "center" }}>รายชื่อเกษตร </h4> */}
                         <table>
                             <tr>
@@ -204,9 +272,9 @@ class S_Certified extends Component {
                                 <th>ชื่อ-สกุล</th>
                                 <th>ครั้งสุดท้ายที่ใช้สารเคมี
                                     {this.click ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.sort_date()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.sort_date()} />
                                     }
                                 </th>
                                 <th>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน</th>
@@ -217,10 +285,10 @@ class S_Certified extends Component {
                                 console.log(diff)
                                 return (
                                     <tr>
-                                        <td>{index + 1}</td>
+                                        <td>{element.num}</td>
                                         <td>{element.title} {element.first_name} {element.last_name}</td>
                                         <td>{element.chemical_date} (คิดเป็น {parseInt(diff)} ปี)</td>
-                                        <td>{element.area_storage}</td>
+                                        <td>{element.area_storage !== "null" ? element.area_storage : "ไม่มี"}</td>
                                     </tr>
 
 
@@ -240,7 +308,7 @@ class S_Certified extends Component {
                 </div>
 
 
-            </div>
+            </div >
 
         )
     }
