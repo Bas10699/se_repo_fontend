@@ -4,6 +4,15 @@ import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
 import {NavLink} from 'react-router-dom'
 import moment from 'moment'
+import one from '../Image/one.png'
+import two from '../Image/two.png'
+import twodis from '../Image/twodis.png'
+import three from '../Image/three.png'
+import threedis from '../Image/threedis.png'
+import four from '../Image/four.png'
+import fourdis from '../Image/fourdis.png'
+import five from '../Image/five.png'
+import fivedis from '../Image/fivedis.png'
 
 class S_Order extends Component {
     constructor(props) {
@@ -33,6 +42,67 @@ class S_Order extends Component {
 
         }
     }
+
+    render_status = (order_status) => {
+        let render_tag
+
+        switch (order_status) {
+            case 0:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={twodis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+            case 1:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+            case 2:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+            case 3:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+                case 4:
+                render_tag = <div>
+                    <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                </div>
+                break;
+                
+            default:
+                render_tag = <div>
+                    <div className="FontDanger"> เกิดข้อผิดพลาด </div>
+                </div>
+                break;
+        }
+        return render_tag
+    }
+
+
     render() {
         return (
             <div className="App">
@@ -71,6 +141,7 @@ class S_Order extends Component {
                                 <th>ชื่อพืช</th>
                                 <th>วันที่</th>
                                 <th>จำนวน</th>
+                                <th>สถานะ</th>
                             </tr>
                             {this.state.order_se.map((element, index) => {
                             return (
@@ -80,6 +151,10 @@ class S_Order extends Component {
                                     <td>{element.plant_name}</td>
                                     <td>{moment(element.order_se_date).utc().format('DD/MM/YYYY')}</td>
                                     <td>{element.amount} กิโลกรัม</td>
+                                    <td>{this.render_status(element.order_se_status)}</td>
+
+
+
                                 </tr>
                             )
                         })}
