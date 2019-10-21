@@ -265,7 +265,7 @@ class S_Certified extends Component {
                         <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h6> */}
 
 
-                        <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน {this.state.sum_area_storage.length} คน</h4>
+                        {/* <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน {this.state.sum_area_storage.length} คน</h4> */}
                         {/* <h4 style={{ textAlign: "center" }}>รายชื่อเกษตร </h4> */}
                         <table>
                             <tr>
