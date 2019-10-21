@@ -99,7 +99,14 @@ class S_Certified extends Component {
     }
 
     sort_date = () => {
-        console.log(sortData(this.state.get_farmer,'chemical_date',false))
+        let data = this.state.get_farmer
+        data.map((element)=>{
+            element.chemical_date = moment(element.chemical_date).format('YYYYMMDD')
+        })
+        sortData(data,'chemical_date',this.state.click)
+        data.map((element)=>{
+            element.chemical_date = moment(element.chemical_date).format('DD-MM-YYYY')
+        })
         this.setState(({ click }) => ({ click: !click }))
     }
 
@@ -162,6 +169,7 @@ class S_Certified extends Component {
         let todos = []
         const { get_farmer, currentPage, todosPerPage } = this.state;
         get_farmer.map((element, index) => {
+            // console.log(index+1)
             todos.push({
                 num: index + 1,
                 ...element
@@ -283,7 +291,7 @@ class S_Certified extends Component {
 
                             {currentTodos.map((element, index) => {
                                 let diff = moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true)
-                                console.log(diff)
+                                // console.log(diff)
                                 return (
                                     <tr>
                                         <td>{element.num}</td>

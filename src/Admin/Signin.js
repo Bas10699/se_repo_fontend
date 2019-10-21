@@ -14,9 +14,13 @@ class Signin extends Component {
     }
 
     handleChange = (e) => {
+        console.log('va',e.target.value)
         this.setState({
             [e.target.id]: e.target.value
         })
+        if (e.key === 'Enter') {
+            this.get_users()
+          }
     }
 
     handleSubmit = (e) => {
@@ -83,13 +87,12 @@ class Signin extends Component {
                         <h4> รหัสผ่าน </h4>
                         <input type="password" id="password" 
                         placeholder="กรอกรหัสผ่าน" 
-                        name="password" onChange={this.handleChange} 
+                        name="password" onKeyUp={this.handleChange}
                         />
 
                         <button className="BTN_Signin" 
-                        onClick={() => this.get_users(
-                            this.state.username, 
-                            this.state.password)}>
+                        onClick={() => this.get_users()} >
+                            
                             เข้าสู่ระบบ
                         </button>
                         <NavLink to={'/Signup'}><button className="BTN_Signup" >สร้างบัญชีผู้ใช้</button></NavLink>
