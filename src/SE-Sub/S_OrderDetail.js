@@ -7,7 +7,7 @@ import Timeline from './TimelineNeo'
 import Checkbox from '../Support/Checkbox'
 import moment from 'moment'
 import Modal from 'react-responsive-modal'
-import { element } from 'prop-types';
+import S_BillFarmerPdf from './S_BillFarmerPdf'
 
 class S_OrderDetail extends Component {
 
@@ -25,7 +25,8 @@ class S_OrderDetail extends Component {
             status: 0,
             order_farmer: [],
             get_user: [],
-            bank: []
+            bank: [],
+            date_send: moment().utc(7).add('years', 543).format('DD/MM/YYYY')
 
         }
     }
@@ -42,7 +43,11 @@ class S_OrderDetail extends Component {
 
     };
 
-
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
 
     get_order = async () => {
         let url = this.props.location.search;
@@ -233,6 +238,26 @@ class S_OrderDetail extends Component {
             openIN: false,
             // order: this.state.order.order_se_status
         })
+        let obj = {
+            order_se_id: this.state.order.order_se_id,
+            order_se_invoice_date: moment().utc(7).add('years', 543).format(),
+            order_se_invoice_date_send: this.state.date_send,
+            order_se_invoice_detail: this.state.bank
+        }
+        try {
+            await post(obj, 'neo_firm/add_invoice_se', user_token).then((result) => {
+                if (result.success) {
+                    alert('ยืนยันคำสั่งซื้อ และส่งใบแจ้งหนี้เรียบร้อย')
+                    window.location.reload()
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('ChStatus: ' + error)
+        }
 
 
     }
@@ -319,7 +344,7 @@ class S_OrderDetail extends Component {
                                                 <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_lastname}
                                                 </td>
                                                 <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
-                                                <td><button className="BTN_Signup">ดูใบสำคัญรับเงิน</button></td>
+                                                <td><S_BillFarmerPdf/></td>
                                             </tr>
                                         )
                                     })}
@@ -392,13 +417,18 @@ class S_OrderDetail extends Component {
                                 </div>
                             })}
 
-                            กำหนดวันชำระเงิน : <input type="date" />
-                            <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
+                            กำหนดวันชำระเงิน : <input type="date" id="date_send" onChange={this.handleChange} />
+                            <h4 style={{ color: "red" }}>รวมเงินทั้งหมด {this.state.order.cost * this.state.order.amount} บาท</h4>
 
-                            <div className="_Card">
-                            <h4 style={{ margin: "0px" }}>ธนาคารกรุงไทย</h4>
-                                <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เกษตรกรอินทรีย์อีสาน เลขที่บัญชี 123-4-56789-0</h5>
-                            </div>
+                            {this.state.bank.map((element) => {
+                                return (
+                                    <div className="_Card">
+                                        <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
+                                        <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h5>
+                                    </div>
+                                )
+                            })
+                            }
 
                             <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบเเจ้งหนี้</button>
 

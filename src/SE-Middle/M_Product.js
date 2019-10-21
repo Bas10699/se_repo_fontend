@@ -61,6 +61,7 @@ class ProductDetail extends Component {
     };
 
     onOpenModal = () => {
+        let selectFarmer = []
         this.setState({ open: true });
     };
 

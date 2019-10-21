@@ -7,6 +7,7 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import arrow from '../Image/up-arrow.png'
 import Pagination from "../Support/Pagination";
+import S_BillFarmerPdf from './S_BillFarmerPdf'
 
 class S_Certified extends Component {
     constructor(props) {
@@ -107,6 +108,7 @@ class S_Certified extends Component {
         data.map((element)=>{
             element.chemical_date = moment(element.chemical_date).format('DD-MM-YYYY')
         })
+        this.setState({get_farmer:data})
         this.setState(({ click }) => ({ click: !click }))
     }
 

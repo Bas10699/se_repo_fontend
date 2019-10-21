@@ -261,8 +261,8 @@ class S_Plan extends Component {
                     <div className="col-1"></div>
                     <div className="col-10">
                         <div className="tab">
-                            <button onClick={() => { this.setState({ page: 1 }) }}>ติดตามการวางแผน</button>
-                            <button onClick={() => { this.setState({ page: 2 }) }}>วางแผนการเพาะปลูกให้กับเกษตรกร</button>
+                            <button onClick={() => { this.setState({ page: 2 }) }}>ติดตามการวางแผน</button>
+                            <button onClick={() => { this.setState({ page: 1 }) }}>วางแผนการเพาะปลูกให้กับเกษตรกร</button>
                         </div>
 
                     </div>
