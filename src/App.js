@@ -82,7 +82,7 @@ function App() {
       <Route exact path='/M_Buying' component={M_Buying}/>
       <Route exact path='/M_Demand/' component={M_Demand}/>
       <Route exact path='/M_Demand/:id' component={M_Demand}/>
-      {/* <Route exact path='/M_Buying/:orderID' component={M_BuyingDetail}/> */}
+      <Route exact path='/M_Buying/:orderID' component={M_BuyingDetail}/>
       <Route exact path='/user/:UserID' component={UserDetail}/>
       <Route exact path='/S_Order' component={S_Order}/>
       <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>

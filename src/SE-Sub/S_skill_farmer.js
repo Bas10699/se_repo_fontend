@@ -425,7 +425,7 @@ class S_skill_farmer extends Component {
                     <div className='col-11' style={{ marginTop: "-50px", marginLeft: "20px", marginRight: "10px" }} >
                         
                         <h4 style={{marginBottom:"0"}}>เลือกข้อมูลที่ต้องการเปรียบเทียบ</h4>
-                        <input type="search" placeholder="ค้นหา" onChange={this.filterName} style={{margin:"10px" ,width:"80%",display:"block",marginLeft:"auto",marginRight:"auto"}}/>
+                        <input type="search" placeholder="ค้นหาชื่อ" onChange={this.filterName} style={{margin:"10px" ,width:"80%",display:"block",marginLeft:"auto",marginRight:"auto"}}/>
                         <button className={this.state.showHide1 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>จํานวนผลผลิตที่ขายต่อปี</button>
                         <button className={this.state.showHide2 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>ผลผลิตต่อไร่</button>
                         <button className={this.state.showHide3 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>จำนวนการส่งมอบต่อครั้ง</button>
