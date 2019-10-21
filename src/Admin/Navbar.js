@@ -62,9 +62,9 @@ class Navbar extends Component {
                 render_user =
                     <div className="App">
                         <div className="Navbar">
-                            <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
+                            <NavLink exact to="/Product_Research" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
-                                <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
+                                {/* <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li> */}
                                 <li><NavLink exact to="/Planting_Planning" activeClassName="Active" className="NavbarText">การวางแผนเพาะปลูก</NavLink></li>
                                 <li><NavLink exact to="/Product_Information" activeClassName="Active" className="NavbarText">ข้อมูลผลผลิต</NavLink></li>
                                 <li><NavLink exact to="/Product_Research" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
