@@ -38,7 +38,7 @@ class S_OrderDetail extends Component {
 
     };
 
-   
+
 
     get_order = async () => {
         let url = this.props.location.search;
@@ -168,6 +168,26 @@ class S_OrderDetail extends Component {
             openIN: false,
             // order: this.state.order.order_se_status
         })
+
+        let obj = {
+            object:this.state.selectFarmer,
+            order_se_id:this.state.order.order_se_id,
+            plant_name: this.state.order.plant_name
+
+        }
+        try {
+            await post(obj, 'neo_firm/add_order_farmer', user_token).then((result) => {
+                if (result.success) {
+                    alert('ออกใบสำเร็จ')
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('ChStatus: '+error)
+        }
     }
 
     status=()=>{
@@ -185,8 +205,6 @@ class S_OrderDetail extends Component {
                         <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_se_id}</h2>
                     </div>
                 </div>
-
-
 
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
@@ -248,14 +266,14 @@ class S_OrderDetail extends Component {
                                     })
                                     : <button>เพิ่มบัญชีธนาคาร</button>
                                     }  */}
-                              <div className="_Card">
+                                <div className="_Card">
                                     สัญลักษณ์ธนาคาร
                             <h3 style={{ margin: "0px" }}>ธนาคารกรุงไทย</h3>
                                     <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เกษตรกรอินทรีย์อีสาน เลขที่บัญชี 123-4-56789-0</h4>
                                 </div>
                                 <button onClick={() => this.setState({ openIN: true })}>ออกใบเเจ้งหนี้</button>
                                 <button>เพิ่มบัญชีธนาคาร</button>
-                                
+
 
                             </div>
                         }
