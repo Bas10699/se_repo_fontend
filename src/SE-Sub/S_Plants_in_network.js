@@ -29,6 +29,7 @@ class S_Plants_in_network extends Component {
     componentWillMount() {
         this.get_plant()
     }
+    
     get_plant = async () => {
         try {
             await get('neo_firm/get_plant_in_network', user_token).then((result) => {
@@ -223,7 +224,8 @@ class S_Plants_in_network extends Component {
                                         <td style={{ textAlign: "center" }}>กิโลกรัม</td>
                                     </tr>
                                 )
-                            })}<div id="Top" />
+                            })}
+                            <div id="Top" />
                         </table>
 
                     </div>

@@ -53,64 +53,65 @@ import Quotation from './Support/pdfmake/Quotation';
 
 import M_R_Order from './SE-Middle/M_Research/M_R_Order';
 import M_R_Trace from './SE-Middle/M_Research/M_R_Trace';
+import S_Plan from './SE-Sub/S_Plan';
 
 function App() {
   return (
     <Router exact path="/">
-      
+
       <Navbar />
 
-      <Route exact path='/Test' component={Test}/>
-      <Route exact path='/UserAll' component={UserAll}/>
-      <Route exact path='/Signin' component={Signin}/>
-      <Route exact path='/Signup' component={Signup}/>
-      <Route exact path='/' component={Home}/>
-      <Route exact path='/T_Cart' component={T_Cart}/>
-      <Route exact path='/T_Order' component={T_Order}/>
-      <Route exact path='/Product' component={Product}/>
-      <Route exact path='/Product/:productID' component={ProductDetail}/>
-      <Route exact path='/T_Buying' component={T_Buying}/>
-      <Route exact path='/T_Buying/:orderID' component={BuyingDetail}/>
-      <Route exact path='/User' component={User}/>
-      <Route exact path='/EditUser' component={EditUser}/>
-      <Route exact path='/M_Product' component={M_Product}/>
-      <Route exact path='/M_Order' component={M_Order}/>
-      <Route exact path='/M_Order/:orderID' component={OrderDetail}/>
-      <Route exact path='/EditProduct/:productID' component={EditProduct}/>
-      <Route exact path='/M_Summary' component={M_Summary}/>
-      <Route exact path='/AddProduct' component={AddProduct}/>
-      <Route exact path='/M_Buying' component={M_Buying}/>
-      <Route exact path='/M_Demand/' component={M_Demand}/>
-      <Route exact path='/M_Demand/:id' component={M_Demand}/>
-      <Route exact path='/M_Buying/:orderID' component={M_BuyingDetail}/>
-      <Route exact path='/user/:UserID' component={UserDetail}/>
-      <Route exact path='/S_Order' component={S_Order}/>
-      <Route exact path='/S_Plants_in_network' component={S_Plants_in_network}/>
-      <Route exact path='/S_skill_farmer' component={S_skill_farmer}/>
-      <Route exact path='/S_Order/:OrderId' component={S_OrderDetail}/>
-      <Route exact path='/S_Certified' component={S_Certified}/>
+      <Route exact path='/Test' component={Test} />
+      <Route exact path='/UserAll' component={UserAll} />
+      <Route exact path='/Signin' component={Signin} />
+      <Route exact path='/Signup' component={Signup} />
+      <Route exact path='/' component={Home} />
+      <Route exact path='/T_Cart' component={T_Cart} />
+      <Route exact path='/T_Order' component={T_Order} />
+      <Route exact path='/Product' component={Product} />
+      <Route exact path='/Product/:productID' component={ProductDetail} />
+      <Route exact path='/T_Buying' component={T_Buying} />
+      <Route exact path='/T_Buying/:orderID' component={BuyingDetail} />
+      <Route exact path='/User' component={User} />
+      <Route exact path='/EditUser' component={EditUser} />
+      <Route exact path='/M_Product' component={M_Product} />
+      <Route exact path='/M_Order' component={M_Order} />
+      <Route exact path='/M_Order/:orderID' component={OrderDetail} />
+      <Route exact path='/EditProduct/:productID' component={EditProduct} />
+      <Route exact path='/M_Summary' component={M_Summary} />
+      <Route exact path='/AddProduct' component={AddProduct} />
+      <Route exact path='/M_Buying' component={M_Buying} />
+      <Route exact path='/M_Demand/' component={M_Demand} />
+      <Route exact path='/M_Demand/:id' component={M_Demand} />
+      <Route exact path='/M_Buying/:orderID' component={M_BuyingDetail} />
+      <Route exact path='/user/:UserID' component={UserDetail} />
+      <Route exact path='/S_Order' component={S_Order} />
+      <Route exact path='/S_Plants_in_network' component={S_Plants_in_network} />
+      <Route exact path='/S_skill_farmer' component={S_skill_farmer} />
+      <Route exact path='/S_Order/:OrderId' component={S_OrderDetail} />
+      <Route exact path='/S_Certified' component={S_Certified} />
 
-      <Route exact path='/M_Plan' component={M_Plan}/>
-      
+      <Route exact path='/M_Plan' component={M_Plan} />
+
       {/* <Route exact path='/Researcher' component={Researcher}/> */}
       {/* <Route exact path='/Request' component={Request}/> */}
       {/* <Route exact path='/Results' component={Results}/> */}
       {/* <Route exact path='/Material' component={Material}/> */}
 
-      <Route exact path='/Planting_Planning' component={Planting_Planning}/>
-      <Route exact path='/Product_Information' component={Product_Information}/>
-      <Route exact path='/Product_Research' component={Product_Research}/>
-      <Route exact path='/Product_Research/:id' component={Product_Research}/>
+      <Route exact path='/Planting_Planning' component={Planting_Planning} />
+      <Route exact path='/Product_Information' component={Product_Information} />
+      <Route exact path='/Product_Research' component={Product_Research} />
+      <Route exact path='/Product_Research/:id' component={Product_Research} />
 
       {/* <Route exact path='/Confirm_Product' component={Confirm_Product}/>
       <Route exact path='/Product_Info' component={Product_Info}/>
       <Route exact path='/Check_Details' component={Check_Details}/>
       <Route exact path='/Product_History' component={Product_History}/> */}
 
-      <Route exact path='/Order_plan' component={Order_plan}/>
-      <Route exact path='/Quotation' component={Quotation}/>
+      <Route exact path='/Order_plan' component={Order_plan} />
+      <Route exact path='/Quotation' component={Quotation} />
 
-
+      <Route exact path='/S_Plan' component={S_Plan} />
     </Router>
   );
 }
