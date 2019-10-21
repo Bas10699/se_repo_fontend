@@ -200,7 +200,7 @@ class User extends Component {
                             </tr>
 
                         </table>
-                        {this.state.get_user ? this.state.get_user.user_type === '4' ?
+                        {this.state.get_user ? this.state.get_user.user_type === '4' || this.state.get_user.user_type === '3' ?
                             this.state.bank_information.map((element) => {
                                 return (
                                     <div className="_Card">

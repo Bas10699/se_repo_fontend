@@ -179,7 +179,13 @@ class EditUser extends Component {
     };
 
     add_invoice = () => {
-        let bank = this.state.bank_information
+        if(this.state.bank_information == ''){
+            var bank = []
+        }
+        else{
+            var bank = this.state.bank_information
+        }
+        // console.log(bank)
         bank.push({
             bankAccount: this.state.bankAccount,
             bankName: this.state.bankName,
