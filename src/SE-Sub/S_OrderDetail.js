@@ -22,7 +22,8 @@ class S_OrderDetail extends Component {
             check_array: [],
             OpenProofPaymet: false,
             openIN: false,
-
+            status:0
+ 
         }
     }
 
@@ -159,11 +160,13 @@ class S_OrderDetail extends Component {
         // console.log('up',updatedList)
     }
 
-    ChStatus = async () => {
+    ChStatus = () => {
+        let order = this.state.order
+        order.order_se_status = 1
         this.setState({
             OpenProofPaymet: false,
             openIN: false,
-            order: this.state.order.order_se_status
+            // order: this.state.order.order_se_status
         })
 
         let obj = {
@@ -185,6 +188,13 @@ class S_OrderDetail extends Component {
         catch (error) {
             alert('ChStatus: '+error)
         }
+    }
+
+    status=()=>{
+        this.setState({
+            status:1,
+            OpenProofPaymet: false,
+        })
     }
 
     render() {
@@ -209,7 +219,7 @@ class S_OrderDetail extends Component {
                             <h4>{this.state.order.plant_name} </h4>
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
                             <h5>ราคา</h5>
-                            <button onClick={() => this.openModel()}>ออกใบสำคัญรับเงิน</button>
+                            { this.state.status == 0 ? <button onClick={() => this.openModel()}>ออกใบสำคัญรับเงิน</button> : "ออกใบสำคัญรับเเล้ว"}
                         </div>
 
 
@@ -217,7 +227,7 @@ class S_OrderDetail extends Component {
                     <div className="col-1"></div>
 
                     <div className="col-7">
-                        {this.state.order.order_se_status >= 0 ?
+                        {this.state.status == 0 ?
                             <div>
                                 <h4 style={{ margin: "0px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
                                 <Checkbox
@@ -292,7 +302,7 @@ class S_OrderDetail extends Component {
                             <h5>รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h5>
                             <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
 
-                            <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบสำคัญรับเงิน</button>
+                            <button className="BTN_Signin" onClick={() => { this.status() }}>ออกใบสำคัญรับเงิน</button>
 
                         </div>
                     </div>
