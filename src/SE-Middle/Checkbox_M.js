@@ -4,7 +4,7 @@ class Checkbox extends Component {
     state = {
         isChecked: false,
         click: false,
-        farmer: []
+        farmer: [],
     }
 
     toggleCheckboxChange = () => {
@@ -45,11 +45,11 @@ class Checkbox extends Component {
         ));
     }
 
-  
+   
 
 
     render() {
-
+        // console.log('GG',this.props.option)
 
         return (
             <div>
