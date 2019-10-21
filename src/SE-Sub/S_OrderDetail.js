@@ -24,8 +24,8 @@ class S_OrderDetail extends Component {
             openIN: false,
             status: 0,
             order_farmer: [],
-            get_user:[],
-            bank:[]
+            get_user: [],
+            bank: []
 
         }
     }
@@ -73,22 +73,22 @@ class S_OrderDetail extends Component {
             alert('get_order: ' + error)
         }
     }
-    
-    get_user = async () =>{
-        try{
-            await get('user/get_user',user_token).then((result)=>{
-                if(result.success){
+
+    get_user = async () => {
+        try {
+            await get('user/get_user', user_token).then((result) => {
+                if (result.success) {
                     this.setState({
                         get_user: result.result,
-                        bank:result.result.bank_information
+                        bank: result.result.bank_information
                     })
                     // console.log('get_user',result.result)
-                }else{
+                } else {
                     alert(result.error_message)
                 }
             })
         }
-        catch(error){
+        catch (error) {
 
         }
     }
@@ -287,7 +287,7 @@ class S_OrderDetail extends Component {
                             <h4>{this.state.order.plant_name} </h4>
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
                             <h5>ราคา {this.state.order.cost} บาท/กิโลกรัม</h5>
-                            {this.state.order.order_farmer_status == 0 ? <button onClick={() => this.openModel()}>ออกใบสำคัญรับเงิน</button> : "ออกใบสำคัญรับเเล้ว"}
+                            {this.state.order.order_farmer_status == 0 ? <button onClick={() => this.openModel()}>ออกใบสำคัญรับเงิน</button> : <div style={{ color: "red" }}>"ออกใบสำคัญรับเงินเเล้ว"</div>}
                         </div>
 
 
@@ -311,17 +311,19 @@ class S_OrderDetail extends Component {
                             :
                             <div>
                                 <h4 style={{ margin: "0px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
-                                {this.state.order_farmer.map((element, index) => {
-                                    return (
-                                        <div>
-                                            {index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_lastname}
-                                            จำนวน {element.order_farmer_plant_volume} กิโลกรัม
-                                            <button>PDF</button>
-                                        </div>
-                                    )
-                                })}
-
-                                บัญชีธนาคาร
+                                <button onClick={() => this.setState({ openIN: true })} className="BTN_Signin" style={{ float: "left" }}>ออกใบเเจ้งหนี้</button>
+                                <table>
+                                    {this.state.order_farmer.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_lastname}
+                                                </td>
+                                                <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
+                                                <td><button className="BTN_Signup">ดูใบสำคัญรับเงิน</button></td>
+                                            </tr>
+                                        )
+                                    })}
+                                </table>
                                 {/* {this.state.get_user ? 
                                     this.state.bank_information.map((element) => {
                                         return (
@@ -334,11 +336,6 @@ class S_OrderDetail extends Component {
                                     })
                                     : <button>เพิ่มบัญชีธนาคาร</button>
                                     }  */}
-
-                                <button onClick={() => this.setState({ openIN: true })}>ออกใบเเจ้งหนี้</button>
-
-
-
                             </div>
                         }
                     </div>
@@ -354,13 +351,16 @@ class S_OrderDetail extends Component {
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12" >
                             <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร  ราคา {this.state.order.cost} บาท/กิโลกรัม</h5>
+                            <table>
+                                {this.state.selectFarmer.map((element, index) => {
+                                    return <tr>
+                                        <td>{index + 1}. {element.title_name} {element.first_name} {element.last_name}</td>
+                                        <td>จำนวน {element.amount} กิโลกรัม </td>
+                                        <td>{element.amount * this.state.order.cost} บาท</td>
+                                    </tr>
+                                })}
 
-                            {this.state.selectFarmer.map((element, index) => {
-                                return <div>
-                                    {index + 1}. {element.title_name} {element.first_name} {element.last_name}
-                                    จำนวน {element.amount} กิโลกรัม {element.amount * this.state.order.cost} บาท
-                                </div>
-                            })}
+                            </table>
 
 
                             <h5>รวมจำนวนทั้งหมด {this.summ(this.state.selectFarmer)} กิโลกรัม</h5>
@@ -377,29 +377,27 @@ class S_OrderDetail extends Component {
                 <Modal open={this.state.openIN} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-12" >
-                            <h3 style={{ textAlign: "center" }}>ออกใบเเจ้งหนี้</h3>
+                            <h2 style={{ textAlign: "center" }}>ออกใบเเจ้งหนี้ของใบสั่งซื้อเลขที่ {this.state.order.order_se_id}</h2>
                         </div>
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12" >
-                            <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_se_id}</h2>
-                            <h5>สั่งซื้อ {this.state.order.plant_name} กับเกษตรกร</h5>
+
+                            <h4>สั่งซื้อ {this.state.order.plant_name} รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h4>
 
                             {this.state.selectFarmer.map((element, index) => {
                                 return <div>
                                     {index + 1}. {element.title_name} {element.first_name} {element.last_name}
-                                    จำนวน {element.amount} กิโลกรัม
+
                                 </div>
                             })}
 
                             กำหนดวันชำระเงิน : <input type="date" />
-                            <h5>รวมจำนวนทั้งหมด {this.state.order.amount} กิโลกรัม</h5>
                             <h4 style={{ color: "red" }}>รวมเงินทั้งหมด XX บาท</h4>
 
                             <div className="_Card">
-                                สัญลักษณ์ธนาคาร
-                            <h3 style={{ margin: "0px" }}>ธนาคารกรุงไทย</h3>
-                                <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เกษตรกรอินทรีย์อีสาน เลขที่บัญชี 123-4-56789-0</h4>
+                            <h4 style={{ margin: "0px" }}>ธนาคารกรุงไทย</h4>
+                                <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร เกษตรกรอินทรีย์อีสาน เลขที่บัญชี 123-4-56789-0</h5>
                             </div>
 
                             <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบเเจ้งหนี้</button>
@@ -407,15 +405,6 @@ class S_OrderDetail extends Component {
                         </div>
                     </div>
                 </Modal>
-
-
-
-
-
-
-
-
-
             </div >
         )
     }
