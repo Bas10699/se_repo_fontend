@@ -344,7 +344,7 @@ class S_OrderDetail extends Component {
                                                 <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_lastname}
                                                 </td>
                                                 <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
-                                                <td><S_BillFarmerPdf/></td>
+                                                <td><S_BillFarmerPdf data={element}/></td>
                                             </tr>
                                         )
                                     })}

@@ -17,6 +17,8 @@ class Navbar extends Component {
         this.state = {
             get_user: null,
             news: false,
+            noti_order_trader:0,
+            noti_M_Order:0
 
         };
     }
@@ -52,6 +54,36 @@ class Navbar extends Component {
             });
         } catch (error) {
             alert("get user error : " + error);
+        }
+    }
+
+    get_noti_trader = async () =>{
+        try{
+            await get('ss/noti_trader',user_token).then((result)=>{
+                if(result.success){
+                    this.setState({
+                        noti_order_trader: result.result
+                    })
+                }
+            })
+        }
+        catch(error){
+            alert('get_noti_trader: '+error)
+        }
+    }
+
+    get_noti_Middle = async () =>{
+        try{
+            await get('ss/noti_SE_Middle',user_token).then((result)=>{
+                if(result.success){
+                    this.setState({
+                        noti_M_Order: result.result
+                    })
+                }
+            })
+        }
+        catch(error){
+            alert('get_noti_trader: '+error)
         }
     }
 

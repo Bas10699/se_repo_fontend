@@ -459,11 +459,11 @@ class S_skill_farmer extends Component {
                                     }
                                 </th> : null}
                                 {this.state.showHide4 ? <th style={{ borderLeft: "1px solid #ccc" }}>เดือนที่ส่งมอบ
-                                {this.state.click4 ?
+                                {/* {this.state.click4 ?
                                         <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.end_plant()} />
                                         :
                                         <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.end_plant()} />
-                                    }
+                                    } */}
                                 </th> : null}
                                 {this.state.showHide5 ? <th style={{ borderLeft: "1px solid #ccc" }}>จำนวนครั้งส่งมอบ
                                 {this.state.click5 ?
