@@ -73,8 +73,8 @@ class PdfOrder extends Component {
                                 widths: [280, 212.5],
                                 heights: 90,
                                 body: [
-                                    [`ผู้ติดต่อ \t\t'$'{this.props.data.name} $'{this.props.data.lastname}' \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t'$'{this.props.data.address}' \n\nโทร. \t\t\t'$'{this.props.data.phone}' `,
-                                    `วันที่กำหนดส่ง '$'{moment(this.props.data.date_send).format('DD/MM/YYYY')'}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n'$'{this.props.data.address_send}'`]
+                                    [`ผู้ติดต่อ \t\tSE กลาง \nชื่อบริษัท \t   \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t \n\nโทร. \t\t\t `,
+                                    `วันที่กำหนดส่ง \nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n`]
                                 ]
                             }
                         },
@@ -99,13 +99,13 @@ class PdfOrder extends Component {
                                         table: {
                                             widths: [20.5, 42, 176, 40, 40, 65, 65],
                                             body: [
-                                                [{ text: 'index + 1', alignment: 'center' },
+                                                [{ text: '1', alignment: 'center' },
                                                 { text: 'element.plant_id', alignment: 'center' },
-                                                'element.plant_name',
-                                                { text: 'addComma(element.price)', alignment: 'center' },
-                                                { text: 'addComma(element.amount)', alignment: 'center' },
+                                                this.props.data.plant_name,
+                                                { text:  this.props.data.cost, alignment: 'center' },
+                                                { text: this.props.data.amount, alignment: 'center' },
                                                 { text: 'กิโลกรัม', alignment: 'center' },
-                                                { text: 'addComma(element.price * element.amount)', alignment: 'center' }]
+                                                { text: this.props.data.cost*this.props.data.amount, alignment: 'center' }]
 
                                             ]
                                         },
@@ -124,7 +124,7 @@ class PdfOrder extends Component {
                                 widths: [320, 80, 84.5],
                                 body: [
                                     [{ text: 'หมายเหตุ', rowSpan: 4, border: [true, false, true, true], },
-                                    { border: [true, false, true, true], text: 'รวมเงิน', },
+                                    { border: [true, false, true, true], text: 'ราคาก่อนรวมภาษี', },
                                     { border: [true, false, true, true], text: addComma(total_price), alignment: 'right' }],
                                     ['', { text: 'ส่วนลด' }, ' '],
                                     ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: addComma(total_price), alignment: 'right' }],

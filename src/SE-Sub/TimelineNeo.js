@@ -21,7 +21,7 @@ import Modal from 'react-responsive-modal'
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
 
-class Timeline extends Component {
+class TimelineNeo extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -154,6 +154,7 @@ class Timeline extends Component {
 
                 {this.props.status >= 0 ?
                     <div style={{ marginLeft: "2.5%", width: "30%", marginTop: "-40px" }}>
+                        {console.log('gg',this.props.order)}
                         <PdfOrder data={this.props.order} />
                     </div>
                     :
@@ -161,7 +162,7 @@ class Timeline extends Component {
                 }
                 {this.props.status >= 1 ?
                     <div style={{ marginLeft: "19.5%", width: "30%", marginTop: "-40px" }}>
-                        <PdfInvoice data={this.props.invoice} order={this.props.order} />
+                        {/* <PdfInvoice data={this.props.invoice} order={this.props.order} /> */}
                     </div>
                     :
                     null
@@ -175,7 +176,7 @@ class Timeline extends Component {
                 }
                 {this.props.status >= 3 ?
                     <div style={{ marginLeft: "53%", width: "30%", marginTop: "-40px" }}>
-                        <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
+                        {/* <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} /> */}
                     </div>
                     :
                     null
@@ -209,4 +210,4 @@ class Timeline extends Component {
         )
     }
 }
-export default Timeline;
+export default TimelineNeo;

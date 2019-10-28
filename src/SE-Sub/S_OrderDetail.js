@@ -301,7 +301,7 @@ class S_OrderDetail extends Component {
 
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
-                        <Timeline status={this.state.order.order_se_status} />
+                        <Timeline status={this.state.order.order_se_status} order={this.state.order}/>
                     </div>
                 </div>
 
