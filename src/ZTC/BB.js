@@ -119,7 +119,7 @@ class T_Buying extends Component {
 
     get_user = async () => {
         try {
-            await get('show/show_user', user_token).then((result) => {
+            await get('user/show_user', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
                         get_user: result.result
