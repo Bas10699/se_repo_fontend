@@ -81,7 +81,7 @@ class Signin extends Component {
                     <div className="col-4">
                         <h4> ชื่อผู้ใช้งาน </h4>
                         <input type="text" id="username" 
-                        placeholder="กรอกชื่อบัญชีผู้ใช้" 
+                        placeholder="somying1234" 
                         name="username" onChange={this.handleChange} 
                         />
                         <h4> รหัสผ่าน </h4>

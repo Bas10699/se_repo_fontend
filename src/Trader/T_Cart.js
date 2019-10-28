@@ -233,7 +233,7 @@ class T_Cart extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ตระกร้าสินค้า</h2>
+                        <h2 style={{ textAlign: "center" }}>ตะกร้าสินค้า</h2>
                     </div>
                 </div>
 
@@ -302,13 +302,13 @@ class T_Cart extends Component {
                                 <div className="col-1" />
                                 <div className="col-10">
                                     <h3 style={{ textAlign: "center" }}>รายละเอียดการจัดส่ง</h3>
-                                    <h4>วันที่กำหนดส่ง</h4>
-                                    <h5 style={{ color: "red" }} >** เลือกวันกำหนดส่ง กรณีสินค้าหมด หรือสั่งซื้อล่วงหน้า **</h5>
-                                    <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px" }} />
+                                    <h4 style={{marginTop:"20px",marginBottom:"0"}}>วันที่กำหนดส่ง</h4>
+                                    <h5 style={{ color: "red",marginTop:"0",marginBottom:"10px" }} >** เลือกวันกำหนดส่ง กรณีสินค้าหมด หรือสั่งซื้อล่วงหน้า **</h5>
+                                    <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px",marginBottom:"0" }} />
 
-                                    <h4>ที่อยู่จัดส่ง</h4>
-                                    <input type="radio" name="address_new" onChange={this.address_change} />ที่อยู่เดิม
-                                        <input type="radio" name="address_new" />ที่อยู่ใหม่
+                                    <h4 style={{marginTop:"20px",marginBottom:"0"}}>ที่อยู่จัดส่ง</h4>
+                                    <input type="radio" name="address_new" onChange={this.address_change} />ที่อยู่เดิม {"\t\t\t\t\t\t\t\t"}
+                                        <input type="radio" name="address_new" style={{margin:"0"}} />ที่อยู่ใหม่
                                     <textarea rows="4" cols="95" name="address" id="address" value={this.state.address} onChange={this.handleChange}
                                         form="usrform" />
                                     <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>

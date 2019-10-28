@@ -78,50 +78,56 @@ class Signup extends Component {
                     <div className="col-4">
                         <h4>ชื่อ</h4>
                         <input type="text" id="name"
-                            placeholder="กรอกชื่อจริง" name="name"
+                            placeholder="สมหญิง" name="name"
                             onChange={this.handleChange}
                         />
                         <h4>นามสกุล</h4>
                         <input type="text" id="lastname"
-                            placeholder="กรอกนามสกุล" name="lastname"
+                            placeholder="ยอดหญิง" name="lastname"
                             onChange={this.handleChange}
                         />
                         <h4>E-mail</h4>
                         <input type="email" id="email"
-                            placeholder="กรอก E-mail" name="email"
+                            placeholder="user@user.com" name="email"
                             onChange={this.handleChange}
                         />
                         <h4>เบอร์โทรศัพท์</h4>
                         <input type="tel" id="phone"
-                            placeholder="กรอกเบอร์โทรศํพท์" name="phone"
+                            placeholder="088-888-8888" name="phone"
                             onChange={this.handleChange}
+                            pattern=" \d{3}[\-]\d{3}[\-]\d{4}"
                         />
                         <h4>ที่อยู่</h4>
                         <input type="text" id="address"
-                            placeholder="กรอกที่อยู่ปัจจุบัน" name="address"
+                            placeholder="00 หมู่ 0 ต.หนึ่ง อ.สองสาม จ.สี่ 56789" name="address"
                             onChange={this.handleChange}
                         />
                         <h4>ชื่อบัญชีผู้ใช้</h4>
                         <input type="text" id="username"
-                            placeholder="กรอกบัญชีผู้ใช้" name="username"
+                            placeholder="somying1234" name="username"
                             onChange={this.handleChange}
+                            pattern="[A-Za-z]"
                         />
                         <h4>ประเภทผู้ใช้งาน</h4>
                         <select id="user_type" name="user_type" onChange={this.handleChange}>
-                            <option>--เลือกประเภท--</option>
+                            <option value='0'>--เลือกประเภท--</option>
                             <option value='2'>ผู้ประกอบการ</option>
                             <option value='4'>SE กลาง</option>
                             <option value='3'>SE ย่อย</option>
+                            <option value='1'>นักวิจัย</option>
                         </select>
 
                         <h4>รหัสผ่าน</h4>
                         <input type="password" id="password"
                             placeholder="กรอกรหัสผ่าน" name="password"
                             onChange={this.handleChange}
+                            pattern=".{6,}(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           
                         />
                         <input type="checkbox" id="show_password"
                             name="show_password"
                             onClick={this.show_password}
+
                         />แสดงรหัสผ่าน
                         <div>
                             <button className="BTN_Signin" style={{ marginBottom: "30px" }}
