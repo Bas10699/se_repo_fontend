@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import queryString from 'query-string';
-import Timeline from '../SE-Sub/TimelineNeo';
+import TimelineNeo from '../SE-Sub/TimelineNeo';
 import Modal from 'react-responsive-modal'
 import moment from 'moment'
 
@@ -213,7 +213,7 @@ class M_BuyingDetail extends Component {
 
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
-                        <Timeline status={this.state.get_order.order_se_status} data={this.state.get_order} />
+                        <TimelineNeo status={this.state.get_order.order_se_status} order={this.state.get_order}/>
                     </div>
                 </div>
 
