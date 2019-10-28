@@ -11,7 +11,7 @@ class EditUser extends Component {
         super(props);
         this.state = {
             name: '',
-            lastname: '',
+            last_name: '',
             email: '',
             phone: '',
             username: '',
@@ -104,7 +104,7 @@ class EditUser extends Component {
     update_data_user = async () => {
         let object = {
             name: this.state.get_user.name,
-            lastname: this.state.get_user.lastname,
+            last_name: this.state.get_user.last_name,
             email: this.state.get_user.email,
             phone: this.state.get_user.phone,
             username: this.state.get_user.username,
@@ -240,8 +240,8 @@ class EditUser extends Component {
                         />
                         <h4>นามสกุล</h4>
                         < input
-                            type="text" id="lastname"
-                            value={this.state.get_user.lastname}
+                            type="text" id="last_name"
+                            value={this.state.get_user.last_name}
                             onChange={this.handleChange}
                         />
                         <h4>ประเภทผู้ใช้งาน : {this.render_type(this.state.get_user ? this.state.get_user.type_user : null)}</h4>

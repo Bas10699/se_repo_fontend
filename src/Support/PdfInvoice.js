@@ -73,7 +73,7 @@ class Pdf extends Component {
                                 widths: [280, 212.5],
                                 heights: 90,
                                 body: [
-                                    [`ผู้ติดต่อ \t\t${this.props.order.name} ${this.props.order.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.order.address} \n\nโทร. \t\t\t${this.props.order.phone} `,
+                                    [`ผู้ติดต่อ \t\t${this.props.order.name} ${this.props.order.last_name} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.order.address} \n\nโทร. \t\t\t${this.props.order.phone} `,
                                      `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_id}\nกำหนดวันชำระเงิน ${this.props.data.date_send} \nที่อยู่จัดส่ง \nเลขที่ 2571/1 ซอฟต์เเวร์รีสอร์ท เเขวงหัวหมาก \nเขตบางกะปิ กรุงเทพฯ 10240`]
                                 ]
                             }

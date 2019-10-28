@@ -68,7 +68,7 @@ class Order_plan extends Component {
                                 widths: [503],
                                 heights: 50,
                                 body: [
-                                    [`ผู้ติดต่อ \t\t${this.props.data.order_farmer_title_name}${this.props.data.order_farmer_name} ${this.props.data.order_farmer_lastname}  \nที่อยู่ \t\t   74 หมู่ 7 ตำบลสันทรายงาม อำเภอเทิง จังหวัดเชียงราย 57160 \nโทร \t\t\t086-4000208 `,
+                                    [`ผู้ติดต่อ \t\t${this.props.data.order_farmer_title_name}${this.props.data.order_farmer_name} ${this.props.data.order_farmer_last_name}  \nที่อยู่ \t\t   74 หมู่ 7 ตำบลสันทรายงาม อำเภอเทิง จังหวัดเชียงราย 57160 \nโทร \t\t\t086-4000208 `,
                                     ]
                                 ]
                             }

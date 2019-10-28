@@ -16,7 +16,7 @@ class UserDetail extends Component {
         this.state = {
             username: '',
             name: '',
-            lastname: '',
+            last_name: '',
             email: '',
             phone: '',
             address: '',
@@ -111,7 +111,7 @@ class UserDetail extends Component {
                         <table>
                             <tr>
                                 <th>ชื่อ - นามสกุล</th>
-                                <td>{this.state.get_user ? this.state.get_user.name : null} {this.state.get_user ? this.state.get_user.lastname : null}</td>
+                                <td>{this.state.get_user ? this.state.get_user.name : null} {this.state.get_user ? this.state.get_user.last_name : null}</td>
                             </tr>
                             <tr>
                                 <th>ประเภทผู้ใช้งาน</th>
@@ -192,8 +192,8 @@ class UserDetail extends Component {
                             <div className="col-4">
                                 <h4>นามสกุล</h4>
                                 < input
-                                    type="text" id="lastname"
-                                    value={this.state.get_user.lastname}
+                                    type="text" id="last_name"
+                                    value={this.state.get_user.last_name}
                                     onChange={this.handleChange}
                                 />
 

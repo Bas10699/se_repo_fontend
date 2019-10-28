@@ -18,7 +18,7 @@ class User extends Component {
         this.state = {
             username: '',
             name: '',
-            lastname: '',
+            last_name: '',
             email: '',
             phone: '',
             address: '',
@@ -176,7 +176,7 @@ class User extends Component {
                         <table>
                             <tr>
                                 <th>ชื่อ - นามสกุล</th>
-                                <td>{this.state.get_user ? this.state.get_user.name : null} {this.state.get_user ? this.state.get_user.lastname : null}</td>
+                                <td>{this.state.get_user ? this.state.get_user.name : null} {this.state.get_user ? this.state.get_user.last_name : null}</td>
                             </tr>
                             <tr>
                                 <th>ประเภทผู้ใช้งาน</th>

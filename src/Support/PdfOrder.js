@@ -73,7 +73,7 @@ class PdfOrder extends Component {
                 widths: [280, 212.5],
                 heights: 90,
                 body: [
-                  [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
+                  [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.last_name} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
                     `วันที่กำหนดส่ง ${moment(this.props.data.date_send).format('DD/MM/YYYY')}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                 ]
               }

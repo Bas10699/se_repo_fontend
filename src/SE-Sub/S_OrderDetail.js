@@ -341,7 +341,7 @@ class S_OrderDetail extends Component {
                                     {this.state.order_farmer.map((element, index) => {
                                         return (
                                             <tr>
-                                                <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_lastname}
+                                                <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_last_name}
                                                 </td>
                                                 <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
                                                 <td><S_BillFarmerPdf data={element}/></td>

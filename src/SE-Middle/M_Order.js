@@ -311,7 +311,7 @@ class M_Order extends Component {
                                                 <td>{element.order_id}</td>
                                                 <td>{moment(element.order_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_status)}</td>
-                                                <td>{element.name} {element.lastname}</td>
+                                                <td>{element.name} {element.last_name}</td>
                                                 <td><NavLink to={"/M_Order/gg?aa=" + element.order_id} style={{ textDecoration: "none" }}>
                                                     <button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button>
                                                 </NavLink>

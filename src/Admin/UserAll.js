@@ -14,7 +14,7 @@ class UserAll extends Component {
         this.state = {
             username: '',
             name: '',
-            lastname: '',
+            last_name: '',
             email: '',
             phone: '',
             address: '',
@@ -130,7 +130,7 @@ class UserAll extends Component {
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{index + 1}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{element.user_id}</td>
                                         <td style={{ textAlign: "left", width: "15%", borderLeft: "1px solid #f4f4f4" }}>{element.name}</td>
-                                        <td style={{ textAlign: "left", width: "10%", borderLeft: "1px solid #f4f4f4" }}>{element.lastname}</td>
+                                        <td style={{ textAlign: "left", width: "10%", borderLeft: "1px solid #f4f4f4" }}>{element.last_name}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{this.render_type(element.type_user)}</td>
                                         <td style={{ textAlign: "left", width: "30%", borderLeft: "1px solid #f4f4f4" }}>{element.address}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>

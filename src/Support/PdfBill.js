@@ -73,7 +73,7 @@ class Pdf extends Component {
                                 widths: [280, 212.5],
                                 heights: 90,
                                 body: [
-                                    [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.lastname} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
+                                    [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.last_name} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
                                      `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_id}\nอ้างอิงใบแจ้งหนี้เลขที่ ${this.props.invoice.invoice_id}\nกำหนดวันชำระเงิน ${this.props.data.date_send} \nวันที่ชำระเงิน ${this.props.payment.date_proof}\nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                                 ]
                             }

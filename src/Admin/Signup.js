@@ -13,7 +13,7 @@ class Signup extends Component {
             password: null,
             email: null,
             name: null,
-            lastname: null,
+            last_name: null,
             phone: null,
             address: null,
             type_user: null
@@ -41,7 +41,7 @@ class Signup extends Component {
             password: this.state.password,
             email: this.state.email,
             name: this.state.name,
-            lastname: this.state.lastname,
+            last_name: this.state.last_name,
             phone: this.state.phone,
             address: this.state.address,
             type_user: this.state.type_user
@@ -82,8 +82,8 @@ class Signup extends Component {
                             onChange={this.handleChange}
                         />
                         <h4>นามสกุล</h4>
-                        <input type="text" id="lastname"
-                            placeholder="ยอดหญิง" name="lastname"
+                        <input type="text" id="last_name"
+                            placeholder="ยอดหญิง" name="last_name"
                             onChange={this.handleChange}
                         />
                         <h4>E-mail</h4>
