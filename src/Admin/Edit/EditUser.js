@@ -37,9 +37,9 @@ class EditUser extends Component {
 
     }
 
-    render_type = (user_type) => {
+    render_type = (type_user) => {
         let render_user
-        switch (user_type) {
+        switch (type_user) {
             case "1":
                 render_user = 'นักวิจัย'
                 break;
@@ -244,13 +244,8 @@ class EditUser extends Component {
                             value={this.state.get_user.lastname}
                             onChange={this.handleChange}
                         />
-                        <h4>ประเภทผู้ใช้งาน : {this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}</h4>
-                        <h4>อีเมล์</h4>
-                        < input
-                            type="text" id="email"
-                            value={this.state.get_user.email}
-                            onChange={this.handleChange}
-                        />
+                        <h4>ประเภทผู้ใช้งาน : {this.render_type(this.state.get_user ? this.state.get_user.type_user : null)}</h4>
+                        
                         <h4>เบอร์โทรศัพท์</h4>
                         < input
                             type="text" id="phone"
@@ -269,8 +264,7 @@ class EditUser extends Component {
                             value={this.state.get_user.address}
                             onChange={this.handleChange}
                         />
-                        <button className="BTN_Signin" onClick={() => this.update_data_user()}>บันทึกข้อมูลผู้ใช้งาน</button>
-                        <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink>
+                       
                     </div>
                     <div className="col-1"></div>
 
@@ -280,7 +274,7 @@ class EditUser extends Component {
                         <div className="">
                             <h3 style={{ textAlign: "center" }}>รหัสผ่าน</h3>
 
-                            <h4>กรอกรหัสผ่านเก่า</h4>
+                            <h4>กรอกรหัสผ่านเดิม</h4>
                             <input type={this.state.password ? "password" : "text"}
                                 id="password1"
                                 onChange={this.handleChange}
@@ -360,7 +354,9 @@ class EditUser extends Component {
                     </div>
                     <div className="col-1"></div>
                 </div>
-
+                <div style={{width:"57%"}}>
+                <button className="BTN_Signin" onClick={() => this.update_data_user()}>บันทึกข้อมูลผู้ใช้งาน</button>
+                        <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink></div>
             </div>
         )
     }
