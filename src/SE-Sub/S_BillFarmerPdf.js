@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import ThaiBaht from'thai-baht-text'
 
 pdfMake.fonts = {
     THSarabunNew: {
@@ -20,6 +21,7 @@ pdfMake.fonts = {
 class Order_plan extends Component {
 
     printPDF = () => {
+        console.log('gg',this.props)
         var Order_plan = {
             content: [
                 {
@@ -66,7 +68,7 @@ class Order_plan extends Component {
                                 widths: [503],
                                 heights: 50,
                                 body: [
-                                    [`ผู้ติดต่อ \t\tนายลำใย เผ่าสูง  \nที่อยู่ \t\t   74 หมู่ 7 ตำบลสันทรายงาม อำเภอเทิง จังหวัดเชียงราย 57160 \nโทร \t\t\t086-4000208 `,
+                                    [`ผู้ติดต่อ \t\t${this.props.data.order_farmer_title_name}${this.props.data.order_farmer_name} ${this.props.data.order_farmer_lastname}  \nที่อยู่ \t\t   74 หมู่ 7 ตำบลสันทรายงาม อำเภอเทิง จังหวัดเชียงราย 57160 \nโทร \t\t\t086-4000208 `,
                                     ]
                                 ]
                             }
@@ -95,9 +97,9 @@ class Order_plan extends Component {
                                                 { text: '15', alignment: 'center' },
                                                     'ข้าว กข.6',
                                                 { text: '15', alignment: 'center' },
-                                                { text: '200', alignment: 'center' },
+                                                { text: this.props.data.order_farmer_plant_volume, alignment: 'center' },
                                                 { text: 'กิโลกรัม', alignment: 'center' },
-                                                { text: '3000', alignment: 'center' }]
+                                                { text: this.props.data.order_farmer_plant_cost*this.props.data.order_farmer_plant_volume, alignment: 'center' }]
 
                                             ]
                                         },
@@ -115,12 +117,12 @@ class Order_plan extends Component {
                                 widths: [305.5,114, 65],
                                 body: [
                                     [{ text: 'หมายเหตุ', rowSpan: 4, border: [true, false, true, true], },
-                                    { border: [true, false, true, true], text: 'รวมเงิน', },
-                                    { border: [true, false, true, true], text: '3000', alignment: 'right' }],
+                                    { border: [true, false, true, true], text: 'ราคาก่อนรวมภาษี', },
+                                    { border: [true, false, true, true], text: ((this.props.data.order_farmer_plant_cost*this.props.data.order_farmer_plant_volume)-(this.props.data.order_farmer_plant_cost*this.props.data.order_farmer_plant_volume)*7/100), alignment: 'right' }],
                                     ['', { text: 'ส่วนลด'}, { text: '-', alignment: 'right' }],
-                                    ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: '2800', alignment: 'right' }],
-                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: '2996', alignment: 'right' }],
-                                    [{ text: 'หนึ่งพันสองร้อยสามสิบสามบาทถ้วน', alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: '1233', alignment: 'right' }]
+                                    ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: '-', alignment: 'right' }],
+                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: (this.props.data.order_farmer_plant_cost*this.props.data.order_farmer_plant_volume)*7/100 , alignment: 'right' }],
+                                    [{ text: ThaiBaht(this.props.data.order_farmer_plant_cost*this.props.data.order_farmer_plant_volume), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: this.props.data.order_farmer_plant_cost*this.props.data.order_farmer_plant_volume, alignment: 'right' }]
                                 ],
                             }
                         },

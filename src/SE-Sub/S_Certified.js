@@ -7,7 +7,7 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import arrow from '../Image/up-arrow.png'
 import Pagination from "../Support/Pagination";
-import S_BillFarmerPdf from './S_BillFarmerPdf'
+
 
 class S_Certified extends Component {
     constructor(props) {
@@ -282,11 +282,11 @@ class S_Certified extends Component {
                                 <th>ลำดับ</th>
                                 <th>ชื่อ-สกุล</th>
                                 <th>ครั้งสุดท้ายที่ใช้สารเคมี
-                                    {this.click ?
+                                    {/* {this.click ?
                                         <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.sort_date()} />
                                         :
                                         <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.sort_date()} />
-                                    }
+                                    } */}
                                 </th>
                                 <th>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน</th>
                             </tr>
