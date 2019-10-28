@@ -78,8 +78,8 @@ class Product extends Component {
     render_type = (type_user) => {
         let render_product
         switch (type_user) {
-            
-            case "2": // Trader
+
+            case "4": // Trader
                 render_product =
                     <div className="App">
                         <div className="Row">
@@ -124,7 +124,9 @@ class Product extends Component {
                     </div>
                 break;
 
-                default: // ผู้ใช้อื่นๆ
+            case "1":
+            case "2":
+            case "3": // ผู้ใช้อื่นๆ
                 render_product =
                     <div className="App">
 
@@ -142,7 +144,7 @@ class Product extends Component {
                             </div>
                             <div className="col-6">
                                 <NavLink to={"/AddProduct"}><button className="BTN_Signin" style={{ marginTop: "55px", marginRight: "35px" }}>เพิ่มสินค้า</button></NavLink>
-                                
+
                             </div>
                             {/* <div className="col-1"></div> */}
                         </div>
@@ -157,7 +159,7 @@ class Product extends Component {
                                         this.state.search_order.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                    <div className='X' onClick={()=>{this.delete()}}>ลบ</div>
+                                                    <div className='X' onClick={() => { this.delete() }}>ลบ</div>
                                                     {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >แก้ไขสินค้า</button></NavLink>
@@ -182,9 +184,9 @@ class Product extends Component {
                     </div>
                 break;
 
-            // default:
-            //     render_product = <div> เกิดข้อผิดพลาด </div>
-            //     break;
+            default:
+                render_product = <div> เกิดข้อผิดพลาด </div>
+                break;
         }
         return render_product
     }
