@@ -87,9 +87,9 @@ class Navbar extends Component {
         }
     }
 
-    render_type = (user_type) => {
+    render_type = (type_user) => {
         let render_user
-        switch (user_type) {
+        switch (type_user) {
             case "1": //นักวิจัย
                 render_user =
                     <div className="App">
@@ -280,7 +280,7 @@ class Navbar extends Component {
         const userLink = (
             <div className="App">
                 <div className="Navbar">
-                    {this.render_type(this.state.get_user ? this.state.get_user.user_type : null)}
+                    {this.render_type(this.state.get_user ? this.state.get_user.type_user : null)}
 
                 </div>
             </div >

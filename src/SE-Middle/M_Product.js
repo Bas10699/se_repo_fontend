@@ -483,9 +483,9 @@ class ProductDetail extends Component {
         return render_Show
     }
 
-    render_page = (user_type) => {
+    render_page = (type_user) => {
         let render_page
-        switch (user_type) {
+        switch (type_user) {
 
             case "4":
             case "5":
@@ -690,7 +690,7 @@ class ProductDetail extends Component {
 
         return (
             <div>
-                {this.render_page(this.state.get_user ? this.state.get_user.user_type : null)}
+                {this.render_page(this.state.get_user ? this.state.get_user.type_user : null)}
 
 
             </div>

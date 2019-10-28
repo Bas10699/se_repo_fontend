@@ -40,7 +40,7 @@ class User extends Component {
                 }
             ],
             order_1: '',
-            user_type: 1,
+            type_user: 1,
             bank_information: [],
             get_user: null,
             isInEdit: false,
@@ -50,9 +50,9 @@ class User extends Component {
         };
     }
 
-    render_type = (user_type) => {
+    render_type = (type_user) => {
         let render_user
-        switch (user_type) {
+        switch (type_user) {
             case "1":
                 render_user = <div > นักวิจัย </div>
                 break;
@@ -85,7 +85,7 @@ class User extends Component {
                         bank_information: result.result.bank_information
                     })
 
-                    if (result.result.user_type === "2") {
+                    if (result.result.type_user === "2") {
                         this.get_demand_tarder()
                     }
                     setTimeout(() => {
@@ -180,7 +180,7 @@ class User extends Component {
                             </tr>
                             <tr>
                                 <th>ประเภทผู้ใช้งาน</th>
-                                <td>{this.state.get_user ? this.render_type(this.state.get_user.user_type) : null}</td>
+                                <td>{this.state.get_user ? this.render_type(this.state.get_user.type_user) : null}</td>
                             </tr>
                             <tr>
                                 <th>อีเมล์</th>
@@ -200,7 +200,7 @@ class User extends Component {
                             </tr>
 
                         </table>
-                        {this.state.get_user ? this.state.get_user.user_type === '4' || this.state.get_user.user_type === '3' ?
+                        {this.state.get_user ? this.state.get_user.type_user === '4' || this.state.get_user.type_user === '3' ?
                             this.state.bank_information ?
                                 this.state.bank_information.map((element) => {
                                     return (
@@ -216,7 +216,7 @@ class User extends Component {
                             : null}
 
 
-                        {this.state.get_user ? this.state.get_user.user_type === '2' ?
+                        {this.state.get_user ? this.state.get_user.type_user === '2' ?
                             <div>
                                 <h4 style={{ marginBottom: "0px" }}>ความต้องการที่บันทึกไว้</h4>
                                 <table>

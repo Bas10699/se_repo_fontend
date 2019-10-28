@@ -18,7 +18,7 @@ class UserAll extends Component {
             email: '',
             phone: '',
             address: '',
-            user_type: 1,
+            type_user: 1,
             get_user: [],
             isInEdit: false,
             user_image: null,
@@ -28,9 +28,9 @@ class UserAll extends Component {
         };
     }
 
-    render_type = (user_type) => {
+    render_type = (type_user) => {
         let render_user
-        switch (user_type) {
+        switch (type_user) {
             case "1":
                 render_user = <div > นักวิจัย </div>
                 break;
@@ -131,7 +131,7 @@ class UserAll extends Component {
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{element.user_id}</td>
                                         <td style={{ textAlign: "left", width: "15%", borderLeft: "1px solid #f4f4f4" }}>{element.name}</td>
                                         <td style={{ textAlign: "left", width: "10%", borderLeft: "1px solid #f4f4f4" }}>{element.lastname}</td>
-                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>{this.render_type(element.user_type)}</td>
+                                        <td style={{ borderLeft: "1px solid #f4f4f4" }}>{this.render_type(element.type_user)}</td>
                                         <td style={{ textAlign: "left", width: "30%", borderLeft: "1px solid #f4f4f4" }}>{element.address}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>
                                             <NavLink to={'/user/userID?user_id=' + element.user_id}><img alt="edit" src={this.state.edit} style={{ width: "20px" }}/></NavLink>

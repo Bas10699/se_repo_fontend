@@ -258,7 +258,7 @@ class S_Certified extends Component {
                     <div className="col-6">
                         {/* <h3 style={{ textAlign: "center", margin: "0" }}>เลือกการเเสดงรายชื่อเกษตรกร</h3> */}
                         <h5 style={{ textAlign: "center", margin: "0" }}>จำนวนปีที่ห่างจากการใช้สารเคมี :
-                        <select name="user_type" onChange={this.filter_chemical_date}>
+                        <select name="type_user" onChange={this.filter_chemical_date}>
                                 <option value="all">ทั้งหมด</option>
                                 <option value="0" >น้อยกว่า 1 ปี</option>
                                 <option value="1" >1 ปี</option>

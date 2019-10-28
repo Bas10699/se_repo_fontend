@@ -20,7 +20,7 @@ class UserDetail extends Component {
             email: '',
             phone: '',
             address: '',
-            user_type: 1,
+            type_user: 1,
             get_user: '',
             isInEdit: false,
             user_image: null,
@@ -28,9 +28,9 @@ class UserDetail extends Component {
         };
     }
 
-    render_type = (user_type) => {
+    render_type = (type_user) => {
         let render_user
-        switch (user_type) {
+        switch (type_user) {
             case "1":
                 render_user = 'นักวิจัย'
                 break;
@@ -115,7 +115,7 @@ class UserDetail extends Component {
                             </tr>
                             <tr>
                                 <th>ประเภทผู้ใช้งาน</th>
-                                <td>{this.state.get_user ? this.render_type(this.state.get_user.user_type) : null}</td>
+                                <td>{this.state.get_user ? this.render_type(this.state.get_user.type_user) : null}</td>
                             </tr>
                             <tr>
                                 <th>อีเมล์</th>
@@ -135,7 +135,7 @@ class UserDetail extends Component {
                             </tr>
 
                         </table>
-                        {this.state.get_user ? this.state.get_user.user_type === '4' ?
+                        {this.state.get_user ? this.state.get_user.type_user === '4' ?
                             <div className="_Card">
                                 สัญลักษณ์ธนาคาร
                             <h3 style={{ margin: "0px" }}>ชื่อธนาคาร</h3>
@@ -177,8 +177,8 @@ class UserDetail extends Component {
                                     onChange={this.handleChange}
                                 />
                                 <h4>ประเภทผู้ใช้งาน</h4>
-                                <select id="user_type" name="user_type" onChange={this.handleChange}>
-                                    <option>{this.render_type(this.state.get_user.user_type)}</option>
+                                <select id="type_user" name="type_user" onChange={this.handleChange}>
+                                    <option>{this.render_type(this.state.get_user.type_user)}</option>
                                     <option value='2'>ผู้ประกอบการ</option>
                                     <option value='4'>SE กลาง</option>
                                     <option value='3'>SE ย่อย</option>

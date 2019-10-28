@@ -75,9 +75,9 @@ class Product extends Component {
         alert("ลบสินค้า")
     }
 
-    render_type = (user_type) => {
+    render_type = (type_user) => {
         let render_product
-        switch (user_type) {
+        switch (type_user) {
             
             case "2": // Trader
                 render_product =
@@ -192,7 +192,7 @@ class Product extends Component {
     render() {
         return (
             <div>
-                {this.state.get_user ? this.render_type(this.state.get_user.user_type) : null}
+                {this.state.get_user ? this.render_type(this.state.get_user.type_user) : null}
             </div>
         )
     }

@@ -499,7 +499,7 @@ textarea{
     border-radius: 5px;
 }
 
-select[name="volum"],[name="user_type"]{
+select[name="volum"],[name="type_user"]{
     font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;

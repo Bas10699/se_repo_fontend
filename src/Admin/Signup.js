@@ -16,7 +16,7 @@ class Signup extends Component {
             lastname: null,
             phone: null,
             address: null,
-            user_type: null
+            type_user: null
         };
     }
 
@@ -44,7 +44,7 @@ class Signup extends Component {
             lastname: this.state.lastname,
             phone: this.state.phone,
             address: this.state.address,
-            user_type: this.state.user_type
+            type_user: this.state.type_user
         };
 
         try {
@@ -109,7 +109,7 @@ class Signup extends Component {
                             pattern="[A-Za-z]"
                         />
                         <h4>ประเภทผู้ใช้งาน</h4>
-                        <select id="user_type" name="user_type" onChange={this.handleChange}>
+                        <select id="type_user" name="type_user" onChange={this.handleChange}>
                             <option value='0'>--เลือกประเภท--</option>
                             <option value='2'>ผู้ประกอบการ</option>
                             <option value='4'>SE กลาง</option>
@@ -139,7 +139,7 @@ class Signup extends Component {
                                     this.state.last_name,
                                     this.state.phone,
                                     this.state.address,
-                                    this.state.user_type
+                                    this.state.type_user
                                 )}>
                                 ลงทะเบียน
                         </button>
