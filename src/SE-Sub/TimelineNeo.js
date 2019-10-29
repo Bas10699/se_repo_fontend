@@ -44,6 +44,31 @@ class TimelineNeo extends Component {
 
     };
 
+    confirm_payment = async () => {
+        const object = {
+            order_se_id: this.props.order.order_se_id,
+            status: 3
+        }
+        try {
+            await post(object, 'neo_firm/update_order_se_status', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                    setTimeout(() => {
+                        console.log("confirm_payment", result.result)
+                    }, 500)
+                } else {
+                    // window.location.href = "/";
+                    alert(result.error_message)
+                    console.log("confirm_payment_err", result.result)
+                }
+            })
+        }
+        catch (error) {
+            alert("confirm_payment" + error);
+        }
+    }
+
+
 
     render_Step = (status) => {
         let render_Show
@@ -154,7 +179,7 @@ class TimelineNeo extends Component {
 
                 {this.props.status >= 0 ?
                     <div style={{ marginLeft: "2.5%", width: "30%", marginTop: "-40px" }}>
-                        {console.log('gg',this.props.order)}
+                        {console.log('gg', this.props.order)}
                         <PdfOrder data={this.props.order} />
                     </div>
                     :
@@ -187,7 +212,27 @@ class TimelineNeo extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
                         </div>
                     </div>
-                    
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-7" >
+                            <a target="_blank" href={ip + this.props.order.order_se_payment_image}>
+                                <img src={ip + this.props.order.order_se_payment_image}
+                                    style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
+                            </a>
+                        </div>
+                        <div className="col-5">
+
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.props.order.order_se_id} </h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.props.order.order_se_invoice_id}</h4>
+                            <h4>วันที่กำหนดชำระเงิน : {moment(this.props.order.order_se_invoice_date_send).format('DD/MM/YYYY')}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.props.order.order_se_Payment_date).format('DD/MM/YYYY')} </h4>
+                            <h4>เวลาที่ชำระเงิน : {this.props.order.order_se_Payment_time}</h4>
+                            {/* <h4>จำนวนเงิน : {addComma(this.sum_price(this.props.detail))} บาท</h4> */}
+
+                            <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
+                            <button className="BTN_PDF" onClick={() => this.setState({ OpenBill: false })}>ยกเลิก</button>
+                        </div>
+
+                    </div>
                 </Modal>
             </div>
         )

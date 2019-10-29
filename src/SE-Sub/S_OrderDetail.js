@@ -60,7 +60,7 @@ class S_OrderDetail extends Component {
             await post(obj, 'neo_firm/get_detail_order_se', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        order: result.result
+                        order: result.result,
                     })
                     if (result.result.order_farmer_status == 1) {
                         this.get_order_farmer()
@@ -274,7 +274,7 @@ class S_OrderDetail extends Component {
             cost: this.state.order.cost
 
         }
-        console.log(obj)
+        console.log("status",obj)
         try {
             await post(obj, 'neo_firm/add_order_farmer', user_token).then((result) => {
                 if (result.success) {
@@ -296,7 +296,7 @@ class S_OrderDetail extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_se_id}</h2>
+                        <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_trader_id}</h2>
                     </div>
                 </div>
 
@@ -336,7 +336,7 @@ class S_OrderDetail extends Component {
                             </div>
                             :
                             <div>
-                                <h4 style={{ margin: "0px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
+                                <h4 style={{ marginTop: "50px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
                                 
                                 <table>
                                     {this.state.order_farmer.map((element, index) => {
@@ -351,7 +351,11 @@ class S_OrderDetail extends Component {
                                     })}
                                 </table>
                                 {console.log("list farmer",this.state.order_farmer)}
+                                {this.state.order.order_se_status == 0 ?
                                 <button onClick={() => this.setState({ openIN: true })} className="BTN_Signin" style={{ float: "left" }}>ออกใบเเจ้งหนี้</button>
+                                :null
+                            }
+                                
                                 {/* {this.state.get_user ? 
                                     this.state.bank_information.map((element) => {
                                         return (

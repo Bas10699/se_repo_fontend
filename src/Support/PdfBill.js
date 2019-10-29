@@ -74,7 +74,7 @@ class Pdf extends Component {
                                 heights: 90,
                                 body: [
                                     [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.last_name} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
-                                     `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_id}\nอ้างอิงใบแจ้งหนี้เลขที่ ${this.props.invoice.invoice_id}\nกำหนดวันชำระเงิน ${this.props.data.date_send} \nวันที่ชำระเงิน ${this.props.payment.date_proof}\nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
+                                    `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_id}\nอ้างอิงใบแจ้งหนี้เลขที่ ${this.props.invoice.invoice_id}\nกำหนดวันชำระเงิน ${this.props.data.date_send} \nวันที่ชำระเงิน ${this.props.payment.date_proof}\nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                                 ]
                             }
                         },
@@ -126,12 +126,12 @@ class Pdf extends Component {
                                 widths: [320, 80, 84.5],
                                 body: [
                                     [{ text: '*หมายเหตุ \n ชำระเงินแล้ว', rowSpan: 4, border: [true, false, true, true], },
-                                    { border: [true, false, true, true], text: 'รวมเงิน', },
-                                    { border: [true, false, true, true], text: addComma(total_price), alignment: 'right' }],
-                                    ['', { text: 'ส่วนลด' }, ' '],
+                                    { border: [true, false, true, true], text: 'ราคาก่อนรวมภาษี', },
+                                    { border: [true, false, true, true], text: addComma(tax = total_price - (Math.ceil(total_price * 0.07))), alignment: 'right' }],
+                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(total_price - tax), alignment: 'right' }],
+                                    ['', { text: 'ส่วนลด' }, ' - '],
                                     ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: addComma(total_price), alignment: 'right' }],
-                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(tax = Math.ceil(total_price * 0.07)), alignment: 'right' }],
-                                    [{ text: ThaiBaht(total_price + tax), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(total_price + tax), alignment: 'right' }]
+                                    [{ text: ThaiBaht(total_price), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(total_price), alignment: 'right' }]
                                 ],
                             }
                         },

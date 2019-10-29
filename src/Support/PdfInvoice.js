@@ -125,13 +125,13 @@ class Pdf extends Component {
                             table: {
                                 widths: [320, 80, 84.5],
                                 body: [
-                                    [{ text: 'หมายเหตุ', rowSpan: 4, border: [true, false, true, true], },
-                                    { border: [true, false, true, true], text: 'รวมเงิน', },
-                                    { border: [true, false, true, true], text: addComma(total_price), alignment: 'right' }],
-                                    ['', { text: 'ส่วนลด' }, ' '],
+                                    [{ text: '*หมายเหตุ \n ชำระเงินแล้ว', rowSpan: 4, border: [true, false, true, true], },
+                                    { border: [true, false, true, true], text: 'ราคาก่อนรวมภาษี', },
+                                    { border: [true, false, true, true], text: addComma(tax = total_price - (Math.ceil(total_price * 0.07))), alignment: 'right' }],
+                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(total_price - tax), alignment: 'right' }],
+                                    ['', { text: 'ส่วนลด' }, ' - '],
                                     ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: addComma(total_price), alignment: 'right' }],
-                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(tax = Math.ceil(total_price * 0.07)), alignment: 'right' }],
-                                    [{ text: ThaiBaht(total_price + tax), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(total_price + tax), alignment: 'right' }]
+                                    [{ text: ThaiBaht(total_price), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(total_price), alignment: 'right' }]
                                 ],
                             }
                         },

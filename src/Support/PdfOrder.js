@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment'
 import ThaiBaht from 'thai-baht-text'
-import {addComma} from './Constance'
+import { addComma } from './Constance'
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -31,7 +31,7 @@ class PdfOrder extends Component {
       content: [
         {
           text: 'ชื่อบริษัท',
-          bold: true ,
+          bold: true,
           style: 'header',
           alignment: 'center'
         },
@@ -50,7 +50,7 @@ class PdfOrder extends Component {
             },
             {
               text: 'ใบสั่งซื้อ',
-              bold: true ,
+              bold: true,
               style: 'subheader',
               alignment: 'center'
             },
@@ -58,8 +58,8 @@ class PdfOrder extends Component {
               table: {
                 widths: [50, 100],
                 body: [
-                  [{ text: 'เลขที่', style: 'subheader1', alignment: 'center' ,fillColor: '#cccccc'}, this.props.data.order_id],
-                  [{ text: 'วันที่', style: 'subheader1', alignment: 'center' ,fillColor: '#cccccc'}, moment(this.props.data.order_date).utc().format("DD/MM/YYYY")]
+                  [{ text: 'เลขที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, this.props.data.order_id],
+                  [{ text: 'วันที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, moment(this.props.data.order_date).utc().format("DD/MM/YYYY")]
                 ]
               }
             },
@@ -74,7 +74,7 @@ class PdfOrder extends Component {
                 heights: 90,
                 body: [
                   [`ผู้ติดต่อ \t\t${this.props.data.name} ${this.props.data.last_name} \nชื่อบริษัท \t  บริษัท เอสคอร์ท เอ็นจิเนียริ่ง เอ็นเตอร์ไพรส์ จำกัด \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t${this.props.data.address} \n\nโทร. \t\t\t${this.props.data.phone} `,
-                    `วันที่กำหนดส่ง ${moment(this.props.data.date_send).format('DD/MM/YYYY')}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
+                  `วันที่กำหนดส่ง ${moment(this.props.data.date_send).format('DD/MM/YYYY')}\nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n${this.props.data.address_send}`]
                 ]
               }
             },
@@ -88,19 +88,19 @@ class PdfOrder extends Component {
                 widths: [20.5, 40, 178, 40, 40, 65, 65],
                 heights: ['*', 280],
                 body: [
-                  [{ text: 'ลำดับ', style: 'subheader1', alignment: 'center', bold: true ,fillColor: '#cccccc'},
-                  { text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center' , bold: true ,fillColor: '#cccccc'},
-                  { text: 'รายการ', style: 'subheader1', alignment: 'center' , bold: true ,fillColor: '#cccccc'},
-                  { text: 'ราคา/หน่วย', style: 'subheader1', alignment: 'center', bold: true  ,fillColor: '#cccccc'},
-                  { text: 'จำนวน', style: 'subheader1', alignment: 'center', bold: true  ,fillColor: '#cccccc'},
-                  { text: 'หน่วยนับ', style: 'subheader1', alignment: 'center', bold: true  ,fillColor: '#cccccc'},
-                  { text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center', bold: true ,fillColor: '#cccccc' }],
+                  [{ text: 'ลำดับ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                  { text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                  { text: 'รายการ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                  { text: 'ราคา/หน่วย', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                  { text: 'จำนวน', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                  { text: 'หน่วยนับ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                  { text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' }],
                   [{
                     table: {
                       widths: [20.5, 42, 176, 40, 40, 65, 65],
                       body: [
                         ...this.props.data.detail.map((element, index) => {
-                          total_price+=element.price * element.amount
+                          total_price += element.price * element.amount
                           return [{ text: index + 1, alignment: 'center' },
                           { text: element.plant_id, alignment: 'center' },
                           element.plant_name,
@@ -123,19 +123,19 @@ class PdfOrder extends Component {
           columns: [
             {
               table: {
-                widths: [320,80, 84.5],
+                widths: [320, 80, 84.5],
                 body: [
-                  [{ text: 'หมายเหตุ',rowSpan: 4,border: [true, false, true, true],},
-                    { border: [true, false, true, true],text: 'รวมเงิน',  }, 
-                    { border: [true, false, true, true],text: addComma(total_price),alignment: 'right'}],
-                  ['',{ text: 'ส่วนลด' }, ' '],
-                  ['',{ text: 'มูลค่าหลังหักส่วนลด' }, {text:addComma(total_price),alignment: 'right'}],
-                  ['',{ text: 'ภาษีมูลค่าเพิ่ม \t7%' }, {text:addComma(tax=Math.ceil(total_price*0.07)),alignment: 'right'}],
-                  [{ text: ThaiBaht(total_price+tax), alignment: 'center',fillColor: '#dddddd' },'จำนวนเงินทั้งสิ้น', {text:addComma(total_price+tax),alignment: 'right'}]
+                  [{ text: '*หมายเหตุ \n ชำระเงินแล้ว', rowSpan: 4, border: [true, false, true, true], },
+                  { border: [true, false, true, true], text: 'ราคาก่อนรวมภาษี', },
+                  { border: [true, false, true, true], text: addComma(tax = total_price - (Math.ceil(total_price * 0.07))), alignment: 'right' }],
+                  ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(total_price - tax), alignment: 'right' }],
+                  ['', { text: 'ส่วนลด' }, ' - '],
+                  ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: addComma(total_price), alignment: 'right' }],
+                  [{ text: ThaiBaht(total_price), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(total_price), alignment: 'right' }]
                 ],
               }
             },
-            
+
           ]
         },
         {
@@ -145,7 +145,7 @@ class PdfOrder extends Component {
                 widths: [250],
                 heights: [15, 89],
                 body: [
-                  [{ text: 'เงื่อนไขอื่นๆ', style: 'subheader1',border: [true, false, true, true], }],
+                  [{ text: 'เงื่อนไขอื่นๆ', style: 'subheader1', border: [true, false, true, true], }],
                   ['\n(1) โปรดระบุเลขที่ใบสั่งซื้อข้างต้น ในใบส่งของทุกฉบับ \n(2) การวางบิลเเละการรับเช็ค เป็นไปตามกำหนดเวลาที่บริษัทกำหนดไว้ \n(3) ในการวางบิลเพื่อเรียกเก็บ ให้เเนบสำเนาใบสั่งซื้อกำกับมาด้วย']
                 ]
               }
@@ -155,7 +155,7 @@ class PdfOrder extends Component {
                 widths: [110, 124],
                 heights: 50,
                 body: [
-                  [{text:'ผู้จัดทำ \n\n_______________ \n\nผู้ตรวจสอบ \n\n_______________',border: [false, false, true, true],}, {text:'\n\n\n\n\n_________________________ \nผู้มีอำนาจลงนาม',border: [true, false, true, true],}]
+                  [{ text: 'ผู้จัดทำ \n\n_______________ \n\nผู้ตรวจสอบ \n\n_______________', border: [false, false, true, true], }, { text: '\n\n\n\n\n_________________________ \nผู้มีอำนาจลงนาม', border: [true, false, true, true], }]
                 ]
               }
             }
@@ -191,7 +191,7 @@ class PdfOrder extends Component {
     }
 
     pdfMake.createPdf(Purchase_orders).open()
-    
+
 
   }
   render() {

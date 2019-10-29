@@ -95,8 +95,8 @@ class Order_plan extends Component {
                                             body: [
                                                 [{ text: '1', alignment: 'center' },
                                                 { text: '15', alignment: 'center' },
-                                                    'ข้าว กข.6',
-                                                { text: '15', alignment: 'center' },
+                                                this.props.data.order_farmer_plant,
+                                                { text: this.props.data.order_farmer_plant_cost, alignment: 'center' },
                                                 { text: this.props.data.order_farmer_plant_volume, alignment: 'center' },
                                                 { text: 'กิโลกรัม', alignment: 'center' },
                                                 { text: this.props.data.order_farmer_plant_cost*this.props.data.order_farmer_plant_volume, alignment: 'center' }]

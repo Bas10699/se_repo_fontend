@@ -84,14 +84,15 @@ class M_BuyingDetail extends Component {
                     <div className="Row">
                         <div className="col-12">
                             <h4>สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
-                            <h5>กรุณาชำระเงินผ่าน : {this.state.order_se_invoice_detail.map((element,index)=>{
+                            <h5>กรุณาชำระเงินผ่าน : {this.state.order_se_invoice_detail ?
+                                this.state.order_se_invoice_detail.map((element,index)=>{
                                 return(
                                     <div>
                                         <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
                                         <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h5>
                                     </div>
                                 )
-                            })}
+                            }) : null}
                                 
                                 {console.log("getorder",this.state.get_order)}
                             </h5>
@@ -275,12 +276,12 @@ class M_BuyingDetail extends Component {
                             
                             โอนเข้าบัญชี : 
                             <select>
-                                {
+                                {this.state.order_se_invoice_detail ?
                                     this.state.order_se_invoice_detail.map((element,index)=>{
                                     return(
                                         <option>{element.bankName}</option>
                                     )
-                                })}
+                                }):null}
                             </select>
                             {/* <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
                             <div className="Row">
