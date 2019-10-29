@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
-import { get, post } from '../Support/Service';
+import { ip,get, post } from '../Support/Service';
 import queryString from 'query-string';
 import TimelineNeo from '../SE-Sub/TimelineNeo';
 import Modal from 'react-responsive-modal'
@@ -20,10 +20,15 @@ class M_BuyingDetail extends Component {
             click: false,
             clicks: false,
             get_order: '',
+            date_proof:null,
+            time_proof:null,
+            image_payment:null,
+            order_se_invoice_detail:[],
             get_product: '',
             search_order: [],
             render_history: null,
-            photo_profile: "https://i.stack.imgur.com/l60Hf.png"
+            photo_profile: "https://i.stack.imgur.com/l60Hf.png",
+            image_paymentdef: 'https://www.ahvc.com.sg/wp/wp-content/uploads/2016/07/default_image-800x800.png'
         }
     }
     componentWillMount() {
@@ -38,7 +43,8 @@ class M_BuyingDetail extends Component {
             await post(params, 'neutrally/get_order_se', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_order: result.result
+                        get_order: result.result,
+                        order_se_invoice_detail:result.result.order_se_invoice_detail
                     })
                     setTimeout(() => {
                         console.log("neutrally/get_order_se", result.result)
@@ -53,29 +59,7 @@ class M_BuyingDetail extends Component {
         }
     }
 
-    // get_order = async () => {
-    //     try {
-    //         await get('neutrally/get_order_se_all', user_token).then((result) => {
-    //             if (result.success) {
-    //                 this.setState({
-    //                     order: result.result,
-    //                     search_order: result.result,
-    //                     render_history: 1
-    //                 })
-
-
-    //                 setTimeout(() => {
-    //                     console.log("get_product1", result.result)
-    //                 }, 500)
-    //             } else {
-    //                 window.location.href = "/product_information";
-    //                 alert(result.error_message)
-    //             }
-    //         });
-    //     } catch (error) {
-    //         alert("get_cart_trader" + error);
-    //     }
-    // }
+    
 
     render_status = (order_status) => {
         let render_show
@@ -100,9 +84,18 @@ class M_BuyingDetail extends Component {
                     <div className="Row">
                         <div className="col-12">
                             <h4>สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
-                            <h5>กรุณาชำระเงินผ่าน : </h5>
-                            {/* รายชื่อธนาคาร {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5> */}
-                            {/* <h5>ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5> */}
+                            <h5>กรุณาชำระเงินผ่าน : {this.state.order_se_invoice_detail.map((element,index)=>{
+                                return(
+                                    <div>
+                                        <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
+                                        <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h5>
+                                    </div>
+                                )
+                            })}
+                                
+                                {console.log("getorder",this.state.get_order)}
+                            </h5>
+                            
                         </div>
                     </div>
                     <div className="Row">
@@ -185,7 +178,7 @@ class M_BuyingDetail extends Component {
     };
 
     onCloseModal = () => {
-        this.setState({ open: false, OpenComfrim: false, OpenBill: false });
+        this.setState({ open: false, OpenComfrim: false, OpenBill: false,OpenProofPaymet:false });
 
     };
 
@@ -194,6 +187,53 @@ class M_BuyingDetail extends Component {
     onOpenModalComfrim = () => {
         this.setState({ open: true });
     };
+
+    add_proof_payment = async () => {
+        let payment = {
+            order_se_id: this.state.get_order.order_se_id,
+            order_se_Payment_date: this.state.date_proof,
+            order_se_Payment_time: this.state.time_proof,
+            image_proof: this.state.image_payment,
+        }
+        try {
+            await post(payment, 'neutrally/add_order_se_payment', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                    setTimeout(() => {
+                        console.log('add_proof_of_payment_trader', result.result)
+                    }, 500)
+                }
+            })
+        } catch (error) {
+            alert('add_proof_payment: ' + error)
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
+    uploadpicture = (e) => {
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        if (!file) {
+
+        } else {
+            reader.readAsDataURL(file)
+
+            reader.onloadend = () => {
+                console.log("img", reader.result)
+                this.setState({
+                    image_payment: reader.result,
+                });
+            }
+        }
+
+    }
+
 
     render() {
         return (
@@ -206,8 +246,8 @@ class M_BuyingDetail extends Component {
 
                 <div className="Row">
                     <div className="col-10" style={{ textAlign: "right" }}>
-                        วันที่
-                        เลขที่ใบสั่งซื้อ
+                        วันที่ {moment(this.state.get_order.order_se_date).utc().add('years', 543).format("DD/MM/YYYY")}<br/>
+                        เลขที่ใบสั่งซื้อ {this.state.get_order.order_se_id}
                     </div>
                 </div>
 
@@ -217,9 +257,10 @@ class M_BuyingDetail extends Component {
                     </div>
                 </div>
 
-                <div className="Row">
+                <div className="Row" style={{marginTop:"50px"}}>
                     <div className="col-2"></div>
-                    <div className="col-8">{this.render_status(1)}</div>
+                    <div className="col-8">{this.render_status(this.state.get_order.order_se_status)}</div>
+                    {console.log("status",this.state.get_order.order_se_status)}
                     <div className="col-2"></div>
                 </div>
 
@@ -229,50 +270,70 @@ class M_BuyingDetail extends Component {
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "500px" }}>
                         <div className="col-11">
-                            <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
-                            {/* <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
-                            <h4>ชำระเงินภายในวันที่</h4>
-                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange} />
-                            <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
-                            เเสดงรายชื่อธนาคารทั้งหมด
+                        <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.get_order.order_se_id}</h4>
+                            
+                            โอนเข้าบัญชี : 
+                            <select>
+                                {
+                                    this.state.order_se_invoice_detail.map((element,index)=>{
+                                    return(
+                                        <option>{element.bankName}</option>
+                                    )
+                                })}
+                            </select>
+                            {/* <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
+                            <div className="Row">
+                                <div className="col-6">
+                                    <h4>วันที่โอนเงิน</h4>
+                                    <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} />
+                                </div>
+                                <div className="col-1"></div>
+                                <div className="col-5">
+                                    <h4>เวลาที่โอนเงิน</h4>
+                                    <input type="time" name="time" id='time_proof' onChange={this.handleChange} />
+                                </div>
+                            </div>
 
-                            <h4>ชื่อธนาคาร <input name="BankName" type="bank" id="BankName" onChange={this.handleChange} /></h4>
-                            <h4>เลขบัญชีธนาคาร <input name="BankNo" type="bank" id="BankNo" onChange={this.handleChange} /></h4>
-                            <h4>ชื่อบัญชีธนาคาร  <input name="BankAccountName" type="bank" id="BankAccountName" onChange={this.handleChange} /></h4> */}
+                            <h4>แนบหลักฐานการโอนเงิน</h4>
+                            <div>
+                                <input type="file"
+                                    onChange={(e) => this.uploadpicture(e)} />
+                            </div>
+                            <img src={this.state.image_payment}
+                                style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginBottom: "20px" }} alt="หลักฐานการโอน" />
+
                         </div>
                         <div className="col-1" />
+
                     </div>
-                    <div className="Row" style={{ width: "500px" }}>
-                        <div className="col-12">
-                            <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-                            <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
-                        </div>
+                    <div className="Row">
+                        <div className="col-12"><button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                            <button className='BTN_CONFIRM' onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
                     </div>
                 </Modal>
 
-                <Modal open={this.state.OpenBill} onClose={this.onCloseModal}>
-                    <div className="Row">
+                <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
+                <div className="Row">
                         <div className="col-12" >
                             <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
                         </div>
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-7" >
-                            {/* <a href={ip + this.state.payment.image_proof}>
-                                <img src={ip + this.state.payment.image_proof}
+                            <a target="_blank" href={ip + this.state.get_order.order_se_payment_image}>
+                                <img src={ip + this.state.get_order.order_se_payment_image}
                                     style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
-                            </a> */}
+                            </a>
                         </div>
                         <div className="col-5">
 
-                            {/* <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
-                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.invoice.invoice_id}</h4>
-                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
-                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
-                            <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
-                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
-                            <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
-                            <button className="BTN_PDF">ไม่พบ</button>
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.get_order.order_se_id} </h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.get_order.order_se_invoice_id}</h4>
+                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.get_order.order_se_invoice_date_send).format('DD/MM/YYYY')}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.state.get_order.order_se_Payment_date).format('DD/MM/YYYY')} </h4>
+                            <h4>เวลาที่ชำระเงิน : {this.state.get_order.order_se_Payment_time}</h4>
+                            {/* <h4>จำนวนเงิน : {addComma(this.state.get_order.amount)} บาท</h4> */}
 
                         </div>
                     </div>

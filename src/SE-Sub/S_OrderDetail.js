@@ -62,7 +62,7 @@ class S_OrderDetail extends Component {
                     this.setState({
                         order: result.result
                     })
-                    if (result.result.order_farmer_status === 1) {
+                    if (result.result.order_farmer_status == 1) {
                         this.get_order_farmer()
                     }
                     console.log(result.result)
@@ -108,7 +108,7 @@ class S_OrderDetail extends Component {
                     this.setState({
                         order_farmer: result.result
                     })
-                    console.log(result.result)
+                    console.log("order_farmer",result.result)
 
                 }
                 else {
@@ -242,7 +242,7 @@ class S_OrderDetail extends Component {
             order_se_id: this.state.order.order_se_id,
             order_se_invoice_date: moment().utc(7).add('years', 543).format(),
             order_se_invoice_date_send: this.state.date_send,
-            order_se_invoice_detail: this.state.bank
+            order_se_invoice_detail: JSON.stringify(this.state.bank)
         }
         try {
             await post(obj, 'neo_firm/add_invoice_se', user_token).then((result) => {
@@ -279,6 +279,7 @@ class S_OrderDetail extends Component {
             await post(obj, 'neo_firm/add_order_farmer', user_token).then((result) => {
                 if (result.success) {
                     alert('ออกใบสำเร็จ')
+                    window.location.reload()
                 }
                 else {
                     alert(result.error_message)
@@ -312,7 +313,7 @@ class S_OrderDetail extends Component {
                             <h4>{this.state.order.plant_name} </h4>
                             <h5>จำนวน {this.state.order.amount} กิโลกรัม</h5>
                             <h5>ราคา {this.state.order.cost} บาท/กิโลกรัม</h5>
-                            {this.state.order.order_farmer_status == 0 ? <button onClick={() => this.openModel()}>ออกใบสำคัญรับเงิน</button> : <div style={{ color: "red" }}>"ออกใบสำคัญรับเงินเเล้ว"</div>}
+                            {this.state.order.order_farmer_status == null ? <button onClick={() => this.openModel()}>ออกใบสำคัญรับเงิน</button> : <div style={{ color: "red" }}>"ออกใบสำคัญรับเงินเเล้ว"</div>}
                         </div>
 
 
@@ -320,7 +321,7 @@ class S_OrderDetail extends Component {
                     <div className="col-1"></div>
 
                     <div className="col-7">
-                        {this.state.order.order_farmer_status == 0 ?
+                        {this.state.order.order_farmer_status == null ?
                             <div>
                                 <h4 style={{ margin: "0px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
                                 <Checkbox
@@ -336,7 +337,7 @@ class S_OrderDetail extends Component {
                             :
                             <div>
                                 <h4 style={{ margin: "0px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
-                                <button onClick={() => this.setState({ openIN: true })} className="BTN_Signin" style={{ float: "left" }}>ออกใบเเจ้งหนี้</button>
+                                
                                 <table>
                                     {this.state.order_farmer.map((element, index) => {
                                         return (
@@ -349,6 +350,8 @@ class S_OrderDetail extends Component {
                                         )
                                     })}
                                 </table>
+                                {console.log("list farmer",this.state.order_farmer)}
+                                <button onClick={() => this.setState({ openIN: true })} className="BTN_Signin" style={{ float: "left" }}>ออกใบเเจ้งหนี้</button>
                                 {/* {this.state.get_user ? 
                                     this.state.bank_information.map((element) => {
                                         return (
@@ -420,7 +423,8 @@ class S_OrderDetail extends Component {
                             กำหนดวันชำระเงิน : <input type="date" id="date_send" onChange={this.handleChange} />
                             <h4 style={{ color: "red" }}>รวมเงินทั้งหมด {this.state.order.cost * this.state.order.amount} บาท</h4>
 
-                            {this.state.bank.map((element) => {
+                            {this.state.bank ?
+                                this.state.bank.map((element) => {
                                 return (
                                     <div className="_Card">
                                         <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
@@ -428,6 +432,7 @@ class S_OrderDetail extends Component {
                                     </div>
                                 )
                             })
+                            :null
                             }
 
                             <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบเเจ้งหนี้</button>
