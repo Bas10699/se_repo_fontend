@@ -1,6 +1,6 @@
 //รายละเอียดคำสั่งซื้อสินค้า SE-M ซื้อของจาก SE-S
 import React, { Component } from 'react';
-import { post, ip } from '../Support/Service';
+import { get, post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
@@ -31,10 +31,12 @@ class OrderDetail extends Component {
             plant: null,
             data: [],
             payment: [],
+            get_user: [],
             OpenComfrim: false,
             OpenBill: false,
             detail_send: null,
             date_send: null,
+            bank_information: [],
             BankAccountName: null,
             BankName: null,
             BankNo: null,
@@ -49,6 +51,7 @@ class OrderDetail extends Component {
 
 
     componentWillMount() {
+        this.get_user()
         this.get_order()
         this.setState({
             isMenuOpened: false
@@ -64,6 +67,31 @@ class OrderDetail extends Component {
     handleClick() {
         // toggles the menu opened state
         this.setState({ isMenuOpened: !this.state.isMenuOpened });
+    }
+
+    get_user = async () => {
+        try {
+            await get('user/get_user', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        get_user: result.result,
+                        bank_information: result.result.bank_information
+                    })
+
+                    if (result.result.type_user === "2") {
+                        this.get_demand_tarder()
+                    }
+                    setTimeout(() => {
+                        console.log("get_user", result.result)
+                    }, 500)
+                } else {
+                    window.location.href = "/";
+                    //alert("user1"+result.error_message);
+                }
+            });
+        } catch (error) {
+            alert("get_user2" + error);
+        }
     }
 
     get_order = async () => {
@@ -129,11 +157,7 @@ class OrderDetail extends Component {
     }
 
     add_invoice = async () => {
-        let detail = {
-            BankName: this.state.BankName,
-            BankNo: this.state.BankNo,
-            BankAccountName: this.state.BankAccountName
-        }
+        let detail = this.state.bank_information
         let object = {
             order_id: this.state.order.order_id,
             date_send: this.state.date_send,
@@ -449,11 +473,19 @@ class OrderDetail extends Component {
                             <h4>ชำระเงินภายในวันที่</h4>
                             <input type="date" name="date_send" id="date_send" onChange={this.handleChange} />
                             <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
-                            เเสดงรายชื่อธนาคารทั้งหมด
 
-                            <h4>ชื่อธนาคาร <input name="BankName" type="bank" id="BankName" onChange={this.handleChange} /></h4>
-                            <h4>เลขบัญชีธนาคาร <input name="BankNo" type="bank" id="BankNo" onChange={this.handleChange} /></h4>
-                            <h4>ชื่อบัญชีธนาคาร  <input name="BankAccountName" type="bank" id="BankAccountName" onChange={this.handleChange} /></h4>
+                            {this.state.bank_information ?
+                                this.state.bank_information.map((element) => {
+                                    return (
+                                        <div className="_Card">
+
+                                            <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
+                                            <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount}</h5>
+                                            <h5 style={{ margin: "0px" }}> เลขที่บัญชี {element.bankNo}</h5>
+                                        </div>
+                                    )
+                                })
+                                : null}
                         </div>
                         <div className="col-1" />
                     </div>
@@ -487,7 +519,7 @@ class OrderDetail extends Component {
                             <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
                             <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4>
                             <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
-                            <button className="BTN_PDF">ไม่พบ</button>
+                            <button className="BTN_PDF" onClick={()=>this.setState({OpenBill:false})}>ยกเลิก</button>
 
                         </div>
                     </div>

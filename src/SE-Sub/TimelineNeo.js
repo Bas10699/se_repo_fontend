@@ -181,31 +181,14 @@ class TimelineNeo extends Component {
                     :
                     null
                 }
-                {/* <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
+                <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
                     <div className="Row">
                         <div className="col-12" >
                             <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
                         </div>
                     </div>
-                    <div className="Row" style={{ width: "800px" }}>
-                        <div className="col-7" >
-                            <a target="_blank" href={ip + this.props.payment.image_proof}>
-                                <img src={ip + this.props.payment.image_proof}
-                                    style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
-                            </a>
-                        </div>
-                        <div className="col-5">
-
-                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.props.order.order_id} </h4>
-                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.props.invoice.invoice_id}</h4>
-                            <h4>วันที่กำหนดชำระเงิน : {moment(this.props.invoice.date_send).format('DD/MM/YYYY')}</h4>
-                            <h4>วันที่ชำระเงิน : {moment(this.props.payment.date_proof).format('DD/MM/YYYY')} </h4>
-                            <h4>เวลาที่ชำระเงิน : {this.props.payment.time_proof}</h4>
-                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.props.detail))} บาท</h4>
-
-                        </div>
-                    </div>
-                </Modal> */}
+                    
+                </Modal>
             </div>
         )
     }

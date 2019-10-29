@@ -100,7 +100,7 @@ class BuyingDetail extends Component {
                     <div className="Row">
                         <div className="col-12">
                             <h4>สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
-                            <h5>กรุณาชำระเงินผ่าน : 
+                            <h5>กรุณาชำระเงินผ่าน :
                             {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
                             <h5>ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
                         </div>
@@ -337,12 +337,12 @@ class BuyingDetail extends Component {
                     <div className="col-2"></div>
                     {/* เริ่ม */}
                     <div className="col-6">
-                        <h4 style={{ textAlign: "right",margin:"0" }}>รหัสใบสั่งซื้อ</h4>
-                        <h4 style={{ textAlign: "right",margin:"0" }}>วันที่ใบสั่งซื้อ</h4>
+                        <h4 style={{ textAlign: "right", margin: "0" }}>รหัสใบสั่งซื้อ</h4>
+                        <h4 style={{ textAlign: "right", margin: "0" }}>วันที่ใบสั่งซื้อ</h4>
                     </div>
                     <div className="col-2">
-                        <h4 style={{ textAlign: "right",margin:"0" }}>{this.state.order.order_id}</h4>
-                        <h4 style={{ textAlign: "right",margin:"0" }}>{moment(this.state.order.order_date).utc().add('years', 543).format("DD/MM/YYYY")}</h4>
+                        <h4 style={{ textAlign: "right", margin: "0" }}>{this.state.order.order_id}</h4>
+                        <h4 style={{ textAlign: "right", margin: "0" }}>{moment(this.state.order.order_date).utc().add('years', 543).format("DD/MM/YYYY")}</h4>
                     </div>
                 </div>
 
@@ -429,13 +429,16 @@ class BuyingDetail extends Component {
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
-                            <h4>โอนเงินไปในบัญชี : <select>
-                                <option value="">--เลือกธนาคาร--</option>
-                                <option value="0">ธนาคาทหารไทย</option>
-                                <option value="1">ธนาคาไทนพาณิชย์</option>
-                                <option value="2">ธนาคากรุงไทย</option>
-                            </select></h4>
-                            โอนเข้าบัญชี : {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankAccountName}
+                            
+                            โอนเข้าบัญชี : 
+                            <select>
+                                {this.state.invoice_detail ?
+                                    this.state.invoice_detail.map((element,index)=>{
+                                    return(
+                                        <option>{element.bankName}</option>
+                                    )
+                                }):null}
+                            </select>
                             <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
                             <div className="Row">
                                 <div className="col-6">

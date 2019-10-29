@@ -11,7 +11,6 @@ class Signup extends Component {
         this.state = {
             username: null,
             password: null,
-            email: null,
             name: null,
             last_name: null,
             phone: null,
@@ -39,7 +38,6 @@ class Signup extends Component {
         let object = {
             username: this.state.username,
             password: this.state.password,
-            email: this.state.email,
             name: this.state.name,
             last_name: this.state.last_name,
             phone: this.state.phone,
@@ -86,11 +84,7 @@ class Signup extends Component {
                             placeholder="ยอดหญิง" name="last_name"
                             onChange={this.handleChange}
                         />
-                        <h4>E-mail</h4>
-                        <input type="email" id="email"
-                            placeholder="user@user.com" name="email"
-                            onChange={this.handleChange}
-                        />
+                        
                         <h4>เบอร์โทรศัพท์</h4>
                         <input type="tel" id="phone"
                             placeholder="088-888-8888" name="phone"
@@ -134,7 +128,6 @@ class Signup extends Component {
                                 onClick={() => this.add_user(
                                     this.state.username,
                                     this.state.password,
-                                    this.state.email,
                                     this.state.name,
                                     this.state.last_name,
                                     this.state.phone,

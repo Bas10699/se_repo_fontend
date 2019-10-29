@@ -205,7 +205,7 @@ class User extends Component {
                                 this.state.bank_information.map((element) => {
                                     return (
                                         <div className="_Card">
-                                            สัญลักษณ์ธนาคาร
+                                            
                             <h3 style={{ margin: "0px" }}>{element.bankName}</h3>
                                             <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h4>
                                         </div>

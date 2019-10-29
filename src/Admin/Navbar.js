@@ -150,10 +150,10 @@ class Navbar extends Component {
                             <ul>
                                 {/* <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li> */}
                                 {/* <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li> */}
-                                {/* <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
+                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
 
                                 <li><NavLink exact to="/S_Plants_in_network" activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
-                                <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">รายการขายสินค้า</NavLink></li>
+                                <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อ</NavLink></li>
                                 <li><NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">ข้อมูลเกษตรกร</NavLink></li>
                                 <li><NavLink exact to="/S_Certified" activeClassName="Active" className="NavbarText">มาตรฐาน</NavLink></li>
                                 {/* <li><NavLink exact to="/S_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li> */}
@@ -245,7 +245,7 @@ class Navbar extends Component {
                             <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
                                 <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
-                                {/* <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >{this.state.get_user.username}</NavLink> */}
+                                <NavLink exact to="/User" activeClassName="Active" className="NavbarRight" >xxx</NavLink>
                             </ul>
                         </div>
                     </div>

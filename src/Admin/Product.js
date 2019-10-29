@@ -79,7 +79,10 @@ class Product extends Component {
         let render_product
         switch (type_user) {
 
-            case "4": // Trader
+            case "2":
+            case "1":
+            case "3":
+            case "5": // Trader
                 render_product =
                     <div className="App">
                         <div className="Row">
@@ -124,9 +127,7 @@ class Product extends Component {
                     </div>
                 break;
 
-            case "1":
-            case "2":
-            case "3": // ผู้ใช้อื่นๆ
+            case "4": // ผู้ใช้อื่นๆ
                 render_product =
                     <div className="App">
 
