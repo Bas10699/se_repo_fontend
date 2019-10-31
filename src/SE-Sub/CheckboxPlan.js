@@ -26,7 +26,8 @@ class CheckboxPlan extends Component {
     }
 
     handleChange = (e) => {
-        console.log(e.target.name)
+        console.log('GG',e.target.name)
+        console.log('BB',e.target.value)
         let result = this.state.result
         console.log(result)
         result.map((element, index) => {
@@ -154,8 +155,8 @@ class CheckboxPlan extends Component {
                                             }
 
                                         }),
-                                            chInput ? <input id='amount' name={index} onChange={this.handleChange} /> :
-                                                <input id='amount' name={index} value='' onChange={this.handleChange} disabled />
+                                            chInput ? <input id='amount' name={option_element.first_name+" "+option_element.last_name} onChange={this.handleChange} /> :
+                                                <input id='amount' name={option_element.first_name+" "+option_element.last_name} value='' onChange={this.handleChange} disabled />
                                         }
 
                                         &nbsp;กิโลกรัม
