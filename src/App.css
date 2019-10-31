@@ -832,8 +832,8 @@ th,tr:hover{
   .Standat {
     list-style-type: none;
     float: left;
-    width: 22.2%;
-    margin-left: 2.8%;
+    width: 25%;
+    margin-left: 2.2%;
     position: relative;
     background-color: #ccc;
     height: 5px;
@@ -851,13 +851,13 @@ th,tr:hover{
   li.Status {
     list-style-type: none;
     float: left;
-    width: 22.2%;
+    width: 25%;
     position: relative;
     background-color: green;
     height: 5px;
     color: black;
     z-index: -1;
-    margin-left: 2.8%;
+    margin-left: 2.2%;
   }
   li.Status img{
     width: "25px";
@@ -1043,12 +1043,14 @@ th,tr:hover{
 /* ห้ามลบ ของกู ปรับแต่งได้ */
 ._Card {
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: 80%;
     float: left;
+    margin-left: 50px;
     margin-bottom: 20px;
     margin-top: 10px;
-    background-color: white;
-    padding: 10px 0px 10px 10px;
+    background-color: #FED07A;
+    padding: 10px 10px 10px 10px;
+    border-radius:10px ;
 }
 .BTN_CONFIRM{
     font-family: 'fc_lamoonregular';

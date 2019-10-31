@@ -228,6 +228,9 @@ class S_Certified extends Component {
                     }
                 }
             },
+            credits: {
+                enabled: false
+            },
             series: [{
                 name: '',
                 colorByPoint: true,

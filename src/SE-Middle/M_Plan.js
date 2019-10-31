@@ -375,14 +375,17 @@ class M_Plan extends Component {
 
                     <div className="Row">
                         <div className="col-12">
-                            <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>เลือก Neo-firm</h2>
-                            {this.state.get_se.map((ele_get_se, index) => {
+                            <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>เลือก Neo-firm
+                            <select className="select" name="volum">
+                                {this.state.get_se.map((ele_get_se, index) => {
                                 return (
-                                    <button onClick={() => this.select_se(index)} style={{ width: "20%", margin: "0" }} className="selectShowb">
+                                    <option onClick={(value) => this.select_se(index)} value={index}>
                                         {ele_get_se.se_name}
-                                    </button>
+                                    </option>
                                 )
                             })}
+                            </select>
+                            </h2>
                             <h3 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ในเครือ {this.state.se_name}</h3>
                         </div>
                     </div>
@@ -602,7 +605,7 @@ class M_Plan extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h4>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
+                        {/* <h4>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
                         <table>
                             <tr>
                                 <th>ชื่อ Neo_firm</th>
@@ -620,7 +623,7 @@ class M_Plan extends Component {
                                 <th>รวม</th>
                                 <th>{this.sum_volume(this.state.volume_fermer)}</th>
                             </tr>
-                        </table>
+                        </table> */}
                         <div className="tab">
                             <button onClick={() => this.setState({ click: 1 })}>ดูความถี่การส่งมอบ</button>
                             <button onClick={() => this.setState({ click: 2 })}>วางแผนเพาะปลูก</button>

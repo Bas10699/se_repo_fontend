@@ -268,9 +268,10 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : ผู้ประกอบการรอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
-                            <h5>รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
-                            <h3>ต้องทำการสั่งซื้อวัตถุดิบก่อน เเล้วจึงกดยืนยันการสั่งซื้อ</h3>
+                            <h3 style={{textAlign:"center"}}>สถานะการสั่งซื้อ</h3>
+                            <h4 style={{margin:"0"}}>ผู้ประกอบการรอยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้</h4>
+                            <h5 style={{margin:"0"}}>รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                            <h3 style={{margin:"0"}}>ต้องทำการสั่งซื้อวัตถุดิบก่อน เเล้วจึงกดยืนยันการสั่งซื้อ</h3>
                         </div>
                     </div>
                     <div className="Row">
@@ -286,7 +287,8 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
+                        <h3 style={{textAlign:"center"}}>สถานะการสั่งซื้อ</h3>
+                            <h4>รอผู้ประกอบการดำเนินการยืนยันการชำระเงิน</h4>
                             {/* <h5>รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5> */}
                         </div>
                     </div>
@@ -304,7 +306,8 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : ผู้ประกอบการชำระเงินแล้ว</h4>
+                        <h3 style={{textAlign:"center"}}>สถานะการสั่งซื้อ</h3>
+                            <h4>ผู้ประกอบการชำระเงินแล้ว</h4>
                             <h5>รอ SE กลางออกใบเสร็จ</h5>
                         </div>
                     </div>
@@ -317,21 +320,22 @@ class OrderDetail extends Component {
 
                 break;
 
-            case 3: render_show =
-                <div className='_Card'>
-                    <div className="Row">
-                        <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : จัดส่งสินค้าเรียบร้อย รอผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้า</h4>
-                        </div>
-                    </div>
-                </div>
-                break;
+            // case 3: render_show =
+            //     <div className='_Card'>
+            //         <div className="Row">
+            //             <div className="col-12">
+            //                 <h4>สถานะการสั่งซื้อ : จัดส่งสินค้าเรียบร้อย รอผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้า</h4>
+            //             </div>
+            //         </div>
+            //     </div>
+            //     break;
 
             case 4: render_show =
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : ผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้าเรียบร้อย</h4>
+                        <h3 style={{textAlign:"center"}}>สถานะการสั่งซื้อ</h3>
+                            <h4>ผู้ประกอบการดำเนินการยืนยันตรวจสอบสินค้าเรียบร้อย</h4>
                         </div>
                     </div>
                 </div>
@@ -369,34 +373,27 @@ class OrderDetail extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-7"></div>
+                    <div className="col-8"></div>
                     {/* เริ่ม */}
                     <div className="col-1">
-                        <h4 style={{ textAlign: "left", marginRight: "10px" }}>รหัสใบสั่งซื้อ</h4>
-                        <h4 style={{ textAlign: "left", marginRight: "10px" }}>วันที่ใบสั่งซื้อ</h4>
-                        <h4 style={{ textAlign: "left", marginRight: "10px" }}>ผู้ซื้อ</h4>
+                        <h5 style={{ textAlign: "left", marginRight: "10px",margin:"0" }}>รหัสใบสั่งซื้อ</h5>
+                        <h5 style={{ textAlign: "left", marginRight: "10px",margin:"0" }}>วันที่ใบสั่งซื้อ</h5>
+                        <h5 style={{ textAlign: "left", marginRight: "10px",margin:"0" }}>ผู้ซื้อ</h5>
                     </div>
                     <div className="col-2">
-                        <h4 style={{ textAlign: "left" }}>{this.state.order.order_id}</h4>
-                        <h4 style={{ textAlign: "left" }}>{moment(this.state.order.order_date).utc().format("DD/MM/YYYY")}</h4>
-                        <h4 style={{ textAlign: "left" }}>{this.state.order.name} {this.state.order.last_name}</h4>
+                        <h5 style={{ textAlign: "left",margin:"0" }}>{this.state.order.order_id}</h5>
+                        <h5 style={{ textAlign: "left" ,margin:"0"}}>{moment(this.state.order.order_date).utc().format("DD/MM/YYYY")}</h5>
+                        <h5 style={{ textAlign: "left",margin:"0" }}>{this.state.order.name} {this.state.order.last_name}</h5>
                     </div>
                 </div>
 
 
                 <Timeline status={this.state.order.order_status} order={this.state.order} detail={this.state.detail} invoice={this.state.invoice} payment={this.state.payment} />
 
-                <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-8">{this.render_status(this.state.order.order_status)}</div>
-                    <div className="col-2"></div>
-                </div>
-
-
-                <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-8">
-                        <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อ</h3>
+                <div className="Row" style={{marginTop:"50px"}}>
+                    <div className="col-1"></div>
+                    <div className="col-6">
+                    <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อ</h3>
                         <table style={{ textAlign: "center" }}>
                             <tr>
                                 <th>รูป</th>
@@ -413,9 +410,9 @@ class OrderDetail extends Component {
                                         <tr>
                                             <td>{element_plant.image ? <img alt="Product" className="Product" src={ip + element_plant.image} /> : <img alt="Product" className="Product" src={this.state.default_image} />}</td>
                                             <td>{element_plant.plant_name}</td>
-                                            <td>{addComma(element_plant.amount)} กิโลกรัม</td>
-                                            <td>{element_plant.price} บาท</td>
-                                            <td>{addComma(element_plant.price * element_plant.amount)} บาท</td>
+                                            <td>{addComma(element_plant.amount)}</td>
+                                            <td>{element_plant.price}</td>
+                                            <td>{addComma(element_plant.price * element_plant.amount)}</td>
                                             {console.log("test", this.state.detail)}
                                             <td>{
                                                 element_plant.status === 1 ?
@@ -423,7 +420,7 @@ class OrderDetail extends Component {
                                                     <NavLink to={`/M_Product?product_id=P%20${element_plant.plant_id}&order_id=${this.state.order.order_id}`}>
                                                         <button
                                                             className="BTN_AddCart"
-                                                            style={{ width: "250px", float: "right" }}>
+                                                            style={{float: "right" }}>
                                                             ทำการสั่งซื้อวัตถุดิบ
                                                         </button>
                                                     </NavLink>}
@@ -434,10 +431,6 @@ class OrderDetail extends Component {
                                 })
                             }
                         </table>
-
-
-
-
                         <div className="TotalCart">
                             <div className="Row">
                                 <div className="col-2">
@@ -458,12 +451,11 @@ class OrderDetail extends Component {
                         </div>
                     </div>
 
-                </div>
-                <div className="col-2"></div>
-                {/*     </div >
-            {this.state.num ? <FrequencyPlant data_plant={this.state.plant} /> : ''} 
-            </div > */}
 
+
+                    <div className="col-5">{this.render_status(this.state.order.order_status)}</div>
+                    
+                </div>
 
                 <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "500px" }}>

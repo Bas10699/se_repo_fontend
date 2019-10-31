@@ -60,7 +60,7 @@ class Timeline extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-2"></div>
-                    <div className="col-8">
+                    <div className="col-10">
                         <ul className="Progressbar">
                             <li className={this.props.status >= 0 ? "Standat1" : "Standat1"}>
                                 <img src={one} alt="one"
@@ -96,7 +96,7 @@ class Timeline extends Component {
                             <li className={this.props.status >= 2 ? "Status" : "Standat"}>
                                 <img src={this.props.status >= 2 ? three : threedis} alt="three"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
-                                <div style={{ marginLeft: "90%", width: "100%" }} >
+                                <div style={{ marginLeft: "93%", width: "100%" }} >
                                     ชำระเงินแล้ว
                                     </div>
                                 {/* {this.props.status >= 2 ?
@@ -108,10 +108,10 @@ class Timeline extends Component {
                                 } */}
 
                             </li>
-                            <li className={this.props.status >= 3 ? "Status" : "Standat"}>
-                                <img src={this.props.status >= 3 ? four : fourdis} alt="four"
+                            <li className={this.props.status >= 4 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 4 ? four : fourdis} alt="four"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
-                                <div style={{ marginLeft: "86%", width: "100%" }} >
+                                <div style={{ marginLeft: "88%", width: "100%" }} >
                                     สินค้าทำการจัดส่ง
                                     </div>
                                 {/* {this.props.status >= 2 ?
@@ -124,13 +124,13 @@ class Timeline extends Component {
 
                             </li>
 
-                            <li className={this.props.status >= 4 ? "Status" : "Standat"}>
+                            {/* <li className={this.props.status >= 4 ? "Status" : "Standat"}>
                                 <img src={this.props.status >= 4 ? five : fivedis} alt="five"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
                                 <div style={{ marginLeft: "86%", width: "100%" }} >
                                     ตรวจสอบสินค้า
                                     </div>
-                            </li>
+                            </li> */}
 
                         </ul>
 
@@ -144,96 +144,27 @@ class Timeline extends Component {
                             null
                         }
                         {this.props.status >= 1 ?
-                            <div style={{ marginLeft: "18.5%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "19.5%", width: "40%", marginTop: "-40px" }}>
                                 <PdfInvoice data={this.props.invoice} order={this.props.order} />
                             </div>
                             :
                             null
                         }
                         {this.props.status >= 2 ?
-                            <div style={{ marginLeft: "43.5%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "47.5%", width: "40%", marginTop: "-40px" }}>
                                 <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
                             </div>
                             :
                             null
                         }
-                        {this.props.status >= 3 ?
-                            <div style={{ marginLeft: "68.5%", width: "40%", marginTop: "-40px" }}>
+                        {this.props.status >= 4 ?
+                            <div style={{ marginLeft: "75%", width: "40%", marginTop: "-40px" }}>
                                 <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
                             </div>
                             :
                             null
                         }
-                        {/*                         
-                        <ul className="Progressbar">
-                            {
-                                this.props.status >= 0 ?
-                                    <li className="Standat" >
-                                        <img src={one} alt="one"
-                                            style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                        <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ<br />
-                                            {moment(this.props.order.order_date).utc().format('DD/MM/YYYY HH:mm')}
-                                            <PdfOrder data={this.props.order} />
-                                        </div>
-                                    </li>
-                                    :
-                                    <li className="Standat" >
-                                        <img src={one} alt="one"
-                                            style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                        <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ส่งใบสั่งซื้อ</div>
-                                    </li>
-                            }
-                            {this.props.status >= 1 ?
-
-                                <li className="Status" >
-                                    <img src={two} alt="two"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ยืนยันคำสั่งซื้อแล้ว<br />
-                                        {moment(this.props.invoice.date).utc().format('DD/MM/YYYY HH:mm')}
-                                        <PdfInvoice data={this.props.invoice} order={this.props.order} />
-                                    </div></li>
-                                : <li className="Standat">
-                                    <img src={twodis} alt="two"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ยืนยันคำสั่งซื้อแล้ว</div></li>}
-
-                            {this.props.status >= 2 ? <li className="Status" >
-                                <img src={three} alt="three"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ชำระเงินแล้ว<br />
-                                    {moment(this.props.order.date_of_payment).utc().format('DD/MM/YYYY HH:mm')}<br />
-                                    <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
-                                </div></li>
-                                : <li className="Standat" >
-                                    <img src={threedis} alt="three"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>ชำระเงินแล้ว</div></li>}
-
-                            {this.props.status >= 3 ? <li className="Status" >
-                                <img src={four} alt="four"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>สินค้าทำการจัดส่ง<br />
-                                    {moment(this.props.order.check_payment_date).utc().format('DD/MM/YYYY HH:mm')}<br />
-                                    <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
-                                </div></li>
-                                : <li className="Standat" >
-                                    <img src={fourdis} alt="four"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "0%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "-90%" }}>สินค้าทำการจัดส่ง</div></li>}
-
-                            {this.props.status >= 4 ? <li className="Statusles" >
-                                <img src={five} alt="five"
-                                    style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", zIndex: "1000" }} />
-                                <br /><div style={{ textAlign: "center", marginLeft: "55%", width: "200px" }}>ตรวจสอบสินค้า<br />
-                                    {moment(this.props.order.date_end).utc().format('DD/MM/YYYY HH:mm')}<br />
-                                    <button className="BTN_PDF">ตรวจสอบ</button> 
-                                </div></li>
-                                : <li className="Standatles" >
-                                    <img src={fivedis} alt="fivedis"
-                                        style={{ width: "25px", marginTop: "-10px", marginLeft: "98%", filter: "grayscale(100%)", backgroundColor: "white" }} />
-                                    <br /><div style={{ textAlign: "center", marginLeft: "95%", width: "100px" }}>ตรวจสอบสินค้า</div></li>}
-                        </ul> */}
-
+                        
                     </div>
                 </div>
 
