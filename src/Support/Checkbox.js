@@ -143,7 +143,7 @@ class Checkbox extends Component {
                                         </td>
                                     <td>{option_element.title_name} {option_element.first_name} {option_element.last_name}</td>
 
-                                    <td>{option_element.year_value}</td>
+                                    <td>{option_element.year_value*option_element.deliver_frequency_number}</td>
                                     <td>{option_element.end_plant}</td>
                                     <td>
                                         {checkInput.map((ele_check) => {

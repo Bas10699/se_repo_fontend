@@ -8,6 +8,7 @@ import top from '../Image/top.png'
 import Pagination from "../Support/Pagination";
 import Modal from 'react-responsive-modal'
 import Checkbox from './CheckboxMPlan'
+import moment from 'moment'
 
 Highcharts.setOptions({
     lang: {
@@ -39,6 +40,7 @@ class M_Plan extends Component {
             selectPlant: '',
             listplan: [],
             volume_fermer: [],
+            open1:false,
         }
     }
 
@@ -56,7 +58,7 @@ class M_Plan extends Component {
     }
 
     onCloseModal = () => {
-        this.setState({ open: false })
+        this.setState({ open: false,open1:false })
     }
 
     get_volume_fermer = async () => {
@@ -114,6 +116,8 @@ class M_Plan extends Component {
             Plant: plant
         })
     }
+
+    
 
     comfirmPlan = async (plant) => {
         this.setState({
@@ -345,6 +349,9 @@ class M_Plan extends Component {
                 pointFormat: '<tr><td style="color:{series.color};padding:0;font-size:10px">จำนวน : </td>' +
                     '<td style="padding:0"><b>{point.y} กิโลกรัม </b></td></tr>',
                 footerFormat: '</table>',
+            },
+            credits: {
+                enabled: false
             },
             series: [{
                 type: 'column',
@@ -580,17 +587,30 @@ class M_Plan extends Component {
                                                     <td>วันที่เริ่มโครงการ</td>
                                                     <td>{element.plant}</td>
                                                     <td>{element.volume}</td>
-                                                    <td>กำหนดส่งก่อน</td>
+                                                    <td>{moment(element.year_round_planing_date).format('DD/MM/YYYY')}</td>
                                                     {/* <td>{element.planing_farmer_volume}</td>
                                             <td>กำหนดส่งก่อน : {moment(element.planing_farmer_date).format('DD/MM/YYYY')}</td> */}
-                                                    <td>รายละเอียด</td>
+                                                    <td><button onClick={()=>this.setState({open1:true})} style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}>รายละเอียด</button></td>
                                                 </tr>
                                             )
                                         })
                                     }
 
                                 </table>
+                                <Modal open={this.state.open1} onClose={this.onCloseModal}>
+                            <div className="Row">
+                                <div className="col-12" >
+                                    <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
+                                </div>
+                            </div>
+                            <div className="Row">
+                                <div className="col-12">
+                                   
+                                </div>
 
+                            </div>
+
+                        </Modal>
                             </div>
                             <div className="col-1"></div>
                         </div>
@@ -608,7 +628,7 @@ class M_Plan extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        {/* <h4>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
+                        <h4>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
                         <table>
                             <tr>
                                 <th>ชื่อ Neo_firm</th>
@@ -626,7 +646,7 @@ class M_Plan extends Component {
                                 <th>รวม</th>
                                 <th>{this.sum_volume(this.state.volume_fermer)}</th>
                             </tr>
-                        </table> */}
+                        </table>
                         <div className="tab">
                             <button onClick={() => this.setState({ click: 1 })}>ดูความถี่การส่งมอบ</button>
                             <button onClick={() => this.setState({ click: 2 })}>วางแผนเพาะปลูก</button>
