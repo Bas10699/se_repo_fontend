@@ -240,7 +240,7 @@ class ProductDetail extends Component {
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-10">
-                        <h3 style={{ textAlign: "center" }}>รายการวัตถุดิบ</h3>
+                        {/* <h3 style={{ textAlign: "center" }}>รายการวัตถุดิบ</h3>
 
                         <table>
                             <tr>
@@ -281,7 +281,7 @@ class ProductDetail extends Component {
                                     )
                                 })
                             }
-                        </table>
+                        </table> */}
                         <div className="Row">
                             <div className="col-10">
                                 <h4>ยอดคำสั่งซื้อทั้งหมด</h4>

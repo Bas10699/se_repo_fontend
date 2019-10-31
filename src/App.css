@@ -832,8 +832,8 @@ th,tr:hover{
   .Standat {
     list-style-type: none;
     float: left;
-    width: 25%;
-    margin-left: 2.2%;
+    width: 27.7%;
+    margin-left: 2.8%;
     position: relative;
     background-color: #ccc;
     height: 5px;
@@ -851,13 +851,13 @@ th,tr:hover{
   li.Status {
     list-style-type: none;
     float: left;
-    width: 25%;
+    width: 27.7%;
     position: relative;
     background-color: green;
     height: 5px;
     color: black;
     z-index: -1;
-    margin-left: 2.2%;
+    margin-left: 2.8%;
   }
   li.Status img{
     width: "25px";
@@ -1056,7 +1056,7 @@ th,tr:hover{
     font-family: 'fc_lamoonregular';
     font-size: 16px;
     color: black;
-    background-color: transparent;
+    background-color: white;
     border: 1px solid rgb(97, 197, 39);
     text-align: center;
     cursor: pointer;

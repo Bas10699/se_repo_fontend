@@ -10,6 +10,7 @@ class Product extends Component {
         this.state = {
             product_data: [],
             search_order: [],
+            prince:[],
             grt_user: null,
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png'
         }
@@ -105,6 +106,9 @@ class Product extends Component {
                                                 <div className="Card">
                                                     {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
+                                                    {element.price.map((element_p,index)=>{
+                                                        return(<div>{element_p}</div>)
+                                                    })}
                                                     <NavLink to={"/Product/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
                                             )
@@ -115,6 +119,9 @@ class Product extends Component {
                                                 <div className="Card">
                                                     {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
+                                                    {element.price.map((element_p,index)=>{
+                                                        return(<div>{element_p}</div>)
+                                                    })}
                                                     <NavLink to={"/Product/product?product_id=" + element.product_id}><button >รายละเอียดเพิ่มเติม</button></NavLink>
                                                 </div>
                                             )

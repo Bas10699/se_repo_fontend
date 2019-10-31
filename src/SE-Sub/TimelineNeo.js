@@ -136,7 +136,7 @@ class TimelineNeo extends Component {
                             <li className={this.props.status >= 2 ? "Status" : "Standat"}>
                                 <img src={this.props.status >= 2 ? three : threedis} alt="three"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
-                                <div style={{ marginLeft: "90%", width: "100%" }} >
+                                <div style={{ marginLeft: "93%", width: "100%" }} >
                                     ชำระเงินแล้ว
                                     </div>
                                 {/* {this.props.status >= 2 ?
@@ -164,13 +164,13 @@ class TimelineNeo extends Component {
 
                             </li>
 
-                            <li className={this.props.status >= 4 ? "Status" : "Standat"}>
+                            {/* <li className={this.props.status >= 4 ? "Status" : "Standat"}>
                                 <img src={this.props.status >= 4 ? five : fivedis} alt="five"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
                                 <div style={{ marginLeft: "86%", width: "100%" }} >
                                     ตรวจสอบสินค้า
                                     </div>
-                            </li>
+                            </li> */}
 
                         </ul>
 
@@ -193,7 +193,7 @@ class TimelineNeo extends Component {
                     null
                 }
                 {this.props.status >= 2 ?
-                    <div style={{ marginLeft: "36%", width: "30%", marginTop: "-40px" }}>
+                    <div style={{ marginLeft: "43%", width: "30%", marginTop: "-40px" }}>
                         <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
                     </div>
                     :

@@ -66,7 +66,7 @@ class M_Buying extends Component {
                 <img src={twodis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
             </div>
                 break;
             case 1: render_tag = <div>
@@ -74,7 +74,7 @@ class M_Buying extends Component {
                 <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
             </div>
                 break;
             case 2:
@@ -83,7 +83,7 @@ class M_Buying extends Component {
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
             case 3:
@@ -92,7 +92,7 @@ class M_Buying extends Component {
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
             case 4:
@@ -101,7 +101,7 @@ class M_Buying extends Component {
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    {/* <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
           
@@ -340,7 +340,7 @@ class M_Buying extends Component {
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Max')} />
                                     }
                                 </th>
-                                <th>จำนวนการสั่งซื้อ</th>
+                                <th>จำนวนการสั่งซื้อ (กิโลกรัม)</th>
                                 <th style={{width:"120px"}}>สั่งซื้อกับ</th>
                                 <th>รายละเอียด</th>
                             </tr>
@@ -352,7 +352,7 @@ class M_Buying extends Component {
                                                 <td>{element.order_se_id}</td>
                                                 <td>{moment(element.order_se_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_se_status)}</td>
-                                                <td>{element.amount} กิโลกรัม</td>
+                                                <td>{addComma(element.amount) }</td>
                                                 <td>{element.se_name}</td>
                                                 <td><NavLink to={"/M_Buying/order?order_id=" + element.order_se_id} style={{ textDecoration: "none" }}><button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>

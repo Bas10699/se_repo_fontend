@@ -306,7 +306,7 @@ class S_OrderDetail extends Component {
                     </div>
                 </div>
 
-                <div className="Row" style={{ marginTop: "30px" }}>
+                <div className="Row" style={{ marginTop: "70px" }}>
                     <div className="col-1"></div>
                     <div className="col-2">
                         <div className="Card" style={{ width: "100%" }}>
@@ -323,7 +323,7 @@ class S_OrderDetail extends Component {
                     <div className="col-7">
                         {this.state.order.order_farmer_status == null ?
                             <div>
-                                <h4 style={{ margin: "0px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
+                                <h4 style={{ marginTop: "10px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
                                 <Checkbox
                                     option={this.state.farmer}
                                     check_array={this.state.check_array}
@@ -336,7 +336,7 @@ class S_OrderDetail extends Component {
                             </div>
                             :
                             <div>
-                                <h4 style={{ marginTop: "50px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
+                                <h4 style={{ marginTop: "10px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
                                 
                                 <table>
                                     {this.state.order_farmer.map((element, index) => {

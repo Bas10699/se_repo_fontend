@@ -60,7 +60,7 @@ class Timeline extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-2"></div>
-                    <div className="col-10">
+                    <div className="col-8">
                         <ul className="Progressbar">
                             <li className={this.props.status >= 0 ? "Standat1" : "Standat1"}>
                                 <img src={one} alt="one"
@@ -144,21 +144,21 @@ class Timeline extends Component {
                             null
                         }
                         {this.props.status >= 1 ?
-                            <div style={{ marginLeft: "19.5%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "23%", width: "40%", marginTop: "-40px" }}>
                                 <PdfInvoice data={this.props.invoice} order={this.props.order} />
                             </div>
                             :
                             null
                         }
                         {this.props.status >= 2 ?
-                            <div style={{ marginLeft: "47.5%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "54%", width: "40%", marginTop: "-40px" }}>
                                 <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
                             </div>
                             :
                             null
                         }
                         {this.props.status >= 4 ?
-                            <div style={{ marginLeft: "75%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "85%", width: "40%", marginTop: "-40px" }}>
                                 <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
                             </div>
                             :

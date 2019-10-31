@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { user_token, addComma } from '../Support/Constance';
-import { ip,get, post } from '../Support/Service';
+import { ip, get, post } from '../Support/Service';
 import queryString from 'query-string';
 import TimelineNeo from '../SE-Sub/TimelineNeo';
 import Modal from 'react-responsive-modal'
@@ -11,19 +11,19 @@ class M_BuyingDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            open:false,
-            OpenComfrim:false,
-            OpenBill:false,
-            OpenProofPaymet:false,
+            open: false,
+            OpenComfrim: false,
+            OpenBill: false,
+            OpenProofPaymet: false,
             order: [],
             data: [],
             click: false,
             clicks: false,
             get_order: '',
-            date_proof:null,
-            time_proof:null,
-            image_payment:null,
-            order_se_invoice_detail:[],
+            date_proof: null,
+            time_proof: null,
+            image_payment: null,
+            order_se_invoice_detail: [],
             get_product: '',
             search_order: [],
             render_history: null,
@@ -44,7 +44,7 @@ class M_BuyingDetail extends Component {
                 if (result.success) {
                     this.setState({
                         get_order: result.result,
-                        order_se_invoice_detail:result.result.order_se_invoice_detail
+                        order_se_invoice_detail: result.result.order_se_invoice_detail
                     })
                     setTimeout(() => {
                         console.log("neutrally/get_order_se", result.result)
@@ -59,17 +59,19 @@ class M_BuyingDetail extends Component {
         }
     }
 
-    
+
 
     render_status = (order_status) => {
         let render_show
         switch (order_status) {
             case 0: render_show =
-                <div className='_Card'>
+                <div>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : รอการยืนยันการสั่งซื้อ</h4>
-                            <h5>รอ {this.state.get_order.se_name} ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                            <div className='_Card'>
+                                <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                                <h5>รอ {this.state.get_order.se_name} ยืนยันการสั่งซื้อ <br /> และส่งใบแจ้งหนี้กลับมา</h5>
+                            </div>
                         </div>
                     </div>
                     <div className="Row">
@@ -80,27 +82,31 @@ class M_BuyingDetail extends Component {
                 break;
 
             case 1: render_show =
-                <div className='_Card'>
+                <div>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : รอการยืนยันการชำระเงิน</h4>
-                            <h5>กรุณาชำระเงินผ่าน : {this.state.order_se_invoice_detail ?
-                                this.state.order_se_invoice_detail.map((element,index)=>{
-                                return(
-                                    <div>
-                                        <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
-                                        <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h5>
-                                    </div>
-                                )
-                            }) : null}
-                                
-                                {console.log("getorder",this.state.get_order)}
-                            </h5>
-                            
+                            <div className='_Card'>
+
+                                <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                                <h5 style={{ margin: "0px" }}>รอการยืนยันการชำระเงิน</h5>
+                                <h5 style={{ margin: "0px" }}>กรุณาชำระเงินผ่าน : {this.state.order_se_invoice_detail ?
+                                    this.state.order_se_invoice_detail.map((element, index) => {
+                                        return (
+                                            <div>
+                                                <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
+                                                <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h5>
+                                            </div>
+                                        )
+                                    }) : null}
+
+                                    {console.log("getorder", this.state.get_order)}
+                                </h5>
+
+                            </div>
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-6">
+                        <div className="col-12" style={{marginLeft:"50px"}}>
                             {/* <PdfInvoice data={this.state.invoice} order={this.state.order} /> */}
                             <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
                         </div>
@@ -109,15 +115,18 @@ class M_BuyingDetail extends Component {
                 break;
 
             case 2: render_show =
-                <div className='_Card'>
-                    <div className="Row">
+            <div>
+                <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : รอ {this.state.get_order.se_name} ตรวจสอบการโอนเงิน</h4>
-                            <h5>รอ {this.state.get_order.se_name} ตรวจสอบการโอนเงิน หลังจากตรวจสอบเรียบร้อยจะส่งใบเสร็จกลับมา</h5>
+                            <div className='_Card'>
+                    
+                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h5 style={{ margin: "0px" }}>รอ {this.state.get_order.se_name} ตรวจสอบการโอนเงิน</h5>
                         </div>
                     </div>
+                    </div>
                     <div className="Row">
-                        <div className="col-6">
+                        <div className="col-12" style={{marginLeft:"50px"}}>
                             <button onClick={() => this.setState({ OpenProofPaymet: true })}
                                 className="BTN_PDF">ดูหลักฐานการโอนเงิน</button>
                         </div>
@@ -126,44 +135,44 @@ class M_BuyingDetail extends Component {
 
                 break;
 
-            case 3: render_show =
-                <div className='_Card'>
-                    <div className="Row">
-                        <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : สินค้าได้ทำการจัดสั่งเเล้ว ผู้ประกอบการกรุณาตรวจสอบสินค้าและใบเสร็จ</h4>
-                        </div>
-                    </div>
-                    <div className="Row">
-                        <div className="col-6">
-                            <button className='BTN_CONFIRM' onClick={() => this.confirm()}>ยืนยันได้รับสินค้า</button>
-                        </div>
-                    </div>
-                </div>
-                break;
-
+            case 3:
             case 4: render_show =
-                <div className='_Card'>
-                    <div className="Row">
+                 <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : เรียบร้อย</h4>
-
+                            <div className='_Card'>
+                   
+                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h5 style={{ margin: "0px" }}>สินค้าได้ทำการจัดสั่งเเล้ว</h5>
                         </div>
                     </div>
-                    {/* <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
-                        <div className="col-6">
-                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
-                        </div>
-                    </div> */}
                 </div>
                 break;
+
+            // case 4: render_show =
+            //     <div className='_Card'>
+            //         <div className="Row">
+            //             <div className="col-12">
+            //             <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+            //                 <h4>เรียบร้อย</h4>
+
+            //             </div>
+            //         </div>
+            //         {/* <div className="Row">
+            //             <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
+            //             <div className="col-6">
+            //                 <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+            //             </div>
+            //         </div> */}
+            //     </div>
+            //     break;
 
 
             default: render_show =
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h4>เกิดข้อผิดพลาด</h4>
 
                         </div>
                     </div>
@@ -179,7 +188,7 @@ class M_BuyingDetail extends Component {
     };
 
     onCloseModal = () => {
-        this.setState({ open: false, OpenComfrim: false, OpenBill: false,OpenProofPaymet:false });
+        this.setState({ open: false, OpenComfrim: false, OpenBill: false, OpenProofPaymet: false });
 
     };
 
@@ -247,22 +256,23 @@ class M_BuyingDetail extends Component {
 
                 <div className="Row">
                     <div className="col-10" style={{ textAlign: "right" }}>
-                        วันที่ {moment(this.state.get_order.order_se_date).utc().add('years', 543).format("DD/MM/YYYY")}<br/>
+                        วันที่ {moment(this.state.get_order.order_se_date).utc().add('years', 543).format("DD/MM/YYYY")}<br />
                         เลขที่ใบสั่งซื้อ {this.state.get_order.order_se_id}
                     </div>
                 </div>
 
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
-                        <TimelineNeo status={this.state.get_order.order_se_status} order={this.state.get_order}/>
+                        <TimelineNeo status={this.state.get_order.order_se_status} order={this.state.get_order} />
                     </div>
                 </div>
 
-                <div className="Row" style={{marginTop:"50px"}}>
-                    <div className="col-2"></div>
-                    <div className="col-8">{this.render_status(this.state.get_order.order_se_status)}</div>
-                    {console.log("status",this.state.get_order.order_se_status)}
-                    <div className="col-2"></div>
+                <div className="Row" style={{ marginTop: "50px" }}>
+                    <div className="col-1"></div>
+                    <div className="col-6"></div>
+                    <div className="col-5">{this.render_status(this.state.get_order.order_se_status)}</div>
+                    {console.log("status", this.state.get_order.order_se_status)}
+
                 </div>
 
 
@@ -271,17 +281,17 @@ class M_BuyingDetail extends Component {
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "500px" }}>
                         <div className="col-11">
-                        <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
+                            <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.get_order.order_se_id}</h4>
-                            
-                            โอนเข้าบัญชี : 
+
+                            โอนเข้าบัญชี :
                             <select>
                                 {this.state.order_se_invoice_detail ?
-                                    this.state.order_se_invoice_detail.map((element,index)=>{
-                                    return(
-                                        <option>{element.bankName}</option>
-                                    )
-                                }):null}
+                                    this.state.order_se_invoice_detail.map((element, index) => {
+                                        return (
+                                            <option>{element.bankName}</option>
+                                        )
+                                    }) : null}
                             </select>
                             {/* <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
                             <div className="Row">
@@ -315,7 +325,7 @@ class M_BuyingDetail extends Component {
                 </Modal>
 
                 <Modal open={this.state.OpenProofPaymet} onClose={this.onCloseModal}>
-                <div className="Row">
+                    <div className="Row">
                         <div className="col-12" >
                             <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
                         </div>

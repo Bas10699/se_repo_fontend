@@ -17,8 +17,8 @@ class Navbar extends Component {
         this.state = {
             get_user: null,
             news: false,
-            noti_order_trader:0,
-            noti_M_Order:0
+            noti_order_trader: 0,
+            noti_M_Order: 0
 
         };
     }
@@ -57,33 +57,33 @@ class Navbar extends Component {
         }
     }
 
-    get_noti_trader = async () =>{
-        try{
-            await get('ss/noti_trader',user_token).then((result)=>{
-                if(result.success){
+    get_noti_trader = async () => {
+        try {
+            await get('ss/noti_trader', user_token).then((result) => {
+                if (result.success) {
                     this.setState({
                         noti_order_trader: result.result
                     })
                 }
             })
         }
-        catch(error){
-            alert('get_noti_trader: '+error)
+        catch (error) {
+            alert('get_noti_trader: ' + error)
         }
     }
 
-    get_noti_Middle = async () =>{
-        try{
-            await get('ss/noti_SE_Middle',user_token).then((result)=>{
-                if(result.success){
+    get_noti_Middle = async () => {
+        try {
+            await get('ss/noti_SE_Middle', user_token).then((result) => {
+                if (result.success) {
                     this.setState({
                         noti_M_Order: result.result
                     })
                 }
             })
         }
-        catch(error){
-            alert('get_noti_trader: '+error)
+        catch (error) {
+            alert('get_noti_trader: ' + error)
         }
     }
 
@@ -100,7 +100,7 @@ class Navbar extends Component {
                                 {/* <li><NavLink exact to="/Planting_Planning" activeClassName="Active" className="NavbarText">การวางแผนเพาะปลูก</NavLink></li> */}
                                 <li><NavLink exact to="/Product_Information" activeClassName="Active" className="NavbarText">ข้อมูลผลผลิต</NavLink></li>
                                 <li><NavLink exact to="/Product_Research" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
-                                
+
                                 <div className="NavbarRight" activeClassName="Active">
                                     <div className="dropdown" activeClassName="Active">
                                         <NavLink exact to="/User" className="dropbtn" activeClassName="Active">{this.state.get_user.username}</NavLink>
@@ -138,7 +138,7 @@ class Navbar extends Component {
                                 </div>
                             </ul>
                         </div>
-                        <NotificationTrader/>
+                        <NotificationTrader />
                     </div>
                 break;
 
@@ -150,12 +150,16 @@ class Navbar extends Component {
                             <ul>
                                 {/* <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li> */}
                                 {/* <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li> */}
-                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
+
 
                                 <li><NavLink exact to="/S_Plants_in_network" activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
-                                <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อ</NavLink></li>
                                 <li><NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">ข้อมูลเกษตรกร</NavLink></li>
+
                                 <li><NavLink exact to="/S_Certified" activeClassName="Active" className="NavbarText">มาตรฐาน</NavLink></li>
+                                <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อ</NavLink></li>
+                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
+
+
                                 <li><NavLink exact to="/S_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li>
 
                                 <div className="NavbarRight" activeClassName="Active">
