@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token, sortData, addComma } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
+import Checkbox from './CheckboxPlan'
 
 import Modal from 'react-responsive-modal'
 class S_Plan extends Component {
@@ -18,7 +19,9 @@ class S_Plan extends Component {
             open: false,
             search_order: [],
             get_user: null,
-
+            check_array: [],
+            order_farmer: [],
+            data:'',
         }
     }
 
@@ -136,6 +139,85 @@ class S_Plan extends Component {
         this.setState({ open: false })
     }
 
+    openModel = () => {
+        let farmer = this.state.farmer
+        let selectFarmer = []
+
+        this.state.check_array.map((element) => {
+
+            selectFarmer.push({
+                title_name: farmer[element.check].title_name,
+                first_name: farmer[element.check].first_name,
+                last_name: farmer[element.check].last_name,
+                plant: farmer[element.check].plant,
+                amount: element.amount
+            })
+
+        })
+        console.log(selectFarmer)
+        this.setState({
+            open: true,
+            selectFarmer: selectFarmer
+        })
+    }
+
+    addPlant = async () => {
+        this.setState({
+            return_page: 2,
+            open: false,
+        })
+        let data = {
+            check_array: this.state.check_array,
+            date:this.state.data
+        }
+        console.log("data",data)
+        try {
+            await post(data, 'neo_firm/add_planing_farmer', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        check_array: result.result,
+                        date:result.date
+                    })
+
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('addplant: ' + error)
+        }
+    }
+
+    get_order_plan = async ()=>{
+        
+        try {
+            await get('neo_firm/get_planing_farmer', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        farmer: this.sort_plant(result.result),
+                        check_array: result.result,
+                        data:result.result.date
+                    })
+
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('get_order plan: ' + error)
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    
     render_plan = (page) => {
         let return_page;
         switch (page) {
@@ -160,7 +242,7 @@ class S_Plan extends Component {
                                             <td>{addComma(ele_plant.year_value)}</td>
                                             <td></td>
                                             <td></td>
-                                            <td><button onClick={() => this.setState({ open: true })}>วางแผน</button></td>
+                                            <td><button onClick={() => this.openModel()}>วางแผน</button></td>
                                         </tr>
 
                                     )
@@ -176,37 +258,27 @@ class S_Plan extends Component {
                     <Modal open={this.state.open} onClose={this.onCloseModal}>
                         <div className="Row">
                             <div className="col-12" >
-                                <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก ชื่อพืช</h3>
+                                <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก</h3>
                             </div>
                         </div>
                         <div className="Row">
                             <div className="col-12">
+                                วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange} />
+                                <button onClick={() => this.addPlant()}>ยืนยันการวางแผน</button>
 
-                                <table>
-                                    <tr>
-                                        <th></th>
-                                        <th>ชื่อเกษตรกร</th>
-                                        <th>พืชที่นิยมปลูก</th>
-                                        <th>ความถี่การส่งมอบ</th>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" /></td>
-                                        <td>นายสำรวย นอนนา</td>
-                                        <td>พริก ข้าวโพก ถั่วเขียว</td>
-                                        <td> 2 ครั้ง / เดือน</td>
-                                    </tr>
-                                    <tr>
-                                    <td><input type="checkbox" /></td>
-                                        <td>นางสาวสมหมาย สมหวัง</td>
-                                        <td>พริก ข้าวหอมมะลิ ถั่วเขียว</td>
-                                        <td> 2 ครั้ง / เดือน</td>
-                                    </tr>
-                                </table>
+                                <Checkbox
+                                    option={this.state.farmer}
+                                    check_array={this.state.check_array}
+                                    return_func={(event) => {
+                                        console.log('event', event)
+                                        this.setState({
+                                            check_array: event
+                                        })
+                                    }} />
                             </div>
 
                         </div>
-                        วันที่ต้องการ : <input type="date"/>
-                        <button onClick={()=> this.setState({open:false})}>ยืนยันการวางแผน</button>
+
                     </Modal>
                 </div>
                 break;
@@ -216,7 +288,17 @@ class S_Plan extends Component {
                     <div className="Row">
                         <div className="col-1"></div>
                         <div className="col-10">
-                            <h4 style={{textAlign:"center"}}>รายชื่อเกษตรกรที่เลือกปลูก</h4>
+                            <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรกรที่เลือกปลูก</h4>
+                            
+                            {this.state.order_farmer.map((element, index) => {
+                                return (
+                                    <tr>
+                                        <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_last_name}
+                                        </td>
+                                        <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
+                                    </tr>
+                                )
+                            })}
                             <table>
                                 <tr>
                                     <th>ชื่อพืช</th>

@@ -138,11 +138,11 @@ class BuyingDetail extends Component {
                             <h4>สถานะการสั่งซื้อ : สินค้าได้ทำการจัดสั่งเเล้ว ผู้ประกอบการกรุณาตรวจสอบสินค้าและใบเสร็จ</h4>
                         </div>
                     </div>
-                    {/* <div className="Row">
+                    <div className="Row">
                         <div className="col-6">
                             <button className='BTN_CONFIRM' onClick={() => this.confirm()}>ยืนยันได้รับสินค้า</button>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
                 break;
 
