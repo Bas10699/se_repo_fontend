@@ -21,7 +21,7 @@ class S_Plan extends Component {
             get_user: null,
             check_array: [],
             order_farmer: [],
-            data:'',
+            date:'',
         }
     }
 
@@ -168,16 +168,13 @@ class S_Plan extends Component {
         })
         let data = {
             check_array: this.state.check_array,
-            date:this.state.data
+            date:this.state.date
         }
         console.log("data",data)
         try {
             await post(data, 'neo_firm/add_planing_farmer', user_token).then((result) => {
                 if (result.success) {
-                    this.setState({
-                        check_array: result.result,
-                        date:result.date
-                    })
+                    
 
                 }
                 else {
