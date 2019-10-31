@@ -377,14 +377,14 @@ class M_Plan extends Component {
                         <div className="col-12">
                             <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>เลือก Neo-firm
                             <select className="select" name="volum">
-                                {this.state.get_se.map((ele_get_se, index) => {
-                                return (
-                                    <option onClick={(value) => this.select_se(index)} value={index}>
-                                        {ele_get_se.se_name}
-                                    </option>
-                                )
-                            })}
-                            </select>
+                                    {this.state.get_se.map((ele_get_se, index) => {
+                                        return (
+                                            <option onClick={(value) => this.select_se(index)} value={index}>
+                                                {ele_get_se.se_name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
                             </h2>
                             <h3 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ในเครือ {this.state.se_name}</h3>
                         </div>
@@ -514,7 +514,7 @@ class M_Plan extends Component {
                                                 <td>{element}</td>
                                                 {/* <td>1100</td>
                                                 <td>100</td> */}
-                                                <td><button onClick={() => this.comfirmPlan(element)}>วางแผน</button></td>
+                                                <td><button onClick={() => this.comfirmPlan(element)} style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}>วางแผน</button></td>
                                             </tr>
                                         )
                                     })}
@@ -535,8 +535,8 @@ class M_Plan extends Component {
                             </div>
                             <div className="Row">
                                 <div className="col-12">
-                                    วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange} />
-                                    <button onClick={() => this.addPlant(this.state.selectPlant)}>ยืนยันการวางแผน</button>
+                                    วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange}  style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}/>
+                                    <button onClick={() => this.addPlant(this.state.selectPlant)} style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}>ยืนยันการวางแผน</button>
                                     <Checkbox
                                         option={this.state.list_neo}
                                         check_array={this.state.check_array}
@@ -560,27 +560,29 @@ class M_Plan extends Component {
                         <div className="Row">
                             <div className="col-1"></div>
                             <div className="col-10">
-                                <h4 style={{ textAlign: "center" }}>รายชื่อ Neo-firm ที่เลือกปลูก</h4>
+                                <h4 style={{ textAlign: "center" }}>ติดตามการวางแผนการเพาะปลูก</h4>
                                 {console.log("list fermer", this.state.check_array)}
 
                                 <table>
                                     <tr>
-                                        <th>รายชื่อ Neo-firm ที่เลือกปลูก</th>
+                                        <th>เริ่มวันที่</th>
                                         <th>ชื่อพืช</th>
-
                                         <th>จำนวนที่ต้องการ</th>
-                                        {/* <th>ระยะเวลาที่กำหนด</th> */}
+                                        <th>วันที่ต้องการ</th>
+                                        <th>รายละเอียด</th>
+
                                     </tr>
                                     {
                                         this.state.listplan.map((element, index) => {
                                             return (
                                                 <tr>
-                                                    <td>{element.se_name}</td>
+                                                    <td>วันที่เริ่มโครงการ</td>
                                                     <td>{element.plant}</td>
-
                                                     <td>{element.volume}</td>
+                                                    <td>กำหนดส่งก่อน</td>
                                                     {/* <td>{element.planing_farmer_volume}</td>
                                             <td>กำหนดส่งก่อน : {moment(element.planing_farmer_date).format('DD/MM/YYYY')}</td> */}
+                                                    <td>รายละเอียด</td>
                                                 </tr>
                                             )
                                         })
@@ -627,7 +629,7 @@ class M_Plan extends Component {
                         <div className="tab">
                             <button onClick={() => this.setState({ click: 1 })}>ดูความถี่การส่งมอบ</button>
                             <button onClick={() => this.setState({ click: 2 })}>วางแผนเพาะปลูก</button>
-                            <button onClick={() => this.setState({ click: 3 })}>ติดตามการเพาะปลูก</button>
+                            <button onClick={() => this.setState({ click: 3 })}>ติดตามการวางแผน</button>
                             {this.state.click >= 2 ? <input type="text" placeholder="ค้นหา"
                                 style={{ width: "20%", marginTop: "5px", marginLeft: "25px" }} /> : null}
                         </div>
