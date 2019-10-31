@@ -566,7 +566,7 @@ class M_Plan extends Component {
                                         <th>ชื่อพืช</th>
 
                                         <th>จำนวนที่ต้องการ</th>
-                                        <th>ระยะเวลาที่กำหนด</th>
+                                        {/* <th>ระยะเวลาที่กำหนด</th> */}
                                     </tr>
                                     {
                                         this.state.listplan.map((element, index) => {
