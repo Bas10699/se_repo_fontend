@@ -4,6 +4,7 @@ import { get, post, ip } from '../Support/Service'
 import { user_token, sortData, addComma } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
 import Checkbox from './CheckboxPlan'
+import moment from 'moment'
 
 import Modal from 'react-responsive-modal'
 class S_Plan extends Component {
@@ -21,14 +22,15 @@ class S_Plan extends Component {
             get_user: null,
             check_array: [],
             order_farmer: [],
-            date:'',
-            selectPlant:null
+            date: '',
+            selectPlant: null
         }
     }
 
     componentWillMount() {
         this.get_skill_farmer()
         this.get_plant()
+        this.get_order_plan()
     }
 
     get_plant = async () => {
@@ -155,30 +157,31 @@ class S_Plan extends Component {
             })
 
         })
-        console.log("jhjh",selectFarmer)
+        console.log("jhjh", selectFarmer)
         this.setState({
             open: true,
             selectFarmer: selectFarmer,
-            selectPlant:plant
+            selectPlant: plant
         })
     }
 
     addPlant = async () => {
         this.setState({
-            return_page: 2,
             open: false,
         })
         let data = {
             check_array: this.state.check_array,
-            date:this.state.date,
-            name_plant:this.state.selectPlant
+            date: this.state.date,
+            name_plant: this.state.selectPlant
         }
-        console.log("data",data)
+        console.log("data", data)
         try {
             await post(data, 'neo_firm/add_planing_farmer', user_token).then((result) => {
                 if (result.success) {
-                    
-
+                    window.location.reload()
+                    this.setState({
+                        page: 2,
+                    })
                 }
                 else {
                     alert(result.error_message)
@@ -190,19 +193,20 @@ class S_Plan extends Component {
         }
     }
 
-    get_order_plan = async ()=>{
-        
+    get_order_plan = async () => {
+
         try {
             await get('neo_firm/get_planing_farmer', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        order_farmer:this.state.check_array
+                        order_farmer: result.result
                         // farmer: this.sort_plant(result.result),
                         // check_array: result.result,
                         // data:result.result.date
                     })
-
+                    console.log("listfarmer func", result.result)
                 }
+
                 else {
                     alert(result.error_message)
                 }
@@ -218,12 +222,13 @@ class S_Plan extends Component {
             [e.target.id]: e.target.value
         })
     }
-    
+
     render_plan = (page) => {
         let return_page;
         switch (page) {
             case 1: return_page =
                 <div>
+                    
                     <div className="Row">
                         <div className="col-1"></div>
                         <div className="col-10">
@@ -232,8 +237,8 @@ class S_Plan extends Component {
                                 <tr>
                                     <th>ชื่อวัตถุดิบ</th>
                                     <th>จำนวนที่มีอยู่ในสต๊อก</th>
-                                    <th>จำนวนที่สั่งซื้อ</th>
-                                    <th>วัตถุดิบขาด</th>
+                                    {/* <th>จำนวนที่สั่งซื้อ</th>
+                                    <th>วัตถุดิบขาด</th> */}
                                     <th>วางแผน</th>
                                 </tr>
                                 {this.plants_se(this.state.plants).map((ele_plant, index) => {
@@ -241,8 +246,8 @@ class S_Plan extends Component {
                                         <tr>
                                             <td>{ele_plant.plant}</td>
                                             <td>{addComma(ele_plant.year_value)}</td>
-                                            <td></td>
-                                            <td></td>
+                                            {/* <td></td>
+                                            <td></td> */}
                                             <td><button onClick={() => this.openModel(ele_plant.plant)}>วางแผน</button></td>
                                         </tr>
 
@@ -290,30 +295,25 @@ class S_Plan extends Component {
                         <div className="col-1"></div>
                         <div className="col-10">
                             <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรกรที่เลือกปลูก</h4>
-                            {console.log("list fermer",this.state.order_farmer)}
-                            {this.state.order_farmer.map((element, index) => {
-                                return (
-                                    <tr>
-                                        <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_last_name}
-                                        </td>
-                                        <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
-                                    </tr>
-                                )
-                            })}
+                            {console.log("list fermer", this.state.order_farmer)}
+
                             <table>
                                 <tr>
                                     <th>ชื่อพืช</th>
                                     <th>รายชื่อเกษตรกรที่เลือกปลูก</th>
+                                    <th>จำนวนที่ต้องการ</th>
                                     <th>ระยะเวลาที่กำหนด</th>
                                 </tr>
-                                <tr>
-                                    <td>ข้าวโพด</td>
-                                    <td>
-                                        <div>นายสำรวย นอนนา</div>
-                                        <div>นางสาวสมหมาย สมหวัง</div>
-                                    </td>
-                                    <td>ระยะเวลาที่เลือก</td>
-                                </tr>
+                                {this.state.order_farmer.map((element, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{element.planing_farmer_plant}</td>
+                                            <td>{element.planing_farmer_name}</td>
+                                            <td>{element.planing_farmer_volume}</td>
+                                            <td>กำหนดส่งก่อน : {moment(element.planing_farmer_date).format('DD/MM/YYYY')}</td>
+                                        </tr>
+                                    )
+                                })}
                             </table>
 
                         </div>
@@ -346,6 +346,8 @@ class S_Plan extends Component {
                         <div className="tab">
                             <button onClick={() => { this.setState({ page: 2 }) }}>ติดตามการวางแผน</button>
                             <button onClick={() => { this.setState({ page: 1 }) }}>วางแผนการเพาะปลูกให้กับเกษตรกร</button>
+                            <input type="text" placeholder="ค้นหา" 
+                            style={{width:"40%",marginTop:"5px",marginLeft:"25px"}}/>
                         </div>
 
                     </div>
