@@ -139,7 +139,7 @@ class S_Plan extends Component {
         this.setState({ open: false })
     }
 
-    openModel = () => {
+    openModel = (plant) => {
         let farmer = this.state.farmer
         let selectFarmer = []
 
@@ -150,7 +150,7 @@ class S_Plan extends Component {
                 first_name: farmer[element.check].first_name,
                 last_name: farmer[element.check].last_name,
                 plant: farmer[element.check].plant,
-                amount: element.amount
+                amount: element.amount,
             })
 
         })
@@ -168,7 +168,8 @@ class S_Plan extends Component {
         })
         let data = {
             check_array: this.state.check_array,
-            date:this.state.date
+            date:this.state.date,
+            name_plant:this.state.plants
         }
         console.log("data",data)
         try {
@@ -193,9 +194,10 @@ class S_Plan extends Component {
             await get('neo_firm/get_planing_farmer', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        farmer: this.sort_plant(result.result),
-                        check_array: result.result,
-                        data:result.result.date
+                        order_farmer:this.state.check_array
+                        // farmer: this.sort_plant(result.result),
+                        // check_array: result.result,
+                        // data:result.result.date
                     })
 
                 }
@@ -239,7 +241,7 @@ class S_Plan extends Component {
                                             <td>{addComma(ele_plant.year_value)}</td>
                                             <td></td>
                                             <td></td>
-                                            <td><button onClick={() => this.openModel()}>วางแผน</button></td>
+                                            <td><button onClick={() => this.openModel(ele_plant.plant)}>วางแผน</button></td>
                                         </tr>
 
                                     )
@@ -286,7 +288,7 @@ class S_Plan extends Component {
                         <div className="col-1"></div>
                         <div className="col-10">
                             <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรกรที่เลือกปลูก</h4>
-                            
+                            {console.log("list fermer",this.state.order_farmer)}
                             {this.state.order_farmer.map((element, index) => {
                                 return (
                                     <tr>
