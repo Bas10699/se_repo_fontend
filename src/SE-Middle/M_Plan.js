@@ -7,6 +7,7 @@ import HighchartsReact from 'highcharts-react-official'
 import top from '../Image/top.png'
 import Pagination from "../Support/Pagination";
 import Modal from 'react-responsive-modal'
+import Checkbox from './CheckboxMPlan'
 
 Highcharts.setOptions({
     lang: {
@@ -27,15 +28,120 @@ class M_Plan extends Component {
             data_month: [],
             month_detail: [],
             click: 1,
-            open:false,
+            open: false,
+            name_plant: [],
+            list_neo: [],
+            check_array: [],
+            Plant: null,
+            date: '',
+            se: [],
+            selectSE: null,
+            selectPlant: '',
+            listplan: [],
+            volume_fermer: [],
         }
     }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
     componentWillMount() {
         this.get_plant()
+        this.get_all_plant()
+        this.get_list_neo()
+        this.get_volume_fermer()
     }
 
     onCloseModal = () => {
         this.setState({ open: false })
+    }
+
+    get_volume_fermer = async () => {
+        try {
+            await get('neutrally/get_count_se_all', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({ volume_fermer: result.result })
+                    console.log('get_volume_fermer', result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+
+        } catch (error) {
+            alert('get_volume_fermer: ' + error)
+        }
+    }
+
+    get_all_plant = async () => {
+        try {
+            await get('neutrally/get_plant_name', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({ name_plant: result.result })
+                    console.log('get_allplant', result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+
+        catch (error) {
+            alert('get_allplant: ' + error)
+        }
+    }
+
+    openModel = (plant) => {
+        let se = this.state.se
+        let selectSE = []
+
+        this.state.check_array.map((element) => {
+
+            selectSE.push({
+                se_name: se[element.check].se_name,
+                data: se[element.check].data,
+                amount: element.amount,
+            })
+
+        })
+        console.log("jhjh", selectSE)
+        this.setState({
+            open: true,
+            selectSE: selectSE,
+            Plant: plant
+        })
+    }
+
+    comfirmPlan = async (plant) => {
+        this.setState({
+            open: true,
+            selectPlant: plant
+        })
+        let data = {
+            name_plant: plant,
+            check_array: this.state.check_array,
+            date: this.state.date,
+        }
+        console.log("data", data)
+        try {
+            await post(data, 'neutrally/get_plant_volume_all_se', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        list_neo: result.result
+                    })
+                }
+
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('addplant: ' + error)
+        }
     }
 
 
@@ -121,6 +227,66 @@ class M_Plan extends Component {
         }
         return return_month
     }
+
+
+    addPlant = async (plant) => {
+        let dataplan = {
+            plant: plant,
+            check_array: this.state.check_array,
+            date: this.state.date,
+        }
+        console.log("dataplan", dataplan)
+
+        try {
+            await post(dataplan, 'neutrally/add_year_round', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                    this.setState({
+                        open: false
+                    })
+
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert('dataplan: ' + error)
+        }
+    }
+
+    get_list_neo = async () => {
+        try {
+            await get('neutrally/get_year_round', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        listplan: result.result
+                    })
+                    console.log("get_list_neo", result, result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+
+        } catch (error) {
+            alert('get_list_neo: ' + error)
+        }
+    }
+
+    sum_volume = (count_farmer) => {
+        let sum = 0;
+        count_farmer.map((element) => {
+            return (
+                sum += (element.count_farmer)
+            )
+
+        })
+        return sum;
+
+    }
+
 
     changeCurrentPage = numPage => {
         this.setState({ currentPage: numPage });
@@ -329,66 +495,102 @@ class M_Plan extends Component {
 
                 case 2: return_plan =
                     <div>
-                    <div className="Row">
-                        <div className="col-1"></div>
-                        <div className="col-10">
-
-                            <table>
-                                <tr>
-                                    <th>ชื่อวัตถุดิบ</th>
-                                    <th>Neo-firm ที่ส่งมอบ</th>
-                                    <th>จำนวนที่มีอยู่ในสต๊อก</th>
-                                    <th>จำนวนที่สั่งซื้อ</th>
-                                    <th>วัตถุดิบขาด</th>
-                                    <th>วางแผน</th>
-                                </tr>
-                                <tr>
-                                    <td>พริก</td>
-                                    <td>1ม2ม3ม4ม5ม</td>
-                                    <td>1000</td>
-                                    <td>1100</td>
-                                    <td>100</td>
-                                    <td><button onClick={() => this.setState({ open: true })}>วางแผน</button></td>
-                                </tr>
-
-                            </table>
-
-
-                        </div>
-                        <div className="col-1"></div>
-                    </div>
-
-                    <Modal open={this.state.open} onClose={this.onCloseModal}>
                         <div className="Row">
-                            <div className="col-12" >
-                                <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก ชื่อพืช</h3>
+                            <div className="col-1"></div>
+                            <div className="col-10">
+                                <table>
+                                    <tr>
+                                        <th>ชื่อวัตถุดิบ</th>
+                                        {/* <th>จำนวนที่สั่งซื้อ</th>
+                                        <th>วัตถุดิบขาด</th> */}
+                                        <th>วางแผน</th>
+                                    </tr>
+                                    {this.state.name_plant.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td>{element}</td>
+                                                {/* <td>1100</td>
+                                                <td>100</td> */}
+                                                <td><button onClick={() => this.comfirmPlan(element)}>วางแผน</button></td>
+                                            </tr>
+                                        )
+                                    })}
+
+
+                                </table>
+
+
                             </div>
+                            <div className="col-1"></div>
                         </div>
+
+                        <Modal open={this.state.open} onClose={this.onCloseModal}>
+                            <div className="Row">
+                                <div className="col-12" >
+                                    <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
+                                </div>
+                            </div>
+                            <div className="Row">
+                                <div className="col-12">
+                                    วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange} />
+                                    <button onClick={() => this.addPlant(this.state.selectPlant)}>ยืนยันการวางแผน</button>
+                                    <Checkbox
+                                        option={this.state.list_neo}
+                                        check_array={this.state.check_array}
+                                        return_func={(event) => {
+                                            console.log('event', event)
+                                            this.setState({
+                                                check_array: event
+                                            })
+                                        }} />
+
+                                </div>
+
+                            </div>
+
+                        </Modal>
+                    </div>
+                    break;
+
+                case 3: return_plan =
+                    <div>
                         <div className="Row">
-                            <div className="col-12">
+                            <div className="col-1"></div>
+                            <div className="col-10">
+                                <h4 style={{ textAlign: "center" }}>รายชื่อ Neo-firm ที่เลือกปลูก</h4>
+                                {console.log("list fermer", this.state.check_array)}
 
                                 <table>
                                     <tr>
-                                        <th></th>
-                                        <th>ชื่อ Neo-firm</th>
-                                        <th>พืชที่นิยมส่งมอบมากที่สุด</th>
+                                        <th>รายชื่อ Neo-firm ที่เลือกปลูก</th>
+                                        <th>ชื่อพืช</th>
+
+                                        <th>จำนวนที่ต้องการ</th>
+                                        <th>ระยะเวลาที่กำหนด</th>
                                     </tr>
-                                    <tr>
-                                        <td><input type="checkbox" /></td>
-                                        <td>Neo-firm อินทรีย์อีสาน</td>
-                                        <td>ข้าวกข.6</td>
-                                    </tr>
-                                   
+                                    {
+                                        this.state.listplan.map((element, index) => {
+                                            return (
+                                                <tr>
+                                                    <td>{element.se_name}</td>
+                                                    <td>{element.plant}</td>
+
+                                                    <td>{element.volume}</td>
+                                                    {/* <td>{element.planing_farmer_volume}</td>
+                                            <td>กำหนดส่งก่อน : {moment(element.planing_farmer_date).format('DD/MM/YYYY')}</td> */}
+                                                </tr>
+                                            )
+                                        })
+                                    }
+
                                 </table>
+
                             </div>
-
+                            <div className="col-1"></div>
                         </div>
-                        วันที่ต้องการ : <input type="date"/>
-                        <button onClick={()=> this.setState({open:false})}>ยืนยันการวางแผน</button>
-                    </Modal>
-                </div>
 
 
+                    </div>
                     break;
                 default:
                     break;
@@ -398,11 +600,36 @@ class M_Plan extends Component {
 
         return (
             <div className="App">
+                <div className="Row">
+                    <div className="col-12">
+                        <h4>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
+                        <table>
+                            <tr>
+                                <th>ชื่อ Neo_firm</th>
+                                <th>จำนวนเกษตรกรในเครือ</th>
+                            </tr>
+                            {this.state.volume_fermer.map((element, index) => {
+                                return (
+                                    <tr>
+                                        <td style={{textAlign:"center"}}>{element.se_name}</td>
+                                        <td style={{textAlign:"center"}}>{element.count_farmer}</td>
+                                    </tr>
+                                )
+                            })}
+                            <tr>
+                                <th>รวม</th>
+                                <th>{this.sum_volume(this.state.volume_fermer)}</th>
+                            </tr>
+                        </table>
+                        <div className="tab">
+                            <button onClick={() => this.setState({ click: 1 })}>ดูความถี่การส่งมอบ</button>
+                            <button onClick={() => this.setState({ click: 2 })}>วางแผนเพาะปลูก</button>
+                            <button onClick={() => this.setState({ click: 3 })}>ติดตามการเพาะปลูก</button>
+                            {this.state.click >= 2 ? <input type="text" placeholder="ค้นหา"
+                                style={{ width: "20%", marginTop: "5px", marginLeft: "25px" }} /> : null}
+                        </div>
 
-                <div className="tab">
-                    <button onClick={()=>this.setState({click: 1})}>ดูความถี่การส่งมอบ</button>
-                    <button onClick={()=>this.setState({click: 2})}>วางแผนเพาะปลูก</button>
-                    
+                    </div>
                 </div>
                 {reander_plan(this.state.click)}
             </div>
