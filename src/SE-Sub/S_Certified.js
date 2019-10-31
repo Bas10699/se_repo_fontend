@@ -232,7 +232,7 @@ class S_Certified extends Component {
                 enabled: false
             },
             series: [{
-                name: '',
+                showInLegend: false,
                 colorByPoint: true,
                 data: this.state.sumEach
 
