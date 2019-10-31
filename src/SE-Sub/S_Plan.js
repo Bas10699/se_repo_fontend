@@ -22,6 +22,7 @@ class S_Plan extends Component {
             check_array: [],
             order_farmer: [],
             date:'',
+            selectPlant:null
         }
     }
 
@@ -154,10 +155,11 @@ class S_Plan extends Component {
             })
 
         })
-        console.log(selectFarmer)
+        console.log("jhjh",selectFarmer)
         this.setState({
             open: true,
-            selectFarmer: selectFarmer
+            selectFarmer: selectFarmer,
+            selectPlant:plant
         })
     }
 
@@ -169,7 +171,7 @@ class S_Plan extends Component {
         let data = {
             check_array: this.state.check_array,
             date:this.state.date,
-            name_plant:this.state.plants
+            name_plant:this.state.selectPlant
         }
         console.log("data",data)
         try {
@@ -257,7 +259,7 @@ class S_Plan extends Component {
                     <Modal open={this.state.open} onClose={this.onCloseModal}>
                         <div className="Row">
                             <div className="col-12" >
-                                <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก</h3>
+                                <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
                             </div>
                         </div>
                         <div className="Row">
