@@ -176,6 +176,12 @@ class Product extends Component {
                                                     <div className='X' onClick={() => { this.delete() }}>ลบ</div>
                                                     {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
+                                                    {element.price.map((element_p, index) => {
+                                                        if (element_p.volume == 1) {
+                                                            return (<div>{element_p.price}บาท/กิโลกรัม</div>)
+                                                        }
+
+                                                    })}
                                                     <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >แก้ไขสินค้า</button></NavLink>
                                                 </div>
                                             )
@@ -186,6 +192,12 @@ class Product extends Component {
                                                 <div className="Card">
                                                     {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
+                                                    {element.price.map((element_p, index) => {
+                                                        if (element_p.volume == 1) {
+                                                            return (<div>{element_p.price}บาท/กิโลกรัม</div>)
+                                                        }
+
+                                                    })}
                                                     <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button >แก้ไขสินค้า</button></NavLink>
                                                 </div>
                                             )

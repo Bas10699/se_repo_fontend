@@ -220,7 +220,7 @@ class ProductDetail extends Component {
 
                         {/* <h4>ราคาขายปลีก</h4> */}
                         {this.sort_price(this.state.price).map((element, index) => {
-                            return (<h5>{addComma(element.volume)} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h5>)
+                            return (<h4 style={{ margin: "0" }}>{addComma(element.volume)} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h4>)
                         })}
                         {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
                         <input type="number"
@@ -231,7 +231,13 @@ class ProductDetail extends Component {
 
                         {this.render_Step(this.state.product_data.amount_stock)}
 
-
+                        {this.state.plant.map((element_plant, index_plant) => {
+                            return (
+                                <h4>จำนวนที่มีอยู่ {addComma(this.sum_data(element_plant.data))} กิโลกรัม</h4>
+                            )
+                        }
+                        )}
+                        <h4>ยอดคำสั่งซื้อทั้งหมด ปปป บาท</h4>
                     </div>
                     <div className="col-1"></div>
 
@@ -282,14 +288,14 @@ class ProductDetail extends Component {
                                 })
                             }
                         </table> */}
-                        <div className="Row">
+                        {/* <div className="Row">
                             <div className="col-10">
                                 <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
                             </div>
                             <div className="col-2">
                                 <h4 style={{ color: "red" }}>{(this.state.total_price)} บาท</h4>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-1"></div>
                 </div>
