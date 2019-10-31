@@ -169,12 +169,13 @@ class M_Plan extends Component {
         }
     }
 
-    select_se = (index) => {
+    select_se = (event) => {
         let result = this.state.get_se
         this.setState({
-            se_name: result[index].se_name,
-            plants: result[index].plant,
-            data_month: result[index].plant[0].data
+            se_name: result[event.target.value].se_name,
+            plants: result[event.target.value].plant,
+            data_month: result[event.target.value].plant[0].data,
+            index_plant:0
 
         })
     }
@@ -376,10 +377,10 @@ class M_Plan extends Component {
                     <div className="Row">
                         <div className="col-12">
                             <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>เลือก Neo-firm
-                            <select className="select" name="volum">
+                            <select className="select" name="volum" onChange={this.select_se}>
                                 {this.state.get_se.map((ele_get_se, index) => {
                                 return (
-                                    <option onClick={(value) => this.select_se(index)} value={index}>
+                                    <option name="volum" value={index}>
                                         {ele_get_se.se_name}
                                     </option>
                                 )
