@@ -66,7 +66,7 @@ class Home extends Component {
                         console.log("get_user", result.result)
                     }, 500)
                 } else {
-                    window.location.href = "/";
+                    // window.location.href = "/";
                     //alert("user1"+result.error_message);
                 }
             });
@@ -77,16 +77,16 @@ class Home extends Component {
 
     render() {
 
-        // let product_data = []
-        // let len =  Math.floor((Math.random() * (  this.state.product_data.length-1 ) ) + 1) 
-        // product_data = this.state.product_data[len]
+        let product_data = []
+        let len =  Math.floor((Math.random() * (  this.state.product_data.length-1 ) ) + 1) 
+        product_data = this.state.product_data[len]
 
         return (
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                    {/* {this.state.get_user ? this.render_page(this.state.get_user.type_user) : null} */}
-                        {/* {product_data ?
+                    {this.state.get_user ? this.render_page(this.state.get_user.type_user) : null}
+                        {product_data ?
                             <div className="HeaderArea">
                                 <div className="Row">
                                     <div className="col-6" style={{ backgroundColor: "black" }}>
@@ -125,10 +125,10 @@ class Home extends Component {
                         }
                     </div>
                     <div className="col-1"> </div>
-                </div> */}
+                </div>
             </div>
-            </div>
-            </div>
+            
+            
         );
     }
 }
