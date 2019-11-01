@@ -16,6 +16,7 @@ class S_Certified extends Component {
             currentPage: 1,
             todosPerPage: 10,
             get_farmer: [],
+            volume_farmer:[],
             click: false,
             sumEach: [],
             sum_area_storage: []
@@ -24,6 +25,26 @@ class S_Certified extends Component {
 
     componentWillMount() {
         this.get_Cert()
+        this.get_volume_farmer()
+    }
+
+    get_volume_farmer = async () => {
+        try {
+            await get('neo_firm/get_count_farmer', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        volume_farmer: result.result
+                    })
+                    setTimeout(() => {
+                        console.log("get_volume_farmer", result.result)
+                    }, 500)
+                } else {
+                    //alert("user1"+result.error_message);
+                }
+            });
+        } catch (error) {
+            alert("get_volume_farmer" + error);
+        }
     }
 
     get_Cert = async () => {
@@ -210,7 +231,7 @@ class S_Certified extends Component {
             xAxis: {
                 categories: ['น้อยกว่า 1 ปี', '1 ปี', '2 ปี', '3 ปี', 'มากกว่า 3 ปี'],
                 title: {
-                    text: '<span style="font-size:15px;">ระยะเวลา</span>',
+                    text: '<span style="font-size:20px;">ระยะเวลา</span>',
                     style: {
                         fontSize: '20px',
                         fontFamily: 'fc_lamoonregular'
@@ -221,7 +242,7 @@ class S_Certified extends Component {
                 // type: 'logarithmic',
                 // minorTickInterval: 10
                 title: {
-                    text: '<span style="font-size:15px;">จำนวน (คน)</span>',
+                    text: '<span style="font-size:20px;">จำนวน (คน)</span>',
                     style: {
                         fontSize: '20px',
                         fontFamily: 'fc_lamoonregular'
@@ -255,7 +276,10 @@ class S_Certified extends Component {
                 <div className="Row">
                     <div className="col-5">
                         <HighchartsReact highcharts={Highcharts} options={options} />
-                        <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "center" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                        <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "left",paddingLeft:"50px" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                        <h4 style={{ margin: "0", textAlign: "left",paddingLeft:"50px" }}>{this.state.volume_farmer.map((element)=>{
+                            return(<p>จากจำนวนเกษตรกรทั้งหมด {element.sum_farmer} คน</p>)
+                        })} </h4>
                     </div>
                     <div className="col-1"></div>
                     <div className="col-6">

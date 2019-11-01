@@ -30,7 +30,6 @@ class S_skill_farmer extends Component {
             showHide5: true,
             showHide6: true,
             get_user: null,
-            volume_farmer:[],
             default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg",
         }
     }
@@ -49,7 +48,6 @@ class S_skill_farmer extends Component {
     componentWillMount() {
         this.get_skill_farmer()
         this.get_user()
-        this.get_volume_farmer()
     }
     get_skill_farmer = async () => {
         try {
@@ -345,24 +343,7 @@ class S_skill_farmer extends Component {
         }
     }
 
-    get_volume_farmer = async () => {
-        try {
-            await get('neo_firm/get_count_farmer', user_token).then((result) => {
-                if (result.success) {
-                    this.setState({
-                        volume_farmer: result.result
-                    })
-                    setTimeout(() => {
-                        console.log("get_volume_farmer", result.result)
-                    }, 500)
-                } else {
-                    //alert("user1"+result.error_message);
-                }
-            });
-        } catch (error) {
-            alert("get_volume_farmer" + error);
-        }
-    }
+   
 
     changeCurrentPage = numPage => {
         this.setState({ currentPage: numPage });
@@ -449,9 +430,7 @@ class S_skill_farmer extends Component {
 
 
 
-                        <h4>{this.state.volume_farmer.map((element)=>{
-                            return(<p>จำนวนเกษตรกรทั้งหมดในเครือ {element.sum_farmer} คน</p>)
-                        })} </h4>
+                        
 
 
 

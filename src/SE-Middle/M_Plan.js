@@ -28,7 +28,7 @@ class M_Plan extends Component {
             index_plant: 0,
             data_month: [],
             month_detail: [],
-            click: 1,
+            click: 2,
             open: false,
             name_plant: [],
             list_neo: [],
@@ -40,7 +40,7 @@ class M_Plan extends Component {
             selectPlant: '',
             listplan: [],
             volume_fermer: [],
-            open1:false,
+            open1: false,
         }
     }
 
@@ -58,7 +58,7 @@ class M_Plan extends Component {
     }
 
     onCloseModal = () => {
-        this.setState({ open: false,open1:false })
+        this.setState({ open: false, open1: false })
     }
 
     get_volume_fermer = async () => {
@@ -117,7 +117,7 @@ class M_Plan extends Component {
         })
     }
 
-    
+
 
     comfirmPlan = async (plant) => {
         this.setState({
@@ -179,7 +179,7 @@ class M_Plan extends Component {
             se_name: result[event.target.value].se_name,
             plants: result[event.target.value].plant,
             data_month: result[event.target.value].plant[0].data,
-            index_plant:0
+            index_plant: 0
 
         })
     }
@@ -385,14 +385,14 @@ class M_Plan extends Component {
                         <div className="col-12">
                             <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>เลือก Neo-firm
                             <select className="select" name="volum" onChange={this.select_se}>
-                                {this.state.get_se.map((ele_get_se, index) => {
-                                return (
-                                    <option name="volum" value={index}>
-                                        {ele_get_se.se_name}
-                                    </option>
-                                )
-                            })}
-                            </select>
+                                    {this.state.get_se.map((ele_get_se, index) => {
+                                        return (
+                                            <option name="volum" value={index}>
+                                                {ele_get_se.se_name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
                             </h2>
                             <h3 style={{ textAlign: "center" }}>ผลผลิตที่ส่งมอบได้ในเครือ {this.state.se_name}</h3>
                         </div>
@@ -438,7 +438,32 @@ class M_Plan extends Component {
                         </div>
                     </div>
                     <div>
-                        <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
+                        <h4 style={{ textAlign: "center" }}>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
+                        <div className="Row">
+                            <div className="col-1"></div>
+                            <div className="col-10">
+                                <table>
+                                    <tr>
+                                        <th>ชื่อ Neo_firm</th>
+                                        <th>จำนวนเกษตรกรในเครือ</th>
+                                    </tr>
+                                    {this.state.volume_fermer.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td style={{ textAlign: "center" }}>{element.se_name}</td>
+                                                <td style={{ textAlign: "center" }}>{element.count_farmer}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                    <tr>
+                                        <th>รวม</th>
+                                        <th>{this.sum_volume(this.state.volume_fermer)}</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h4 style={{ textAlign: "center" }} id="#go">รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
                     </div>
                     <div className="Row">
                         <div className="col-1"></div>
@@ -522,7 +547,7 @@ class M_Plan extends Component {
                                                 <td>{element}</td>
                                                 {/* <td>1100</td>
                                                 <td>100</td> */}
-                                                <td><button onClick={() => this.comfirmPlan(element)} style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}>วางแผน</button></td>
+                                                <td><button onClick={() => this.comfirmPlan(element)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
                                             </tr>
                                         )
                                     })}
@@ -543,8 +568,8 @@ class M_Plan extends Component {
                             </div>
                             <div className="Row">
                                 <div className="col-12">
-                                    วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange}  style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}/>
-                                    <button onClick={() => this.addPlant(this.state.selectPlant)} style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}>ยืนยันการวางแผน</button>
+                                    วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }} />
+                                    <button onClick={() => this.addPlant(this.state.selectPlant)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>ยืนยันการวางแผน</button>
                                     <Checkbox
                                         option={this.state.list_neo}
                                         check_array={this.state.check_array}
@@ -590,7 +615,7 @@ class M_Plan extends Component {
                                                     <td>{moment(element.year_round_planing_date).format('DD/MM/YYYY')}</td>
                                                     {/* <td>{element.planing_farmer_volume}</td>
                                             <td>กำหนดส่งก่อน : {moment(element.planing_farmer_date).format('DD/MM/YYYY')}</td> */}
-                                                    <td><button onClick={()=>this.setState({open1:true})} style={{fontFamily:"fc_lamoonregular",fontSize:"16px"}}>รายละเอียด</button></td>
+                                                    <td><button onClick={() => this.setState({ open1: true })} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>รายละเอียด</button></td>
                                                 </tr>
                                             )
                                         })
@@ -598,19 +623,19 @@ class M_Plan extends Component {
 
                                 </table>
                                 <Modal open={this.state.open1} onClose={this.onCloseModal}>
-                            <div className="Row">
-                                <div className="col-12" >
-                                    <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
-                                </div>
-                            </div>
-                            <div className="Row">
-                                <div className="col-12">
-                                   
-                                </div>
+                                    <div className="Row">
+                                        <div className="col-12" >
+                                            <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
+                                        </div>
+                                    </div>
+                                    <div className="Row">
+                                        <div className="col-12">
 
-                            </div>
+                                        </div>
 
-                        </Modal>
+                                    </div>
+
+                                </Modal>
                             </div>
                             <div className="col-1"></div>
                         </div>
@@ -628,27 +653,8 @@ class M_Plan extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h4>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
-                        <table>
-                            <tr>
-                                <th>ชื่อ Neo_firm</th>
-                                <th>จำนวนเกษตรกรในเครือ</th>
-                            </tr>
-                            {this.state.volume_fermer.map((element, index) => {
-                                return (
-                                    <tr>
-                                        <td style={{textAlign:"center"}}>{element.se_name}</td>
-                                        <td style={{textAlign:"center"}}>{element.count_farmer}</td>
-                                    </tr>
-                                )
-                            })}
-                            <tr>
-                                <th>รวม</th>
-                                <th>{this.sum_volume(this.state.volume_fermer)}</th>
-                            </tr>
-                        </table>
+
                         <div className="tab">
-                            <button onClick={() => this.setState({ click: 1 })}>ดูความถี่การส่งมอบ</button>
                             <button onClick={() => this.setState({ click: 2 })}>วางแผนเพาะปลูก</button>
                             <button onClick={() => this.setState({ click: 3 })}>ติดตามการวางแผน</button>
                             {this.state.click >= 2 ? <input type="text" placeholder="ค้นหา"

@@ -185,6 +185,11 @@ class Navbar extends Component {
                         <div className="Navbar">
                             <NavLink exact to="/M_Plan" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
+                                <li><NavLink exact to="/M_Data"activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
+                                <li><NavLink exact to="/M_Farmer"activeClassName="Active" className="NavbarText">ข้อมูลเกษตรกร</NavLink></li>
+                                <li><NavLink exact to="/M_Default"activeClassName="Active" className="NavbarText">มาตรฐาน</NavLink></li>
+                                
+                                
                                 <li><NavLink exact to="/M_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li>
                                 <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">จัดการสินค้า</NavLink></li>
                                 {/* <li><NavLink exact to="/M_Demand" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li> */}

@@ -54,6 +54,9 @@ import Quotation from './Support/pdfmake/Quotation';
 import M_R_Order from './SE-Middle/M_Research/M_R_Order';
 import M_R_Trace from './SE-Middle/M_Research/M_R_Trace';
 import S_Plan from './SE-Sub/S_Plan';
+import M_Data from './SE-Middle/M_Data';
+import M_Farmer from './SE-Middle/M_Farmer';
+import M_Default from './SE-Middle/M_Default';
 
 function App() {
   return (
@@ -92,6 +95,9 @@ function App() {
       <Route exact path='/S_Certified' component={S_Certified} />
 
       <Route exact path='/M_Plan' component={M_Plan} />
+      <Route exact path='/M_Data' component={M_Data}/>
+      <Route exact path='/M_Farmer' component={M_Farmer}/>
+      <Route exact path='/M_Default' component={M_Default}/>
 
       {/* <Route exact path='/Researcher' component={Researcher}/> */}
       {/* <Route exact path='/Request' component={Request}/> */}

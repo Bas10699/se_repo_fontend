@@ -172,22 +172,22 @@ class BuyingDetail extends Component {
             //     </div>
             //     break;
 
-            case 4: render_show =
-                <div className='_Card'>
-                    <div className="Row">
-                        <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : เรียบร้อย</h4>
+            // case 4: render_show =
+            //     <div className='_Card'>
+            //         <div className="Row">
+            //             <div className="col-12">
+            //                 <h4>สถานะการสั่งซื้อ : เรียบร้อย</h4>
 
-                        </div>
-                    </div>
-                    {/* <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
-                        <div className="col-6">
-                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
-                        </div>
-                    </div> */}
-                </div>
-                break;
+            //             </div>
+            //         </div>
+            //         {/* <div className="Row">
+            //             <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
+            //             <div className="col-6">
+            //                 <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+            //             </div>
+            //         </div> */}
+            //     </div>
+            //     break;
 
 
             default: render_show =
