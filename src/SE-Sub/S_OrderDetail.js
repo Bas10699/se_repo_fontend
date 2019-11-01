@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { get, post, ip } from '../Support/Service'
-import { user_token, addComma } from '../Support/Constance'
+import { user_token, addComma,sortData } from '../Support/Constance'
 import Timeline from './TimelineNeo'
 import Checkbox from '../Support/Checkbox'
 import moment from 'moment'
@@ -324,6 +324,7 @@ class S_OrderDetail extends Component {
                         {this.state.order.order_farmer_status == null ?
                             <div>
                                 <h4 style={{ marginTop: "10px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
+                                {/* {console.log("ggggg",this.state.farmer)} */}
                                 <Checkbox
                                     option={this.state.farmer}
                                     check_array={this.state.check_array}
