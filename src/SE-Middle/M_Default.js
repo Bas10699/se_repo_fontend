@@ -1,20 +1,13 @@
-//se-middle วางแผนเพาะปลูกให้กับ se-sub
-import React, { Component } from 'react'
-import { get, post, ip } from '../Support/Service'
-import { user_token, addComma } from '../Support/Constance'
+//ตระกร้าสินค้า
+import React, { Component } from 'react';
+import { user_token, addComma, user_token_decoded,sortData } from '../Support/Constance';
+import { get, post, ip } from '../Support/Service';
+import moment from 'moment'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import top from '../Image/top.png'
+import arrow from '../Image/up-arrow.png'
 import Pagination from "../Support/Pagination";
-import Modal from 'react-responsive-modal'
-import Checkbox from './CheckboxMPlan'
-import moment from 'moment'
 
-Highcharts.setOptions({
-    lang: {
-        thousandsSep: ','
-    }
-});
 
 class M_Default extends Component {
     constructor(props) {
@@ -22,51 +15,27 @@ class M_Default extends Component {
         this.state = {
             currentPage: 1,
             todosPerPage: 10,
-            plants: [],
-            se_name: null,
-            get_se: [],
-            index_plant: 0,
-            data_month: [],
-            month_detail: [],
-            click: 1,
-            open: false,
-            name_plant: [],
-            list_neo: [],
-            check_array: [],
-            Plant: null,
-            date: '',
-            se: [],
-            selectSE: null,
-            selectPlant: '',
-            listplan: [],
-            volume_fermer: [],
-            open1: false,
+            get_farmer: [],
+            volume_farmer:[],
+            click: false,
+            sumEach: [],
+            sum_area_storage: [],
+            name_se: [],
+            index:30
         }
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
     }
 
     componentWillMount() {
-        this.get_plant()
-        this.get_all_plant()
-        this.get_list_neo()
-        this.get_volume_fermer()
+        this.get_name_se_all()
+        this.get_Cert_post()
     }
 
-    onCloseModal = () => {
-        this.setState({ open: false, open1: false })
-    }
-
-    get_volume_fermer = async () => {
+    get_name_se_all = async () => {
         try {
-            await get('neutrally/get_count_se_all', user_token).then((result) => {
+            await get('neutrally/get_name_se_all', user_token).then((result) => {
                 if (result.success) {
-                    this.setState({ volume_fermer: result.result })
-                    console.log('get_volume_fermer', result.result)
+                    this.setState({ name_se: result.result })
+                    console.log('get_name_se_all', result.result)
                 }
                 else {
                     alert(result.error_message)
@@ -74,182 +43,31 @@ class M_Default extends Component {
             })
 
         } catch (error) {
-            alert('get_volume_fermer: ' + error)
+            alert('get_name_se_all: ' + error)
         }
     }
 
-    get_all_plant = async () => {
-        try {
-            await get('neutrally/get_plant_name', user_token).then((result) => {
-                if (result.success) {
-                    this.setState({ name_plant: result.result })
-                    console.log('get_allplant', result.result)
-                }
-                else {
-                    alert(result.error_message)
-                }
-            })
-        }
-
-        catch (error) {
-            alert('get_allplant: ' + error)
-        }
-    }
-
-    openModel = (plant) => {
-        let se = this.state.se
-        let selectSE = []
-
-        this.state.check_array.map((element) => {
-
-            selectSE.push({
-                se_name: se[element.check].se_name,
-                data: se[element.check].data,
-                amount: element.amount,
-            })
-
-        })
-        console.log("jhjh", selectSE)
+    get_Cert = (e) =>{
         this.setState({
-            open: true,
-            selectSE: selectSE,
-            Plant: plant
+            index:e.target.value
         })
+        this.get_Cert_post()
     }
 
-
-
-    comfirmPlan = async (plant) => {
-        this.setState({
-            open: true,
-            selectPlant: plant
-        })
-        let data = {
-            name_plant: plant,
-            check_array: this.state.check_array,
-            date: this.state.date,
+    get_Cert_post = async () => {
+        let index = this.state.index
+        let obj = {
+            user_id: index
         }
-        console.log("data", data)
         try {
-            await post(data, 'neutrally/get_plant_volume_all_se', user_token).then((result) => {
+            await post(obj,'neutrally/get_Certified_farmer_se', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        list_neo: result.result
+                        get_farmer: result.result,
+                        get_origin: result.result
                     })
-                }
-
-                else {
-                    alert(result.error_message)
-                }
-            })
-        }
-        catch (error) {
-            alert('addplant: ' + error)
-        }
-    }
-
-
-    get_plant = async () => {
-        try {
-            await get('neutrally/get_plant_all_se', user_token).then((result) => {
-                if (result.success) {
-                    this.setState({
-                        get_se: result.result,
-                        se_name: result.result[0].se_name,
-                        plants: result.result[0].plant,
-                        data_month: result.result[0].plant[0].data
-
-                    })
-                    console.log('get_plant', result.result)
-                }
-                else {
-                    alert(result.error_message)
-                }
-            })
-
-        } catch (error) {
-            alert('get_plant: ' + error)
-
-        }
-    }
-
-    select_se = (event) => {
-        let result = this.state.get_se
-        this.setState({
-            se_name: result[event.target.value].se_name,
-            plants: result[event.target.value].plant,
-            data_month: result[event.target.value].plant[0].data,
-            index_plant: 0
-
-        })
-    }
-
-    show_chart = (index) => {
-        let plant = this.state.plants
-        this.setState({
-            index_plant: index,
-            data_month: plant[index].data
-        })
-    }
-
-    show_detail_month = (plant, index) => {
-        let plants = this.state.plants
-        console.log('index', plants[plant])
-        this.setState({
-            month_detail: plants[plant].detail[index]
-        })
-    }
-
-    rander_month = (index) => {
-        let return_month
-        switch (index) {
-            case 1: return_month = <b>ม.ค.</b>
-                break;
-            case 2: return_month = <b>ก.พ.</b>
-                break;
-            case 3: return_month = <b>มี.ค.</b>
-                break;
-            case 4: return_month = <b>เม.ย.</b>
-                break;
-            case 5: return_month = <b>พ.ค.</b>
-                break;
-            case 6: return_month = <b>มิ.ย.</b>
-                break;
-            case 7: return_month = <b>ก.ค.</b>
-                break;
-            case 8: return_month = <b>ส.ค.</b>
-                break;
-            case 9: return_month = <b>ก.ย.</b>
-                break;
-            case 10: return_month = <b>ต.ค.</b>
-                break;
-            case 11: return_month = <b>พ.ย.</b>
-                break;
-            case 12: return_month = <b>ธ.ค.</b>
-                break;
-            default:
-                break;
-        }
-        return return_month
-    }
-
-
-    addPlant = async (plant) => {
-        let dataplan = {
-            plant: plant,
-            check_array: this.state.check_array,
-            date: this.state.date,
-        }
-        console.log("dataplan", dataplan)
-
-        try {
-            await post(dataplan, 'neutrally/add_year_round', user_token).then((result) => {
-                if (result.success) {
-                    window.location.reload()
-                    this.setState({
-                        open: false
-                    })
-
+                    this.sum()
+                    console.log('get_fa', result.result)
                 }
                 else {
                     alert(result.error_message)
@@ -257,41 +75,123 @@ class M_Default extends Component {
             })
         }
         catch (error) {
-            alert('dataplan: ' + error)
+
         }
     }
 
-    get_list_neo = async () => {
-        try {
-            await get('neutrally/get_year_round', user_token).then((result) => {
-                if (result.success) {
-                    this.setState({
-                        listplan: result.result
-                    })
-                    console.log("get_list_neo", result, result)
+    filter_area_storage = () => {
+        let data = this.state.get_origin
+        let area_storage = []
+        data.map((element, index) => {
+
+            if (element.area_storage !== "null") {
+                area_storage.push(element)
+            }
+        })
+        this.setState({
+            get_farmer: area_storage
+        })
+
+    }
+
+    sum = () => {
+        let farmer = this.state.get_origin
+        let num0 = 0, num1 = 0, num2 = 0, num3 = 0, num4 = 0
+        let area_storage = []
+        farmer.map((element) => {
+            let chemical = parseInt(moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true))
+            if (chemical === 0) {
+                num0 += 1
+            }
+            else if (chemical === 1) {
+                num1 += 1
+            }
+            else if (chemical === 2) {
+                num2 += 1
+            }
+            else if (chemical === 3) {
+                num3 += 1
+            }
+            else {
+                num4 += 1
+            }
+            if (element.area_storage !== "null") {
+                area_storage.push(element)
+            }
+        })
+        this.setState({
+            sumEach: [
+                { name: 'น้อยกว่า 1 ปี', y: num0 },
+                { name: '1 ปี', y: num1 },
+                { name: '2 ปี', y: num2 },
+                { name: '3 ปี', y: num3 },
+                { name: 'มากกว่า 3 ปี', y: num4 }
+            ],
+            sum_area_storage: area_storage
+        })
+    }
+
+    sort_date = () => {
+        let data = this.state.get_farmer
+        data.map((element)=>{
+            element.chemical_date = moment(element.chemical_date).format('YYYYMMDD')
+        })
+        sortData(data,'chemical_date',this.state.click)
+        data.map((element)=>{
+            element.chemical_date = moment(element.chemical_date).format('DD-MM-YYYY')
+        })
+        this.setState({get_farmer:data})
+        this.setState(({ click }) => ({ click: !click }))
+    }
+
+    filter_chemical_date = (e) => {
+        let num = e.target.value
+        console.log(num)
+        let data = this.state.get_origin
+        let chemical_date = []
+        if (num === "all") {
+            this.setState({
+                get_farmer: this.state.get_origin,
+                currentPage: 1,
+            })
+        }
+        else {
+            data.map((element) => {
+
+                let chemical = parseInt(moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true))
+
+                switch (num) {
+                    case "0":
+                    case "1":
+                    case "2":
+                    case "3":
+                        if (num == chemical) {
+                            chemical_date.push(
+                                element
+                            )
+                        }
+                        break;
+                    case "4":
+                        if (chemical >= 4) {
+                            chemical_date.push(
+                                element
+                            )
+                        }
+                        break;
+                    default:
+                        break;
                 }
-                else {
-                    alert(result.error_message)
-                }
+
+
             })
 
-        } catch (error) {
-            alert('get_list_neo: ' + error)
+            this.setState({
+                get_farmer: chemical_date,
+                currentPage: 1,
+            });
         }
-    }
-
-    sum_volume = (count_farmer) => {
-        let sum = 0;
-        count_farmer.map((element) => {
-            return (
-                sum += (element.count_farmer)
-            )
-
-        })
-        return sum;
 
     }
-
 
     changeCurrentPage = numPage => {
         this.setState({ currentPage: numPage });
@@ -300,411 +200,179 @@ class M_Default extends Component {
     };
 
     render() {
-
-        const { month_detail, currentPage, todosPerPage } = this.state;
+        let todos = []
+        const { get_farmer, currentPage, todosPerPage } = this.state;
+        get_farmer.map((element, index) => {
+            // console.log(index+1)
+            todos.push({
+                num: index + 1,
+                ...element
+            })
+        })
         // Logic for displaying todos
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-        const currentTodos = month_detail.slice(indexOfFirstTodo, indexOfLastTodo);
+        const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
 
-        let plant = this.state.plants
-        let index = this.state.index_plant
-        console.log('chart plant', plant[index])
-        var options = {
-
+        const options = {
+            chart: {
+                renderTo: 'container',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'column'
+            },
             title: {
-                text: plant[index] ? plant[index].name : null,
+                text: 'กราฟแสดงจำนวนเกษตรกรที่ห่างจากการใช้สารเคมี',
                 style: {
                     fontSize: '24px',
                     fontFamily: 'fc_lamoonregular'
                 }
             },
-
-            xAxis: {
-                categories: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
             },
-
-            yAxis: {
-                type: 'logarithmic',
-                // minorTickInterval: 10
+            xAxis: {
+                categories: ['น้อยกว่า 1 ปี', '1 ปี', '2 ปี', '3 ปี', 'มากกว่า 3 ปี'],
                 title: {
-                    text: '<span style="font-size:15px;">จำนวน (กิโลกรัม)</span>',
+                    text: '<span style="font-size:20px;">ระยะเวลา</span>',
                     style: {
                         fontSize: '20px',
                         fontFamily: 'fc_lamoonregular'
                     }
                 }
             },
-            plotOptions: {
-                series: {
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        // format: '{point.y}'
+            yAxis: {
+                // type: 'logarithmic',
+                // minorTickInterval: 10
+                title: {
+                    text: '<span style="font-size:20px;">จำนวน (คน)</span>',
+                    style: {
+                        fontSize: '20px',
+                        fontFamily: 'fc_lamoonregular'
                     }
                 }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:14px">{point.key}</span><br/><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0;font-size:10px">จำนวน : </td>' +
-                    '<td style="padding:0"><b>{point.y} กิโลกรัม </b></td></tr>',
-                footerFormat: '</table>',
             },
             credits: {
                 enabled: false
             },
             series: [{
-                type: 'column',
-                colorByPoint: true,
-                data: plant[index] ? plant[index].data : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 showInLegend: false,
-                labels: {
-                    enabled: true,
-                    rotation: 0,
-                    color: '{series.color}',
-                    align: 'center',
-                    format: '(point.y)}', // one decimal
-                    y: 10, // 10 pixels down from the top
-                    style: {
-                        fontSize: '20px',
-                        fontFamily: 'fc_lamoonregular'
+                colorByPoint: true,
+                data: this.state.sumEach
 
-                    }
-                }
-            }],
+            }]
+        };
 
-
+        var linkStyle;
+        if (this.state.hover) {
+            linkStyle = { color: '#ed1212', cursor: 'pointer' }
+        } else {
+            linkStyle = { color: '#000' }
         }
-
-        // let reander_plan = (click) => {
-        //     let return_plan
-        //     switch (click) {
-        //         case 1: return_plan = 
-        //             <div>
-        //                 <h4 style={{ textAlign: "center" }}>จำนวนเกษตรกรในเครือเเต่ละ Neo-firm</h4>
-        //                 <div className="Row">
-        //                     <div className="col-1"></div>
-        //                     <div className="col-10">
-        //                         <table>
-        //                             <tr>
-        //                                 <th>ชื่อ Neo_firm</th>
-        //                                 <th>จำนวนเกษตรกรในเครือ</th>
-        //                             </tr>
-        //                             {this.state.volume_fermer.map((element, index) => {
-        //                                 return (
-        //                                     <tr>
-        //                                         <td style={{ textAlign: "center" }}>{element.se_name}</td>
-        //                                         <td style={{ textAlign: "center" }}>{element.count_farmer}</td>
-        //                                     </tr>
-        //                                 )
-        //                             })}
-        //                             <tr>
-        //                                 <th>รวม</th>
-        //                                 <th>{this.sum_volume(this.state.volume_fermer)}</th>
-        //                             </tr>
-        //                         </table>
-        //                     </div>
-        //                 </div>
-
-        //                 <h4 style={{ textAlign: "center" }} id="#go">รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
-        //             </div>
-        //             <div className="Row">
-        //                 <div className="col-1"></div>
-        //                 <div className="col-10">
-        //                     {this.state.data_month ?
-        //                         <div>
-
-        //                             <table>
-        //                                 <tr>
-        //                                     <th>ลำดับ</th>
-        //                                     <th>ชื่อ</th>
-        //                                     <th>พืชที่ปลูก </th>
-        //                                     <th>เดือนที่ส่งมอบ</th>
-        //                                     <th>จํานวนผลผลิตที่ส่งมอบต่อครั้ง</th>
-        //                                     <th>จำนวนครั้งส่งมอบ</th>
-        //                                     <th>รวม</th>
-        //                                 </tr>
-        //                                 {currentTodos.map((ele_detail, index) => {
-        //                                     return (
-        //                                         <tr style={{ textAlign: "center" }}>
-        //                                             <td>{index + 1}</td>
-        //                                             <td style={{ textAlign: "left" }}>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
-        //                                             <td><b>{ele_detail.plant}</b></td>
-        //                                             <td>{ele_detail.end_plant}</td>
-        //                                             {addComma(ele_detail.deliver_value * 1) == 0 ?
-        //                                                 <td style={{ color: "red" }}><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
-        //                                                 :
-        //                                                 <td><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
-        //                                             }
-
-        //                                             <td>{addComma(ele_detail.deliver_frequency_number)}</td>
-
-        //                                             {addComma(ele_detail.deliver_value * 1) == 0 ?
-        //                                                 <td style={{ color: "red" }}>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
-        //                                                 :
-        //                                                 <td>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
-        //                                             }
-
-        //                                         </tr>
-        //                                     )
-        //                                 })
-        //                                 }
-
-        //                             </table>
-        //                         </div>
-        //                         : null}
-        //                     <div className="Row">
-        //                         <div className="col-4"></div>
-        //                         <Pagination
-        //                             currentPage={currentPage}
-        //                             totalPages={Math.ceil(month_detail.length / todosPerPage)}
-        //                             changeCurrentPage={this.changeCurrentPage}
-        //                             theme="square-i"
-        //                         />
-
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //             <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
-
-
-        //         </div>
-
-        //             break;
-
-        //         case 2: return_plan =
-        //             <div>
-        //                 <div className="Row">
-        //                     <div className="col-1"></div>
-        //                     <div className="col-10">
-        //                         <table>
-        //                             <tr>
-        //                                 <th>ชื่อวัตถุดิบ</th>
-        //                                 {/* <th>จำนวนที่สั่งซื้อ</th>
-        //                                 <th>วัตถุดิบขาด</th> */}
-        //                                 <th>วางแผน</th>
-        //                             </tr>
-        //                             {this.state.name_plant.map((element, index) => {
-        //                                 return (
-        //                                     <tr>
-        //                                         <td>{element}</td>
-        //                                         {/* <td>1100</td>
-        //                                         <td>100</td> */}
-        //                                         <td><button onClick={() => this.comfirmPlan(element)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
-        //                                     </tr>
-        //                                 )
-        //                             })}
-
-
-        //                         </table>
-
-
-        //                     </div>
-        //                     <div className="col-1"></div>
-        //                 </div>
-
-        //                 <Modal open={this.state.open} onClose={this.onCloseModal}>
-        //                     <div className="Row">
-        //                         <div className="col-12" >
-        //                             <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
-        //                         </div>
-        //                     </div>
-        //                     <div className="Row">
-        //                         <div className="col-12">
-        //                             วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }} />
-        //                             <button onClick={() => this.addPlant(this.state.selectPlant)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>ยืนยันการวางแผน</button>
-        //                             <Checkbox
-        //                                 option={this.state.list_neo}
-        //                                 check_array={this.state.check_array}
-        //                                 return_func={(event) => {
-        //                                     console.log('event', event)
-        //                                     this.setState({
-        //                                         check_array: event
-        //                                     })
-        //                                 }} />
-
-        //                         </div>
-
-        //                     </div>
-
-        //                 </Modal>
-        //             </div>
-        //             break;
-
-        //         case 3: return_plan =
-        //             <div>
-        //                 <div className="Row">
-        //                     <div className="col-1"></div>
-        //                     <div className="col-10">
-        //                         <h4 style={{ textAlign: "center" }}>ติดตามการวางแผนการเพาะปลูก</h4>
-        //                         {console.log("list fermer", this.state.check_array)}
-
-        //                         <table>
-        //                             <tr>
-        //                                 <th>เริ่มวันที่</th>
-        //                                 <th>ชื่อพืช</th>
-        //                                 <th>จำนวนที่ต้องการ</th>
-        //                                 <th>วันที่ต้องการ</th>
-        //                                 <th>รายละเอียด</th>
-
-        //                             </tr>
-        //                             {
-        //                                 this.state.listplan.map((element, index) => {
-        //                                     return (
-        //                                         <tr>
-        //                                             <td>วันที่เริ่มโครงการ</td>
-        //                                             <td>{element.plant}</td>
-        //                                             <td>{element.volume}</td>
-        //                                             <td>{moment(element.year_round_planing_date).format('DD/MM/YYYY')}</td>
-        //                                             {/* <td>{element.planing_farmer_volume}</td>
-        //                                     <td>กำหนดส่งก่อน : {moment(element.planing_farmer_date).format('DD/MM/YYYY')}</td> */}
-        //                                             <td><button onClick={() => this.setState({ open1: true })} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>รายละเอียด</button></td>
-        //                                         </tr>
-        //                                     )
-        //                                 })
-        //                             }
-
-        //                         </table>
-        //                         <Modal open={this.state.open1} onClose={this.onCloseModal}>
-        //                             <div className="Row">
-        //                                 <div className="col-12" >
-        //                                     <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
-        //                                 </div>
-        //                             </div>
-        //                             <div className="Row">
-        //                                 <div className="col-12">
-
-        //                                 </div>
-
-        //                             </div>
-
-        //                         </Modal>
-        //                     </div>
-        //                     <div className="col-1"></div>
-        //                 </div>
-
-
-        //             </div>
-        //             break;
-        //         default:
-        //             break;
-        //     }
-        //     return return_plan
-        // }
-
         return (
-            <div className="App">
-                <div className="Row">
+            <div className='App'>
+                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>
                             เลือก Neo-firm
-                        <select className="select" name="volum" onChange={this.select_se}>
-                                {this.state.get_se.map((ele_get_se, index) => {
+                        <select className="select" onChange={this.get_Cert} type="select">
+                                {this.state.name_se.map((ele_get_se, index) => {
                                     return (
-                                        <option name="volum" value={index}>
-                                            {ele_get_se.se_name}
+                                        <option value={ele_get_se.user_id}>
+                                            {ele_get_se.name}
                                         </option>
                                     )
                                 })}
                             </select>
                         </h2>
-                        <h3 style={{ textAlign: "center" }}>มาตรฐานของเกษตรกร {this.state.se_name}</h3>
+                        <h3 style={{ textAlign: "center" }}>มาตรฐานเกษตกรในเครือ {this.state.name_neo}</h3>
                         {/* <h4>{this.state.volume_farmer.map((element)=>{
                             return(<p>จากจำนวนเกษตรกรทั้งหมด {element.sum_farmer} คน</p>)
                         })}</h4> */}
                     </div>
                 </div>
-
                 <div className="Row">
-                    {/* <div className="col-2" style={{paddingLeft:"25px"}}>
-                        <h4>ผลผลิตที่ส่งมอบได้
-                    {this.state.plants.map((element, index) => {
-                            return (
-                                <div style={{ cursor: 'pointer' }} onClick={() => this.show_chart(index)}> {index + 1}. {element.name}</div>
-                            )
-                        })}
-</h4>
-                    </div> */}
+                    <div className="col-5">
+                        <HighchartsReact highcharts={Highcharts} options={options} />
+                        <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "left",paddingLeft:"50px" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
+                        <h4 style={{ margin: "0", textAlign: "left",paddingLeft:"50px" }}>{this.state.volume_farmer.map((element)=>{
+                            return(<p>จากจำนวนเกษตรกรทั้งหมด {element.sum_farmer} คน</p>)
+                        })} </h4>
+                    </div>
+                    <div className="col-1"></div>
+                    <div className="col-6">
+                        {/* <h3 style={{ textAlign: "center", margin: "0" }}>เลือกการเเสดงรายชื่อเกษตรกร</h3> */}
+                        <h5 style={{ textAlign: "center", margin: "0" }}>จำนวนปีที่ห่างจากการใช้สารเคมี :
+                        <select name="type_user" onChange={this.filter_chemical_date}>
+                                <option value="all">ทั้งหมด</option>
+                                <option value="0" >น้อยกว่า 1 ปี</option>
+                                <option value="1" >1 ปี</option>
+                                <option value="2" >2 ปี</option>
+                                <option value="3" >3 ปี</option>
+                                <option value="4" >มากกว่า 3 ปี</option>
+                            </select>
+                        </h5>
+                        {/* <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.setState({ get_farmer: this.state.get_origin })}>เกษตรทั้งหมด จำนวน 1347 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(0)}>ไม่ได้ใช้สารเคมีน้อยกว่า 1 ปี จำนวน 140 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(1)}>ไม่ได้ใช้สารเคมี 1 ปี จำนวน 338 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(2)}>ไม่ได้ใช้สารเคมี 2 ปี จำนวน 299 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(3)}>ไม่ได้ใช้สารเคมี 3 ปี จำนวน 400 คน</h6>
+                        <h6 style={{ cursor: 'pointer',margin:"0" }} onClick={() => this.filter_chemical_date(4)}>ไม่ได้ใช้สารเคมีมากกว่า 3 ปี จำนวน 287 คน</h6> */}
 
 
-                    {/* <div className="col-2" style={{paddingLeft:"0px"}} >
-                        <h4>
-                        <div style={{ textAlign: "center" }}>
-                            {this.state.plants[this.state.index_plant] ?
-                                this.state.plants[this.state.index_plant].name
-                                :
-                                null
-                            }
-                        </div>
-                        <table className="s_plant">
-                            {this.state.data_month.map((element, index) => {
+                        {/* <h4 style={{ cursor: 'pointer' }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน {this.state.sum_area_storage.length} คน</h4> */}
+                        {/* <h4 style={{ textAlign: "center" }}>รายชื่อเกษตร </h4> */}
+                        <table>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>ชื่อ-สกุล</th>
+                                <th>ครั้งสุดท้ายที่ใช้สารเคมี
+                                    {/* {this.click ?
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.sort_date()} />
+                                        :
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.sort_date()} />
+                                    } */}
+                                </th>
+                                <th>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน</th>
+                            </tr>
+
+                            {currentTodos.map((element, index) => {
+                                let diff = moment().utc(7).add('years', 543).diff(moment(element.chemical_date), 'year', true)
+                                // console.log(diff)
                                 return (
-                                    <tr style={{ cursor: 'pointer' }} onClick={() => this.show_detail_month(this.state.index_plant, index)}>
-                                        <th><h4 style={{margin:"0"}}>{this.rander_month(index + 1)}</h4></th>
-                                        <td style={{ textAlign: "right",paddingLeft:"5px" }}><h4 style={{margin:"0"}}>{addComma(element)}</h4></td>
-                                        <td style={{ textAlign: "center" }}><h4 style={{margin:"0"}}>กิโลกรัม</h4></td>
+                                    <tr>
+                                        <td>{element.num}</td>
+                                        <td>{element.title} {element.first_name} {element.last_name}</td>
+                                        <td>{element.chemical_date} (คิดเป็น {parseInt(diff)} ปี)</td>
+                                        <td>{element.area_storage !== "null" ? element.area_storage : "ไม่มี"}</td>
                                     </tr>
+
+
                                 )
-                            })}<div id="Top" />
+                            })}
                         </table>
-                        </h4>
-                    </div> */}
-
-
-                    <div className="col-7" style={{paddingLeft:"25px"}}>
-                        <h4 style={{ textAlign: "center" }} id="#go">รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
-                        {this.state.data_month ?
-                            <table>
-                                <tr>
-                                    <th>ลำดับ</th>
-                                    <th>ชื่อ</th>
-                                    <th>พืชที่ปลูก </th>
-                                    <th>เดือนที่ส่งมอบ</th>
-                                    <th>จํานวนผลผลิตที่ส่งมอบต่อครั้ง</th>
-                                    <th>จำนวนครั้งส่งมอบ</th>
-                                    <th>รวม</th>
-                                </tr>
-                                {currentTodos.map((ele_detail, index) => {
-                                    return (
-                                        <tr style={{ textAlign: "center" }}>
-                                            <td>{index + 1}</td>
-                                            <td style={{ textAlign: "left" }}>{ele_detail.title_name}{ele_detail.first_name}  {ele_detail.last_name}</td>
-                                            <td><b>{ele_detail.plant}</b></td>
-                                            <td>{ele_detail.end_plant}</td>
-                                            {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                <td style={{ color: "red" }}><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
-                                                :
-                                                <td><b>{addComma(ele_detail.deliver_value * 1)}</b></td>
-                                            }
-
-                                            <td>{addComma(ele_detail.deliver_frequency_number)}</td>
-
-                                            {addComma(ele_detail.deliver_value * 1) == 0 ?
-                                                <td style={{ color: "red" }}>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
-                                                :
-                                                <td>{addComma((ele_detail.deliver_value * 1) * ele_detail.deliver_frequency_number)}</td>
-                                            }
-
-                                        </tr>
-                                    )
-                                })
-                                }
-
-                            </table>
-                            : null}
-                        <div className="Row">
-                            <div className="col-4"></div>
+                        <div style={{ textAlign: 'center' }}>
                             <Pagination
                                 currentPage={currentPage}
-                                totalPages={Math.ceil(month_detail.length / todosPerPage)}
+                                totalPages={Math.ceil(get_farmer.length / todosPerPage)}
                                 changeCurrentPage={this.changeCurrentPage}
-                                theme="square-i"
+                                theme="square-fill"
                             />
-
                         </div>
                     </div>
+
                 </div>
-            </div>
+
+
+            </div >
 
         )
     }
