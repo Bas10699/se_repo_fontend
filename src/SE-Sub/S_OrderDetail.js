@@ -324,9 +324,9 @@ class S_OrderDetail extends Component {
                         {this.state.order.order_farmer_status == null ?
                             <div>
                                 <h4 style={{ marginTop: "10px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
-                                {console.log("ggggg",this.state.farmer)}
+                                {/* {console.log("ggggg",this.state.farmer)} */}
                                 <Checkbox
-                                    option={sortData(this.state.farmer,"")}
+                                    option={this.state.farmer}
                                     check_array={this.state.check_array}
                                     return_func={(event) => {
                                         console.log('event', event)
