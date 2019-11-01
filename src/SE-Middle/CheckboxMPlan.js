@@ -128,7 +128,7 @@ class CheckboxMPlan extends Component {
                     <tr>
                         <th>ลำดับ</th>
                         <th>ชื่อ Neo-firm</th>
-                        <th>จำนวนที่มีอยู๋</th>
+                        <th>จำนวนที่มีอยู่</th>
                         <th>จำนวนที่ต้องการ</th>
                     </tr>
                     {

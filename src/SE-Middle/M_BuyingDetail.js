@@ -268,9 +268,8 @@ class M_BuyingDetail extends Component {
                 </div>
 
                 <div className="Row" style={{ marginTop: "50px" }}>
-                    <div className="col-1"></div>
-                    <div className="col-6"></div>
-                    <div className="col-5">{this.render_status(this.state.get_order.order_se_status)}</div>
+                    <div className="col-3"></div>
+                    <div className="col-6">{this.render_status(this.state.get_order.order_se_status)}</div>
                     {console.log("status", this.state.get_order.order_se_status)}
 
                 </div>

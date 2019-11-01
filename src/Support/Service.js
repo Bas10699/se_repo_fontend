@@ -1,8 +1,8 @@
-export const ip = "http://192.168.1.30:3003/api/v1/"//หอ
+// export const ip = "http://192.168.1.30:3003/api/v1/"//หอ
 // export const ip = "http://192.168.1.9:3003/api/v1/"
 // export const ip = "http://192.168.43.74:3003/api/v1/"
 // export const ip = "http://127.0.0.1:3003/api/v1/"
-// export const ip = "http://103.253.72.69:3043/api/v1/" //พี่ต้น
+export const ip = "http://103.253.72.69:3043/api/v1/" //พี่ต้น
 // export const ip = "http://192.168.1.7:3003/api/v1/"//สนง
 // export const ip = "http://10.94.4.28:3003/api/v1/"
 
