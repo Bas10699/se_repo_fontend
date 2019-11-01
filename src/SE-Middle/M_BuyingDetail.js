@@ -284,15 +284,15 @@ class M_BuyingDetail extends Component {
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.get_order.order_se_id}</h4>
 
-                            โอนเข้าบัญชี :
-                            <select>
+                            <h4>โอนเข้าบัญชี :
+                            <select style={{fontFamily:"fc_lamoonregular",fontSize:"24px"}}>
                                 {this.state.order_se_invoice_detail ?
                                     this.state.order_se_invoice_detail.map((element, index) => {
                                         return (
                                             <option>{element.bankName}</option>
                                         )
                                     }) : null}
-                            </select>
+                            </select></h4>
                             {/* <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
                             <div className="Row">
                                 <div className="col-6">

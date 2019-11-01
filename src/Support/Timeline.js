@@ -108,8 +108,8 @@ class Timeline extends Component {
                                 } */}
 
                             </li>
-                            <li className={this.props.status >= 4 ? "Status" : "Standat"}>
-                                <img src={this.props.status >= 4 ? four : fourdis} alt="four"
+                            <li className={this.props.status >= 3 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 3 ? four : fourdis} alt="four"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
                                 <div style={{ marginLeft: "88%", width: "100%" }} >
                                     สินค้าทำการจัดส่ง
@@ -157,7 +157,7 @@ class Timeline extends Component {
                             :
                             null
                         }
-                        {this.props.status >= 4 ?
+                        {this.props.status >= 3 ?
                             <div style={{ marginLeft: "85%", width: "40%", marginTop: "-40px" }}>
                                 <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
                             </div>
