@@ -14,6 +14,7 @@ class S_skill_farmer extends Component {
             currentPage: 1,
             todosPerPage: 10,
             farmer: [],
+            volume_farmer:[],
             plants: [],
             search_order: [],
             click1: false,
@@ -47,26 +48,30 @@ class S_skill_farmer extends Component {
 
     componentWillMount() {
         this.get_skill_farmer()
-        this.get_name_se_all()()
+        this.get_user()
+        this.get_volume_farmer()
     }
 
-    get_name_se_all = async () => {
+    get_volume_farmer = async () => {
         try {
-            await get('neutrally/get_name_se_all', user_token).then((result) => {
+            await get('neo_firm/get_count_farmer', user_token).then((result) => {
                 if (result.success) {
-                    this.setState({ name_se: result.result })
-                    console.log('get_name_se_all', result.result)
+                    this.setState({
+                        volume_farmer: result.result
+                    })
+                    setTimeout(() => {
+                        console.log("get_volume_farmer", result.result)
+                    }, 500)
+                } else {
+                    //alert("user1"+result.error_message);
                 }
-                else {
-                    alert(result.error_message)
-                }
-            })
-
+            });
         } catch (error) {
-            alert('get_name_se_all: ' + error)
+            alert("get_volume_farmer" + error);
         }
     }
 
+    
     get_skill_farmer = async () => {
         try {
             await get('neo_firm/get_farmer_se', user_token).then((result) => {
@@ -405,23 +410,9 @@ class S_skill_farmer extends Component {
         return (
             <div className="App" id="#Top">
                 <div className="Row">
-                    <div className="col-12">
-                        <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>
-                            เลือก Neo-firm
-                        <select className="select" onChange={this.get_skill_farmer}>
-                                {this.state.name_se.map((ele_get_se, index) => {
-                                    return (
-                                        <option value={ele_get_se.user_id}>
-                                            {ele_get_se.name}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                        </h2>
-                        <h3 style={{ textAlign: "center" }}>มาตรฐานของเกษตรกรในเครือ {this.state.name_neo}</h3>
-                        {/* <h4>{this.state.volume_farmer.map((element)=>{
-                            return(<p>จากจำนวนเกษตรกรทั้งหมด {element.sum_farmer} คน</p>)
-                        })}</h4> */}
+                    <div className="col-2"></div>
+                    <div className="col-10">
+                        <h2 style={{ textAlign: "center" }}>ประสิทธิภาพการปลูกพืชของเกษตรกร</h2>
                     </div>
                 </div>
 
@@ -461,7 +452,9 @@ class S_skill_farmer extends Component {
 
 
 
-
+                    <h4>{this.state.volume_farmer.map((element)=>{
+                            return(<p>จำนวนเกษตรกรทั้งหมดในเครือ {element.sum_farmer} คน</p>)
+                        })} </h4>
                         
 
 
