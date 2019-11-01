@@ -299,6 +299,7 @@ class S_Plan extends Component {
 
                             <table>
                                 <tr>
+                                    <th>วันที่เริ่มต้น</th>
                                     <th>ชื่อพืช</th>
                                     <th>รายชื่อเกษตรกรที่เลือกปลูก</th>
                                     <th>จำนวนที่ต้องการ</th>
@@ -307,6 +308,7 @@ class S_Plan extends Component {
                                 {this.state.order_farmer.map((element, index) => {
                                     return (
                                         <tr>
+                                            <td>วันที่เริ่มต้น</td>
                                             <td>{element.planing_farmer_plant}</td>
                                             <td>{element.planing_farmer_name}</td>
                                             <td>{element.planing_farmer_volume}</td>
@@ -344,8 +346,9 @@ class S_Plan extends Component {
                     <div className="col-1"></div>
                     <div className="col-10">
                         <div className="tab">
-                            <button onClick={() => { this.setState({ page: 2 }) }}>ติดตามการวางแผน</button>
                             <button onClick={() => { this.setState({ page: 1 }) }}>วางแผนการเพาะปลูกให้กับเกษตรกร</button>
+                            <button onClick={() => { this.setState({ page: 2 }) }}>ติดตามการวางแผน</button>
+                            
                             <input type="text" placeholder="ค้นหา" 
                             style={{width:"40%",marginTop:"5px",marginLeft:"25px"}}/>
                         </div>

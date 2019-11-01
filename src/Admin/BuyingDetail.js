@@ -105,7 +105,15 @@ class BuyingDetail extends Component {
                             <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
                             <h4 style={{margin:"0"}}>รอการยืนยันการชำระเงิน</h4>
                             <h5 style={{margin:"0"}}>กรุณาชำระเงินผ่าน :
-                            {this.state.invoice_detail.BankName} {this.state.invoice_detail.BankNo} {this.state.invoice_detail.BankAccountName}</h5>
+                            {console.log("accountBank",this.state.invoice_detail)}
+                            {this.state.invoice_detail.map((element_bank,index)=>{
+                                return(
+                                    <div>
+                                        {index+1}. {element_bank.bankName} {element_bank.bankNo} {element_bank.bankAccount}
+                                    </div>
+                                )
+                            })}
+                            </h5>
                             <h5>ก่อนวันที่ {moment(this.state.invoice.date_send).utc().add('years', 543).format("DD/MM/YYYY")} เมื่อโอนเงินแล้วให้ยืนยันและส่งหลักฐานการชำระเงิน </h5>
                         </div>
                     </div>
@@ -431,16 +439,16 @@ class BuyingDetail extends Component {
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
-                            
+                            <h5>
                             โอนเข้าบัญชี : 
-                            <select>
+                            <select style={{fontFamily:"fc_lamoonregular",fontSize:"24px"}}>
                                 {this.state.invoice_detail ?
                                     this.state.invoice_detail.map((element,index)=>{
                                     return(
                                         <option>{element.bankName}</option>
                                     )
                                 }):null}
-                            </select>
+                            </select></h5>
                             <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
                             <div className="Row">
                                 <div className="col-6">
