@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import ConfirmProduct from './Confirm_Product'
-import Product_Info from './Product_Info'
-import Check_Details from './Check_Details'
-import Product_History from './Product_History'
+import ConfirmProduct from './Confirm_Product';
+import Product_Info from './Product_Info';
+import Check_Details from './Check_Details';
+import Product_History from './Product_History';
 
 class Product_Research extends Component {
 
@@ -40,6 +40,7 @@ class Product_Research extends Component {
                     <NavLink to={"/Product_Research/Product_History"}>
                         <button>ประวัติการพัฒนาผลิตภัณฑ์</button>
                     </NavLink>
+                    
                 </div>
                 {render_page}
 
