@@ -47,7 +47,7 @@ class S_skill_farmer extends Component {
 
     componentWillMount() {
         this.get_skill_farmer()
-        this.get_name_se_all()()
+        this.get_name_se_all()
     }
 
     get_name_se_all = async () => {

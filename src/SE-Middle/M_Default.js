@@ -14,20 +14,51 @@ class M_Default extends Component {
         super(props)
         this.state = {
             currentPage: 1,
-            todosPerPage: 10,
+            todosPerPage: 15,
             get_farmer: [],
             volume_farmer:[],
             click: false,
             sumEach: [],
             sum_area_storage: [],
             name_se: [],
-            index:30
+            index:30,
+            volume_fermer:[]
         }
     }
 
     componentWillMount() {
         this.get_name_se_all()
         this.get_Cert_post()
+        this.get_volume_fermer()
+    }
+
+    sum_volume = (count_farmer) => {
+        let sum = 0;
+        count_farmer.map((element) => {
+            return (
+                sum += (element.count_farmer)
+            )
+
+        })
+        return sum;
+
+    }
+
+    get_volume_fermer = async () => {
+        try {
+            await get('neutrally/get_count_se_all', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({ volume_fermer: result.result })
+                    console.log('get_volume_fermer', result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+
+        } catch (error) {
+            alert('get_volume_fermer: ' + error)
+        }
     }
 
     get_name_se_all = async () => {
@@ -303,9 +334,27 @@ class M_Default extends Component {
                     <div className="col-5">
                         <HighchartsReact highcharts={Highcharts} options={options} />
                         <h4 style={{ cursor: 'pointer', margin: "0", textAlign: "left",paddingLeft:"50px" }} onClick={() => this.filter_area_storage()}>พื้นที่เพาะปลูกทีได้รับการรับรองมาตรฐาน จำนวน 0 คน</h4>
-                        <h4 style={{ margin: "0", textAlign: "left",paddingLeft:"50px" }}>{this.state.volume_farmer.map((element)=>{
-                            return(<p>จากจำนวนเกษตรกรทั้งหมด {element.sum_farmer} คน</p>)
-                        })} </h4>
+                        <div style={{paddingLeft:"50px"}}>
+                            <h4 style={{textAlign:"center"}}>จำนวนเกษตรกรในเครือข่าย</h4>
+                            <table>
+                                    <tr>
+                                        <th>ชื่อ Neo_firm</th>
+                                        <th>จำนวนเกษตรกรในเครือ</th>
+                                    </tr>
+                                    {this.state.volume_fermer.map((element, index) => {
+                                        return (
+                                            <tr>
+                                                <td style={{ textAlign: "center" }}>{element.se_name}</td>
+                                                <td style={{ textAlign: "center" }}>{element.count_farmer}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                    <tr>
+                                        <th>รวม</th>
+                                        <th>{this.sum_volume(this.state.volume_fermer)}</th>
+                                    </tr>
+                                </table>
+                            </div>
                     </div>
                     <div className="col-1"></div>
                     <div className="col-6">

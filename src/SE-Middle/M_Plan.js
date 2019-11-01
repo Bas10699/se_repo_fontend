@@ -41,6 +41,7 @@ class M_Plan extends Component {
             listplan: [],
             volume_fermer: [],
             open1: false,
+            detail: [],
         }
     }
 
@@ -268,7 +269,7 @@ class M_Plan extends Component {
                     this.setState({
                         listplan: result.result
                     })
-                    console.log("get_list_neo", result, result)
+                    console.log("get_list_neo", result.result)
                 }
                 else {
                     alert(result.error_message)
@@ -290,6 +291,15 @@ class M_Plan extends Component {
         })
         return sum;
 
+    }
+
+    GGG = (index) => {
+        let aa = this.state.listplan
+        let bb = aa[index].detail
+        this.setState({
+            open1: true,
+            detail: bb
+        })
     }
 
 
@@ -537,16 +547,16 @@ class M_Plan extends Component {
                                 <table>
                                     <tr>
                                         <th>ชื่อวัตถุดิบ</th>
-                                        {/* <th>จำนวนที่สั่งซื้อ</th>
-                                        <th>วัตถุดิบขาด</th> */}
+                                        <th>จำนวนที่สั่งซื้อ</th>
+                                        <th>วัตถุดิบขาด</th>
                                         <th>วางแผน</th>
                                     </tr>
                                     {this.state.name_plant.map((element, index) => {
                                         return (
-                                            <tr>
+                                            <tr style={{ textAlign: "center" }}>
                                                 <td>{element}</td>
-                                                {/* <td>1100</td>
-                                                <td>100</td> */}
+                                                <td>0</td>
+                                                <td>0</td>
                                                 <td><button onClick={() => this.comfirmPlan(element)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
                                             </tr>
                                         )
@@ -594,7 +604,7 @@ class M_Plan extends Component {
                             <div className="col-1"></div>
                             <div className="col-10">
                                 <h4 style={{ textAlign: "center" }}>ติดตามการวางแผนการเพาะปลูก</h4>
-                                {console.log("list fermer", this.state.check_array)}
+                                {/* {console.log("list fermer", this.state.check_array)} */}
 
                                 <table>
                                     <tr>
@@ -608,14 +618,14 @@ class M_Plan extends Component {
                                     {
                                         this.state.listplan.map((element, index) => {
                                             return (
-                                                <tr>
+                                                <tr style={{ textAlign: "center" }}>
                                                     <td>วันที่เริ่มโครงการ</td>
                                                     <td>{element.plant}</td>
                                                     <td>{element.volume}</td>
                                                     <td>{moment(element.year_round_planing_date).format('DD/MM/YYYY')}</td>
                                                     {/* <td>{element.planing_farmer_volume}</td>
                                             <td>กำหนดส่งก่อน : {moment(element.planing_farmer_date).format('DD/MM/YYYY')}</td> */}
-                                                    <td><button onClick={() => this.setState({ open1: true })} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>รายละเอียด</button></td>
+                                                    <td><button onClick={() => this.GGG(index)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>รายละเอียด</button></td>
                                                 </tr>
                                             )
                                         })
@@ -623,14 +633,31 @@ class M_Plan extends Component {
 
                                 </table>
                                 <Modal open={this.state.open1} onClose={this.onCloseModal}>
-                                    <div className="Row">
+                                    <div className="Row" style={{width:"500px"}}>
                                         <div className="col-12" >
                                             <h3 style={{ textAlign: "center" }}>วางแผนการเพาะปลูก {this.state.selectPlant}</h3>
                                         </div>
                                     </div>
                                     <div className="Row">
                                         <div className="col-12">
-
+                                            <table>
+                                                <tr>
+                                                    <th>ลำดับ</th>
+                                                    <th>ชื่อ Neo_firm ที่เลือก</th>
+                                                    <th>จำนวนที่ต้องการ</th>
+                                                </tr>
+                                            
+                                            {this.state.detail.map((element, index) => {
+                                                return (
+                                                    <tr>
+                                                        <td>{index + 1}.</td>
+                                                        <td>{element.se_name}</td>
+                                                        <td>{element.volume}</td>
+                                                        {/* <progress className="progress" value={element.volume} max="100" /> */}
+                                                    </tr>
+                                                )
+                                            })}
+                                            </table>
                                         </div>
 
                                     </div>
