@@ -398,19 +398,19 @@ class M_Data extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-2" style={{paddingLeft:"25px"}}>
-                        <h4>ผลผลิตที่ส่งมอบได้
+                    <div className="col-1" style={{paddingLeft:"25px"}}>
+                       ผลผลิตที่ส่งมอบได้
                     {this.state.plants.map((element, index) => {
                             return (
                                 <div style={{ cursor: 'pointer' }} onClick={() => this.show_chart(index)}> {index + 1}. {element.name}</div>
                             )
                         })}
-</h4>
                     </div>
-
+<div className="col-9">
+<HighchartsReact highcharts={Highcharts} options={options} />
+</div>
 
                     <div className="col-2" style={{paddingLeft:"0px"}} >
-                        <h4>
                         <div style={{ textAlign: "center" }}>
                             {this.state.plants[this.state.index_plant] ?
                                 this.state.plants[this.state.index_plant].name
@@ -422,18 +422,18 @@ class M_Data extends Component {
                             {this.state.data_month.map((element, index) => {
                                 return (
                                     <tr style={{ cursor: 'pointer' }} onClick={() => this.show_detail_month(this.state.index_plant, index)}>
-                                        <th><h4 style={{margin:"0"}}>{this.rander_month(index + 1)}</h4></th>
-                                        <td style={{ textAlign: "right",paddingLeft:"5px" }}><h4 style={{margin:"0"}}>{addComma(element)}</h4></td>
-                                        <td style={{ textAlign: "center" }}><h4 style={{margin:"0"}}>กิโลกรัม</h4></td>
+                                        <th>{this.rander_month(index + 1)}</th>
+                                        <td style={{ textAlign: "right",paddingLeft:"5px" }}>{addComma(element)}</td>
+                                        <td style={{ textAlign: "center" }}>กิโลกรัม</td>
                                     </tr>
                                 )
                             })}<div id="Top" />
                         </table>
-                        </h4>
                     </div>
-
-
-                    <div className="col-7" style={{paddingLeft:"25px"}}>
+</div>
+<div className="Row">
+<div className="col-1"></div>
+                    <div className="col-10" style={{paddingLeft:"25px"}}>
                         <h4 style={{ textAlign: "center" }} id="#go">รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
                         {this.state.data_month ?
                             <table>
@@ -486,12 +486,7 @@ class M_Data extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="Row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                    <HighchartsReact highcharts={Highcharts} options={options} />
-                    </div>
-                </div>
+                
             </div>
 
         )
