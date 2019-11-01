@@ -147,7 +147,7 @@ class BuyingDetail extends Component {
                 break;
 
             case 3:
-                case 4: render_show =
+                render_show =
                 <div>
                 <div className="Row">
                         <div className="col-12">
@@ -180,29 +180,31 @@ class BuyingDetail extends Component {
             //     </div>
             //     break;
 
-            // case 4: render_show =
-            //     <div className='_Card'>
-            //         <div className="Row">
-            //             <div className="col-12">
-            //                 <h4>สถานะการสั่งซื้อ : เรียบร้อย</h4>
+            case 4: render_show =
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                        <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h4>เรียบร้อย</h4>
 
-            //             </div>
-            //         </div>
-            //         {/* <div className="Row">
-            //             <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
-            //             <div className="col-6">
-            //                 <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
-            //             </div>
-            //         </div> */}
-            //     </div>
-            //     break;
+                        </div>
+                    </div>
+                    {/* <div className="Row">
+                        <div className="col-6"><PdfInvoice data={this.state.invoice} /></div>
+                        <div className="col-6">
+                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+                        </div>
+                    </div> */}
+                </div>
+                break;
 
 
             default: render_show =
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                            <h4>สถานะการสั่งซื้อ : เกิดข้อผิดพลาด</h4>
+                        <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h4>เกิดข้อผิดพลาด</h4>
 
                         </div>
                     </div>
@@ -365,14 +367,7 @@ class BuyingDetail extends Component {
                     </div>
                 </div>
 
-                {/* <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-8">
-                        <PdfOrder data={this.state.order} />
-                    </div>
-                    <div className="col-2"></div>
-                </div> */}
-
+                
                 <Timeline status={this.state.order.order_status} order={this.state.order} detail={this.state.detail} invoice={this.state.invoice} payment={this.state.payment} />
 
                 <div className="Row">

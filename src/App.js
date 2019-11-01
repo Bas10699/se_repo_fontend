@@ -57,6 +57,7 @@ import S_Plan from './SE-Sub/S_Plan';
 import M_Data from './SE-Middle/M_Data';
 import M_Farmer from './SE-Middle/M_Farmer';
 import M_Default from './SE-Middle/M_Default';
+import Defalut from './Admin/Defalut';
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
       <Route exact path='/Signin' component={Signin} />
       <Route exact path='/Signup' component={Signup} />
       <Route exact path='/' component={Home} />
+      <Route exact path='/Defalut' component={Defalut}/>
       <Route exact path='/T_Cart' component={T_Cart} />
       <Route exact path='/T_Order' component={T_Order} />
       <Route exact path='/Product' component={Product} />

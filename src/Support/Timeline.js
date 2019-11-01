@@ -124,13 +124,13 @@ class Timeline extends Component {
 
                             </li>
 
-                            {/* <li className={this.props.status >= 4 ? "Status" : "Standat"}>
+                            <li className={this.props.status >= 4 ? "Status" : "Standat"}>
                                 <img src={this.props.status >= 4 ? five : fivedis} alt="five"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
                                 <div style={{ marginLeft: "86%", width: "100%" }} >
                                     ตรวจสอบสินค้า
                                     </div>
-                            </li> */}
+                            </li>
 
                         </ul>
 
@@ -144,21 +144,21 @@ class Timeline extends Component {
                             null
                         }
                         {this.props.status >= 1 ?
-                            <div style={{ marginLeft: "23%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "18%", width: "40%", marginTop: "-40px" }}>
                                 <PdfInvoice data={this.props.invoice} order={this.props.order} />
                             </div>
                             :
                             null
                         }
                         {this.props.status >= 2 ?
-                            <div style={{ marginLeft: "54%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "43.5%", width: "40%", marginTop: "-40px" }}>
                                 <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
                             </div>
                             :
                             null
                         }
                         {this.props.status >= 3 ?
-                            <div style={{ marginLeft: "85%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "69.5%", width: "40%", marginTop: "-40px" }}>
                                 <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
                             </div>
                             :
