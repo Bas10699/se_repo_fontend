@@ -17,7 +17,7 @@ class ProductDetail extends Component {
             product_data: [],
             plant: [],
             plant_id: [],
-            amount: 1,
+            amount: 0,
             data: [],
             price: [],
             data_cart: [],
@@ -98,7 +98,7 @@ class ProductDetail extends Component {
     }
 
     add_cart = async () => {
-
+        
         this.state.plant.map((element, index) => {
             this.state.data.push({
                 plant_id: element.plant_id,
@@ -141,13 +141,7 @@ class ProductDetail extends Component {
 
 
     volume_check = (data_price, index) => {
-        let dataSortVolume = data_price.sort(compare)
-        let price = 0
-        dataSortVolume.map((element) => {
-            if (this.state.amount >= element.volume) {
-                price = element.price
-            }
-        })
+
         function compare(a, b) {
             const order_idA = a.volume
             const order_idB = b.volume
@@ -160,6 +154,16 @@ class ProductDetail extends Component {
             }
             return comparison;
         }
+
+        let dataSortVolume = data_price.sort(compare)
+        let price = 0
+       
+        dataSortVolume.map((element) => {
+            if (this.state.amount >= element.volume) {
+                price = element.price
+            }
+        })
+
 
         return price
     }
@@ -237,7 +241,7 @@ class ProductDetail extends Component {
                             )
                         }
                         )}
-                        <h4>ยอดคำสั่งซื้อทั้งหมด ปปป บาท</h4>
+                        <h4>ยอดคำสั่งซื้อทั้งหมด {this.volume_check(this.state.price) * this.state.amount} บาท</h4>
                     </div>
                     <div className="col-1"></div>
 
