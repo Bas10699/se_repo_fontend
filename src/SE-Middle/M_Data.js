@@ -313,7 +313,7 @@ class M_Data extends Component {
         var options = {
 
             title: {
-                text: plant[index] ? "กราฟแสดงผลผลิตที่ส่งมอบได้ : "+plant[index].name : null,
+                text: plant[index] ? "กราฟแสดงผลผลิตที่ส่งมอบได้ : " + plant[index].name : null,
                 style: {
                     fontSize: '24px',
                     fontFamily: 'fc_lamoonregular'
@@ -398,19 +398,19 @@ class M_Data extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-1" style={{paddingLeft:"25px"}}>
-                       ผลผลิตที่ส่งมอบได้
+                    <div className="col-1" style={{ paddingLeft: "25px" }}>
+                        ผลผลิตที่ส่งมอบได้
                     {this.state.plants.map((element, index) => {
                             return (
                                 <div style={{ cursor: 'pointer' }} onClick={() => this.show_chart(index)}> {index + 1}. {element.name}</div>
                             )
                         })}
                     </div>
-<div className="col-9">
-<HighchartsReact highcharts={Highcharts} options={options} />
-</div>
+                    <div className="col-9">
+                        <HighchartsReact highcharts={Highcharts} options={options} />
+                    </div>
 
-                    <div className="col-2" style={{paddingLeft:"0px"}} >
+                    <div className="col-2" style={{ paddingLeft: "0px" }} >
                         <div style={{ textAlign: "center" }}>
                             {this.state.plants[this.state.index_plant] ?
                                 this.state.plants[this.state.index_plant].name
@@ -423,17 +423,17 @@ class M_Data extends Component {
                                 return (
                                     <tr style={{ cursor: 'pointer' }} onClick={() => this.show_detail_month(this.state.index_plant, index)}>
                                         <th>{this.rander_month(index + 1)}</th>
-                                        <td style={{ textAlign: "right",paddingLeft:"5px" }}>{addComma(element)}</td>
+                                        <td style={{ textAlign: "right", paddingLeft: "5px" }}>{addComma(element)}</td>
                                         <td style={{ textAlign: "center" }}>กิโลกรัม</td>
                                     </tr>
                                 )
                             })}<div id="Top" />
                         </table>
                     </div>
-</div>
-<div className="Row">
-<div className="col-1"></div>
-                    <div className="col-10" style={{paddingLeft:"25px"}}>
+                </div>
+                <div className="Row">
+                    <div className="col-1"></div>
+                    <div className="col-10" style={{ paddingLeft: "25px" }}>
                         <h4 style={{ textAlign: "center" }} id="#go">รายชื่อเกษตรที่มีผลผลิตที่ส่งมอบได้ในเดือน </h4>
                         {this.state.data_month ?
                             <table>
@@ -486,7 +486,7 @@ class M_Data extends Component {
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
         )

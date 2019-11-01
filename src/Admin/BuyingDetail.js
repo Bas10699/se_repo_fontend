@@ -120,7 +120,7 @@ class BuyingDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-12" style={{ marginLeft: "50px" }}><PdfInvoice data={this.state.invoice} order={this.state.order} />
-                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()}>แจ้งชำระเงิน</button>
+                            <button className='BTN_CONFIRM' onClick={() => this.onOpenModal()} style={{marginTop:"25px"}}>แจ้งชำระเงิน</button>
                         </div>
                     </div>
                 </div>
