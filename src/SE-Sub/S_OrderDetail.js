@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { get, post, ip } from '../Support/Service'
-import { user_token, addComma,sortData } from '../Support/Constance'
+import { user_token, addComma, sortData } from '../Support/Constance'
 import Timeline from './TimelineNeo'
 import Checkbox from '../Support/Checkbox'
 import moment from 'moment'
@@ -21,6 +21,7 @@ class S_OrderDetail extends Component {
             search_order: [],
             check_array: [],
             OpenProofPaymet: false,
+            OpenProof: false,
             openIN: false,
             status: 0,
             order_farmer: [],
@@ -39,7 +40,7 @@ class S_OrderDetail extends Component {
     }
 
     onCloseModal = () => {
-        this.setState({ OpenProofPaymet: false, openIN: false });
+        this.setState({ OpenProofPaymet: false, openIN: false, OpenProof: false });
 
     };
 
@@ -108,7 +109,7 @@ class S_OrderDetail extends Component {
                     this.setState({
                         order_farmer: result.result
                     })
-                    console.log("order_farmer",result.result)
+                    console.log("order_farmer", result.result)
 
                 }
                 else {
@@ -274,7 +275,7 @@ class S_OrderDetail extends Component {
             cost: this.state.order.cost
 
         }
-        console.log("status",obj)
+        console.log("status", obj)
         try {
             await post(obj, 'neo_firm/add_order_farmer', user_token).then((result) => {
                 if (result.success) {
@@ -296,15 +297,18 @@ class S_OrderDetail extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_trader_id}</h2>
+                        <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_trader_id} </h2>
                     </div>
                 </div>
 
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
-                        <Timeline status={this.state.order.order_se_status} order={this.state.order}/>
+                        <Timeline status={this.state.order.order_se_status} order={this.state.order} />
                     </div>
+
                 </div>
+
+
 
                 <div className="Row" style={{ marginTop: "70px" }}>
                     <div className="col-1"></div>
@@ -321,6 +325,20 @@ class S_OrderDetail extends Component {
                     <div className="col-1"></div>
 
                     <div className="col-7">
+                        {this.state.order.order_se_status == 1 ?
+                            <button onClick={() => this.setState({ OpenProof: true })}
+                                className="BTN_PDF">ตรวจสอบหลักฐานการโอนเงิน</button>
+                            :
+                            null}
+
+                        {this.state.order.order_se_status == 3 ?
+                            <button 
+                                className="BTN_PDF">จัดส่งสินค้า</button>
+                            :
+                            null}
+
+
+
                         {this.state.order.order_farmer_status == null ?
                             <div>
                                 <h4 style={{ marginTop: "10px" }}>เกษตรกรที่พร้อมส่งมอบ</h4>
@@ -338,7 +356,7 @@ class S_OrderDetail extends Component {
                             :
                             <div>
                                 <h4 style={{ marginTop: "10px" }}>เกษตรกรที่ทำการสั่งซื้อ</h4>
-                                
+
                                 <table>
                                     {this.state.order_farmer.map((element, index) => {
                                         return (
@@ -346,17 +364,17 @@ class S_OrderDetail extends Component {
                                                 <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_last_name}
                                                 </td>
                                                 <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
-                                                <td><S_BillFarmerPdf data={element}/></td>
+                                                <td><S_BillFarmerPdf data={element} /></td>
                                             </tr>
                                         )
                                     })}
                                 </table>
-                                {console.log("list farmer",this.state.order_farmer)}
+                                {console.log("list farmer", this.state.order_farmer)}
                                 {this.state.order.order_se_status == 0 ?
-                                <button onClick={() => this.setState({ openIN: true })} className="BTN_Signin" style={{ float: "left" }}>ออกใบเเจ้งหนี้</button>
-                                :null
-                            }
-                                
+                                    <button onClick={() => this.setState({ openIN: true })} className="BTN_Signin" style={{ float: "left" }}>ออกใบเเจ้งหนี้</button>
+                                    : null
+                                }
+
                                 {/* {this.state.get_user ? 
                                     this.state.bank_information.map((element) => {
                                         return (
@@ -405,6 +423,33 @@ class S_OrderDetail extends Component {
                     </div>
                 </Modal>
 
+                <Modal open={this.state.OpenProof} onClose={this.onCloseModal}>
+                    <div className="Row">
+                        <div className="col-12" >
+                            <h3 style={{ textAlign: "center" }}>ตรวจสอบการโอนเงิน</h3>
+                        </div>
+                    </div>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-12" >
+                            {/* <a href={ip + this.state.payment.image_proof}>
+                                <img src={ip + this.state.payment.image_proof}
+                                    style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
+                            </a> */}
+                        </div>
+                        <div className="col-5">
+
+                            {/* <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.invoice.invoice_id}</h4>
+                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
+                            <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
+                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
+                            <button className="BTN_CONFIRM" >ออกใบเสร็จ</button>
+                            <button className="BTN_PDF" onClick={() => this.setState({ OpenProof: false })}>ยกเลิก</button>
+
+                        </div>
+                    </div>
+                </Modal>
 
                 {/* ใบเเจ้งหนี้ */}
                 <Modal open={this.state.openIN} onClose={this.onCloseModal}>
@@ -430,14 +475,14 @@ class S_OrderDetail extends Component {
 
                             {this.state.bank ?
                                 this.state.bank.map((element) => {
-                                return (
-                                    <div className="_Card">
-                                        <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
-                                        <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h5>
-                                    </div>
-                                )
-                            })
-                            :null
+                                    return (
+                                        <div className="_Card">
+                                            <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
+                                            <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h5>
+                                        </div>
+                                    )
+                                })
+                                : null
                             }
 
                             <button className="BTN_Signin" onClick={() => { this.ChStatus() }}>ออกใบเเจ้งหนี้</button>

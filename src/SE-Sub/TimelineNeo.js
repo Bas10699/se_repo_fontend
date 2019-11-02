@@ -133,8 +133,8 @@ class TimelineNeo extends Component {
                                 } */}
                             </li>
 
-                            <li className={this.props.status >= 2 ? "Status" : "Standat"}>
-                                <img src={this.props.status >= 2 ? three : threedis} alt="three"
+                            <li className={this.props.status >= 3 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 3 ? three : threedis} alt="three"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
                                 <div style={{ marginLeft: "93%", width: "100%" }} >
                                     ชำระเงินแล้ว
@@ -148,8 +148,8 @@ class TimelineNeo extends Component {
                                 } */}
 
                             </li>
-                            <li className={this.props.status >= 3 ? "Status" : "Standat"}>
-                                <img src={this.props.status >= 3 ? four : fourdis} alt="four"
+                            <li className={this.props.status >= 4 ? "Status" : "Standat"}>
+                                <img src={this.props.status >= 4 ? four : fourdis} alt="four"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
                                 <div style={{ marginLeft: "86%", width: "100%" }} >
                                     สินค้าทำการจัดส่ง
@@ -186,20 +186,20 @@ class TimelineNeo extends Component {
                     null
                 }
                 {this.props.status >= 1 ?
-                    <div style={{ marginLeft: "19.5%", width: "30%", marginTop: "-40px" }}>
-                        {/* <PdfInvoice data={this.props.invoice} order={this.props.order} /> */}
-                    </div>
-                    :
-                    null
-                }
-                {this.props.status >= 2 ?
-                    <div style={{ marginLeft: "43%", width: "30%", marginTop: "-40px" }}>
-                        <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
+                    <div style={{ marginLeft: "22.8%", width: "30%", marginTop: "-40px" }}>
+                        <PdfInvoice data={this.props.invoice} order={this.props.order} />
                     </div>
                     :
                     null
                 }
                 {this.props.status >= 3 ?
+                    <div style={{ marginLeft: "43.1%", width: "30%", marginTop: "-40px" }}>
+                         <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
+                    </div>
+                    :
+                    null
+                }
+                {this.props.status >= 4 ?
                     <div style={{ marginLeft: "53%", width: "30%", marginTop: "-40px" }}>
                         {/* <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} /> */}
                     </div>
@@ -228,8 +228,8 @@ class TimelineNeo extends Component {
                             <h4>เวลาที่ชำระเงิน : {this.props.order.order_se_Payment_time}</h4>
                             {/* <h4>จำนวนเงิน : {addComma(this.sum_price(this.props.detail))} บาท</h4> */}
 
-                            <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
-                            <button className="BTN_PDF" onClick={() => this.setState({ OpenBill: false })}>ยกเลิก</button>
+                            {/* <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
+                            <button className="BTN_PDF" onClick={() => this.setState({ OpenBill: false })}>ยกเลิก</button> */}
                         </div>
 
                     </div>

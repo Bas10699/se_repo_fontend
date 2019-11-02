@@ -56,7 +56,7 @@ class S_Order extends Component {
                     {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-            case 1:
+            case 1:case 2:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
@@ -65,7 +65,7 @@ class S_Order extends Component {
                     {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-            case 2:
+             case 3:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
@@ -74,7 +74,7 @@ class S_Order extends Component {
                     {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-            case 3:
+           
                 case 4:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />

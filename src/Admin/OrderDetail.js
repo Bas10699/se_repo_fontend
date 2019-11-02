@@ -40,6 +40,7 @@ class OrderDetail extends Component {
             BankAccountName: null,
             BankName: null,
             BankNo: null,
+            logistic: 1,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -339,15 +340,46 @@ class OrderDetail extends Component {
             //     </div>
             //     break;
 
-            case 3:
-            case 4: render_show =
-                <div className='_Card'>
-                    <div className="Row">
-                        <div className="col-12">
+            case 3: render_show =
+            <div>
+                <div className="Row">
+                    <div className="col-12">
+                        <div className='_Card'>
                             <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
-                            <h5>สินค้าทำการจัดส่งเรียบร้อย</h5>
+                            <h5>{this.state.logistic == 1 ?
+                                <div>
+                                    <h5>ขนส่งแบบ รถไฟ</h5>
+                                    กรอกหมายเลขพัสดุ : <input />
+                                </div>
+                                :
+                                <div>
+                                    รอระบบขนส่งจาก {this.state.order.name} {this.state.order.last_name}
+                                </div>}
+                            </h5>
                         </div>
                     </div>
+                </div>
+                <div className="Row">
+                        <div className="col-12" style={{ marginLeft: "50px" }}>
+                            <button className="BTN_PDF">ยืนยันหมายเลขพัสดุ</button>
+                            
+                            </div>
+                    </div>
+                </div>
+                break;
+
+            case 4: render_show =
+            <div>
+                <div className="Row">
+                    <div className="col-12">
+                        <div className='_Card'>
+                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h5>เรียบร้อย
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                
                 </div>
                 break;
 
@@ -355,18 +387,11 @@ class OrderDetail extends Component {
                 <div className='_Card'>
                     <div className="Row">
                         <div className="col-12">
-                        <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
                             <h4>เกิดข้อผิดพลาด</h4>
-                            {/* <h5>รอ SE กลางออกใบเสร็จ</h5> */}
+                            
                         </div>
                     </div>
-                    {/* <div className="Row">
-                        <div className="col-6"><PdfInvoice data={this.state.order} /></div>
-                        <div className="col-6">
-                            <button
-                                    className='BTN_CONFIRM'
-                                    onClick={() => this.setState({ OpenComfrim: true })}>ออกใบเสร็จ</button></div>
-                    </div> */}
                 </div>
 
                 break;

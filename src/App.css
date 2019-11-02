@@ -832,7 +832,7 @@ th,tr:hover{
   .Standat {
     list-style-type: none;
     float: left;
-    width: 22.2%;
+    width: 27.7%;
     margin-left: 2.8%;
     position: relative;
     background-color: #ccc;
@@ -851,7 +851,7 @@ th,tr:hover{
   li.Status {
     list-style-type: none;
     float: left;
-    width: 22.2%;
+    width: 27.7%;
     position: relative;
     background-color: green;
     height: 5px;

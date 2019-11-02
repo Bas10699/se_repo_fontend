@@ -111,7 +111,7 @@ class Timeline extends Component {
                             <li className={this.props.status >= 4 ? "Status" : "Standat"}>
                                 <img src={this.props.status >= 4 ? four : fourdis} alt="four"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
-                                <div style={{ marginLeft: "88%", width: "100%" }} >
+                                <div style={{ marginLeft: "84%", width: "100%" }} >
                                     สินค้าทำการจัดส่ง
                                     </div>
                                 {/* {this.props.status >= 2 ?
@@ -124,13 +124,13 @@ class Timeline extends Component {
 
                             </li>
 
-                            <li className={this.props.status >= 5 ? "Status" : "Standat"}>
+                            {/* <li className={this.props.status >= 5 ? "Status" : "Standat"}>
                                 <img src={this.props.status >= 5 ? five : fivedis} alt="five"
                                     style={{ width: "25px", marginTop: "-10px", marginLeft: "100%", zIndex: "1000" }} />
-                                <div style={{ marginLeft: "86%", width: "100%" }} >
-                                    ตรวจสอบสินค้า
+                                <div style={{ marginLeft: "95%", width: "100%" }} >
+                                    เรียบร้อย
                                     </div>
-                            </li>
+                            </li> */}
 
                         </ul>
 
@@ -144,27 +144,26 @@ class Timeline extends Component {
                             null
                         }
                         {this.props.status >= 1 ?
-                            <div style={{ marginLeft: "18%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "23.2%", width: "40%", marginTop: "-40px" }}>
                                 <PdfInvoice data={this.props.invoice} order={this.props.order} />
                             </div>
                             :
                             null
-                        }
-                        {this.props.status >= 5 ?
-                            <div style={{ marginLeft: "43.5%", width: "40%", marginTop: "-40px" }}>
-                                <button className="BTN_PDF" onClick={() => this.setState({ OpenProofPaymet: true })} >หลักฐานการโอน</button>
-                            </div>
-                            :
-                            null
-                        }
+                        }                        
                         {this.props.status >= 3 ?
-                            <div style={{ marginLeft: "43.5%", width: "40%", marginTop: "-40px" }}>
+                            <div style={{ marginLeft: "54.5%", width: "40%", marginTop: "-40px" }}>
                                 <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
                             </div>
                             :
                             null
                         }
-                        
+                        {this.props.status >= 4 ?
+                            <div style={{ marginLeft: "83%", width: "40%", marginTop: "-40px",marginBottom:"20px" }}>
+                                หมายเลขพัสดุ : SHP4042678386
+                            </div>
+                            :
+                            null
+                        }
                     </div>
                 </div>
 
