@@ -1319,3 +1319,24 @@ ol {
    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
    animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
+
+  .Add{
+    font-family: 'fc_lamoonregular';
+    font-size: 20px;
+    color: white;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    text-align: center;
+    cursor: pointer;
+    padding: 8px 8px;
+    width: 150px;
+    /* margin-top: 20px; */
+    margin-left: 10px;
+    /* float: right; */
+    transition: 0.5s;
+}
+
+.Add:hover{
+    background-color: #0057b4;
+    color: white;
+}

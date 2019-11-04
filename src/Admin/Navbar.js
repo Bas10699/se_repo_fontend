@@ -97,7 +97,7 @@ class Navbar extends Component {
                             <NavLink exact to="/Product_Research" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
                                 {/* <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li> */}
-                                {/* <li><NavLink exact to="/Planting_Planning" activeClassName="Active" className="NavbarText">การวางแผนเพาะปลูก</NavLink></li> */}
+                                <li><NavLink exact to="/Planting_Planning" activeClassName="Active" className="NavbarText">การวางแผนเพาะปลูก</NavLink></li>
                                 <li><NavLink exact to="/Product_Information" activeClassName="Active" className="NavbarText">ข้อมูลผลผลิต</NavLink></li>
                                 <li><NavLink exact to="/Product_Research" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
 
@@ -122,7 +122,7 @@ class Navbar extends Component {
                             <ul>
                                 {/* <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li> */}
                                 <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li>
-                                {/* <li><NavLink exact to="/T_Order" activeClassName="Active" className="NavbarText">พัฒนาผลิตภัณฑ์</NavLink></li> */}
+                                <li><NavLink exact to="/T_Order" activeClassName="Active" className="NavbarText">พัฒนาผลิตภัณฑ์</NavLink></li>
                                 <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตะกร้าสินค้า</NavLink></li>
                                 <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
 
