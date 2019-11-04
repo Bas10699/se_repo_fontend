@@ -71,7 +71,8 @@ class M_R_Order extends Component {
                     </div>
                 </div>
                 <div className="Row">
-                    <div className="col-12">
+                    <div className="col-1"></div>
+                    <div className="col-10">
                         <table>
                             <tr>
                                 <th>ผู้สั่งพัฒนาผลิตภัณฑ์</th>
@@ -89,7 +90,7 @@ class M_R_Order extends Component {
                                         <td>{element.product_name}</td>
                                         <td></td>
                                         <td><button onClick={()=>this.setState({ open: true })}>เลือกนักวิจัย</button></td>
-                                        <td>{this.state.check_array}</td>
+                                        <td>{this.state.check_array} </td>
                                         <td>ตกลง : ยกเลิก</td>
                                         
                                     </tr>
@@ -103,11 +104,14 @@ class M_R_Order extends Component {
 
 
                     </div>
+                    <div className="col-1"></div>
                 </div>
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
-                    <div className="Row" style={{ width: "500px" }}>
-                        <div className="col-11">
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-12">
+                            
                             <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา [ชื่อผลิตภัณฑ์]</h3>
+                            กำหนดวันที่ต้องการ <input type="date"/>
                             <Checkbox
                                     option={researcher}
                                     check_array={this.state.check_array}
@@ -117,10 +121,9 @@ class M_R_Order extends Component {
                                             check_array: event
                                         })
                                     }} />
-                                    กำหนดวันที่ต้องการ <input type="date"/>
+                                    
                                     <button onClick={()=>this.onCloseModal()}>ยืนยัน</button>
                         </div>
-                        <div className="col-1" />
                     </div>
                     
                 </Modal>
