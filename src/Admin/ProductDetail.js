@@ -25,6 +25,7 @@ class ProductDetail extends Component {
             total_price: [],
             cart_product: [],
             status: null,
+            loading: true,
 
             default_image: 'https://www.lamonde.com/pub/media/catalog/product/placeholder/default/Lamonde_-_Image_-_No_Product_Image_4.png',
         }
@@ -81,7 +82,8 @@ class ProductDetail extends Component {
                     this.setState({
                         product_data: result.result,
                         price: result.result.price,
-                        plant: result.result.plant,
+                        // plant: result.result.plant,
+                        loading: false,
                     })
 
                     setTimeout(() => {
@@ -98,7 +100,7 @@ class ProductDetail extends Component {
     }
 
     add_cart = async () => {
-        
+
         this.state.plant.map((element, index) => {
             this.state.data.push({
                 plant_id: element.plant_id,
@@ -157,7 +159,7 @@ class ProductDetail extends Component {
 
         let dataSortVolume = data_price.sort(compare)
         let price = 0
-       
+
         dataSortVolume.map((element) => {
             if (this.state.amount >= element.volume) {
                 price = element.price
@@ -208,49 +210,53 @@ class ProductDetail extends Component {
     render() {
 
         return (
-            <div className="App">
-                {/* <div className="Row">
+            <div>
+                {this.state.loading ?
+                    <div><div className="loader"></div><h5 style={{ textAlign: 'center', marginTop: '28%' }}>กำลังโหลด...</h5></div>
+                    :
+                    <div className="App">
+                        {/* <div className="Row">
                     <div className="col-12" style={{padding:"220"}}></div>
                 </div> */}
-                <div className="Row">
-                    <div className="col-5">
-                        {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
-                    </div>
-                    <div className="col-1"></div>
-                    <div className="col-5">
-                        <h3>{this.state.product_data.product_name}</h3>
-                        <h5>{this.state.product_data.product_status}</h5>
+                        <div className="Row">
+                            <div className="col-5">
+                                {this.state.product_data.image ? <img className="IMG_Detail" src={ip + this.state.product_data.image} alt={this.state.product_data.product_name} /> : <img className="IMG_Detail" src={this.state.default_image} alt={this.state.product_data.product_name} />}
+                            </div>
+                            <div className="col-1"></div>
+                            <div className="col-5">
+                                <h3>{this.state.product_data.product_name}</h3>
+                                <h5>{this.state.product_data.product_status}</h5>
 
 
-                        {/* <h4>ราคาขายปลีก</h4> */}
-                        {this.sort_price(this.state.price).map((element, index) => {
-                            return (<h4 style={{ margin: "0" }}>{addComma(element.volume)} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h4>)
-                        })}
-                        {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
-                        <input type="number"
-                            name="quantity" min="1"
-                            id="amount" placeholder="จำนวนที่ต้องการสั่งซื้อ"
-                            onChange={this.handleChange} />
-                        <button className="BTN_AddCart" onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button>
+                                {/* <h4>ราคาขายปลีก</h4> */}
+                                {this.sort_price(this.state.price).map((element, index) => {
+                                    return (<h4 style={{ margin: "0" }}>{addComma(element.volume)} กิโลกรัมขึ้นไป ราคา {element.price} บาท/กิโลกรัม </h4>)
+                                })}
+                                {/* <h4>ราคาขาย  บาท/กิโลกรัม</h4> */}
+                                <input type="number"
+                                    name="quantity" min="1"
+                                    id="amount" placeholder="จำนวนที่ต้องการสั่งซื้อ"
+                                    onChange={this.handleChange} />
+                                <button className="BTN_AddCart" onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button>
 
-                        {this.render_Step(this.state.product_data.amount_stock)}
+                                {this.render_Step(this.state.product_data.amount_stock)}
 
-                        {this.state.plant.map((element_plant, index_plant) => {
-                            return (
-                                <h4>จำนวนที่มีอยู่ {addComma(this.sum_data(element_plant.data))} กิโลกรัม</h4>
-                            )
-                        }
-                        )}
-                        <h4>ยอดคำสั่งซื้อทั้งหมด {this.volume_check(this.state.price) * this.state.amount} บาท</h4>
-                    </div>
-                    <div className="col-1"></div>
+                                {this.state.plant.map((element_plant, index_plant) => {
+                                    return (
+                                        <h4>จำนวนที่มีอยู่ {addComma(this.sum_data(element_plant.data))} กิโลกรัม</h4>
+                                    )
+                                }
+                                )}
+                                <h4>ยอดคำสั่งซื้อทั้งหมด {this.volume_check(this.state.price) * this.state.amount} บาท</h4>
+                            </div>
+                            <div className="col-1"></div>
 
 
-                </div>
-                <div className="Row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                        {/* <h3 style={{ textAlign: "center" }}>รายการวัตถุดิบ</h3>
+                        </div>
+                        <div className="Row">
+                            <div className="col-1"></div>
+                            <div className="col-10">
+                                {/* <h3 style={{ textAlign: "center" }}>รายการวัตถุดิบ</h3>
 
                         <table>
                             <tr>
@@ -292,7 +298,7 @@ class ProductDetail extends Component {
                                 })
                             }
                         </table> */}
-                        {/* <div className="Row">
+                                {/* <div className="Row">
                             <div className="col-10">
                                 <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
                             </div>
@@ -300,10 +306,13 @@ class ProductDetail extends Component {
                                 <h4 style={{ color: "red" }}>{(this.state.total_price)} บาท</h4>
                             </div>
                         </div> */}
+                            </div>
+                            <div className="col-1"></div>
+                        </div>
                     </div>
-                    <div className="col-1"></div>
-                </div>
+                }
             </div>
+
         );
     }
 }

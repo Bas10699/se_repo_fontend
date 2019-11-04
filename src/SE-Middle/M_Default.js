@@ -82,7 +82,7 @@ class M_Default extends Component {
         this.setState({
             index:e.target.value
         })
-        this.get_Cert_post()
+        setTimeout(()=>this.get_Cert_post(),)
     }
 
     get_Cert_post = async () => {
@@ -95,7 +95,8 @@ class M_Default extends Component {
                 if (result.success) {
                     this.setState({
                         get_farmer: result.result,
-                        get_origin: result.result
+                        get_origin: result.result,
+                        currentPage: 1,
                     })
                     this.sum()
                     console.log('get_fa', result.result)

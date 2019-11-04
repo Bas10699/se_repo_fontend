@@ -86,6 +86,27 @@ class BuyingDetail extends Component {
         }
     }
 
+    add_review = async () =>{
+        alert(this.state.rating + " : "+this.state.review)
+        let object = {
+            rating_score:this.state.rating,
+            review_detail:this.state.review
+        }
+        try{
+            await post(object,'trader/add_review_order',user_token).then((result)=>{
+                if(result.success){
+                    alert(result.message)
+                }
+                else{
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch(error){
+            alert('add_review: '+error)
+        }
+    }
+
     render_status = (order_status) => {
         let render_show
         switch (order_status) {
@@ -578,9 +599,11 @@ class BuyingDetail extends Component {
                             <h4 style={{marginBottom:"0"}}>ให้คะเเนน : {rating}</h4>
                             <h2 style={{margin:"0"}}><StarRatingComponent
                                 name="rating"
+                                id='rating'
                                 editing={true}
                                 starCount={5}
                                 value={rating}
+                                onChange={this.handleChange}
                                 onStarClick={this.onStarClick.bind(this)}
                             /></h2>
                         </div>
@@ -588,7 +611,7 @@ class BuyingDetail extends Component {
                         <div className="Row">
                             <div className="col-12">
                                 <h4>แสดงความคิดเห็น</h4>
-                                <textarea rows="4" cols="110" name="review" id="review" />
+                                <textarea rows="4" cols="110" name="review" id="review" onChange={this.handleChange}/>
                             </div>
 
                         </div>
@@ -596,7 +619,7 @@ class BuyingDetail extends Component {
                     <div className="Row">
                         <div className="col-12" >
                             <button className="BTN_PDF" onClick={()=>this.setState({review:false})}>ยกเลิก</button>
-                            <button className='BTN_CONFIRM' >ยืนยัน</button>
+                            <button className='BTN_CONFIRM' onClick={()=>this.add_review()} >ยืนยัน</button>
                         </div>
                     </div>
                 </Modal>

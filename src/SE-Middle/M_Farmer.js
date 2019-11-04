@@ -57,8 +57,10 @@ class M_Farmer extends Component {
             showHide5: true,
             showHide6: true,
             get_user: null,
+            loading: false,
             default_user_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2S47oPrtWI_lK68iwye6EW3Q9GMRPoCQPw4vlObBssUl355pLMg",
         }
+        
     }
 
     filterName = (event) => {
@@ -100,14 +102,20 @@ class M_Farmer extends Component {
         this.setState({
             indexGG: e.target.value
         })
-        this.get_skill_farmer_GG()
+        setTimeout(()=>this.get_skill_farmer_GG(),)
+        
     }
 
     get_skill_farmer_GG = async () => {
+        this.setState({
+            loading:true
+        })
+
         let index = this.state.indexGG
         let obj = {
             user_id: index
         }
+        console.log(obj)
         try {
             await post(obj, 'neutrally/get_farmer_se_all', user_token).then((result) => {
                 if (result.success) {
@@ -115,6 +123,7 @@ class M_Farmer extends Component {
                         farmer: this.sort_plant(result.result),
                         plants: result.result,
                         search_order: result.result,
+                        loading:false
                     })
                     console.log(result.result)
                 }
@@ -453,7 +462,7 @@ class M_Farmer extends Component {
                                 {this.state.name_se.map((ele_get_se, index) => {
                                     return (
                                         <option value={ele_get_se.user_id}>
-                                            {ele_get_se.name}
+                                            {ele_get_se.user_id} {ele_get_se.name}
                                         </option>
                                     )
                                 })}
@@ -465,8 +474,9 @@ class M_Farmer extends Component {
                         })}</h4> */}
                     </div>
                 </div>
-
-
+                {this.state.loading ? 
+                <div><div className="loader"></div><h5 style={{ textAlign: 'center', marginTop: '28%' }}>กำลังโหลด...</h5></div>
+                : 
                 <div className='Row'>
                     <div className='col-1' style={{ marginTop: "-130px" }}>
 
@@ -617,7 +627,10 @@ class M_Farmer extends Component {
 
                         </div>
                     </div>
-                </div>
+                </div>}
+
+
+                
 
             </div >
         )
