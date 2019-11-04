@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
 import { ip, get } from '../Support/Service';
 import { NavLink } from 'react-router-dom'
-import Product_Research from '../Researcher/Product_Research'
+import Product_Information from '../Researcher/Product_Information'
 import Product from './Product'
 import S_Plants_in_network from '../SE-Sub/S_Plants_in_network'
 import M_Plan from '../SE-Middle/M_Plan'
@@ -28,7 +28,7 @@ class Home extends Component {
     render_page = (type_user) => {
         let return_page
         switch (type_user) {
-            case "1": return_page = <div><Product_Research /></div>
+            case "1": return_page = <div><Product_Information /></div>
 
                 break;
             case "2": return_page = <div><Product /></div>
