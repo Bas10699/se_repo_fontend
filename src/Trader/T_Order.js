@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { user_token } from '../Support/Constance'
 import { get, post } from '../Support/Service'
 import T_Researcher from './T_Researcher'
+import { element } from 'prop-types'
 
 class T_Order extends Component {
     constructor(props) {
         super(props)
         this.state = {
             product_name: '',
-            nutrient: '',
+            nutrient: [],
             resear_name: "",
             page: 1
         }
@@ -18,18 +19,24 @@ class T_Order extends Component {
         this.setState({
             [e.target.id]: e.target.value
         })
+        if (e.key === 'Enter') {
+            this.add_resear()
+        }
     }
 
     send_demand = async (status) => {
         let object = {
             product_name: this.state.product_name,
-            nutrient: this.state.nutrient,
+            nutrient: JSON.stringify(this.state.nutrient),
+            volume:this.state.volume,
+            volume_type:this.state.volume_type,
             product_status: status
         }
         try {
             await post(object, 'trader/add_send_demand', user_token).then((result) => {
                 if (result.success) {
                     alert('เรียบร้อย')
+                    window.location.href='/T_Order/trace'
                 }
                 else {
                     alert(result.error_message)
@@ -43,8 +50,23 @@ class T_Order extends Component {
     }
 
     add_resear = () => {
-        alert("เพิ่มสารอาหาร", this.state.resear_name)
-        console.log("เพิ่มสารอาหาร", this.state.resear_name)
+        let nutrient = this.state.nutrient
+        if (this.state.resear_name) {
+            nutrient.push(this.state.resear_name)
+            this.setState({
+                nutrient: nutrient,
+                resear_name: ""
+            })
+        }
+
+    }
+    delete_reseqr = (index) =>{
+        let nutrient = this.state.nutrient
+        nutrient.splice(index,1)
+        this.setState({
+            nutrient: nutrient
+        })
+
     }
 
     render_page = (page) => {
@@ -67,16 +89,22 @@ class T_Order extends Component {
                                 <div className="Row">
                                     <div className="col-6">
                                         <h5 style={{ marginBottom: "7px" }}>ปริมาณที่ต้องการ</h5>
-                                        <input id='volum' onChange={this.handleChange} type="number" style={{ width: "70%", marginLeft: "20px" }} />
+                                        <input id='volume' onChange={this.handleChange} type="number" style={{ width: "70%", marginLeft: "20px" }} />
                                     </div>
                                     <div className="col-6">
                                         <h5 style={{ marginBottom: "7px" }}>หน่วย</h5>
-                                        <input id='vulum' onChange={this.handleChange} type="text" style={{ width: "30%", marginLeft: "0px" }} />
+                                        <input id='volume_type' onChange={this.handleChange} type="text" style={{ width: "30%", marginLeft: "0px" }} />
                                     </div>
                                 </div>
 
                                 <h5 style={{ marginBottom: "0" }}>สารอาหารที่ต้องการ</h5>
-                                <input id='resear_name' onChange={this.handleChange} type="text" style={{ width: "69%", marginLeft: "20px" }} />
+                                <input
+                                    id='resear_name'
+                                    onChange={this.handleChange}
+                                    value={this.state.resear_name}
+                                    onKeyUp={this.handleChange}
+                                    type="text"
+                                    style={{ width: "69%", marginLeft: "20px" }} />
                                 <button className="Add" style={{ marginTop: "0" }} onClick={() => this.add_resear()}>เพิ่มสารอาหาร</button>
 
                             </div>
@@ -84,10 +112,15 @@ class T_Order extends Component {
                                 <div className="col-12">
                                     <h4>สารอาหารที่เลือก</h4>
                                     <table>
-                                        <tr>
-                                            <td>{this.state.resear_name}<button style={{float:"right"}} className="BTN_Cencle">ลบ</button></td>
-                                            {/* <td style={{ float: "right" }}></td> */}
-                                        </tr>
+                                        {this.state.nutrient.map((element,index) => {
+                                            return (
+                                                <tr>
+                                                    <td>{element}</td>
+                                                    <td style={{ float: "right" }}><button className="BTN_Cencle" onClick={()=>this.delete_reseqr(index)}>ลบ</button></td>
+                                                </tr>
+                                            )
+                                        })}
+
                                     </table>
                                 </div>
 
@@ -117,13 +150,22 @@ class T_Order extends Component {
 
 
     render() {
+        let pa = this.props.match.params
+        let page = 0
+        console.log(pa)
+        if(pa.DD){
+            page = 2
+        }
+        else{
+            page = 1
+        }
         return (
             <div className="App">
                 <div className="tab">
-                    <button onClick={() => this.setState({ page: 1 })}>ส่งความต้องการพัฒนาผลิตภัณฑ์</button>
-                    <button onClick={() => this.setState({ page: 2 })}>ติดตามการพัฒนาผลิตภัณฑ์</button>
+                    <button onClick={() => window.location.href="/T_Order"}>ส่งความต้องการพัฒนาผลิตภัณฑ์</button>
+                    <button onClick={() => window.location.href="/T_Order/trace"}>ติดตามการพัฒนาผลิตภัณฑ์</button>
                 </div>
-                {this.render_page(this.state.page)}
+                {this.render_page(page)}
             </div>
         )
     }
