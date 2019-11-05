@@ -72,6 +72,7 @@ function App() {
       <Route exact path='/' component={Home} />
       <Route exact path='/Defalut' component={Defalut}/>
       <Route exact path='/T_Cart' component={T_Cart} />
+      <Route exact path='/T_Order/:DD' component={T_Order} />
       <Route exact path='/T_Order' component={T_Order} />
       <Route exact path='/Product' component={Product} />
       <Route exact path='/Product/:productID' component={ProductDetail} />

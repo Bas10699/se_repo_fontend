@@ -22,23 +22,7 @@ class User extends Component {
             email: '',
             phone: '',
             address: '',
-            order: [
-                {
-                    name_order: "ยาสมุนไพรลดความอ้วน",
-                    status: "0",
-                    detial_order: "สมุนไพรที่ช่วยขับเหงื่อ มีฤทธิ์ร้อน กระตุ้นให้หิวน้ำ"
-                },
-                {
-                    name_order: "อาหารคลีน",
-                    status: "0",
-                    detial_order: "เน้นผัก รสชาติอร่อย ไม่มีน้ำตาลเเต่มีความหวาน ชงดื่มได้"
-                },
-                {
-                    name_order: "นมเพิ่มความสูง",
-                    status: "1",
-                    detial_order: "วัตถุดิบที่เพิ่มเเคลเซียมเยอะๆ กินง่าย ชงดื่มได้ทั้งร้อนเเละเย็น"
-                }
-            ],
+            order: [],
             order_1: '',
             type_user: 1,
             bank_information: [],
@@ -103,7 +87,7 @@ class User extends Component {
 
     get_demand_tarder = async () => {
         try {
-            await get('trader/get_send_demand', user_token).then((result) => {
+            await get('trader/get_send_demand_personal', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
                         order: result.result

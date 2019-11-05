@@ -95,11 +95,35 @@ export default class ReactPagination extends React.Component {
       );
     }
   };
+  showEllipsisFirstPagi = () => {
+    // if (this.state.showEllipis) {
+      return (
+        <a>
+          <li>...</li>
+        </a>
+      );
+    // }
+  };
   isactive = currentPage => {
     if (this.props.currentPage == currentPage) {
       return true;
     }
     return false;
+  };
+  showFirstPagi = () => {
+    // if (this.props.currentPage !== this.props.totalPages) {
+      return (
+        <a
+          // className={this.isactive(1) ? "is-active" : ""}
+          onClick={() => {
+            this.changeCurrentPage(1);
+          }}
+        >
+          <li>{1}</li>
+          
+        </a>
+      );
+    // }
   };
   showLastPagi = () => {
     if (this.props.currentPage !== this.props.totalPages) {
@@ -154,25 +178,27 @@ export default class ReactPagination extends React.Component {
               );
             })
           ) : (
-            <React.Fragment>
-              {this.state.firstThreeArray.map((no, index) => {
-                return (
-                  <a
-                    key={index}
-                    className={this.isactive(no) ? "is-active" : ""}
-                    onClick={() => {
-                      this.changeCurrentPage(no);
-                    }}
-                  >
-                    <li>{no}</li>
-                  </a>
-                );
-              })}
-              {this.showEllipsis()}
+              <React.Fragment>
+                {this.props.currentPage <3 ? null : this.showFirstPagi()}
+                {this.props.currentPage <3 ? null : this.showEllipsisFirstPagi()}
+                {this.state.firstThreeArray.map((no, index) => {
+                  return (
+                    <a
+                      key={index}
+                      className={this.isactive(no) ? "is-active" : ""}
+                      onClick={() => {
+                        this.changeCurrentPage(no);
+                      }}
+                    >
+                      <li>{no}</li>
+                    </a>
+                  );
+                })}
+                {this.showEllipsis()}
 
-              {this.showLastPagi()}
-            </React.Fragment>
-          )}
+                {this.showLastPagi()}
+              </React.Fragment>
+            )}
           {this.showNext()}
         </ul>
       </div>
