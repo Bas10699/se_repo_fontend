@@ -131,7 +131,7 @@ class S_OrderDetail extends Component {
                         plants: result.result,
                         search_order: result.result
                     })
-
+                    // console.log('get_farmer_se',result.result)
                 }
                 else {
                     alert(result.error_message)
@@ -168,6 +168,7 @@ class S_OrderDetail extends Component {
         this.state.check_array.map((element) => {
 
             selectFarmer.push({
+                farmer_id: farmer[element.check].farmer_id,
                 title_name: farmer[element.check].title_name,
                 first_name: farmer[element.check].first_name,
                 last_name: farmer[element.check].last_name,

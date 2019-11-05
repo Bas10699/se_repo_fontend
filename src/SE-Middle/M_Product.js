@@ -254,6 +254,7 @@ class ProductDetail extends Component {
                 se.push({
                     plant: ele.plant,
                     name: ele_se.name,
+                    id_name:ele_se.id_name,
                     amount: 0
                 })
             })
@@ -623,12 +624,12 @@ class ProductDetail extends Component {
                                                             <input type="number" style={{ marginTop: "0px" }}
                                                                 name="quantity" min="1"
                                                                 id={index} placeholder="จำนวนที่ต้องการสั่งซื้อ"
-                                                                value={option_element.amount}
+                                                                // value={option_element.amount}
                                                                 onChange={this.handleChange_se} /> :
                                                             <input type="number" style={{ marginTop: "0px" }}
                                                                 name="quantity" min="1"
                                                                 id={index} placeholder="จำนวนที่ต้องการสั่งซื้อ"
-                                                                value={option_element.amount}
+                                                                value=''
                                                                 onChange={this.handleChange_se} disabled />
                                                     }
                                                     {/* + ราคาขนส่ง */}
