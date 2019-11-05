@@ -85,8 +85,8 @@ class T_Order extends Component {
                                     <h4>สารอาหารที่เลือก</h4>
                                     <table>
                                         <tr>
-                                            <td>{this.state.resear_name}</td>
-                                            <td style={{ float: "right" }}><button className="BTN_Cencle">ลบ</button></td>
+                                            <td>{this.state.resear_name}<button style={{float:"right"}} className="BTN_Cencle">ลบ</button></td>
+                                            {/* <td style={{ float: "right" }}></td> */}
                                         </tr>
                                     </table>
                                 </div>

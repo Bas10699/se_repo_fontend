@@ -7,23 +7,23 @@ import { get, post } from '../../Support/Service';
 import Modal from 'react-responsive-modal';
 import Checkbox from '../M_Research/Checkbox_R'
 
-const researcher = [
-    {
-        name: "ดร.จำปา ดอกจำปี",
-        skill: 'นักพัฒนาผลิตภัณฑ์ทางเกษตร',
-        stock: '10 ชิ้น',      
-    },
-    {
-        name: "ดร.ฉลาม ไม่กินเนื้อ",
-        skill: 'นักพัฒนาผลิตภัณฑ์ทางทะเล',
-        stock: '0 ชิ้น',      
-    },
-    {
-        name: "ดร.สำอางค์ คนสวย",
-        skill: 'นักพัฒนาผลิตภัณฑ์ทางเครื่องสำงอางค์',
-        stock: '5 ชิ้น',      
-    }
-]
+// const researcher = [
+//     {
+//         name: "ดร.จำปา ดอกจำปี",
+//         skill: 'นักพัฒนาผลิตภัณฑ์ทางเกษตร',
+//         stock: '10 ชิ้น',      
+//     },
+//     {
+//         name: "ดร.ฉลาม ไม่กินเนื้อ",
+//         skill: 'นักพัฒนาผลิตภัณฑ์ทางทะเล',
+//         stock: '0 ชิ้น',      
+//     },
+//     {
+//         name: "ดร.สำอางค์ คนสวย",
+//         skill: 'นักพัฒนาผลิตภัณฑ์ทางเครื่องสำงอางค์',
+//         stock: '5 ชิ้น',      
+//     }
+// ]
 
 class M_R_Order extends Component {
     constructor(props) {
@@ -32,12 +32,41 @@ class M_R_Order extends Component {
             get_demand: [],
             check_array:[],
             open:false,
-
+            researcher:[],
+            date:"",
         }
     }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
     componentWillMount() {
         this.get_demand()
+        this.get_reaearcher()
     }
+
+    get_reaearcher = async () => {
+        try {
+            await get('neutrally/get_name_researcher',user_token).then((result) => {
+                if(result.success){
+                    this.setState({
+                        researcher:result.result
+                    })
+                    console.log("get_reaearcher",result.result)
+                }
+                else{
+                    alert(result.error_message)
+                }
+            })
+            
+        } catch (error) {
+            alert('get_reaearcher' + error)
+        }
+    }
+
     get_demand = async () => {
         try {
             await get('researcher/get_demand_trader_all', user_token).then((result) => {
@@ -61,6 +90,11 @@ class M_R_Order extends Component {
         this.setState({ open: false });
 
     };
+
+    send_data = () => {
+        console.log("send_data",this.state.date+" : "+this.state.check_array)
+        this.setState({open:false})
+    }
 
     render() {
         return (
@@ -90,7 +124,7 @@ class M_R_Order extends Component {
                                         <td>{element.product_name}</td>
                                         <td></td>
                                         <td><button onClick={()=>this.setState({ open: true })}>เลือกนักวิจัย</button></td>
-                                        <td>{this.state.check_array} </td>
+                                        <td>{this.state.check_array}</td>
                                         <td>ตกลง : ยกเลิก</td>
                                         
                                     </tr>
@@ -111,9 +145,9 @@ class M_R_Order extends Component {
                         <div className="col-12">
                             
                             <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา [ชื่อผลิตภัณฑ์]</h3>
-                            กำหนดวันที่ต้องการ <input type="date"/>
+                            กำหนดวันที่ต้องการ <input type="date" id="date" onChange={this.handleChange}/>
                             <Checkbox
-                                    option={researcher}
+                                    option={this.state.researcher}
                                     check_array={this.state.check_array}
                                     return_func={(event) => {
                                         console.log('event', event)
@@ -122,7 +156,7 @@ class M_R_Order extends Component {
                                         })
                                     }} />
                                     
-                                    <button onClick={()=>this.onCloseModal()}>ยืนยัน</button>
+                                    <button onClick={()=>this.send_data()}>ยืนยัน</button>
                         </div>
                     </div>
                     
