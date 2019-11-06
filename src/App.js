@@ -59,6 +59,8 @@ import M_Farmer from './SE-Middle/M_Farmer';
 import M_Default from './SE-Middle/M_Default';
 import Defalut from './Admin/Defalut';
 
+import S_Summary from './SE-Sub/S_Summary'
+
 function App() {
   return (
     <Router exact path="/">
@@ -96,6 +98,7 @@ function App() {
       <Route exact path='/S_skill_farmer' component={S_skill_farmer} />
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail} />
       <Route exact path='/S_Certified' component={S_Certified} />
+      <Route exact path='/S_Summary' component={S_Summary}/>
 
       <Route exact path='/M_Plan' component={M_Plan} />
       <Route exact path='/M_Data' component={M_Data}/>

@@ -162,7 +162,7 @@ class Navbar extends Component {
 
                                 <li><NavLink exact to="/S_Certified" activeClassName="Active" className="NavbarText">มาตรฐาน</NavLink></li>
                                 <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อ</NavLink></li>
-                                <li><NavLink exact to="/T_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
+                                <li><NavLink exact to="/S_Summary" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
 
 
                                 <li><NavLink exact to="/S_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li>
