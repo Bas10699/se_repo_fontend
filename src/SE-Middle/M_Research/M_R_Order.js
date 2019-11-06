@@ -6,6 +6,7 @@ import { user_token } from '../../Support/Constance';
 import { get, post } from '../../Support/Service';
 import Modal from 'react-responsive-modal';
 import Checkbox from '../M_Research/Checkbox_R'
+import folder from '../../Image/folder.png'
 
 // const researcher = [
 //     {
@@ -30,10 +31,13 @@ class M_R_Order extends Component {
         super(props)
         this.state = {
             get_demand: [],
-            check_array:[],
-            open:false,
-            researcher:[],
-            date:"",
+            check_array: [],
+            open: false,
+            researcher: [],
+            date: "",
+            show_data: false,
+            setdata: [],
+            nutrient: [],
         }
     }
 
@@ -50,18 +54,18 @@ class M_R_Order extends Component {
 
     get_reaearcher = async () => {
         try {
-            await get('neutrally/get_name_researcher',user_token).then((result) => {
-                if(result.success){
+            await get('neutrally/get_name_researcher', user_token).then((result) => {
+                if (result.success) {
                     this.setState({
-                        researcher:result.result
+                        researcher: result.result
                     })
-                    console.log("get_reaearcher",result.result)
+                    console.log("get_reaearcher", result.result)
                 }
-                else{
+                else {
                     alert(result.error_message)
                 }
             })
-            
+
         } catch (error) {
             alert('get_reaearcher' + error)
         }
@@ -74,10 +78,10 @@ class M_R_Order extends Component {
                     this.setState({
                         get_demand: result.result
                     })
-                    console.log(result.result)
+                    console.log("get_demand", result.result)
                 }
                 else {
-                    alert(result.error_message)
+                    alert("get_demand", result.error_message)
                 }
             })
         }
@@ -87,16 +91,26 @@ class M_R_Order extends Component {
     }
 
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, show_data: false });
 
     };
 
     send_data = () => {
-        console.log("send_data",this.state.date+" : "+this.state.check_array)
-        this.setState({open:false})
+        console.log("send_data", this.state.date + " : " + this.state.check_array)
+        this.setState({ open: false })
+    }
+
+    show = (element) => {
+        this.setState({
+            show_data: true,
+            setdata: element,
+            nutrient: element.nutrient
+        })
+        console.log("show", element)
     }
 
     render() {
+        let setdata = this.state.setdata
         return (
             <div className="App">
                 <div className="Row">
@@ -117,18 +131,19 @@ class M_R_Order extends Component {
                                 <th>นักวิจัยยืนยัน</th>
                             </tr>
 
-                            {this.state.get_demand.map((element) => {
+                            {this.state.get_demand.map((element, index) => {
                                 return (
-                                    <tr style={{textAlign:"center"}}>
-                                        <td>trader 1</td>
+                                    <tr style={{ textAlign: "center" }}>
+                                        <td>{element.trader_id}</td>
                                         <td>{element.product_name}</td>
-                                        <td></td>
-                                        <td><button onClick={()=>this.setState({ open: true })}>เลือกนักวิจัย</button></td>
-                                        <td>{this.state.check_array}</td>
+                                        <td><img src={folder} style={{ width: "25px", cursor: "pointer" }} alt="ข้อมูล" onClick={() => this.show(element)} /></td>
+                                        <td style={{textAlign:"center"}}><button onClick={() => this.setState({ open: true })} className="BTN_Signin" 
+                                        style={{float:"left",marginLeft:"23%",marginTop:"0"}}>เลือกนักวิจัย</button></td>
+                                        <td>{this.state.check_array+"\n"}</td>
                                         <td>ตกลง : ยกเลิก</td>
-                                        
+
                                     </tr>
-                                    
+
                                 )
                             })}
 
@@ -143,26 +158,51 @@ class M_R_Order extends Component {
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12">
-                            
+
                             <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา [ชื่อผลิตภัณฑ์]</h3>
-                            กำหนดวันที่ต้องการ <input type="date" id="date" onChange={this.handleChange}/>
+                            กำหนดวันที่ต้องการ <input type="date" id="date" onChange={this.handleChange} />
                             <Checkbox
-                                    option={this.state.researcher}
-                                    check_array={this.state.check_array}
-                                    return_func={(event) => {
-                                        console.log('event', event)
-                                        this.setState({
-                                            check_array: event
-                                        })
-                                    }} />
-                                    
-                                    <button onClick={()=>this.send_data()}>ยืนยัน</button>
+                                option={this.state.researcher}
+                                check_array={this.state.check_array}
+                                return_func={(event) => {
+                                    console.log('event', event)
+                                    this.setState({
+                                        check_array: event
+                                    })
+                                }} />
+
+                            <button onClick={() => this.send_data()} className="BTN_Signin">ยืนยัน</button>
                         </div>
                     </div>
-                    
+
                 </Modal>
 
-            </div>
+
+                <Modal open={this.state.show_data} onClose={this.onCloseModal}>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-12">
+
+                            <h3 style={{ textAlign: "center" }}>รายละเอียด {setdata.product_name}</h3>
+                            <table>
+                                <tr>
+                                   
+                                        <th style={{width:"30%"}}>สารอาหารที่ต้องการ</th>
+                                        <td>{this.state.nutrient.map((e) => {
+                                            return (<p>{e}</p>)
+                                        })}</td>
+                                </tr>
+                                <tr>
+                                    <th>จำนวนผลิตภัณฑ์</th>
+                                    <td><h4 style={{margin:"0"}}>{setdata.volume} {setdata.volume_type}</h4></td>
+                                </tr>
+                            </table>
+                            <button className="BTN_Signin" onClick={this.onCloseModal}>ปิดหน้าต่างนี้</button>
+                        </div>
+                    </div>
+
+                </Modal>
+
+            </div >
         )
     }
 } export default M_R_Order;
