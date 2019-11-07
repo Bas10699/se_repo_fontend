@@ -38,6 +38,7 @@ class M_R_Order extends Component {
             show_data: false,
             setdata: [],
             nutrient: [],
+            name_product:null,
         }
     }
 
@@ -95,9 +96,32 @@ class M_R_Order extends Component {
 
     };
 
-    send_data = () => {
-        console.log("send_data", this.state.date + " : " + this.state.check_array)
-        this.setState({ open: false })
+    send_data = async () => {
+        let check = this.state.check_array
+        let resear = this.state.researcher
+        let data = []
+        check.map((element)=>{
+            data.push(
+                resear[element]
+            )
+        })
+        
+        let obj = {
+            data: data,
+            date:this.state.date
+        }
+        console.log(obj)
+        try{
+            await post(obj,'neutrally/update_name_resercher_damand',user_token).then((result)=>{
+                if(result.success){
+                    alert('GG')
+                }
+            })
+        }
+        catch(error){
+            alert('send: '+error)
+        }
+        // this.setState({ open: false })
     }
 
     show = (element) => {
@@ -137,7 +161,7 @@ class M_R_Order extends Component {
                                         <td>{element.trader_id}</td>
                                         <td>{element.product_name}</td>
                                         <td><img src={folder} style={{ width: "25px", cursor: "pointer" }} alt="ข้อมูล" onClick={() => this.show(element)} /></td>
-                                        <td style={{textAlign:"center"}}><button onClick={() => this.setState({ open: true })} className="BTN_Signin" 
+                                        <td style={{textAlign:"center"}}><button onClick={() => this.setState({ open: true,name_product:element.product_name })} className="BTN_Signin" 
                                         style={{float:"left",marginLeft:"23%",marginTop:"0"}}>เลือกนักวิจัย</button></td>
                                         <td>{this.state.check_array+"\n"}</td>
                                         <td>ตกลง : ยกเลิก</td>
@@ -159,7 +183,7 @@ class M_R_Order extends Component {
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12">
 
-                            <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา [ชื่อผลิตภัณฑ์]</h3>
+                            <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา {this.state.name_product}</h3>
                             กำหนดวันที่ต้องการ <input type="date" id="date" onChange={this.handleChange} />
                             <Checkbox
                                 option={this.state.researcher}

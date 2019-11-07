@@ -65,13 +65,13 @@ class Checkbox extends Component {
                         this.props.option.map((option_element, index) => {
                             return (
                                 <tr>
-                                    <td><input type="checkbox" value={option_element.name+"\n"} 
+                                    <td><input type="checkbox" value={index} 
                                     id='check'
                                         onClick={(event) => { this.onCheck(event) }} />
                                     {index + 1} .</td>
-                                    <td>{option_element.name}</td>
+                                    <td>{option_element.name} {option_element.last_name}</td>
                                     <td>{option_element.skill}</td>
-                                    <td>{option_element.stock}</td>
+                                    <td>{option_element.count_pro_resear}</td>
                                 </tr>
                             )
                         })
