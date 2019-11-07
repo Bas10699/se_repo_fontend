@@ -233,7 +233,7 @@ class S_Plan extends Component {
                         <div className="col-1"></div>
                         <div className="col-10">
 
-                            <table>
+                            <table style={{textAlign:"center"}}>
                                 <tr>
                                     <th>ชื่อวัตถุดิบ</th>
                                     <th>จำนวนที่มีอยู่ในสต๊อก</th>
