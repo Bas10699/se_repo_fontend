@@ -298,7 +298,7 @@ class S_OrderDetail extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_trader_id} </h2>
+                        <h2 style={{ textAlign: "center" }}>ใบสั่งซื้อเลขที่ {this.state.order.order_se_id} </h2>
                     </div>
                 </div>
 
@@ -362,7 +362,7 @@ class S_OrderDetail extends Component {
                                     {this.state.order_farmer.map((element, index) => {
                                         return (
                                             <tr>
-                                                <td>{index + 1}. {element.order_farmer_title_name} {element.order_farmer_name} {element.order_farmer_last_name}
+                                                <td>{index + 1}. {element.order_farmer_title_name}{element.order_farmer_name} {element.order_farmer_lastname}
                                                 </td>
                                                 <td>จำนวน {element.order_farmer_plant_volume} กิโลกรัม</td>
                                                 <td><S_BillFarmerPdf data={element} /></td>
