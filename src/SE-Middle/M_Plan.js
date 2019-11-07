@@ -112,31 +112,6 @@ class M_Plan extends Component {
         }
     }
 
-
-    get_plant = async () => {
-        try {
-            await get('neutrally/get_plant_all_se', user_token).then((result) => {
-                if (result.success) {
-                    this.setState({
-                        get_se: result.result,
-                        se_name: result.result[0].se_name,
-                        plants: result.result[0].plant,
-                        data_month: result.result[0].plant[0].data
-
-                    })
-                    console.log('get_plant', result.result)
-                }
-                else {
-                    alert(result.error_message)
-                }
-            })
-
-        } catch (error) {
-            alert('get_plant: ' + error)
-
-        }
-    }
-
    addPlant = async (plant) => {
         let dataplan = {
             plant: plant,
@@ -214,15 +189,19 @@ class M_Plan extends Component {
                                     <tr>
                                         <th>ชื่อวัตถุดิบ</th>
                                         <th>จำนวนที่สั่งซื้อ</th>
+                                        <th>จำนวนที่มีอยู่ในคลัง</th>
                                         <th>วัตถุดิบขาด</th>
                                         <th>วางแผน</th>
                                     </tr>
                                     {this.state.name_plant.map((element, index) => {
+                                        let want = (element.amount_want*1)-(element.amount_stock*1)
                                         return (
                                             <tr style={{ textAlign: "center" }}>
-                                                <td>{element}</td>
-                                                <td>0</td>
-                                                <td>0</td>
+                                                <td>{element.plant_name}</td>
+                                                <td>{element.amount_want}</td>
+                                                <td>{element.amount_stock}</td>
+                                                {want<0 ? <td>0</td>:<td>{want*1}</td>}
+                                                
                                                 <td><button onClick={() => this.comfirmPlan(element)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
                                             </tr>
                                         )

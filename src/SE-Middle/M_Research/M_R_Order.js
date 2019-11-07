@@ -8,23 +8,6 @@ import Modal from 'react-responsive-modal';
 import Checkbox from '../M_Research/Checkbox_R'
 import folder from '../../Image/folder.png'
 
-// const researcher = [
-//     {
-//         name: "ดร.จำปา ดอกจำปี",
-//         skill: 'นักพัฒนาผลิตภัณฑ์ทางเกษตร',
-//         stock: '10 ชิ้น',      
-//     },
-//     {
-//         name: "ดร.ฉลาม ไม่กินเนื้อ",
-//         skill: 'นักพัฒนาผลิตภัณฑ์ทางทะเล',
-//         stock: '0 ชิ้น',      
-//     },
-//     {
-//         name: "ดร.สำอางค์ คนสวย",
-//         skill: 'นักพัฒนาผลิตภัณฑ์ทางเครื่องสำงอางค์',
-//         stock: '5 ชิ้น',      
-//     }
-// ]
 
 class M_R_Order extends Component {
     constructor(props) {
