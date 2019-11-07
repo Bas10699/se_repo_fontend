@@ -53,11 +53,11 @@ class Checkbox extends Component {
 
         return (
             <div>
-                <table>
+                <table style={{textAlign:"center"}}>
                     <tr>
                         <th>ลำดับ</th>
                         <th>ชื่อ - นามสกุล</th>
-                        <th>ความสามารถ</th>
+                        {/* <th>ความสามารถ</th> */}
                         <th>กำลังพัฒนาผลิตภัณฑ์</th>
                     </tr>
 
@@ -65,12 +65,12 @@ class Checkbox extends Component {
                         this.props.option.map((option_element, index) => {
                             return (
                                 <tr>
-                                    <td><input type="checkbox" value={index} 
+                                    <td><input type="checkbox" value={option_element.name} 
                                     id='check'
                                         onClick={(event) => { this.onCheck(event) }} />
                                     {index + 1} .</td>
-                                    <td>{option_element.name} {option_element.last_name}</td>
-                                    <td>{option_element.skill}</td>
+                                    <td style={{textAlign:"left"}}>{option_element.name} {option_element.last_name}</td>
+                                    {/* <td>{option_element.skill}</td> */}
                                     <td>{option_element.count_pro_resear}</td>
                                 </tr>
                             )

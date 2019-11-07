@@ -81,15 +81,15 @@ class M_R_Order extends Component {
     };
 
     send_data = async () => {
+        this.setState({ open: false, show_data: false });
         let check = this.state.check_array
         let resear = this.state.researcher
         let data = []
-        check.map((element)=>{
+        check.map((element) => {
             data.push(
                 resear[element]
             )
         })
-        
         let obj = {
             data: data,
             product_id:this.state.id_product,
@@ -103,8 +103,8 @@ class M_R_Order extends Component {
                 }
             })
         }
-        catch(error){
-            alert('send: '+error)
+        catch (error) {
+            alert('send: ' + error)
         }
         // this.setState({ open: false })
     }
@@ -116,6 +116,21 @@ class M_R_Order extends Component {
             nutrient: element.nutrient
         })
         console.log("show", element)
+    }
+
+    render_comfirm = (status) => {
+        let return_comfirm
+        switch (status) {
+            case 0: return_comfirm = "รอคำตอบรับ"
+                break;
+            case 1: return_comfirm = "ตกลง"
+                break;
+            case 2: return_comfirm = "ยกเลิก"
+                break;
+            default: return_comfirm = "เกิดดข้อผิดพลาด"
+                break;
+        }
+        return return_comfirm
     }
 
     render() {
@@ -194,15 +209,15 @@ class M_R_Order extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียด {setdata.product_name}</h3>
                             <table>
                                 <tr>
-                                   
-                                        <th style={{width:"30%"}}>สารอาหารที่ต้องการ</th>
-                                        <td>{this.state.nutrient.map((e) => {
-                                            return (<p>{e}</p>)
-                                        })}</td>
+
+                                    <th style={{ width: "30%" }}>สารอาหารที่ต้องการ</th>
+                                    <td>{this.state.nutrient.map((e) => {
+                                        return (<p>{e}</p>)
+                                    })}</td>
                                 </tr>
                                 <tr>
                                     <th>จำนวนผลิตภัณฑ์</th>
-                                    <td><h4 style={{margin:"0"}}>{setdata.volume} {setdata.volume_type}</h4></td>
+                                    <td><h4 style={{ margin: "0" }}>{setdata.volume} {setdata.volume_type}</h4></td>
                                 </tr>
                             </table>
                             <button className="BTN_Signin" onClick={this.onCloseModal}>ปิดหน้าต่างนี้</button>
