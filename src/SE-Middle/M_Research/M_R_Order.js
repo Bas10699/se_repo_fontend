@@ -21,7 +21,7 @@ class M_R_Order extends Component {
             show_data: false,
             setdata: [],
             nutrient: [],
-            name_product:null,
+            name_product: null,
         }
     }
 
@@ -80,29 +80,29 @@ class M_R_Order extends Component {
     };
 
     send_data = async () => {
+        this.setState({ open: false, show_data: false });
         let check = this.state.check_array
         let resear = this.state.researcher
         let data = []
-        check.map((element)=>{
+        check.map((element) => {
             data.push(
                 resear[element]
             )
         })
-        
         let obj = {
             data: data,
-            date:this.state.date
+            date: this.state.date
         }
         console.log(obj)
-        try{
-            await post(obj,'neutrally/update_name_resercher_damand',user_token).then((result)=>{
-                if(result.success){
+        try {
+            await post(obj, 'neutrally/update_name_resercher_damand', user_token).then((result) => {
+                if (result.success) {
                     alert('GG')
                 }
             })
         }
-        catch(error){
-            alert('send: '+error)
+        catch (error) {
+            alert('send: ' + error)
         }
         // this.setState({ open: false })
     }
@@ -114,6 +114,21 @@ class M_R_Order extends Component {
             nutrient: element.nutrient
         })
         console.log("show", element)
+    }
+
+    render_comfirm = (status) => {
+        let return_comfirm
+        switch (status) {
+            case 0: return_comfirm = "รอคำตอบรับ"
+                break;
+            case 1: return_comfirm = "ตกลง"
+                break;
+            case 2: return_comfirm = "ยกเลิก"
+                break;
+            default: return_comfirm = "เกิดดข้อผิดพลาด"
+                break;
+        }
+        return return_comfirm
     }
 
     render() {
@@ -144,10 +159,10 @@ class M_R_Order extends Component {
                                         <td>{element.trader_id}</td>
                                         <td>{element.product_name}</td>
                                         <td><img src={folder} style={{ width: "25px", cursor: "pointer" }} alt="ข้อมูล" onClick={() => this.show(element)} /></td>
-                                        <td style={{textAlign:"center"}}><button onClick={() => this.setState({ open: true,name_product:element.product_name })} className="BTN_Signin" 
-                                        style={{float:"left",marginLeft:"23%",marginTop:"0"}}>เลือกนักวิจัย</button></td>
-                                        <td>{this.state.check_array+"\n"}</td>
-                                        <td>ตกลง : ยกเลิก</td>
+                                        <td style={{ textAlign: "center" }}><button onClick={() => this.setState({ open: true, name_product: element.product_name })} className="BTN_Signin"
+                                            style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>เลือกนักวิจัย</button></td>
+                                        <td>{this.state.check_array + "\n"}</td>
+                                        <td>{this.render_comfirm(0)}</td>
 
                                     </tr>
 
@@ -192,15 +207,15 @@ class M_R_Order extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียด {setdata.product_name}</h3>
                             <table>
                                 <tr>
-                                   
-                                        <th style={{width:"30%"}}>สารอาหารที่ต้องการ</th>
-                                        <td>{this.state.nutrient.map((e) => {
-                                            return (<p>{e}</p>)
-                                        })}</td>
+
+                                    <th style={{ width: "30%" }}>สารอาหารที่ต้องการ</th>
+                                    <td>{this.state.nutrient.map((e) => {
+                                        return (<p>{e}</p>)
+                                    })}</td>
                                 </tr>
                                 <tr>
                                     <th>จำนวนผลิตภัณฑ์</th>
-                                    <td><h4 style={{margin:"0"}}>{setdata.volume} {setdata.volume_type}</h4></td>
+                                    <td><h4 style={{ margin: "0" }}>{setdata.volume} {setdata.volume_type}</h4></td>
                                 </tr>
                             </table>
                             <button className="BTN_Signin" onClick={this.onCloseModal}>ปิดหน้าต่างนี้</button>

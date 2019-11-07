@@ -195,7 +195,7 @@ class M_Plan extends Component {
                                                 <td>{element.plant_name}</td>
                                                 <td>{element.amount_want}</td>
                                                 <td>{element.amount_stock}</td>
-                                                {want < 0 ? <td>0</td> : <td>{want * 1}</td>}
+                                                {want <= 0 ? <td style={{color:"green"}}>วัตถุดิบเพียงพอ</td> : <td>{want * 1}</td>}
 
                                                 <td><button onClick={() => this.comfirmPlan(element.plant_name)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
                                             </tr>
