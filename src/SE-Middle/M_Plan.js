@@ -167,13 +167,6 @@ class M_Plan extends Component {
         })
     }
 
-
-    changeCurrentPage = numPage => {
-        this.setState({ currentPage: numPage });
-        //fetch a data
-        //or update a query to get data
-    };
-
     render() {
 
         let reander_plan = (click) => {
