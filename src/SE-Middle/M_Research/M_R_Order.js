@@ -22,6 +22,7 @@ class M_R_Order extends Component {
             setdata: [],
             nutrient: [],
             name_product:null,
+            id_product:null
         }
     }
 
@@ -91,13 +92,14 @@ class M_R_Order extends Component {
         
         let obj = {
             data: data,
+            product_id:this.state.id_product,
             date:this.state.date
         }
         console.log(obj)
         try{
             await post(obj,'neutrally/update_name_resercher_damand',user_token).then((result)=>{
                 if(result.success){
-                    alert('GG')
+                    window.location.href='/M_Demand/M_R_Trace'
                 }
             })
         }
@@ -144,7 +146,7 @@ class M_R_Order extends Component {
                                         <td>{element.trader_id}</td>
                                         <td>{element.product_name}</td>
                                         <td><img src={folder} style={{ width: "25px", cursor: "pointer" }} alt="ข้อมูล" onClick={() => this.show(element)} /></td>
-                                        <td style={{textAlign:"center"}}><button onClick={() => this.setState({ open: true,name_product:element.product_name })} className="BTN_Signin" 
+                                        <td style={{textAlign:"center"}}><button onClick={() => this.setState({ open: true,name_product:element.product_name,id_product:element.product_id })} className="BTN_Signin" 
                                         style={{float:"left",marginLeft:"23%",marginTop:"0"}}>เลือกนักวิจัย</button></td>
                                         <td>{this.state.check_array+"\n"}</td>
                                         <td>ตกลง : ยกเลิก</td>
