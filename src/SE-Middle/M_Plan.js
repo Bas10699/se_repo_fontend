@@ -66,10 +66,10 @@ class M_Plan extends Component {
         try {
             await get('neutrally/get_plant_name', user_token).then((result) => {
                 if (result.success) {
-                    this.setState({ 
+                    this.setState({
                         name_plant: result.result,
                         loading: false
-                     })
+                    })
                     console.log('get_allplant', result.result)
                 }
                 else {
@@ -83,16 +83,18 @@ class M_Plan extends Component {
         }
     }
 
+
     comfirmPlan = async (plant) => {
-        this.setState({
-            open: true,
-            selectPlant: plant
-        })
+       
         let data = {
             name_plant: plant,
             check_array: this.state.check_array,
             date: this.state.date,
         }
+        this.setState({
+            open: true,
+            selectPlant: plant
+        })
         console.log("data", data)
         try {
             await post(data, 'neutrally/get_plant_volume_all_se', user_token).then((result) => {
@@ -103,16 +105,16 @@ class M_Plan extends Component {
                 }
 
                 else {
-                    alert(result.error_message)
+                    alert('comfirmPlan', result.error_message)
                 }
             })
         }
         catch (error) {
-            alert('addplant: ' + error)
+            alert('comfirmPlan: ' + error)
         }
     }
 
-   addPlant = async (plant) => {
+    addPlant = async (plant) => {
         let dataplan = {
             plant: plant,
             check_array: this.state.check_array,
@@ -187,15 +189,15 @@ class M_Plan extends Component {
                                         <th>วางแผน</th>
                                     </tr>
                                     {this.state.name_plant.map((element, index) => {
-                                        let want = (element.amount_want*1)-(element.amount_stock*1)
+                                        let want = (element.amount_want * 1) - (element.amount_stock * 1)
                                         return (
                                             <tr style={{ textAlign: "center" }}>
                                                 <td>{element.plant_name}</td>
                                                 <td>{element.amount_want}</td>
                                                 <td>{element.amount_stock}</td>
-                                                {want<0 ? <td>0</td>:<td>{want*1}</td>}
-                                                
-                                                <td><button onClick={() => this.comfirmPlan(element)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
+                                                {want < 0 ? <td>0</td> : <td>{want * 1}</td>}
+
+                                                <td><button onClick={() => this.comfirmPlan(element.plant_name)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
                                             </tr>
                                         )
                                     })}
@@ -317,7 +319,7 @@ class M_Plan extends Component {
         return (
             <div>
                 {this.state.loading ?
-                    <div><div className="loader"></div><h5 style={{textAlign:'center', marginTop:'28%'}}>กำลังโหลด...</h5></div>
+                    <div><div className="loader"></div><h5 style={{ textAlign: 'center', marginTop: '28%' }}>กำลังโหลด...</h5></div>
                     : <div className="App">
                         <div className="Row">
                             <div className="col-12">
