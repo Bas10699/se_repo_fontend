@@ -136,7 +136,7 @@ class CheckboxMPlan extends Component {
                             let chInput = 0
                             return (
                                 <tr>
-                                    <td><input type="checkbox" value={option_element.se_name} id='check'
+                                    <td><input type="checkbox" value={option_element.se_id} id='check'
                                         // amount={true}
                                         onChange={() => this.check_input(index)}
                                         onClick={(event) => { this.onCheck(event) }} /> {index + 1} .
@@ -150,8 +150,8 @@ class CheckboxMPlan extends Component {
                                             }
 
                                         }),
-                                            chInput ? <input id='amount' name={option_element.se_name} onChange={this.handleChange} /> :
-                                                <input id='amount' name={option_element.se_name} value='' onChange={this.handleChange} disabled />
+                                            chInput ? <input id='amount' name={option_element.se_id} onChange={this.handleChange} /> :
+                                                <input id='amount' name={option_element.se_id} value='' onChange={this.handleChange} disabled />
                                         }
 
                                         &nbsp;กิโลกรัม

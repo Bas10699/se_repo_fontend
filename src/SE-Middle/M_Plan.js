@@ -125,7 +125,7 @@ class M_Plan extends Component {
         try {
             await post(dataplan, 'neutrally/add_year_round', user_token).then((result) => {
                 if (result.success) {
-                    window.location.reload()
+                    // window.location.reload()
                     this.setState({
                         open: false
                     })

@@ -23,7 +23,9 @@ class S_Plan extends Component {
             check_array: [],
             order_farmer: [],
             date: '',
-            selectPlant: null
+            selectPlant: null,
+            want: [],
+            show_data: [],
         }
     }
 
@@ -31,6 +33,7 @@ class S_Plan extends Component {
         this.get_skill_farmer()
         this.get_plant()
         this.get_order_plan()
+        this.get_planing_se_personal()
     }
 
     get_plant = async () => {
@@ -51,6 +54,23 @@ class S_Plan extends Component {
         } catch (error) {
             alert('get_plant: ' + error)
 
+        }
+    }
+
+    get_planing_se_personal = async () => {
+        try {
+            await get('neo_firm/get_planing_se_personal', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({ want: result.result })
+                    console.log('GGGGG', result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
         }
     }
 
@@ -112,6 +132,7 @@ class S_Plan extends Component {
     plants_se = (data) => {
         let disnict_plant = []
         let disnict_plant_sum = []
+        let want = this.state.want
         data.map((el, i) => {
             let index = disnict_plant.findIndex((find) => find === el.plant)
             if (index < 0) {
@@ -122,18 +143,26 @@ class S_Plan extends Component {
         })
         disnict_plant.map((ele_plant) => {
             let value = 0
+            let volume_want = 0
             data.map((ele_data) => {
                 if (ele_data.plant === ele_plant) {
                     value += ele_data.year_value
                 }
             })
+            want.map((ele_want) => {
+                if (ele_plant === ele_want.plant) {
+                    volume_want += ele_want.volume
+                }
+            })
+
             disnict_plant_sum.push({
                 plant: ele_plant,
-                year_value: value
+                year_value: value,
+                volume_want:volume_want
             })
         })
 
-
+        // console.log(disnict_plant_sum)
 
         return this.sort_plant(disnict_plant_sum)
     }
@@ -204,6 +233,7 @@ class S_Plan extends Component {
                         // check_array: result.result,
                         // data:result.result.date
                     })
+                    // this.show()
                     console.log("listfarmer func", result.result)
                 }
 
@@ -217,6 +247,29 @@ class S_Plan extends Component {
         }
     }
 
+    // show = () => {
+    //     let order_farmer = this.state.order_farmer
+    //     let want = this.state.want
+    //     let result = []
+    //     order_farmer.map((element) => {
+    //         let volume = 0
+    //         want.map((ele_want) => {
+    //             if (ele_want.plant == element.planing_farmer_plant) {
+    //                 volume += ele_want.volume
+    //             }
+    //         })
+    //         result.push({
+    //             ...element,
+    //             want: volume
+    //         })
+    //     })
+
+    //     this.setState({
+    //         show_data: result
+    //     })
+
+    // }
+
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
@@ -228,26 +281,29 @@ class S_Plan extends Component {
         switch (page) {
             case 1: return_page =
                 <div>
-                    
+
                     <div className="Row">
                         <div className="col-1"></div>
                         <div className="col-10">
 
-                            <table style={{textAlign:"center"}}>
+                            <table style={{ textAlign: "center" }}>
                                 <tr>
                                     <th>ชื่อวัตถุดิบ</th>
-                                    <th>จำนวนที่มีอยู่ในสต๊อก</th>
-                                    {/* <th>จำนวนที่สั่งซื้อ</th>
-                                    <th>วัตถุดิบขาด</th> */}
+                                    {/* <th>จำนวนที่มีอยู่ในสต๊อก</th> */}
+
+                                    <th>จำนวนที่สั่ง</th>
+                                    {/* <th>วัตถุดิบขาด</th> */}
+
                                     <th>วางแผน</th>
+
                                 </tr>
                                 {this.plants_se(this.state.plants).map((ele_plant, index) => {
                                     return (
                                         <tr>
                                             <td>{ele_plant.plant}</td>
-                                            <td>{addComma(ele_plant.year_value)}</td>
-                                            {/* <td></td>
-                                            <td></td> */}
+                                            {/* <td>{addComma(ele_plant.year_value)}</td> */}
+                                            <td>{ele_plant.volume_want}</td>
+                                            {/* <td></td> */}
                                             <td><button onClick={() => this.openModel(ele_plant.plant)}>วางแผน</button></td>
                                         </tr>
 
@@ -295,7 +351,7 @@ class S_Plan extends Component {
                         <div className="col-1"></div>
                         <div className="col-10">
                             <h4 style={{ textAlign: "center" }}>รายชื่อเกษตรกรที่เลือกปลูก</h4>
-                            {console.log("list fermer", this.state.order_farmer)}
+                            {/* {console.log("list fermer", this.state.order_farmer)} */}
 
                             <table>
                                 <tr>
@@ -348,9 +404,9 @@ class S_Plan extends Component {
                         <div className="tab">
                             <button onClick={() => { this.setState({ page: 1 }) }}>วางแผนการเพาะปลูกให้กับเกษตรกร</button>
                             <button onClick={() => { this.setState({ page: 2 }) }}>ติดตามการวางแผน</button>
-                            
-                            <input type="text" placeholder="ค้นหา" 
-                            style={{width:"40%",marginTop:"5px",marginLeft:"25px"}}/>
+
+                            <input type="text" placeholder="ค้นหา"
+                                style={{ width: "40%", marginTop: "5px", marginLeft: "25px" }} />
                         </div>
 
                     </div>
