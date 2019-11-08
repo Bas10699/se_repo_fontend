@@ -43,8 +43,10 @@ class M_R_Trace extends Component {
         super(props)
         this.state = {
             open: false,
-            formula:[],
-            get_demand:[],
+            formula: [],
+            get_demand: [],
+            open1: false,
+            open2:false,
 
         }
     }
@@ -54,11 +56,11 @@ class M_R_Trace extends Component {
     }
 
     open = (formula) => {
-        this.setState({ open: true,formula:formula })
+        this.setState({ open: true, formula: formula })
     }
 
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, open1: false,open2:false });
 
     };
 
@@ -153,21 +155,16 @@ class M_R_Trace extends Component {
                                 <th>ชื่อผลิตภัณฑ์</th>
                                 <th>ชื่อสูตร</th>
                                 <th>จำนวนที่สั่ง</th>
-                                <th>ราคาต่อชิ้น</th>
-                                <th>ราคาทั้งหมด</th>
-                                <th>รูป</th>
-                                <th>รายละเอียด</th>
+                                {/* <th>รายละเอียด</th> */}
                             </tr>
-                            {order.map((element, index) => {
+                            {this.state.get_demand.map((element, index) => {
                                 return (
                                     <tr>
-                                        <td>{element.name_order}</td>
-                                        <td>{element.formula}</td>
-                                        <td>{element.number}</td>
-                                        <td>{element.price}</td>
-                                        <td>{element.number * element.price}</td>
-                                        <td>รูป</td>
-                                        <td><button onClick={() => { this.open(element.formula) }}>รายละเอียด</button></td>
+                                        <td>{element.product_name}</td>
+                                        <td>{element.formula}<button onClick={() => { this.open() }}>กรองสูตร</button>
+                                        {element.formula}<button onClick={() => { this.setState({open2:true}) }}>สูตรผู้ประกอบการเลือก</button></td>
+                                        <td>{element.volume} {element.volume_type}</td>
+                                        {/* <td>ชื่อนักวิจัยที่รับผิดชอบ</td> */}
                                     </tr>
                                 )
                             })}
@@ -180,7 +177,7 @@ class M_R_Trace extends Component {
                     <div className="Row" style={{ width: "500px" }}>
                         <div className="col-11">
                             <h3 style={{ textAlign: "center" }}>รายละเอียด {this.state.formula}</h3>
-
+                            <h4>รับผิดชอบโดย ชื่อนักวิจัย</h4>
                         </div>
                         <div className="col-1" />
                     </div>
@@ -206,8 +203,63 @@ class M_R_Trace extends Component {
                             </table>
                         </div>
                     </div>
-                    <h4>ย้อนกลับ หมายเลขหน้าที่แสดง ถัดไป</h4> 
-                    <button onClick={() => this.onCloseModal()} className="BTN_CONFIRM" style={{float:"right"}}>เลือกสูตรผลิตภัณฑ์นี้</button>
+                    <h4>ย้อนกลับ หมายเลขหน้าที่แสดง ถัดไป</h4>
+                    <button onClick={() => this.onCloseModal()} className="BTN_CONFIRM" style={{ float: "right" }}>เลือกสูตรผลิตภัณฑ์นี้</button>
+                </Modal>
+
+
+
+
+                <Modal open={this.state.open1} onClose={this.onCloseModal}>
+                    <div className="Row" style={{ width: "500px" }}>
+                        <div className="col-11">
+                            <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยที่รับผิดชอบ</h3>
+
+                        </div>
+                        <div className="col-1" />
+                    </div>
+                    <div className="Row">
+                        <div className="col-12">
+                        </div>
+                    </div>
+                    <button onClick={() => this.setState({ open1: false })} className="BTN_CONFIRM" style={{ float: "right" }}>ปิดหน้าต่างนี้</button>
+                </Modal>
+
+                
+
+                <Modal open={this.state.open2} onClose={this.onCloseModal}>
+                    <div className="Row" style={{ width: "500px" }}>
+                        <div className="col-11">
+                            <h3 style={{ textAlign: "center" }}>สูตรที่เลือก ชื่อนักวิจัย</h3>
+
+                        </div>
+                        <div className="col-1" />
+                    </div>
+                    <div className="Row">
+                        <div className="col-12">
+                        <HighchartsReact highcharts={Highcharts} options={options} />
+                            <table style={{ textAlign: "center" }}>
+                                <tr>
+                                    <th colSpan="5">รายชื่อวัตถุดิบ</th>
+                                </tr>
+                                <tr>
+                                    <th>ชื่อพืช </th>
+                                    <th>จำนวน/หน่วย</th>
+                                    <th>ราคาเฉลี่ย</th>
+                                    <th>ราคารวมเฉลี่ย</th>
+                                    <th>สั่งซื้อ</th>
+                                </tr>
+                                <tr>
+                                    <td>ข้าวหอมมะลิ</td>
+                                    <td>95</td>
+                                    <td>3</td>
+                                    <td>285</td>
+                                    <td>สั่งซื้อสินค้า</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <button onClick={() => this.setState({ open2: false })} className="BTN_CONFIRM" style={{ float: "right" }}>ปิดหน้าต่างนี้</button>
                 </Modal>
             </div>
         )

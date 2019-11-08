@@ -38,7 +38,9 @@ class Confirm_Product extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            get_demand:[],
+            Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
         }
     }
 
@@ -63,12 +65,33 @@ class Confirm_Product extends Component {
 
     componentWillMount() {
         this.get_user()
+        this.get_demand()
     }
 
     handleChange = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.id]: e.target.value
         })
+    }
+
+    get_demand = async () => {
+        try {
+            await get('researcher/get_demand_personal', user_token).then((result) => {
+                if (result.success) {
+                    console.log("get_demand", result.result)
+                    this.setState({
+                        get_demand: result.result
+                    })
+                    setTimeout(() => {
+                        console.log("get_demand", result.result)
+                    }, 500)
+                } else {
+                    console.log("get_demand", result.result)
+                }
+            });
+        } catch (error) {
+            alert("get_demand" + error);
+        }
     }
 
     on_Open_Modal = () => {
@@ -105,18 +128,33 @@ class Confirm_Product extends Component {
                                 <th>พัฒนาเสร็จสิ้น</th>
                             </tr>
                             {
-                                Product.map((element, index) => {
+                                this.state.get_demand.map((element, index) => {
                                     return (
                                         <tr>
-                                            <td>{element.Product_name}</td>
-                                            <td>{element.Product_nutrients}</td>
-                                            <td>{element.Product_number}</td>
+                                            <td>{element.product_name}</td>
+                                            <td>{element.nutrient}</td>
+                                            <td>{element.volume} {element.volume_type}</td>
                                             <td><div style={{ color: "green" }}> วันที่เริ่มต้น : {element.timeStrat}</div>
                                                 <div style={{ color: "red" }}>วันที่สิ้นสุด : {element.timeEnd}</div></td>
                                             <td>
                                                 <NavLink>
-                                                    <img src={element.Fill_out_img} style={{ width: "30px" }} onClick={() => {this.on_Open_Modal()}}/>
-                                                    <Modal open={this.state.open} onClose={this.on_Close_Modal}>
+                                                    <img src={this.state.Fill_out_img} style={{ width: "30px" }} onClick={() => {this.on_Open_Modal()}}/>
+                                                    
+                                                </NavLink>
+                                            </td>
+                                            <td>
+                                                <NavLink>
+                                                    <img src={element.Develop_img} style={{ width: "30px" }} onClick={() => {this.Finish()}}/>
+                                                </NavLink>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </table>
+                    </div>
+                </div>
+                <Modal open={this.state.open} onClose={this.on_Close_Modal}>
                                                         <div className="Row">
                                                             <div className="col-12">
                                                                 <h3 style={{ textAlign: "center" }}>พัฒนาผลิตภัณฑ์</h3>
@@ -154,7 +192,7 @@ class Confirm_Product extends Component {
                                                         <div className="Row">
                                                             <div className="col-12">
                                                             <h4>เลือกรูปภาพ</h4>
-                                                                <input type="search" placeholder="กรุณาเลือกรูปภาพ" style={{ width: "500px" }}/>
+                                                                <input type="file" placeholder="กรุณาเลือกรูปภาพ" style={{ width: "500px" }}/>
                                                             </div>
                                                         </div>
                                                         <NavLink>
@@ -168,21 +206,6 @@ class Confirm_Product extends Component {
                                                             </button>
                                                         </NavLink>
                                                     </Modal>
-                                                </NavLink>
-                                            </td>
-                                            <td>
-                                                <NavLink>
-                                                    <img src={element.Develop_img} style={{ width: "30px" }} onClick={() => {this.Finish()}}/>
-                                                </NavLink>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </table>
-                    </div>
-                </div>
-
             </div>
         )
     }
