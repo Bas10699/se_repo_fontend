@@ -166,7 +166,7 @@ class Confirm_Product extends Component {
         try {
             await post(obj, 'researcher/confirm_resercher_damand', user_token).then((result) => {
                 if (result.success) {
-                    alert('ยืนยันรับงานวิจัย เรียบร้อย')
+                    // alert('ยืนยันรับงานวิจัย เรียบร้อย')
                     window.location.reload()
 
                 }
@@ -185,9 +185,9 @@ class Confirm_Product extends Component {
         switch (product_researcher_status) {
             case 0: return_product_researcher_status = <div>รอการตอบรับ</div>
                 break;
-            case 1: return_product_researcher_status = <div style={{color:"green"}}>ยืนยันเเล้ว</div>
+            case 1: return_product_researcher_status = <div style={{ color: "green" }}>ยืนยันเเล้ว</div>
                 break;
-            case 2: return_product_researcher_status = <div style={{color:"red"}}>ยกเลิกเเล้ว</div>
+            case 2: return_product_researcher_status = <div style={{ color: "red" }}>ยกเลิกเเล้ว</div>
                 break;
 
             default:
@@ -231,7 +231,10 @@ class Confirm_Product extends Component {
                                                 return element_n + " "
                                             })}</td>
                                             <td>{element.volume} {element.volume_type}</td>
-                                        <td>{moment(element.time_start).format('DD/MM/YYYY')}</td>
+                                            <td>
+                                                <h5 style={{margin:"0"}}>กรุณาตอบรับก่อนวันที่ : {moment(element.date_confirm).format('DD/MM/YYYY')}</h5>
+                                                <h5 style={{margin:"0",color:"red"}}>ส่งสูตรก่อนวันที่ : {moment(element.date_line).format('DD/MM/YYYY')}</h5>
+                                            </td>
                                             <td>
                                                 {element.product_researcher_status == 0 ? <div><NavLink>
                                                     <img alt="ยืนยัน" src={this.state.Check_true_img} style={{ width: "30px" }} onClick={() => { this.on_Open_Modal(element.product_name, element.volume, element.volume_type, element.product_id) }} />

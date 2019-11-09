@@ -19,13 +19,16 @@ class M_R_Order extends Component {
             open: false,
             open1: false,
             researcher: [],
-            date: "",
+            date_line: "",
+            date_comfirm: "",
             show_data: false,
             setdata: [],
             nutrient: [],
             name_product: null,
             id_product: null,
-            list_research: []
+            list_research: [],
+            get_send_data_line: [],
+            product_researcher_status: null,
         }
     }
 
@@ -117,7 +120,8 @@ class M_R_Order extends Component {
         let obj = {
             list_research: this.state.list_research,
             product_id: this.state.id_product,
-            date: this.state.date,
+            date_confirm: this.state.date_comfirm,
+            date_line: this.state.date_line,
             check: check,
             resear: resear,
             data: data,
@@ -140,6 +144,36 @@ class M_R_Order extends Component {
         // this.setState({ open: false })
     }
 
+    send_data_line = async (product_id, product_name) => {
+        this.setState({
+            open1: true
+        })
+        let obj = {
+            product_id: product_id,
+            // date_line: this.state.date_line
+        }
+        console.log("send_data_line", obj)
+        try {
+            await post(obj, 'neutrally/get_product_researcher_confirm', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        get_send_data_line: result.result,
+                        name_product: product_name
+
+                    })
+                    console.log("send_data_line", result.result)
+                }
+                else {
+                    alert("send_data_line", result.error_message)
+                }
+
+            })
+        } catch (error) {
+            alert('send_data_line: ' + error)
+        }
+
+    }
+
     show = (element) => {
         this.setState({
             show_data: true,
@@ -157,17 +191,13 @@ class M_R_Order extends Component {
                 name_product: data.product_name,
                 id_product: data.product_id,
             })} className="BTN_Signin"
-                style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>เลือกนักวิจัย</button></div>
+                style={{ float: "left", marginLeft: "23%", marginTop: "0", fontSize: "18px" }}>เลือกนักวิจัย</button></div>
                 break;
-            case 2: return_comfirm = "ทำการเลือกนักวิจัยเรียบร้อยรอการตอบกลับ"
-                break;
-            case 3: return_comfirm =
+            // case 2: return_comfirm = "ทำการเลือกนักวิจัยเรียบร้อยรอการตอบกลับ"
+            //     break;
+            case 3: case 2: return_comfirm =
                 <div style={{ textAlign: "center" }}>
-                    <button onClick={() => this.setState({
-                        open1: true,
-                        name_product: data.product_name,
-                        id_product: data.product_id,
-                    })} className="BTN_Signin"
+                    <button onClick={() => this.send_data_line(data.product_id, data.product_name)} className="Add"
                         style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>แสดงรายชื่อนักวิจัย</button></div>
                 break;
             case 4: return_comfirm = "ยกเลิก"
@@ -176,6 +206,23 @@ class M_R_Order extends Component {
                 break;
         }
         return return_comfirm
+    }
+
+    render_confirm = (product_researcher_status) => {
+        // this.setState({product_researcher_status:product_researcher_status})
+        let return_product_researcher_status
+        switch (product_researcher_status) {
+            case 0: return_product_researcher_status = <div>รอการตอบรับ</div>
+                break;
+            case 1: return_product_researcher_status = <div style={{ color: "green" }}>ยืนยันเเล้ว</div>
+                break;
+            case 2: return_product_researcher_status = <div style={{ color: "red" }}>ยกเลิกเเล้ว</div>
+                break;
+
+            default:
+                break;
+        }
+        return return_product_researcher_status
     }
 
     render() {
@@ -201,7 +248,7 @@ class M_R_Order extends Component {
                             {this.state.get_demand.map((element, index) => {
                                 return (
                                     <tr style={{ textAlign: "center" }}>
-                                        <td>{element.trader_id}</td>
+                                        <td>{element.name} {element.last_name}</td>
                                         <td>{element.product_name}</td>
                                         <td><img src={folder} style={{ width: "25px", cursor: "pointer" }} alt="ข้อมูล" onClick={() => this.show(element)} /></td>
                                         <td>{element.product_status >= 0 ? this.render_status(element)
@@ -224,7 +271,8 @@ class M_R_Order extends Component {
                         <div className="col-12">
 
                             <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา {this.state.name_product}</h3>
-                            กำหนดวันที่ตอบรับการพัฒนา <input type="date" id="date" onChange={this.handleChange} />
+                            <h5>กำหนดวันที่ตอบรับการพัฒนา <input type="date" id="date_comfirm" onChange={this.handleChange} /></h5>
+                            <h5>กำหนดวันที่ส่งสูตร <input type="date" id="date_line" onChange={this.handleChange} /></h5>
                             <Checkbox
                                 option={this.state.researcher}
                                 check_array={this.state.list_research}
@@ -246,24 +294,26 @@ class M_R_Order extends Component {
                         <div className="col-12">
 
                             <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยที่เลือกพัฒนา {this.state.name_product}</h3>
-                            กำหนดวันที่ส่งสูตร<input type="date" id="date" onChange={this.handleChange} />
                             <table>
                                 <tr>
                                     <th>รายชื่อนักวิจัย</th>
-                                    <th>พัฒนาเเล้ว</th>
-                                    <th>ผลิตภัณฑ์ที่กำลังพัฒนา</th>
                                     <th>การตอบรับ</th>
                                 </tr>
-                                <tr>
-                                    <td>ชื่อนักวิจัย</td>
-                                    <td>ชื่อนักวิจัย</td>
-                                    <td>ชื่อนักวิจัย</td>
-                                    <td>ชื่อนักวิจัย</td>
-                                </tr>
+                                {this.state.get_send_data_line.map((e, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{e.name} {e.last_name}</td>
+                                            <td>{this.render_confirm(e.product_researcher_status)}</td>
+                                        </tr>
+                                    )
+                                })}
                             </table>
+                            <button
+                                onClick={() => this.setState({ open1: false })}
+                                className="BTN_Signin">ปิดหน้าต่างนี้</button>
 
-                            <button onClick={() => this.send_data()} className="BTN_Signin">ยืนยัน</button>
                         </div>
+
                     </div>
 
                 </Modal>
