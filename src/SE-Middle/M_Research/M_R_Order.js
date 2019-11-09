@@ -17,6 +17,7 @@ class M_R_Order extends Component {
             get_demand: [],
             check_array: [],
             open: false,
+            open1: false,
             researcher: [],
             date: "",
             show_data: false,
@@ -156,9 +157,14 @@ class M_R_Order extends Component {
             })} className="BTN_Signin"
                 style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>เลือกนักวิจัย</button></div>
                 break;
-            case 2: return_comfirm = "ทำการเลือกนักวิจัยเรียบร้อย"
+            case 2: return_comfirm = "ทำการเลือกนักวิจัยเรียบร้อยรอการตอบกลับ"
                 break;
-            case 3: return_comfirm = "ตกลง"
+            case 3: return_comfirm =
+                <div style={{ textAlign: "center" }}>
+                    <button onClick={() => this.setState({
+                        open1: true,
+                    })} className="BTN_Signin"
+                        style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>แสดงรายชื่อนักวิจัย</button></div>
                 break;
             case 4: return_comfirm = "ยกเลิก"
                 break;
@@ -205,19 +211,16 @@ class M_R_Order extends Component {
                             })}
 
                         </table>
-
-
-
-
                     </div>
                     <div className="col-1"></div>
                 </div>
+
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12">
 
                             <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา {this.state.name_product}</h3>
-                            กำหนดวันที่ต้องการ <input type="date" id="date" onChange={this.handleChange} />
+                            กำหนดวันที่ตอบรับการพัฒนา <input type="date" id="date" onChange={this.handleChange} />
                             <Checkbox
                                 option={this.state.researcher}
                                 check_array={this.state.list_research}
@@ -227,6 +230,33 @@ class M_R_Order extends Component {
                                         list_research: event
                                     })
                                 }} />
+
+                            <button onClick={() => this.send_data()} className="BTN_Signin">ยืนยัน</button>
+                        </div>
+                    </div>
+                </Modal>
+
+
+                <Modal open={this.state.open1} onClose={this.onCloseModal}>
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-12">
+
+                            <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยที่เลือกพัฒนา {this.state.name_product}</h3>
+                            กำหนดวันที่ส่งสูตร<input type="date" id="date" onChange={this.handleChange} />
+                            <table>
+                                <tr>
+                                    <th>รายชื่อนักวิจัย</th>
+                                    <th>พัฒนาเเล้ว</th>
+                                    <th>ผลิตภัณฑ์ที่กำลังพัฒนา</th>
+                                    <th>การตอบรับ</th>
+                                </tr>
+                                <tr>
+                                    <td>ชื่อนักวิจัย</td>
+                                    <td>ชื่อนักวิจัย</td>
+                                    <td>ชื่อนักวิจัย</td>
+                                    <td>ชื่อนักวิจัย</td>
+                                </tr>
+                            </table>
 
                             <button onClick={() => this.send_data()} className="BTN_Signin">ยืนยัน</button>
                         </div>
@@ -247,9 +277,7 @@ class M_R_Order extends Component {
                                 <tr>
 
                                     <th style={{ width: "30%" }}>สารอาหารที่ต้องการ</th>
-                                    <td>{this.state.nutrient.map((e) => {
-                                        return (<p>{e}</p>)
-                                    })}</td>
+                                    <td>{this.state.nutrient + "\n"}</td>
                                 </tr>
                                 <tr>
                                     <th>จำนวนผลิตภัณฑ์</th>

@@ -3,36 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { user_token } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import Modal from 'react-responsive-modal';
-
-const Product = [
-    {
-        Product_name: "ยาสมุนไพรลดความอ้วน",
-        Product_nutrients: 'โปรตีน',
-        Product_number: '10 กล่อง',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp"
-    },
-    {
-        Product_name: "อาหารคลีน",
-        Product_nutrients: 'คาร์โบไฮเดรต, โปรตีน',
-        Product_number: '20 ชิ้น',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp"
-    },
-    {
-        Product_name: "นมเพิ่มความสูง",
-        Product_nutrients: 'วิตามิน',
-        Product_number: '30 กล่อง',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp"
-    }
-]
+import moment from 'moment'
 
 class Confirm_Product extends Component {
     constructor(props) {
@@ -134,8 +105,8 @@ class Confirm_Product extends Component {
                                             <td>{element.product_name}</td>
                                             <td>{element.nutrient}</td>
                                             <td>{element.volume} {element.volume_type}</td>
-                                            <td><div style={{ color: "green" }}> วันที่เริ่มต้น : {element.timeStrat}</div>
-                                                <div style={{ color: "red" }}>วันที่สิ้นสุด : {element.timeEnd}</div></td>
+                                            <td><div style={{ color: "green" }}> วันที่เริ่มต้น : {moment(element.time_start).utc().add('years', 543).format("DD/MM/YYYY")}</div>
+                                                <div style={{ color: "red" }}>วันที่สิ้นสุด : {moment(element.time_end).utc().add('years', 543).format("DD/MM/YYYY")}</div></td>
                                             <td>
                                                 <NavLink>
                                                     <img src={this.state.Fill_out_img} style={{ width: "30px" }} onClick={() => {this.on_Open_Modal()}}/>
@@ -195,16 +166,8 @@ class Confirm_Product extends Component {
                                                                 <input type="file" placeholder="กรุณาเลือกรูปภาพ" style={{ width: "500px" }}/>
                                                             </div>
                                                         </div>
-                                                        <NavLink>
-                                                            <button>
-                                                                ตกลง
-                                                            </button>
-                                                        </NavLink>
-                                                        <NavLink>
-                                                            <button>
-                                                                ยกเลิก
-                                                            </button>
-                                                        </NavLink>
+                                                        <NavLink><button>ตกลง</button></NavLink>
+                                                        <NavLink><button>ยกเลิก</button></NavLink>
                                                     </Modal>
             </div>
         )

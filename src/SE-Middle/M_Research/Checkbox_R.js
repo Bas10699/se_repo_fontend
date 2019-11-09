@@ -57,7 +57,7 @@ class Checkbox extends Component {
                     <tr>
                         <th>ลำดับ</th>
                         <th>ชื่อ - นามสกุล</th>
-                        {/* <th>ความสามารถ</th> */}
+                        <th>พัฒนาเเล้ว</th>
                         <th>กำลังพัฒนาผลิตภัณฑ์</th>
                     </tr>
 
@@ -70,7 +70,7 @@ class Checkbox extends Component {
                                         onClick={(event) => { this.onCheck(event) }} />
                                     {index + 1} .</td>
                                     <td style={{textAlign:"left"}}>{option_element.name} {option_element.last_name}</td>
-                                    {/* <td>{option_element.skill}</td> */}
+                                    <td>จำนวนที่เคยพัฒนาเสร็จสิ้นไปแล้ว</td>
                                     <td>{option_element.count_pro_resear}</td>
                                 </tr>
                             )

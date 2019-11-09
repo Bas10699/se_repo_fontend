@@ -46,7 +46,7 @@ class M_R_Trace extends Component {
             formula: [],
             get_demand: [],
             open1: false,
-            open2:false,
+            open2: false,
 
         }
     }
@@ -60,7 +60,7 @@ class M_R_Trace extends Component {
     }
 
     onCloseModal = () => {
-        this.setState({ open: false, open1: false,open2:false });
+        this.setState({ open: false, open1: false, open2: false });
 
     };
 
@@ -152,18 +152,21 @@ class M_R_Trace extends Component {
                     <div className="col-10">
                         <table>
                             <tr>
+                                <th>ผู้สั่งพัฒนาผลิตภัณฑ์</th>
                                 <th>ชื่อผลิตภัณฑ์</th>
-                                <th>ชื่อสูตร</th>
-                                <th>จำนวนที่สั่ง</th>
+                                <th>สารอาหารที่ต้องการ</th>
+                                <th>จำนวน</th>
+                                <th>สูตร</th>
                                 {/* <th>รายละเอียด</th> */}
                             </tr>
                             {this.state.get_demand.map((element, index) => {
                                 return (
                                     <tr>
                                         <td>{element.product_name}</td>
-                                        <td>{element.formula}<button onClick={() => { this.open() }}>กรองสูตร</button>
-                                        {element.formula}<button onClick={() => { this.setState({open2:true}) }}>สูตรผู้ประกอบการเลือก</button></td>
+                                        <td>{element.product_name}</td>
+                                        <td>{element.nutrient}</td>
                                         <td>{element.volume} {element.volume_type}</td>
+                                        <td><button onClick={() => { this.open() }} className="BTN_Signin" style={{ margin: "0", float: "left" }}>กรองสูตร</button></td>
                                         {/* <td>ชื่อนักวิจัยที่รับผิดชอบ</td> */}
                                     </tr>
                                 )
@@ -205,6 +208,7 @@ class M_R_Trace extends Component {
                     </div>
                     <h4>ย้อนกลับ หมายเลขหน้าที่แสดง ถัดไป</h4>
                     <button onClick={() => this.onCloseModal()} className="BTN_CONFIRM" style={{ float: "right" }}>เลือกสูตรผลิตภัณฑ์นี้</button>
+                    <button onClick={() => this.onCloseModal()} className="BTN_Cencle">ไม่ผ่าน</button>
                 </Modal>
 
 
@@ -225,42 +229,9 @@ class M_R_Trace extends Component {
                     <button onClick={() => this.setState({ open1: false })} className="BTN_CONFIRM" style={{ float: "right" }}>ปิดหน้าต่างนี้</button>
                 </Modal>
 
-                
 
-                <Modal open={this.state.open2} onClose={this.onCloseModal}>
-                    <div className="Row" style={{ width: "500px" }}>
-                        <div className="col-11">
-                            <h3 style={{ textAlign: "center" }}>สูตรที่เลือก ชื่อนักวิจัย</h3>
 
-                        </div>
-                        <div className="col-1" />
-                    </div>
-                    <div className="Row">
-                        <div className="col-12">
-                        <HighchartsReact highcharts={Highcharts} options={options} />
-                            <table style={{ textAlign: "center" }}>
-                                <tr>
-                                    <th colSpan="5">รายชื่อวัตถุดิบ</th>
-                                </tr>
-                                <tr>
-                                    <th>ชื่อพืช </th>
-                                    <th>จำนวน/หน่วย</th>
-                                    <th>ราคาเฉลี่ย</th>
-                                    <th>ราคารวมเฉลี่ย</th>
-                                    <th>สั่งซื้อ</th>
-                                </tr>
-                                <tr>
-                                    <td>ข้าวหอมมะลิ</td>
-                                    <td>95</td>
-                                    <td>3</td>
-                                    <td>285</td>
-                                    <td>สั่งซื้อสินค้า</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <button onClick={() => this.setState({ open2: false })} className="BTN_CONFIRM" style={{ float: "right" }}>ปิดหน้าต่างนี้</button>
-                </Modal>
+
             </div>
         )
     }
