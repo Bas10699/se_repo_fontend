@@ -96,8 +96,8 @@ class M_R_Order extends Component {
     }
 
     onCloseModal = () => {
-        window.location.reload()
-        this.setState({ open: false, show_data: false });
+        // window.location.reload()
+        this.setState({ open: false, open1: false, show_data: false, list_research: [] });
 
     };
 
@@ -119,15 +119,15 @@ class M_R_Order extends Component {
             product_id: this.state.id_product,
             date: this.state.date,
             check: check,
-            resear:resear,
-            data:data,
+            resear: resear,
+            data: data,
         }
         console.log(obj)
         try {
             await post(obj, 'neutrally/update_name_resercher_damand', user_token).then((result) => {
                 if (result.success) {
                     alert("เลือกนักวิจัยเรียบร้อย")
-                    window.location.href = '/M_Demand/M_R_Trace'
+                    window.location.reload()
                 }
                 else {
                     alert(result.error_message)
@@ -149,14 +149,13 @@ class M_R_Order extends Component {
         console.log("show", element)
     }
 
-    render_status = (status) => {
+    render_status = (data) => {
         let return_comfirm
-        switch (status) {
+        switch (data.product_status) {
             case 1: return_comfirm = <div style={{ textAlign: "center" }}><button onClick={() => this.setState({
                 open: true,
-                name_product: element.product_name,
-                id_product: element.product_id,
-                list_research: element.list_research
+                name_product: data.product_name,
+                id_product: data.product_id,
             })} className="BTN_Signin"
                 style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>เลือกนักวิจัย</button></div>
                 break;
@@ -166,6 +165,8 @@ class M_R_Order extends Component {
                 <div style={{ textAlign: "center" }}>
                     <button onClick={() => this.setState({
                         open1: true,
+                        name_product: data.product_name,
+                        id_product: data.product_id,
                     })} className="BTN_Signin"
                         style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>แสดงรายชื่อนักวิจัย</button></div>
                 break;
@@ -203,7 +204,7 @@ class M_R_Order extends Component {
                                         <td>{element.trader_id}</td>
                                         <td>{element.product_name}</td>
                                         <td><img src={folder} style={{ width: "25px", cursor: "pointer" }} alt="ข้อมูล" onClick={() => this.show(element)} /></td>
-                                        <td>{element.product_status >= 0 ? this.render_status(element.product_status)
+                                        <td>{element.product_status >= 0 ? this.render_status(element)
                                             :
                                             null}
                                         </td>
