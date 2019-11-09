@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { user_token } from '../Support/Constance';
 import { get, post } from '../Support/Service';
 import Modal from 'react-responsive-modal';
+import moment from 'moment'
 
 const Product = [
     {
@@ -232,7 +233,7 @@ class Confirm_Product extends Component {
                                                 return element_n + " "
                                             })}</td>
                                             <td>{element.volume} {element.volume_type}</td>
-                                            <td></td>
+                                        <td>{moment(element.time_start).format('DD/MM/YYYY')}</td>
                                             <td>
                                                 {element.product_researcher_status == 0 ? <div><NavLink>
                                                     <img alt="ยืนยัน" src={this.state.Check_true_img} style={{ width: "30px" }} onClick={() => { this.on_Open_Modal(element.product_name, element.volume, element.volume_type, element.product_id) }} />
