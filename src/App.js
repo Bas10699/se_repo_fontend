@@ -60,6 +60,7 @@ import M_Default from './SE-Middle/M_Default';
 import Defalut from './Admin/Defalut';
 
 import S_Summary from './SE-Sub/S_Summary'
+import Create_Info from './Researcher/Create_Info';
 
 function App() {
   return (
@@ -72,7 +73,7 @@ function App() {
       <Route exact path='/Signin' component={Signin} />
       <Route exact path='/Signup' component={Signup} />
       <Route exact path='/' component={Home} />
-      <Route exact path='/Defalut' component={Defalut}/>
+      <Route exact path='/Defalut' component={Defalut} />
       <Route exact path='/T_Cart' component={T_Cart} />
       <Route exact path='/T_Order/:DD' component={T_Order} />
       <Route exact path='/T_Order' component={T_Order} />
@@ -98,12 +99,12 @@ function App() {
       <Route exact path='/S_skill_farmer' component={S_skill_farmer} />
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail} />
       <Route exact path='/S_Certified' component={S_Certified} />
-      <Route exact path='/S_Summary' component={S_Summary}/>
+      <Route exact path='/S_Summary' component={S_Summary} />
 
       <Route exact path='/M_Plan' component={M_Plan} />
-      <Route exact path='/M_Data' component={M_Data}/>
-      <Route exact path='/M_Farmer' component={M_Farmer}/>
-      <Route exact path='/M_Default' component={M_Default}/>
+      <Route exact path='/M_Data' component={M_Data} />
+      <Route exact path='/M_Farmer' component={M_Farmer} />
+      <Route exact path='/M_Default' component={M_Default} />
 
       {/* <Route exact path='/Researcher' component={Researcher}/> */}
       {/* <Route exact path='/Request' component={Request}/> */}
@@ -114,6 +115,7 @@ function App() {
       <Route exact path='/Product_Information' component={Product_Information} />
       <Route exact path='/Product_Research' component={Product_Research} />
       <Route exact path='/Product_Research/:id' component={Product_Research} />
+      <Route exact path='/Create_Info' component={Create_Info} />
 
       {/* <Route exact path='/Confirm_Product' component={Confirm_Product}/>
       <Route exact path='/Product_Info' component={Product_Info}/>

@@ -60,6 +60,7 @@ class T_Order extends Component {
         }
 
     }
+    
     delete_reseqr = (index) =>{
         let nutrient = this.state.nutrient
         nutrient.splice(index,1)

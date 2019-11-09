@@ -12,6 +12,7 @@ class Confirm_Product extends Component {
             open: false,
             get_demand: [],
             Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
+
         }
     }
 
@@ -65,8 +66,8 @@ class Confirm_Product extends Component {
         }
     }
 
-    on_Open_Modal = () => {
-        this.setState({ open: true });
+    on_Open_Modal = (product_name) => {
+        this.setState({ open: true,product_name:product_name });
     }
 
     on_Close_Modal = () => {
@@ -108,13 +109,11 @@ class Confirm_Product extends Component {
                                                 return element_n+" "
                                             })}</td>
                                             <td>{element.volume} {element.volume_type}</td>
-                                            <td><div style={{ color: "green" }}> วันที่เริ่มต้น : {moment(element.time_start).utc().add('years', 543).format("DD/MM/YYYY")}</div>
-                                                <div style={{ color: "red" }}>วันที่สิ้นสุด : {moment(element.time_end).utc().add('years', 543).format("DD/MM/YYYY")}</div></td>
                                             <td>
-                                                <NavLink>
-                                                    <img src={this.state.Fill_out_img} style={{ width: "30px" }} onClick={() => { this.on_Open_Modal() }} />
-
-                                                </NavLink>
+                                               กรุณาส่งสูตรก่อน :  <div style={{ color: "red" }}>{moment(element.time_end).utc().add('years', 543).format("DD/MM/YYYY")}</div></td>
+                                            <td>
+                                                <NavLink to="/Create_Info"><button>สร้างสูตร</button></NavLink> 
+                                                    {/* <img alt="กรอกสูตร" src={this.state.Fill_out_img} style={{ width: "30px",cursor:"pointer" }} onClick={() => { this.on_Open_Modal(element.product_name) }} /> */}
                                             </td>
                                             
                                         </tr>
@@ -125,24 +124,25 @@ class Confirm_Product extends Component {
                     </div>
                     <div className="col-1"></div>
                 </div>
+
+
                 <Modal open={this.state.open} onClose={this.on_Close_Modal}>
-                    <div className="Row">
+                    <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12">
-                            <h3 style={{ textAlign: "center" }}>พัฒนาผลิตภัณฑ์</h3>
-                            <h4 style={{ textAlign: "center" }}>ชื่อผลิตภัณฑ์ : </h4>
+                        <h3 style={{ textAlign: "center" }}>พัฒนาผลิตภัณฑ์ {this.state.product_name}</h3>
                             <h4>ชื่อสูตรผลิตภัณฑ์</h4>
-                            <input type="text" style={{ width: "500px" }} />
+                            <input type="text" style={{ width: "90%" }} />
                         </div>
                     </div>
                     <div className="Row">
                         <div className="col-6">
                             <h4>ข้อมูลสารอาหาร</h4>
-                            <input type="text" style={{ width: "200px" }} />
+                            <input type="text" style={{ width: "250px" }} />
                         </div>
                         <div className="col-6">
                             <h4>ปริมาณสารอาหาร</h4>
-                            <input type="text" style={{ width: "200px" }} />
-                            <button>เพิ่มข้อมูล</button>
+                            <input type="text" style={{ width: "50px" }} />%
+                            <button className="BTN_CONFIRM" style={{width:"50%",float:"right"}}>เพิ่มปริมาณสารอาหาร</button>
                         </div>
                     </div>
                     <div className="Row">
@@ -166,8 +166,8 @@ class Confirm_Product extends Component {
                             <input type="file" placeholder="กรุณาเลือกรูปภาพ" style={{ width: "500px" }} />
                         </div>
                     </div>
-                    <NavLink><button>ตกลง</button></NavLink>
-                    <NavLink><button>ยกเลิก</button></NavLink>
+                    <button>ตกลง</button>
+                    <button>ยกเลิก</button>
                 </Modal>
             </div>
         )
