@@ -115,7 +115,7 @@ function App() {
       <Route exact path='/Product_Information' component={Product_Information} />
       <Route exact path='/Product_Research' component={Product_Research} />
       <Route exact path='/Product_Research/:id' component={Product_Research} />
-      <Route exact path='/Create_Info' component={Create_Info} />
+      <Route exact path='/Create_Info/:id' component={Create_Info} />
 
       {/* <Route exact path='/Confirm_Product' component={Confirm_Product}/>
       <Route exact path='/Product_Info' component={Product_Info}/>

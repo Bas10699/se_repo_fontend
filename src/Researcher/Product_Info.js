@@ -113,7 +113,7 @@ class Confirm_Product extends Component {
                                                 <td>
                                                     กรุณาส่งสูตรก่อน :  <div style={{ color: "red" }}>{moment(element.date_line).utc().add('years', 543).format("DD/MM/YYYY")}</div></td>
                                                 <td>
-                                                    <NavLink to="/Create_Info" ><button className="BTN_Signin" style={{ margin: "0" }}>สร้างสูตร</button></NavLink>
+                                                    <NavLink to={"/Create_Info/product?product_id=" + element.product_id} ><button className="BTN_Signin" style={{ margin: "0" }} >สร้างสูตร</button></NavLink>
 
                                                 </td>
 

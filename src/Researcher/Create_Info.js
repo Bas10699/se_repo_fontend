@@ -1,8 +1,37 @@
 import React, { Component } from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import { post } from '../Support/Service'
+import { user_token } from '../Support/Constance';
+
+import queryString from 'query-string';
 
 class Create_Info extends Component {
+
+
+    get_demand_detail = async()=>{
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        let obj = {
+            product_id: this.state.product_id,
+        }
+        console.log("obj",obj)
+        // try {
+        //     await post(obj,'researcher/get_demand_detail',user_token).then((result)=>{
+        //         if (result.success) {
+                    
+        //             alert('ยืนยันรับงานวิจัย เรียบร้อย')
+
+        //         }
+        //         else {
+        //             alert(result.error_message)
+        //         }
+        //     })
+        // } catch (error) {
+            
+        // }
+    } 
+
     render() {
 
         let options = {
@@ -64,7 +93,7 @@ class Create_Info extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>สร้างสูตร</h2>
+        <h2 style={{ textAlign: "center" }}>สร้างสูตร </h2>
                     </div>
                 </div>
 
