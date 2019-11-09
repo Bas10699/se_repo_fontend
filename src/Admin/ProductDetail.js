@@ -100,17 +100,19 @@ class ProductDetail extends Component {
     }
 
     add_cart = async () => {
-
-        this.state.plant.map((element, index) => {
-            this.state.data.push({
-                plant_id: element.plant_id,
-                total_plant: this.state.total_plant = element.volume * this.state.amount,
-            })
-        })
+        console.log(this.state.product_data)
+        // this.state.plant.map((element, index) => {
+        //     this.state.data.push({
+        //         plant_id: element.plant_id,
+        //         total_plant: this.state.total_plant = element.volume * this.state.amount,
+        //     })
+        // })
 
         let data = {
-            data_plant: this.state.data
+            plant_id: this.state.product_data.product_id,
+            total_plant:this.state.amount
         }
+        // console.log(data)
         try {
             await post(data, 'trader/add_cart_trader', user_token).then((result) => {
                 if (result.success) {

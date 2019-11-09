@@ -7,7 +7,8 @@ class Notification extends Component {
         super(props)
         this.state = {
             noti: false,
-            messageNew: ''
+            messageNew: '',
+            step: 0,
         }
     }
     componentDidMount() {
@@ -18,7 +19,16 @@ class Notification extends Component {
         socket.on('new-noti-se', (messageNew) => {
             console.log('gg', messageNew)
             this.setState({
-                messageNew: messageNew
+                messageNew: messageNew,
+                step: 1
+            })
+            this.openSnackBar()
+        })
+        socket.on('new_confirm_payment', (messageNew) => {
+            console.log('gg', messageNew)
+            this.setState({
+                messageNew: messageNew,
+                step: 2
             })
             this.openSnackBar()
         })
@@ -36,13 +46,26 @@ class Notification extends Component {
     }
 
     render() {
-        const { noti, messageNew } = this.state
-        return (
-            <div className={noti ? "notiShow" : "notiHide"} style={{ cursor: 'pointer' }} onClick={() => this.to()}>
+        const { noti, messageNew, step } = this.state
+        let render_show
+        switch (step) {
+            case 1: render_show = <div className={noti ? "notiShow" : "notiHide"} style={{ cursor: 'pointer' }} onClick={() => this.to()}>
                 ยืนยันการสั่งซื้อ {messageNew}<br />
                 กรุณาชำระเงินตามกำหนด
-            </div>
-        )
+                </div>
+                break;
+            case 2: render_show = <div className={noti ? "notiShow" : "notiHide"} style={{ cursor: 'pointer' }} onClick={() => this.to()}>
+                ใบสั่งซื้อเลขที่ {messageNew}<br />
+                ตรวจสอบการชำระเงินแล้ว
+                </div>
+                break;
+            default: render_show = <div className={noti ? "notiShow" : "notiHide"} style={{ cursor: 'pointer' }} onClick={() => this.to()}>
+                การแจ้งเตือน
+                </div>
+                break;
+        }
+        return render_show
+        
     }
 }
 export default Notification
