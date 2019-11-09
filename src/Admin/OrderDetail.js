@@ -222,6 +222,8 @@ class OrderDetail extends Component {
         try {
             await post(object, 'neutrally/update_status_order_trader', user_token).then((result) => {
                 if (result.success) {
+                    const socket = socketIOClient(ip)
+                    socket.emit('confirm_payment', this.state.order.order_id)
                     window.location.reload()
                     setTimeout(() => {
                         console.log("confirm_payment", result.result)
