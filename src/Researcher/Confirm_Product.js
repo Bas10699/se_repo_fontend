@@ -161,8 +161,6 @@ class Confirm_Product extends Component {
             product_researcher_status: this.state.product_researcher_status,
             volume: this.state.volume,
             volume_type: this.state.volume_type,
-            time_start: this.state.date_start,
-            time_end: this.state.date_end,
         }
         console.log("obj", obj)
         try {
