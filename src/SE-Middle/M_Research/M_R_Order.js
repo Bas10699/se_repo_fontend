@@ -115,9 +115,12 @@ class M_R_Order extends Component {
         //     )
         // })
         let obj = {
-            data: this.state.list_research,
+            list_research: this.state.list_research,
             product_id: this.state.id_product,
-            date: this.state.date
+            date: this.state.date,
+            check: check,
+            resear:resear,
+            data:data,
         }
         console.log(obj)
         try {
