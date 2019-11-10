@@ -1368,3 +1368,22 @@ ol {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+.BTN_Edit {
+    font-family: 'fc_lamoonregular';
+    font-size: 20px;
+    color: #007bff;
+    background-color: transparent;
+    border: 1px solid #007bff;
+    text-align: center;
+    cursor: pointer;
+    padding: 8px 8px;
+    width: 150px;
+    margin-left: 10px;
+    transition: 0.5s;
+}
+
+.BTN_Edit:hover{
+    background-color: #0057b4;
+    color: white;
+}

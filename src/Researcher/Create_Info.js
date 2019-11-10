@@ -4,9 +4,9 @@ import HighchartsReact from 'highcharts-react-official'
 import { post } from '../Support/Service'
 import { user_token } from '../Support/Constance';
 import Modal from 'react-responsive-modal'
+import delete_icon from '../Image/delete-icon.png'
 
 import queryString from 'query-string';
-import { async } from 'q';
 
 class Create_Info extends Component {
     constructor(props) {
@@ -133,7 +133,7 @@ class Create_Info extends Component {
             await post(obj, 'researcher/add_product_plan', user_token).then((result) => {
                 if (result.success) {
                     alert('เพิ่มสูตรพัฒนาเรียบร้อย')
-                    window.location.href='/Product_Research/Product_Info'
+                    window.location.href = '/Product_Research/Product_Info'
                 }
                 else {
                     alert(result.error_message)
@@ -215,12 +215,14 @@ class Create_Info extends Component {
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>สร้างสูตรพัฒนาผลิตภัณฑ์ {this.state.demand_detail.product_name} </h2>
+                        <h4 style={{ textAlign: "center" }}>
+                            รายละเอียดผลิตภัณฑ์ที่ต้องการ<br />
+                            สารอาหารที่ต้องการ {this.state.demand_detail_nutrient.map((ele_nut) => {
+                                return ele_nut + " "
+                            })}<br />
+                            จำนวน {this.state.demand_detail.volume} {this.state.demand_detail.volume_type}
+                        </h4>
 
-                        รายละเอียดผลิตภัณฑ์ที่ต้องการ<br />
-                        สารอาหารที่ต้องการ {this.state.demand_detail_nutrient.map((ele_nut) => {
-                            return ele_nut + " "
-                        })}<br />
-                        จำนวน {this.state.demand_detail.volume} {this.state.demand_detail.volume_type}
 
                     </div>
                 </div>
@@ -238,12 +240,14 @@ class Create_Info extends Component {
                             <tr>
                                 <th>ชื่อพืช </th>
                                 <th>จำนวน/หน่วย</th>
+                                <th>ลบ</th>
                             </tr>
                             {this.state.plants.map((ele_plant) => {
                                 return (
                                     <tr>
                                         <td>{ele_plant.plant_name}</td>
                                         <td>{ele_plant.plant_volume} {ele_plant.plant_volume_type}</td>
+                                        <td><img src={delete_icon} style={{ width: "30px" }} alt="cancle" /></td>
                                     </tr>
                                 )
                             })}
@@ -265,9 +269,9 @@ class Create_Info extends Component {
                             </div>
                             <div className="col-6">
                                 <h5 style={{ marginBottom: "10px" }}>ปริมาณสารอาหาร</h5>
-                                <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} />%
-                            <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-10px" }}>เพิ่มปริมาณสารอาหาร</button>
-                                <button className="Add" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "-10px" }}>แก้ไขปริมาณสารอาหาร</button>
+                                <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} />กรัม
+                                <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-10px" }}>เพิ่มปริมาณสารอาหาร</button>
+                                <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button>
                             </div>
                         </div>
                         <div className="Row">
@@ -299,17 +303,25 @@ class Create_Info extends Component {
                     <div className="col-1"></div>
                 </div>
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
-                    <div className='App'>ข้อมูลสารอาหาร
-                    {this.state.nutrient_graph.map((ele, index) => {
-                        return (
-                            <div>
-                                {index + 1}.
-                                <input id={index} value={ele.name} onChange={this.nutrientChangeName} />
-                                <input id={index} value={ele.y} onChange={this.nutrientChangeY} />
-                                <button onClick={() => this.delete_nutrient_graph(index)}>ลบ</button>
-                            </div>
-                        )
-                    })}
+                    <div className='Row' style={{ width: "800px" }}>
+                        <div className="col-12" style={{ width: "800px" }}>
+                            <h2 style={{ textAlign: "center" }}>ข้อมูลสารอาหาร</h2>
+                            <table>
+                                {this.state.nutrient_graph.map((ele, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{index + 1}.</td>
+                                            <td><input type="text" id={index} value={ele.name} onChange={this.nutrientChangeName} /></td>
+                                            <td><input type="number" style={{ marginLeft:"25px" }} id={index} value={ele.y} onChange={this.nutrientChangeY} /></td>
+                                            <td><img src={delete_icon} style={{ width: "30px",cursor:"pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} /></td>
+                                        </tr>
+                                    )
+                                })}
+                            </table>
+                        </div>
+
+
+
                     </div>
                 </Modal>
             </div>
