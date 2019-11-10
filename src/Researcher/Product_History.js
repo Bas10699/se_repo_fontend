@@ -6,60 +6,6 @@ import Modal from 'react-responsive-modal';
 import cart_img from '../Image/cart.png'
 import nutrients_img from '../Image/nutrients_img.png'
 
-const Product = [
-    {
-        Product_name: "ยาสมุนไพรลดความอ้วน",
-        Product_nutrients: 'โปรตีน',
-        Product_number: '10 กล่อง',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp",
-        Nutrients_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjvAUn9nip0Sbmsw0nek8f9rJ4aLW98ZtvwZzSRI4Jw_AI0zy",
-        Material_img: "https://www.bahtdiaw.com/img/logo/cart.png",
-        img: "http://www.wongtawan.com/wp-content/uploads/product_shoot_88.jpg",
-        // Clean_food_img: "https://food.mthai.com/app/uploads/2019/03/Clean-food.jpg",
-        // Milk_img: "https://www.honestdocs.co/system/blog_articles/main_hero_images/000/004/572/large/iStock-854296650_%281%29.jpg",
-        Edit_data_img: "https://th.seaicons.com/wp-content/uploads/2017/02/edit-icon.png",
-        Delete_data_img: "https://inwfile.com/s-dm/7dvzz2.png",
-        Send_information_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQwHV0w_GqHEPvyssqRe-vKuUbfjZdsy_Q6l-oiKL5t1yRG_v7"
-    },
-    {
-        Product_name: "อาหารคลีน",
-        Product_nutrients: 'คาร์โบไฮเดรต, โปรตีน',
-        Product_number: '20 ชิ้น',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp",
-        Nutrients_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjvAUn9nip0Sbmsw0nek8f9rJ4aLW98ZtvwZzSRI4Jw_AI0zy",
-        Material_img: "https://www.bahtdiaw.com/img/logo/cart.png",
-        // Herbal_medicines_img: "http://www.wongtawan.com/wp-content/uploads/product_shoot_88.jpg",
-        img: "https://food.mthai.com/app/uploads/2019/03/Clean-food.jpg",
-        // Milk_img: "https://www.honestdocs.co/system/blog_articles/main_hero_images/000/004/572/large/iStock-854296650_%281%29.jpg",
-        Edit_data_img: "https://th.seaicons.com/wp-content/uploads/2017/02/edit-icon.png",
-        Delete_data_img: "https://inwfile.com/s-dm/7dvzz2.png",
-        Send_information_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQwHV0w_GqHEPvyssqRe-vKuUbfjZdsy_Q6l-oiKL5t1yRG_v7"
-    },
-    {
-        Product_name: "นมเพิ่มความสูง",
-        Product_nutrients: 'วิตามิน',
-        Product_number: '30 กล่อง',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp",
-        Nutrients_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjvAUn9nip0Sbmsw0nek8f9rJ4aLW98ZtvwZzSRI4Jw_AI0zy",
-        Material_img: "https://www.bahtdiaw.com/img/logo/cart.png",
-        // Herbal_medicines_img: "http://www.wongtawan.com/wp-content/uploads/product_shoot_88.jpg",
-        // Clean_food_img: "https://food.mthai.com/app/uploads/2019/03/Clean-food.jpg",
-        img: "https://www.honestdocs.co/system/blog_articles/main_hero_images/000/004/572/large/iStock-854296650_%281%29.jpg",
-        Edit_data_img: "https://th.seaicons.com/wp-content/uploads/2017/02/edit-icon.png",
-        Delete_data_img: "https://inwfile.com/s-dm/7dvzz2.png",
-        Send_information_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQwHV0w_GqHEPvyssqRe-vKuUbfjZdsy_Q6l-oiKL5t1yRG_v7"
-    }
-]
-
 class Confirm_Product extends Component {
     constructor(props) {
         super(props);
