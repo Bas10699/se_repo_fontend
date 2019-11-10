@@ -132,7 +132,8 @@ class Create_Info extends Component {
         try {
             await post(obj, 'researcher/add_product_plan', user_token).then((result) => {
                 if (result.success) {
-                    alert('สำเร็จ')
+                    alert('เพิ่มสูตรพัฒนาเรียบร้อย')
+                    window.location.href='/Product_Research/Product_Info'
                 }
                 else {
                     alert(result.error_message)

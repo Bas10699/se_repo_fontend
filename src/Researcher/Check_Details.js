@@ -9,59 +9,6 @@ import edit_icon from '../Image/edit-icon.png'
 import delete_icon from '../Image/delete-icon.png'
 import send_data_icon from '../Image/send-data-icon.png'
 
-const Product = [
-    {
-        Product_name: "ยาสมุนไพรลดความอ้วน",
-        Product_nutrients: 'โปรตีน',
-        Product_number: '10 กล่อง',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp",
-        Nutrients_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjvAUn9nip0Sbmsw0nek8f9rJ4aLW98ZtvwZzSRI4Jw_AI0zy",
-        Material_img: "https://www.bahtdiaw.com/img/logo/cart.png",
-        img: "http://www.wongtawan.com/wp-content/uploads/product_shoot_88.jpg",
-        // Clean_food_img: "https://food.mthai.com/app/uploads/2019/03/Clean-food.jpg",
-        // Milk_img: "https://www.honestdocs.co/system/blog_articles/main_hero_images/000/004/572/large/iStock-854296650_%281%29.jpg",
-        Edit_data_img: "https://th.seaicons.com/wp-content/uploads/2017/02/edit-icon.png",
-        Delete_data_img: "https://inwfile.com/s-dm/7dvzz2.png",
-        Send_information_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQwHV0w_GqHEPvyssqRe-vKuUbfjZdsy_Q6l-oiKL5t1yRG_v7"
-    },
-    {
-        Product_name: "อาหารคลีน",
-        Product_nutrients: 'คาร์โบไฮเดรต, โปรตีน',
-        Product_number: '20 ชิ้น',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp",
-        Nutrients_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjvAUn9nip0Sbmsw0nek8f9rJ4aLW98ZtvwZzSRI4Jw_AI0zy",
-        Material_img: "https://www.bahtdiaw.com/img/logo/cart.png",
-        // Herbal_medicines_img: "http://www.wongtawan.com/wp-content/uploads/product_shoot_88.jpg",
-        img: "https://food.mthai.com/app/uploads/2019/03/Clean-food.jpg",
-        // Milk_img: "https://www.honestdocs.co/system/blog_articles/main_hero_images/000/004/572/large/iStock-854296650_%281%29.jpg",
-        Edit_data_img: "https://th.seaicons.com/wp-content/uploads/2017/02/edit-icon.png",
-        Delete_data_img: "https://inwfile.com/s-dm/7dvzz2.png",
-        Send_information_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQwHV0w_GqHEPvyssqRe-vKuUbfjZdsy_Q6l-oiKL5t1yRG_v7"
-    },
-    {
-        Product_name: "นมเพิ่มความสูง",
-        Product_nutrients: 'วิตามิน',
-        Product_number: '30 กล่อง',
-        Check_true_img: "https://www.nipa.co.th/wp-content/uploads/2019/03/okt.png",
-        Check_false_img: "https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png",
-        Fill_out_img: "https://nl2561.nlpoly.com/wp-content/uploads/2018/05/f25.png",
-        Develop_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYMcV_tU_MuKHFjcO_cxa_wvoJOJulAKzOU80H4nnltqnkxCFp",
-        Nutrients_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjvAUn9nip0Sbmsw0nek8f9rJ4aLW98ZtvwZzSRI4Jw_AI0zy",
-        Material_img: "https://www.bahtdiaw.com/img/logo/cart.png",
-        // Herbal_medicines_img: "http://www.wongtawan.com/wp-content/uploads/product_shoot_88.jpg",
-        // Clean_food_img: "https://food.mthai.com/app/uploads/2019/03/Clean-food.jpg",
-        img: "https://www.honestdocs.co/system/blog_articles/main_hero_images/000/004/572/large/iStock-854296650_%281%29.jpg",
-        Edit_data_img: "https://th.seaicons.com/wp-content/uploads/2017/02/edit-icon.png",
-        Delete_data_img: "https://inwfile.com/s-dm/7dvzz2.png",
-        Send_information_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQwHV0w_GqHEPvyssqRe-vKuUbfjZdsy_Q6l-oiKL5t1yRG_v7"
-    }
-]
 
 class Confirm_Product extends Component {
     constructor(props) {
@@ -74,7 +21,9 @@ class Confirm_Product extends Component {
             nutrient_precent: [],
             plant: [],
             data_edit: '',
-            data_edit_nutrient: []
+            data_edit_nutrient: [],
+            data_edit_plant: [],
+
 
         }
     }
@@ -102,6 +51,26 @@ class Confirm_Product extends Component {
         }
     }
 
+    delete_product_plan_detail = async (plan_id) => {
+        let obj = {
+            plan_id: plan_id
+        }
+        try {
+            await post(obj, 'researcher/delete_product_plan', user_token).then((result) => {
+                if (result.success) {
+                    alert('ลบสูตรพัฒนาแล้ว')
+                    window.location.reload()
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+
+        }
+    }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -118,8 +87,18 @@ class Confirm_Product extends Component {
     }
 
     on_Close_Modal = () => {
-        this.setState({ open: false, material: false, edit_data: false });
+
+        this.setState({ open: false, material: false });
     };
+
+    on_Close_Modal_edit = () => {
+        if (window.confirm('คุณแน่ใจหรื่อไม่?')) {
+            // Save it!
+            window.location.reload()
+        } else {
+            // Do nothing!
+        }
+    }
 
     Material = (index) => {
         let product_plan = this.state.product_plan
@@ -139,12 +118,9 @@ class Confirm_Product extends Component {
         this.setState({
             edit_data: true,
             data_edit: data[index],
-            data_edit_nutrient: data[index].nutrient_precent
+            data_edit_nutrient: data[index].nutrient_precent,
+            data_edit_plant: data[index].plant
         });
-    }
-
-    Delete_Product = () => {
-        alert("ยกเลิกรายการ")
     }
 
     Send_information = () => {
@@ -282,7 +258,7 @@ class Confirm_Product extends Component {
                                             <td>
                                                 <NavLink>
                                                     <img src={edit_icon} style={{ width: "30px" }} onClick={() => { this.Edit_data(index) }} />
-                                                    <Modal open={this.state.edit_data} onClose={this.on_Close_Modal}>
+                                                    <Modal open={this.state.edit_data} onClose={this.on_Close_Modal_edit}>
                                                         <div className="Row">
                                                             <div className="col-12">
                                                                 <h3 style={{ textAlign: "center" }}>พัฒนาผลิตภัณฑ์</h3>
@@ -294,12 +270,13 @@ class Confirm_Product extends Component {
                                                         <div className="Row">
                                                             <div className="col-6">
                                                                 <h4>ข้อมูลสารอาหาร</h4>
+                                                                <input type="text" value={element.name} style={{ width: "200px" }} />
                                                             </div>
                                                             <div className="col-6">
                                                                 <h4>ปริมาณสารอาหาร</h4>
-
-                                                                <button>เพิ่มข้อมูล</button>
+                                                                <input type="text" style={{ width: "200px" }} />
                                                             </div>
+                                                            <button>เพิ่มข้อมูล</button>
                                                         </div>
                                                         {this.state.data_edit_nutrient.map((element) => {
                                                             return (
@@ -310,6 +287,7 @@ class Confirm_Product extends Component {
                                                                     <div className="col-6">
                                                                         <input value={element.y} />
                                                                     </div>
+                                                                    <button>ลบ</button>
                                                                 </div>
                                                             )
 
@@ -329,10 +307,28 @@ class Confirm_Product extends Component {
                                                                 <button>เพิ่มข้อมูล</button>
                                                             </div>
                                                         </div>
+                                                        {this.state.data_edit_plant.map((element) => {
+                                                            return (
+                                                                <div className="Row">
+                                                                    <div className="col-6">
+                                                                        <input value={element.plant_name} />
+                                                                    </div>
+                                                                    <div className="col-3">
+                                                                        <input value={element.plant_volume} />
+                                                                    </div>
+                                                                    <div className="col-3">
+                                                                        <input value={element.plant_volume_type} />
+                                                                    </div>
+                                                                    <button>ลบ</button>
+                                                                </div>
+                                                            )
+
+                                                        })}
                                                         <div className="Row">
                                                             <div className="col-12">
                                                                 <h4>เลือกรูปภาพ</h4>
-                                                                <input type="search" placeholder="กรุณาเลือกรูปภาพ" style={{ width: "500px" }} />
+                                                                <input type="file" placeholder="กรุณาเลือกรูปภาพ" style={{ width: "500px" }} /><br />
+                                                                <img src={ip + element.image} style={{ width: "240px" }} onClick={() => { this.Image() }} />
                                                             </div>
                                                         </div>
                                                         <NavLink>
@@ -350,7 +346,7 @@ class Confirm_Product extends Component {
                                             </td>
                                             <td>
                                                 <NavLink>
-                                                    <img src={delete_icon} style={{ width: "30px" }} onClick={() => { this.Delete_Product() }} />
+                                                    <img src={delete_icon} style={{ width: "30px" }} onClick={() => { this.delete_product_plan_detail(element.plan_id) }} />
                                                 </NavLink>
                                             </td>
                                             <td>

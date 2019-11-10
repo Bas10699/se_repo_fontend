@@ -97,6 +97,7 @@ class Confirm_Product extends Component {
                                 <th>สารอาหารที่ต้องการ</th>
                                 <th>จำนวนผลิตภัณฑ์</th>
                                 <th>ระยะเวลาการพัฒนา</th>
+                                <th>พัฒนาไปแล้ว(สูตร)</th>
                                 <th>กรอกข้อมูล</th>
                             </tr>
                             {
@@ -112,6 +113,7 @@ class Confirm_Product extends Component {
                                                 <td>{element.volume} {element.volume_type}</td>
                                                 <td>
                                                     กรุณาส่งสูตรก่อน :  <div style={{ color: "red" }}>{moment(element.date_line).utc().add('years', 543).format("DD/MM/YYYY")}</div></td>
+                                                <td>{element.count_plan}</td>
                                                 <td>
                                                     <NavLink to={"/Create_Info/product?product_id=" + element.product_id} ><button className="BTN_Signin" style={{ margin: "0" }} >สร้างสูตร</button></NavLink>
 
