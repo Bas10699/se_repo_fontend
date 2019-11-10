@@ -107,7 +107,6 @@ class Signup extends Component {
                             <option value='0'>--เลือกประเภท--</option>
                             <option value='2'>ผู้ประกอบการ</option>
                             <option value='4'>SE กลาง</option>
-                            <option value='3'>SE ย่อย</option>
                             <option value='1'>นักวิจัย</option>
                         </select>
 

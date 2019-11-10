@@ -519,10 +519,10 @@ class BuyingDetail extends Component {
                         <div className="col-1" />
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
-                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
-                            <h5>
+                            <h4 style={{ margin: "0" }}>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
+                            <h5 style={{ margin: "0" }}>
                                 โอนเข้าบัญชี :
-                            <select style={{ fontFamily: "fc_lamoonregular", fontSize: "24px" }}>
+                            <select style={{ fontFamily: "fc_lamoonregular", fontSize: "20px" }}>
                                     {this.state.invoice_detail ?
                                         this.state.invoice_detail.map((element, index) => {
                                             return (
@@ -530,20 +530,20 @@ class BuyingDetail extends Component {
                                             )
                                         }) : null}
                                 </select></h5>
-                            <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
+                            <h4 style={{ color: "red", marginTop:"10px"}}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
                             <div className="Row">
                                 <div className="col-6">
-                                    <h4>วันที่โอนเงิน</h4>
+                                    <h4 style={{marginTop:"0"}}>วันที่โอนเงิน</h4>
                                     <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} />
                                 </div>
                                 <div className="col-1"></div>
                                 <div className="col-5">
-                                    <h4>เวลาที่โอนเงิน</h4>
+                                    <h4 style={{marginTop:"0"}}>เวลาที่โอนเงิน</h4>
                                     <input type="time" name="time" id='time_proof' onChange={this.handleChange} />
                                 </div>
                             </div>
 
-                            <h4>แนบหลักฐานการโอนเงิน</h4>
+                            <h4 style={{ margin: "0" }}>แนบหลักฐานการโอนเงิน</h4>
                             <div>
                                 <input type="file"
                                     onChange={(e) => this.uploadpicture(e)} />
@@ -557,7 +557,7 @@ class BuyingDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-12">
-                            <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                            <button className="BTN_Cencle" style={{width:"200px"}} onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
                             <button className='BTN_CONFIRM' onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
                     </div>
                 </Modal>
@@ -618,7 +618,6 @@ class BuyingDetail extends Component {
                     
                     <div className="Row">
                         <div className="col-12" >
-                            <button className="BTN_PDF" onClick={()=>this.setState({review:false})}>ยกเลิก</button>
                             <button className='BTN_CONFIRM' onClick={()=>this.add_review()} >ยืนยัน</button>
                         </div>
                     </div>
