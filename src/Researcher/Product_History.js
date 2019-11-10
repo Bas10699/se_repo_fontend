@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { user_token } from '../Support/Constance';
-import { get, post } from '../Support/Service';
+import { get, post, ip } from '../Support/Service';
 import Modal from 'react-responsive-modal';
+import cart_img from '../Image/cart.png'
+import nutrients_img from '../Image/nutrients_img.png'
 
 const Product = [
     {
@@ -56,38 +58,40 @@ const Product = [
         Delete_data_img: "https://inwfile.com/s-dm/7dvzz2.png",
         Send_information_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQwHV0w_GqHEPvyssqRe-vKuUbfjZdsy_Q6l-oiKL5t1yRG_v7"
     }
-]      
+]
 
 class Confirm_Product extends Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
-            material: false
+            material: false,
+            product_plan: [],
+            nutrient_precent: [],
+            plant: [],
         }
     }
+    componentWillMount() {
+        this.get_history_product_plan()
+    }
 
-    get_user = async () => {
+    get_history_product_plan = async () => {
         try {
-            await get('show', user_token).then((result) => {
+            await get('researcher/get_history_product_plan_detail', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_user: result.result
+                        product_plan: result.result
                     })
-                    setTimeout(() => {
-                        console.log("get_user", result.result)
-                    }, 500)
-                } else {
-                    window.location.href = "/";
+                    console.log(result.result)
                 }
-            });
-        } catch (error) {
-            alert("get_user2" + error);
+                else {
+                    alert(result.error_message)
+                }
+            })
         }
-    }
-
-    componentWillMount() {
-        this.get_user()
+        catch (error) {
+            alert(error)
+        }
     }
 
     handleChange = (e) => {
@@ -96,23 +100,33 @@ class Confirm_Product extends Component {
         })
     }
 
-    on_Open_Modal = () => {
-        this.setState({ open: true });
+    on_Open_Modal = (index) => {
+        let product_plan = this.state.product_plan
+
+        this.setState({
+            open: true,
+            nutrient_precent: product_plan[index].nutrient_precent
+        });
     }
 
     on_Close_Modal = () => {
         this.setState({ open: false, material: false });
     };
 
-    Material = () => {
-        this.setState({ material: true });
+    Material = (index) => {
+        let product_plan = this.state.product_plan
+
+        this.setState({
+            material: true,
+            plant: product_plan[index].plant
+        });
     }
 
     Image = () => {
         alert("ดูรูปภาพ")
     }
 
-    render () {
+    render() {
         return (
             <div className="App">
 
@@ -121,7 +135,7 @@ class Confirm_Product extends Component {
                         <h3 style={{ textAlign: "center" }}>ประวัติการพัฒนาผลิตภัณฑ์</h3>
                     </div>
                 </div>
-                
+
                 <div className="Row">
                     <div className="col-12">
                         <table style={{ textAlign: "center" }}>
@@ -133,43 +147,43 @@ class Confirm_Product extends Component {
                                 <th>รูปภาพ</th>
                             </tr>
                             {
-                                Product.map((element, index) => {
+                                this.state.product_plan.map((element, index) => {
                                     return (
                                         <tr>
-                                            <td>{element.Product_name}</td>
-                                            <td>ชื่อสูตร</td>
+                                            <td>{element.product_name}</td>
+                                            <td>{element.product_plan_name}</td>
                                             <td>
                                                 <NavLink>
-                                                        <img src={element.Nutrients_img} style={{ width: "30px" }} onClick={() => this.on_Open_Modal()}/>
+                                                    <img src={nutrients_img} style={{ width: "30px" }} onClick={() => this.on_Open_Modal(index)} />
                                                     <Modal open={this.state.open} onClose={this.on_Close_Modal}>
                                                         <div className="Row">
                                                             <div className="col-12">
                                                                 <h3 style={{ textAlign: "center" }}>สารอาหารทั้งหมด</h3>
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <h4>
-                                                                                    ลำดับ
-                                                                                </h4>
-                                                                            </td>
-                                                                            <td>
-                                                                                <h4>
-                                                                                    ชื่อสารอาหาร
-                                                                                </h4>
-                                                                            </td>
-                                                                            <td>
-                                                                                <h4>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <h4>
+                                                                                ลำดับ
+                                                                            </h4>
+                                                                        </td>
+                                                                        <td>
+                                                                            <h4>
+                                                                                ชื่อสารอาหาร
+                                                                            </h4>
+                                                                        </td>
+                                                                        <td>
+                                                                            <h4>
                                                                                 ปริมาณ(%)
-                                                                                </h4>
-                                                                            </td>
-                                                                        </tr>
-                                                                        {
-                                                                        Product.map((element, index) => {
+                                                                            </h4>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {
+                                                                        this.state.nutrient_precent.map((element, index) => {
                                                                             return (
                                                                                 <tr>
                                                                                     <td>{index + 1}</td>
-                                                                                    <td>ชื่อสารอาหาร</td>
-                                                                                    <td>ปริมาณ(%)</td>
+                                                                                    <td>{element.name}</td>
+                                                                                    <td>{element.y}</td>
                                                                                 </tr>
                                                                             )
                                                                         })
@@ -182,8 +196,8 @@ class Confirm_Product extends Component {
                                             </td>
                                             <td>
                                                 <NavLink>
-                                                        <img src={element.Material_img} style={{ width: "30px" }} onClick={() => this.Material()}/>
-                                                        <Modal open={this.state.material} onClose={this.on_Close_Modal}>
+                                                    <img src={cart_img} style={{ width: "30px" }} onClick={() => this.Material(index)} />
+                                                    <Modal open={this.state.material} onClose={this.on_Close_Modal}>
                                                         <div className="Row">
                                                             <div className="col-12">
                                                                 <h3 style={{ textAlign: "center" }}>วัตถุดิบทั้งหมด</h3>
@@ -215,13 +229,13 @@ class Confirm_Product extends Component {
                                                                         </td>
                                                                     </tr>
                                                                     {
-                                                                        Product.map((element, index) => {
+                                                                        this.state.plant.map((element, index) => {
                                                                             return (
                                                                                 <tr>
                                                                                     <td>{index + 1}</td>
-                                                                                    <td>ชื่อวัตถุดิบ</td>
-                                                                                    <td>ปริมาณ</td>
-                                                                                    <td>หน่วย</td>
+                                                                                    <td>{element.plant_name}</td>
+                                                                                    <td>{element.plant_volume}</td>
+                                                                                    <td>{element.plant_volume_type}</td>
                                                                                 </tr>
                                                                             )
                                                                         })
@@ -234,7 +248,7 @@ class Confirm_Product extends Component {
                                             </td>
                                             <td>
                                                 <NavLink>
-                                                        <img src={element.img} style={{ width: "30px" }} onClick={() => {this.Image()}}/>
+                                                    <img src={ip + element.image} style={{ width: "30px" }} onClick={() => { this.Image() }} />
                                                 </NavLink>
                                             </td>
                                         </tr>

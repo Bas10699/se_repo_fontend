@@ -123,8 +123,24 @@ class Confirm_Product extends Component {
         });
     }
 
-    Send_information = () => {
-        alert("ส่งข้อมูลเรียบร้อยเเล้ว")
+    send_developer_demand = async (plan_id) => {
+        let obj = {
+            plan_id: plan_id
+        }
+        try {
+            await post(obj, 'researcher/send_developer_demand', user_token).then((result) => {
+                if (result.success) {
+                    alert('ส่งข้อมูลเรียบร้อย')
+                    window.location.reload()
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
     }
 
     render() {
@@ -351,7 +367,7 @@ class Confirm_Product extends Component {
                                             </td>
                                             <td>
                                                 <NavLink>
-                                                    <img src={send_data_icon} style={{ width: "30px" }} onClick={() => { this.Send_information() }} />
+                                                    <img src={send_data_icon} style={{ width: "30px" }} onClick={() => { this.send_developer_demand(element.plan_id) }} />
                                                 </NavLink>
                                             </td>
                                         </tr>
