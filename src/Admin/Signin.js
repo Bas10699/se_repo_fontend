@@ -50,37 +50,44 @@ class Signin extends Component {
         }
         console.log("Signin" + this.state);
     }
-    responseFacebook(response) {
-        console.log(response);
-        if (response) {
+    // responseFacebook(response) {
+    //     console.log(response);
+    //     if (response) {
+    //         let obj = {
+    //             facebook_id: response.userID,
+    //             name: response.name,
+    //             email: response.email
+    //         }
+    //         FacebookLogin(obj)
+    //     }
+    // }
+
+
+    responseFacebook = async (response) => {
+        console.log(response)
+        if (response.userID) {
             let obj = {
                 facebook_id: response.userID,
                 name: response.name,
                 email: response.email
             }
-            this.FacebookLogin(obj)
-
+            try {
+                await post(obj, 'user/facebook_login', null).then((result) => {
+                    if (result.success) {
+                        localStorage.setItem("user_token", result.token);
+                        window.location.href = "/";
+                        console.log("Signin" + result.token);
+                    }
+                    else {
+                        alert(result.error_message)
+                    }
+                })
+            }
+            catch (error) {
+                alert(error)
+            }
         }
-    }
 
-
-    FacebookLogin = async (obj) => {
-        console.log(obj)
-        try {
-            await post(obj, 'user/facebook_login', null).then((result) => {
-                if (result.success) {
-                    localStorage.setItem("user_token", result.token);
-                    window.location.href = "/";
-                    console.log("Signin" + result.token);
-                }
-                else {
-                    alert(result.error_message)
-                }
-            })
-        }
-        catch (error) {
-            alert(error)
-        }
     }
 
 
