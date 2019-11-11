@@ -319,7 +319,7 @@ class OrderDetail extends Component {
 
                                 <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
                                 <h5>ผู้ประกอบการชำระเงินแล้ว</h5>
-                                <h5>รอ Neo-trust ออกใบเสร็จ</h5>
+                                <h5>รอ SE กลาง ออกใบเสร็จ</h5>
                             </div>
                         </div>
                     </div>

@@ -158,8 +158,8 @@ class Timeline extends Component {
                             null
                         }
                         {this.props.status >= 4 ?
-                            <div style={{ marginLeft: "83%", width: "40%", marginTop: "-40px",marginBottom:"20px" }}>
-                                หมายเลขพัสดุ : SHP4042678386
+                            <div style={{ marginLeft: "83%", width: "40%", marginTop: "-40px",marginBottom:"50px" }}>
+                                {/* หมายเลขพัสดุ : SHP4042678386 */}
                             </div>
                             :
                             null

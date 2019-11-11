@@ -382,7 +382,7 @@ class M_Data extends Component {
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>
-                            เลือก Neo-firm
+                            เลือก SE ย่อย
                         <select className="select" name="volum" onChange={this.select_se}>
                                 {this.state.get_se.map((ele_get_se, index) => {
                                     return (

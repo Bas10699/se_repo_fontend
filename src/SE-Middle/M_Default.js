@@ -314,7 +314,7 @@ class M_Default extends Component {
                  <div className="Row">
                     <div className="col-12">
                         <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>
-                            เลือก Neo-firm
+                            เลือก SE ย่อย
                         <select className="select" onChange={this.get_Cert} type="select">
                                 {this.state.name_se.map((ele_get_se, index) => {
                                     return (
