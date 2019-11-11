@@ -5,7 +5,7 @@
 //4 = se-sub
 import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
-import { get,post } from '../Support/Service';
+import { get, post } from '../Support/Service';
 import { NavLink } from 'react-router-dom'
 import { element } from 'prop-types';
 import Modal from 'react-responsive-modal'
@@ -205,7 +205,7 @@ class User extends Component {
                             </tr>
                             <tr>
                                 <th>บัญชีผู้ใช้ Facebook</th>
-                                <td>{this.state.get_user ? <div style={{ color: 'GREEN' }}>เชื่อมต่อแล้ว</div> :
+                                <td>{this.state.get_user ? this.state.get_user.facebook_id ? <div style={{ color: 'GREEN' }}>เชื่อมต่อแล้ว</div> :
                                     <FacebookLogin
                                         textButton=" เชื่อมต่อกับ facebook"
                                         cssClass="facebook-button"
@@ -215,7 +215,8 @@ class User extends Component {
                                         fields="name,email,picture"
                                         // scope="public_profile,user_friends,user_actions.books"
                                         callback={this.responseFacebook}
-                                    />}</td>
+                                    /> :
+                                    null}</td>
                             </tr>
 
 

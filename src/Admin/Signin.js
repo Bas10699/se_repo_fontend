@@ -50,14 +50,21 @@ class Signin extends Component {
         }
         console.log("Signin" + this.state);
     }
-
-    responseFacebook = async (response) => {
+    responseFacebook(response) {
         console.log(response);
-        let obj = {
-            facebook_id: response.userID,
-            name: response.name,
-            email: response.email
+        if (response) {
+            let obj = {
+                facebook_id: response.userID,
+                name: response.name,
+                email: response.email
+            }
+            this.FacebookLogin(obj)
+
         }
+    }
+
+
+    FacebookLogin = async (obj) => {
         console.log(obj)
         try {
             await post(obj, 'user/facebook_login', null).then((result) => {
@@ -75,6 +82,7 @@ class Signin extends Component {
             alert(error)
         }
     }
+
 
 
     render() {
