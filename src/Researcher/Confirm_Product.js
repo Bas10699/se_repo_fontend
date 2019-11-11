@@ -232,16 +232,27 @@ class Confirm_Product extends Component {
                                             })}</td>
                                             <td>{element.volume} {element.volume_type}</td>
                                             <td>
-                                                <h5 style={{margin:"0"}}>กรุณาตอบรับก่อนวันที่ : {moment(element.date_confirm).format('DD/MM/YYYY')}</h5>
-                                                <h5 style={{margin:"0",color:"red"}}>ส่งสูตรก่อนวันที่ : {moment(element.date_line).format('DD/MM/YYYY')}</h5>
+                                                <h5 style={{ margin: "0" }}>กรุณาตอบรับภายในวันที่ : {moment(element.date_confirm).format('DD/MM/YYYY')}</h5>
+                                                <h5 style={{ margin: "0", color: "red" }}>ส่งสูตรภายในวันที่ : {moment(element.date_line).format('DD/MM/YYYY')}</h5>
                                             </td>
                                             <td>
-                                                {element.product_researcher_status == 0 ? <div><NavLink>
-                                                    <img alt="ยืนยัน" src={this.state.Check_true_img} style={{ width: "30px" }} onClick={() => { this.on_Open_Modal(element.product_name, element.volume, element.volume_type, element.product_id) }} />
-                                                </NavLink>
-                                                    <NavLink>
-                                                        <img alt="ยกเลิก" src={this.state.Check_false_img} style={{ width: "30px" }} onClick={() => { this.Delete_Product(element.product_name, element.volume, element.volume_type, element.product_id) }} />
-                                                    </NavLink></div>
+                                                {element.product_researcher_status == 0 ? <div>
+                                                    ยืนยัน<img alt="ยืนยัน" src={this.state.Check_true_img} style={{ width: "30px" }}
+                                                        onClick={() => {
+                                                            this.on_Open_Modal(
+                                                                element.product_name,
+                                                                element.volume,
+                                                                element.volume_type,
+                                                                element.product_id)
+                                                        }} />
+                                                    ยกเลิก<img alt="ยกเลิก" src={this.state.Check_false_img} style={{ width: "30px" }}
+                                                        onClick={() => {
+                                                            this.Delete_Product(element.product_name,
+                                                                element.volume,
+                                                                element.volume_type,
+                                                                element.product_id)
+                                                        }} />
+                                                </div>
                                                     : this.render_status(element.product_researcher_status)}
 
 

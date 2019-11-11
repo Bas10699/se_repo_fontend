@@ -60,6 +60,12 @@ class Defalut extends Component {
                                 <div className="col-1"></div>
                                 <div className="col-5">
                                     <h2>{product_data.product_name}</h2>
+                                    {product_data.price.map((element_p, index) => {
+                                                        if (element_p.volume == 1) {
+                                                            return (<div>{element_p.price} บาท/กิโลกรัม</div>)
+                                                        }
+
+                                                    })}
                                     <NavLink to={"/EditProduct/product?product_id=" + product_data.product_id}><button className="BTN_Buy">ซื้อสินค้า</button></NavLink>
                                 </div>
 
@@ -75,16 +81,21 @@ class Defalut extends Component {
                     <div className="col-10">
                         {//จะเเสดงเเค่ 4 ตัวสินค้า
                             this.state.product_data.map((element, index) => {
-                                for (var i = 0; index < 4; i++) {
+                                // for (var i = 0; index < 4; i++) {
                                     return (
                                         <div className="HeaderAreaCard">
                                             {element.image ? <img alt="Product" src={ip + element.image} /> : <img alt="Product" src={this.state.default_image} />}
                                             <h4>{element.product_name}</h4>
-                                            
+                                            {element.price.map((element_p, index) => {
+                                                        if (element_p.volume == 1) {
+                                                            return (<div>{element_p.price} บาท/กิโลกรัม</div>)
+                                                        }
+
+                                                    })}
                                             <NavLink to={"/EditProduct/product?product_id=" + element.product_id}><button>รายละเอียดเพิ่มเติม</button></NavLink>
                                         </div>
                                     )
-                                }
+                                // }
                             })
                         }
                     </div>

@@ -116,7 +116,7 @@ class BuyingDetail extends Component {
                         <div className="col-12">
                             <div className='_Card'>
                                 <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
-                                <h5>รอ Neo-trust ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
+                                <h5>รอ SE กลาง ยืนยันการสั่งซื้อ และส่งใบแจ้งหนี้กลับมา</h5>
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@ class BuyingDetail extends Component {
                         <div className="col-12">
                             <div className='_Card'>
                                 <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
-                                <h5>รอ Neo-trust ตรวจสอบการโอนเงิน</h5>
+                                <h5>รอ SE กลาง ตรวจสอบการโอนเงิน</h5>
                             </div>
                         </div>
                     </div>
@@ -183,31 +183,7 @@ class BuyingDetail extends Component {
                             <div className="col-12">
                                 <div className='_Card'>
                                     <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
-                                    <h4>{this.state.comfirmLog == 0 ?
-                                        <div>
-                                            เลือกการจัดส่งประเภท
-                                            <div className="Row">
-                                                <div className="col-6">
-                                                    <input type="radio" name="logistic" /> รับซื้อหน้าสวน <br />
-                                                    <input type="radio" name="logistic" /> รถตัวเอง<br />
-                                                    <input type="radio" name="logistic" /> รถเช่า<br />
-                                                    <input type="radio" name="logistic" /> ไปษรณีย์
-                                                </div>
-                                                <div className="col-6">
-                                                    <input type="radio" name="logistic" /> รถไฟ<br />
-                                                    <input type="radio" name="logistic" /> เครื่องบิน<br />
-                                                    <input type="radio" name="logistic" /> อื่นๆ
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        :
-                                        <div>
-                                            เลือกการจัดส่งประเภท รถไฟ
-                                            <h4>รอหมายเลขพัสดุ</h4>
-                                        </div>
-                                    }
-                                    </h4>
+                                    <h4>รอ SE กลาง จัดส่งสินค้า</h4>
 
                                 </div>
                             </div>
@@ -215,9 +191,9 @@ class BuyingDetail extends Component {
 
                         <div className="Row">
                             <div className="col-12" style={{ marginLeft: "50px" }}>
-                                {this.state.comfirmLog == 0 ? <button className='BTN_CONFIRM'
+                                {/* {this.state.comfirmLog == 0 ? <button className='BTN_CONFIRM'
                                     onClick={() => this.setState({ comfirmLog: 1 })}
-                                >ยืนยันการขนส่ง</button> : null}
+                                >ยืนยันการขนส่ง</button> : null} */}
 
                             </div>
                         </div>
@@ -246,7 +222,7 @@ class BuyingDetail extends Component {
                             <div className='_Card'>
 
                                 <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
-                                <h4>หมายเลขพัสดุ : SHP4042678386</h4>
+                                <h4>ยืนยันได้รับสินค้า</h4>
 
                             </div>
                         </div>

@@ -240,6 +240,8 @@ class Create_Info extends Component {
                             <tr>
                                 <th>ชื่อพืช </th>
                                 <th>จำนวน/หน่วย</th>
+                                <th>ราคาต้นทุน/หน่วย (บาท)</th>
+                                <th>ราคารวม (บาท)</th>
                                 <th>ลบ</th>
                             </tr>
                             {this.state.plants.map((ele_plant) => {
@@ -247,6 +249,7 @@ class Create_Info extends Component {
                                     <tr>
                                         <td>{ele_plant.plant_name}</td>
                                         <td>{ele_plant.plant_volume} {ele_plant.plant_volume_type}</td>
+                                        <td>ราคา</td>
                                         <td><img src={delete_icon} style={{ width: "30px" }} alt="cancle" /></td>
                                     </tr>
                                 )
@@ -263,7 +266,7 @@ class Create_Info extends Component {
                             </div>
                         </div>
                         <div className="Row">
-                            <div className="col-6">
+                            {/* <div className="col-6">
                                 <h5 style={{ marginBottom: "10px" }}>ข้อมูลสารอาหาร</h5>
                                 <input type="text" id='nutrient_data' onChange={this.handleChange} style={{ width: "250px" }} />
                             </div>
@@ -272,7 +275,7 @@ class Create_Info extends Component {
                                 <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} />กรัม
                                 <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-10px" }}>เพิ่มปริมาณสารอาหาร</button>
                                 <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="Row">
                             <div className="col-5">

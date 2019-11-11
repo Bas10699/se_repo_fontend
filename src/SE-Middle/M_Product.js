@@ -511,7 +511,7 @@ class ProductDetail extends Component {
                             </div>
                             {console.log("product_data : ", this.state.product_data)}
                             <div style={{ width: "53%" }}>
-                                <h3 style={{ margin: "0" }}>Neo-firm ที่ส่งมอบวัตถุดิบ</h3>
+                                <h3 style={{ margin: "0" }}>SE ย่อย ที่ส่งมอบวัตถุดิบ</h3>
 
                                 {
                                     this.state.frequency.map((element, index) => {

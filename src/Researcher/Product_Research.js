@@ -4,6 +4,7 @@ import ConfirmProduct from './Confirm_Product';
 import Product_Info from './Product_Info';
 import Check_Details from './Check_Details';
 import Product_History from './Product_History';
+import Create_Nutrients from './Create_Nutrients';
 
 class Product_Research extends Component {
 
@@ -21,24 +22,29 @@ class Product_Research extends Component {
                 break;
             case "/Product_Research/Product_History": render_page = <Product_History />
                 break;
+                case "/Product_Research/Create_Nutrients": render_page = <Create_Nutrients />
+                break;
             default:
                 break;
         }
         return (
             <div className="App">
-                <div className="tab">
+                <div className="tab" >
 
                     <NavLink to={"/Product_Research/Confirm_Product"}>
-                        <button>ยืนยันการพัฒนาผลิตภัณฑ์</button>
+                        <button style={{width:"20%"}}>ยืนยันการพัฒนาผลิตภัณฑ์</button>
                     </NavLink>
                     <NavLink to={"/Product_Research/Product_Info"}>
-                        <button>ข้อมูลผลิตภัณฑ์</button>
+                        <button style={{width:"20%"}}>ข้อมูลผลิตภัณฑ์</button>
                     </NavLink>
                     <NavLink to={"/Product_Research/Check_Details"}>
-                        <button>ตรวจสอบรายละเอียด</button>
+                        <button style={{width:"20%"}}>ตรวจสอบรายละเอียด</button>
                     </NavLink>
                     <NavLink to={"/Product_Research/Product_History"}>
-                        <button>ประวัติการพัฒนาผลิตภัณฑ์</button>
+                        <button style={{width:"20%"}}>ประวัติการพัฒนาผลิตภัณฑ์</button>
+                    </NavLink>
+                    <NavLink to={"/Product_Research/Create_Nutrients"}>
+                        <button style={{width:"20%"}}>จัดการสารอาหาร</button>
                     </NavLink>
                     
                 </div>
