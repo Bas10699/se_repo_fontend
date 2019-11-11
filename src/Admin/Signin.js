@@ -3,6 +3,7 @@ import '../App.css';
 import { user_token } from '../Support/Constance';
 import { ip, get, post } from '../Support/Service';
 import { NavLink } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 
 class Signin extends Component {
     constructor(props) {
@@ -14,13 +15,13 @@ class Signin extends Component {
     }
 
     handleChange = (e) => {
-        console.log('va',e.target.value)
+        console.log('va', e.target.value)
         this.setState({
             [e.target.id]: e.target.value
         })
         if (e.key === 'Enter') {
             this.get_users()
-          }
+        }
     }
 
     handleSubmit = (e) => {
@@ -50,21 +51,31 @@ class Signin extends Component {
         console.log("Signin" + this.state);
     }
 
-    facebook = async () => {
-        console.log("facebook");
+    responseFacebook = async (response) => {
+        console.log(response);
+        let obj = {
+            facebook_id: response.userID,
+            name: response.name,
+            email: response.email
+        }
+        console.log(obj)
         try {
-            await get("auth/facebook", null).then(res => {
-                if (res.success) {
-                    console.log("facebook : " + res.token);
+            await post(obj, 'user/facebook_login', null).then((result) => {
+                if (result.success) {
+                    localStorage.setItem("user_token", result.token);
+                    window.location.href = "/";
+                    console.log("Signin" + result.token);
                 }
                 else {
-                    window.location.href = "/Signup";
+                    alert(result.error_message)
                 }
-            });
-        } catch (error) {
-            alert("alert_facebook" + error);
+            })
+        }
+        catch (error) {
+            alert(error)
         }
     }
+
 
     render() {
         return (
@@ -77,30 +88,45 @@ class Signin extends Component {
 
                 <div className="Row">
                     <div className="col-4"></div>
-                    
+
                     <div className="col-4">
                         <h4> ชื่อผู้ใช้งาน </h4>
-                        <input type="text" id="username" 
-                        placeholder="somying1234" 
-                        name="username" onChange={this.handleChange} 
+                        <input type="text" id="username"
+                            placeholder="somying1234"
+                            name="username" onChange={this.handleChange}
                         />
                         <h4> รหัสผ่าน </h4>
-                        <input type="password" id="password" 
-                        placeholder="กรอกรหัสผ่าน" 
-                        name="password" onKeyUp={this.handleChange}
+                        <input type="password" id="password"
+                            placeholder="กรอกรหัสผ่าน"
+                            name="password" onKeyUp={this.handleChange}
                         />
 
-                        <button className="BTN_Signin" 
-                        onClick={() => this.get_users()} >
-                            
+                        <FacebookLogin
+                            textButton=" เข้าสู่ระบบด้วย facebook"
+                            cssClass="facebook-button"
+                            icon="fa-facebook"
+                            appId="872871633077260"
+                            autoLoad={false}
+                            fields="name,email,picture"
+                            // scope="public_profile,user_friends,user_actions.books"
+                            callback={this.responseFacebook}
+                        />
+
+                        <button className="BTN_Signin"
+                            onClick={() => this.get_users()} >
+
                             เข้าสู่ระบบ
                         </button>
                         <NavLink to={'/Signup'}><button className="BTN_Signup" >สร้างบัญชีผู้ใช้</button></NavLink>
                     </div>
 
 
+
+
                     <div className="col-4"></div>
+
                 </div>
+
             </div >
         );
     }

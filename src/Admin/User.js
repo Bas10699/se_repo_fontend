@@ -5,11 +5,11 @@
 //4 = se-sub
 import React, { Component } from 'react';
 import { user_token } from '../Support/Constance';
-import { get } from '../Support/Service';
+import { get,post } from '../Support/Service';
 import { NavLink } from 'react-router-dom'
 import { element } from 'prop-types';
 import Modal from 'react-responsive-modal'
-
+import FacebookLogin from 'react-facebook-login';
 
 
 class User extends Component {
@@ -104,6 +104,27 @@ class User extends Component {
         }
     }
 
+    responseFacebook = async (response) => {
+        console.log(response);
+        let obj = {
+            facebook_id: response.userID,
+        }
+        console.log(obj)
+        try {
+            await post(obj, 'user/update_facebook_id', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload();
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+
 
 
     componentWillMount() {
@@ -166,10 +187,10 @@ class User extends Component {
                                 <th>ประเภทผู้ใช้งาน</th>
                                 <td>{this.state.get_user ? this.render_type(this.state.get_user.type_user) : null}</td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <th>อีเมล์</th>
                                 <td>{this.state.get_user ? this.state.get_user.email : null}</td>
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <th>เบอร์โทรศัพท์</th>
                                 <td>{this.state.get_user ? this.state.get_user.phone : null}</td>
@@ -182,6 +203,21 @@ class User extends Component {
                                 <th>ที่อยู่</th>
                                 <td>{this.state.get_user ? this.state.get_user.address : null}</td>
                             </tr>
+                            <tr>
+                                <th>บัญชีผู้ใช้ Facebook</th>
+                                <td>{this.state.get_user ? <div style={{ color: 'GREEN' }}>เชื่อมต่อแล้ว</div> :
+                                    <FacebookLogin
+                                        textButton=" เชื่อมต่อกับ facebook"
+                                        cssClass="facebook-button"
+                                        icon="fa-facebook"
+                                        appId="872871633077260"
+                                        autoLoad={false}
+                                        fields="name,email,picture"
+                                        // scope="public_profile,user_friends,user_actions.books"
+                                        callback={this.responseFacebook}
+                                    />}</td>
+                            </tr>
+
 
                         </table>
                         {this.state.get_user ? this.state.get_user.type_user === '4' || this.state.get_user.type_user === '3' ?
@@ -189,8 +225,8 @@ class User extends Component {
                                 this.state.bank_information.map((element) => {
                                     return (
                                         <div className="_Card">
-                                            
-                            <h3 style={{ margin: "0px" }}>{element.bankName}</h3>
+
+                                            <h3 style={{ margin: "0px" }}>{element.bankName}</h3>
                                             <h4 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount} เลขที่บัญชี {element.bankNo}</h4>
                                         </div>
                                     )
