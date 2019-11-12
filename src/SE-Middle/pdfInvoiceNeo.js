@@ -49,7 +49,7 @@ class PdfInvoice extends Component {
                             text: ''
                         },
                         {
-                            text: 'ใบเสร็จรับเงิน',
+                            text: 'ใบแจ้งหนี้',
                             bold: true,
                             style: 'subheader',
                             alignment: 'center'

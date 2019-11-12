@@ -3,8 +3,8 @@ import { post, ip } from '../Support/Service';
 import { user_token, addComma } from '../Support/Constance';
 import queryString from 'query-string';
 import PdfOrder from '../SE-Middle/pdfOrderNeo';
-import PdfInvoice from '../Support/PdfInvoice'
-import PdfBill from '../Support/PdfBill'
+import PdfInvoice from '../SE-Middle/pdfInvoiceNeo'
+import PdfBill from '../SE-Middle/pdfBillNeo'
 import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import one from '../Image/one.png'
@@ -187,14 +187,14 @@ class TimelineNeo extends Component {
                 }
                 {this.props.status >= 1 ?
                     <div style={{ marginLeft: "22.8%", width: "30%", marginTop: "-40px" }}>
-                        <PdfInvoice data={this.props.invoice} order={this.props.order} />
+                        <PdfInvoice data={this.props.order} />
                     </div>
                     :
                     null
                 }
                 {this.props.status >= 3 ?
                     <div style={{ marginLeft: "43.1%", width: "30%", marginTop: "-40px" }}>
-                         <PdfBill data={this.props.order} invoice={this.props.invoice} payment={this.props.payment} />
+                         <PdfBill data={this.props.order} />
                     </div>
                     :
                     null

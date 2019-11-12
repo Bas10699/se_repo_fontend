@@ -9,7 +9,15 @@ class AddProduct extends Component {
         this.state = {
             product_name: null,
             product_detail: null,
-            cost: 0
+            cost: 0,
+            price:[],
+            amount_stock:0,
+            kg:'',
+            tun:'',
+            amount_stock:0,
+            money:0,
+            volume:0,
+
         }
     }
     handleChange = (e) => {
@@ -17,6 +25,18 @@ class AddProduct extends Component {
             [e.target.id]: e.target.value
         })
     }
+
+    add_price = () =>{
+        let price = this.state.price
+        price.push({
+            price:this.state.money,
+            volume: this.state.volume
+        })
+        this.setState({
+            price:price
+        })
+    }
+
     add_product = async () => {
         let obj = {
 
@@ -51,17 +71,21 @@ class AddProduct extends Component {
 
                         <h4>ราคาทุน (รับซื้อจาก SE ย่อย)</h4>
                         <h4><input type="number" style={{ width: "20%" }}
-                            name="cost" id="cost" min="1"
+                             id="cost" min="1"
                         /> บาท / กิโลกรัม</h4>
 
+                        <h4>จำนวนสินค้าในคลัง</h4>
+                        <h4><input type="number" style={{ width: "20%" }}
+                             id="amount_stock" min="1"
+                        /> บาท / กิโลกรัม</h4>
 
                         <h4>ราคาขาย</h4>
                         <h4><input type="number" style={{ width: "20%" }}
-                            name="cart_product" id="cart_product" min="1"
+                            name="cart_product" id="money" min="1"
                         /> บาท /
     
                             <input type="number" style={{ width: "20%" }}
-                                name="cart_product" id="cart_product" min="1"
+                                name="cart_product" id="volume" min="1"
                             />
                             หน่วย
                             <select style={{ width: "20%" }} name="volum">

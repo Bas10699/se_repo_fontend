@@ -46,6 +46,12 @@ class UserAll extends Component {
             case "5":
                 render_user = <div > Admin </div>
                 break;
+            case "A":
+                render_user = 'สมาชิก'
+                break;
+            case "B":
+                render_user = 'พนักงานขาย'
+                break;
 
             default:
                 render_user = <div className="FontDanger"> เกิดข้อผิดพลาด </div>
@@ -134,9 +140,9 @@ class UserAll extends Component {
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>{this.render_type(element.type_user)}</td>
                                         <td style={{ textAlign: "left", width: "30%", borderLeft: "1px solid #f4f4f4" }}>{element.address}</td>
                                         <td style={{ borderLeft: "1px solid #f4f4f4" }}>
-                                            <NavLink to={'/user/userID?user_id=' + element.user_id}><img alt="edit" src={this.state.edit} style={{ width: "20px" }}/></NavLink>
+                                            <NavLink to={'/user/userID?user_id=' + element.user_id}><img alt="edit" src={this.state.edit} style={{ width: "20px" }} /></NavLink>
 
-                                            
+
                                         </td>
                                     </tr>
                                 )

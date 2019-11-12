@@ -66,7 +66,7 @@ class S_OrderDetail extends Component {
                     if (result.result.order_farmer_status == 1) {
                         this.get_order_farmer()
                     }
-                    console.log(result.result)
+                    console.log('bb',result.result)
                     setTimeout(() => { this.filterPlant(result.result.plant_name) }, 500)
 
                 }
@@ -326,7 +326,7 @@ class S_OrderDetail extends Component {
                     <div className="col-1"></div>
 
                     <div className="col-7">
-                        {this.state.order.order_se_status == 1 ?
+                        {this.state.order.order_se_status == 2 ?
                             <button onClick={() => this.setState({ OpenProof: true })}
                                 className="BTN_PDF">ตรวจสอบหลักฐานการโอนเงิน</button>
                             :
@@ -432,19 +432,19 @@ class S_OrderDetail extends Component {
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12" >
-                            {/* <a href={ip + this.state.payment.image_proof}>
-                                <img src={ip + this.state.payment.image_proof}
+                            <a href={ip + this.state.order.order_se_payment_image}>
+                                <img src={ip + this.state.order.order_se_payment_image}
                                     style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
-                            </a> */}
+                            </a>
                         </div>
                         <div className="col-5">
 
-                            {/* <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
-                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.invoice.invoice_id}</h4>
-                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
-                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
-                            <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
-                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
+                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_se_id} </h4>
+                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.order.order_se_invoice_id}</h4>
+                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.order.order_se_invoice_date_send).format('DD/MM/YYYY')}</h4>
+                            <h4>วันที่ชำระเงิน : {moment(this.state.order.order_se_Payment_date).format('DD/MM/YYYY')} </h4>
+                            <h4>เวลาที่ชำระเงิน : {this.state.order.order_se_Payment_time}</h4>
+                            {/* <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
                             <button className="BTN_CONFIRM" >ออกใบเสร็จ</button>
                             <button className="BTN_PDF" onClick={() => this.setState({ OpenProof: false })}>ยกเลิก</button>
 

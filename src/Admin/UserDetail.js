@@ -44,7 +44,13 @@ class UserDetail extends Component {
                 render_user = 'SE กลาง'
                 break;
             case "5":
-                render_user = 'Admin' 
+                render_user = 'Admin'
+                break;
+            case "A":
+                render_user = 'สมาชิก'
+                break;
+            case "B":
+                render_user = 'พนักงานขาย'
                 break;
 
             default:
@@ -74,7 +80,7 @@ class UserDetail extends Component {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         try {
-            await post(params, 'user/show_user', user_token).then((result) => {
+            await post(params, 'user/show_user_detail', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
                         get_user: result.result
@@ -183,7 +189,7 @@ class UserDetail extends Component {
                                     <option value='4'>SE กลาง</option>
                                     <option value='3'>SE ย่อย</option>
                                 </select>
-                                
+
                             </div>
                             <div className="col-1"></div>
 
@@ -209,7 +215,7 @@ class UserDetail extends Component {
                                     value={this.state.get_user.username}
                                     onChange={this.handleChange}
                                 />
-                                <button className="BTN_Signup" onClick={()=> this.onCloseModal()}>ยกเลิก</button>
+                                <button className="BTN_Signup" onClick={() => this.onCloseModal()}>ยกเลิก</button>
                                 <button className="BTN_Signin" onClick={() => this.update_data_user()}>บันทึกข้อมูลผู้ใช้งาน</button>
 
                             </div>
