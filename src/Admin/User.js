@@ -52,6 +52,12 @@ class User extends Component {
             case "5":
                 render_user = <div > Admin </div>
                 break;
+            case "A":
+                render_user = <div > สมาชิก </div>
+                break;
+            case "B":
+                render_user = <div > พนักงานขาย </div>
+                break;
 
             default:
                 render_user = <div className="FontDanger"> เกิดข้อผิดพลาด </div>
@@ -221,7 +227,7 @@ class User extends Component {
 
 
                         </table>
-                        {this.state.get_user ? this.state.get_user.type_user === '4' || this.state.get_user.type_user === '3' ?
+                        {this.state.get_user ? this.state.get_user.type_user === '4' || this.state.get_user.type_user === '3' ||  this.state.get_user.type_user === 'B'?
                             this.state.bank_information ?
                                 this.state.bank_information.map((element) => {
                                     return (

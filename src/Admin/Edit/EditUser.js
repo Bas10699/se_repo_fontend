@@ -31,7 +31,7 @@ class EditUser extends Component {
             edit_bankAccount: null,
             edit_bankName: null,
             edit_bankNo: null,
-            index:0
+            index: 0
 
         };
 
@@ -54,6 +54,12 @@ class EditUser extends Component {
                 break;
             case "5":
                 render_user = 'Admin'
+                break;
+            case "A":
+                render_user = 'สมาชิก'
+                break;
+            case "B":
+                render_user = 'พนักงานขาย'
                 break;
 
             default:
@@ -179,10 +185,10 @@ class EditUser extends Component {
     };
 
     add_invoice = () => {
-        if(this.state.bank_information == ''){
+        if (this.state.bank_information == '') {
             var bank = []
         }
-        else{
+        else {
             var bank = this.state.bank_information
         }
         // console.log(bank)
@@ -198,19 +204,19 @@ class EditUser extends Component {
 
     }
 
-    open_edit_invoice = (index) =>{
+    open_edit_invoice = (index) => {
         let bank = this.state.bank_information
-        
-        this.setState({ 
+
+        this.setState({
             openEdit: true,
-            index:index,
+            index: index,
             edit_bankAccount: bank[index].bankAccount,
             edit_bankName: bank[index].bankName,
             edit_bankNo: bank[index].bankNo
-         })
+        })
     }
 
-    edit_invoice = () =>{
+    edit_invoice = () => {
         let index = this.state.index
         this.state.bank_information[index] = {
             bankAccount: this.state.edit_bankAccount,
@@ -245,7 +251,7 @@ class EditUser extends Component {
                             onChange={this.handleChange}
                         />
                         <h4>ประเภทผู้ใช้งาน : {this.render_type(this.state.get_user ? this.state.get_user.type_user : null)}</h4>
-                        
+
                         <h4>เบอร์โทรศัพท์</h4>
                         < input
                             type="text" id="phone"
@@ -264,7 +270,7 @@ class EditUser extends Component {
                             value={this.state.get_user.address}
                             onChange={this.handleChange}
                         />
-                       
+
                     </div>
                     <div className="col-1"></div>
 
@@ -325,7 +331,7 @@ class EditUser extends Component {
 
                                 <div className="col-10">
 
-                                    <h5>ชื่อธนาคาร</h5> <input type="text" id='bankName' placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์"  onChange={this.handleChange_bank} />
+                                    <h5>ชื่อธนาคาร</h5> <input type="text" id='bankName' placeholder="ธนาคารกรุงไทย, ธนาคารไทยพาณิชย์" onChange={this.handleChange_bank} />
                                     <h5>เลขที่บัญชี</h5> <input type="text" id='bankNo' pattern="[0-9]{1,}" placeholder="123-4-56789-0" onChange={this.handleChange_bank} />
                                     <h5>ชื่อบัญชี</h5> <input type="text" id='bankAccount' placeholder="นางบัญชี ธนาคาร, Miss.bunshe Thanakan" onChange={this.handleChange_bank} />
 
@@ -354,9 +360,9 @@ class EditUser extends Component {
                     </div>
                     <div className="col-1"></div>
                 </div>
-                <div style={{width:"57%"}}>
-                <button className="BTN_Signin" onClick={() => this.update_data_user()}>บันทึกข้อมูลผู้ใช้งาน</button>
-                        <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink></div>
+                <div style={{ width: "57%" }}>
+                    <button className="BTN_Signin" onClick={() => this.update_data_user()}>บันทึกข้อมูลผู้ใช้งาน</button>
+                    <NavLink to={"/User"}><button className="BTN_Signup">ยกเลิก</button></NavLink></div>
             </div>
         )
     }

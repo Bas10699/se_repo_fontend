@@ -83,7 +83,8 @@ class Product extends Component {
             case "2":
             case "1":
             case "3":
-            case "5": // Trader
+            case "5":
+            case "A":   // Trader
                 render_product =
                     <div className="App">
                         <div className="Row">
@@ -140,7 +141,8 @@ class Product extends Component {
                     </div>
                 break;
 
-            case "4": // ผู้ใช้อื่นๆ
+            case "4":
+            case "B": // ผู้ใช้อื่นๆ
                 render_product =
                     <div className="App">
 
