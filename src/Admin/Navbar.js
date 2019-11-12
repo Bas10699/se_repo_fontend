@@ -229,11 +229,43 @@ class Navbar extends Component {
                 render_user =
                     <div className="App">
                         <div className="Navbar">
-                            <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
+                        <NavLink exact to="/M_Plan" className="NavbarLeft">LogoBrand</NavLink>
                             <ul>
-                                <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li>
+                                <li><NavLink exact to="/M_Data" activeClassName="Active" className="NavbarText">ผลผลิตที่ส่งมอบได้</NavLink></li>
+                                <li><NavLink exact to="/M_Farmer" activeClassName="Active" className="NavbarText">ข้อมูลเกษตรกร</NavLink></li>
+                                <li><NavLink exact to="/M_Default" activeClassName="Active" className="NavbarText">มาตรฐาน</NavLink></li>
+
+
+                                <li><NavLink exact to="/M_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li>
+                                <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">จัดการสินค้า</NavLink></li>
+
+                                {/* <li><NavLink exact to="/T_Cart" activeClassName="Active" className="NavbarText">ตระกร้าสินค้า</NavLink></li> */}
+                                <li><NavLink exact to="/M_Buying" activeClassName="Active" className="NavbarText">ประวัติการสั่งซื้อ</NavLink></li>
+                                <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">ตรวจสอบคำสั่งซื้อ</NavLink></li>
+                                {/* <li><NavLink exact to="/M_Summary" activeClassName="Active" className="NavbarText">สรุปยอดซื้อ-ขาย</NavLink></li> */}
+                                {/* <li><NavLink exact to="/M_BB" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
+                                <li><NavLink exact to="/M_Demand" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
+                                <li><NavLink exact to="/UserAll" activeClassName="Active" className="NavbarText">จัดการผู้ใช้งาน</NavLink></li>
+                                {/* <NavLink to="/signup"><img src={bell} alt="bell"
+                                    onClick={() => this.setState({ news: false })} />
+                                    <span className={this.state.news ? "badge" : null} />
+                                </NavLink> */}
+                                <div className="NavbarRight" activeClassName="Active">
+                                    <div className="dropdown" activeClassName="Active">
+                                        <NavLink exact to="/User" className="dropbtn" activeClassName="Active">{this.state.get_user.username}</NavLink>
+                                        <div className="dropdown-content">
+                                            <NavLink to={"/EditUser"} activeClassName="Active" className="NavbarRight">แก้ไขข้อมูล</NavLink>
+                                            <NavLink to="/Signin" activeClassName="Active" className="NavbarRight" onClick={this.logOut.bind(this)} >ออกจากระบบ</NavLink>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </ul>
+                            {/* <NavLink exact to="/" className="NavbarLeft">LogoBrand</NavLink>
+                            <ul>
+                                <li><NavLink exact to="/" activeClassName="Active" className="NavbarText">หน้าเเรก</NavLink></li> */}
                                 {/* <li><NavLink exact to="/Product" activeClassName="Active" className="NavbarText">สินค้า</NavLink></li> */}
-                                <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อ</NavLink></li>
+                                {/* <li><NavLink exact to="/M_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อ</NavLink></li>
                                 <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">ข้อมูลวัตถุดิบ</NavLink></li>
                                 <li><NavLink exact to="#" activeClassName="Active" className="NavbarText">วางแผนการเพาะปลูก</NavLink></li>
                                 <li><NavLink exact to="/UserAll" activeClassName="Active" className="NavbarText">ผู้ใช้งาน</NavLink></li>
@@ -247,7 +279,7 @@ class Navbar extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 break;
