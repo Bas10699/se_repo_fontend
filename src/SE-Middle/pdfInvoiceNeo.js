@@ -58,8 +58,8 @@ class PdfInvoice extends Component {
                             table: {
                                 widths: [50, 100],
                                 body: [
-                                    [{ text: 'เลขที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, this.props.data.order_se_id],
-                                    [{ text: 'วันที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, moment(this.props.data.order_se_date).utc().format("DD/MM/YYYY")]
+                                    [{ text: 'เลขที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, this.props.data.order_se_invoice_id],
+                                    [{ text: 'วันที่', style: 'subheader1', alignment: 'center', fillColor: '#cccccc' }, moment(this.props.data.order_se_invoice_date).utc().format("DD/MM/YYYY")]
                                 ]
                             }
                         },
@@ -74,7 +74,7 @@ class PdfInvoice extends Component {
                                 heights: 90,
                                 body: [
                                     [`ผู้ติดต่อ \t\tSE กลาง \nชื่อบริษัท \t   \nสาขา \t\t   สำนักงานใหญ่ \nที่อยู่ \t\t\t \n\nโทร. \t\t\t `,
-                                    `วันที่กำหนดส่ง \nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n`]
+                                    `อ้างอิงใบสั่งซื้อเลขที่ ${this.props.data.order_se_id} \nจำนวนวันเครดิต \nที่อยู่จัดส่ง \n`]
                                 ]
                             }
                         },
@@ -85,11 +85,11 @@ class PdfInvoice extends Component {
                         {
                             table: {
                                 style: 'tableExample',
-                                widths: [20.5, 40, 178, 40, 40, 65, 65],
+                                widths: [20.5, 227, 40, 40, 65, 65],
                                 heights: ['*', 280],
                                 body: [
                                     [{ text: 'ลำดับ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
-                                    { text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
+                                    // { text: 'รหัสสินค้า', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
                                     { text: 'รายการ', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
                                     { text: 'ราคา/หน่วย', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
                                     { text: 'จำนวน', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' },
@@ -97,10 +97,10 @@ class PdfInvoice extends Component {
                                     { text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' }],
                                     [{
                                         table: {
-                                            widths: [20.5, 42, 176, 40, 40, 65, 65],
+                                            widths: [20.5, 227, 40, 40, 65, 65],
                                             body: [
                                                 [{ text: '1', alignment: 'center' },
-                                                { text: 'element.plant_id', alignment: 'center' },
+                                                // { text: 'element.plant_id', alignment: 'center' },
                                                 this.props.data.plant_name,
                                                 { text:  this.props.data.cost, alignment: 'center' },
                                                 { text: this.props.data.amount, alignment: 'center' },
@@ -110,7 +110,7 @@ class PdfInvoice extends Component {
                                             ]
                                         },
                                         layout: 'noBorders'
-                                    }, '', '', '', '', '', ''],
+                                    }, '', '', '', '', ''],
                                 ]
 
                             }
@@ -125,11 +125,11 @@ class PdfInvoice extends Component {
                                 body: [
                                     [{ text: 'หมายเหตุ', rowSpan: 4, border: [true, false, true, true], },
                                     { border: [true, false, true, true], text: 'ราคาก่อนรวมภาษี', },
-                                    { border: [true, false, true, true], text: addComma(total_price), alignment: 'right' }],
-                                    ['', { text: 'ส่วนลด' }, ' '],
-                                    ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: addComma(total_price), alignment: 'right' }],
-                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(tax = Math.ceil(total_price * 0.07)), alignment: 'right' }],
-                                    [{ text: 'ThaiBaht(total_price + tax)', alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(total_price + tax), alignment: 'right' }]
+                                    { border: [true, false, true, true], text: addComma((this.props.data.cost*this.props.data.amount)*0.93), alignment: 'right' }],
+                                    ['', { text: 'ภาษีมูลค่าเพิ่ม \t7%' }, { text: addComma(tax = Math.ceil((this.props.data.cost*this.props.data.amount) * 0.07)), alignment: 'right' }],
+                                    ['', { text: 'ส่วนลด' }, {text:'0', alignment: 'right'} ],
+                                    ['', { text: 'มูลค่าหลังหักส่วนลด' }, { text: addComma(this.props.data.cost*this.props.data.amount), alignment: 'right' }],
+                                    [{ text: ThaiBaht(this.props.data.cost*this.props.data.amount), alignment: 'center', fillColor: '#dddddd' }, 'จำนวนเงินทั้งสิ้น', { text: addComma(this.props.data.cost*this.props.data.amount), alignment: 'right' }]
                                 ],
                             }
                         },
