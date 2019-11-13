@@ -102,6 +102,31 @@ class UserDetail extends Component {
         this.get_user()
     }
 
+    update_data_user = async () => {
+        let obj = {
+            name: this.state.get_user.name,
+            last_name: this.state.get_user.last_name,
+            address: this.state.get_user.address,
+            phone: this.state.get_user.phone,
+            username: this.state.get_user.username,
+            type_user: this.state.get_user.type_user,
+            user_id: this.state.get_user.user_id
+        }
+        try {
+            await post(obj,'user/update_data_user',user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+
     render() {
         return (
             <div className="App">

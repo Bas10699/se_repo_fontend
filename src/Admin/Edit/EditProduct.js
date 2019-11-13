@@ -143,6 +143,7 @@ class EditProduct extends Component {
                     .then((result) => {
                         console.log("edit1" + result);
                         if (result.success) {
+                            alert('แก้ไขเรียบร้อย')
                             window.location.reload();
                         } else {
                             alert("edit_alert : " + result.error_message);

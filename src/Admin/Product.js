@@ -72,8 +72,27 @@ class Product extends Component {
         });
     }
 
-    delete = () => {
-        alert("ลบสินค้า")
+    delete = async (plant_id) => {
+        let id = plant_id.split(" ")
+        let obj = {
+            plant_id: id[1]
+        }
+        if (window.confirm('ยืนยันการลบสินค้า')) {
+            try {
+                await post(obj, 'neutrally/delete_plant_stock', user_token).then((result) => {
+                    if (result.success) {
+                        window.location.reload()
+                    }
+                    else {
+                        alert(result.error_message)
+                    }
+                })
+            }
+            catch (error) {
+                alert(error)
+            }
+        }
+
     }
 
     render_type = (type_user) => {
@@ -83,7 +102,6 @@ class Product extends Component {
             case "2":
             case "1":
             case "3":
-            case "5":
             case "A":   // Trader
                 render_product =
                     <div className="App">
@@ -142,6 +160,7 @@ class Product extends Component {
                 break;
 
             case "4":
+            case "5":
             case "B": // ผู้ใช้อื่นๆ
                 render_product =
                     <div className="App">
@@ -175,7 +194,7 @@ class Product extends Component {
                                         this.state.search_order.map((element, index) => {
                                             return (
                                                 <div className="Card">
-                                                    <div className='X' onClick={() => { this.delete() }}>ลบ</div>
+                                                    <div className='X' onClick={() => { this.delete(element.product_id) }}>ลบ</div>
                                                     {element.image === '' ? <img alt="Product" src={this.state.default_image} /> : <img alt="Product" src={ip + element.image} />}
                                                     <h4>{element.product_name}</h4>
                                                     {element.price.map((element_p, index) => {

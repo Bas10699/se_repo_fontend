@@ -9,11 +9,34 @@ class Product_Information extends Component {
             get_data: [],
             currentPage: 1,
             todosPerPage: 10,
+            get_plant_all: [],
         }
     }
     componentWillMount() {
         this.get_data()
+        this.get_plant_all_mount()
     }
+
+    get_plant_all_mount = async () => {
+        try {
+            await get('researcher/get_plant_all_mount', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        get_plant_all: result.result
+                    })
+                    console.log('plant', result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+
     get_data = async () => {
         try {
             await get('researcher/get_plant', user_token).then((result) => {
@@ -34,11 +57,11 @@ class Product_Information extends Component {
         }
     }
     render() {
-        
+
         return (
             <div className="App">
 
-                <div className="Row">
+                {/* <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-8">
                         <h3 style={{ textAlign: "center" }}>ข้อมูลผลผลิต</h3>
@@ -59,9 +82,14 @@ class Product_Information extends Component {
                                 )
                             })}
                         </table>
-                        
+
                     </div>
-                </div>
+                </div> */}
+                {this.state.get_plant_all.map((element) => {
+                    return (
+                        <div>{element.name}</div>
+                    )
+                })}
 
             </div>
         )
