@@ -7,7 +7,6 @@ import { get, post } from '../../Support/Service';
 import Modal from 'react-responsive-modal';
 import Checkbox from '../M_Research/Checkbox_R'
 import folder from '../../Image/folder.png'
-import { throwStatement } from '@babel/types';
 
 
 class M_R_Order extends Component {

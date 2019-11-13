@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import { get, post, ip } from '../../Support/Service'
 import { user_token } from '../../Support/Constance'
 import queryString from 'query-string';
+import Checkbox from '../M_Research/Checkbox_F'
 
 class M_R_Formula extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            product_plan: []
+            product_plan: [],
+            nutrient_precent: [],
+            plant: [],
+            active: false,
+            manu: false,
+            check_array:[],
         }
     }
     componentWillMount() {
@@ -21,7 +27,7 @@ class M_R_Formula extends Component {
             await post(params, 'neutrally/get_product_plan', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        product_plan: result.result
+                        product_plan: result.result,
                     })
                     console.log(result.result)
                 }
@@ -41,33 +47,84 @@ class M_R_Formula extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ทำการกรองสูตรพัฒนาผลิตภัณฑ์ ชื่อผลิตภัณฑ์</h2>
+                        <h2 style={{ textAlign: "center" }}>ทำการกรองสูตรพัฒนาผลิตภัณฑ์ product_plan</h2>
                     </div>
                 </div>
 
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-10">
-                        <table>
+
+                        <Checkbox
+                            option={this.state.product_plan}
+                            check_array={this.state.check_array}
+                            return_func={(event) => {
+                                console.log('event', event)
+                                this.setState({
+                                    check_array: event
+                                })
+                            }} />
+
+
+
+
+                        {/* <table>
                             <tr>
                                 <th>ชื่อสูตร</th>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
+                                {this.state.product_plan.map((e_product_plan_name, index) => {
+                                    return (
+                                        <th>
+                                            <div>
+                                                <label class="switch">
+                                                    <input type="checkbox" value={index}
+                                                    onChange={() => this.setState(
+                                                        { active: !this.state.active }
+                                                    )}
+                                                    />
+                                                    {console.log("active",this.state.active,index)}
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>
+                                            {e_product_plan_name.product_plan_name}
+                                        </th>
+                                    )
+                                }
+                                )}
+
                             </tr>
                             <tr>
                                 <th>สารอาหาร</th>
+                                {this.state.product_plan.map((e_product_plan_name, index) => {
+                                    return (
+                                        <td>{e_product_plan_name.nutrient_precent.map((e_nutrient_precent) => {
+
+                                            return (
+                                                <div>{e_nutrient_precent.name}</div>
+                                            )
+                                        })}</td>
+                                    )
+                                }
+                                )}
+
                             </tr>
                             <tr>
-                                <th>วัตุดิบ</th>
+                                <th>วัตถุดิบ</th>
+                                {this.state.product_plan.map((e_product_plan_name, index) => {
+                                    return (
+                                        <td>{e_product_plan_name.plant.map((e_plant) => {
+                                            return (
+                                                <div>{e_plant.plant_name} {e_plant.plant_volume} {e_plant.plant_volume_type}</div>
+                                            )
+                                        })}</td>
+                                    )
+                                }
+                                )}
                             </tr>
                             <tr>
                                 <th>ราคาต้นทุน</th>
                             </tr>
-                            <tr>
-                                <th></th>
-                            </tr>
-                        </table>
+
+                        </table> */}
                     </div>
                     <div className="col-1"></div>
                 </div>
