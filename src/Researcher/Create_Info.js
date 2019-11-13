@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { post } from '../Support/Service'
+import { post, get } from '../Support/Service'
 import { user_token } from '../Support/Constance';
 import Modal from 'react-responsive-modal'
 import delete_icon from '../Image/delete-icon.png'
@@ -23,7 +23,9 @@ class Create_Info extends Component {
             plant_volume: 0,
             plant_volume_type: null,
             open: false,
-            default_image: null
+            default_image: null,
+            nutrient_information: [],
+            nutrient_information_plant: []
         }
     }
     onOpenModal = () => {
@@ -39,6 +41,8 @@ class Create_Info extends Component {
 
     componentWillMount() {
         this.get_demand_detail()
+        this.get_nutrient_information()
+        this.get_nutrient_information_plant()
     }
 
     handleChange = (e) => {
@@ -66,6 +70,44 @@ class Create_Info extends Component {
 
     }
 
+    get_nutrient_information = async () => {
+        try {
+            await get('researcher/get_nutrient_information', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        nutrient_information: result.result
+                    })
+                    console.log(result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+
+    get_nutrient_information_plant = async () => {
+        try {
+            await get('researcher/get_nutrient_information_plant', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        nutrient_information_plant: result.result
+                    })
+                    console.log(result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+
     add_nutrient_graph = () => {
         let nutrient = this.state.nutrient_graph
         console.log(this.state.nutrient_data, this.state.nutrient_volume)
@@ -87,14 +129,32 @@ class Create_Info extends Component {
 
     add_plants = () => {
         let plants = this.state.plants
+        let plant_name = this.state.plant_name
+        console.log('pla',plant_name)
+        let nutrient = this.state.nutrient_graph
         plants.push({
             plant_name: this.state.plant_name,
             plant_volume: parseInt(this.state.plant_volume),
             plant_volume_type: this.state.plant_volume_type
         })
-        this.setState({
-            plants: plants
+
+        var updatedList = this.state.nutrient_information;
+        updatedList = updatedList.filter(function (item) {
+            return item.plant_name.search(plant_name) !== -1;
+        });
+
+        updatedList.map((ele_list) => {
+            nutrient.push({
+                name: ele_list.nutrient_name,
+                y: ele_list.volume * this.state.plant_volume
+            })
         })
+
+        this.setState({
+            plants: plants,
+            nutrient_graph:nutrient
+        })
+
     }
 
     get_demand_detail = async () => {
@@ -280,7 +340,14 @@ class Create_Info extends Component {
                         <div className="Row">
                             <div className="col-5">
                                 <h5 style={{ marginBottom: "10px" }}>วัตถุดิบที่ใช้</h5>
-                                <input type="text" id='plant_name' onChange={this.handleChange} style={{ width: "200px" }} />
+                                <input type="text" list="data" id='plant_name' onChange={this.handleChange} style={{ width: "200px" }} />
+
+                                <datalist id="data">
+                                    {this.state.nutrient_information_plant.map((item, key) =>
+                                        <option key={key} value={item.plant_name} />
+                                    )}
+                                </datalist>
+
                             </div>
                             <div className="col-2">
                                 <h5 style={{ marginBottom: "10px" }}>ปริมาณ</h5>
