@@ -1503,3 +1503,12 @@ ol {
   .slider.round:before {
     border-radius: 50%;
   }
+
+.ex3 {
+    background-color: rgb(255, 196, 34);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+    overflow: auto;
+  }
