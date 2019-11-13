@@ -123,9 +123,10 @@ class Confirm_Product extends Component {
         });
     }
 
-    send_developer_demand = async (plan_id) => {
+    send_developer_demand = async (plan) => {
         let obj = {
-            plan_id: plan_id
+            plan_id: plan.plan_id,
+            product_id:plan.product_id
         }
         try {
             await post(obj, 'researcher/send_developer_demand', user_token).then((result) => {
@@ -362,7 +363,7 @@ class Confirm_Product extends Component {
                                             </td>
                                             <td>
                                                 <NavLink>
-                                                    <img src={delete_icon} style={{ width: "30px" }} onClick={() => { this.delete_product_plan_detail(element.plan_id) }} />
+                                                    <img src={delete_icon} style={{ width: "30px" }} onClick={() => { this.delete_product_plan_detail(element) }} />
                                                 </NavLink>
                                             </td>
                                             <td>

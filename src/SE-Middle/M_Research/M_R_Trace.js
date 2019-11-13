@@ -18,7 +18,7 @@ class M_R_Trace extends Component {
         this.get_demand()
     }
 
-    
+
 
     get_demand = async () => {
         try {
@@ -40,7 +40,7 @@ class M_R_Trace extends Component {
     }
 
     render() {
-       
+
 
 
         return (
@@ -68,11 +68,15 @@ class M_R_Trace extends Component {
                                     <tr>
                                         <td>{element.name} {element.last_name}</td>
                                         <td>{element.product_name}</td>
-                                        <td>{element.nutrient.map((e,index)=>{
-                                            return e+" "
+                                        <td>{element.nutrient.map((e, index) => {
+                                            return e + " "
                                         })}</td>
                                         <td>{element.volume} {element.volume_type}</td>
-                                        <td><NavLink to ={"/M_R_Formula/product?product_id=" + element.product_id}><button className="BTN_Signin" style={{ margin: "0", float: "left" }}>กรองสูตร</button></NavLink></td>
+                                        {element.product_status > 2 ?
+                                            <td><NavLink to={"/M_R_Formula/product?product_id=" + element.product_id}><button className="BTN_Signin" style={{ margin: "0", float: "left" }}>กรองสูตร</button></NavLink></td>
+                                            :
+                                            <td>รอนักวิจัยส่งสูตรพัฒนา</td>}
+
                                         {/* <td>ชื่อนักวิจัยที่รับผิดชอบ</td> */}
                                     </tr>
                                 )

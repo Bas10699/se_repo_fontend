@@ -300,6 +300,18 @@ class Create_Info extends Component {
                                 <input type="file" placeholder="กรุณาเลือกรูปภาพ" onChange={this.uploadpicture} style={{ width: "500px" }} />
                             </div>
                         </div>
+
+
+                        {/* <input type="text" list="data" onChange={this._onChange} />
+
+                        <datalist id="data">
+                            {this.state.data.map((item, key) =>
+                                <option key={key} value={item.displayValue} />
+                            )}
+                        </datalist> */}
+
+
+
                         <button className="BTN_Signin" onClick={() => this.add_product_plan()}>ตกลง</button>
                         <button className="BTN_Cencle" style={{ marginTop: "20px" }}>ยกเลิก</button>
                     </div>
@@ -315,8 +327,8 @@ class Create_Info extends Component {
                                         <tr>
                                             <td>{index + 1}.</td>
                                             <td><input type="text" id={index} value={ele.name} onChange={this.nutrientChangeName} /></td>
-                                            <td><input type="number" style={{ marginLeft:"25px" }} id={index} value={ele.y} onChange={this.nutrientChangeY} /></td>
-                                            <td><img src={delete_icon} style={{ width: "30px",cursor:"pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} /></td>
+                                            <td><input type="number" style={{ marginLeft: "25px" }} id={index} value={ele.y} onChange={this.nutrientChangeY} /></td>
+                                            <td><img src={delete_icon} style={{ width: "30px", cursor: "pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} /></td>
                                         </tr>
                                     )
                                 })}

@@ -13,7 +13,7 @@ class M_R_Formula extends Component {
             plant: [],
             active: false,
             manu: false,
-            check_array:[],
+            check_array: [],
         }
     }
     componentWillMount() {
@@ -42,6 +42,16 @@ class M_R_Formula extends Component {
         }
     }
 
+    send_plan = () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        let obj = {
+            plan_id:this.state.check_array,
+            product_id:params.product_id
+        }
+        console.log('send', obj)
+    }
+
     render() {
         return (
             <div className="App">
@@ -59,13 +69,13 @@ class M_R_Formula extends Component {
                             option={this.state.product_plan}
                             check_array={this.state.check_array}
                             return_func={(event) => {
-                                console.log('event', event)
+                                // console.log('event', event)
                                 this.setState({
                                     check_array: event
                                 })
                             }} />
 
-
+                        <button onClick={() => this.send_plan()}>ส่งสูตร</button>
 
 
                         {/* <table>
