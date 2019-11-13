@@ -189,7 +189,8 @@ class ProductDetail extends Component {
             order_se: this.state.se,
             order_trader_id: params.order_id,
             detail_order_trader: this.state.detail,
-            plant_name: this.state.product_data.product_name
+            plant_name: this.state.product_data.product_name,
+            price:this.state.product_data.cost
         }
         try {
             await post(obj, 'neutrally/add_order_se', user_token).then((result) => {
@@ -255,7 +256,8 @@ class ProductDetail extends Component {
                     plant: ele.plant,
                     name: ele_se.name,
                     id_name:ele_se.id_name,
-                    amount: 0
+                    amount: 0,
+                    
                 })
             })
         })
