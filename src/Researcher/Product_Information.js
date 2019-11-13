@@ -29,7 +29,7 @@ class Product_Information extends Component {
             await get('researcher/get_plant_all_mount', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_plant_all_origin:result.result,
+                        get_plant_all_origin: result.result,
                         get_plant_all: result.result,
                         plants: result.result,
                         data_month: result.result[0].data
@@ -220,26 +220,36 @@ class Product_Information extends Component {
                 <div className="Row">
                     {/* <div className="col-1"></div> */}
 
-                    <div className="col-2" style={{ marginLeft: "10px" }}>
-                        <br/><br/>
-                        <input type='text' onChange={this.filterPlant}></input>
+                    <div className="col-2" style={{ marginTop: "-8px" }}>
+
+
                         <div className='ex3'>
+                            <h3 style={{ textAlign: "center" }}>รายชื่อพืช</h3>
+                            <input type='text' onChange={this.filterPlant} style={{ width: "88%", marginTop: "20px", marginBottom: "15px", marginLeft: "2px" }} />
                             {this.state.get_plant_all.map((element, index) => {
                                 return (
-                                    <div style={{ cursor: 'pointer' }} onClick={() => this.show_chart(index)} >{index + 1}. {element.name}</div>
+
+                                    <div style={{ cursor: 'pointer', marginLeft: "10px", fontSize: "22px" }}
+                                        onClick={() => this.show_chart(index)} >
+                                        {index + 1}. {element.name}
+                                    </div>
                                 )
                             })}
                         </div>
                     </div>
 
-                    <div className='col-8' style={{marginLeft:'auto',marginRight:'auto'}}>
+                    <div className='col-8' style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                         <br />
                         <HighchartsReact highcharts={Highcharts} options={options} />
 
 
                     </div>
                     <div className='col-2'>
-                        <table className="s_plant">
+
+                        <table className="s_plant" style={{ marginTop: "100px" }}>
+                            <tr>
+                                <th colSpan="3">จำนวนที่ส่งมอบในเเต่ละเดือน</th>
+                            </tr>
                             {this.state.data_month.map((element, index) => {
                                 return (
                                     <tr style={{ cursor: 'pointer' }} >

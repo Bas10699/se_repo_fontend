@@ -447,21 +447,9 @@ class S_skill_farmer extends Component {
                     {/* <div className='col-1'></div> */}
                     <div className='col-11' style={{ marginTop: "-50px", marginLeft: "20px", marginRight: "10px" }} >
 
-
-
-
-
-
                     <h4>{this.state.volume_farmer.map((element)=>{
                             return(<p>จำนวนเกษตรกรทั้งหมดในเครือ {element.sum_farmer} คน</p>)
                         })} </h4>
-                        
-
-
-
-
-
-
                         <h4 style={{marginBottom:"0"}}>เลือกข้อมูลที่ต้องการเปรียบเทียบ</h4>
                         <input type="search" placeholder="ค้นหาชื่อ" onChange={this.filterName} style={{margin:"10px" ,width:"80%",display:"block",marginLeft:"auto",marginRight:"auto"}}/>
                         <button className={this.state.showHide1 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>จํานวนผลผลิตที่ขายต่อปี</button>

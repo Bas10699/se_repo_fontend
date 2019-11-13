@@ -69,6 +69,7 @@ class Checkbox extends Component {
                                             <div>
                                                 {/* <label class="switch"> */}
                                                     <input type="checkbox" value={index}
+                                                    id='checkbox'
                                                      onClick={(event) => { this.onCheck(event) }}
                                                     />
                                                     {/* {console.log("active",index)} */}
