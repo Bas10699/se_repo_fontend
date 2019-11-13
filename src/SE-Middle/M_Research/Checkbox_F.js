@@ -68,7 +68,7 @@ class Checkbox extends Component {
                                         <th>
                                             <div>
                                                 {/* <label class="switch"> */}
-                                                    <input type="checkbox" value={e_product_plan_name.plan_id}
+                                                    <input type="checkbox" id="checkbox" value={e_product_plan_name.plan_id}
                                                      onClick={(event) => { this.onCheck(event) }}
                                                     />
                                                     {/* {console.log("active",index)} */}
