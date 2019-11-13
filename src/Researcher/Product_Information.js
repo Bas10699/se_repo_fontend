@@ -216,16 +216,19 @@ class Product_Information extends Component {
 
                     </div>
                 </div> */}
+                <div className="Row">
+                    <div className="col-2" style={{backgroundColor:"rgb(255, 196, 34)"}}>
+                        <h3 style={{ textAlign: "center",margin:"10px" }}>รายชื่อพืช</h3>
+                    <input type='text' onChange={this.filterPlant} style={{ width: "88%", marginTop: "20px", marginBottom: "15px", marginLeft: "2px" }} />
+                    </div>
+                </div>
 
                 <div className="Row">
                     {/* <div className="col-1"></div> */}
-
-                    <div className="col-2" style={{ marginTop: "-8px" }}>
-
-
+                    
+                    <div className="col-2" style={{ marginTop: "-9px" }}>
                         <div className='ex3'>
-                            <h3 style={{ textAlign: "center" }}>รายชื่อพืช</h3>
-                            <input type='text' onChange={this.filterPlant} style={{ width: "88%", marginTop: "20px", marginBottom: "15px", marginLeft: "2px" }} />
+
                             {this.state.get_plant_all.map((element, index) => {
                                 return (
 
@@ -238,7 +241,7 @@ class Product_Information extends Component {
                         </div>
                     </div>
 
-                    <div className='col-8' style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                    <div className='col-8' style={{ marginLeft: 'auto', marginRight: 'auto',marginTop:"-100px" }}>
                         <br />
                         <HighchartsReact highcharts={Highcharts} options={options} />
 
@@ -246,7 +249,7 @@ class Product_Information extends Component {
                     </div>
                     <div className='col-2'>
 
-                        <table className="s_plant" style={{ marginTop: "100px" }}>
+                        <table className="s_plant" style={{ marginTop:"-30px" }}>
                             <tr>
                                 <th colSpan="3">จำนวนที่ส่งมอบในเเต่ละเดือน</th>
                             </tr>

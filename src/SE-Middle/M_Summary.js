@@ -55,7 +55,7 @@ class M_Summary extends Component {
         var options = {
 
             title: {
-                text:  null,
+                text: null,
                 style: {
                     fontSize: '24px',
                     fontFamily: 'fc_lamoonregular'
@@ -123,34 +123,45 @@ class M_Summary extends Component {
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>สรุปยอดการซื้อ-ขาย</h2>
+                        {/* 
                         <select >
                             <option>รายเดือน</option>
                             <option>รายสัปดาห์</option>
-                        </select>
+                        </select> */}
                     </div>
                 </div>
                 <div className="Row">
                     <div className="col-1"></div>
-                    <div className="col-10">
+                    <div className="col-10" style={{textAlign:"center"}}>
+                        <h4>เลือกวันที่ <input type="date" /> ถึง <input type="date" /></h4>
+                        เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม 000 บาท
+                        <table>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>วันที่</th>
+                                <th>รหัสใบสั่งซื้อ</th>                                
+                                <th>ยอดสั่งซื้อ</th>
+                            </tr>
+                        </table>
                         <div className="Row">
                             <div className="col-6" style={{ backgroundColor: "#ccc" }}>
-                                กราฟเเท่ง ยอดขายรายเดือน
+                                {/* กราฟเเท่ง ยอดขายรายเดือน */}
                             </div>
                             <div className="col-1"></div>
                             <div className="col-6" style={{ backgroundColor: "#ccc" }}>
-                                กราฟพายยอดขาย se ย่อย
+                                {/* กราฟพายยอดขาย se ย่อย */}
                             </div>
                         </div>
-                        <div className="Row">
+                        {/* <div className="Row">
                             <div className="col-6">
                                 <HighchartsReact highcharts={Highcharts} options={options} />
                             </div>
-                            <div className="col-1"></div>
-                            {/* <div className="col-6" style={{ backgroundColor: "#ccc" }}>
+                            <div className="col-1"></div> */}
+                        {/* <div className="col-6" style={{ backgroundColor: "#ccc" }}>
                                 กราฟพายยอดขาย se ย่อย
                             </div> */}
-                        </div>
-                        
+                        {/* </div> */}
+
                     </div>
                     <div className="col-1"></div>
                 </div>
