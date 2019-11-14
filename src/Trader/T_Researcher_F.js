@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
 import Modal from 'react-responsive-modal'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
+import T_Highcharts from './T_Highcharts'
 
 import queryString from 'query-string';
 
@@ -92,51 +91,6 @@ class T_Researcher_F extends Component {
         return return_status
     }
     render() {
-        let index_plant = this.state.product_plan
-        let options = {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: 'กราฟแสดงผลอัตราส่วนสารอาหาร',
-                style: {
-                    fontSize: '20px',
-                    fontFamily: 'fc_lamoonregular'
-                }
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                    },
-                    style: {
-                        fontSize: '20px',
-                        fontFamily: 'fc_lamoonregular'
-                    }
-                }
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: 'อัตราส่วน',
-                style: {
-                    fontSize: '20px',
-                    fontFamily: 'fc_lamoonregular'
-                },
-                colorByPoint: true,
-                data: []
-            }]
-        };
         return (
             <div className="App">
                 <div className="tab">
@@ -161,7 +115,7 @@ class T_Researcher_F extends Component {
                     return (
                         <div className="Row">
 
-                            {e.nutrient_precent.map((ee, index) => {
+                            {/* {e.nutrient_precent.map((ee, index) => {
                                 return (
                                     <div>
                                         {ee.name}
@@ -169,11 +123,11 @@ class T_Researcher_F extends Component {
                                     </div>
                                 )
                             }
-                            )}
+                            )} */}
 
 
                             <div className="col-6">
-                                <HighchartsReact highcharts={Highcharts} options={options} />
+                                <T_Highcharts data={e.nutrient_precent}/>
                             </div>
                             <div className="col-5">
                                 <table style={{ textAlign: "center" }}>

@@ -3,7 +3,6 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 class T_Highcharts extends Component {
     render() {
-        let index_plant = this.state.product_plan
         let options = {
             chart: {
                 plotBackgroundColor: null,
@@ -45,7 +44,17 @@ class T_Highcharts extends Component {
                     fontFamily: 'fc_lamoonregular'
                 },
                 colorByPoint: true,
-                data: this.props.name
+                data: this.props.data
+                // [{
+                //     name: 'โปรตีน',
+                //     y: 20,
+                // }, {
+                //     name: 'เเคลเซียม',
+                //     y: 60,
+                // }, {
+                //     name: 'คาร์โบไฮเดรต',
+                //     y: 10
+                // }]
             }]
         };
         return (
