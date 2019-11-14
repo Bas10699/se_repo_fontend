@@ -319,8 +319,12 @@ class Create_Nutrients extends Component {
                                 </div>
                                 <div className="col-5">
                                     <h5 style={{ marginBottom: "10px" }}>ปริมาณสารอาหาร</h5>
-                                    <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} /> กรัม
-                                    <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-10px" }}>เพิ่มปริมาณสารอาหาร</button>
+                                    <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} /> <select onChange={this.handleChange} type="select" style={{width:"90px"}}>
+                                    <option>มิลลิกรัม</option>
+                                    <option>กรัม</option>
+                                    <option>กิโลกรัม</option>
+                                </select>
+                                    <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-40px" }}>+ สารอาหาร</button>
                                     {/* <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button> */}
                                 </div>
                             </div>
