@@ -1400,9 +1400,9 @@ ol {
   .Add{
     font-family: 'fc_lamoonregular';
     font-size: 20px;
-    color: white;
-    background-color: #007bff;
-    border: 1px solid #007bff;
+    color: black;
+    background-color: rgb(255, 209, 82);
+    border: 1px solid rgb(255, 196, 34);
     text-align: center;
     cursor: pointer;
     padding: 8px 8px;
@@ -1414,8 +1414,8 @@ ol {
 }
 
 .Add:hover{
-    background-color: #0057b4;
-    color: white;
+    background-color: rgb(255, 196, 34);
+    color: black;
 }
 
 
@@ -1449,9 +1449,9 @@ ol {
 .BTN_Edit {
     font-family: 'fc_lamoonregular';
     font-size: 20px;
-    color: #007bff;
+    color: black;
     background-color: transparent;
-    border: 1px solid #007bff;
+    border: 1px solid rgb(255, 196, 34);
     text-align: center;
     cursor: pointer;
     padding: 8px 8px;
@@ -1461,8 +1461,8 @@ ol {
 }
 
 .BTN_Edit:hover{
-    background-color: #0057b4;
-    color: white;
+    background-color: rgb(255, 196, 34);
+    color: black;
 }
 
 .facebook-button{
