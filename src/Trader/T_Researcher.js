@@ -54,7 +54,7 @@ class T_Researcher extends Component {
                 break;
             case 4: return_status =
                 <div>
-                    <NavLink to={'/T_Researcher_F/product?product_id='+product_id}> <button className="BTN_Signin" style={{ margin: "0", float: "left" }} onClick={()=>this.onOpen()}>สูตรผลิตภัณฑ์</button></NavLink>
+                    <NavLink to={'/T_Researcher_F/product?product_id='+product_id}> <button className="BTN_Signin" style={{ margin: "0", display:"block",marginLeft:"auto",marginRight:"60px" }} onClick={()=>this.onOpen()}>สูตรผลิตภัณฑ์</button></NavLink>
                 </div>
                 break;
 

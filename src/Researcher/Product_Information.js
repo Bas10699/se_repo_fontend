@@ -218,7 +218,7 @@ class Product_Information extends Component {
                 </div> */}
                 <div className="Row">
                     <div className="col-2" style={{backgroundColor:"rgb(255, 196, 34)",marginTop:"0px"}}>
-                        <h3 style={{ textAlign: "center",margin:"10px" }}>รายชื่อพืช</h3>
+                        <h3 style={{ textAlign: "center",margin:"10px",paddingTop:"20px" }}>รายชื่อพืช</h3>
                     <input type='text' onChange={this.filterPlant} style={{ width: "88%", marginTop: "20px", marginBottom: "15px", marginLeft: "2px" }} />
                     </div>
                 </div>

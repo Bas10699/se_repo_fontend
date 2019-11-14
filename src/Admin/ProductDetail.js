@@ -239,7 +239,7 @@ class ProductDetail extends Component {
                                     name="quantity" min="1"
                                     id="amount" placeholder="จำนวนที่ต้องการสั่งซื้อ"
                                     onChange={this.handleChange} />
-                                <button className="BTN_AddCart" onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button>
+                                <button className="BTN_AddCart" style={{width:"150px"}} onClick={() => { this.add_cart() }}>เพิ่มในตะกร้าสินค้า</button>
 
                                 {this.render_Step(this.state.product_data.amount_stock)}
 

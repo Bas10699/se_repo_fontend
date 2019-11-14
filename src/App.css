@@ -414,7 +414,7 @@ h6{
     text-align: center;
     cursor: pointer;
     padding: 10px 10px;
-    width: 150px;
+    width: 100px;
     transition: 0.5s;
 }
 
@@ -1556,4 +1556,28 @@ ol {
     height: 483px;
     width: 100%;
     overflow: auto;
+  }
+
+  .yes{
+    width: 50px;
+    background: transparent;
+    border: none;
+    font-family: 'fc_lamoonregular';
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .yes:hover{
+    color: green;
+  }
+
+  .no{
+    width: 50px;
+    background: transparent;
+    border: none;
+    font-family: 'fc_lamoonregular';
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .no:hover{
+    color: red;
   }

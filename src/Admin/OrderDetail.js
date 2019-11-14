@@ -349,9 +349,12 @@ class OrderDetail extends Component {
                         <div className='_Card'>
                             <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
                             <h5>{this.state.logistic == 1 ?
+                                // <div>
+                                //     <h5>ขนส่งแบบ รถไฟ</h5>
+                                //     กรอกหมายเลขพัสดุ : <input />
+                                // </div>
                                 <div>
-                                    <h5>ขนส่งแบบ รถไฟ</h5>
-                                    กรอกหมายเลขพัสดุ : <input />
+                                    รอการขนส่ง
                                 </div>
                                 :
                                 <div>
@@ -363,7 +366,7 @@ class OrderDetail extends Component {
                 </div>
                 <div className="Row">
                         <div className="col-12" style={{ marginLeft: "50px" }}>
-                            <button className="BTN_PDF">ยืนยันหมายเลขพัสดุ</button>
+                            <button className="BTN_PDF">ยืนยันจัดส่ง</button>
                             
                             </div>
                     </div>

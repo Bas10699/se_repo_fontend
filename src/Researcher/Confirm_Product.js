@@ -236,22 +236,25 @@ class Confirm_Product extends Component {
                                                 <h5 style={{ margin: "0", color: "red" }}>ส่งสูตรภายในวันที่ : {moment(element.date_line).format('DD/MM/YYYY')}</h5>
                                             </td>
                                             <td>
-                                                {element.product_researcher_status == 0 ? <div>
-                                                    ยืนยัน<img alt="ยืนยัน" src={this.state.Check_true_img} style={{ width: "30px" }}
+                                                {element.product_researcher_status == 0 ? 
+                                                <div>
+                                                    <button style={{borderRight:"1px solid #000" }}
+                                                    className="yes"
                                                         onClick={() => {
                                                             this.on_Open_Modal(
                                                                 element.product_name,
                                                                 element.volume,
                                                                 element.volume_type,
                                                                 element.product_id)
-                                                        }} />
-                                                    ยกเลิก<img alt="ยกเลิก" src={this.state.Check_false_img} style={{ width: "30px" }}
+                                                        }} >ยืนยัน</button>
+
+                                                    <button className="no"
                                                         onClick={() => {
                                                             this.Delete_Product(element.product_name,
                                                                 element.volume,
                                                                 element.volume_type,
                                                                 element.product_id)
-                                                        }} />
+                                                        }} >ยกเลิก</button>
                                                 </div>
                                                     : this.render_status(element.product_researcher_status)}
 

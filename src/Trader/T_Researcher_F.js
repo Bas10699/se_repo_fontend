@@ -104,27 +104,12 @@ class T_Researcher_F extends Component {
                     </div>
                 </div>
 
-                <div className="Row">
-                    <div className="col-12" >
-                        <h3 style={{ textAlign: "center" }}>รายละเอียด</h3>
-
-                    </div>
-                </div>
+                
                 {this.state.product_plan.map((e) => {
 
                     return (
+                        <div>
                         <div className="Row">
-
-                            {/* {e.nutrient_precent.map((ee, index) => {
-                                return (
-                                    <div>
-                                        {ee.name}
-                                        {ee.y},
-                                    </div>
-                                )
-                            }
-                            )} */}
-
 
                             <div className="col-6">
                                 <T_Highcharts data={e.nutrient_precent} name={e.product_plan_name}/>
@@ -152,8 +137,11 @@ class T_Researcher_F extends Component {
                             </div>
                             <div className="col-1"></div>
                         </div>
+                        <hr style={{width:"90%",marginBottom:"100px"}}/>
+                        </div>
                     )
                 })}
+                
 
             </div>
 

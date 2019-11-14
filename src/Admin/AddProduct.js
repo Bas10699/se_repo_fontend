@@ -101,8 +101,8 @@ class AddProduct extends Component {
                     <img className="IMG_Detail" src={this.state.default_image} alt="product" />
                     <input type="file" onChange={(e) => this.uploadpicture(e)} /></div>
                     <div className="col-1"></div>
-                    <div className="col-5"><h4>ชื่อสินค้า</h4>
-                        <input type="text" onChange={this.handleChange}
+                    <div className="col-6"><h4>ชื่อสินค้า</h4>
+                        <input type="text" onChange={this.handleChange} style={{width:"400px"}}
                              id="product_name" />
 
                         <h4>รายละเอียดสินค้า</h4>
@@ -111,12 +111,12 @@ class AddProduct extends Component {
 
 
                         <h4>ราคาทุน (รับซื้อจาก SE ย่อย)</h4>
-                        <h4><input type="number" style={{ width: "20%" }}
+                        <h4><input type="number" style={{ width: "15%" }}
                              id="cost" min="1" onChange={this.handleChange}
                         /> บาท / กิโลกรัม</h4>
 
                         <h4>จำนวนสินค้าในคลัง</h4>
-                        <h4><input type="number" style={{ width: "20%" }}
+                        <h4><input type="number" style={{ width: "15%" }}
                              id="amount_stock" min="1" onChange={this.handleChange}
                         />  กิโลกรัม</h4>
 
@@ -128,28 +128,31 @@ class AddProduct extends Component {
                                 </div>
                             )
                         })}
-                        <h4><input type="number" style={{ width: "20%" }}
+                        <h4><input type="number" style={{ width: "15%" }}
                             name="cart_product" id="money" min="1" onChange={this.handleChange}
                         /> บาท /
     
-                            <input type="number" style={{ width: "20%" }}
+                            <input type="number" style={{ width: "15%" }}
                                 name="cart_product" id="volume" min="1" onChange={this.handleChange}
                             />
                             หน่วย
-                            <select style={{ width: "20%" }} onChange={this.handleChange} name="volum_type">
+                            <select style={{ width: "15%",marginRight:"0" }} onChange={this.handleChange} name="volum_type" 
+                            className="select" type="select">
                                 <option value="kg">กิโลกรัม</option>
                                 <option value="tun">ตัน</option>
                             </select>
+<button className="BTN_AddCart" onClick={()=>this.add_price()} style={{marginLeft:"20px"}}>+ ราคาขาย</button>       
                         </h4>
-                        
+                 
 
-                        <button className="BTN_AddCart" onClick={()=>this.add_price()} >เพิ่มราคาขาย</button></div>
-                    <div className="col-1"></div>
+                        
+                        </div>
+                    {/* <div className="col-1"></div> */}
                 </div>
                 <div className="Row">
                     <div className="col-8">
                     </div>
-                    <button onClick={()=>this.add_product()}>เพิ่มสินค้า</button>
+                    <button  className="BTN_Signin" onClick={()=>this.add_product()}>เพิ่มสินค้า</button>
                 </div>
             </div>
         )

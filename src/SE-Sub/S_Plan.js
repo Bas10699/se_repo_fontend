@@ -327,7 +327,7 @@ class S_Plan extends Component {
                                             {/* <td>{addComma(ele_plant.year_value)}</td> */}
                                             <td>{ele_plant.volume_want}</td>
                                             {/* <td></td> */}
-                                            <td><button onClick={() => this.openModel(ele_plant.plant)}>วางแผน</button></td>
+                                            <td><button onClick={() => this.openModel(ele_plant.plant)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
                                         </tr>
 
                                     )

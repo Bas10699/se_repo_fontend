@@ -189,48 +189,48 @@ class M_Summary extends Component {
         return (
             <div className="App">
                 <div className="Row">
-                    <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>สรุปยอดการซื้อ-ขาย</h2>
-                        {/* 
-                        <select >
-                            <option>รายเดือน</option>
-                            <option>รายสัปดาห์</option>
-                        </select> */}
+                    <div className="col-12" style={{ textAlign: "center" }}>
+                        <h2 >สรุปยอดการซื้อ-ขาย</h2>
+                        <h4>
+                            เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} />
+                            <button onClick={() => this.filterDate()} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>ค้นหา</button>
+                        </h4>
+
+                        <h4 style={{ margin: "0" }}>มียอดรวม {this.state.sum_money} บาท</h4>
                     </div>
                 </div>
                 <div className="Row">
                     <div className="col-1"></div>
-                    <div className="col-5" style={{ textAlign: "center", paddingRight: "10px" }}>
-                        <h3 style={{ color: "green" }}>รายรับ</h3>
-                        <h4>
-                            เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} />
-                            <button onClick={() => this.filterDate()}>ค้นหา</button>
-                        </h4>
-
-                        <h4 style={{ margin: "0" }}>มียอดรวม {this.state.sum_money} บาท</h4>
+                    <div className="col-10" style={{ textAlign: "center", paddingRight: "10px" }}>
+                        
+                        
                         <table>
                             <tr>
-                                <th>ลำดับ</th>
                                 <th>วันที่</th>
-                                <th>ชื่อพืช</th>
-                                <th>จำนวน</th>
-                                <th>ราคารวม</th>
+                                <th>รายรับ</th>
+                                <th>รายจ่าย</th>
+                                <th>คงเหลือ</th>
                             </tr>
                             {this.state.summery_trader.map((item, index) => {
                                 return (
                                     <tr>
-                                        <td>{index + 1}</td>
+                                        {/* <td>{index + 1}</td> */}
                                         <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
-                                        <td>{item.plant_name}</td>
-                                        <td>{item.amount}</td>
-                                        <td>{item.amount * item.price}</td>
+                                        {/* <td>{item.plant_name}</td> */}
+                                        <td style={{color:"green"}}>{item.amount}</td>
+                                        <td style={{color:"red"}}>{item.amount * item.price}</td>
                                     </tr>
                                 )
                             })}
+                            <tr>
+                                <th colSpan="3">รวม</th>
+                                <th>รายรับ-รายจ่าย</th>
+                                
+                            </tr>
                         </table>
 
                     </div>
-                    <div className="col-5" style={{ textAlign: "center", paddingLeft: "10px" }}>
+                    {/* <div className="col-5" style={{ textAlign: "center", paddingLeft: "10px" }}>
                         <h3 style={{ color: "red" }}>รายจ่าย</h3>
                         <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} />
                         <button onClick={() => this.filterDate()}>ค้นหา</button>
@@ -255,9 +255,9 @@ class M_Summary extends Component {
                                     </tr>
                                 )
                             })}
-                        </table>
+                        </table> */}
 
-                    </div>
+                    {/* </div> */}
                     <div className="col-1"></div>
                 </div>
             </div>

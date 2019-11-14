@@ -99,7 +99,14 @@ class M_R_Formula extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>ทำการกรองสูตรพัฒนาผลิตภัณฑ์ product_plan</h2>
+                        <h2 style={{ textAlign: "center" }}>ทำการกรองสูตรพัฒนาผลิตภัณฑ์ {this.state.product_plan.map((e,index)=>{
+                            for (var i = 0; index < 1; i++) {
+                                return (
+                                <div>{e.product_name}</div>
+                            )
+                            }
+                            
+                        })}</h2>
                     </div>
                 </div>
 
@@ -117,7 +124,7 @@ class M_R_Formula extends Component {
                                 })
                             }} />
 
-                        <button onClick={() => this.send_plan()}>ส่งสูตร</button>
+                        <button className="BTN_Signin" onClick={() => this.send_plan()}>ส่งสูตร</button>
 
 
                         {/* <table>
