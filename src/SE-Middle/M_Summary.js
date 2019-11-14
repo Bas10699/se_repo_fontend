@@ -15,7 +15,9 @@ class M_Summary extends Component {
             search_product: [],
             dateStart: '',
             dateEnd: '',
-            sum_money: 0
+            sum_money: 0,
+            summery_se: [],
+            summery_se_origin: []
         }
     }
 
@@ -27,6 +29,7 @@ class M_Summary extends Component {
 
     componentWillMount() {
         this.get_summery_trader()
+        this.get_summery_se()
     }
 
     filterDate = () => {
@@ -68,19 +71,40 @@ class M_Summary extends Component {
                     this.setState({
                         summery_trader: result.result,
                         summery_trader_origin: result.result,
-                        search_product: result.result
+                        // search_product: result.result
                     })
 
                     setTimeout(() => {
-                        console.log("get_product", result.result)
+                        console.log("summery_trader", result.result)
                     }, 500)
                 } else {
-                    window.location.href = "/";
                     alert(result.error_message)
                 }
             });
         } catch (error) {
-            alert("get_product error" + error);
+            alert("get_summery_trader" + error);
+        }
+    }
+
+    get_summery_se = async () => {
+        try {
+            await get('neutrally/get_summary_order_se', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        summery_se: result.result,
+                        summery_se_origin: result.result,
+                        // search_product: result.result
+                    })
+
+                    setTimeout(() => {
+                        console.log("summery_se", result.result)
+                    }, 500)
+                } else {
+                    alert(result.error_message)
+                }
+            });
+        } catch (error) {
+            alert("get_summery_se" + error);
         }
     }
 
@@ -177,7 +201,7 @@ class M_Summary extends Component {
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-5" style={{ textAlign: "center", paddingRight: "10px" }}>
-                        <h3 style={{color:"green"}}>รายรับ</h3>
+                        <h3 style={{ color: "green" }}>รายรับ</h3>
                         <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
                         <button onClick={() => this.filterDate()}>ค้นหา</button>
                         เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
@@ -203,8 +227,8 @@ class M_Summary extends Component {
                         </table>
 
                     </div>
-                    <div className="col-5" style={{ textAlign: "center", paddingLeft: "10px"}}>
-                        <h3 style={{color:"red"}}>รายจ่าย</h3>
+                    <div className="col-5" style={{ textAlign: "center", paddingLeft: "10px" }}>
+                        <h3 style={{ color: "red" }}>รายจ่าย</h3>
                         <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
                         <button onClick={() => this.filterDate()}>ค้นหา</button>
                         เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
@@ -216,14 +240,14 @@ class M_Summary extends Component {
                                 <th>จำนวน</th>
                                 <th>ราคารวม</th>
                             </tr>
-                            {this.state.summery_trader.map((item, index) => {
+                            {this.state.summery_se.map((item, index) => {
                                 return (
                                     <tr>
                                         <td>{index + 1}</td>
-                                        <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
+                                        <td>{moment(item.order_se_Payment_date).utc().format('DD/MM/YYYY')}</td>
                                         <td>{item.plant_name}</td>
                                         <td>{item.amount}</td>
-                                        <td>{item.amount * item.price}</td>
+                                        <td>{item.amount * item.order_se_price}</td>
                                     </tr>
                                 )
                             })}
