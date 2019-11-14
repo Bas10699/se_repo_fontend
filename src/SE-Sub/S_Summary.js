@@ -2,19 +2,38 @@
 
 import React, { Component } from 'react'
 import { get } from '../Support/Service'
-import { addComma,user_token } from '../Support/Constance'
+import { addComma, user_token } from '../Support/Constance'
 import moment from 'moment'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class S_Summary extends Component {
     constructor(props) {
         super(props)
         this.state = {
             farmer: [],
+            summary_personal: []
         }
     }
     componentWillMount() {
         this.get_static()
+
+    }
+    get_summary_personal = async () => {
+        try {
+            await get('neo_firm/get_summary_personal', user_token, (err, result) => {
+                if (result.success) {
+                    this.setState({
+                        summary_personal: result.result
+                    })
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
     }
 
     get_static = async () => {
@@ -45,8 +64,8 @@ class S_Summary extends Component {
 
                 <div className="Row">
                     <div className="col-2"></div>
-                    <div className="col-8" style={{textAlign:"center"}}>
-                    <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
+                    <div className="col-8" style={{ textAlign: "center" }}>
+                        <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
                         <button onClick={() => this.filterDate()}>ค้นหา</button>
                         เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
                         <table>
