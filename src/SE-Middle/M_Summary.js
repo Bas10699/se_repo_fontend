@@ -2,20 +2,63 @@
 import React, { Component } from 'react'
 import { user_token } from '../Support/Constance';
 import { get } from '../Support/Service';
+import moment from 'moment'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import { element } from 'prop-types';
 
 class M_Summary extends Component {
     constructor(props) {
         super(props)
         this.state = {
             summery_trader: [],
-            search_product: []
+            search_product: [],
+            dateStart: '',
+            dateEnd: '',
+            sum_money: 0
         }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
     }
 
     componentWillMount() {
         this.get_summery_trader()
+    }
+
+    filterDate = () => {
+
+        let format = 'DD/MM/YYYY'
+        let dateStart = moment(this.state.dateStart).format(format)
+        let dateEnd = moment(this.state.dateEnd).format(format)
+        console.log(dateStart, dateEnd)
+        // var time = moment() gives you current time. no format required.
+        let date_fil = []
+        let money = 0
+        this.state.summery_trader_origin.map((element) => {
+            let date = moment(element.date_of_payment).utc().format(format)
+            let time = moment(date, format),
+                beforeTime = moment(dateStart, format),
+                afterTime = moment(dateEnd, format);
+
+            if (time.isBetween(beforeTime, afterTime, null, '[]')) {
+
+                console.log('is between')
+                date_fil.push(element)
+                money += (element.amount * element.price)
+
+            } else {
+                console.log('is not between')
+            }
+        })
+        this.setState({
+            summery_trader: date_fil,
+            sum_money: money
+        })
+
     }
 
     get_summery_trader = async () => {
@@ -24,6 +67,7 @@ class M_Summary extends Component {
                 if (result.success) {
                     this.setState({
                         summery_trader: result.result,
+                        summery_trader_origin: result.result,
                         search_product: result.result
                     })
 
@@ -132,16 +176,29 @@ class M_Summary extends Component {
                 </div>
                 <div className="Row">
                     <div className="col-1"></div>
-                    <div className="col-10" style={{textAlign:"center"}}>
-                        <h4>เลือกวันที่ <input type="date" /> ถึง <input type="date" /></h4>
-                        เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม 000 บาท
+                    <div className="col-10" style={{ textAlign: "center" }}>
+                        <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
+                        <button onClick={() => this.filterDate()}>ค้นหา</button>
+                        เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
                         <table>
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>วันที่</th>
-                                <th>รหัสใบสั่งซื้อ</th>                                
-                                <th>ยอดสั่งซื้อ</th>
+                                <th>ชื่อพืช</th>
+                                <th>จำนวน</th>
+                                <th>ราคารวม</th>
                             </tr>
+                            {this.state.summery_trader.map((item, index) => {
+                                return (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
+                                        <td>{item.plant_name}</td>
+                                        <td>{item.amount}</td>
+                                        <td>{item.amount * item.price}</td>
+                                    </tr>
+                                )
+                            })}
                         </table>
                         <div className="Row">
                             <div className="col-6" style={{ backgroundColor: "#ccc" }}>
