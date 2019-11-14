@@ -176,7 +176,8 @@ class M_Summary extends Component {
                 </div>
                 <div className="Row">
                     <div className="col-1"></div>
-                    <div className="col-10" style={{ textAlign: "center" }}>
+                    <div className="col-5" style={{ textAlign: "center", paddingRight: "10px" }}>
+                        <h3>รายรับ</h3>
                         <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
                         <button onClick={() => this.filterDate()}>ค้นหา</button>
                         เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
@@ -200,24 +201,33 @@ class M_Summary extends Component {
                                 )
                             })}
                         </table>
-                        <div className="Row">
-                            <div className="col-6" style={{ backgroundColor: "#ccc" }}>
-                                {/* กราฟเเท่ง ยอดขายรายเดือน */}
-                            </div>
-                            <div className="col-1"></div>
-                            <div className="col-6" style={{ backgroundColor: "#ccc" }}>
-                                {/* กราฟพายยอดขาย se ย่อย */}
-                            </div>
-                        </div>
-                        {/* <div className="Row">
-                            <div className="col-6">
-                                <HighchartsReact highcharts={Highcharts} options={options} />
-                            </div>
-                            <div className="col-1"></div> */}
-                        {/* <div className="col-6" style={{ backgroundColor: "#ccc" }}>
-                                กราฟพายยอดขาย se ย่อย
-                            </div> */}
-                        {/* </div> */}
+
+                    </div>
+                    <div className="col-5" style={{ textAlign: "center", paddingLeft: "10px" }}>
+                        <h3>รายจ่าย</h3>
+                        <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
+                        <button onClick={() => this.filterDate()}>ค้นหา</button>
+                        เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
+                        <table>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>วันที่</th>
+                                <th>ชื่อพืช</th>
+                                <th>จำนวน</th>
+                                <th>ราคารวม</th>
+                            </tr>
+                            {this.state.summery_trader.map((item, index) => {
+                                return (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
+                                        <td>{item.plant_name}</td>
+                                        <td>{item.amount}</td>
+                                        <td>{item.amount * item.price}</td>
+                                    </tr>
+                                )
+                            })}
+                        </table>
 
                     </div>
                     <div className="col-1"></div>
