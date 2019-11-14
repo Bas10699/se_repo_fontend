@@ -63,6 +63,7 @@ import S_Summary from './SE-Sub/S_Summary'
 import Create_Info from './Researcher/Create_Info';
 import M_R_Formula from './SE-Middle/M_Research/M_R_Formula';
 import T_Researcher_F from './Trader/T_Researcher_F';
+import S_H_Buying from './SE-Sub/S_H_Buying';
 
 function App() {
   return (
@@ -101,8 +102,8 @@ function App() {
       <Route exact path='/S_skill_farmer' component={S_skill_farmer} />
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail} />
       <Route exact path='/S_Certified' component={S_Certified} />
-      <Route exact path='/S_Summary' component={S_Summary} />
-
+      <Route exact path='/S_H_Buying' component={S_H_Buying} />
+<Route exact path='/S_Summary' component={S_Summary}/>
       <Route exact path='/M_Plan' component={M_Plan} />
       <Route exact path='/M_Data' component={M_Data} />
       <Route exact path='/M_Farmer' component={M_Farmer} />

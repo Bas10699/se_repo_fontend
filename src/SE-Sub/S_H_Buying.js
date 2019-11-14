@@ -6,7 +6,7 @@ import { addComma,user_token } from '../Support/Constance'
 import moment from 'moment'
 import {NavLink} from 'react-router-dom'
 
-class S_Summary extends Component {
+class S_H_Buying extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -39,37 +39,37 @@ class S_Summary extends Component {
             <div className='App'>
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>สรุปยอดขาย</h2>
+                        <h2 style={{ textAlign: "center" }}>ประวัติการสั่งซื้อ</h2>
                     </div>
                 </div>
 
                 <div className="Row">
                     <div className="col-2"></div>
-                    <div className="col-8" style={{textAlign:"center"}}>
-                    <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
-                        <button onClick={() => this.filterDate()}>ค้นหา</button>
-                        เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
-                        <table>
+                    <div className="col-8">
+                        <table style={{textAlign:"center"}}>
                             <tr>
                                 <th>ลำดับ</th>
+                                <th>ชื่อ - นามสกุล เกษตรกร</th>
+                                <th>พืช</th>
+                                <th>จำนวนที่สั่งซื้อ (กิโลกรัม)</th>
                                 <th>วันที่</th>
-                                <th>ชื่อพืช</th>
-                                <th>จำนวน</th>
-                                <th>ราคารวม</th>
+                                <th>เลขใบสั่งซื้อ</th>
                             </tr>
-                            {/* {this.state.summery_trader.map((item, index) => {
+
+                            {this.state.farmer.map((e, index) => {
                                 return (
                                     <tr>
-                                        <td>{index + 1}</td>
-                                        <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
-                                        <td>{item.plant_name}</td>
-                                        <td>{item.amount}</td>
-                                        <td>{item.amount * item.price}</td>
+                                        <td>{index + 1}.</td>
+                                        <td style={{textAlign:"left"}}>{e.order_farmer_title_name}{e.order_farmer_name} {e.order_farmer_lastname}</td>
+                                        <td>{e.order_farmer_plant}</td>
+                                        <td>{addComma(e.order_farmer_plant_volume)}</td>
+                                        <td>{moment(e.order_farmer_date).utc().add('years', 543).format("DD/MM/YYYY")}</td>
+                                        <td><NavLink to={'S_Order/Order?orderId='+e.order_se_id}>{e.order_se_id}</NavLink></td>
+                                        
                                     </tr>
                                 )
-                            })} */}
+                            })}
                         </table>
-
                     </div>
                     <div className="col-2"></div>
 
@@ -79,4 +79,4 @@ class S_Summary extends Component {
         )
     }
 }
-export default S_Summary
+export default S_H_Buying
