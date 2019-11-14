@@ -42,14 +42,27 @@ class M_R_Formula extends Component {
         }
     }
 
-    send_plan = () => {
+    send_plan = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
         let obj = {
-            plan_id:this.state.check_array,
-            product_id:params.product_id
+            plan_id: this.state.check_array,
+            product_id: params.product_id
         }
         console.log('send', obj)
+        try {
+            await post(obj, 'neutrally/send_plan_product_to_trader', user_token).then((result) => {
+                if (result.success) {
+                    alert('สำเร็จ')
+                }
+                else {
+                    alert(result.success)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
     }
 
     render() {
