@@ -21,7 +21,9 @@ class Create_Nutrients extends Component {
             open: false,
             name: "",
             nutrient_graph: [],
-            nutrient_information: []
+            nutrient_information: [],
+            delete_id: [],
+            nutrient_graph_id:[]
         }
     }
     componentWillMount() {
@@ -35,23 +37,64 @@ class Create_Nutrients extends Component {
         })
     }
 
+    nutrientChangeName = (e) => {
+        let nutrient_graph = this.state.nutrient_graph
+        let nutrient_graph_id = this.state.nutrient_graph_id
+        let index = e.target.id
+        nutrient_graph[index].name = e.target.value
+        nutrient_graph_id[index].name = e.target.value
+        this.setState({
+            nutrient_graph: nutrient_graph,
+            nutrient_graph_id: nutrient_graph_id
+        })
+
+    }
+    nutrientChangeY = (e) => {
+        let nutrient_graph = this.state.nutrient_graph
+        let nutrient_graph_id = this.state.nutrient_graph_id
+        let index = e.target.id
+        nutrient_graph[index].y = parseInt(e.target.value)
+        nutrient_graph_id[index].y = parseInt(e.target.value)
+        this.setState({
+            nutrient_graph: nutrient_graph,
+            nutrient_graph_id: nutrient_graph_id
+        })
+
+    }
+
     add_nutrient_graph = () => {
         let nutrient = this.state.nutrient_graph
-        console.log(this.state.nutrient_data, this.state.nutrient_volume)
+        let nutrient_id = this.state.nutrient_graph_id
+        
         nutrient.push({
             name: this.state.nutrient_data,
             y: parseFloat(this.state.nutrient_volume)
         })
+        nutrient_id.push({
+            name: this.state.nutrient_data,
+            y: parseFloat(this.state.nutrient_volume)
+        })
+        console.log(nutrient)
         this.setState({
             nutrient_graph: nutrient,
+            nutrient_graph_id: nutrient_id,
         })
     }
 
-    delete_nutrient_graph = (index) => {
+    delete_nutrient_graph = (index, id) => {
+        let delete_id = this.state.delete_id
+        if (id) {
+            delete_id.push(id)
+        }
+        // console.log(delete_id)
         let nutrient_graph = this.state.nutrient_graph
+        let nutrient_graph_id = this.state.nutrient_graph_id
         nutrient_graph.splice(index, 1)
+        nutrient_graph_id.splice(index, 1)
         this.setState({
-            nutrient_graph: nutrient_graph
+            nutrient_graph: nutrient_graph,
+            nutrient_graph_id: nutrient_graph_id,
+            delete_id: delete_id
         })
     }
 
@@ -97,9 +140,11 @@ class Create_Nutrients extends Component {
     }
     add_nutrient_information = async () => {
         let obj = {
-            nutrient: this.state.nutrient_graph,
-            plant_name: this.state.name
+            nutrient: this.state.nutrient_graph_id,
+            plant_name: this.state.name,
+            delete_id: this.state.delete_id
         }
+        console.log(this.state.nutrient_graph_id)
         try {
             await post(obj, 'researcher/add_nutrient_information', user_token).then((result) => {
                 if (result.success) {
@@ -119,15 +164,19 @@ class Create_Nutrients extends Component {
     set_nutrients = (name) => {
         console.log("set_nutrients", name)
         let nutrient_information = this.state.nutrient_information
-        let data = []
+        let data = [],data1=[]
         let check = 0
         nutrient_information.map((element) => {
             if (element.plant_name === name) {
                 check = 1
                 data.push({
-                    id:element.nutrient_id,
                     name: element.nutrient_name,
-                    y: element.volume
+                    y: element.volume,
+                    id: element.nutrient_id,
+                })
+                data1.push({
+                    name: element.nutrient_name,
+                    y: element.volume,
                 })
             }
         })
@@ -136,9 +185,10 @@ class Create_Nutrients extends Component {
             this.setState({
                 open: true,
                 name: name,
-                nutrient_graph: data,
+                nutrient_graph_id: data,
                 nutrient_data: null,
                 nutrient_volume: null,
+                nutrient_graph:data1
             })
         }
         else {
@@ -250,7 +300,7 @@ class Create_Nutrients extends Component {
                                                 {index + 1}.
                                                     <input type="text" id={index} value={ele.name} onChange={this.nutrientChangeName} style={{ width: "100px" }} />
                                                 <input type="number" style={{ marginLeft: "25px", width: "50px" }} id={index} value={ele.y} onChange={this.nutrientChangeY} />
-                                                <img src={delete_icon} style={{ width: "30px", cursor: "pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} />
+                                                <img src={delete_icon} style={{ width: "30px", cursor: "pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index, ele.id)} />
                                             </div>
                                         )
                                     })}
