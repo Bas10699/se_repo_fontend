@@ -158,7 +158,7 @@ class S_Plan extends Component {
             disnict_plant_sum.push({
                 plant: ele_plant,
                 year_value: value,
-                volume_want:volume_want
+                volume_want: volume_want
             })
         })
 
@@ -228,7 +228,8 @@ class S_Plan extends Component {
             await get('neo_firm/get_planing_farmer', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        order_farmer: result.result
+                        order_farmer: result.result,
+                        order_farmer_origin: result.result
                         // farmer: this.sort_plant(result.result),
                         // check_array: result.result,
                         // data:result.result.date
@@ -274,6 +275,28 @@ class S_Plan extends Component {
         this.setState({
             [e.target.id]: e.target.value
         })
+    }
+
+    filterPlant = (e) => {
+        if (this.state.page === 1) {
+            var updatedList = this.state.search_order;
+            updatedList = updatedList.filter(function (item) {
+                return item.plant.search(e.target.value) !== -1;
+            });
+            this.setState({
+                plants: updatedList,
+            });
+        }
+        if (this.state.page === 2) {
+            var updatedList = this.state.order_farmer_origin;
+            updatedList = updatedList.filter(function (item) {
+                return item.planing_farmer_plant.search(e.target.value) !== -1;
+            });
+            this.setState({
+                order_farmer: updatedList,
+            });
+        }
+
     }
 
     render_plan = (page) => {
@@ -405,7 +428,7 @@ class S_Plan extends Component {
                             <button onClick={() => { this.setState({ page: 1 }) }}>วางแผนการเพาะปลูกให้กับเกษตรกร</button>
                             <button onClick={() => { this.setState({ page: 2 }) }}>ติดตามการวางแผน</button>
 
-                            <input type="text" placeholder="ค้นหา"
+                            <input type="text" placeholder="ค้นหาพืช" onChange={this.filterPlant}
                                 style={{ width: "40%", marginTop: "5px", marginLeft: "25px" }} />
                         </div>
 
