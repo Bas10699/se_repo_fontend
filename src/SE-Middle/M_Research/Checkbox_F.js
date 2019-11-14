@@ -60,61 +60,58 @@ class Checkbox extends Component {
         // console.log(this.props.check_array)
         return (
             <div>
-                 <table>
-                            <tr>
-                                <th>ชื่อสูตร</th>
-                                {this.props.option.map((e_product_plan_name, index) => {
+                <table>
+                    <tr>
+                        <th style={{borderRight:"1px solid #ccc"}}>ชื่อสูตร</th>
+                        {this.props.option.map((e_product_plan_name, index) => {
+                            return (
+                                <th style={{borderRight:"1px solid #ccc"}}>
+                                    <div>
+                                        <input type="checkbox" id="checkbox" value={e_product_plan_name.plan_id}
+                                            onClick={(event) => { this.onCheck(event) }}
+                                        />
+                                        {e_product_plan_name.product_plan_name}
+                                    </div>
+
+                                </th>
+                            )
+                        }
+                        )}
+
+                    </tr>
+                    <tr>
+                        <th style={{borderRight:"1px solid #ccc"}}>สารอาหาร</th>
+                        {this.props.option.map((e_product_plan_name, index) => {
+                            return (
+                                <td style={{borderRight:"1px solid #ccc"}}>{e_product_plan_name.nutrient_precent.map((e_nutrient_precent) => {
+
                                     return (
-                                        <th>
-                                            <div>
-                                                {/* <label class="switch"> */}
-                                                    <input type="checkbox" id="checkbox" value={e_product_plan_name.plan_id}
-                                                     onClick={(event) => { this.onCheck(event) }}
-                                                    />
-                                                    {/* {console.log("active",index)} */}
-                                                    {/* <span class="slider round"></span>
-                                                </label> */}
-                                            </div>
-                                            {e_product_plan_name.product_plan_name}
-                                        </th>
+                                        <div>{e_nutrient_precent.name}</div>
                                     )
-                                }
-                                )}
+                                })}</td>
+                            )
+                        }
+                        )}
 
-                            </tr>
-                            <tr>
-                                <th>สารอาหาร</th>
-                                {this.props.option.map((e_product_plan_name, index) => {
+                    </tr>
+                    <tr>
+                        <th style={{borderRight:"1px solid #ccc"}}>วัตถุดิบ</th>
+                        {this.props.option.map((e_product_plan_name, index) => {
+                            return (
+                                <td style={{borderRight:"1px solid #ccc"}}>{e_product_plan_name.plant.map((e_plant) => {
                                     return (
-                                        <td>{e_product_plan_name.nutrient_precent.map((e_nutrient_precent) => {
-
-                                            return (
-                                                <div>{e_nutrient_precent.name}</div>
-                                            )
-                                        })}</td>
+                                        <div>{e_plant.plant_name} {e_plant.plant_volume} {e_plant.plant_volume_type}</div>
                                     )
-                                }
-                                )}
+                                })}</td>
+                            )
+                        }
+                        )}
+                    </tr>
+                    <tr>
+                        <th style={{borderRight:"1px solid #ccc"}}>ราคาต้นทุน</th>
+                    </tr>
 
-                            </tr>
-                            <tr>
-                                <th>วัตถุดิบ</th>
-                                {this.props.option.map((e_product_plan_name, index) => {
-                                    return (
-                                        <td>{e_product_plan_name.plant.map((e_plant) => {
-                                            return (
-                                                <div>{e_plant.plant_name} {e_plant.plant_volume} {e_plant.plant_volume_type}</div>
-                                            )
-                                        })}</td>
-                                    )
-                                }
-                                )}
-                            </tr>
-                            <tr>
-                                <th>ราคาต้นทุน</th>
-                            </tr>
-
-                        </table>
+                </table>
             </div>
         );
     }
