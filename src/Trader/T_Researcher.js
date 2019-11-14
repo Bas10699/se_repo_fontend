@@ -52,7 +52,7 @@ class T_Researcher extends Component {
             case 1:
             case 2: return_status = <div>รอการวิจัย</div>
                 break;
-            case 3: return_status =
+            case 4: return_status =
                 <div>
                     <NavLink to={'/T_Researcher_F/product?product_id='+product_id}> <button className="BTN_Signin" style={{ margin: "0", float: "left" }} onClick={()=>this.onOpen()}>สูตรผลิตภัณฑ์</button></NavLink>
                 </div>
