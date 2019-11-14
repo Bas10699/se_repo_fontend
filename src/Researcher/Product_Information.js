@@ -15,12 +15,13 @@ class Product_Information extends Component {
             get_plant_all_origin: [],
             plants: '',
             data_month: [],
-            index_plant: 0
+            index_plant: 0,
+            loading: true
 
         }
     }
     componentWillMount() {
-        this.get_data()
+        // this.get_data()
         this.get_plant_all_mount()
     }
 
@@ -32,7 +33,8 @@ class Product_Information extends Component {
                         get_plant_all_origin: result.result,
                         get_plant_all: result.result,
                         plants: result.result,
-                        data_month: result.result[0].data
+                        data_month: result.result[0].data,
+                        loading:false
                     })
                     console.log('plant', result.result)
                 }
@@ -96,6 +98,7 @@ class Product_Information extends Component {
                 if (result.success) {
                     this.setState({
                         get_data: result.result,
+                        
                     })
                     setTimeout(() => {
                         console.log("get_data", result.result)
@@ -191,8 +194,11 @@ class Product_Information extends Component {
 
         return (
             <div className="App">
-
-                {/* <div className="Row">
+                {this.state.loading ?
+                    <div><div className="loader"></div><h5 style={{ textAlign: 'center', marginTop: '28%' }}>กำลังโหลด...</h5></div>
+                    :
+                    <div>
+                        {/* <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-8">
                         <h3 style={{ textAlign: "center" }}>ข้อมูลผลผลิต</h3>
@@ -216,58 +222,59 @@ class Product_Information extends Component {
 
                     </div>
                 </div> */}
-                <div className="Row">
-                    <div className="col-2" style={{backgroundColor:"rgb(255, 196, 34)",marginTop:"0px"}}>
-                        <h3 style={{ textAlign: "center",margin:"10px",paddingTop:"20px" }}>รายชื่อพืช</h3>
-                    <input type='text' onChange={this.filterPlant} style={{ width: "88%", marginTop: "20px", marginBottom: "15px", marginLeft: "2px" }} />
-                    </div>
-                </div>
-
-                <div className="Row">
-                    {/* <div className="col-1"></div> */}
-                    
-                    <div className="col-2" style={{ marginTop: "-9px" }}>
-                        <div className='ex3'>
-
-                            {this.state.get_plant_all.map((element, index) => {
-                                return (
-
-                                    <div style={{ cursor: 'pointer', marginLeft: "10px", fontSize: "22px" }}
-                                        onClick={() => this.show_chart(index)} >
-                                        {index + 1}. {element.name}
-                                    </div>
-                                )
-                            })}
+                        < div className="Row">
+                            <div className="col-2" style={{ backgroundColor: "rgb(255, 196, 34)", marginTop: "0px" }}>
+                                <h3 style={{ textAlign: "center", margin: "10px", paddingTop: "20px" }}>รายชื่อพืช</h3>
+                                <input type='text' onChange={this.filterPlant} style={{ width: "88%", marginTop: "20px", marginBottom: "15px", marginLeft: "2px" }} />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className='col-8' style={{ marginLeft: 'auto', marginRight: 'auto',marginTop:"-100px" }}>
-                        <br />
-                        <HighchartsReact highcharts={Highcharts} options={options} />
+                        <div className="Row">
+                            {/* <div className="col-1"></div> */}
+
+                            <div className="col-2" style={{ marginTop: "-9px" }}>
+                                <div className='ex3'>
+
+                                    {this.state.get_plant_all.map((element, index) => {
+                                        return (
+
+                                            <div style={{ cursor: 'pointer', marginLeft: "10px", fontSize: "22px" }}
+                                                onClick={() => this.show_chart(index)} >
+                                                {index + 1}. {element.name}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+
+                            <div className='col-8' style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: "-100px" }}>
+                                <br />
+                                <HighchartsReact highcharts={Highcharts} options={options} />
 
 
-                    </div>
-                    <div className='col-2'>
+                            </div>
+                            <div className='col-2'>
 
-                        <table className="s_plant" style={{ marginTop:"-30px" }}>
-                            <tr>
-                                <th colSpan="3">จำนวนที่ส่งมอบในเเต่ละเดือน</th>
-                            </tr>
-                            {this.state.data_month.map((element, index) => {
-                                return (
-                                    <tr style={{ cursor: 'pointer' }} >
-                                        <th>{this.rander_month(index + 1)}</th>
-                                        <td style={{ textAlign: "right" }}>{addComma(element)}</td>
-                                        <td style={{ textAlign: "center" }}>กิโลกรัม</td>
+                                <table className="s_plant" style={{ marginTop: "-30px" }}>
+                                    <tr>
+                                        <th colSpan="3">จำนวนที่ส่งมอบในเเต่ละเดือน</th>
                                     </tr>
-                                )
-                            })}
-                            <div id="Top" />
-                        </table>
-                    </div>
-                </div>
+                                    {this.state.data_month.map((element, index) => {
+                                        return (
+                                            <tr >
+                                                <th>{this.rander_month(index + 1)}</th>
+                                                <td style={{ textAlign: "right" }}>{addComma(element)}</td>
+                                                <td style={{ textAlign: "center" }}>กิโลกรัม</td>
+                                            </tr>
+                                        )
+                                    })}
+                                    <div id="Top" />
+                                </table>
+                            </div>
+                        </div>
+                    </div>}
 
-            </div>
+            </div >
         )
     }
 } export default Product_Information;

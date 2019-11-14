@@ -240,6 +240,32 @@ class OrderDetail extends Component {
         }
     }
 
+    send_logistic = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        const object = {
+            order_id: params.aa,
+            status: 4
+        }
+        try {
+            await post(object, 'neutrally/update_status_order_trader', user_token).then((result) => {
+                if (result.success) {
+                    window.location.reload()
+                    setTimeout(() => {
+                        console.log("confirm_payment", result.result)
+                    }, 500)
+                } else {
+                    // window.location.href = "/";
+                    alert(result.error_message)
+                    console.log("confirm_payment_err", result.result)
+                }
+            })
+        }
+        catch (error) {
+            alert("confirm_payment" + error);
+        }
+    }
+
     sum_price = (data_price) => {
         let sum = 0;
         data_price.map((element) => {
@@ -366,7 +392,7 @@ class OrderDetail extends Component {
                 </div>
                 <div className="Row">
                         <div className="col-12" style={{ marginLeft: "50px" }}>
-                            <button className="BTN_PDF">ยืนยันจัดส่ง</button>
+                            <button className="BTN_PDF" onClick={()=> this.send_logistic()}>ยืนยันจัดส่ง</button>
                             
                             </div>
                     </div>

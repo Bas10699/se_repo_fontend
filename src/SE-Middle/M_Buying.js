@@ -38,7 +38,7 @@ class M_Buying extends Component {
     filterID = (event) => {
         var updatedList = this.state.order;
         updatedList = updatedList.filter(function (item) {
-            return item.order_id.toLowerCase().search(
+            return item.order_se_id.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1;
         });
         this.setState({
@@ -49,7 +49,7 @@ class M_Buying extends Component {
     filterDate = (event) => {
         var updatedList = this.state.order;
         updatedList = updatedList.filter(function (item) {
-            return item.order_date.toLowerCase().search(
+            return item.order_se_date.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1;
         });
         this.setState({
@@ -57,10 +57,10 @@ class M_Buying extends Component {
         });
     }
 
-    render_status = (order_status) => {
+    render_status = (order_se_status) => {
         let render_tag
 
-        switch (order_status) {
+        switch (order_se_status) {
             case 0: render_tag = <div>
                 <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={twodis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
@@ -174,8 +174,8 @@ class M_Buying extends Component {
         const order = this.state.order
 
         function compare(a, b) {
-            const order_idA = a.order_date
-            const order_idB = b.order_date
+            const order_idA = a.order_se_date
+            const order_idB = b.order_se_date
 
             let comparison = 0;
             if (order_idA < order_idB) {
@@ -197,8 +197,8 @@ class M_Buying extends Component {
 
         if (e === 'Max') {
             function compare(a, b) {
-                const order_idA = a.order_status
-                const order_idB = b.order_status
+                const order_idA = a.order_se_status
+                const order_idB = b.order_se_status
 
                 let comparison = 0;
                 if (order_idA < order_idB) {
@@ -214,8 +214,8 @@ class M_Buying extends Component {
         }
         if (e === 'Min') {
             function compare(a, b) {
-                const order_idA = a.order_status
-                const order_idB = b.order_status
+                const order_idA = a.order_se_status
+                const order_idB = b.order_se_status
 
                 let comparison = 0;
                 if (order_idA > order_idB) {
@@ -234,8 +234,8 @@ class M_Buying extends Component {
         const order = this.state.order
         if (e === 'Max') {
             function compare(a, b) {
-                const order_idA = a.order_date
-                const order_idB = b.order_date
+                const order_idA = a.order_se_date
+                const order_idB = b.order_se_date
 
                 let comparison = 0;
                 if (order_idA < order_idB) {
@@ -253,8 +253,8 @@ class M_Buying extends Component {
         }
         if (e === 'Min') {
             function compare(a, b) {
-                const order_idA = a.order_date
-                const order_idB = b.order_date
+                const order_idA = a.order_se_date
+                const order_idB = b.order_se_date
 
                 let comparison = 0;
                 if (order_idA > order_idB) {
@@ -309,11 +309,11 @@ class M_Buying extends Component {
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-4">
-                        <input type="search" placeholder="ค้นหา" onChange={this.filterID} />
+                        <input type="search" placeholder="ค้นหาจากเลขที่ใบสั่งซื้อ" onChange={this.filterID} />
                     </div>
                     <div className="col-4">
                         <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} />
-                        <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button>
+                        {/* <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button> */}
                     </div>
                     <div className="col-2"></div>
                 </div>
@@ -356,7 +356,7 @@ class M_Buying extends Component {
                                                 <td>{this.render_status(element.order_se_status)}</td>
                                                 <td>{element.plant_name}</td>
                                                 <td>{addComma(element.amount) }</td>
-                                                <td>{element.se_name}</td>
+                                                <td>{element.name}</td>
                                                 <td><NavLink to={"/M_Buying/order?order_id=" + element.order_se_id} style={{ textDecoration: "none" }}><button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>
                                         )
@@ -368,7 +368,9 @@ class M_Buying extends Component {
                                                 <td>{element.order_se_id}</td>
                                                 <td>{moment(element.order_se_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_se_status)}</td>
-                                                <td>{element.amount} บาท</td>
+                                                <td>{element.plant_name}</td>
+                                                <td>{addComma(element.amount)}</td>
+                                                <td>{element.name}</td>
                                                 <td><NavLink to={"/M_Buying/order?order_id=" + element.order_se_id} style={{ textDecoration: "none" }}><button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>
                                         )

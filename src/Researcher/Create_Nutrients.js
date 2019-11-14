@@ -65,15 +65,29 @@ class Create_Nutrients extends Component {
     add_nutrient_graph = () => {
         let nutrient = this.state.nutrient_graph
         let nutrient_id = this.state.nutrient_graph_id
+        nutrient.map((ele) => {
+            if (ele.name === this.state.nutrient_data) {
+                ele.y += parseFloat(this.state.nutrient_volume)
+            }
+            else {
+                nutrient.push({
+                    name: this.state.nutrient_data,
+                    y: parseFloat(this.state.nutrient_volume)
+                })
+            }
+        })
+        nutrient_id.map((element) => {
+            if (element.name === this.state.nutrient_data) {
+                element.y += parseFloat(this.state.nutrient_volume)
+            }
+            else {
+                nutrient_id.push({
+                    name: this.state.nutrient_data,
+                    y: parseFloat(this.state.nutrient_volume)
+                })
+            }
+        })
 
-        nutrient.push({
-            name: this.state.nutrient_data,
-            y: parseFloat(this.state.nutrient_volume)
-        })
-        nutrient_id.push({
-            name: this.state.nutrient_data,
-            y: parseFloat(this.state.nutrient_volume)
-        })
         console.log(nutrient)
         this.setState({
             nutrient_graph: nutrient,
@@ -275,7 +289,7 @@ class Create_Nutrients extends Component {
                                 return (
                                     <tr>
                                         <td>{index + 1}. {element.name}</td>
-                                        <td><button className="BTN_Signin" style={{margin:"0",float:"left"}} onClick={() => this.set_nutrients(element.name)}>จัดการสารอาหาร</button></td>
+                                        <td><button className="BTN_Signin" style={{ margin: "0", float: "left" }} onClick={() => this.set_nutrients(element.name)}>จัดการสารอาหาร</button></td>
                                     </tr>
                                 )
                             })}
@@ -319,11 +333,11 @@ class Create_Nutrients extends Component {
                                 </div>
                                 <div className="col-5">
                                     <h5 style={{ marginBottom: "10px" }}>ปริมาณสารอาหาร</h5>
-                                    <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} /> <select onChange={this.handleChange} type="select" style={{width:"90px"}}>
-                                    <option>มิลลิกรัม</option>
-                                    <option>กรัม</option>
-                                    <option>กิโลกรัม</option>
-                                </select>
+                                    <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} /> <select onChange={this.handleChange} type="select" style={{ width: "90px" }}>
+                                        <option>มิลลิกรัม</option>
+                                        <option>กรัม</option>
+                                        <option>กิโลกรัม</option>
+                                    </select>
                                     <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-40px" }}>+ สารอาหาร</button>
                                     {/* <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button> */}
                                 </div>

@@ -1,11 +1,11 @@
 //se-middle สรุปยอดการซื้อ-ขาย
 import React, { Component } from 'react'
-import { user_token } from '../Support/Constance';
+import { user_token,addComma,sortData } from '../Support/Constance';
 import { get } from '../Support/Service';
 import moment from 'moment'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { element } from 'prop-types';
+import Modal from 'react-responsive-modal'
 
 class M_Summary extends Component {
     constructor(props) {
@@ -17,13 +17,19 @@ class M_Summary extends Component {
             dateEnd: '',
             sum_money: 0,
             summery_se: [],
-            summery_se_origin: []
+            summery_se_origin: [],
+            open: false
         }
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+    }
+    onCloseModel = () => {
+        this.setState({
+            open: false
         })
     }
 
@@ -40,6 +46,7 @@ class M_Summary extends Component {
         console.log(dateStart, dateEnd)
         // var time = moment() gives you current time. no format required.
         let date_fil = []
+        let date_se = []
         let money = 0
         this.state.summery_trader_origin.map((element) => {
             let date = moment(element.date_of_payment).utc().format(format)
@@ -49,16 +56,32 @@ class M_Summary extends Component {
 
             if (time.isBetween(beforeTime, afterTime, null, '[]')) {
 
-                console.log('is between')
+                // console.log('is between')
                 date_fil.push(element)
                 money += (element.amount * element.price)
 
             } else {
-                console.log('is not between')
+                // console.log('is not between')
+            }
+        })
+        this.state.summery_se_origin.map((element) => {
+            let date = moment(element.order_se_Payment_date).utc().format(format)
+            let time = moment(date, format),
+                beforeTime = moment(dateStart, format),
+                afterTime = moment(dateEnd, format);
+
+            if (time.isBetween(beforeTime, afterTime, null, '[]')) {
+
+                // console.log('is between')
+                date_se.push(element)
+
+            } else {
+                // console.log('is not between')
             }
         })
         this.setState({
             summery_trader: date_fil,
+            summery_se: date_se,
             sum_money: money
         })
 
@@ -106,6 +129,64 @@ class M_Summary extends Component {
         } catch (error) {
             alert("get_summery_se" + error);
         }
+    }
+
+    sum_in_out_money = (data) => {
+        let sum_se = this.state.summery_se
+        let date = []
+        let result = []
+        data.map((ele_data) => {
+            let date_data = moment(ele_data.date_of_payment).utc().format('DD/MM/YYYY')
+            let index = date.findIndex((elem) => elem === date_data)
+            if (index < 0) {
+                date.push(date_data)
+            }
+        })
+        date.map((ee) => {
+            sum_se.map((ele) => {
+                let date_se = moment(ele.order_se_Payment_date).utc().format('DD/MM/YYYY')
+                if (ee !== date_se) {
+                    let index = date.findIndex((elem) => elem === date_se)
+                    if (index < 0) {
+                        date.push(date_se)
+                    }
+                }
+            })
+        })
+
+        date.map((e_in) => {
+            let monney_in = 0
+            let monney_out = 0
+            data.map((e_data) => {
+                let date_data = moment(e_data.date_of_payment).utc().format('DD/MM/YYYY')
+                if (e_in === date_data) {
+                    // console.log('gg',e_data)
+                    monney_in += (e_data.amount * e_data.price)
+                }
+            })
+            sum_se.map((s_data) => {
+                let date_se = moment(s_data.order_se_Payment_date).utc().format('DD/MM/YYYY')
+                if (e_in === date_se) {
+                    console.log('gg', s_data)
+                    monney_out += (s_data.amount * s_data.order_se_price)
+                }
+            })
+            result.push({
+                date: e_in,
+                monney_in: monney_in,
+                monney_out: monney_out
+            })
+        })
+        console.log('555', result)
+        return sortData(result,'date',false)
+    }
+
+    sum_money_all = (data) => {
+        let sum = 0
+        data.map((ele) => {
+            sum += ele.monney_in - ele.monney_out
+        })
+        return sum
     }
 
     // filterSearch = (event) => {
@@ -196,14 +277,16 @@ class M_Summary extends Component {
                             <button onClick={() => this.filterDate()} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>ค้นหา</button>
                         </h4>
 
-                        <h4 style={{ margin: "0" }}>มียอดรวม {this.state.sum_money} บาท</h4>
+                        <h4 style={{ margin: "0" }}>มียอดรวม {addComma(this.sum_money_all(this.sum_in_out_money(this.state.summery_trader)))} บาท&nbsp;
+                            <u style={{ cursor: 'pointer', color: 'blue' }} onClick={() => this.setState({ open: true })} >ดูรายละเอียดเพิ่มเติม</u>
+                        </h4>
                     </div>
                 </div>
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-10" style={{ textAlign: "center", paddingRight: "10px" }}>
-                        
-                        
+
+
                         <table>
                             <tr>
                                 <th>วันที่</th>
@@ -211,53 +294,85 @@ class M_Summary extends Component {
                                 <th>รายจ่าย</th>
                                 <th>คงเหลือ</th>
                             </tr>
-                            {this.state.summery_trader.map((item, index) => {
+                            {this.sum_in_out_money(this.state.summery_trader).map((item, index) => {
                                 return (
                                     <tr>
                                         {/* <td>{index + 1}</td> */}
-                                        <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
+                                        <td>{item.date}</td>
                                         {/* <td>{item.plant_name}</td> */}
-                                        <td style={{color:"green"}}>{item.amount}</td>
-                                        <td style={{color:"red"}}>{item.amount * item.price}</td>
+                                        <td style={{ color: "green" }}>{addComma(item.monney_in)}</td>
+                                        <td style={{ color: "red" }}>{addComma(item.monney_out)}</td>
+                                        <td >{addComma(item.monney_in - item.monney_out)}</td>
                                     </tr>
                                 )
                             })}
                             <tr>
                                 <th colSpan="3">รวม</th>
-                                <th>รายรับ-รายจ่าย</th>
-                                
+                                <th>{addComma(this.sum_money_all(this.sum_in_out_money(this.state.summery_trader)))}</th>
+
                             </tr>
                         </table>
 
                     </div>
-                    {/* <div className="col-5" style={{ textAlign: "center", paddingLeft: "10px" }}>
-                        <h3 style={{ color: "red" }}>รายจ่าย</h3>
-                        <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} />
-                        <button onClick={() => this.filterDate()}>ค้นหา</button>
-                        </h4>
-                        <h4 style={{ margin: "0" }}>มียอดรวม {this.state.sum_money} บาท</h4>
-                        <table>
-                            <tr>
-                                <th>ลำดับ</th>
-                                <th>วันที่</th>
-                                <th>ชื่อพืช</th>
-                                <th>จำนวน</th>
-                                <th>ราคารวม</th>
-                            </tr>
-                            {this.state.summery_se.map((item, index) => {
-                                return (
-                                    <tr>
-                                        <td>{index + 1}</td>
-                                        <td>{moment(item.order_se_Payment_date).utc().format('DD/MM/YYYY')}</td>
-                                        <td>{item.plant_name}</td>
-                                        <td>{item.amount}</td>
-                                        <td>{item.amount * item.order_se_price}</td>
-                                    </tr>
-                                )
-                            })}
-                        </table> */}
+                    <Modal open={this.state.open} onClose={this.onCloseModel}>
+                        <div className="App">
+                            <div className="Row">
+                                <div className="col-8" style={{ textAlign: "center" }}>
+                                    <div className="col-1"></div>
+                                    <div className="col-3" style={{ textAlign: "center", paddingLeft: "10px" }}>
+                                        <h3 style={{ color: "green" }}>รายรับ</h3>
+                                        <table>
+                                            <tr>
+                                                <th>ลำดับ</th>
+                                                <th>วันที่</th>
+                                                <th>ชื่อพืช</th>
+                                                <th>จำนวน</th>
+                                                <th>ราคารวม</th>
+                                            </tr>
+                                            {this.state.summery_trader.map((item, index) => {
+                                                return (
+                                                    <tr>
+                                                        <td>{index + 1}</td>
+                                                        <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
+                                                        <td>{item.plant_name}</td>
+                                                        <td>{addComma(item.amount)}</td>
+                                                        <td>{addComma(item.amount * item.price)}</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </table>
 
-                    {/* </div> */}
+                                    </div>
+
+                                    <div className="col-3" style={{ textAlign: "center", paddingLeft: "10px" }}>
+                                        <h3 style={{ color: "red" }}>รายจ่าย</h3>
+                                        <table>
+                                            <tr>
+                                                <th>ลำดับ</th>
+                                                <th>วันที่</th>
+                                                <th>ชื่อพืช</th>
+                                                <th>จำนวน</th>
+                                                <th>ราคารวม</th>
+                                            </tr>
+                                            {this.state.summery_se.map((item, index) => {
+                                                return (
+                                                    <tr>
+                                                        <td>{index + 1}</td>
+                                                        <td>{moment(item.order_se_Payment_date).utc().format('DD/MM/YYYY')}</td>
+                                                        <td>{item.plant_name}</td>
+                                                        <td>{addComma(item.amount)}</td>
+                                                        <td>{addComma(item.amount * item.order_se_price)}</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Modal>
+
                     <div className="col-1"></div>
                 </div>
             </div>
