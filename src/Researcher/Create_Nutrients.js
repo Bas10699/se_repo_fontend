@@ -23,7 +23,7 @@ class Create_Nutrients extends Component {
             nutrient_graph: [],
             nutrient_information: [],
             delete_id: [],
-            nutrient_graph_id:[]
+            nutrient_graph_id: []
         }
     }
     componentWillMount() {
@@ -65,7 +65,7 @@ class Create_Nutrients extends Component {
     add_nutrient_graph = () => {
         let nutrient = this.state.nutrient_graph
         let nutrient_id = this.state.nutrient_graph_id
-        
+
         nutrient.push({
             name: this.state.nutrient_data,
             y: parseFloat(this.state.nutrient_volume)
@@ -164,7 +164,7 @@ class Create_Nutrients extends Component {
     set_nutrients = (name) => {
         console.log("set_nutrients", name)
         let nutrient_information = this.state.nutrient_information
-        let data = [],data1=[]
+        let data = [], data1 = []
         let check = 0
         nutrient_information.map((element) => {
             if (element.plant_name === name) {
@@ -188,7 +188,7 @@ class Create_Nutrients extends Component {
                 nutrient_graph_id: data,
                 nutrient_data: null,
                 nutrient_volume: null,
-                nutrient_graph:data1
+                nutrient_graph: data1
             })
         }
         else {
@@ -267,15 +267,15 @@ class Create_Nutrients extends Component {
                     <div className="col-2"></div>
                     <div className="col-8">
                         <table>
-                            <tr>
+                            {/* <tr>
                                 <th>รายชื่อพืช</th>
                                 <th>จัดการสารอาหาร</th>
-                            </tr>
+                            </tr> */}
                             {this.state.get_plant_all.map((element, index) => {
                                 return (
                                     <tr>
                                         <td>{index + 1}. {element.name}</td>
-                                        <td><div onClick={() => this.set_nutrients(element.name)}>จัดการสารอาหาร</div></td>
+                                        <td><button className="BTN_Signin" style={{margin:"0",float:"left"}} onClick={() => this.set_nutrients(element.name)}>จัดการสารอาหาร</button></td>
                                     </tr>
                                 )
                             })}

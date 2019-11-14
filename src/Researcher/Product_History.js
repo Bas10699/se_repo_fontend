@@ -83,14 +83,15 @@ class Confirm_Product extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-12">
+                    <div className="col-1"></div>
+                    <div className="col-10">
                         <table style={{ textAlign: "center" }}>
                             <tr>
                                 <th>ชื่อผลิตภัณฑ์</th>
                                 <th>ชื่อสูตร</th>
                                 <th>สารอาหาร</th>
                                 <th>วัตถุดิบ</th>
-                                <th>รูปภาพ</th>
+                                {/* <th>รูปภาพ</th> */}
                             </tr>
                             {
                                 this.state.product_plan.map((element, index) => {
@@ -192,11 +193,13 @@ class Confirm_Product extends Component {
                                                     </Modal>
                                                 </NavLink>
                                             </td>
-                                            <td>
-                                                <NavLink>
-                                                    <img src={ip + element.image} style={{ width: "30px" }} onClick={() => { this.Image() }} />
-                                                </NavLink>
-                                            </td>
+                                            {/* <td>
+
+                                                <a target="_blank" href={ip + element.image}>
+                                                    <img src={ip + element.image} style={{ width: "30px" }} />
+                                                </a>
+
+                                            </td> */}
                                         </tr>
                                     )
                                 })

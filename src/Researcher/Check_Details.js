@@ -92,7 +92,7 @@ class Confirm_Product extends Component {
     };
 
     on_Close_Modal_edit = () => {
-        if (window.confirm('คุณแน่ใจหรื่อไม่?')) {
+        if (window.confirm('คุณแน่ใจหรือไม่?')) {
             // Save it!
             window.location.reload()
         } else {
@@ -126,7 +126,7 @@ class Confirm_Product extends Component {
     send_developer_demand = async (plan) => {
         let obj = {
             plan_id: plan.plan_id,
-            product_id:plan.product_id
+            product_id: plan.product_id
         }
         try {
             await post(obj, 'researcher/send_developer_demand', user_token).then((result) => {
@@ -155,14 +155,15 @@ class Confirm_Product extends Component {
                 </div>
 
                 <div className="Row">
-                    <div className="col-12">
+                    <div className="col-1"></div>
+                    <div className="col-10">
                         <table style={{ textAlign: "center" }}>
                             <tr>
                                 <th>ชื่อผลิตภัณฑ์</th>
                                 <th>ชื่อสูตร</th>
                                 <th>สารอาหาร</th>
                                 <th>วัตถุดิบ</th>
-                                <th>รูปภาพ</th>
+                                {/* <th>รูปภาพ</th> */}
                                 <th>เเก้ไขข้อมูล</th>
                                 <th>ลบข้อมูล</th>
                                 <th>ส่งข้อมูล</th>
@@ -217,7 +218,7 @@ class Confirm_Product extends Component {
                                             </td>
                                             <td>
                                                 <NavLink>
-                                                    <img src={cart_img} style={{ width: "30px" }} onClick={() => { this.Material(index) }} />
+                                                    <img src={cart_img} style={{ width: "30px" }} alt="img" onClick={() => { this.Material(index) }} />
                                                     <Modal open={this.state.material} onClose={this.on_Close_Modal}>
                                                         <div className="Row">
                                                             <div className="col-12">
@@ -267,17 +268,16 @@ class Confirm_Product extends Component {
                                                     </Modal>
                                                 </NavLink>
                                             </td>
+                                            {/* <td>
+                                                    <a target="_blank" href={ip + element.image}>
+                                                        <img src={ip + element.image} style={{ width: "30px" }} alt="img" />
+                                                    </a>
+                                            </td> */}
                                             <td>
-                                                <NavLink>
-                                                    <img src={ip + element.image} style={{ width: "30px" }} onClick={() => { this.Image() }} />
-                                                </NavLink>
-                                            </td>
-                                            <td>
-                                                <NavLink>
                                                     <img src={edit_icon} style={{ width: "30px" }} onClick={() => { this.Edit_data(index) }} />
                                                     <Modal open={this.state.edit_data} onClose={this.on_Close_Modal_edit}>
-                                                        <div className="Row">
-                                                            <div className="col-12">
+                                                        <div className="Row" style={{ width: "600px" }}>
+                                                            <div className="col-12" >
                                                                 <h3 style={{ textAlign: "center" }}>พัฒนาผลิตภัณฑ์</h3>
                                                                 <h4 style={{ textAlign: "center" }}>ชื่อผลิตภัณฑ์ : {this.state.data_edit.product_name}</h4>
                                                                 <h4>ชื่อสูตรผลิตภัณฑ์</h4>
@@ -285,81 +285,74 @@ class Confirm_Product extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="Row">
-                                                            <div className="col-6">
+                                                            <div className="col-5">
                                                                 <h4>ข้อมูลสารอาหาร</h4>
-                                                                <input type="text" value={element.name} style={{ width: "200px" }} />
+                                                                {/* <input type="text" value={element.name} style={{ width: "200px" }} /> */}
                                                             </div>
-                                                            <div className="col-6">
+                                                            <div className="col-5">
                                                                 <h4>ปริมาณสารอาหาร</h4>
-                                                                <input type="text" style={{ width: "200px" }} />
+                                                                {/* <input type="text" style={{ width: "200px" }} /> */}
                                                             </div>
-                                                            <button>เพิ่มข้อมูล</button>
+                                                                
                                                         </div>
                                                         {this.state.data_edit_nutrient.map((element) => {
                                                             return (
                                                                 <div className="Row">
-                                                                    <div className="col-6">
-                                                                        <input value={element.name} />
+                                                                    <div className="col-5">
+                                                                        <input type="text" style={{ width: "200px" }} value={element.name} />
                                                                     </div>
-                                                                    <div className="col-6">
-                                                                        <input value={element.y} />
+                                                                    <div className="col-5">
+                                                                        <input type="text" style={{ width: "200px" }} value={element.y} />
                                                                     </div>
-                                                                    <button>ลบ</button>
+                                                                    <img src={delete_icon} style={{ width: "30px" }} />
                                                                 </div>
                                                             )
 
                                                         })}
+                                                        <button className="Add" style={{marginTop:"25px"}}>เพิ่มสารอาหาร</button>
                                                         <div className="Row">
                                                             <div className="col-6">
                                                                 <h4>วัตถุดิบที่ใช้</h4>
-                                                                <input type="text" style={{ width: "200px" }} />
+                                                                {/* <input type="text" style={{ width: "200px" }} /> */}
                                                             </div>
                                                             <div className="col-3">
                                                                 <h4>ปริมาณ</h4>
-                                                                <input type="text" style={{ width: "50px" }} />
+                                                                {/* <input type="text" style={{ width: "50px" }} /> */}
                                                             </div>
                                                             <div className="col-3">
                                                                 <h4>หน่วย</h4>
-                                                                <input type="text" style={{ width: "50px" }} />
-                                                                <button>เพิ่มข้อมูล</button>
+                                                                {/* <input type="text" style={{ width: "50px" }} /> */}
+                                                                
                                                             </div>
                                                         </div>
                                                         {this.state.data_edit_plant.map((element) => {
                                                             return (
                                                                 <div className="Row">
                                                                     <div className="col-6">
-                                                                        <input value={element.plant_name} />
+                                                                        <input type="text" style={{ width: "200px" }} value={element.plant_name} />
                                                                     </div>
                                                                     <div className="col-3">
-                                                                        <input value={element.plant_volume} />
+                                                                        <input type="text" style={{ width: "50px" }} value={element.plant_volume} />
                                                                     </div>
-                                                                    <div className="col-3">
-                                                                        <input value={element.plant_volume_type} />
+                                                                    <div className="col-2">
+                                                                        <input type="text" style={{ width: "50px" }} value={element.plant_volume_type} />
                                                                     </div>
-                                                                    <button>ลบ</button>
+                                                                    <img src={delete_icon} style={{ width: "30px" }} />
                                                                 </div>
                                                             )
 
                                                         })}
-                                                        <div className="Row">
+                                                        <button  className="Add" style={{marginTop:"25px"}}>เพิ่มวัตถุดิบ</button>
+                                                        {/* <div className="Row">
                                                             <div className="col-12">
                                                                 <h4>เลือกรูปภาพ</h4>
                                                                 <input type="file" placeholder="กรุณาเลือกรูปภาพ" style={{ width: "500px" }} /><br />
                                                                 <img src={ip + element.image} style={{ width: "240px" }} onClick={() => { this.Image() }} />
                                                             </div>
-                                                        </div>
-                                                        <NavLink>
-                                                            <button>
-                                                                ตกลง
-                                                            </button>
-                                                        </NavLink>
-                                                        <NavLink>
-                                                            <button>
-                                                                ยกเลิก
-                                                            </button>
-                                                        </NavLink>
+                                                        </div> */}
+                                                            <button className="BTN_Signin" style={{marginTop:"100px"}}>ตกลง</button>
+                                                            <button className="BTN_Signup" style={{marginTop:"100px"}} onClick={()=>{this.on_Close_Modal_edit()}}>ยกเลิก</button>
                                                     </Modal>
-                                                </NavLink>
                                             </td>
                                             <td>
                                                 <NavLink>
