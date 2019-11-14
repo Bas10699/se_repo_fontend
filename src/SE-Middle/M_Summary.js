@@ -177,7 +177,7 @@ class M_Summary extends Component {
                 <div className="Row">
                     <div className="col-1"></div>
                     <div className="col-5" style={{ textAlign: "center", paddingRight: "10px" }}>
-                        <h3>รายรับ</h3>
+                        <h3 style={{color:"green"}}>รายรับ</h3>
                         <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
                         <button onClick={() => this.filterDate()}>ค้นหา</button>
                         เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
@@ -204,7 +204,7 @@ class M_Summary extends Component {
 
                     </div>
                     <div className="col-5" style={{ textAlign: "center", paddingLeft: "10px" }}>
-                        <h3>รายจ่าย</h3>
+                        <h3 style={{color:"red"}}>รายจ่าย</h3>
                         <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} /></h4>
                         <button onClick={() => this.filterDate()}>ค้นหา</button>
                         เเสดงรายการจากวันที่ ปปป ถึงวันที่ ผผผ มียอดรวม {this.state.sum_money} บาท
