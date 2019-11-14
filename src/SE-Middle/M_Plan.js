@@ -283,7 +283,7 @@ class M_Plan extends Component {
                                             <table>
                                                 <tr>
                                                     <th>ลำดับ</th>
-                                                    <th>ชื่อ Neo_firm ที่เลือก</th>
+                                                    <th>ชื่อ SE ย่อย ที่เลือก</th>
                                                     <th>จำนวนที่ต้องการ</th>
                                                 </tr>
 
