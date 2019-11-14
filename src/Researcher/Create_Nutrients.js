@@ -5,6 +5,7 @@ import Modal from 'react-responsive-modal'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import delete_icon from '../Image/delete-icon.png'
+import { async } from 'q'
 
 class Create_Nutrients extends Component {
     constructor(props) {
@@ -91,6 +92,25 @@ class Create_Nutrients extends Component {
                     alert(result.error_message)
                 }
 
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+    add_nutrient_information = async () => {
+        let obj = {
+            nutrient: this.state.nutrient_graph,
+            plant_name: this.state.name
+        }
+        try {
+            await post(obj, 'researcher/add_nutrient_information', user_token).then((result) => {
+                if (result.success) {
+                    alert('สำเร็จ')
+                }
+                else {
+                    alert(result.error_message)
+                }
             })
         }
         catch (error) {
@@ -201,15 +221,7 @@ class Create_Nutrients extends Component {
                                 <div className="col-5">
                                     รายการสารอาหาร
                                         {this.state.nutrient_graph.map((ele, index) => {
-                                            return (
-                                                <div>
-                                                    {index + 1}.
-                                                    <input type="text" id={index} value={ele.name} onChange={this.nutrientChangeName} style={{width:"100px"}}/>
-                                                    <input type="number" style={{ marginLeft: "25px",width:"50px" }} id={index} value={ele.y} onChange={this.nutrientChangeY}/>
                                                     <img src={delete_icon} style={{ width: "30px", cursor: "pointer",marginTop:"15px" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} />
-                                                </div>
-                                            )
-                                        })}
                                 </div>
                             </div>
 
@@ -226,7 +238,7 @@ class Create_Nutrients extends Component {
                                     {/* <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button> */}
                                 </div>
                             </div>
-                            <button className="BTN_Signin" onClick={this.onCloseModal}>บันทึก</button>
+                            <button className="BTN_Signin" onClick={()=>this.add_nutrient_information()}>บันทึก</button>
                             <button className="BTN_Signup" onClick={this.onCloseModal}>ยกเลิก</button>
 
                         </div>
