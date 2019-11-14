@@ -250,8 +250,13 @@ class EditUser extends Component {
                             value={this.state.get_user.last_name}
                             onChange={this.handleChange}
                         />
-                        <h4>ประเภทผู้ใช้งาน : {this.render_type(this.state.get_user ? this.state.get_user.type_user : null)}</h4>
-
+                        {/* <h4>ประเภทผู้ใช้งาน : {this.render_type(this.state.get_user ? this.state.get_user.type_user : null)}</h4> */}
+                        <h4>อีเมลล์</h4>
+                        < input
+                            type="text" id="email"
+                            value={this.state.get_user.email}
+                            onChange={this.handleChange}
+                        />
                         <h4>เบอร์โทรศัพท์</h4>
                         < input
                             type="text" id="phone"

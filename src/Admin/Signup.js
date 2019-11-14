@@ -15,7 +15,8 @@ class Signup extends Component {
             last_name: null,
             phone: null,
             address: null,
-            type_user: null
+            type_user: null,
+            email:null
         };
     }
 
@@ -42,7 +43,8 @@ class Signup extends Component {
             last_name: this.state.last_name,
             phone: this.state.phone,
             address: this.state.address,
-            type_user: this.state.type_user
+            type_user: this.state.type_user,
+            email:this.state.email
         };
 
         try {
@@ -84,7 +86,13 @@ class Signup extends Component {
                             placeholder="ยอดหญิง" name="last_name"
                             onChange={this.handleChange}
                         />
-                        
+
+                        <h4>อีเมล</h4>
+                        <input type="email" id="email"
+                            placeholder="example@example.com" name="email"
+                            onChange={this.handleChange}
+                        />
+
                         <h4>เบอร์โทรศัพท์</h4>
                         <input type="tel" id="phone"
                             placeholder="088-888-8888" name="phone"
@@ -115,7 +123,7 @@ class Signup extends Component {
                             placeholder="กรอกรหัสผ่าน" name="password"
                             onChange={this.handleChange}
                             pattern=".{6,}(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                           
+
                         />
                         <input type="checkbox" id="show_password"
                             name="show_password"
@@ -124,15 +132,7 @@ class Signup extends Component {
                         />แสดงรหัสผ่าน
                         <div>
                             <button className="BTN_Signin" style={{ marginBottom: "30px" }}
-                                onClick={() => this.add_user(
-                                    this.state.username,
-                                    this.state.password,
-                                    this.state.name,
-                                    this.state.last_name,
-                                    this.state.phone,
-                                    this.state.address,
-                                    this.state.type_user
-                                )}>
+                                onClick={() => this.add_user()}>
                                 ลงทะเบียน
                         </button>
                             <NavLink to={'/Signin'}><button style={{ marginBottom: "30px" }} className="BTN_Signup">มีบัญชีผู้ใช้เเล้ว</button></NavLink>

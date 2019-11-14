@@ -193,10 +193,10 @@ class User extends Component {
                                 <th>ประเภทผู้ใช้งาน</th>
                                 <td>{this.state.get_user ? this.render_type(this.state.get_user.type_user) : null}</td>
                             </tr>
-                            {/* <tr>
+                            <tr>
                                 <th>อีเมล์</th>
                                 <td>{this.state.get_user ? this.state.get_user.email : null}</td>
-                            </tr> */}
+                            </tr>
                             <tr>
                                 <th>เบอร์โทรศัพท์</th>
                                 <td>{this.state.get_user ? this.state.get_user.phone : null}</td>
@@ -243,7 +243,7 @@ class User extends Component {
                             : null}
 
 
-                        {this.state.get_user ? this.state.get_user.type_user === '2' ?
+                        {/* {this.state.get_user ? this.state.get_user.type_user === '2' ?
                             <div>
                                 <h4 style={{ marginBottom: "0px" }}>ความต้องการที่บันทึกไว้</h4>
                                 <table>
@@ -270,7 +270,7 @@ class User extends Component {
                             </div>
 
                             : null
-                            : null}
+                            : null} */}
 
                     </div>
                     <div className="col-3"></div>

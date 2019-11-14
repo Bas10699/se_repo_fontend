@@ -159,7 +159,10 @@ class T_Cart extends Component {
             detail: detail,
             date_send: this.state.date,
             address_send: this.state.address,
-            order_status: "0"
+            order_status: "0",
+            email:this.state.get_user.email,
+            name:this.state.get_user.name,
+            last_name:this.state.get_user.last_name
         }
 
         try {
