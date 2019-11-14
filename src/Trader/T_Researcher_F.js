@@ -4,9 +4,8 @@ import { user_token } from '../Support/Constance'
 import Modal from 'react-responsive-modal'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import {NavLink} from 'react-router-dom'
 
-class T_Researcher extends Component {
+class T_Researcher_F extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -46,7 +45,7 @@ class T_Researcher extends Component {
         }
     }
 
-    rander_status = (status,product_id) => {
+    rander_status = (status) => {
         let return_status
         switch (status) {
             case 1:
@@ -54,7 +53,7 @@ class T_Researcher extends Component {
                 break;
             case 3: return_status =
                 <div>
-                    <NavLink to={'/T_Researcher_F/product?product_id='+product_id}> <button className="BTN_Signin" style={{ margin: "0", float: "left" }} onClick={()=>this.onOpen()}>สูตรผลิตภัณฑ์</button></NavLink>
+                    <button className="BTN_Signin" style={{ margin: "0", float: "left" }} onClick={()=>this.onOpen()}>สูตรผลิตภัณฑ์</button>
                 </div>
                 break;
 
@@ -124,37 +123,42 @@ class T_Researcher extends Component {
                         <h2 style={{ textAlign: "center" }}>ตรวจสอบการพัฒนาผลิตภัณฑ์</h2>
                     </div>
                 </div>
-                <div className="Row">
-                    <div className="col-2"></div>
-                    <div className="col-8">
-                        <table>
-                            <tr>
-                                <th>ชื่อผลิตภัณฑ์</th>
-                                <th>สิ่งที่ต้องการ</th>
-                                <th>จำนวน</th>
-                                <th>สถานะการพัฒนา</th>
-                            </tr>
-                            {this.state.demand.map((element,index) => {
-                                return (
-                                    <tr style={{ textAlign: "center" }}>
-                                        <td style={{ textAlign: "left" }}>{element.product_name}</td>
-                                        <td style={{ textAlign: "left" }}>{element.nutrient + "\n"}</td>
-                                        <td>{element.volume} {element.volume_type}</td>
-                                        <td>{this.rander_status(element.product_status,element.product_id)}</td>
-                                    </tr>
-                                )
-                            })}
-
-                        </table>
+                
+                    <div className="Row">
+                        <div className="col-12" >
+                            <h3 style={{ textAlign: "center" }}>รายละเอียด</h3>
+                        </div>
                     </div>
-                    <div className="col-2"></div>
-                </div>
-
-              
+                    <div className="Row">
+                        <div className="col-6">
+                        <HighchartsReact highcharts={Highcharts} options={options} />
+                        </div>
+                        <div className="col-5">
+                            <table style={{ textAlign: "center" }}>
+                                <tr>
+                                    <th colSpan="4">รายชื่อวัตถุดิบ</th>
+                                </tr>
+                                <tr>
+                                    <th>ชื่อพืช </th>
+                                    <th>จำนวน/หน่วย</th>
+                                    <th>ราคาเฉลี่ย</th>
+                                    <th>ราคารวมเฉลี่ย</th>
+                                </tr>
+                                <tr>
+                                    <td>ข้าวหอมมะลิ</td>
+                                    <td>95</td>
+                                    <td>3</td>
+                                    <td>285</td>
+                                </tr>
+                            </table>
+                            
+                        </div>
+<div className="col-1"></div>
+                    </div>
             </div>
 
 
         )
     }
 }
-export default T_Researcher
+export default T_Researcher_F

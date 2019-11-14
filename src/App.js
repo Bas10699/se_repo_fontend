@@ -62,6 +62,7 @@ import Defalut from './Admin/Defalut';
 import S_Summary from './SE-Sub/S_Summary'
 import Create_Info from './Researcher/Create_Info';
 import M_R_Formula from './SE-Middle/M_Research/M_R_Formula';
+import T_Researcher_F from './Trader/T_Researcher_F';
 
 function App() {
   return (
@@ -118,6 +119,7 @@ function App() {
       <Route exact path='/Product_Research/:id' component={Product_Research} />
       <Route exact path='/Create_Info/:id' component={Create_Info} />
       <Route exact path='/M_R_Formula/:id' component={M_R_Formula}/>
+      <Route exact path='/T_Researcher_F/:id' component={T_Researcher_F}/>
 
       {/* <Route exact path='/Confirm_Product' component={Confirm_Product}/>
       <Route exact path='/Product_Info' component={Product_Info}/>
