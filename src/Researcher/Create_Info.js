@@ -353,11 +353,16 @@ class Create_Info extends Component {
                                 <h5 style={{ marginBottom: "10px" }}>ปริมาณ</h5>
                                 <input type="text" id='plant_volume' onChange={this.handleChange} style={{ width: "50px" }} />
                             </div>
-                            <div className="col-2">
+                            <div className="col-4">
                                 <h5 style={{ marginBottom: "10px" }}>หน่วย</h5>
-                                <input type="text" id='plant_volume_type' onChange={this.handleChange} style={{ width: "50px" }} />
+                                <select onChange={this.handleChange} type="select" style={{width:"90px"}}>
+                                    <option>มิลลิกรัม</option>
+                                    <option>กรัม</option>
+                                    <option>กิโลกรัม</option>
+                                </select>
+                                {/* <input type="text" id='plant_volume_type' onChange={this.handleChange} style={{ width: "50px" }} /> */}
                             </div>
-                            <div className="col-3">
+                            <div className="col-1">
                                 <button className="BTN_AddCart" onClick={() => this.add_plants()} style={{ float: "right", marginTop: "58px" }}>+ วัตถุดิบ</button>
                             </div>
                         </div>
