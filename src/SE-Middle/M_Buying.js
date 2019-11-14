@@ -333,7 +333,7 @@ class M_Buying extends Component {
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Max')} />
                                     }
                                 </th>
-                                <th>
+                                <th style={{width:"120px"}}>
                                     สถานะการสั่งซื้อ
                                     {this.state.clicks ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Min')} />

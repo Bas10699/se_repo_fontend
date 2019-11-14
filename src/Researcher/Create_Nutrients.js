@@ -206,7 +206,7 @@ class Create_Nutrients extends Component {
                                                     {index + 1}.
                                                     <input type="text" id={index} value={ele.name} onChange={this.nutrientChangeName} style={{width:"100px"}}/>
                                                     <input type="number" style={{ marginLeft: "25px",width:"50px" }} id={index} value={ele.y} onChange={this.nutrientChangeY}/>
-                                                    <img src={delete_icon} style={{ width: "30px", cursor: "pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} />
+                                                    <img src={delete_icon} style={{ width: "30px", cursor: "pointer",marginTop:"15px" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} />
                                                 </div>
                                             )
                                         })}
