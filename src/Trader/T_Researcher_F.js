@@ -127,7 +127,7 @@ class T_Researcher_F extends Component {
 
 
                             <div className="col-6">
-                                <T_Highcharts data={e.nutrient_precent}/>
+                                <T_Highcharts data={e.nutrient_precent} name={e.product_plan_name}/>
                             </div>
                             <div className="col-5">
                                 <table style={{ textAlign: "center" }}>

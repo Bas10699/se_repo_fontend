@@ -11,7 +11,7 @@ class T_Highcharts extends Component {
                 type: 'pie'
             },
             title: {
-                text: 'กราฟแสดงผลอัตราส่วนสารอาหาร',
+                text: 'กราฟแสดงผลอัตราส่วนสารอาหาร '+this.props.name,
                 style: {
                     fontSize: '20px',
                     fontFamily: 'fc_lamoonregular'
