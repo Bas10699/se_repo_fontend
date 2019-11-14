@@ -339,7 +339,7 @@ class M_Default extends Component {
                             <h4 style={{textAlign:"center"}}>จำนวนเกษตรกรในเครือข่าย</h4>
                             <table>
                                     <tr>
-                                        <th>ชื่อ Neo_firm</th>
+                                        <th>ชื่อ SE ย่อย</th>
                                         <th>จำนวนเกษตรกรในเครือ</th>
                                     </tr>
                                     {this.state.volume_fermer.map((element, index) => {

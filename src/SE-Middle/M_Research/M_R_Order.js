@@ -196,7 +196,7 @@ class M_R_Order extends Component {
             //     break;
             case 3: case 2: return_comfirm =
                 <div style={{ textAlign: "center" }}>
-                    <button onClick={() => this.send_data_line(data.product_id, data.product_name)} className="Add"
+                    <button onClick={() => this.send_data_line(data.product_id, data.product_name)} className="BTN_Signup"
                         style={{ float: "left", marginLeft: "23%", marginTop: "0" }}>แสดงรายชื่อนักวิจัย</button></div>
                 break;
             case 4: return_comfirm = "ยกเลิก"
