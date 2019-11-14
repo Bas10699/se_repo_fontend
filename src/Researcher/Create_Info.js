@@ -300,8 +300,8 @@ class Create_Info extends Component {
                             <tr>
                                 <th>ชื่อพืช </th>
                                 <th>จำนวน/หน่วย</th>
-                                <th>ราคาต้นทุน/หน่วย (บาท)</th>
-                                <th>ราคารวม (บาท)</th>
+                                {/* <th>ราคาต้นทุน/หน่วย (บาท)</th>
+                                <th>ราคารวม (บาท)</th> */}
                                 <th>ลบ</th>
                             </tr>
                             {this.state.plants.map((ele_plant) => {
@@ -309,7 +309,7 @@ class Create_Info extends Component {
                                     <tr>
                                         <td>{ele_plant.plant_name}</td>
                                         <td>{ele_plant.plant_volume} {ele_plant.plant_volume_type}</td>
-                                        <td>ราคา</td>
+                                        {/* <td>ราคา</td> */}
                                         <td><img src={delete_icon} style={{ width: "30px" }} alt="cancle" /></td>
                                     </tr>
                                 )

@@ -11,7 +11,6 @@ class Create_Nutrients extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            get_data: [],
             currentPage: 1,
             todosPerPage: 10,
             get_plant_all: [],
@@ -21,12 +20,13 @@ class Create_Nutrients extends Component {
             index_plant: 0,
             open: false,
             name: "",
-            nutrient_graph: []
+            nutrient_graph: [],
+            nutrient_information: []
         }
     }
     componentWillMount() {
-        this.get_data()
         this.get_plant_all_mount()
+        this.get_nutrient_information()
     }
 
     handleChange = (e) => {
@@ -55,26 +55,23 @@ class Create_Nutrients extends Component {
         })
     }
 
-    get_data = async () => {
+    get_nutrient_information = async () => {
         try {
-            await get('researcher/get_plant', user_token).then((result) => {
+            await get('researcher/get_nutrient_information', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
-                        get_data: result.result,
+                        nutrient_information: result.result
                     })
-                    setTimeout(() => {
-                        console.log("get_data", result.result)
-                    }, 500)
-                } else {
+                }
+                else {
                     alert(result.error_message)
                 }
             })
         }
         catch (error) {
-
+            alert(error)
         }
     }
-
 
     get_plant_all_mount = async () => {
         try {
@@ -107,7 +104,7 @@ class Create_Nutrients extends Component {
             await post(obj, 'researcher/add_nutrient_information', user_token).then((result) => {
                 if (result.success) {
                     alert('สำเร็จ')
-                    this.setState({open:false})
+                    this.setState({ open: false })
                 }
                 else {
                     alert(result.error_message)
@@ -121,13 +118,39 @@ class Create_Nutrients extends Component {
 
     set_nutrients = (name) => {
         console.log("set_nutrients", name)
-        this.setState({
-            open: true,
-            name: name,
-            nutrient_graph: [],
-            nutrient_data: null,
-            nutrient_volume: null,
+        let nutrient_information = this.state.nutrient_information
+        let data = []
+        let check = 0
+        nutrient_information.map((element) => {
+            if (element.plant_name === name) {
+                check = 1
+                data.push({
+                    id:element.nutrient_id,
+                    name: element.nutrient_name,
+                    y: element.volume
+                })
+            }
         })
+        console.log(data)
+        if (check === 1) {
+            this.setState({
+                open: true,
+                name: name,
+                nutrient_graph: data,
+                nutrient_data: null,
+                nutrient_volume: null,
+            })
+        }
+        else {
+            this.setState({
+                open: true,
+                name: name,
+                nutrient_graph: [],
+                nutrient_data: null,
+                nutrient_volume: null,
+            })
+        }
+
     }
 
     onCloseModal = () => {
@@ -222,46 +245,46 @@ class Create_Nutrients extends Component {
                                 <div className="col-5">
                                     รายการสารอาหาร
                                     {this.state.nutrient_graph.map((ele, index) => {
-                                            return (
-                                                <div>
-                                                    {index + 1}.
-                                                    <input type="text" id={index} value={ele.name} onChange={this.nutrientChangeName} style={{width:"100px"}}/>
-                                                    <input type="number" style={{ marginLeft: "25px",width:"50px" }} id={index} value={ele.y} onChange={this.nutrientChangeY}/>
-                                                    <img src={delete_icon} style={{ width: "30px", cursor: "pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} />
-                                                </div>
-                                            )
-                                        })}
-                                        {/* {this.state.nutrient_graph.map((ele, index) => { */}
+                                        return (
+                                            <div>
+                                                {index + 1}.
+                                                    <input type="text" id={index} value={ele.name} onChange={this.nutrientChangeName} style={{ width: "100px" }} />
+                                                <input type="number" style={{ marginLeft: "25px", width: "50px" }} id={index} value={ele.y} onChange={this.nutrientChangeY} />
+                                                <img src={delete_icon} style={{ width: "30px", cursor: "pointer" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} />
+                                            </div>
+                                        )
+                                    })}
+                                    {/* {this.state.nutrient_graph.map((ele, index) => { */}
 
-                                        {/* // <img src={delete_icon} style={{ width: "30px", cursor: "pointer", marginTop: "15px" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} /> */}
-                                        {/* })} */}
+                                    {/* // <img src={delete_icon} style={{ width: "30px", cursor: "pointer", marginTop: "15px" }} alt="cancle" onClick={() => this.delete_nutrient_graph(index)} /> */}
+                                    {/* })} */}
                                 </div>
                             </div>
 
-                                <div className="Row">
-                                    <div className="col-1"></div>
-                                    <div className="col-5">
-                                        <h5 style={{ marginBottom: "10px" }}>ข้อมูลสารอาหาร</h5>
-                                        <input type="text" id='nutrient_data' onChange={this.handleChange} style={{ width: "250px" }} />
-                                    </div>
-                                    <div className="col-5">
-                                        <h5 style={{ marginBottom: "10px" }}>ปริมาณสารอาหาร</h5>
-                                        <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} /> กรัม
+                            <div className="Row">
+                                <div className="col-1"></div>
+                                <div className="col-5">
+                                    <h5 style={{ marginBottom: "10px" }}>ข้อมูลสารอาหาร</h5>
+                                    <input type="text" id='nutrient_data' onChange={this.handleChange} style={{ width: "250px" }} />
+                                </div>
+                                <div className="col-5">
+                                    <h5 style={{ marginBottom: "10px" }}>ปริมาณสารอาหาร</h5>
+                                    <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} /> กรัม
                                     <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-10px" }}>เพิ่มปริมาณสารอาหาร</button>
-                                        {/* <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button> */}
-                                    </div>
+                                    {/* <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button> */}
                                 </div>
-                                <button className="BTN_Signin" onClick={() => this.add_nutrient_information()}>บันทึก</button>
-                                <button className="BTN_Signup" onClick={this.onCloseModal}>ยกเลิก</button>
-
                             </div>
+                            <button className="BTN_Signin" onClick={() => this.add_nutrient_information()}>บันทึก</button>
+                            <button className="BTN_Signup" onClick={this.onCloseModal}>ยกเลิก</button>
+
                         </div>
+                    </div>
 
                 </Modal>
 
 
             </div>
-                )
-            }
-        }
+        )
+    }
+}
 export default Create_Nutrients

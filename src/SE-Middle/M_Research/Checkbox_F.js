@@ -62,10 +62,10 @@ class Checkbox extends Component {
             <div>
                 <table>
                     <tr>
-                        <th style={{borderRight:"1px solid #ccc"}}>ชื่อสูตร</th>
+                        <th style={{ borderRight: "1px solid #ccc" }}>ชื่อสูตร</th>
                         {this.props.option.map((e_product_plan_name, index) => {
                             return (
-                                <th style={{borderRight:"1px solid #ccc"}}>
+                                <th style={{ borderRight: "1px solid #ccc" }}>
                                     <div>
                                         <input type="checkbox" id="checkbox" value={e_product_plan_name.plan_id}
                                             onClick={(event) => { this.onCheck(event) }}
@@ -80,10 +80,10 @@ class Checkbox extends Component {
 
                     </tr>
                     <tr>
-                        <th style={{borderRight:"1px solid #ccc"}}>สารอาหาร</th>
+                        <th style={{ borderRight: "1px solid #ccc" }}>สารอาหาร</th>
                         {this.props.option.map((e_product_plan_name, index) => {
                             return (
-                                <td style={{borderRight:"1px solid #ccc"}}>{e_product_plan_name.nutrient_precent.map((e_nutrient_precent) => {
+                                <td style={{ borderRight: "1px solid #ccc" }}>{e_product_plan_name.nutrient_precent.map((e_nutrient_precent) => {
 
                                     return (
                                         <div>{e_nutrient_precent.name}</div>
@@ -95,10 +95,10 @@ class Checkbox extends Component {
 
                     </tr>
                     <tr>
-                        <th style={{borderRight:"1px solid #ccc"}}>วัตถุดิบ</th>
+                        <th style={{ borderRight: "1px solid #ccc" }}>วัตถุดิบ</th>
                         {this.props.option.map((e_product_plan_name, index) => {
                             return (
-                                <td style={{borderRight:"1px solid #ccc"}}>{e_product_plan_name.plant.map((e_plant) => {
+                                <td style={{ borderRight: "1px solid #ccc" }}>{e_product_plan_name.plant.map((e_plant) => {
                                     return (
                                         <div>{e_plant.plant_name} {e_plant.plant_volume} {e_plant.plant_volume_type}</div>
                                     )
@@ -108,7 +108,17 @@ class Checkbox extends Component {
                         )}
                     </tr>
                     <tr>
-                        <th style={{borderRight:"1px solid #ccc"}}>ราคาต้นทุน</th>
+                        <th style={{ borderRight: "1px solid #ccc" }}>ราคาต้นทุน</th>
+                        {this.props.option.map((e_product_plan_name, index) => {
+                            return (
+                                <td style={{ borderRight: "1px solid #ccc" }}>{e_product_plan_name.price.map((e_plant) => {
+                                    return (
+                                        <div>{e_plant.plant_name} {e_plant.plant_volume} {e_plant.plant_volume_type} {(e_plant.plant_volume / 1000) * e_plant.price} บาท</div>
+                                    )
+                                })}</td>
+                            )
+                        }
+                        )}
                     </tr>
 
                 </table>

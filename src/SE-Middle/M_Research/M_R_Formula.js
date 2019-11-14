@@ -14,10 +14,31 @@ class M_R_Formula extends Component {
             active: false,
             manu: false,
             check_array: [],
+            plant_stock: []
         }
     }
     componentWillMount() {
         this.get_product_plan()
+        this.get_plant_stock()
+    }
+
+    get_plant_stock = async () => {
+        try {
+            await get('neutrally/get_plant_stock', user_token).then((result) => {
+                if (result.success) {
+                    this.setState({
+                        plant_stock: result.result
+                    })
+                    console.log(result.result)
+                }
+                else {
+                    alert(result.error_message)
+                }
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
     }
 
     get_product_plan = async () => {
@@ -64,6 +85,14 @@ class M_R_Formula extends Component {
             alert(error)
         }
     }
+
+    // price_ = () => {
+    //     let product_plan = this.state.product_plan
+    //     let plant_stock = this.state.plant_stock
+    //     product_plan.map((ele_product)=>{
+    //         plant_stock.map()
+    //     })
+    // }
 
     render() {
         return (

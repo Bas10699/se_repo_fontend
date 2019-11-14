@@ -131,7 +131,7 @@ class T_Researcher_F extends Component {
                     fontFamily: 'fc_lamoonregular'
                 },
                 colorByPoint: true,
-                data: this.state.nutrient_precent[index_plant].data
+                data: []
             }]
         };
         return (
@@ -153,6 +153,7 @@ class T_Researcher_F extends Component {
                     </div>
                 </div>
                 {this.state.product_plan.map((e) => {
+
                     return (
                         <div className="Row">
                             <div className="col-6">
