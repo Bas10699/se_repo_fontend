@@ -6,8 +6,6 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
 import queryString from 'query-string';
-import { thisExpression } from '@babel/types'
-import { element } from 'prop-types'
 
 class T_Researcher_F extends Component {
     constructor(props) {
@@ -17,7 +15,9 @@ class T_Researcher_F extends Component {
             open: false,
             product_plan: [],
             nutrient_precent: [],
-            index_plant:0,
+            index_plant: 0,
+            // name:"",
+            // y:"",
         }
     }
 
@@ -42,8 +42,12 @@ class T_Researcher_F extends Component {
         try {
             await post(params, 'trader/get_product_plan', user_token).then((result) => {
                 if (result.success) {
-                    this.setState({ product_plan: result.result })
+                    this.setState({
+                        product_plan: result.result,
+                        // nutrient_precent: result.result.nutrient_precent
+                    })
                     console.log("post_product_plan", result.result)
+                    // console.log("pie : ",result.nutrient_precent)
                 }
             })
         } catch (error) {
@@ -57,7 +61,6 @@ class T_Researcher_F extends Component {
                 if (result.success) {
                     this.setState({
                         demand: result.result,
-                        nutrient_precent: result.result.nutrient_precent
 
                     })
                     console.log('demand', result.result)
@@ -89,7 +92,7 @@ class T_Researcher_F extends Component {
         return return_status
     }
     render() {
-        let index_plant = this.state.index_plant
+        let index_plant = this.state.product_plan
         let options = {
             chart: {
                 plotBackgroundColor: null,
@@ -150,12 +153,25 @@ class T_Researcher_F extends Component {
                 <div className="Row">
                     <div className="col-12" >
                         <h3 style={{ textAlign: "center" }}>รายละเอียด</h3>
+
                     </div>
                 </div>
                 {this.state.product_plan.map((e) => {
 
                     return (
                         <div className="Row">
+
+                            {e.nutrient_precent.map((ee, index) => {
+                                return (
+                                    <div>
+                                        {ee.name}
+                                        {ee.y},
+                                    </div>
+                                )
+                            }
+                            )}
+
+
                             <div className="col-6">
                                 <HighchartsReact highcharts={Highcharts} options={options} />
                             </div>
@@ -184,6 +200,7 @@ class T_Researcher_F extends Component {
                         </div>
                     )
                 })}
+
             </div>
 
 
