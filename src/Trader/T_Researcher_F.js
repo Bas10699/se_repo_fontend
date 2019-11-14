@@ -53,7 +53,7 @@ class T_Researcher_F extends Component {
                 break;
             case 3: return_status =
                 <div>
-                    <button className="BTN_Signin" style={{ margin: "0", float: "left" }} onClick={()=>this.onOpen()}>สูตรผลิตภัณฑ์</button>
+                    <button className="BTN_Signin" style={{ margin: "0", float: "left" }} onClick={() => this.onOpen()}>สูตรผลิตภัณฑ์</button>
                 </div>
                 break;
 
@@ -118,43 +118,48 @@ class T_Researcher_F extends Component {
         };
         return (
             <div className="App">
+                <div className="tab">
+                    <button onClick={() => window.location.href="/T_Order"}>ส่งความต้องการพัฒนาผลิตภัณฑ์</button>
+                    <button onClick={() => window.location.href="/T_Order/trace"}>ติดตามการพัฒนาผลิตภัณฑ์</button>
+                </div>
+                {/* {this.render_page(page)} */}
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>ตรวจสอบการพัฒนาผลิตภัณฑ์</h2>
                     </div>
                 </div>
-                
-                    <div className="Row">
-                        <div className="col-12" >
-                            <h3 style={{ textAlign: "center" }}>รายละเอียด</h3>
-                        </div>
+
+                <div className="Row">
+                    <div className="col-12" >
+                        <h3 style={{ textAlign: "center" }}>รายละเอียด</h3>
                     </div>
-                    <div className="Row">
-                        <div className="col-6">
+                </div>
+                <div className="Row">
+                    <div className="col-6">
                         <HighchartsReact highcharts={Highcharts} options={options} />
-                        </div>
-                        <div className="col-5">
-                            <table style={{ textAlign: "center" }}>
-                                <tr>
-                                    <th colSpan="4">รายชื่อวัตถุดิบ</th>
-                                </tr>
-                                <tr>
-                                    <th>ชื่อพืช </th>
-                                    <th>จำนวน/หน่วย</th>
-                                    <th>ราคาเฉลี่ย</th>
-                                    <th>ราคารวมเฉลี่ย</th>
-                                </tr>
-                                <tr>
-                                    <td>ข้าวหอมมะลิ</td>
-                                    <td>95</td>
-                                    <td>3</td>
-                                    <td>285</td>
-                                </tr>
-                            </table>
-                            
-                        </div>
-<div className="col-1"></div>
                     </div>
+                    <div className="col-5">
+                        <table style={{ textAlign: "center" }}>
+                            <tr>
+                                <th colSpan="4">รายชื่อวัตถุดิบ</th>
+                            </tr>
+                            <tr>
+                                <th>ชื่อพืช </th>
+                                <th>จำนวน/หน่วย</th>
+                                <th>ราคาเฉลี่ย</th>
+                                <th>ราคารวมเฉลี่ย</th>
+                            </tr>
+                            <tr>
+                                <td>ข้าวหอมมะลิ</td>
+                                <td>95</td>
+                                <td>3</td>
+                                <td>285</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div className="col-1"></div>
+                </div>
             </div>
 
 

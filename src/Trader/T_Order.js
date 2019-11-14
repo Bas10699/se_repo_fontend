@@ -140,7 +140,6 @@ class T_Order extends Component {
 
                 break;
             case 2: return_page = <T_Researcher />
-
                 break;
             default:
                 break;
