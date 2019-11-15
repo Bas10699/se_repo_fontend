@@ -97,7 +97,7 @@ class PdfOrder extends Component {
                                     { text: 'จำนวนเงิน', style: 'subheader1', alignment: 'center', bold: true, fillColor: '#cccccc' }],
                                     [{
                                         table: {
-                                            widths: [20.5, 42, 176, 40, 40, 65, 65],
+                                            widths: [20.5, 227, 40, 40, 65, 65],
                                             body: [
                                                 [{ text: '1', alignment: 'center' },
                                                 // { text: 'element.plant_id', alignment: 'center' },
