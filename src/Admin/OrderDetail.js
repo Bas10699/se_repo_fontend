@@ -163,7 +163,8 @@ class OrderDetail extends Component {
             order_id: this.state.order.order_id,
             date_send: this.state.date_send,
             detail: JSON.stringify(detail),
-            status: 0
+            status: 0,
+            email:this.state.order.email
         }
         console.log("วันที่ส่ง", this.state.date_send)
 
