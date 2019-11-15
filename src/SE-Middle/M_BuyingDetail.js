@@ -293,7 +293,7 @@ class M_BuyingDetail extends Component {
                         <div className="col-11">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.get_order.order_se_id}</h4>
-        <h3 style={{margin:"0"}}>{this.state.get_order.amount*this.state.get_order.order_se_price}</h3>
+        <h3 style={{margin:"0"}}>ยอดคำสั่งซื้อ {this.state.get_order.amount*this.state.get_order.order_se_price} บาท</h3>
                             <h4>โอนเข้าบัญชี :
                             <select style={{ fontFamily: "fc_lamoonregular", fontSize: "24px" }}>
                                     {this.state.order_se_invoice_detail ?
