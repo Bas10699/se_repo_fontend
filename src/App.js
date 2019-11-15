@@ -64,6 +64,7 @@ import Create_Info from './Researcher/Create_Info';
 import M_R_Formula from './SE-Middle/M_Research/M_R_Formula';
 import T_Researcher_F from './Trader/T_Researcher_F';
 import S_H_Buying from './SE-Sub/S_H_Buying';
+import T_Order_draft from './Trader/T_Order_draft'
 
 function App() {
   return (
@@ -79,6 +80,7 @@ function App() {
       <Route exact path='/Defalut' component={Defalut} />
       <Route exact path='/T_Cart' component={T_Cart} />
       <Route exact path='/T_Order/:DD' component={T_Order} />
+      <Route exact path='/T_Order_draft/:product' component={T_Order_draft} />
       <Route exact path='/T_Order' component={T_Order} />
       <Route exact path='/Product' component={Product} />
       <Route exact path='/Product/:productID' component={ProductDetail} />
@@ -103,7 +105,7 @@ function App() {
       <Route exact path='/S_Order/:OrderId' component={S_OrderDetail} />
       <Route exact path='/S_Certified' component={S_Certified} />
       <Route exact path='/S_H_Buying' component={S_H_Buying} />
-<Route exact path='/S_Summary' component={S_Summary}/>
+      <Route exact path='/S_Summary' component={S_Summary} />
       <Route exact path='/M_Plan' component={M_Plan} />
       <Route exact path='/M_Data' component={M_Data} />
       <Route exact path='/M_Farmer' component={M_Farmer} />
@@ -119,8 +121,8 @@ function App() {
       <Route exact path='/Product_Research' component={Product_Research} />
       <Route exact path='/Product_Research/:id' component={Product_Research} />
       <Route exact path='/Create_Info/:id' component={Create_Info} />
-      <Route exact path='/M_R_Formula/:id' component={M_R_Formula}/>
-      <Route exact path='/T_Researcher_F/:id' component={T_Researcher_F}/>
+      <Route exact path='/M_R_Formula/:id' component={M_R_Formula} />
+      <Route exact path='/T_Researcher_F/:id' component={T_Researcher_F} />
 
       {/* <Route exact path='/Confirm_Product' component={Confirm_Product}/>
       <Route exact path='/Product_Info' component={Product_Info}/>

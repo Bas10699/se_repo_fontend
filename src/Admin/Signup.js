@@ -110,13 +110,13 @@ class Signup extends Component {
                             onChange={this.handleChange}
                             pattern="[A-Za-z]"
                         />
-                        <h4>ประเภทผู้ใช้งาน</h4>
+                        {/* <h4>ประเภทผู้ใช้งาน</h4>
                         <select id="type_user" name="type_user" onChange={this.handleChange}>
                             <option value='0'>--เลือกประเภท--</option>
                             <option value='2'>ผู้ประกอบการ</option>
                             <option value='4'>SE กลาง</option>
                             <option value='1'>นักวิจัย</option>
-                        </select>
+                        </select> */}
 
                         <h4>รหัสผ่าน</h4>
                         <input type="password" id="password"

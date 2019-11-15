@@ -4,7 +4,7 @@ import { user_token } from '../Support/Constance'
 import Modal from 'react-responsive-modal'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class T_Researcher extends Component {
     constructor(props) {
@@ -46,15 +46,18 @@ class T_Researcher extends Component {
         }
     }
 
-    rander_status = (status,product_id) => {
+    rander_status = (status, product_id) => {
         let return_status
         switch (status) {
+            case 0: return_status = <NavLink to={'/T_Order_draft/product?product_id=' + product_id}> <button className="BTN_Signup" style={{ margin: "0", display: "block", marginLeft: "auto", marginRight: "60px" }}>แบบร่าง</button></NavLink>
+                break;
             case 1:
-            case 2: return_status = <div>รอการวิจัย</div>
+            case 2:
+            case 3: return_status = <div>รอการวิจัย</div>
                 break;
             case 4: return_status =
                 <div>
-                    <NavLink to={'/T_Researcher_F/product?product_id='+product_id}> <button className="BTN_Signin" style={{ margin: "0", display:"block",marginLeft:"auto",marginRight:"60px" }} onClick={()=>this.onOpen()}>สูตรผลิตภัณฑ์</button></NavLink>
+                    <NavLink to={'/T_Researcher_F/product?product_id=' + product_id}> <button className="BTN_Signin" style={{ margin: "0", display: "block", marginLeft: "auto", marginRight: "60px" }} onClick={() => this.onOpen()}>สูตรผลิตภัณฑ์</button></NavLink>
                 </div>
                 break;
 
@@ -134,13 +137,13 @@ class T_Researcher extends Component {
                                 <th>จำนวน</th>
                                 <th>สถานะการพัฒนา</th>
                             </tr>
-                            {this.state.demand.map((element,index) => {
+                            {this.state.demand.map((element, index) => {
                                 return (
                                     <tr style={{ textAlign: "center" }}>
                                         <td style={{ textAlign: "left" }}>{element.product_name}</td>
                                         <td style={{ textAlign: "left" }}>{element.nutrient + "\n"}</td>
                                         <td>{element.volume} {element.volume_type}</td>
-                                        <td>{this.rander_status(element.product_status,element.product_id)}</td>
+                                        <td>{this.rander_status(element.product_status, element.product_id)}</td>
                                     </tr>
                                 )
                             })}
@@ -150,7 +153,7 @@ class T_Researcher extends Component {
                     <div className="col-2"></div>
                 </div>
 
-              
+
             </div>
 
 

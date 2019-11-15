@@ -265,7 +265,7 @@ class M_BuyingDetail extends Component {
 
                 <div className="Row">
                     <div className="col-10" style={{ textAlign: "right" }}>
-                        <h4 style={{ margin: "0" }}>วันที่ {moment(this.state.get_order.order_se_date).utc().add('years', 543).format("DD/MM/YYYY")}<br />
+                        <h4 style={{ margin: "0" }}>วันที่ {moment(this.state.get_order.order_se_date).utc().format("DD/MM/YYYY")}<br />
                             เลขที่ใบสั่งซื้อ {this.state.get_order.order_se_id}<br />
                         </h4>
 

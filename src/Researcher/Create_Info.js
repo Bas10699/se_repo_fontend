@@ -21,7 +21,7 @@ class Create_Info extends Component {
             plants: [],
             plant_name: null,
             plant_volume: 0,
-            plant_volume_type: null,
+            plant_volume_type: 'มิลลิกรัม',
             open: false,
             default_image: null,
             nutrient_information: [],
@@ -374,10 +374,10 @@ class Create_Info extends Component {
                             </div>
                             <div className="col-4">
                                 <h5 style={{ marginBottom: "10px" }}>หน่วย</h5>
-                                <select onChange={this.handleChange} type="select" style={{ width: "90px" }}>
-                                    <option>มิลลิกรัม</option>
-                                    <option>กรัม</option>
-                                    <option>กิโลกรัม</option>
+                                <select id='plant_volume_type' onChange={this.handleChange} type="select" style={{ width: "90px" }}>
+                                    <option value='มิลลิกรัม'>มิลลิกรัม</option>
+                                    <option value='กรัม'>กรัม</option>
+                                    <option value='กิโลกรัม'>กิโลกรัม</option>
                                 </select>
                                 {/* <input type="text" id='plant_volume_type' onChange={this.handleChange} style={{ width: "50px" }} /> */}
                             </div>

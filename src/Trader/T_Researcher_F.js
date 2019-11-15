@@ -39,7 +39,7 @@ class T_Researcher_F extends Component {
             product_id: this.state.demand.product_id
         }
         try {
-            await post(params, 'trader/get_product_plan', user_token).then((result) => {
+            await post(params, 'trader/get_product_plan_price', user_token).then((result) => {
                 if (result.success) {
                     this.setState({
                         product_plan: result.result,
@@ -91,6 +91,8 @@ class T_Researcher_F extends Component {
         return return_status
     }
     render() {
+        const {product_plan} = this.state
+        let product_name = product_plan[0]? product_plan[0].product_name:null
         return (
             <div className="App">
                 <div className="tab">
@@ -100,48 +102,64 @@ class T_Researcher_F extends Component {
                 {/* {this.render_page(page)} */}
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>สูตรพัฒนาผลิตภัณฑ์ </h2>
+                        <h2 style={{ textAlign: "center" }}>สูตรพัฒนาผลิตภัณฑ์ {product_name}</h2>
                     </div>
                 </div>
 
-                
+
                 {this.state.product_plan.map((e) => {
 
                     return (
                         <div>
-                        <div className="Row">
+                            <div className="Row">
 
-                            <div className="col-6">
-                                <T_Highcharts data={e.nutrient_precent} name={e.product_plan_name}/>
+                                <div className="col-6">
+                                    <T_Highcharts data={e.nutrient_precent} name={e.product_plan_name} />
+                                </div>
+                                <div className="col-5">
+                                    <table style={{ textAlign: "center" }}>
+                                        <tr>
+                                            <th colSpan="4">รายชื่อวัตถุดิบ</th>
+                                        </tr>
+                                        <tr>
+                                            <th>ชื่อวัตถุดิบ</th>
+                                            <th>จำนวนที่ใช้</th>
+                                            <th>หน่วย</th>
+                                            <th>ราคา/กิโลกรัม (บาท)</th>
+                                        </tr>
+                                        {e.price.map((element, index) => {
+                                            let unit = 1
+                                            if (element.plant_volume_type === 'มิลลิกรัม') {
+                                                unit = 0.000001
+                                            }
+                                            else if (element.plant_volume_type === 'กรัม') {
+                                                unit = 0.001
+                                            }
+                                            else {
+                                                unit = 1
+                                            }
+                                            return (
+                                                <tr>
+                                                    <td>{element.plant_name}</td>
+                                                    <td>{element.plant_volume}</td>
+                                                    <td>{element.plant_volume_type}</td>
+                                                    <td>{element.plant_volume * unit * element.price * e.volume}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                        <tr>
+                                            <th colSpan="3">ราคารวม</th>
+                                            <th>xxx</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div className="col-1"></div>
                             </div>
-                            <div className="col-5">
-                                <table style={{ textAlign: "center" }}>
-                                    <tr>
-                                        <th colSpan="3">รายชื่อวัตถุดิบ</th>
-                                    </tr>
-                                    <tr>
-                                        <th>ชื่อวัตถุดิบ</th>
-                                        <th>จำนวนที่ใช้</th>
-                                        <th>หน่วย</th>
-                                    </tr>
-                                    {e.plant.map((element, index) => {
-                                        return (
-                                            <tr>
-                                                <td>{element.plant_name}</td>
-                                                <td>{element.plant_volume}</td>
-                                                <td>{element.plant_volume_type}</td>
-                                            </tr>
-                                        )
-                                    })}
-                                </table>
-                            </div>
-                            <div className="col-1"></div>
-                        </div>
-                        <hr style={{width:"90%",marginBottom:"100px"}}/>
+                            <hr style={{ width: "90%", marginBottom: "100px" }} />
                         </div>
                     )
                 })}
-                
+
 
             </div>
 
