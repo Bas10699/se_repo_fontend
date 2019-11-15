@@ -23,7 +23,8 @@ class Create_Nutrients extends Component {
             nutrient_graph: [],
             nutrient_information: [],
             delete_id: [],
-            nutrient_graph_id: []
+            nutrient_graph_id: [],
+            nutrient_volume_type: 'mg'
         }
     }
     componentWillMount() {
@@ -65,28 +66,45 @@ class Create_Nutrients extends Component {
     add_nutrient_graph = () => {
         let nutrient = this.state.nutrient_graph
         let nutrient_id = this.state.nutrient_graph_id
+        let volume_type = this.state.nutrient_volume_type
+        console.log(nutrient)
+        let check1 = 0
+        let check2 = 0
+        let unit = 1
+        if (volume_type === 'mg') {
+            unit = 0.001
+        }
+        else if (volume_type === 'kg') {
+            unit = 1000
+        }
+        else {
+            unit = 1
+        }
         nutrient.map((ele) => {
-            if (ele.name === this.state.nutrient_data) {
+            if ((ele.name).trim() === (this.state.nutrient_data).trim()) {
                 ele.y += parseFloat(this.state.nutrient_volume)
-            }
-            else {
-                nutrient.push({
-                    name: this.state.nutrient_data,
-                    y: parseFloat(this.state.nutrient_volume)
-                })
+                check1 = 1
             }
         })
+        if (check1 !== 1) {
+            nutrient.push({
+                name: (this.state.nutrient_data).trim(),
+                y: parseFloat(this.state.nutrient_volume)*unit
+            })
+        }
+
         nutrient_id.map((element) => {
-            if (element.name === this.state.nutrient_data) {
+            if ((element.name).trim() === (this.state.nutrient_data).trim()) {
                 element.y += parseFloat(this.state.nutrient_volume)
-            }
-            else {
-                nutrient_id.push({
-                    name: this.state.nutrient_data,
-                    y: parseFloat(this.state.nutrient_volume)
-                })
+                check2 = 0
             }
         })
+        if (check2 !== 1) {
+            nutrient_id.push({
+                name: (this.state.nutrient_data).trim(),
+                y: parseFloat(this.state.nutrient_volume)*unit
+            })
+        }
 
         console.log(nutrient)
         this.setState({
@@ -100,7 +118,7 @@ class Create_Nutrients extends Component {
         if (id) {
             delete_id.push(id)
         }
-        // console.log(delete_id)
+        console.log(id)
         let nutrient_graph = this.state.nutrient_graph
         let nutrient_graph_id = this.state.nutrient_graph_id
         nutrient_graph.splice(index, 1)
@@ -162,8 +180,8 @@ class Create_Nutrients extends Component {
         try {
             await post(obj, 'researcher/add_nutrient_information', user_token).then((result) => {
                 if (result.success) {
-                    alert('สำเร็จ')
-                    this.setState({ open: false })
+                    alert('บันทึกสำเร็จ')
+                    window.location.reload()
                 }
                 else {
                     alert(result.error_message)
@@ -219,7 +237,7 @@ class Create_Nutrients extends Component {
 
     onCloseModal = () => {
         // window.location.reload()
-        this.setState({ open: false });
+        this.setState({ open: false, nutrient_graph_id: [] });
 
     };
 
@@ -308,7 +326,7 @@ class Create_Nutrients extends Component {
                                 </div>
                                 <div className="col-5">
                                     รายการสารอาหาร
-                                    {this.state.nutrient_graph.map((ele, index) => {
+                                    {this.state.nutrient_graph_id.map((ele, index) => {
                                         return (
                                             <div>
                                                 {index + 1}.
@@ -333,10 +351,11 @@ class Create_Nutrients extends Component {
                                 </div>
                                 <div className="col-5">
                                     <h5 style={{ marginBottom: "10px" }}>ปริมาณสารอาหาร</h5>
-                                    <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} /> <select onChange={this.handleChange} type="select" style={{ width: "90px" }}>
-                                        <option>มิลลิกรัม</option>
-                                        <option>กรัม</option>
-                                        <option>กิโลกรัม</option>
+                                    <input type="text" id='nutrient_volume' onChange={this.handleChange} style={{ width: "50px" }} />
+                                    <select id='nutrient_volume_type' onChange={this.handleChange} type="select" style={{ width: "90px" }}>
+                                        <option value='mg'>มิลลิกรัม</option>
+                                        <option value='g'>กรัม</option>
+                                        <option value='kg'>กิโลกรัม</option>
                                     </select>
                                     <button className="Add" onClick={() => this.add_nutrient_graph()} style={{ float: "right", marginTop: "-40px" }}>+ สารอาหาร</button>
                                     {/* <button className="BTN_Edit" onClick={() => this.onOpenModal()} style={{ float: "right", marginTop: "10px" }}>แก้ไขปริมาณสารอาหาร</button> */}

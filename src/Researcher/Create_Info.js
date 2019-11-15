@@ -127,10 +127,18 @@ class Create_Info extends Component {
         })
     }
 
+    delete_plant = (index) => {
+        let plants = this.state.plants
+        plants.splice(index, 1)
+        this.setState({
+            plants: plants
+        })
+    }
+
     add_plants = () => {
         let plants = this.state.plants
         let plant_name = this.state.plant_name
-        console.log('pla',plant_name)
+        console.log('pla', plant_name)
         let nutrient = this.state.nutrient_graph
         plants.push({
             plant_name: this.state.plant_name,
@@ -138,21 +146,32 @@ class Create_Info extends Component {
             plant_volume_type: this.state.plant_volume_type
         })
 
-        var updatedList = this.state.nutrient_information;
-        updatedList = updatedList.filter(function (item) {
-            return item.plant_name.search(plant_name) !== -1;
-        });
-
-        updatedList.map((ele_list) => {
-            nutrient.push({
-                name: ele_list.nutrient_name,
-                y: ele_list.volume * this.state.plant_volume
-            })
+        let nutrient_information = this.state.nutrient_information;
+        nutrient_information.map((ele) => {
+            if ((ele.plant_name).trim() === (plant_name).trim()) {
+                let check = 0
+                nutrient.map((ele_n) => {
+                    if ((ele_n.name).trim() === (ele.nutrient_name).trim()) {
+                        ele_n.y += ele.volume * this.state.plant_volume
+                        check = 1
+                    }
+                })
+                if (check !== 1) {
+                    nutrient.push({
+                        name: ele.nutrient_name,
+                        y: ele.volume * this.state.plant_volume
+                    })
+                }
+            }
         })
+
+        // updatedList.map((ele_list) => {
+
+        // })
 
         this.setState({
             plants: plants,
-            nutrient_graph:nutrient
+            nutrient_graph: nutrient
         })
 
     }
@@ -304,13 +323,13 @@ class Create_Info extends Component {
                                 <th>ราคารวม (บาท)</th> */}
                                 <th>ลบ</th>
                             </tr>
-                            {this.state.plants.map((ele_plant) => {
+                            {this.state.plants.map((ele_plant,index) => {
                                 return (
                                     <tr>
                                         <td>{ele_plant.plant_name}</td>
                                         <td>{ele_plant.plant_volume} {ele_plant.plant_volume_type}</td>
                                         {/* <td>ราคา</td> */}
-                                        <td><img src={delete_icon} style={{ width: "30px" }} alt="cancle" /></td>
+                                        <td><img src={delete_icon} onClick={()=>this.delete_plant(index)} style={{ cursor:'pointer', width: "30px" }} alt="cancle" /></td>
                                     </tr>
                                 )
                             })}
@@ -355,7 +374,7 @@ class Create_Info extends Component {
                             </div>
                             <div className="col-4">
                                 <h5 style={{ marginBottom: "10px" }}>หน่วย</h5>
-                                <select onChange={this.handleChange} type="select" style={{width:"90px"}}>
+                                <select onChange={this.handleChange} type="select" style={{ width: "90px" }}>
                                     <option>มิลลิกรัม</option>
                                     <option>กรัม</option>
                                     <option>กิโลกรัม</option>
@@ -385,7 +404,7 @@ class Create_Info extends Component {
 
 
                         <button className="BTN_Signin" onClick={() => this.add_product_plan()}>ตกลง</button>
-                        <button className="BTN_Cencle" style={{ marginTop: "20px" }}>ยกเลิก</button>
+                        <button className="BTN_Cencle" onClick={()=>window.location.href='/Product_Research/Product_Info'} style={{ marginTop: "20px" }}>ยกเลิก</button>
                     </div>
                     <div className="col-1"></div>
                 </div>
