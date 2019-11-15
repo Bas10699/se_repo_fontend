@@ -70,7 +70,7 @@ class M_BuyingDetail extends Component {
                         <div className="col-12">
                             <div className='_Card'>
                                 <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อสินค้า {this.state.get_order.plant_name}</h3>
-                                <h5>รอ {this.state.get_order.se_name} ยืนยันการสั่งซื้อ <br /> และส่งใบแจ้งหนี้กลับมา</h5>
+                                <h5>รอ {this.state.get_order.name} ยืนยันการสั่งซื้อ <br /> และส่งใบแจ้งหนี้กลับมา</h5>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@ class M_BuyingDetail extends Component {
                             <div className='_Card'>
 
                                 <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อสินค้า {this.state.get_order.plant_name}</h3>
-                                <h5 style={{ margin: "0px" }}>รอ {this.state.get_order.se_name} ตรวจสอบการโอนเงิน</h5>
+                                <h5 style={{ margin: "0px" }}>รอ {this.state.get_order.name} ตรวจสอบการโอนเงิน</h5>
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@ class M_BuyingDetail extends Component {
                             <div className='_Card'>
 
                                 <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อสินค้า {this.state.get_order.plant_name}</h3>
-                                <h5 style={{ margin: "0px" }}>รอ {this.state.get_order.se_name} ส่งสินค้า</h5>
+                                <h5 style={{ margin: "0px" }}>รอ {this.state.get_order.name} ส่งสินค้า</h5>
 
                             </div>
                         </div>
@@ -258,7 +258,7 @@ class M_BuyingDetail extends Component {
             <div className="App">
                 <div className="Row">
                     <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>รายละเอียดคำสั่งซื้อกับ {this.state.get_order.se_name}</h2>
+                        <h2 style={{ textAlign: "center" }}>รายละเอียดคำสั่งซื้อกับ {this.state.get_order.name}</h2>
                         
                     </div>
                 </div>

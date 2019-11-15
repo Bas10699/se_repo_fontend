@@ -1,6 +1,6 @@
 //se-middle สรุปยอดการซื้อ-ขาย
 import React, { Component } from 'react'
-import { user_token,addComma,sortData } from '../Support/Constance';
+import { user_token, addComma, sortData } from '../Support/Constance';
 import { get } from '../Support/Service';
 import moment from 'moment'
 import Highcharts from 'highcharts'
@@ -178,7 +178,7 @@ class M_Summary extends Component {
             })
         })
         console.log('555', result)
-        return sortData(result,'date',false)
+        return sortData(result, 'date', false)
     }
 
     sum_money_all = (data) => {
@@ -292,7 +292,7 @@ class M_Summary extends Component {
                                 <th>วันที่</th>
                                 <th>รายรับ</th>
                                 <th>รายจ่าย</th>
-                                <th>คงเหลือ</th>
+                                <th style={{borderLeft:"1px solid #ccc"}}>คงเหลือ</th>
                             </tr>
                             {this.sum_in_out_money(this.state.summery_trader).map((item, index) => {
                                 return (
@@ -302,73 +302,74 @@ class M_Summary extends Component {
                                         {/* <td>{item.plant_name}</td> */}
                                         <td style={{ color: "green" }}>{addComma(item.monney_in)}</td>
                                         <td style={{ color: "red" }}>{addComma(item.monney_out)}</td>
-                                        <td >{addComma(item.monney_in - item.monney_out)}</td>
+                                        <td style={{borderLeft:"1px solid #ccc"}}>{addComma(item.monney_in - item.monney_out)}</td>
                                     </tr>
                                 )
                             })}
                             <tr>
                                 <th colSpan="3">รวม</th>
-                                <th>{addComma(this.sum_money_all(this.sum_in_out_money(this.state.summery_trader)))}</th>
+                                <th style={{borderLeft:"1px solid #ccc"}}>{addComma(this.sum_money_all(this.sum_in_out_money(this.state.summery_trader)))}</th>
 
                             </tr>
                         </table>
 
                     </div>
                     <Modal open={this.state.open} onClose={this.onCloseModel}>
-                        <div className="App">
-                            <div className="Row">
-                                <div className="col-8" style={{ textAlign: "center" }}>
-                                    <div className="col-1"></div>
-                                    <div className="col-3" style={{ textAlign: "center", paddingLeft: "10px" }}>
-                                        <h3 style={{ color: "green" }}>รายรับ</h3>
-                                        <table>
+                        <div className="Row">
+                            <div className="col-12">
+                                <h2 style={{ textAlign: "center" }}>รายละเอียดเพิ่มเติม</h2>
+                            </div>
+                        </div>
+                        <div className="Row" style={{ width: "800px" }}>
+
+                            {/* <div className="col-1"></div> */}
+                            <div className="col-6" style={{ textAlign: "center", paddingLeft: "10px" }}>
+                                <h3 style={{ color: "green" }}>รายรับ</h3>
+                                <table>
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>วันที่</th>
+                                        <th>ชื่อพืช</th>
+                                        <th>จำนวน</th>
+                                        <th>ราคารวม</th>
+                                    </tr>
+                                    {this.state.summery_trader.map((item, index) => {
+                                        return (
                                             <tr>
-                                                <th>ลำดับ</th>
-                                                <th>วันที่</th>
-                                                <th>ชื่อพืช</th>
-                                                <th>จำนวน</th>
-                                                <th>ราคารวม</th>
+                                                <td>{index + 1}</td>
+                                                <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
+                                                <td>{item.plant_name}</td>
+                                                <td>{addComma(item.amount)}</td>
+                                                <td>{addComma(item.amount * item.price)}</td>
                                             </tr>
-                                            {this.state.summery_trader.map((item, index) => {
-                                                return (
-                                                    <tr>
-                                                        <td>{index + 1}</td>
-                                                        <td>{moment(item.date_of_payment).utc().format('DD/MM/YYYY')}</td>
-                                                        <td>{item.plant_name}</td>
-                                                        <td>{addComma(item.amount)}</td>
-                                                        <td>{addComma(item.amount * item.price)}</td>
-                                                    </tr>
-                                                )
-                                            })}
-                                        </table>
+                                        )
+                                    })}
+                                </table>
+                            </div>
 
-                                    </div>
-
-                                    <div className="col-3" style={{ textAlign: "center", paddingLeft: "10px" }}>
-                                        <h3 style={{ color: "red" }}>รายจ่าย</h3>
-                                        <table>
+                            <div className="col-6" style={{ textAlign: "center", paddingLeft: "10px" }}>
+                                <h3 style={{ color: "red" }}>รายจ่าย</h3>
+                                <table>
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>วันที่</th>
+                                        <th>ชื่อพืช</th>
+                                        <th>จำนวน</th>
+                                        <th>ราคารวม</th>
+                                    </tr>
+                                    {this.state.summery_se.map((item, index) => {
+                                        return (
                                             <tr>
-                                                <th>ลำดับ</th>
-                                                <th>วันที่</th>
-                                                <th>ชื่อพืช</th>
-                                                <th>จำนวน</th>
-                                                <th>ราคารวม</th>
+                                                <td>{index + 1}</td>
+                                                <td>{moment(item.order_se_Payment_date).utc().format('DD/MM/YYYY')}</td>
+                                                <td>{item.plant_name}</td>
+                                                <td>{addComma(item.amount)}</td>
+                                                <td>{addComma(item.amount * item.order_se_price)}</td>
                                             </tr>
-                                            {this.state.summery_se.map((item, index) => {
-                                                return (
-                                                    <tr>
-                                                        <td>{index + 1}</td>
-                                                        <td>{moment(item.order_se_Payment_date).utc().format('DD/MM/YYYY')}</td>
-                                                        <td>{item.plant_name}</td>
-                                                        <td>{addComma(item.amount)}</td>
-                                                        <td>{addComma(item.amount * item.order_se_price)}</td>
-                                                    </tr>
-                                                )
-                                            })}
-                                        </table>
+                                        )
+                                    })}
+                                </table>
 
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </Modal>
