@@ -153,7 +153,7 @@ class M_BuyingDetail extends Component {
                                 className="BTN_PDF">ดูหลักฐานการโอนเงิน</button>
                         </div>
                     </div> */}
-                    </div>
+                </div>
                 break;
 
             case 4: render_show =
@@ -259,14 +259,14 @@ class M_BuyingDetail extends Component {
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ textAlign: "center" }}>รายละเอียดคำสั่งซื้อกับ {this.state.get_order.name}</h2>
-                        
+
                     </div>
                 </div>
 
                 <div className="Row">
                     <div className="col-10" style={{ textAlign: "right" }}>
-                        <h4 style={{margin:"0"}}>วันที่ {moment(this.state.get_order.order_se_date).utc().add('years', 543).format("DD/MM/YYYY")}<br />
-                        เลขที่ใบสั่งซื้อ {this.state.get_order.order_se_id}<br/>
+                        <h4 style={{ margin: "0" }}>วันที่ {moment(this.state.get_order.order_se_date).utc().add('years', 543).format("DD/MM/YYYY")}<br />
+                            เลขที่ใบสั่งซื้อ {this.state.get_order.order_se_id}<br />
                         </h4>
 
                     </div>
@@ -293,7 +293,7 @@ class M_BuyingDetail extends Component {
                         <div className="col-11">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.get_order.order_se_id}</h4>
-        <h3 style={{margin:"0"}}>ยอดคำสั่งซื้อ {this.state.get_order.amount*this.state.get_order.order_se_price} บาท</h3>
+                            <h3 style={{ margin: "0" }}>ยอดคำสั่งซื้อ {this.state.get_order.amount * this.state.get_order.order_se_price} บาท</h3>
                             <h4>โอนเข้าบัญชี :
                             <select style={{ fontFamily: "fc_lamoonregular", fontSize: "24px" }}>
                                     {this.state.order_se_invoice_detail ?

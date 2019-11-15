@@ -248,7 +248,7 @@ class M_Plan extends Component {
 
                                 <table>
                                     <tr>
-                                        <th>เริ่มวันที่</th>
+                                        {/* <th>เริ่มวันที่</th> */}
                                         <th>ชื่อพืช</th>
                                         <th>จำนวนที่ต้องการ</th>
                                         <th>วันที่ต้องการ</th>
@@ -259,7 +259,7 @@ class M_Plan extends Component {
                                         this.state.listplan.map((element, index) => {
                                             return (
                                                 <tr style={{ textAlign: "center" }}>
-                                                    <td>วันที่เริ่มโครงการ</td>
+                                                    {/* <td>วันที่เริ่มโครงการ</td> */}
                                                     <td>{element.plant}</td>
                                                     <td>{element.volume}</td>
                                                     <td>{moment(element.year_round_planing_date).format('DD/MM/YYYY')}</td>
