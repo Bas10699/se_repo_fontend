@@ -216,10 +216,10 @@ class S_OrderDetail extends Component {
         // console.log('up',updatedList)
     }
 
-    confirm_payment = async () => {
+    confirm_payment = async (index) => {
         const object = {
             order_se_id: this.state.order.order_se_id,
-            status: 3
+            status: index
         }
         try {
             await post(object, 'neo_firm/update_order_se_status', user_token).then((result) => {
@@ -358,7 +358,7 @@ class S_OrderDetail extends Component {
 
                         {this.state.order.order_se_status == 3 ?
                             <button 
-                                className="BTN_PDF">จัดส่งสินค้า</button>
+                                className="BTN_PDF" onClick={()=>this.confirm_payment(4)}>จัดส่งสินค้า</button>
                             :
                             null}
 
@@ -469,7 +469,7 @@ class S_OrderDetail extends Component {
                             <h4>วันที่ชำระเงิน : {moment(this.state.order.order_se_Payment_date).format('DD/MM/YYYY')} </h4>
                             <h4>เวลาที่ชำระเงิน : {this.state.order.order_se_Payment_time}</h4>
                             {/* <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
-                            <button className="BTN_CONFIRM" onClick={()=>this.confirm_payment()} >ออกใบเสร็จ</button>
+                            <button className="BTN_CONFIRM" onClick={()=>this.confirm_payment(3)} >ออกใบเสร็จ</button>
                             <button className="BTN_PDF" onClick={() => this.setState({ OpenProof: false })}>ยกเลิก</button>
 
                         </div>
