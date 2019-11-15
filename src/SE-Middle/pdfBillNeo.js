@@ -196,7 +196,7 @@ class PdfInvoice extends Component {
         // console.log('555',this.props.data)
         return (
             <div>
-                <button className="BTN_PDF" onClick={() => { this.printPDF() }}>ดูรายละเอียดใบสั่งซื้อ</button>
+                <button className="BTN_PDF" onClick={() => { this.printPDF() }}>ดูรายละเอียดใบเสร็จ</button>
             </div>
         )
     }

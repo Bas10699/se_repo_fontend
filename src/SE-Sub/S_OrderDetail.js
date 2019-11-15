@@ -357,8 +357,8 @@ class S_OrderDetail extends Component {
                             null}
 
                         {this.state.order.order_se_status == 3 ?
-                            <button 
-                                className="BTN_PDF">จัดส่งสินค้า</button>
+                            <button
+                                className="BTN_PDF">ส่งสินค้า</button>
                             :
                             null}
 
