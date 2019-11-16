@@ -12,6 +12,7 @@ import PdfBill from '../Support/PdfBill'
 import Frequency from './Frequency'
 import { NavLink } from 'react-router-dom'
 import socketIOClient from 'socket.io-client'
+import DateSelect from '../Support/dateSelect'
 
 
 // import FrequencyPlant from './frequency_plant'
@@ -290,6 +291,10 @@ class OrderDetail extends Component {
     onOpenModalComfrim = () => {
         this.setState({ open: true });
     };
+    callbackFunction = (childData) => {
+        this.setState({ date: childData })
+        // alert(childData)
+    }
 
     render_status = (order_status) => {
         let render_show
@@ -531,7 +536,9 @@ class OrderDetail extends Component {
                             <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h4>ชำระเงินภายในวันที่</h4>
-                            <input type="date" name="date_send" id="date_send" onChange={this.handleChange} />
+                            {/* <input type="date" name="date_send" id="date_send" onChange={this.handleChange} /> */}
+                            <DateSelect parentCallback={this.callbackFunction} />
+
                             <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
 
                             {this.state.bank_information ?

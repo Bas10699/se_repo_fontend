@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment'
+import 'moment/locale/th';
 const year = moment().utc(7).add('year', 543).format('YYYY')
 const day = moment().utc(7).format('DD')
-const month = moment().utc(7).lang("th").format('MM')
-const month_t = moment().utc(7).lang("th").format('MMMM')
+const month = moment().utc(7).format('MM')
+const month_t = moment().utc(7).format('MMMM')
 const Month = [
     { pid: "01", lable: "มกราคม", key: "0110" },
     { pid: "02", lable: "กุมภาพันธ์", key: "0100" },

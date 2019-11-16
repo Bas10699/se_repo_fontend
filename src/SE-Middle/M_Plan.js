@@ -9,6 +9,7 @@ import Pagination from "../Support/Pagination";
 import Modal from 'react-responsive-modal'
 import Checkbox from './CheckboxMPlan'
 import moment from 'moment'
+import DateSelect from '../Support/dateSelect'
 
 Highcharts.setOptions({
     lang: {
@@ -85,7 +86,7 @@ class M_Plan extends Component {
 
 
     comfirmPlan = async (plant) => {
-       
+
         let data = {
             name_plant: plant,
             check_array: this.state.check_array,
@@ -169,6 +170,11 @@ class M_Plan extends Component {
         })
     }
 
+    callbackFunction = (childData) => {
+        this.setState({ date: childData })
+        // alert(childData)
+    }
+
     render() {
 
         let reander_plan = (click) => {
@@ -195,7 +201,7 @@ class M_Plan extends Component {
                                                 <td>{element.plant_name}</td>
                                                 <td>{element.amount_want}</td>
                                                 <td>{element.amount_stock}</td>
-                                                {want <= 0 ? <td style={{color:"green"}}>วัตถุดิบเพียงพอ</td> : <td>{want * 1}</td>}
+                                                {want <= 0 ? <td style={{ color: "green" }}>วัตถุดิบเพียงพอ</td> : <td>{want * 1}</td>}
 
                                                 <td><button onClick={() => this.comfirmPlan(element.plant_name)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>วางแผน</button></td>
                                             </tr>
@@ -218,7 +224,10 @@ class M_Plan extends Component {
                             </div>
                             <div className="Row">
                                 <div className="col-12">
-                                    วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }} />
+                                    วันที่ต้องการ :
+                                    {/* <input type="date" id="date" onChange={this.handleChange} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }} /> */}
+                                    <DateSelect parentCallback={this.callbackFunction} />
+                                    
                                     <button onClick={() => this.addPlant(this.state.selectPlant)} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>ยืนยันการวางแผน</button>
                                     <Checkbox
                                         option={this.state.list_neo}

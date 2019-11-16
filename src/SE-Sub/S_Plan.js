@@ -5,6 +5,7 @@ import { user_token, sortData, addComma } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
 import Checkbox from './CheckboxPlan'
 import moment from 'moment'
+import DateSelect from '../Support/dateSelect'
 
 import Modal from 'react-responsive-modal'
 class S_Plan extends Component {
@@ -299,6 +300,11 @@ class S_Plan extends Component {
 
     }
 
+    callbackFunction = (childData) => {
+        this.setState({ date: childData })
+        // alert(childData)
+    }
+
     render_plan = (page) => {
         let return_page;
         switch (page) {
@@ -348,7 +354,9 @@ class S_Plan extends Component {
                         </div>
                         <div className="Row">
                             <div className="col-12">
-                                วันที่ต้องการ : <input type="date" id="date" onChange={this.handleChange} />
+                                วันที่ต้องการ : 
+                                {/* <input type="date" id="date" onChange={this.handleChange} /> */}
+                                <DateSelect parentCallback={this.callbackFunction} />
                                 <button onClick={() => this.addPlant()}>ยืนยันการวางแผน</button>
 
                                 <Checkbox

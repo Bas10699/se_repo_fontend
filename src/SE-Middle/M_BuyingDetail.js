@@ -6,6 +6,7 @@ import queryString from 'query-string';
 import TimelineNeo from '../SE-Sub/TimelineNeo';
 import Modal from 'react-responsive-modal'
 import moment from 'moment'
+import DateSelect from '../Support/dateSelect'
 
 class M_BuyingDetail extends Component {
     constructor(props) {
@@ -252,6 +253,10 @@ class M_BuyingDetail extends Component {
 
     }
 
+    callbackFunction = (childData) => {
+        this.setState({ date_proof: childData })
+        // alert(childData)
+    }
 
     render() {
         return (
@@ -307,7 +312,8 @@ class M_BuyingDetail extends Component {
                             <div className="Row">
                                 <div className="col-6">
                                     <h4>วันที่โอนเงิน</h4>
-                                    <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} />
+                                    {/* <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} /> */}
+                                    <DateSelect parentCallback={this.callbackFunction} />
                                 </div>
                                 <div className="col-1"></div>
                                 <div className="col-5">

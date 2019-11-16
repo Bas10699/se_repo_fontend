@@ -6,6 +6,7 @@ import moment from 'moment'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import Modal from 'react-responsive-modal'
+import DateSelect from '../Support/dateSelect'
 
 class M_Summary extends Component {
     constructor(props) {
@@ -200,6 +201,16 @@ class M_Summary extends Component {
     //     });
     // }
 
+    callbackFunction_start = (childData) => {
+        this.setState({ dateStart: childData })
+        // alert(childData)
+    }
+
+    callbackFunction_end = (childData) => {
+        this.setState({ dateEnd: childData })
+        // alert(childData)
+    }
+
     render() {
         var options = {
 
@@ -273,7 +284,13 @@ class M_Summary extends Component {
                     <div className="col-12" style={{ textAlign: "center" }}>
                         <h2 >สรุปยอดการซื้อ-ขาย</h2>
                         <h4>
-                            เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} />
+                            เลือกวันที่
+                            {/* <input type="date" id='dateStart' onChange={this.handleChange} /> */}
+                            <DateSelect parentCallback={this.callbackFunction_start} />
+                            ถึง
+                             {/* <input type="date" id='dateEnd' onChange={this.handleChange} /> */}
+                            <DateSelect parentCallback={this.callbackFunction_end} />
+
                             <button onClick={() => this.filterDate()} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>ค้นหา</button>
                         </h4>
 
@@ -292,7 +309,7 @@ class M_Summary extends Component {
                                 <th>วันที่</th>
                                 <th>รายรับ</th>
                                 <th>รายจ่าย</th>
-                                <th style={{borderLeft:"1px solid #ccc"}}>คงเหลือ</th>
+                                <th style={{ borderLeft: "1px solid #ccc" }}>คงเหลือ</th>
                             </tr>
                             {this.sum_in_out_money(this.state.summery_trader).map((item, index) => {
                                 return (
@@ -302,13 +319,13 @@ class M_Summary extends Component {
                                         {/* <td>{item.plant_name}</td> */}
                                         <td style={{ color: "green" }}>{addComma(item.monney_in)}</td>
                                         <td style={{ color: "red" }}>{addComma(item.monney_out)}</td>
-                                        <td style={{borderLeft:"1px solid #ccc"}}>{addComma(item.monney_in - item.monney_out)}</td>
+                                        <td style={{ borderLeft: "1px solid #ccc" }}>{addComma(item.monney_in - item.monney_out)}</td>
                                     </tr>
                                 )
                             })}
                             <tr>
                                 <th colSpan="3">รวม</th>
-                                <th style={{borderLeft:"1px solid #ccc"}}>{addComma(this.sum_money_all(this.sum_in_out_money(this.state.summery_trader)))}</th>
+                                <th style={{ borderLeft: "1px solid #ccc" }}>{addComma(this.sum_money_all(this.sum_in_out_money(this.state.summery_trader)))}</th>
 
                             </tr>
                         </table>

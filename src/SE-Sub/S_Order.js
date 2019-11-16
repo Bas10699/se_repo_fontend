@@ -122,9 +122,9 @@ class S_Order extends Component {
                         />
                     </div>
                     <div className="col-4">
-                        <input type="date" name="date" placeholder="ค้นหา" 
+                        {/* <input type="date" name="date" placeholder="ค้นหา" 
                         // onChange={this.filterDate} 
-                        />
+                        /> */}
                         {/* <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button> */}
                     </div>
                     <div className="col-2"></div>

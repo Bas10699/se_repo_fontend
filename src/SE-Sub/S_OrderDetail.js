@@ -8,6 +8,7 @@ import Checkbox from '../Support/Checkbox'
 import moment from 'moment'
 import Modal from 'react-responsive-modal'
 import S_BillFarmerPdf from './S_BillFarmerPdf'
+import DateSelect from '../Support/dateSelect'
 
 class S_OrderDetail extends Component {
 
@@ -317,6 +318,11 @@ class S_OrderDetail extends Component {
         }
     }
 
+    callbackFunction = (childData) => {
+        this.setState({ date_send: childData })
+        // alert(childData)
+    }
+
     render() {
         return (
             <div className="App">
@@ -495,7 +501,10 @@ class S_OrderDetail extends Component {
                                 </div>
                             })}
 
-                            กำหนดวันชำระเงิน : <input type="date" id="date_send" onChange={this.handleChange} />
+                            กำหนดวันชำระเงิน : 
+                            {/* <input type="date" id="date_send" onChange={this.handleChange} /> */}
+                            <DateSelect parentCallback={this.callbackFunction} />
+                            
                             <h4 style={{ color: "red" }}>รวมเงินทั้งหมด {this.state.order.cost * this.state.order.amount} บาท</h4>
 
                             {this.state.bank ?

@@ -295,6 +295,7 @@ class M_Buying extends Component {
 
     }
 
+    
     render() {
         return (
             <div className="App">
@@ -312,7 +313,8 @@ class M_Buying extends Component {
                         <input type="search" placeholder="ค้นหาจากเลขที่ใบสั่งซื้อ" onChange={this.filterID} />
                     </div>
                     <div className="col-4">
-                        <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} />
+                        {/* <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} /> */}
+                        {/* <DateSelect parentCallback={this.callbackFunction} /> */}
                         {/* <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button> */}
                     </div>
                     <div className="col-2"></div>

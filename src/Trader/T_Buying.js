@@ -312,8 +312,8 @@ class T_Buying extends Component {
                         <input type="search" placeholder="ค้นหา" onChange={this.filterID} />
                     </div>
                     <div className="col-4">
-                        <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} />
-                        <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button>
+                        {/* <input type="date" name="date" placeholder="ค้นหา" onChange={this.filterDate} /> */}
+                        {/* <button onClick={() => this.SortId()} className="BTN_AddCart">เรียงล่าสุด</button> */}
                     </div>
                     <div className="col-2"></div>
                 </div>

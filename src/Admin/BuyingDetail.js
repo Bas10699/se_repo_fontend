@@ -11,6 +11,8 @@ import { NavLink } from 'react-router-dom'
 import Modal from 'react-responsive-modal'
 import StarRatingComponent from 'react-star-rating-component';
 
+import DateSelect from '../Support/dateSelect'
+
 class BuyingDetail extends Component {
 
     constructor(props) {
@@ -403,7 +405,10 @@ class BuyingDetail extends Component {
 
     }
 
-
+    callbackFunction = (childData) => {
+        this.setState({ date_send: childData })
+        // alert(childData)
+    }
     
 
     render() {
@@ -510,7 +515,9 @@ class BuyingDetail extends Component {
                             <div className="Row">
                                 <div className="col-6">
                                     <h4 style={{marginTop:"0"}}>วันที่โอนเงิน</h4>
-                                    <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} />
+                                    {/* <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} /> */}
+                                    <DateSelect parentCallback={this.callbackFunction} />
+
                                 </div>
                                 <div className="col-1"></div>
                                 <div className="col-5">

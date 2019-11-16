@@ -7,6 +7,7 @@ import { get, post } from '../../Support/Service';
 import Modal from 'react-responsive-modal';
 import Checkbox from '../M_Research/Checkbox_R'
 import folder from '../../Image/folder.png'
+import DateSelect from '../../Support/dateSelect'
 
 
 class M_R_Order extends Component {
@@ -224,6 +225,14 @@ class M_R_Order extends Component {
         return return_product_researcher_status
     }
 
+    callbackFunction = (childData) => {
+        this.setState({ date_comfirm: childData })
+        // alert(childData)
+    }
+    callbackFunction_line = (childData) => {
+        this.setState({ date_line: childData })
+        // alert(childData)
+    }
     render() {
         let setdata = this.state.setdata
         return (
@@ -270,8 +279,14 @@ class M_R_Order extends Component {
                         <div className="col-12">
 
                             <h3 style={{ textAlign: "center" }}>รายชื่อนักวิจัยสำหรับการพัฒนา {this.state.name_product}</h3>
-                            <h5>กำหนดวันที่ตอบรับการพัฒนา <input type="date" id="date_comfirm" onChange={this.handleChange} /></h5>
-                            <h5>กำหนดวันที่ส่งสูตร <input type="date" id="date_line" onChange={this.handleChange} /></h5>
+                            <h5>กำหนดวันที่ตอบรับการพัฒนา
+                                {/* <input type="date" id="date_comfirm" onChange={this.handleChange} /> */}
+                                <DateSelect parentCallback={this.callbackFunction} />
+                            </h5>
+                            <h5>กำหนดวันที่ส่งสูตร
+                                {/* <input type="date" id="date_line" onChange={this.handleChange} /> */}
+                                <DateSelect parentCallback={this.callbackFunction_line} />
+                            </h5>
                             <Checkbox
                                 option={this.state.researcher}
                                 check_array={this.state.list_research}

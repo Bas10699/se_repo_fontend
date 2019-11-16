@@ -5,6 +5,7 @@ import { get } from '../Support/Service'
 import { addComma, user_token } from '../Support/Constance'
 import moment from 'moment'
 import { NavLink } from 'react-router-dom'
+import DateSelect from '../Support/dateSelect'
 
 class S_Summary extends Component {
     constructor(props) {
@@ -175,13 +176,28 @@ class S_Summary extends Component {
         return sum
     }
 
+    callbackFunction_start = (childData) => {
+        this.setState({ dateStart: childData })
+        // alert(childData)
+    }
+    callbackFunction_end = (childData) => {
+        this.setState({ dateEnd: childData })
+        // alert(childData)
+    }
+
     render() {
         return (
             <div className='App'>
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
                         <h2 >สรุปยอดขาย</h2>
-                        <h4>เลือกวันที่ <input type="date" id='dateStart' onChange={this.handleChange} /> ถึง <input type="date" id='dateEnd' onChange={this.handleChange} />
+                        <h4>เลือกวันที่ 
+                            {/* <input type="date" id='dateStart' onChange={this.handleChange} /> */}
+                            <DateSelect parentCallback={this.callbackFunction_start} />
+                             ถึง 
+                             {/* <input type="date" id='dateEnd' onChange={this.handleChange} /> */}
+                             <DateSelect parentCallback={this.callbackFunction_end} />
+
                             <button onClick={() => this.filterDate()} style={{ fontFamily: "fc_lamoonregular", fontSize: "16px" }}>ค้นหา</button></h4>
                         <h4 style={{ margin: "0" }}>ยอดรวม {this.sum_money_all(this.sum_in_out_money(this.state.summary_personal))} บาท</h4>
                     </div>
