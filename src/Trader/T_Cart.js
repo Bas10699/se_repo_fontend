@@ -5,6 +5,9 @@ import { get, post, ip } from '../Support/Service';
 import Modal from 'react-responsive-modal'
 import socketIOClient from 'socket.io-client'
 
+import DateSelect from '../Support/dateSelect'
+
+
 class T_Cart extends Component {
     constructor(props) {
         super(props)
@@ -160,15 +163,15 @@ class T_Cart extends Component {
             date_send: this.state.date,
             address_send: this.state.address,
             order_status: "0",
-            email:this.state.get_user.email,
-            name:this.state.get_user.name,
-            last_name:this.state.get_user.last_name
+            email: this.state.get_user.email,
+            name: this.state.get_user.name,
+            last_name: this.state.get_user.last_name
         }
 
         try {
             await post(object, 'trader/add_order', user_token).then((result) => {
                 if (result.success) {
-                    
+
                     const socket = socketIOClient(ip)
                     socket.emit('send-noti', result.result)
 
@@ -229,9 +232,12 @@ class T_Cart extends Component {
         return sum;
     }
 
+    callbackFunction = (childData) => {
+        this.setState({ date: childData })
+        // alert(childData)
+    }
 
     render() {
-
         const cart_product = (
             <div className="App">
                 <div className="Row">
@@ -297,6 +303,9 @@ class T_Cart extends Component {
                                 </div>
                             </div>
                         </div>
+                        {/* <DatePicker onChange={this.changeHandler} /> */}
+
+
                         <button className="BTN_Signin" style={{ float: "left" }} onClick={() => { this.edit_amount() }}>ยืนยันการแก้ไขจำนวน</button>
                         <button className="BTN_Signup" style={{ float: "right" }} onClick={() => { this.onOpenModal() }}>สั่งซื้อ</button>
 
@@ -305,13 +314,15 @@ class T_Cart extends Component {
                                 <div className="col-1" />
                                 <div className="col-10">
                                     <h3 style={{ textAlign: "center" }}>รายละเอียดการจัดส่ง</h3>
-                                    <h4 style={{marginTop:"20px",marginBottom:"0"}}>วันที่กำหนดส่ง</h4>
-                                    <h5 style={{ color: "red",marginTop:"0",marginBottom:"10px" }} >** เลือกวันกำหนดส่ง กรณีสินค้าหมด หรือสั่งซื้อล่วงหน้า **</h5>
-                                    <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px",marginBottom:"0" }} />
+                                    <h4 style={{ marginTop: "20px", marginBottom: "0" }}>วันที่กำหนดส่ง</h4>
+                                    <h5 style={{ color: "red", marginTop: "0", marginBottom: "10px" }} >** เลือกวันกำหนดส่ง กรณีสินค้าหมด หรือสั่งซื้อล่วงหน้า **</h5>
+                                    {/* <input type="date" name="date" id="date" onChange={this.handleChange} style={{ marginTop: "-50px", marginLeft: "-2px", marginBottom: "0" }} /> */}
+                                    
+                                    <DateSelect parentCallback={this.callbackFunction} />
 
-                                    <h4 style={{marginTop:"20px",marginBottom:"0"}}>ที่อยู่จัดส่ง</h4>
+                                    <h4 style={{ marginTop: "20px", marginBottom: "0" }}>ที่อยู่จัดส่ง</h4>
                                     <input type="radio" name="address_new" onChange={this.address_change} />ที่อยู่เดิม {"\t\t\t\t\t\t\t\t"}
-                                        <input type="radio" name="address_new" style={{margin:"0"}} />ที่อยู่ใหม่
+                                    <input type="radio" name="address_new" style={{ margin: "0" }} />ที่อยู่ใหม่
                                     <textarea rows="4" cols="95" name="address" id="address" value={this.state.address} onChange={this.handleChange}
                                         form="usrform" />
                                     <button className="BTN_Signin" onClick={() => { this.Comfirm() }}>ออกใบคำสั่งซื้อ</button>
