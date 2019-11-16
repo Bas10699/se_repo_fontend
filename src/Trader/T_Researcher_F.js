@@ -73,6 +73,29 @@ class T_Researcher_F extends Component {
         }
     }
 
+    sum_money = (data) => {
+        let price = data.price
+        let result = 0
+        price.map((ele) => {
+            let unit = 1
+            if (ele.plant_volume_type === 'มิลลิกรัม') {
+                unit = 0.000001
+            }
+            else if (ele.plant_volume_type === 'กรัม') {
+                unit = 0.001
+            }
+            else {
+                unit = 1
+            }
+
+            result = ele.plant_volume * unit * ele.price * data.volume
+
+        })
+
+        return result.toFixed(2)
+
+    }
+
     rander_status = (status) => {
         let return_status
         switch (status) {
@@ -91,8 +114,8 @@ class T_Researcher_F extends Component {
         return return_status
     }
     render() {
-        const {product_plan} = this.state
-        let product_name = product_plan[0]? product_plan[0].product_name:null
+        const { product_plan } = this.state
+        let product_name = product_plan[0] ? product_plan[0].product_name : null
         return (
             <div className="App">
                 <div className="tab">
@@ -143,13 +166,13 @@ class T_Researcher_F extends Component {
                                                     <td>{element.plant_name}</td>
                                                     <td>{element.plant_volume}</td>
                                                     <td>{element.plant_volume_type}</td>
-                                                    <td>{element.plant_volume * unit * element.price * e.volume}</td>
+                                                    <td>{(element.plant_volume * unit * element.price * e.volume).toFixed(2)}</td>
                                                 </tr>
                                             )
                                         })}
                                         <tr>
                                             <th colSpan="3">ราคารวม</th>
-                                            <th>xxx</th>
+                                            <th>{this.sum_money(e)}</th>
                                         </tr>
                                     </table>
                                 </div>
