@@ -133,7 +133,7 @@ class DateSelect extends Component {
         return (
             <div>
                 {/* {console.log(this.state.day, this.state.month, this.state.year)} */}
-                <select onChange={this._oninput_day}>
+                <select id='day' onChange={this._oninput_day}>
                     <option selected disabled hidden>{this.state.day}</option>
                     {this.state.day_array.map((ele, index) => {
                         return (

@@ -476,7 +476,7 @@ class M_Farmer extends Component {
         //     );
         // });
         return (
-            <div className="App" id="#Top">
+            <div className="App">
                 <div className="Row">
                     <div className="col-12">
                         <h2 style={{ marginBottom: "0", marginTop: "10px", marginLeft: "50px" }}>
@@ -524,7 +524,7 @@ class M_Farmer extends Component {
                             })}
 
                         </ol>
-                        <a href="#Top" onClick={()=>this.exportToCSV()} style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
+                        <a href="#Top" onClick={()=>this.exportToCSV()} style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /><h4 className="texttop">ดาวน์โหลดข้อมูล</h4></a>
                     </div>
 
                     {/* <div className='col-1'></div> */}

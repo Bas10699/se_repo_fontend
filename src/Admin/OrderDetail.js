@@ -366,8 +366,8 @@ class OrderDetail extends Component {
                         </div>
                     </div>
                     <div className="Row">
-                        <div className="col-12" style={{ marginLeft: "50px" }}><PdfInvoice data={this.state.invoice} /></div>
-                        <button onClick={() => this.cancel_order()} style={{ marginRight: "100px" }}>ยกเลิกคำสั่งซื้อ</button>
+                        {/* <div className="col-12" style={{ marginLeft: "50px" }}><PdfInvoice data={this.state.invoice} /></div> */}
+                        <button onClick={() => this.cancel_order()} style={{ marginLeft: "50px" }} className="BTN_Cencle">ยกเลิกคำสั่งซื้อ</button>
                         {/* <div className="col-6">
                             <button
                                 className='BTN_CONFIRM'

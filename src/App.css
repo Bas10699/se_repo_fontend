@@ -543,15 +543,22 @@ select[name="volum"],[name="type_user"],[type="select"]{
     border-radius: 5px;
 }
 
-/* select[name="day"],[name="month"],[name="year"]{
+select[id="month"],[id="year"]{
     font-family: 'fc_lamoonregular';
     font-size: 16px;
     border: 1px solid black;
-    width: 100%;
+    width: 20%;
     padding: 10px 10px;
     border-radius: 5px;
-} */
-
+}
+select[id="day"]{
+  font-family: 'fc_lamoonregular';
+  font-size: 16px;
+  border: 1px solid black;
+  width: 10%;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
 input[type="search"]{
     font-family: 'fc_lamoonregular';
     font-size: 16px;
@@ -1228,8 +1235,8 @@ ol {
 
 .top{
     position: fixed;
-    right: 20px;
-    bottom: 10px;
+    right: 50px;
+    bottom: 50px;
     width: 50px;
     z-index: 1000;
     font-size: 18px;
@@ -1237,7 +1244,7 @@ ol {
     outline: none;
     cursor: pointer;
     text-decoration: none;
-    filter: grayscale(100%);
+    filter: grayscale(40%);
     transition: 0.5s;
 }
 
@@ -1252,6 +1259,20 @@ ol {
 
 .top:hover{
     filter: grayscale(0%);
+}
+
+.texttop{
+  position: fixed;
+  right: 20px;
+  bottom: 0px;
+  width: 100px;
+  z-index: 1000;
+  font-size: 20px;
+  color: #000;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .selectShowb {

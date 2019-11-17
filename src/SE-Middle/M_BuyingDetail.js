@@ -162,7 +162,7 @@ class M_BuyingDetail extends Component {
                     <div className="Row">
                         <div className="col-12">
                             <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อสินค้า {this.state.get_order.plant_name}</h3>
-                            <h5>{this.state.get_order.se_name} ส่งสินค้าเรียบร้อย</h5>
+                            <h5>{this.state.get_order.name} ส่งสินค้าเรียบร้อย</h5>
 
                         </div>
                     </div>
