@@ -1,7 +1,7 @@
 //ความสามารถของเกษตร
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
-import { user_token,sortData } from '../Support/Constance'
+import { user_token, sortData } from '../Support/Constance'
 import { NavLink } from 'react-router-dom'
 import top from '../Image/top.png'
 import arrow from '../Image/up-arrow.png'
@@ -14,7 +14,7 @@ class S_skill_farmer extends Component {
             currentPage: 1,
             todosPerPage: 10,
             farmer: [],
-            volume_farmer:[],
+            volume_farmer: [],
             plants: [],
             search_order: [],
             click1: false,
@@ -71,7 +71,7 @@ class S_skill_farmer extends Component {
         }
     }
 
-    
+
     get_skill_farmer = async () => {
         try {
             await get('neo_firm/get_farmer_se', user_token).then((result) => {
@@ -294,16 +294,16 @@ class S_skill_farmer extends Component {
 
     }
 
-    deliver_value = () =>{
-        if(this.state.click3 === true){
-            let data = sortData(this.state.farmer,'deliver_value',true)
+    deliver_value = () => {
+        if (this.state.click3 === true) {
+            let data = sortData(this.state.farmer, 'deliver_value', true)
             this.setState({
                 farmer: data,
                 click3: false
             })
         }
-        else{
-            let data = sortData(this.state.farmer,'deliver_value',false)
+        else {
+            let data = sortData(this.state.farmer, 'deliver_value', false)
             this.setState({
                 farmer: data,
                 click3: true
@@ -311,16 +311,16 @@ class S_skill_farmer extends Component {
         }
     }
 
-    end_plant = () =>{
-        if(this.state.click4 === true){
-            let data = sortData(this.state.farmer,'end_plant',true)
+    end_plant = () => {
+        if (this.state.click4 === true) {
+            let data = sortData(this.state.farmer, 'end_plant', true)
             this.setState({
                 farmer: data,
                 click4: false
             })
         }
-        else{
-            let data = sortData(this.state.farmer,'end_plant',false)
+        else {
+            let data = sortData(this.state.farmer, 'end_plant', false)
             this.setState({
                 farmer: data,
                 click4: true
@@ -328,16 +328,16 @@ class S_skill_farmer extends Component {
         }
     }
 
-    deliver_frequency_number = () =>{
-        if(this.state.click5 === true){
-            let data = sortData(this.state.farmer,'deliver_frequency_number',true)
+    deliver_frequency_number = () => {
+        if (this.state.click5 === true) {
+            let data = sortData(this.state.farmer, 'deliver_frequency_number', true)
             this.setState({
                 farmer: data,
                 click5: false
             })
         }
-        else{
-            let data = sortData(this.state.farmer,'deliver_frequency_number',false)
+        else {
+            let data = sortData(this.state.farmer, 'deliver_frequency_number', false)
             this.setState({
                 farmer: data,
                 click5: true
@@ -366,7 +366,27 @@ class S_skill_farmer extends Component {
         }
     }
 
-   
+    exportToCSV = () => {
+        let csvRow = []
+        let A = [['ลำดับ','ชื่อ','นามสกุล','พืชที่ปลูก','จํานวนผลผลิตที่ขาย/ปี(กิโลกรัม)','ผลผลิต/ไร่(กิโลกรัม)','จำนวนการส่งมอบ/ครั้ง(กิโลกรัม)','เดือนที่ส่งมอบ','จำนวนครั้งส่งมอบ','พื้นที่ปลูก(ไร่)']]
+        let data = this.state.farmer
+        data.map((element,index)=>{
+            A.push([index+1,element.first_name,element.last_name,element.plant,element.year_value,element.product_value,element.deliver_value,element.end_plant,element.deliver_frequency_number,element.growingArea])
+        })
+        A.map((eleA)=>{
+            csvRow.push(eleA.join(','))
+        })
+        
+        let csvString = csvRow.join('%0A')
+        let a = document.createElement("a")
+        a.href = 'data:attachment/csv;charset=utf-8,%EF%BB%BF' + csvString
+        a.target = "_Blank"
+        a.download = 'testfile.csv'
+        document.body.appendChild(a)
+        a.click()
+    }
+
+
 
     changeCurrentPage = numPage => {
         this.setState({ currentPage: numPage });
@@ -377,13 +397,13 @@ class S_skill_farmer extends Component {
     render() {
         let todos = []
         const { farmer, currentPage, todosPerPage } = this.state;
-        farmer.map((element,index)=>{
+        farmer.map((element, index) => {
             todos.push({
-                num:index+1,
+                num: index + 1,
                 ...element
             })
         })
-        
+
         // Logic for displaying todos
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
@@ -426,7 +446,7 @@ class S_skill_farmer extends Component {
                                 <h5 style={{ padding: "10px 5px 10px 10px", margin: "0px" }}>{this.state.get_user ? this.state.get_user.name : null}</h5>
                             </div>
                             <hr style={{ boxShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.2)", border: "1px solid #ccc", width: "80%" }} />
-                            <NavLink onClick={()=>this.setState({farmer:this.state.plants})}
+                            <NavLink onClick={() => this.setState({ farmer: this.state.plants })}
                                 style={{ color: "black", textDecoration: "none", width: "100%", textAlign: "center" }}>
                                 <li style={{ textAlign: "left", marginLeft: "5px", paddingLeft: "5px" }} activeClassName="Active">--แสดงทั้งหมด--</li>
                             </NavLink>
@@ -441,17 +461,17 @@ class S_skill_farmer extends Component {
                             })}
 
                         </ol>
-                        <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
+                        <a href="#Top" onClick={() => this.exportToCSV()} style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
                     </div>
 
                     {/* <div className='col-1'></div> */}
                     <div className='col-11' style={{ marginTop: "-50px", marginLeft: "20px", marginRight: "10px" }} >
 
-                    <h4>{this.state.volume_farmer.map((element)=>{
-                            return(<p>จำนวนเกษตรกรทั้งหมดในเครือ {element.sum_farmer} คน</p>)
+                        <h4>{this.state.volume_farmer.map((element) => {
+                            return (<p>จำนวนเกษตรกรทั้งหมดในเครือ {element.sum_farmer} คน</p>)
                         })} </h4>
-                        <h4 style={{marginBottom:"0"}}>เลือกข้อมูลที่ต้องการเปรียบเทียบ</h4>
-                        <input type="search" placeholder="ค้นหาชื่อ" onChange={this.filterName} style={{margin:"10px" ,width:"80%",display:"block",marginLeft:"auto",marginRight:"auto"}}/>
+                        <h4 style={{ marginBottom: "0" }}>เลือกข้อมูลที่ต้องการเปรียบเทียบ</h4>
+                        <input type="search" placeholder="ค้นหาชื่อ" onChange={this.filterName} style={{ margin: "10px", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto" }} />
                         <button className={this.state.showHide1 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide1 === true) { this.setState({ showHide1: false }) } else { this.setState({ showHide1: true }) } }}>จํานวนผลผลิตที่ขายต่อปี</button>
                         <button className={this.state.showHide2 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide2 === true) { this.setState({ showHide2: false }) } else { this.setState({ showHide2: true }) } }}>ผลผลิตต่อไร่</button>
                         <button className={this.state.showHide3 ? "selectShowb" : "selectShow"} onClick={() => { if (this.state.showHide3 === true) { this.setState({ showHide3: false }) } else { this.setState({ showHide3: true }) } }}>จำนวนการส่งมอบต่อครั้ง</button>
@@ -467,23 +487,23 @@ class S_skill_farmer extends Component {
 
                                 {this.state.showHide1 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จํานวนผลผลิตที่ขาย/ปี
                                 {this.state.click1 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.year_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.year_value()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.year_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.year_value()} />
                                     }
                                 </th> : null}
                                 {this.state.showHide2 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>ผลผลิต/ไร่
                                 {this.state.click2 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.product_value()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.product_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.product_value()} />
                                     }
                                 </th> : null}
                                 {this.state.showHide3 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>จำนวนการส่งมอบ/ครั้ง
                                 {this.state.click3 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.deliver_value()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_value()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.deliver_value()} />
                                     }
                                 </th> : null}
                                 {this.state.showHide4 ? <th style={{ borderLeft: "1px solid #ccc" }}>เดือนที่ส่งมอบ
@@ -495,16 +515,16 @@ class S_skill_farmer extends Component {
                                 </th> : null}
                                 {this.state.showHide5 ? <th style={{ borderLeft: "1px solid #ccc" }}>จำนวนครั้งส่งมอบ
                                 {this.state.click5 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_frequency_number()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.deliver_frequency_number()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.deliver_frequency_number()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.deliver_frequency_number()} />
                                     }
                                 </th> : null}
                                 {this.state.showHide6 ? <th colSpan="2" style={{ borderLeft: "1px solid #ccc" }}>พื้นที่ปลูก
                                 {this.state.click6 ?
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.growingArea()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.growingArea()} />
                                         :
-                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft:"5px" }} onClick={() => this.growingArea()} />
+                                        <img src={arrow} alt="arrow" style={{ width: "20px", transform: "scaleY(-1)", cursor: "pointer", marginLeft: "5px" }} onClick={() => this.growingArea()} />
                                     }
                                 </th> : null}
                             </tr>
@@ -546,15 +566,15 @@ class S_skill_farmer extends Component {
                             }
 
                         </table>
-                        <div style={{textAlign:'center'}}>
-                            
+                        <div style={{ textAlign: 'center' }}>
+
                             <Pagination
                                 currentPage={currentPage}
                                 totalPages={Math.ceil(todos.length / todosPerPage)}
                                 changeCurrentPage={this.changeCurrentPage}
                                 theme="square-fill"
                             />
-                            
+
                         </div>
                     </div>
                 </div>
