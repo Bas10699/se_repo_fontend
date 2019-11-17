@@ -70,7 +70,7 @@ class M_Buying extends Component {
             </div>
                 break;
             case 1:
-                case 2: render_tag = <div>
+            case 2: render_tag = <div>
                 <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
@@ -105,7 +105,10 @@ class M_Buying extends Component {
                     {/* <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-          
+            case -1:
+                render_tag = <div style={{ color: 'red' }}> ถูกยกเลิก </div>
+                break;
+
             default:
                 render_tag = <div> เกิดข้อผิดพลาด </div>
                 break;
@@ -188,8 +191,10 @@ class M_Buying extends Component {
 
         console.log(order.sort(compare));
         let sort_order = order.sort(compare)
-        this.setState({ order: sort_order,
-        click:true })
+        this.setState({
+            order: sort_order,
+            click: true
+        })
 
     }
     SortStatus = (e) => {
@@ -209,8 +214,10 @@ class M_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order,
-                clicks: true })
+            this.setState({
+                order: sort_order,
+                clicks: true
+            })
         }
         if (e === 'Min') {
             function compare(a, b) {
@@ -226,8 +233,10 @@ class M_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order,
-                clicks: false })
+            this.setState({
+                order: sort_order,
+                clicks: false
+            })
         }
     }
     SortDate = (e) => {
@@ -295,7 +304,7 @@ class M_Buying extends Component {
 
     }
 
-    
+
     render() {
         return (
             <div className="App">
@@ -335,7 +344,7 @@ class M_Buying extends Component {
                                         <img src={az} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortDate('Max')} />
                                     }
                                 </th>
-                                <th style={{width:"120px"}}>
+                                <th style={{ width: "120px" }}>
                                     สถานะการสั่งซื้อ
                                     {this.state.clicks ?
                                         <img src={za} alt="arrow" style={{ width: "20px" }} onClick={() => this.SortStatus('Min')} />
@@ -345,7 +354,7 @@ class M_Buying extends Component {
                                 </th>
                                 <th>ชื่อพืช</th>
                                 <th>จำนวนการสั่งซื้อ (กิโลกรัม)</th>
-                                <th style={{width:"120px"}}>สั่งซื้อกับ</th>
+                                <th style={{ width: "120px" }}>สั่งซื้อกับ</th>
                                 <th>รายละเอียด</th>
                             </tr>
                             {
@@ -357,7 +366,7 @@ class M_Buying extends Component {
                                                 <td>{moment(element.order_se_date).utc().format("DD/MM/YYYY, HH:mm")}</td>
                                                 <td>{this.render_status(element.order_se_status)}</td>
                                                 <td>{element.plant_name}</td>
-                                                <td>{addComma(element.amount) }</td>
+                                                <td>{addComma(element.amount)}</td>
                                                 <td>{element.name}</td>
                                                 <td><NavLink to={"/M_Buying/order?order_id=" + element.order_se_id} style={{ textDecoration: "none" }}><button className="BTN_Detail" style={{ marginTop: "5px" }}>รายละเอียด</button></NavLink></td>
                                             </tr>

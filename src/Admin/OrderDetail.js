@@ -165,7 +165,7 @@ class OrderDetail extends Component {
             date_send: this.state.date_send,
             detail: JSON.stringify(detail),
             status: 0,
-            email:this.state.order.email
+            email: this.state.order.email
         }
         console.log("วันที่ส่ง", this.state.date_send)
 
@@ -268,6 +268,38 @@ class OrderDetail extends Component {
         }
     }
 
+    cancel_order = async () => {
+        let url = this.props.location.search;
+        let params = queryString.parse(url);
+        this.state.detail.map((element)=>{
+            element.status=-1
+        })
+        const object = {
+            order_id: params.aa,
+            detail:this.state.detail,
+            status: -1
+        }
+        if (window.confirm('ยืนยันการยกเลิกคำสั่งซื้อ')) {
+            try {
+                await post(object, 'neutrally/cancel_order_trader', user_token).then((result) => {
+                    if (result.success) {
+                        window.location.reload()
+                        setTimeout(() => {
+                            console.log("cancel_order_trader", result)
+                        }, 500)
+                    } else {
+                        // window.location.href = "/";
+                        alert(result.error_message)
+                        console.log("cancel_order_trader", result)
+                    }
+                })
+            }
+            catch (error) {
+                alert("cancel_order_trader" + error);
+            }
+        }
+    }
+
     sum_price = (data_price) => {
         let sum = 0;
         data_price.map((element) => {
@@ -335,6 +367,7 @@ class OrderDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-12" style={{ marginLeft: "50px" }}><PdfInvoice data={this.state.invoice} /></div>
+                        <button onClick={() => this.cancel_order()} style={{ marginRight: "100px" }}>ยกเลิกคำสั่งซื้อ</button>
                         {/* <div className="col-6">
                             <button
                                 className='BTN_CONFIRM'
@@ -375,48 +408,62 @@ class OrderDetail extends Component {
             //     break;
 
             case 3: render_show =
-            <div>
-                <div className="Row">
-                    <div className="col-12">
-                        <div className='_Card'>
-                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
-                            <h5>{this.state.logistic == 1 ?
-                                // <div>
-                                //     <h5>ขนส่งแบบ รถไฟ</h5>
-                                //     กรอกหมายเลขพัสดุ : <input />
-                                // </div>
-                                <div>
-                                    รอการขนส่ง
+                <div>
+                    <div className="Row">
+                        <div className="col-12">
+                            <div className='_Card'>
+                                <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                                <h5>{this.state.logistic == 1 ?
+                                    // <div>
+                                    //     <h5>ขนส่งแบบ รถไฟ</h5>
+                                    //     กรอกหมายเลขพัสดุ : <input />
+                                    // </div>
+                                    <div>
+                                        รอการขนส่ง
                                 </div>
-                                :
-                                <div>
-                                    รอระบบขนส่งจาก {this.state.order.name} {this.state.order.last_name}
-                                </div>}
-                            </h5>
+                                    :
+                                    <div>
+                                        รอระบบขนส่งจาก {this.state.order.name} {this.state.order.last_name}
+                                    </div>}
+                                </h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="Row">
+                    <div className="Row">
                         <div className="col-12" style={{ marginLeft: "50px" }}>
-                            <button className="BTN_PDF" onClick={()=> this.send_logistic()}>ยืนยันจัดส่ง</button>
-                            
-                            </div>
+                            <button className="BTN_PDF" onClick={() => this.send_logistic()}>ยืนยันจัดส่ง</button>
+
+                        </div>
                     </div>
                 </div>
                 break;
 
             case 4: render_show =
-            <div>
-                <div className="Row">
-                    <div className="col-12">
-                        <div className='_Card'>
-                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
-                            <h5>เรียบร้อย
+                <div>
+                    <div className="Row">
+                        <div className="col-12">
+                            <div className='_Card'>
+                                <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                                <h5>เรียบร้อย
                             </h5>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-                
+                break;
+            case -1: render_show =
+                <div>
+                    <div className="Row">
+                        <div className="col-12">
+                            <div className='_Card'>
+                                <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                                <h4 style={{ color: 'red' }}>ถูกยกเลิก
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 break;
 
@@ -426,7 +473,7 @@ class OrderDetail extends Component {
                         <div className="col-12">
                             <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
                             <h4>เกิดข้อผิดพลาด</h4>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -488,15 +535,19 @@ class OrderDetail extends Component {
                                             <td>{addComma(element_plant.price * element_plant.amount)}</td>
                                             {console.log("test", this.state.detail)}
                                             <td>{
-                                                element_plant.status === 1 ?
-                                                    "ทำการสั่งซื้อเเล้ว" :
-                                                    <NavLink to={`/M_Product?product_id=P%20${element_plant.plant_id}&order_id=${this.state.order.order_id}`}>
-                                                        <button
-                                                            className="BTN_AddCart"
-                                                            style={{ float: "right" }}>
-                                                            ทำการสั่งซื้อวัตถุดิบ
+                                                element_plant.status === -1 ?
+                                                    <div style={{ color: 'red' }}>ถูกยกเลิกแล้ว</div> :
+                                                    element_plant.status === 1 ?
+                                                        "ทำการสั่งซื้อเเล้ว" :
+                                                        <NavLink to={`/M_Product?product_id=P%20${element_plant.plant_id}&order_id=${this.state.order.order_id}`}>
+                                                            <button
+                                                                className="BTN_AddCart"
+                                                                style={{ float: "right" }}>
+                                                                ทำการสั่งซื้อวัตถุดิบ
                                                         </button>
-                                                    </NavLink>}
+                                                        </NavLink>
+
+                                            }
 
                                             </td>
                                         </tr>

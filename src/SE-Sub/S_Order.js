@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { get, post, ip } from '../Support/Service'
 import { user_token } from '../Support/Constance'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import one from '../Image/one.png'
 import two from '../Image/two.png'
@@ -51,31 +51,31 @@ class S_Order extends Component {
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={twodis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-            case 1:case 2:
+            case 1: case 2:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
-                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-             case 3:
+            case 3:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px"}} alt="1" />
+                    <img src={fourdis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-           
-                case 4:
+
+            case 4:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
@@ -84,16 +84,20 @@ class S_Order extends Component {
                     {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-                // case 4:
-                // render_tag = <div>
-                //     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                //     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                //     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                //     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                //     <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
-                // </div>
-                // break;
-                
+            // case 4:
+            // render_tag = <div>
+            //     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+            //     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+            //     <img src={three} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+            //     <img src={four} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+            //     <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
+            // </div>
+            // break;
+            case -1:
+                render_tag = <div>
+                    <div className="FontDanger" style={{ color: 'red' }}> ถูกยกเลิก </div>
+                </div>
+                break;
             default:
                 render_tag = <div>
                     <div className="FontDanger"> เกิดข้อผิดพลาด </div>
@@ -117,7 +121,7 @@ class S_Order extends Component {
                 <div className="Row">
                     <div className="col-2"></div>
                     <div className="col-4">
-                        <input type="search" placeholder="ค้นหา" 
+                        <input type="search" placeholder="ค้นหา"
                         // onChange={this.filterID} 
                         />
                     </div>
@@ -145,22 +149,22 @@ class S_Order extends Component {
                                 <th>สถานะ</th>
                             </tr>
                             {this.state.order_se.map((element, index) => {
-                            return (
-                                <tr>
-                                    <td>{index + 1}</td>
-                                    <td><NavLink to={'S_Order/Order?orderId='+element.order_se_id}>{element.order_se_id}</NavLink></td>
-                                    <td>{element.plant_name}</td>
-                                    <td>{moment(element.order_se_date).utc().format('DD/MM/YYYY')}</td>
-                                    <td>{element.amount} กิโลกรัม</td>
-                                    <td>{this.render_status(element.order_se_status)}</td>
+                                return (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td><NavLink to={'S_Order/Order?orderId=' + element.order_se_id}>{element.order_se_id}</NavLink></td>
+                                        <td>{element.plant_name}</td>
+                                        <td>{moment(element.order_se_date).utc().format('DD/MM/YYYY')}</td>
+                                        <td>{element.amount} กิโลกรัม</td>
+                                        <td>{this.render_status(element.order_se_status)}</td>
 
 
 
-                                </tr>
-                            )
-                        })}
+                                    </tr>
+                                )
+                            })}
                         </table>
-                        
+
                     </div>
                     <div className="col-2"></div>
                 </div>

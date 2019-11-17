@@ -368,15 +368,17 @@ class S_skill_farmer extends Component {
 
     exportToCSV = () => {
         let csvRow = []
-        let A = [['ลำดับ','ชื่อ','นามสกุล','พืชที่ปลูก','จํานวนผลผลิตที่ขาย/ปี(กิโลกรัม)','ผลผลิต/ไร่(กิโลกรัม)','จำนวนการส่งมอบ/ครั้ง(กิโลกรัม)','เดือนที่ส่งมอบ','จำนวนครั้งส่งมอบ','พื้นที่ปลูก(ไร่)']]
+        let A = [['ประสิทธิภาพการปลูกพืชของเกษตรกร%20' + this.state.get_user.name],
+                [],
+                ['ลำดับ', 'ชื่อ', 'นามสกุล', 'พืชที่ปลูก', 'จํานวนผลผลิตที่ขาย/ปี(กิโลกรัม)', 'ผลผลิต/ไร่(กิโลกรัม)', 'จำนวนการส่งมอบ/ครั้ง(กิโลกรัม)', 'เดือนที่ส่งมอบ', 'จำนวนครั้งส่งมอบ', 'พื้นที่ปลูก(ไร่)']]
         let data = this.state.farmer
-        data.map((element,index)=>{
-            A.push([index+1,element.first_name,element.last_name,element.plant,element.year_value,element.product_value,element.deliver_value,element.end_plant,element.deliver_frequency_number,element.growingArea])
+        data.map((element, index) => {
+            A.push([index + 1, element.first_name, element.last_name, element.plant, element.year_value, element.product_value, element.deliver_value, element.end_plant, element.deliver_frequency_number, element.growingArea])
         })
-        A.map((eleA)=>{
+        A.map((eleA) => {
             csvRow.push(eleA.join(','))
         })
-        
+
         let csvString = csvRow.join('%0A')
         let a = document.createElement("a")
         a.href = 'data:attachment/csv;charset=utf-8,%EF%BB%BF' + csvString

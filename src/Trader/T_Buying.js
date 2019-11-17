@@ -70,7 +70,7 @@ class T_Buying extends Component {
             </div>
                 break;
             case 1:
-                case 2: render_tag = <div>
+            case 2: render_tag = <div>
                 <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                 <img src={threedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
@@ -78,7 +78,7 @@ class T_Buying extends Component {
                 {/* <img src={fivedis} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
             </div>
                 break;
-                case 3:
+            case 3:
                 render_tag = <div>
                     <img src={one} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
                     <img src={two} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" />
@@ -105,7 +105,10 @@ class T_Buying extends Component {
                     {/* <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
-          
+            case -1:
+                render_tag = <div style={{ color: 'red' }}> ถูกยกเลิก </div>
+                break;
+
             default:
                 render_tag = <div> เกิดข้อผิดพลาด </div>
                 break;
@@ -188,8 +191,10 @@ class T_Buying extends Component {
 
         console.log(order.sort(compare));
         let sort_order = order.sort(compare)
-        this.setState({ order: sort_order,
-        click:true })
+        this.setState({
+            order: sort_order,
+            click: true
+        })
 
     }
     SortStatus = (e) => {
@@ -209,8 +214,10 @@ class T_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order,
-                clicks: true })
+            this.setState({
+                order: sort_order,
+                clicks: true
+            })
         }
         if (e === 'Min') {
             function compare(a, b) {
@@ -226,8 +233,10 @@ class T_Buying extends Component {
                 return comparison;
             }
             let sort_order = order.sort(compare)
-            this.setState({ order: sort_order,
-                clicks: false })
+            this.setState({
+                order: sort_order,
+                clicks: false
+            })
         }
     }
     SortDate = (e) => {

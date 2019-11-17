@@ -101,6 +101,11 @@ class M_Order extends Component {
                     {/* <img src={five} style={{ width: "25px", height: "25px", marginRight: "5px" }} alt="1" /> */}
                 </div>
                 break;
+            case -1:
+                render_tag = <div>
+                    <div className="FontDanger" style={{color:'red'}}> ยกเลิกคำสั่งซื้อ </div>
+                </div>
+                break;
                 
             default:
                 render_tag = <div>

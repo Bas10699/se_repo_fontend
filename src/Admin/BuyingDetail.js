@@ -88,24 +88,24 @@ class BuyingDetail extends Component {
         }
     }
 
-    add_review = async () =>{
-        alert(this.state.rating + " : "+this.state.review)
+    add_review = async () => {
+        alert(this.state.rating + " : " + this.state.review)
         let object = {
-            rating_score:this.state.rating,
-            review_detail:this.state.review
+            rating_score: this.state.rating,
+            review_detail: this.state.review
         }
-        try{
-            await post(object,'trader/add_review_order',user_token).then((result)=>{
-                if(result.success){
+        try {
+            await post(object, 'trader/add_review_order', user_token).then((result) => {
+                if (result.success) {
                     alert(result.message)
                 }
-                else{
+                else {
                     alert(result.error_message)
                 }
             })
         }
-        catch(error){
-            alert('add_review: '+error)
+        catch (error) {
+            alert('add_review: ' + error)
         }
     }
 
@@ -238,7 +238,7 @@ class BuyingDetail extends Component {
                 </div>
                 break;
 
-                case 5: render_show =
+            case 5: render_show =
                 <div>
                     <div className="Row">
                         <div className="col-12">
@@ -257,6 +257,19 @@ class BuyingDetail extends Component {
                     </div> */}
                 </div>
                 break;
+
+            case -1: render_show =
+                <div className='_Card'>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h3 style={{ textAlign: "center" }}>สถานะการสั่งซื้อ</h3>
+                            <h4 style={{ color: 'red' }}>ถูกยกเลิก</h4>
+
+                        </div>
+                    </div>
+                </div>
+                break;
+
 
 
             default: render_show =
@@ -409,7 +422,7 @@ class BuyingDetail extends Component {
         this.setState({ date_send: childData })
         // alert(childData)
     }
-    
+
 
     render() {
         const { rating } = this.state;
@@ -511,17 +524,17 @@ class BuyingDetail extends Component {
                                             )
                                         }) : null}
                                 </select></h5>
-                            <h4 style={{ color: "red", marginTop:"10px"}}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
+                            <h4 style={{ color: "red", marginTop: "10px" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
                             <div className="Row">
                                 <div className="col-6">
-                                    <h4 style={{marginTop:"0"}}>วันที่โอนเงิน</h4>
+                                    <h4 style={{ marginTop: "0" }}>วันที่โอนเงิน</h4>
                                     {/* <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} /> */}
                                     <DateSelect parentCallback={this.callbackFunction} />
 
                                 </div>
                                 <div className="col-1"></div>
                                 <div className="col-5">
-                                    <h4 style={{marginTop:"0"}}>เวลาที่โอนเงิน</h4>
+                                    <h4 style={{ marginTop: "0" }}>เวลาที่โอนเงิน</h4>
                                     <input type="time" name="time" id='time_proof' onChange={this.handleChange} />
                                 </div>
                             </div>
@@ -540,7 +553,7 @@ class BuyingDetail extends Component {
                     </div>
                     <div className="Row">
                         <div className="col-12">
-                            <button className="BTN_Cencle" style={{width:"200px"}} onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                            <button className="BTN_Cencle" style={{ width: "200px" }} onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
                             <button className='BTN_CONFIRM' onClick={() => { if (window.confirm('ยืนยันการชำระเงิน ?')) { this.add_proof_payment() }; }}>ส่งหลักฐานการโอน</button></div>
                     </div>
                 </Modal>
@@ -579,8 +592,8 @@ class BuyingDetail extends Component {
                     </div>
                     <div className="Row" style={{ width: "800px" }}>
                         <div className="col-12">
-                            <h4 style={{marginBottom:"0"}}>ให้คะเเนน : {rating}</h4>
-                            <h2 style={{margin:"0"}}><StarRatingComponent
+                            <h4 style={{ marginBottom: "0" }}>ให้คะเเนน : {rating}</h4>
+                            <h2 style={{ margin: "0" }}><StarRatingComponent
                                 name="rating"
                                 id='rating'
                                 editing={true}
@@ -590,18 +603,18 @@ class BuyingDetail extends Component {
                                 onStarClick={this.onStarClick.bind(this)}
                             /></h2>
                         </div>
+                    </div>
+                    <div className="Row">
+                        <div className="col-12">
+                            <h4>แสดงความคิดเห็น</h4>
+                            <textarea rows="4" cols="110" name="review" id="review" onChange={this.handleChange} />
                         </div>
-                        <div className="Row">
-                            <div className="col-12">
-                                <h4>แสดงความคิดเห็น</h4>
-                                <textarea rows="4" cols="110" name="review" id="review" onChange={this.handleChange}/>
-                            </div>
 
-                        </div>
-                    
+                    </div>
+
                     <div className="Row">
                         <div className="col-12" >
-                            <button className='BTN_CONFIRM' onClick={()=>this.add_review()} >ยืนยัน</button>
+                            <button className='BTN_CONFIRM' onClick={() => this.add_review()} >ยืนยัน</button>
                         </div>
                     </div>
                 </Modal>

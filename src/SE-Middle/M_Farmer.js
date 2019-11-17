@@ -100,7 +100,8 @@ class M_Farmer extends Component {
 
     get_skill_farmer = (e) => {
         this.setState({
-            indexGG: e.target.value
+            indexGG: e.target.value,
+            name_neo: e.target.name
         })
         setTimeout(()=>this.get_skill_farmer_GG(),)
         
@@ -410,6 +411,28 @@ class M_Farmer extends Component {
         }
     }
 
+    exportToCSV = () => {
+        let csvRow = []
+        let A = [['ประสิทธิภาพการปลูกพืชของเกษตรกร%20' + this.state.name_neo],
+                [],
+                ['ลำดับ', 'ชื่อ', 'นามสกุล', 'พืชที่ปลูก', 'จํานวนผลผลิตที่ขาย/ปี(กิโลกรัม)', 'ผลผลิต/ไร่(กิโลกรัม)', 'จำนวนการส่งมอบ/ครั้ง(กิโลกรัม)', 'เดือนที่ส่งมอบ', 'จำนวนครั้งส่งมอบ', 'พื้นที่ปลูก(ไร่)']]
+        let data = this.state.farmer
+        data.map((element, index) => {
+            A.push([index + 1, element.first_name, element.last_name, element.plant, element.year_value, element.product_value, element.deliver_value, element.end_plant, element.deliver_frequency_number, element.growingArea])
+        })
+        A.map((eleA) => {
+            csvRow.push(eleA.join(','))
+        })
+
+        let csvString = csvRow.join('%0A')
+        let a = document.createElement("a")
+        a.href = 'data:attachment/csv;charset=utf-8,%EF%BB%BF' + csvString
+        a.target = "_Blank"
+        a.download = 'testfile.csv'
+        document.body.appendChild(a)
+        a.click()
+    }
+
 
 
     changeCurrentPage = numPage => {
@@ -461,8 +484,8 @@ class M_Farmer extends Component {
                         <select className="select" onChange={this.get_skill_farmer} type="select">
                                 {this.state.name_se.map((ele_get_se, index) => {
                                     return (
-                                        <option value={ele_get_se.user_id}>
-                                            {ele_get_se.user_id} {ele_get_se.name}
+                                        <option value={ele_get_se.user_id} name={ele_get_se.name}>
+                                             {ele_get_se.name}
                                         </option>
                                     )
                                 })}
@@ -501,7 +524,7 @@ class M_Farmer extends Component {
                             })}
 
                         </ol>
-                        <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
+                        <a href="#Top" onClick={()=>this.exportToCSV()} style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
                     </div>
 
                     {/* <div className='col-1'></div> */}
