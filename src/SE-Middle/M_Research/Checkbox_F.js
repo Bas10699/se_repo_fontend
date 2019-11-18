@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { element } from 'prop-types';
 
 class Checkbox extends Component {
     constructor(props) {
@@ -52,7 +53,23 @@ class Checkbox extends Component {
         ));
     }
 
-
+    sum_money = (data) => {
+        let money = 0
+        data.map((element) => {
+            let unit = 1
+            if (element.plant_volume_type === 'มิลลิกรัม') {
+                unit = 0.000001
+            }
+            else if (element.plant_volume_type === 'กรัม') {
+                unit = 0.001
+            }
+            else {
+                unit = 1
+            }
+            money += (element.plant_volume * unit) * element.price
+        })
+        return money
+    }
 
 
     render() {
@@ -112,10 +129,24 @@ class Checkbox extends Component {
                         {this.props.option.map((e_product_plan_name, index) => {
                             return (
                                 <td style={{ borderRight: "1px solid #ccc" }}>{e_product_plan_name.price.map((e_plant) => {
+                                    let unit = 1
+                                    if (e_plant.plant_volume_type === 'มิลลิกรัม') {
+                                        unit = 0.000001
+                                    }
+                                    else if (e_plant.plant_volume_type === 'กรัม') {
+                                        unit = 0.001
+                                    }
+                                    else {
+                                        unit = 1
+                                    }
                                     return (
-                                        <div>{e_plant.plant_name} {e_plant.plant_volume} {e_plant.plant_volume_type} {(e_plant.plant_volume / 1000) * e_plant.price} บาท</div>
+                                        <div>{e_plant.plant_name} {e_plant.plant_volume} {e_plant.plant_volume_type} {(e_plant.plant_volume * unit) * e_plant.price} บาท
+
+                                        </div>
                                     )
-                                })}</td>
+                                })}
+                                    <br /><b>รวม {this.sum_money(e_product_plan_name.price)} บาท</b>
+                                </td>
                             )
                         }
                         )}
