@@ -1,7 +1,7 @@
 //รายละเอียดคำสั่งซื้อสินค้า SE-M ซื้อของจาก SE-S
 import React, { Component } from 'react';
 import { get, post, ip } from '../Support/Service';
-import { user_token, addComma } from '../Support/Constance';
+import { user_token, addComma, user_token_decoded } from '../Support/Constance';
 import queryString from 'query-string';
 import moment from 'moment'
 import Timeline from '../Support/Timeline'
@@ -18,9 +18,9 @@ import DateSelect from '../Support/dateSelect'
 // import FrequencyPlant from './frequency_plant'
 // import HTimeline from '../Timeline';
 
-
 class OrderDetail extends Component {
     constructor(props) {
+        
         super(props)
         this.state = {
             open: false,
@@ -42,6 +42,7 @@ class OrderDetail extends Component {
             BankName: null,
             BankNo: null,
             logistic: 1,
+            loading: true,
             photo_profile: "https://i.stack.imgur.com/l60Hf.png",
             tag0: "https://image.flaticon.com/icons/svg/1161/1161832.svg",
             tag1: "https://image.flaticon.com/icons/svg/1161/1161833.svg",
@@ -53,11 +54,18 @@ class OrderDetail extends Component {
 
 
     componentWillMount() {
-        this.get_user()
-        this.get_order()
-        this.setState({
-            isMenuOpened: false
-        });
+        if (user_token_decoded.type > 3) {
+            this.get_user()
+            this.get_order()
+            this.setState({
+                isMenuOpened: false
+            });
+        }
+        else {
+            localStorage.removeItem('user_token')
+            this.props.history.push("/signin");
+            
+        }
     }
 
     handleChange = (e) => {
@@ -109,6 +117,7 @@ class OrderDetail extends Component {
                     this.setState({
                         order: result.result,
                         detail: result.result.detail,
+                        loading: false,
                     })
                     if (result.result.order_status > 0) {
                         this.get_invoice()
@@ -271,12 +280,12 @@ class OrderDetail extends Component {
     cancel_order = async () => {
         let url = this.props.location.search;
         let params = queryString.parse(url);
-        this.state.detail.map((element)=>{
-            element.status=-1
+        this.state.detail.map((element) => {
+            element.status = -1
         })
         const object = {
             order_id: params.aa,
-            detail:this.state.detail,
+            detail: this.state.detail,
             status: -1
         }
         if (window.confirm('ยืนยันการยกเลิกคำสั่งซื้อ')) {
@@ -486,161 +495,165 @@ class OrderDetail extends Component {
     render() {
         return (
             <div className="App">
-                <div className="Row">
-                    <div className="col-12">
-                        <h2 style={{ textAlign: "center" }}>รายละเอียดคำสั่งซื้อสินค้า {this.state.order.order_id}</h2>
-                    </div>
-                </div>
+                {this.state.loading ?
+                    <div><div className="loader"></div><h5 style={{ textAlign: 'center', marginTop: '28%' }}>กำลังโหลด...</h5></div> :
+                    <div>
+                        <div className="Row">
+                            <div className="col-12">
+                                <h2 style={{ textAlign: "center" }}>รายละเอียดคำสั่งซื้อสินค้า {this.state.order.order_id}</h2>
+                            </div>
+                        </div>
 
-                <div className="Row">
-                    <div className="col-8"></div>
-                    {/* เริ่ม */}
-                    <div className="col-1">
-                        <h5 style={{ textAlign: "left", marginRight: "10px", margin: "0" }}>รหัสใบสั่งซื้อ</h5>
-                        <h5 style={{ textAlign: "left", marginRight: "10px", margin: "0" }}>วันที่ใบสั่งซื้อ</h5>
-                        <h5 style={{ textAlign: "left", marginRight: "10px", margin: "0" }}>ผู้ซื้อ</h5>
-                    </div>
-                    <div className="col-2">
-                        <h5 style={{ textAlign: "left", margin: "0" }}>{this.state.order.order_id}</h5>
-                        <h5 style={{ textAlign: "left", margin: "0" }}>{moment(this.state.order.order_date).utc().format("DD/MM/YYYY")}</h5>
-                        <h5 style={{ textAlign: "left", margin: "0" }}>{this.state.order.name} {this.state.order.last_name}</h5>
-                    </div>
-                </div>
+                        <div className="Row">
+                            <div className="col-8"></div>
+                            {/* เริ่ม */}
+                            <div className="col-1">
+                                <h5 style={{ textAlign: "left", marginRight: "10px", margin: "0" }}>รหัสใบสั่งซื้อ</h5>
+                                <h5 style={{ textAlign: "left", marginRight: "10px", margin: "0" }}>วันที่ใบสั่งซื้อ</h5>
+                                <h5 style={{ textAlign: "left", marginRight: "10px", margin: "0" }}>ผู้ซื้อ</h5>
+                            </div>
+                            <div className="col-2">
+                                <h5 style={{ textAlign: "left", margin: "0" }}>{this.state.order.order_id}</h5>
+                                <h5 style={{ textAlign: "left", margin: "0" }}>{moment(this.state.order.order_date).utc().format("DD/MM/YYYY")}</h5>
+                                <h5 style={{ textAlign: "left", margin: "0" }}>{this.state.order.name} {this.state.order.last_name}</h5>
+                            </div>
+                        </div>
 
 
-                <Timeline status={this.state.order.order_status} order={this.state.order} detail={this.state.detail} invoice={this.state.invoice} payment={this.state.payment} />
+                        <Timeline status={this.state.order.order_status} order={this.state.order} detail={this.state.detail} invoice={this.state.invoice} payment={this.state.payment} />
 
-                <div className="Row" style={{ marginTop: "50px" }}>
-                    <div className="col-1"></div>
-                    <div className="col-6">
-                        <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อ</h3>
-                        <table style={{ textAlign: "center" }}>
-                            <tr>
-                                <th>รูป</th>
-                                <th>ชื่อวัตถุดิบ</th>
-                                <th>จำนวนที่สั่ง (กิโลกรัม)</th>
-                                <th>ราคาต่อหน่วย (บาท)</th>
-                                <th>ราคารวม (บาท)</th>
-                                <th>ทำการสั่งซื้อ</th>
-                            </tr>
+                        <div className="Row" style={{ marginTop: "50px" }}>
+                            <div className="col-1"></div>
+                            <div className="col-6">
+                                <h3 style={{ textAlign: "center" }}>รายการสั่งซื้อ</h3>
+                                <table style={{ textAlign: "center" }}>
+                                    <tr>
+                                        <th>รูป</th>
+                                        <th>ชื่อวัตถุดิบ</th>
+                                        <th>จำนวนที่สั่ง (กิโลกรัม)</th>
+                                        <th>ราคาต่อหน่วย (บาท)</th>
+                                        <th>ราคารวม (บาท)</th>
+                                        <th>ทำการสั่งซื้อ</th>
+                                    </tr>
 
-                            {
-                                this.state.detail.map((element_plant, index) => {
-                                    return (
-                                        <tr>
-                                            <td>{element_plant.image ? <img alt="Product" className="Product" src={ip + element_plant.image} /> : <img alt="Product" className="Product" src={this.state.default_image} />}</td>
-                                            <td>{element_plant.plant_name}</td>
-                                            <td>{addComma(element_plant.amount)}</td>
-                                            <td>{element_plant.price}</td>
-                                            <td>{addComma(element_plant.price * element_plant.amount)}</td>
-                                            {console.log("test", this.state.detail)}
-                                            <td>{
-                                                element_plant.status === -1 ?
-                                                    <div style={{ color: 'red' }}>ถูกยกเลิกแล้ว</div> :
-                                                    element_plant.status === 1 ?
-                                                        "ทำการสั่งซื้อเเล้ว" :
-                                                        <NavLink to={`/M_Product?product_id=P%20${element_plant.plant_id}&order_id=${this.state.order.order_id}`}>
-                                                            <button
-                                                                className="BTN_AddCart"
-                                                                style={{ float: "right" }}>
-                                                                ทำการสั่งซื้อวัตถุดิบ
+                                    {
+                                        this.state.detail.map((element_plant, index) => {
+                                            return (
+                                                <tr>
+                                                    <td>{element_plant.image ? <img alt="Product" className="Product" src={ip + element_plant.image} /> : <img alt="Product" className="Product" src={this.state.default_image} />}</td>
+                                                    <td>{element_plant.plant_name}</td>
+                                                    <td>{addComma(element_plant.amount)}</td>
+                                                    <td>{element_plant.price}</td>
+                                                    <td>{addComma(element_plant.price * element_plant.amount)}</td>
+                                                    {console.log("test", this.state.detail)}
+                                                    <td>{
+                                                        element_plant.status === -1 ?
+                                                            <div style={{ color: 'red' }}>ถูกยกเลิกแล้ว</div> :
+                                                            element_plant.status === 1 ?
+                                                                "ทำการสั่งซื้อเเล้ว" :
+                                                                <NavLink to={`/M_Product?product_id=P%20${element_plant.plant_id}&order_id=${this.state.order.order_id}`}>
+                                                                    <button
+                                                                        className="BTN_AddCart"
+                                                                        style={{ float: "right" }}>
+                                                                        ทำการสั่งซื้อวัตถุดิบ
                                                         </button>
-                                                        </NavLink>
+                                                                </NavLink>
 
-                                            }
+                                                    }
 
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </table>
-                        <div className="TotalCart">
-                            <div className="Row">
-                                <div className="col-2">
-                                </div>
-                                <div className="col-1"></div>
-                                <div className="col-9">
-
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </table>
+                                <div className="TotalCart">
                                     <div className="Row">
-                                        <div className="col-5">
-                                            <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
+                                        <div className="col-2">
                                         </div>
-                                        <div className="col-7">
-                                            <h4 style={{ color: "red", textAlign: "left" }}>{addComma(this.sum_price(this.state.detail))} บาท</h4>
+                                        <div className="col-1"></div>
+                                        <div className="col-9">
+
+                                            <div className="Row">
+                                                <div className="col-5">
+                                                    <h4>ยอดคำสั่งซื้อทั้งหมด</h4>
+                                                </div>
+                                                <div className="col-7">
+                                                    <h4 style={{ color: "red", textAlign: "left" }}>{addComma(this.sum_price(this.state.detail))} บาท</h4>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
 
 
-                    <div className="col-5">{this.render_status(this.state.order.order_status)}</div>
-
-                </div>
-
-                <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
-                    <div className="Row" style={{ width: "800px" }}>
-                        <div className="col-12">
-                            <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
-                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
-                            <h4 style={{margin:"0"}}>ชำระเงินภายในวันที่</h4>
-                            {/* <input type="date" name="date_send" id="date_send" onChange={this.handleChange} /> */}
-                            <DateSelect parentCallback={this.callbackFunction} />
-
-                            <h4 style={{ marginTop: "20px" }}> ข้อมูลการชำระเงิน</h4>
-
-                            {this.state.bank_information ?
-                                this.state.bank_information.map((element) => {
-                                    return (
-                                        <div className="_Card">
-
-                                            <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
-                                            <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount}</h5>
-                                            <h5 style={{ margin: "0px" }}> เลขที่บัญชี {element.bankNo}</h5>
-                                        </div>
-                                    )
-                                })
-                                : null}
-                        </div>
-                    </div>
-                    <div className="Row" style={{ width: "500px" }}>
-                        <div className="col-12">
-                            <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
-                            <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
-                        </div>
-                    </div>
-                </Modal>
-
-                <Modal open={this.state.OpenBill} onClose={this.onCloseModal}>
-                    <div className="Row">
-                        <div className="col-12" >
-                            <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
-                        </div>
-                    </div>
-                    <div className="Row" style={{ width: "800px" }}>
-                        <div className="col-7" >
-                            <a href={ip + this.state.payment.image_proof}>
-                                <img src={ip + this.state.payment.image_proof}
-                                    style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
-                            </a>
-                        </div>
-                        <div className="col-5">
-
-                            <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
-                            <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.invoice.invoice_id}</h4>
-                            <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
-                            <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
-                            <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
-                            <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4>
-                            <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
-                            <button className="BTN_PDF" onClick={() => this.setState({ OpenBill: false })}>ยกเลิก</button>
+                            <div className="col-5">{this.render_status(this.state.order.order_status)}</div>
 
                         </div>
-                    </div>
-                </Modal>
+
+                        <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
+                            <div className="Row" style={{ width: "800px" }}>
+                                <div className="col-12">
+                                    <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
+                                    <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
+                                    <h4 style={{ margin: "0" }}>ชำระเงินภายในวันที่</h4>
+                                    {/* <input type="date" name="date_send" id="date_send" onChange={this.handleChange} /> */}
+                                    <DateSelect parentCallback={this.callbackFunction} />
+
+                                    <h4 style={{ marginTop: "20px" }}> ข้อมูลการชำระเงิน</h4>
+
+                                    {this.state.bank_information ?
+                                        this.state.bank_information.map((element) => {
+                                            return (
+                                                <div className="_Card">
+
+                                                    <h4 style={{ margin: "0px" }}>{element.bankName}</h4>
+                                                    <h5 style={{ margin: "0px" }}>ชื่อบัญชีธนาคาร {element.bankAccount}</h5>
+                                                    <h5 style={{ margin: "0px" }}> เลขที่บัญชี {element.bankNo}</h5>
+                                                </div>
+                                            )
+                                        })
+                                        : null}
+                                </div>
+                            </div>
+                            <div className="Row" style={{ width: "500px" }}>
+                                <div className="col-12">
+                                    <button className="BTN_PDF" onClick={() => { this.onCloseModal() }}>ยกเลิก</button>
+                                    <button className='BTN_CONFIRM' onClick={() => { this.add_invoice() }}>ออกใบแจ้งหนี้</button>
+                                </div>
+                            </div>
+                        </Modal>
+
+                        <Modal open={this.state.OpenBill} onClose={this.onCloseModal}>
+                            <div className="Row">
+                                <div className="col-12" >
+                                    <h3 style={{ textAlign: "center" }}>รายละเอียดการชำระเงิน</h3>
+                                </div>
+                            </div>
+                            <div className="Row" style={{ width: "800px" }}>
+                                <div className="col-7" >
+                                    <a href={ip + this.state.payment.image_proof}>
+                                        <img src={ip + this.state.payment.image_proof}
+                                            style={{ height: "100%", width: "80%", display: "block", marginLeft: "auto", marginRight: "auto", objectFit: "cover" }} alt="หลักฐานการโอน" />
+                                    </a>
+                                </div>
+                                <div className="col-5">
+
+                                    <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id} </h4>
+                                    <h4>อ้างอิงถึงใบแจ้งหนี้เลขที่ : {this.state.invoice.invoice_id}</h4>
+                                    <h4>วันที่กำหนดชำระเงิน : {moment(this.state.invoice.date_send).format('DD/MM/YYYY')}</h4>
+                                    <h4>วันที่ชำระเงิน : {moment(this.state.payment.date_proof).format('DD/MM/YYYY')} </h4>
+                                    <h4>เวลาที่ชำระเงิน : {this.state.payment.time_proof}</h4>
+                                    <h4>จำนวนเงิน : {addComma(this.sum_price(this.state.detail))} บาท</h4>
+                                    <button className="BTN_CONFIRM" onClick={() => this.confirm_payment()} >ออกใบเสร็จ</button>
+                                    <button className="BTN_PDF" onClick={() => this.setState({ OpenBill: false })}>ยกเลิก</button>
+
+                                </div>
+                            </div>
+                        </Modal>
+                    </div>}
 
 
 
