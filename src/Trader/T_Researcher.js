@@ -141,7 +141,9 @@ class T_Researcher extends Component {
                                 return (
                                     <tr style={{ textAlign: "center" }}>
                                         <td style={{ textAlign: "left" }}>{element.product_name}</td>
-                                        <td style={{ textAlign: "left" }}>{element.nutrient + "\n"}</td>
+                                        <td style={{ textAlign: "left" }}>{element.nutrient.map((e)=>{
+                                            return e+" "
+                                        })}</td>
                                         <td>{element.volume} {element.volume_type}</td>
                                         <td>{this.rander_status(element.product_status, element.product_id)}</td>
                                     </tr>

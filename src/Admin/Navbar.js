@@ -166,7 +166,7 @@ class Navbar extends Component {
 
 
                                 <li><NavLink exact to="/S_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li>
-                                <li><NavLink exact to="/S_Summary" activeClassName="Active" className="NavbarText">สรุปยอดซื้อ-ขาย</NavLink></li>
+                                <li><NavLink exact to="/S_Summary" activeClassName="Active" className="NavbarText">สรุปยอดซื้อขาย</NavLink></li>
                                 <div className="NavbarRight" activeClassName="Active">
                                     <div className="dropdown" activeClassName="Active">
                                         <NavLink exact to="/User" className="dropbtn" activeClassName="Active">{this.state.get_user.username}</NavLink>
@@ -204,7 +204,7 @@ class Navbar extends Component {
 
                                 {/* <li><NavLink exact to="/M_BB" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li> */}
                                 <li><NavLink exact to="/M_Demand" activeClassName="Active" className="NavbarText">การวิจัยผลิตภัณฑ์</NavLink></li>
-                                <li><NavLink exact to="/M_Summary" activeClassName="Active" className="NavbarText">สรุปยอดซื้อ-ขาย</NavLink></li>
+                                <li><NavLink exact to="/M_Summary" activeClassName="Active" className="NavbarText">สรุปยอดซื้อขาย</NavLink></li>
                                 {/* <NavLink to="/signup"><img src={bell} alt="bell"
                                     onClick={() => this.setState({ news: false })} />
                                     <span className={this.state.news ? "badge" : null} />
