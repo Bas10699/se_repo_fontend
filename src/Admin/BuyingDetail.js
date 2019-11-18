@@ -513,7 +513,7 @@ class BuyingDetail extends Component {
 
 
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
-                    <div className="Row" style={{ width: "500px" }}>
+                    <div className="Row" style={{ width: "800px" }}>
                         <div className="col-1" />
                         <div className="col-10">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
