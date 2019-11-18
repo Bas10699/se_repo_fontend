@@ -126,7 +126,8 @@ class UserAll extends Component {
                                 <th style={{ borderLeft: "1px solid #f4f4f4" }}></th>
                             </tr>
                             {this.state.get_user.map((element, index) => {
-                                return (
+                                if(element.type_user>=0){
+                                    return (
                                     <tr style={{ borderLeft: "1px solid #f4f4f4" }}>
                                         <td>
                                             <button style={{ backgroundColor: "transparent", border: "none" }} onClick={() => { if (window.confirm('ยืนยันการลบบัญชีผู้ใช้')) { this.delete_user(element.user_id) } }}>
@@ -146,6 +147,8 @@ class UserAll extends Component {
                                         </td>
                                     </tr>
                                 )
+                                }
+                                
                             })}
                         </table>
                     </div>
