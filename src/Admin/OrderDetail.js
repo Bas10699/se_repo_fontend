@@ -324,7 +324,7 @@ class OrderDetail extends Component {
         this.setState({ open: true });
     };
     callbackFunction = (childData) => {
-        this.setState({ date: childData })
+        this.setState({ date_send: childData })
         // alert(childData)
     }
 

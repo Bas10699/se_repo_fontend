@@ -355,6 +355,7 @@ class BuyingDetail extends Component {
             time_proof: this.state.time_proof,
             image_proof: this.state.image_payment,
         }
+        // alert('dd')
         try {
             await post(payment, 'trader/add_proof_of_payment_trader', user_token).then((result) => {
                 if (result.success) {
@@ -362,6 +363,9 @@ class BuyingDetail extends Component {
                     setTimeout(() => {
                         console.log('add_proof_of_payment_trader', result.result)
                     }, 500)
+                }
+                else{
+                    alert(result.error_message)
                 }
             })
         } catch (error) {
@@ -419,7 +423,7 @@ class BuyingDetail extends Component {
     }
 
     callbackFunction = (childData) => {
-        this.setState({ date_send: childData })
+        this.setState({ date_proof: childData })
         // alert(childData)
     }
 
@@ -516,23 +520,25 @@ class BuyingDetail extends Component {
                             <h4 style={{ margin: "0" }}>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
                             <h5 style={{ margin: "0" }}>
                                 โอนเข้าบัญชี :
-                            <select style={{ fontFamily: "fc_lamoonregular", fontSize: "20px" }}>
+                            <select style={{ fontFamily: "fc_lamoonregular", fontSize: "20px" }} onChange={(e)=>this.setState({idd:e.target.value})}>
                                     {this.state.invoice_detail ?
                                         this.state.invoice_detail.map((element, index) => {
                                             return (
-                                                <option>{element.bankName}</option>
+                                                <option value={index}>{element.bankName}</option>
                                             )
                                         }) : null}
                                 </select></h5>
+                                    <h5>{this.state.invoice_detail[this.state.idd]}</h5>
                             <h4 style={{ color: "red", marginTop: "10px" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4>
                             <div className="Row">
-                                <div className="col-6">
+                                <div className="col-12">
                                     <h4 style={{ marginTop: "0" }}>วันที่โอนเงิน</h4>
                                     {/* <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} /> */}
                                     <DateSelect parentCallback={this.callbackFunction} />
-
                                 </div>
-                                <div className="col-1"></div>
+                            </div>
+                            <div className="Row">
+                                {/* <div className="col-1"></div> */}
                                 <div className="col-5">
                                     <h4 style={{ marginTop: "0" }}>เวลาที่โอนเงิน</h4>
                                     <input type="time" name="time" id='time_proof' onChange={this.handleChange} />
