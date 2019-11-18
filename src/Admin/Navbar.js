@@ -161,11 +161,12 @@ class Navbar extends Component {
                                 <li><NavLink exact to="/S_skill_farmer" activeClassName="Active" className="NavbarText">ข้อมูลเกษตรกร</NavLink></li>
 
                                 <li><NavLink exact to="/S_Certified" activeClassName="Active" className="NavbarText">มาตรฐาน</NavLink></li>
+                                <li><NavLink exact to="/S_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li>
                                 <li><NavLink exact to="/S_Order" activeClassName="Active" className="NavbarText">คำสั่งซื้อ</NavLink></li>
                                 <li><NavLink exact to="/S_H_Buying" activeClassName="Active" className="NavbarText">ประวัติการซื้อ</NavLink></li>
 
 
-                                <li><NavLink exact to="/S_Plan" activeClassName="Active" className="NavbarText">วางแผน</NavLink></li>
+                                
                                 <li><NavLink exact to="/S_Summary" activeClassName="Active" className="NavbarText">สรุปยอดซื้อขาย</NavLink></li>
                                 <div className="NavbarRight" activeClassName="Active">
                                     <div className="dropdown" activeClassName="Active">

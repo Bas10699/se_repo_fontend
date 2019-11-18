@@ -190,7 +190,7 @@ class S_Summary extends Component {
             <div className='App'>
                 <div className="Row">
                     <div className="col-12" style={{ textAlign: "center" }}>
-                        <h2 >สรุปยอดขาย</h2>
+                        <h2 >สรุปยอดซื้อ-ขาย</h2>
                         <h4>เลือกวันที่ 
                             {/* <input type="date" id='dateStart' onChange={this.handleChange} /> */}
                             <DateSelect parentCallback={this.callbackFunction_start} />
