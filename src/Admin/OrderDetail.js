@@ -582,15 +582,15 @@ class OrderDetail extends Component {
                 </div>
 
                 <Modal open={this.state.OpenComfrim} onClose={this.onCloseModal}>
-                    <div className="Row" style={{ width: "500px" }}>
-                        <div className="col-11">
+                    <div className="Row" style={{ width: "800px" }}>
+                        <div className="col-12">
                             <h3 style={{ textAlign: "center" }}>รายละเอียดใบแจ้งหนี้</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.order.order_id}</h4>
-                            <h4>ชำระเงินภายในวันที่</h4>
+                            <h4 style={{margin:"0"}}>ชำระเงินภายในวันที่</h4>
                             {/* <input type="date" name="date_send" id="date_send" onChange={this.handleChange} /> */}
                             <DateSelect parentCallback={this.callbackFunction} />
 
-                            <h4 style={{ marginTop: "-30px" }}> ข้อมูลการชำระเงิน</h4>
+                            <h4 style={{ marginTop: "20px" }}> ข้อมูลการชำระเงิน</h4>
 
                             {this.state.bank_information ?
                                 this.state.bank_information.map((element) => {
@@ -605,7 +605,6 @@ class OrderDetail extends Component {
                                 })
                                 : null}
                         </div>
-                        <div className="col-1" />
                     </div>
                     <div className="Row" style={{ width: "500px" }}>
                         <div className="col-12">
