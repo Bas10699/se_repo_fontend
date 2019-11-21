@@ -293,7 +293,7 @@ class S_Plants_in_network extends Component {
                         </div>
                     </div>
                 </div>
-                <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a>
+                {/* <a href="#Top" style={{ textDecoration: "none", }}><img alt="top" src={top} className="top" /></a> */}
             </div>
         )
     }

@@ -126,7 +126,7 @@ class UserAll extends Component {
                                 <th style={{ borderLeft: "1px solid #f4f4f4" }}></th>
                             </tr>
                             {this.state.get_user.map((element, index) => {
-                                if(element.type_user>=0){
+                                if(element.type_user!=='-1'){
                                     return (
                                     <tr style={{ borderLeft: "1px solid #f4f4f4" }}>
                                         <td>

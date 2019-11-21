@@ -327,8 +327,10 @@ class M_BuyingDetail extends Component {
                                 <input type="file"
                                     onChange={(e) => this.uploadpicture(e)} />
                             </div>
-                            <img src={this.state.image_payment}
+                            {this.state.image_payment ? <img src={this.state.image_payment}
                                 style={{ width: "150px", display: "block", marginLeft: "auto", marginRight: "auto", marginBottom: "20px" }} alt="หลักฐานการโอน" />
+                                : null}
+
 
                         </div>
                         <div className="col-1" />

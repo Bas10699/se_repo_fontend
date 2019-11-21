@@ -43,7 +43,7 @@ class Signup extends Component {
             last_name: this.state.last_name,
             phone: this.state.phone,
             address: this.state.address,
-            type_user: this.state.type_user,
+            type_user: 'A',
             email:this.state.email
         };
 

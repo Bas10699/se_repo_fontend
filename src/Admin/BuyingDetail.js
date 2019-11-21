@@ -211,7 +211,7 @@ class BuyingDetail extends Component {
             //         </div>
             //         <div className="Row">
             //             <div className="col-6">
-            //                 <button className='BTN_CONFIRM'>ยืนยันได้รับสินค้า</button>
+            //                 <button onClick={()=>this.confirm()} className='BTN_CONFIRM'>ยืนยันได้รับสินค้า</button>
             //             </div>
             //         </div>
             //     </div>

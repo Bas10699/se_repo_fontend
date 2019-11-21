@@ -113,7 +113,7 @@ class UserDetail extends Component {
             user_id: this.state.get_user.user_id
         }
         try {
-            await post(obj,'user/update_data_user',user_token).then((result) => {
+            await post(obj, 'user/update_data_user', user_token).then((result) => {
                 if (result.success) {
                     window.location.reload()
                 }
@@ -209,10 +209,13 @@ class UserDetail extends Component {
                                 />
                                 <h4>ประเภทผู้ใช้งาน</h4>
                                 <select id="type_user" name="type_user" onChange={this.handleChange}>
-                                    <option>{this.render_type(this.state.get_user.type_user)}</option>
+                                    <option selected disabled hidden>{this.render_type(this.state.get_user.type_user)}</option>
+                                    <option value='1'>นักวิจัย</option>
                                     <option value='2'>ผู้ประกอบการ</option>
                                     <option value='4'>SE กลาง</option>
                                     <option value='3'>SE ย่อย</option>
+                                    <option value='A'>สมาชิก</option>
+                                    <option value='B'>พนักงานขาย</option>
                                 </select>
 
                             </div>
