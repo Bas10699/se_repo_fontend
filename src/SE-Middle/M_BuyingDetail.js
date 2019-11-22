@@ -294,7 +294,7 @@ class M_BuyingDetail extends Component {
 
 
                 <Modal open={this.state.open} onClose={this.onCloseModal}>
-                    <div className="Row" style={{ width: "500px" }}>
+                    <div className="Row" style={{ width: "800px" }}>
                         <div className="col-11">
                             <h3 style={{ textAlign: "center" }}>แจ้งการชำระเงิน</h3>
                             <h4>อ้างอิงถึงใบสั่งซื้อเลขที่ : {this.state.get_order.order_se_id}</h4>
@@ -310,13 +310,14 @@ class M_BuyingDetail extends Component {
                                 </select></h4>
                             {/* <h4 style={{ color: "red" }}>ยอดคำสั่งซื้อทั้งหมด {addComma(this.sum_price(this.state.detail))} บาท</h4> */}
                             <div className="Row">
-                                <div className="col-6">
+                                <div className="col-10">
                                     <h4>วันที่โอนเงิน</h4>
                                     {/* <input type="date" name="date_send" id='date_proof' onChange={this.handleChange} /> */}
                                     <DateSelect parentCallback={this.callbackFunction} />
                                 </div>
-                                <div className="col-1"></div>
-                                <div className="col-5">
+                                </div>
+                                <div className="Row">
+                                <div className="col-2">
                                     <h4>เวลาที่โอนเงิน</h4>
                                     <input type="time" name="time" id='time_proof' onChange={this.handleChange} />
                                 </div>
